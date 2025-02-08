@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZINCO - ROXYGEN</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="amdecor.css">
+  <link rel="stylesheet" href="https://use.typekit.net/npp3dgf.css">
+  <link rel="icon" type="image/x-icon" href="../imghome/logo_zinco">
+  <script src="https://kit.fontawesome.com/21fc0bb23c.js" crossorigin="anonymous"></script>
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <script>
+  window.TallyConfig = {
+    "formId": "3EWYBN",
+    "popup": {
+      "width": 370,
+      "emoji": {
+        "text": "👋",
+        "animation": "head-shake"
+      },
+      "autoClose": 2000,
+      "open": {
+        "trigger": "time",
+        "ms": 4000
+      }
+    }
+  };
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html" class="home_button">
+      <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
+    </a>
+    <button class="circle-button" onclick="toggleOverlay()">
+      <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+    </button>
+    
+  </div>
+
+  <!-- Overlay Section -->
+  <div class="overlay" id="overlay" onclick="closeOverlay(event)">
+    <div class="overlay-content" onclick="event.stopPropagation()">
+      <div class="card">
+        <div class="profile">
+          <img src="../imghome/io.png" alt="Profile">
+          <div>
+            <strong>Francesco</strong>
+            <p>Hi, I'm a Communication Design student! This website is a repository / portfolio of my work.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <button>Escape Lake Como</button>
+        <button>AM Decor</button>
+      </div>
+      <div class="links-column">
+        <a href="index.html" class="overlay-link">Home</a>
+        <a href="index.html#progetti" class="overlay-link">My Projects</a>
+        <a href="contacts.html" class="overlay-link">Contacts</a>
+        <a href="#" class="overlay-link">Link 4</a>
+        <a href="#" class="overlay-link">Link 5</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="intro" class="intro">
+    <h1 id="intro-text">AM DECOR</h1>
+    <a href="https://www.instagram.com/zjncoo/" target=”_blank”>
+      <div id="username">@zjncoo</div>
+    </a>
+     <!-- Add your username here -->
+    <div class="navbar">
+      <a href="index.html" class="home_button">
+        <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
+      </a>
+      
+      
+    </div>
+  </div>
+
+  <script>
+    const intro = document.getElementById('intro');
+    const introText = document.getElementById('intro-text');
+  
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const maxScroll = window.innerHeight; // Height of the intro section
+      const progress = Math.min(scrollTop / maxScroll, 1); // Progress between 0 and 1
+  
+      // Update the zoom and opacity of the intro text based on scroll progress
+      const scale = 1 + progress * 9; // Scale from 1 to 10
+      const opacity = 1 - progress; // Opacity from 1 to 0
+  
+      introText.style.transform = `scale(${scale})`;
+      introText.style.opacity = opacity;
+  
+      // When the animation finishes, remove the intro section
+      if (progress >= 1) {
+        intro.style.display = 'none'; // Completely remove intro from view
+      } else {
+        intro.style.display = 'flex'; // Show the intro when scrolling back up
+      }
+    });
+  </script>
+
+  <div class="news-container">
+    <div id="square"></div>
+    <!-- INTRODUCTION Section -->
+<section id="introduction" class="section">
+  <h2>Introduction</h2>
+  <img src="../images/introduction.jpg" alt="Introduction Image">
+  <p>
+    This project reimagines the Roxy brand with a fresh, bold perspective, balancing its rich history with a contemporary identity.
+  </p>
+</section>
+
+<!-- APPEARANCE Section -->
+<section id="appearance" class="section">
+  <h2>Appearance</h2>
+  <img src="../images/appearance.jpg" alt="Appearance Image">
+  <p>
+    The chosen color palette and visual elements reflect a daring yet elegant aesthetic, with vibrant reds and metallic accents as the core colors.
+  </p>
+  <div class="colors">
+    <div class="color-swatch" style="background-color: #a51f22;"></div>
+    <div class="color-swatch" style="background-color: #3a3a3a;"></div>
+    <div class="color-swatch" style="background-color: #ffffff;"></div>
+  </div>
+</section>
+
+<!-- LOGO Section -->
+<section id="logo" class="section">
+  <h2>Logo</h2>
+  <img src="../images/logo.jpg" alt="Logo Image">
+  <p>
+    The redesigned logo embraces minimalism while preserving the brand’s iconic boldness, ensuring instant recognizability.
+  </p>
+</section>
+
+<!-- TYPOGRAPHY Section -->
+<section id="typography" class="section">
+  <h2>Typography</h2>
+  <h2>Helvetica Bold</h2>
+  <h2>HELVETICA BOLD</h2>
+  <p id="light">Helvetica Light</p>
+
+  <p>
+    The typography features clean, sans-serif fonts to communicate modernity and sophistication, paired with occasional decorative typefaces for emphasis.
+  </p>
+</section>
+
+<!-- MOCKUPS Section -->
+<section id="mockups" class="section">
+  <h2>Mockups</h2>
+  <img src="../images/mockups.jpg" alt="Mockups Image">
+  <p>
+    These mockups showcase the application of the rebrand across packaging, digital media, and physical touchpoints, emphasizing consistency and boldness.
+  </p>
+</section>
+  </div>
+
+  <h1 class="title">Roxy BrandBook</h1>
+
+  <div class="book-container">
+    <div class="page" id="page1-container">
+      <canvas id="page1"></canvas>
+    </div>
+    <div class="page" id="page2-container" style="display: none;">
+      <canvas id="page2"></canvas>
+    </div>
+    <div class="page" id="page3-container" style="display: none;">
+      <canvas id="page3"></canvas>
+    </div>
+    <div class="magnifier" id="magnifier">
+      <canvas id="magnifierCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button id="prevButton" disabled><</button>
+    <button id="nextButton">></button>
+  </div>
+
+  <script>
+    function toggleOverlay() {
+      const overlay = document.getElementById('overlay');
+      if (overlay.classList.contains('active')) {
+        overlay.classList.remove('active');
+        // Use a timeout to hide the element after the animation
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 300); // Match the transition duration in CSS
+      } else {
+        overlay.style.display = 'flex';
+        // Add the active class after ensuring the display is set
+        setTimeout(() => overlay.classList.add('active'), 10);
+      }
+    }
+
+    function closeOverlay(event) {
+      // Close the overlay if the transparent background is clicked
+      if (event.target === event.currentTarget) {
+        toggleOverlay();
+      }
+    }
+
+    // PDF.js Variables
+    const url = 'versionesofi.pdf'; 
+    let pdfDoc = null;
+    let currentPage = 1;
+    const canvasCover = document.getElementById('page1');
+    const canvasLeft = document.getElementById('page2');
+    const canvasRight = document.getElementById('page3');
+    const ctxCover = canvasCover.getContext('2d');
+    const ctxLeft = canvasLeft.getContext('2d');
+    const ctxRight = canvasRight.getContext('2d');
+
+    const magnifier = document.getElementById('magnifier');
+    const magnifierCanvas = document.getElementById('magnifierCanvas');
+    const magnifierCtx = magnifierCanvas.getContext('2d');
+
+    magnifierCanvas.width = 150;
+    magnifierCanvas.height = 150;
+
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+
+    // Load PDF
+    pdfjsLib.getDocument(url).promise.then((pdf) => {
+      pdfDoc = pdf;
+      renderPages();
+    });
+
+    // Render Pages
+    function renderPages() {
+      if (pdfDoc) {
+        if (currentPage === 1) {
+          pdfDoc.getPage(currentPage).then((page) => {
+            renderPage(page, canvasCover, ctxCover);
+            document.getElementById('page1-container').style.display = 'flex';
+            document.getElementById('page2-container').style.display = 'none';
+            document.getElementById('page3-container').style.display = 'none';
+          });
+        } else {
+          pdfDoc.getPage(currentPage).then((page) => {
+            renderPage(page, canvasLeft, ctxLeft);
+          });
+
+          const nextPage = currentPage + 1 <= pdfDoc.numPages ? currentPage + 1 : null;
+          if (nextPage) {
+            pdfDoc.getPage(nextPage).then((page) => {
+              renderPage(page, canvasRight, ctxRight);
+            });
+          } else {
+            ctxRight.clearRect(0, 0, canvasRight.width, canvasRight.height);
+          }
+
+          document.getElementById('page1-container').style.display = 'none';
+          document.getElementById('page2-container').style.display = 'flex';
+          document.getElementById('page3-container').style.display = 'flex';
+        }
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage >= pdfDoc.numPages;
+      }
+    }
+
+    function renderPage(page, canvas, ctx) {
+      const scale = 2.0;
+      const viewport = page.getViewport({ scale: scale });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      page.render({ canvasContext: ctx, viewport: viewport });
+    }
+
+    nextButton.addEventListener('click', () => {
+      if (currentPage < pdfDoc.numPages) {
+        currentPage += currentPage === 1 ? 1 : 2;
+        renderPages();
+      }
+    });
+
+    prevButton.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage -= currentPage === 2 ? 1 : 2;
+        renderPages();
+      }
+    });
+
+    document.querySelectorAll('.page canvas').forEach((canvas) => {
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        magnifier.style.display = 'flex';
+        magnifier.style.left = `${e.clientX - magnifier.offsetWidth / 2}px`;
+        magnifier.style.top = `${e.clientY - magnifier.offsetHeight / 2}px`;
+        magnifierCtx.clearRect(0, 0, magnifierCanvas.width, magnifierCanvas.height);
+        magnifierCtx.drawImage(
+          canvas,
+          x - magnifierCanvas.width / 4,
+          y - magnifierCanvas.height / 4,
+          magnifierCanvas.width / 2,
+          magnifierCanvas.height / 2,
+          0,
+          0,
+          magnifierCanvas.width,
+          magnifierCanvas.height
+        );
+      });
+
+      canvas.addEventListener('mouseenter', () => {
+        document.body.style.cursor = 'none';
+        magnifier.style.display = 'block';
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        document.body.style.cursor = 'default';
+        magnifier.style.display = 'none';
+      });
+    });
+  </script>
+
+  <div class="folder-container">
+    <img src="../imgroxy/folderclosed.png" alt="Folder" class="folder" id="folder">
+    <img src="../imghome/roxy.png" alt="Photos" class="photos" id="photos">
+  </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const folder = document.getElementById("folder");
+          const photos = document.getElementById("photos");
+
+          folder.addEventListener("mouseover", function() {
+              folder.src = "../imgroxy/folderopen.webp"; // Ensure this image exists
+          });
+          
+          folder.addEventListener("mouseout", function() {
+              folder.src = "../imgroxy/folderclosed.png";
+          });
+      });
+  </script>
+  <!-- Fixed Button -->
+  <button class="fixed-button">@zjncoo</button>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <p>Contatti</p>
+      <a href="mailto:francesco.zanchetta@mail.polimi.it">francesco.zanchetta@mail.polimi.it</a>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Francesco Zanchetta.</p>
+    </div>
+  </footer>
+</body>
+</html>

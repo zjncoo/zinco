@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZINCO - ROXYGEN</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="roxy.css">
+  <link rel="stylesheet" href="https://use.typekit.net/npp3dgf.css">
+  <link rel="icon" type="image/x-icon" href="../imghome/logo_zinco">
+  <script src="https://kit.fontawesome.com/21fc0bb23c.js" crossorigin="anonymous"></script>
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <script>
+  window.TallyConfig = {
+    "formId": "3EWYBN",
+    "popup": {
+      "width": 370,
+      "emoji": {
+        "text": "👋",
+        "animation": "head-shake"
+      },
+      "autoClose": 2000,
+      "open": {
+        "trigger": "time",
+        "ms": 4000
+      }
+    }
+  };
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html" class="home_button">
+      <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
+    </a>
+    <button class="circle-button" onclick="toggleOverlay()">
+      <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
+    </button>
+    
+  </div>
+
+  <!-- Overlay Section -->
+  <div class="overlay" id="overlay" onclick="closeOverlay(event)">
+    <div class="overlay-content" onclick="event.stopPropagation()">
+      <div class="card">
+        <div class="profile">
+          <img src="../imghome/io.png" alt="Profile">
+          <div>
+            <strong>Francesco</strong>
+            <p>Hi, I'm a Communication Design student! This website is a repository / portfolio of my work.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <button>Escape Lake Como</button>
+        <button>AM Decor</button>
+      </div>
+      <div class="links-column">
+        <a href="index.html" class="overlay-link">Home</a>
+        <a href="index.html#progetti" class="overlay-link">My Projects</a>
+        <a href="contacts.html" class="overlay-link">Contacts</a>
+        <a href="#" class="overlay-link">Link 4</a>
+        <a href="#" class="overlay-link">Link 5</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="intro" class="intro">
+    <h1 id="intro-text">ROXY</h1>
+    <a href="https://www.instagram.com/zjncoo/" target=”_blank”>
+      <div id="username">@zjncoo</div>
+    </a>
+     <!-- Add your username here -->
+    <div class="navbar">
+      <a href="home.html" class="home_button">
+        <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
+      </a>
+      
+      
+    </div>
+  </div>
+
+  <script>
+    const intro = document.getElementById('intro');
+    const introText = document.getElementById('intro-text');
+  
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const maxScroll = window.innerHeight; // Height of the intro section
+      const progress = Math.min(scrollTop / maxScroll, 1); // Progress between 0 and 1
+  
+      // Update the zoom and opacity of the intro text based on scroll progress
+      const scale = 1 + progress * 9; // Scale from 1 to 10
+      const opacity = 1 - progress; // Opacity from 1 to 0
+  
+      introText.style.transform = `scale(${scale})`;
+      introText.style.opacity = opacity;
+  
+      // When the animation finishes, remove the intro section
+      if (progress >= 1) {
+        intro.style.display = 'none'; // Completely remove intro from view
+      } else {
+        intro.style.display = 'flex'; // Show the intro when scrolling back up
+      }
+    });
+  </script>
+
+  <div class="news-container">
+    <div id="square"></div>
+    <div class="news-item">
+      <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
+      <h2 class="news-title">ROXY Brand with ROXYGEN</h2>
+      <p class="news-meta">Francesco Zanchetta and Roxy Team</p>
+      <p class="news-content">
+        The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
+
+        <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
+
+        <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
+
+        <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
+      </p>
+
+      <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
+      <p class="news-content">
+        The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
+
+        <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
+
+        <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
+
+        <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
+      </p>
+
+      <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
+      <p class="news-content">
+        The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
+
+        <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
+
+        <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
+
+        <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
+      </p>
+    </div>
+  </div>
+
+  <h1 class="title">Roxy BrandBook</h1>
+
+  <div class="book-container">
+    <div class="page" id="page1-container">
+      <canvas id="page1"></canvas>
+    </div>
+    <div class="page" id="page2-container" style="display: none;">
+      <canvas id="page2"></canvas>
+    </div>
+    <div class="page" id="page3-container" style="display: none;">
+      <canvas id="page3"></canvas>
+    </div>
+    <div class="magnifier" id="magnifier">
+      <canvas id="magnifierCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button id="prevButton" disabled><</button>
+    <button id="nextButton">></button>
+  </div>
+
+  <script>
+    function toggleOverlay() {
+      const overlay = document.getElementById('overlay');
+      if (overlay.classList.contains('active')) {
+        overlay.classList.remove('active');
+        // Use a timeout to hide the element after the animation
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 300); // Match the transition duration in CSS
+      } else {
+        overlay.style.display = 'flex';
+        // Add the active class after ensuring the display is set
+        setTimeout(() => overlay.classList.add('active'), 10);
+      }
+    }
+
+    function closeOverlay(event) {
+      // Close the overlay if the transparent background is clicked
+      if (event.target === event.currentTarget) {
+        toggleOverlay();
+      }
+    }
+
+    // PDF.js Variables
+    const url = 'versionesofi.pdf'; 
+    let pdfDoc = null;
+    let currentPage = 1;
+    const canvasCover = document.getElementById('page1');
+    const canvasLeft = document.getElementById('page2');
+    const canvasRight = document.getElementById('page3');
+    const ctxCover = canvasCover.getContext('2d');
+    const ctxLeft = canvasLeft.getContext('2d');
+    const ctxRight = canvasRight.getContext('2d');
+
+    const magnifier = document.getElementById('magnifier');
+    const magnifierCanvas = document.getElementById('magnifierCanvas');
+    const magnifierCtx = magnifierCanvas.getContext('2d');
+
+    magnifierCanvas.width = 150;
+    magnifierCanvas.height = 150;
+
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+
+    // Load PDF
+    pdfjsLib.getDocument(url).promise.then((pdf) => {
+      pdfDoc = pdf;
+      renderPages();
+    });
+
+    // Render Pages
+    function renderPages() {
+      if (pdfDoc) {
+        if (currentPage === 1) {
+          pdfDoc.getPage(currentPage).then((page) => {
+            renderPage(page, canvasCover, ctxCover);
+            document.getElementById('page1-container').style.display = 'flex';
+            document.getElementById('page2-container').style.display = 'none';
+            document.getElementById('page3-container').style.display = 'none';
+          });
+        } else {
+          pdfDoc.getPage(currentPage).then((page) => {
+            renderPage(page, canvasLeft, ctxLeft);
+          });
+
+          const nextPage = currentPage + 1 <= pdfDoc.numPages ? currentPage + 1 : null;
+          if (nextPage) {
+            pdfDoc.getPage(nextPage).then((page) => {
+              renderPage(page, canvasRight, ctxRight);
+            });
+          } else {
+            ctxRight.clearRect(0, 0, canvasRight.width, canvasRight.height);
+          }
+
+          document.getElementById('page1-container').style.display = 'none';
+          document.getElementById('page2-container').style.display = 'flex';
+          document.getElementById('page3-container').style.display = 'flex';
+        }
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage >= pdfDoc.numPages;
+      }
+    }
+
+    function renderPage(page, canvas, ctx) {
+      const scale = 2.0;
+      const viewport = page.getViewport({ scale: scale });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      page.render({ canvasContext: ctx, viewport: viewport });
+    }
+
+    nextButton.addEventListener('click', () => {
+      if (currentPage < pdfDoc.numPages) {
+        currentPage += currentPage === 1 ? 1 : 2;
+        renderPages();
+      }
+    });
+
+    prevButton.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage -= currentPage === 2 ? 1 : 2;
+        renderPages();
+      }
+    });
+
+    document.querySelectorAll('.page canvas').forEach((canvas) => {
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        magnifier.style.display = 'flex';
+        magnifier.style.left = `${e.clientX - magnifier.offsetWidth / 2}px`;
+        magnifier.style.top = `${e.clientY - magnifier.offsetHeight / 2}px`;
+        magnifierCtx.clearRect(0, 0, magnifierCanvas.width, magnifierCanvas.height);
+        magnifierCtx.drawImage(
+          canvas,
+          x - magnifierCanvas.width / 4,
+          y - magnifierCanvas.height / 4,
+          magnifierCanvas.width / 2,
+          magnifierCanvas.height / 2,
+          0,
+          0,
+          magnifierCanvas.width,
+          magnifierCanvas.height
+        );
+      });
+
+      canvas.addEventListener('mouseenter', () => {
+        document.body.style.cursor = 'none';
+        magnifier.style.display = 'block';
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        document.body.style.cursor = 'default';
+        magnifier.style.display = 'none';
+      });
+    });
+  </script>
+
+  <div class="folder-container">
+    <img src="../imgroxy/folderclosed.png" alt="Folder" class="folder" id="folder">
+    <img src="../imghome/roxy.png" alt="Photos" class="photos" id="photos">
+  </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const folder = document.getElementById("folder");
+          const photos = document.getElementById("photos");
+
+          folder.addEventListener("mouseover", function() {
+              folder.src = "../imgroxy/folderopen.webp"; // Ensure this image exists
+          });
+          
+          folder.addEventListener("mouseout", function() {
+              folder.src = "../imgroxy/folderclosed.png";
+          });
+      });
+  </script>
+  <!-- Fixed Button -->
+  <button class="fixed-button">@zjncoo</button>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <p>Contatti</p>
+      <a href="mailto:francesco.zanchetta@mail.polimi.it">francesco.zanchetta@mail.polimi.it</a>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Francesco Zanchetta.</p>
+    </div>
+  </footer>
+</body>
+</html>
