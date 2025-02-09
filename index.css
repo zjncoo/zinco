@@ -125,7 +125,7 @@ body {
     text-align: center;
     border: 0.5px solid rgba(255, 255, 255, 0.176);
     border-radius: 22px;
-    background: rgb(235, 208, 1);
+    background: #ffd104;
     color: rgb(0, 0, 0);
     cursor: pointer;
     font-weight: bold;
@@ -133,7 +133,7 @@ body {
 }
 
 .scroll-btn:hover {
-    background: linear-gradient(45deg, #a5a5a584, #38383855); /* Reverse or change the gradient */
+    background: linear-gradient(45deg, #a5a5a5e8, #000000e4); /* Reverse or change the gradient */
     transform: scale(1.02); /* Slightly increase the button size on hover */
     color: rgb(255, 255, 255);
 }
