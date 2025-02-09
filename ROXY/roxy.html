@@ -31,6 +31,9 @@
   </script>
 </head>
 <body>
+
+  
+  
   <!-- Navbar -->
   <div class="navbar">
     <a href="../index.html" class="home_button">
@@ -331,6 +334,26 @@
   </script>
   <!-- Fixed Button -->
   <button class="fixed-button">@zjncoo</button>
+
+  <!-- Transition Cover -->
+  <div id="transition-cover">
+    <img src="../imghome/logo_zinco.svg" alt="Logo">
+  </div>
+
+  <script>
+    // Wait for the page to load and trigger the transition animation
+    window.addEventListener('load', () => {
+      const transitionCover = document.getElementById('transition-cover');
+      
+      // Initially, transition cover takes up the entire screen
+      transitionCover.classList.add('show');
+
+      // After the page has loaded, start the transition to move it down
+      setTimeout(() => {
+        transitionCover.classList.add('move-down');
+      }, 50); // Small delay to ensure page load is fully processed
+    });
+  </script>
 
   <!-- Footer Section -->
   <footer>

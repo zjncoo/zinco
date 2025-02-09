@@ -124,8 +124,45 @@
       </div>
 
     </div> <!-- End of project-grid -->
-
   </section>
+
+  <!-- Transition Cover -->
+  <div id="transition-cover">
+    <img src="imghome/logo_zinco.svg" alt="Logo">
+  </div>
+
+  <script>
+    // Add click event listener for all external links
+    const transitionCover = document.getElementById('transition-cover');
+    const externalLinks = document.querySelectorAll('.project-button');
+
+    externalLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
+        document.body.classList.add('locked'); // Lock the page
+        
+        // Show the transition cover animation
+        transitionCover.classList.add('active');
+
+        // Wait for the animation to finish before navigating
+        setTimeout(() => {
+          window.location.href = link.href; // Navigate to the external link
+        }, 1000); // Match this time with the duration of your animation
+      });
+    });
+
+    // Add event listener for when the new page is loaded
+    window.addEventListener('load', () => {
+      // Once the page has loaded, slide the square down
+      transitionCover.classList.remove('active');
+      transitionCover.classList.add('inactive');
+
+      // Unlock the page after the animation
+      setTimeout(() => {
+        document.body.classList.remove('locked');
+      }, 500); // Delay to match the animation time
+    });
+  </script>
 
   <!-- Footer Section -->
   <footer>

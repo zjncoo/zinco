@@ -450,3 +450,47 @@ footer {
   font-size: 0.9em;
   font-weight: 300;
 }
+
+/* Animation container */
+#transition-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(0);
+  transition: transform 1s ease-in-out;
+  z-index: 9999;
+}
+
+
+#transition-cover.show {
+  transform: translateY(0); /* Full screen */
+}
+
+#transition-cover.move-down {
+  transform: translateY(+100%); /* Moves up and disappears */
+}
+
+#transition-cover img {
+  width: 100px;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#transition-cover.move-down img {
+  opacity: 0; /* Fade in logo when transition completes */
+}
+
+/* Ensure the rest of the page is unclickable during the animation */
+body {
+  pointer-events: auto;
+}
+
+body.locked {
+  pointer-events: none;
+}
