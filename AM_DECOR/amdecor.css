@@ -684,3 +684,110 @@ body {
 body.locked {
   pointer-events: none;
 }
+
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px) {
+  body {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align content to the left */
+    padding: 10px;
+  }
+
+  #logo img {
+    width: 60%; /* Adjust logo size */
+  }
+
+  #introduction a {
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 10%;
+  }
+
+  .navbar {
+    flex-direction: column; /* Stack navbar items */
+    gap: 5px; /* Reduce gap between items */
+    padding: 5px;
+  }
+
+  .home_button {
+    font-size: 14px; /* Smaller button text */
+    padding: 8px 10px;
+  }
+
+  h1 {
+    font-size: 24px; /* Adjust heading size */
+    margin: 20px auto;
+  }
+
+  .news-container {
+    max-width: 90%; /* Reduce width for better fit */
+    padding: 10px;
+  }
+
+  .card {
+    width: 90%; /* Full width on mobile */
+    margin: 10px auto;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .sidebar-link {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .book-container {
+    width: 90%; /* Scale down book container */
+    height: auto; /* Adjust height proportionally */
+    flex-direction: column; /* Stack pages */
+  }
+
+  .magnifier {
+    width: 100px; /* Adjust size for smaller screens */
+    height: 100px;
+  }
+
+  .news-title {
+    font-size: 18px; /* Smaller titles */
+  }
+
+  .fixed-button {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .links-column {
+    width: auto; /* Allow it to resize naturally */
+    padding: 10px;
+  }
+
+  .section img {
+    max-width: 100%; /* Ensure images fit */
+  }
+
+  .square-container {
+    gap: 10px; /* Reduce gap between squares */
+  }
+
+  .square {
+    width: 10vw; /* Smaller squares */
+    height: 10vw;
+  }
+
+  footer {
+    padding: 20px 10px;
+    font-size: 14px;
+  }
+
+  #form {
+    width: 90%; /* Full width for forms */
+    margin: 10vh auto;
+  }
+
+  #username {
+    font-size: 12px; /* Adjust text size */
+  }
+}
