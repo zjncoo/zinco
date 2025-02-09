@@ -386,6 +386,10 @@ body {
         padding: 6px 12px;
     }
 
+    .project-column {
+        width: 70vw;
+    }
+
     .links h2 {
         font-size: 2em; /* Smaller heading */
     }
