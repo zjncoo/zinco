@@ -31,9 +31,10 @@
   </script>
 </head>
 <body>
+  <a class="fixed-button" class="navbarbutton" id="backtoprojects" href="../index.html#projects">< Back to My Projects</a>
   <!-- Navbar -->
   <div class="navbar">
-    <a href="../index.html" class="home_button">
+    <a href="../index.html" class="home_button" class="navbarbutton">
       <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
     </a>
     <button class="circle-button" onclick="toggleOverlay()">
@@ -83,7 +84,7 @@
     </div>
   </div>
 
-   <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation -->
   <div id="sidebarbox">
     <nav class="sidebar">
       <ul>
@@ -125,7 +126,7 @@
   <div class="news-container">
     <div id="square"></div>
     <!-- INTRODUCTION Section -->
-<section id="introduction" class="section">
+<section id="Introduction" class="section">
   <h2>Introduction</h2>
   <p>
     AM Decor is a building firm operating in Nothern Italy. 
@@ -307,6 +308,47 @@
 
         requestAnimationFrame(scrollAnimation);
       }
+    });
+  </script>
+
+  <!-- PAGE ANIMATION-->
+   <!-- INITIAL TRANSITION -->
+  <div id="transition-cover">
+    <img src="../imghome/logo_zinco.svg" alt="Logo">
+  </div>
+
+  <script>
+    // Wait for the page to load and trigger the initial transition animation
+    window.addEventListener('load', () => {
+      const transitionCover = document.getElementById('transition-cover');
+      
+      // Initially, transition cover takes up the entire screen
+      transitionCover.classList.add('show');
+
+      // After the page has loaded, start the transition to move it down
+      setTimeout(() => {
+        transitionCover.classList.add('move-down');
+      }, 50); // Small delay to ensure page load is fully processed
+    });
+
+    // For external link navigation (handling exit transition before page load)
+    const transitionCover = document.getElementById('transition-cover');
+    const externalLinks = document.querySelectorAll('.home_button, #backtoprojects');
+
+    externalLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
+        document.body.classList.add('locked'); // Lock the page to prevent interaction
+
+        // Trigger the exit transition (slide-up)
+        transitionCover.classList.remove('move-down'); // Remove 'move-down' if already applied
+        transitionCover.classList.add('move-up'); // Apply move-up transition to cover the screen
+
+        // Wait for the exit animation to finish before navigating
+        setTimeout(() => {
+          window.location.href = link.href; // Navigate to the external link
+        }, 1000); // Match this time with the duration of your animation
+      });
     });
   </script>
 

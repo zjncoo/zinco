@@ -42,8 +42,23 @@
     <button class="circle-button" onclick="toggleOverlay()">
       <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
     </button>
-    
   </div>
+
+  <!-- Sidebar Navigation -->
+  <div id="sidebarbox">
+    <nav class="sidebar">
+      <ul>
+        <li><a href="#introduction" class="sidebar-link">Introduction</a></li>
+        <li><a href="#appearance" class="sidebar-link">Appearance</a></li>
+        <li><a href="#logo" class="sidebar-link">Logo</a></li>
+        <li><a href="#typography" class="sidebar-link">Typography</a></li>
+        <li><a href="#mockups" class="sidebar-link">Mockups</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+
+  
 
   <!-- Overlay Section -->
   <div class="overlay" id="overlay" onclick="closeOverlay(event)">
@@ -115,17 +130,20 @@
     <div id="square"></div>
     <div class="news-item">
       <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
-      <h2 class="news-title">ROXY Brand with ROXYGEN</h2>
-      <p class="news-meta">Francesco Zanchetta and Roxy Team</p>
-      <p class="news-content">
-        The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
+      <section id="introduction">
+        <h2 class="news-title">Introduction</h2>
+        <p class="news-meta">Francesco Zanchetta and Roxy Team</p>
+        <p class="news-content">
+          The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
 
-        <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
+          <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
 
-        <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
+          <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
 
-        <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
-      </p>
+          <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
+        </p>
+      </section>
+      
 
       <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
       <p class="news-content">
@@ -335,13 +353,38 @@
   <!-- Fixed Button -->
   <button class="fixed-button">@zjncoo</button>
 
-  <!-- Transition Cover -->
+  <!--SCRIPT LEFT NAVBAR-->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.sidebar-link');
+      const sections = document.querySelectorAll('.section');
+  
+      const highlightLink = () => {
+        const scrollPos = window.scrollY + window.innerHeight / 2; // Middle of the screen
+  
+        sections.forEach((section, index) => {
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+  
+          if (scrollPos >= top && scrollPos <= bottom) {
+            links.forEach((link) => link.classList.remove('highlight'));
+            links[index].classList.add('highlight');
+          }
+        });
+      };
+  
+      window.addEventListener('scroll', highlightLink);
+      highlightLink(); // Initial highlight
+    });
+  </script>
+
+  <!-- INITIAL TRANSITION -->
   <div id="transition-cover">
     <img src="../imghome/logo_zinco.svg" alt="Logo">
   </div>
 
   <script>
-    // Wait for the page to load and trigger the transition animation
+    // Wait for the page to load and trigger the initial transition animation
     window.addEventListener('load', () => {
       const transitionCover = document.getElementById('transition-cover');
       
@@ -352,6 +395,26 @@
       setTimeout(() => {
         transitionCover.classList.add('move-down');
       }, 50); // Small delay to ensure page load is fully processed
+    });
+
+    // For external link navigation (handling exit transition before page load)
+    const transitionCover = document.getElementById('transition-cover');
+    const externalLinks = document.querySelectorAll('.home_button, #backtoprojects');
+
+    externalLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
+        document.body.classList.add('locked'); // Lock the page to prevent interaction
+
+        // Trigger the exit transition (slide-up)
+        transitionCover.classList.remove('move-down'); // Remove 'move-down' if already applied
+        transitionCover.classList.add('move-up'); // Apply move-up transition to cover the screen
+
+        // Wait for the exit animation to finish before navigating
+        setTimeout(() => {
+          window.location.href = link.href; // Navigate to the external link
+        }, 1000); // Match this time with the duration of your animation
+      });
     });
   </script>
 
