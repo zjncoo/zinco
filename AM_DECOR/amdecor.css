@@ -15,7 +15,6 @@ body {
     background-color: #1a1a1a; /* Almost black background */
     color: white; /* White text for contrast */
     width: 100vw;
-    overflow-x: hidden;
   }
 
   #introduction a {
