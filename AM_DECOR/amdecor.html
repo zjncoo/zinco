@@ -115,7 +115,7 @@
   <h2>Introduction</h2>
   <img src="../images/introduction.jpg" alt="Introduction Image">
   <p>
-    This project reimagines the Roxy brand with a fresh, bold perspective, balancing its rich history with a contemporary identity.
+    This project reimagines the AM DECOR brand with a fresh, bold perspective, balancing its rich history with a contemporary identity.
   </p>
 </section>
 
@@ -164,28 +164,6 @@
 </section>
   </div>
 
-  <h1 class="title">Roxy BrandBook</h1>
-
-  <div class="book-container">
-    <div class="page" id="page1-container">
-      <canvas id="page1"></canvas>
-    </div>
-    <div class="page" id="page2-container" style="display: none;">
-      <canvas id="page2"></canvas>
-    </div>
-    <div class="page" id="page3-container" style="display: none;">
-      <canvas id="page3"></canvas>
-    </div>
-    <div class="magnifier" id="magnifier">
-      <canvas id="magnifierCanvas"></canvas>
-    </div>
-  </div>
-
-  <div class="button-container">
-    <button id="prevButton" disabled><</button>
-    <button id="nextButton">></button>
-  </div>
-
   <script>
     function toggleOverlay() {
       const overlay = document.getElementById('overlay');
@@ -209,121 +187,6 @@
       }
     }
 
-    // PDF.js Variables
-    const url = 'versionesofi.pdf'; 
-    let pdfDoc = null;
-    let currentPage = 1;
-    const canvasCover = document.getElementById('page1');
-    const canvasLeft = document.getElementById('page2');
-    const canvasRight = document.getElementById('page3');
-    const ctxCover = canvasCover.getContext('2d');
-    const ctxLeft = canvasLeft.getContext('2d');
-    const ctxRight = canvasRight.getContext('2d');
-
-    const magnifier = document.getElementById('magnifier');
-    const magnifierCanvas = document.getElementById('magnifierCanvas');
-    const magnifierCtx = magnifierCanvas.getContext('2d');
-
-    magnifierCanvas.width = 150;
-    magnifierCanvas.height = 150;
-
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-
-    // Load PDF
-    pdfjsLib.getDocument(url).promise.then((pdf) => {
-      pdfDoc = pdf;
-      renderPages();
-    });
-
-    // Render Pages
-    function renderPages() {
-      if (pdfDoc) {
-        if (currentPage === 1) {
-          pdfDoc.getPage(currentPage).then((page) => {
-            renderPage(page, canvasCover, ctxCover);
-            document.getElementById('page1-container').style.display = 'flex';
-            document.getElementById('page2-container').style.display = 'none';
-            document.getElementById('page3-container').style.display = 'none';
-          });
-        } else {
-          pdfDoc.getPage(currentPage).then((page) => {
-            renderPage(page, canvasLeft, ctxLeft);
-          });
-
-          const nextPage = currentPage + 1 <= pdfDoc.numPages ? currentPage + 1 : null;
-          if (nextPage) {
-            pdfDoc.getPage(nextPage).then((page) => {
-              renderPage(page, canvasRight, ctxRight);
-            });
-          } else {
-            ctxRight.clearRect(0, 0, canvasRight.width, canvasRight.height);
-          }
-
-          document.getElementById('page1-container').style.display = 'none';
-          document.getElementById('page2-container').style.display = 'flex';
-          document.getElementById('page3-container').style.display = 'flex';
-        }
-
-        prevButton.disabled = currentPage === 1;
-        nextButton.disabled = currentPage >= pdfDoc.numPages;
-      }
-    }
-
-    function renderPage(page, canvas, ctx) {
-      const scale = 2.0;
-      const viewport = page.getViewport({ scale: scale });
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      page.render({ canvasContext: ctx, viewport: viewport });
-    }
-
-    nextButton.addEventListener('click', () => {
-      if (currentPage < pdfDoc.numPages) {
-        currentPage += currentPage === 1 ? 1 : 2;
-        renderPages();
-      }
-    });
-
-    prevButton.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage -= currentPage === 2 ? 1 : 2;
-        renderPages();
-      }
-    });
-
-    document.querySelectorAll('.page canvas').forEach((canvas) => {
-      canvas.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        magnifier.style.display = 'flex';
-        magnifier.style.left = `${e.clientX - magnifier.offsetWidth / 2}px`;
-        magnifier.style.top = `${e.clientY - magnifier.offsetHeight / 2}px`;
-        magnifierCtx.clearRect(0, 0, magnifierCanvas.width, magnifierCanvas.height);
-        magnifierCtx.drawImage(
-          canvas,
-          x - magnifierCanvas.width / 4,
-          y - magnifierCanvas.height / 4,
-          magnifierCanvas.width / 2,
-          magnifierCanvas.height / 2,
-          0,
-          0,
-          magnifierCanvas.width,
-          magnifierCanvas.height
-        );
-      });
-
-      canvas.addEventListener('mouseenter', () => {
-        document.body.style.cursor = 'none';
-        magnifier.style.display = 'block';
-      });
-
-      canvas.addEventListener('mouseleave', () => {
-        document.body.style.cursor = 'default';
-        magnifier.style.display = 'none';
-      });
-    });
   </script>
 
   <div class="folder-container">
