@@ -34,7 +34,19 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 2;
 }
+
+#covering {
+    bottom: 0px;
+    right: 0px;
+    width: 100vw;
+    background-color: #000;
+    height: 10vh;
+    z-index: 2;
+    position: absolute;
+}
+
 
 /* Logo styling */
 #logo {
@@ -205,6 +217,7 @@ body {
     overflow: hidden;
 }
 
+
 .floating-images img {
     position: absolute;
     transition: all 0.1s ease-out;
@@ -275,4 +288,12 @@ body {
     bottom: 0;
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
+  }
+
+
+  #coso {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
   }
