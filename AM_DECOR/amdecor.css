@@ -790,4 +790,8 @@ body.locked {
   #username {
     font-size: 12px; /* Adjust text size */
   }
+
+  #backtoprojects {
+    display: none;
+  }
 }
