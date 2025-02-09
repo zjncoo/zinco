@@ -11,17 +11,56 @@
 </head>
 
 <body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div id="logo-container">
+      <img src="../imghome/logo_zinco.svg" alt="Logo" id="logoanimation">
+      <div id="percentage">0%</div>
+    </div>
+    <!-- Fixed Button -->
+    <button class="fixed-button">@zjncoo</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    let percentage = 0;
+    const loadingScreen = document.getElementById('loading-screen');
+    const percentageDisplay = document.getElementById('percentage');
+    const mainContent = document.getElementById('main-content');
+    
+    // Simulate loading process
+    const loadingInterval = setInterval(() => {
+      if (percentage < 100) {
+        percentage++;
+        percentageDisplay.textContent = `${percentage}%`;
+      } else {
+        clearInterval(loadingInterval);
+
+        // Delay the transition of the loading screen by 1 second
+        setTimeout(() => {
+          loadingScreen.style.transition = 'transform 0.5s ease-out';
+          loadingScreen.style.transform = 'translateY(-100%)';
+          mainContent.classList.remove('hidden');
+        }, 1000); // 1000ms delay
+      }
+    }, 15); // Update the percentage every 20ms
+  });
+  </script>
+
+
 
   <!-- Landing Section -->
   <section class="landing">
     <div class="content">
       <img src="imghome/logo_zinco.svg" id="logo">
-      <a href="#progetti"><button class="scroll-btn">Discover My Work</button></a>
     </div>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.63/build/spline-viewer.js"></script>
-    <spline-viewer id="coso" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/YKjAqMh4Gctd8n2m/scene.splinecode"></spline-viewer>
+    <spline-viewer id="coso" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/pzAGOuhTojAnubm0/scene.splinecode"></spline-viewer>
     <div id="covering"></div>
   </section>
+
+  <a href="#progetti"><button class="scroll-btn">Discover My Work</button></a>
+
 
 
   
