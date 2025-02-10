@@ -15,6 +15,7 @@ body {
     background-color: #1a1a1a; /* Almost black background */
     color: white; /* White text for contrast */
     width: 100vw;
+    
   }
 
   #introduction a {
@@ -271,6 +272,7 @@ body {
     padding: 20px;
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
+    overflow: hidden;
   }
   
   .news-item {
@@ -376,7 +378,7 @@ body {
 }
 
 #square {
-  height: 140vh;
+  height: 100vh;
   width: 100vw;
   color: grey;
 }
@@ -645,7 +647,7 @@ h1 {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background: #000;
   display: flex;
@@ -685,112 +687,136 @@ body.locked {
 }
 
 
-/* Mobile Styles */
-@media only screen and (max-width: 768px) {
-  body {
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align content to the left */
-    padding: 10px;
-  }
 
+
+/* Default styles are for larger screens. */
+
+/* Extra Large Screens (1200px and above) */
+@media (min-width: 1200px) {
   #logo img {
-    width: 60%; /* Adjust logo size */
-  }
-
-  #introduction a {
-    padding: 10px;
-    font-size: 14px;
-    margin-top: 10%;
-  }
-
-  .navbar {
-    flex-direction: column; /* Stack navbar items */
-    gap: 5px; /* Reduce gap between items */
-    padding: 5px;
-  }
-
-  .home_button {
-    font-size: 14px; /* Smaller button text */
-    padding: 8px 10px;
-  }
-
-  h1 {
-    font-size: 24px; /* Adjust heading size */
-    margin: 20px auto;
+    width: 30%;
   }
 
   .news-container {
-    max-width: 90%; /* Reduce width for better fit */
+    max-width: 30%;
+  }
+
+  .book-container {
+    width: 700px; /* Adjust for larger screens */
+    height: 500px;
+  }
+}
+
+/* Large Screens (992px - 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .news-container {
+    max-width: 50%;
+  }
+
+  .book-container {
+    width: 600px;
+    height: 450px;
+  }
+
+  #logo img {
+    width: 35%;
+  }
+}
+
+/* Medium Screens (768px - 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+  body {
     padding: 10px;
   }
 
-  .card {
-    width: 90%; /* Full width on mobile */
-    margin: 10px auto;
+  .news-container {
+    max-width: 70%;
+  }
+
+  #logo img {
+    width: 50%;
+  }
+
+  .book-container {
+    width: 500px;
+    height: 350px;
+  }
+
+  .circle-button {
+    width: 35px;
+    height: 35px;
+    font-size: 120%;
+  }
+}
+
+/* Small Screens (576px - 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+  body {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  #logo img {
+    width: 60%;
+  }
+
+  .book-container {
+    width: 100%;
+    height: auto;
+  }
+
+  .news-container {
+    max-width: 90%;
+  }
+
+  .fixed-button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+/* Extra Small Screens (up to 575px) */
+@media (max-width: 575px) {
+  body {
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  #logo img {
+    width: 70%;
+  }
+
+  #square {
+    height: 40vh;
+  }
+
+  .book-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .news-container {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 28px;
   }
 
   .sidebar {
     display: none;
   }
+  
 
-  .sidebar-link {
+  .home_button {
     font-size: 14px;
-    padding: 5px;
-  }
-
-  .book-container {
-    width: 90%; /* Scale down book container */
-    height: auto; /* Adjust height proportionally */
-    flex-direction: column; /* Stack pages */
-  }
-
-  .magnifier {
-    width: 100px; /* Adjust size for smaller screens */
-    height: 100px;
-  }
-
-  .news-title {
-    font-size: 18px; /* Smaller titles */
+    padding: 8px 10px;
   }
 
   .fixed-button {
-    padding: 8px 10px;
-    font-size: 14px;
-  }
-
-  .links-column {
-    width: auto; /* Allow it to resize naturally */
-    padding: 10px;
-  }
-
-  .section img {
-    max-width: 100%; /* Ensure images fit */
-  }
-
-  .square-container {
-    gap: 10px; /* Reduce gap between squares */
-  }
-
-  .square {
-    width: 10vw; /* Smaller squares */
-    height: 10vw;
-  }
-
-  footer {
-    padding: 20px 10px;
-    font-size: 14px;
-  }
-
-  #form {
-    width: 90%; /* Full width for forms */
-    margin: 10vh auto;
-  }
-
-  #username {
-    font-size: 12px; /* Adjust text size */
-  }
-
-  #backtoprojects {
-    display: none;
+    font-size: 12px;
+    padding: 6px 8px;
   }
 }
