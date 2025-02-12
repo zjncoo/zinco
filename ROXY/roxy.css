@@ -841,16 +841,20 @@ body.locked {
 }
 
 
+#pdf-viewer-container {
+  width: 60%; /* Set the container width to 60% of the page */
+  margin: 20px auto;
+  text-align: center;
+}
 
 #pdf-viewer {
-  margin: 20px auto;
-  max-width: 80%;
-  z-index: 11;
-  position: relative; /* Ensure buttons are positioned relative to the viewer */
+  position: relative;
+  margin-bottom: 20px; /* Space between the viewer and the thumbnails */
 }
 
 canvas {
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 0.5px solid rgba(255, 255, 255, 0.176);
   width: 100%;
   height: auto;
 }
@@ -861,10 +865,10 @@ canvas {
   transform: translateY(-50%);
   padding: 10px 15px;
   font-size: 16px;
-  background-color: #000000;
+  background-color: #f4f4f4;
   border: 1px solid #ccc;
   cursor: pointer;
-  z-index: 20; /* Ensure buttons are above other elements */
+  z-index: 20;
 }
 
 .left {
@@ -885,13 +889,14 @@ canvas {
 #thumbnails-container canvas {
   cursor: pointer;
   margin-right: 10px;
-  border: 1px solid #ddd;
-  width: 80px;  /* Set a fixed width for the thumbnails */
+  border-radius: 10px;
+  width: 80px; /* Set a fixed width for the thumbnails */
+  border: 1px solid #dddddd00;
   height: auto; /* Maintain aspect ratio */
 }
 
 #thumbnails-container canvas:hover {
-  border-color: #333;
+  border: 1px solid #ddd;
 }
 
 .navigation {
