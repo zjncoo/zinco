@@ -86,6 +86,8 @@
     </div>
   </div>
 
+  
+
   <div id="intro" class="intro">
     <h1 id="intro-text">ROXY</h1>
     <a href="https://www.instagram.com/zjncoo/" target=”_blank”>
@@ -126,8 +128,76 @@
     });
   </script>
 
+  <div id="square"></div>
+
+  <h1>PDF Viewer</h1>
+  <div id="pdf-viewer">
+    <canvas id="pdf-canvas"></canvas>
+  </div>
+  <div class="navigation">
+    <button id="prev-page">Previous</button>
+    <span>Page <span id="current-page">1</span> of <span id="total-pages">0</span></span>
+    <button id="next-page">Next</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    const pdfUrl = 'roxy.pdf'; // Replace with the path to your PDF file
+
+    let pdfDoc = null,
+        currentPage = 1,
+        totalPages = 0,
+        pageRendering = false,
+        canvas = document.getElementById('pdf-canvas'),
+        ctx = canvas.getContext('2d');
+
+    // Load the PDF
+    pdfjsLib.getDocument(pdfUrl).promise.then((doc) => {
+      pdfDoc = doc;
+      totalPages = pdfDoc.numPages;
+      document.getElementById('total-pages').textContent = totalPages;
+
+      // Render the first page
+      renderPage(currentPage);
+    });
+
+    // Render a specific page
+    function renderPage(pageNumber) {
+      pageRendering = true;
+      pdfDoc.getPage(pageNumber).then((page) => {
+        const viewport = page.getViewport({ scale: 1.5 });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+
+        page.render(renderContext).promise.then(() => {
+          pageRendering = false;
+        });
+
+        document.getElementById('current-page').textContent = pageNumber;
+      });
+    }
+
+    // Go to the previous page
+    document.getElementById('prev-page').addEventListener('click', () => {
+      if (currentPage <= 1 || pageRendering) return;
+      currentPage--;
+      renderPage(currentPage);
+    });
+
+    // Go to the next page
+    document.getElementById('next-page').addEventListener('click', () => {
+      if (currentPage >= totalPages || pageRendering) return;
+      currentPage++;
+      renderPage(currentPage);
+    });
+  </script>
+
   <div class="news-container">
-    <div id="square"></div>
     <div class="news-item">
       <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
       <section id="introduction">
