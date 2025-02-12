@@ -115,16 +115,20 @@
   <div id="square"></div>
 
   <h1>PDF Viewer</h1>
-  <div id="pdf-viewer">
-    <canvas id="pdf-canvas"></canvas>
-    <button id="prev-page" class="side-button left">Previous</button>
-    <button id="next-page" class="side-button right">Next</button>
-  </div>
-  <div class="navigation">
-    <span>Page <span id="current-page">1</span> of <span id="total-pages">0</span></span>
-  </div>
-  <div id="thumbnails-container" style="overflow-x: auto; white-space: nowrap; margin-top: 20px;">
-    <!-- Thumbnails will go here -->
+  <div id="pdf-viewer-container">
+    <div id="pdf-viewer">
+      <canvas id="pdf-canvas"></canvas>
+      <button id="prev-page" class="side-button left"><</button>
+      <button id="next-page" class="side-button right">></button>
+    </div>
+    
+    <!-- Thumbnails container -->
+    <div id="thumbnails-container"></div>
+    
+    <!-- Progress number container -->
+    <div class="navigation">
+      <span>Page <span id="current-page">1</span> of <span id="total-pages">0</span></span>
+    </div>
   </div>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>

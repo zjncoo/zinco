@@ -853,7 +853,7 @@ body.locked {
 }
 
 canvas {
-  border-radius: 10px;
+  border-radius: 22px;
   border: 0.5px solid rgba(255, 255, 255, 0.176);
   width: 100%;
   height: auto;
@@ -865,8 +865,8 @@ canvas {
   transform: translateY(-50%);
   padding: 10px 15px;
   font-size: 16px;
-  background-color: #f4f4f4;
-  border: 1px solid #ccc;
+  background-color: #000000;
+  border: 1px solid #dfdfdfb9;
   cursor: pointer;
   z-index: 20;
 }
