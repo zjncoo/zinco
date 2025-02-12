@@ -83,13 +83,13 @@ body {
 
 /* Links Section */
 .links {
-    height: 100vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     justify-content: center;
-    background-color: #111;
+    background-color: #000000;
     color: #fff;
 }
 
@@ -160,88 +160,68 @@ body {
     overflow-x: hidden;
 }
 
-.floating-img {
-    transform: translate3d(0, 0, 0);
-    transition: transform 0.1s ease-out;
-}
-
-.floating-images {
-    will-change: transform;
-}
-
 .landing {
     position: relative;
     overflow: hidden;
 }
 
-.floating-images img {
-    position: absolute;
-    transition: all 0.1s ease-out;
-}
 
-/* Grid layout for 3 columns */
+/* Contenitore principale */
 .project-grid {
+    display: flex;
+    flex-direction: column;
+    width: 70vw; /* Occupa il 70% della finestra */
+    margin: 0 auto; /* Centra il contenitore */
+    gap: 40px;
+    margin-top: 5%;
+}
+
+/* Griglia 2x2 per ogni sezione */
+.project-subgrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
 }
 
-.project-column {
-    padding: 20px;
-    background-color: #262626;
-    border-radius: 8px;
-}
-
-.project-column h3 {
-    margin-bottom: 20px;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-}
-
+/* Stile dei rettangoli */
 .project-button {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    align-items: center; /* Allinea il titolo al centro verticalmente */
+    justify-content: center; /* Allinea il titolo al centro orizzontalmente */
     background-size: cover;
     background-position: center;
-    width: 200px;
-    height: 100px;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
+    width: 100%;
+    height: 32vh;
     text-decoration: none;
-    padding: 10px;
-    box-sizing: border-box;
+    border-radius: 10px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    margin-bottom: 15px;
 }
 
-.project-button:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
-
-.project-button .button-text {
-    z-index: 2;
-}
-
-.project-button .overlay {
+/* Nasconde il titolo inizialmente */
+.project-button h3 {
+    font-size: 0;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+    font-family: "headline-gothic-atf", sans-serif;
+    transition: font-size 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
 }
+
+/* Quando si passa sopra il pulsante, il titolo appare */
+.project-button:hover h3 {
+    font-size: 70px;
+    opacity: 1;
+}
+
+/* Effetto di sfondo bianco su hover */
+.project-button:hover {
+    background: #ffd104 !important;
+    background-image: none !important;
+}
+
 
 #coso {
     width: 100vw;
