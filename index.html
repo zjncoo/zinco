@@ -4,18 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HomePage - zinco</title>
-  <link rel="icon" type="image/x-icon" href="../zinco/imghome/logo_zinco.svg"> <!-- favicon -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../zinco/imghome/logo_zinco.svg">
+  <!-- Linking external CSS files -->
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="https://use.typekit.net/npp3dgf.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"> <!-- aggiungo font inter -->
- 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"> <!-- Adding Inter font -->
 </head>
 
 <body>
+
   <!-- Loading Screen -->
   <div id="loading-screen">
     <div id="logo-container">
+      <!-- Logo Image -->
       <img src="imghome/logo_zinco.svg" alt="Logo" id="logoanimation">
+      <!-- Percentage text to show loading progress -->
       <div id="percentage">0%</div>
     </div>
     <!-- Fixed Button -->
@@ -23,123 +27,131 @@
   </div>
 
   <script>
+    // Script to handle loading screen progress
     document.addEventListener("DOMContentLoaded", function() {
-    let percentage = 0;
-    const loadingScreen = document.getElementById('loading-screen');
-    const percentageDisplay = document.getElementById('percentage');
-    const mainContent = document.getElementById('main-content');
-    
-    // Simulate loading process
-    const loadingInterval = setInterval(() => {
-      if (percentage < 100) {
-        percentage++;
-        percentageDisplay.textContent = `${percentage}%`;
-      } else {
-        clearInterval(loadingInterval);
+      let percentage = 0;
+      const loadingScreen = document.getElementById('loading-screen');
+      const percentageDisplay = document.getElementById('percentage');
+      const mainContent = document.getElementById('main-content');
+      
+      // Simulating loading process
+      const loadingInterval = setInterval(() => {
+        if (percentage < 100) {
+          percentage++;
+          percentageDisplay.textContent = `${percentage}%`;
+        } else {
+          clearInterval(loadingInterval);
 
-        // Delay the transition of the loading screen by 1 second
-        setTimeout(() => {
-          loadingScreen.style.transition = 'transform 0.5s ease-out';
-          loadingScreen.style.transform = 'translateY(-100%)';
-          mainContent.classList.remove('hidden');
-        }, 1000); // 1000ms delay
-      }
-    }, 15); // Update the percentage every 20ms
-  });
+          // Delay transition of loading screen by 1 second
+          setTimeout(() => {
+            loadingScreen.style.transition = 'transform 0.5s ease-out';
+            loadingScreen.style.transform = 'translateY(-100%)';
+            mainContent.classList.remove('hidden');
+          }, 1000); // 1000ms delay
+        }
+      }, 15); // Update the percentage every 15ms
+    });
   </script>
-
-
 
   <!-- Landing Section -->
   <section class="landing">
     <div class="content">
+      <!-- Landing page logo -->
       <img src="imghome/logo_zinco.svg" id="logo">
     </div>
+    
+    <!-- Spline Viewer (3D Model Viewer) -->
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.63/build/spline-viewer.js"></script>
     <spline-viewer id="coso" loading-anim-type="spinner-small-dark" url="https://prod.spline.design/pzAGOuhTojAnubm0/scene.splinecode"></spline-viewer>
+    
+    <!-- Overlay element covering the section -->
     <div id="covering"></div>
   </section>
 
+  <!-- Scroll Button to Discover My Work Section -->
   <a href="#projects"><button class="scroll-btn">Discover My Work</button></a>
 
-
-
-  
-
-  <!-- Hidden Section with Buttons -->
+  <!-- Hidden Section with Buttons for Projects -->
   <section class="links" id="projects">
     <h2>My Projects</h2>
     <h3>Branding</h3>
 
+    <!-- Project Grid with Branding Projects -->
     <div class="project-grid">
-
-      <!-- Sezione Brands (2x2) -->
+      <!-- Section for Branding Projects (2x2 Grid) -->
       <div class="project-section">
         <div class="project-subgrid">
+          <!-- Project 1: ROXYGEN -->
           <a href="ROXY/roxy.html" class="project-button" style="background-image: url('imghome/roxy.png');">
             <h3>ROXYGEN</h3>
           </a>
+          <!-- Project 2: ESCAPES -->
           <a href="../LEZIONE-1IA/index.html" class="project-button" style="background-image: url('imghome/escapes.png');">
             <h3>ESCAPES</h3>
           </a>
+          <!-- Project 3: AM DECOR -->
           <a href="AM_DECOR/amdecor.html" class="project-button" style="background-image: url('imghome/am.png');">
             <h3>AM DECOR</h3>
           </a>
+          <!-- Project 4: GRAPHIC 1 (Placeholder) -->
           <a href="#" class="project-button" style="background-image: url('path-to-image');">
             <h3>GRAPHIC 1</h3>
           </a>
         </div>
       </div>
-    
-      <!-- Sezione Websites & Graphics (2x2) -->
+
+      <!-- Section for Websites & Graphics Projects (2x2 Grid) -->
       <div class="project-section">
         <div class="project-subgrid">
+          <!-- Project 1: Lezione 3 -->
           <a href="../LEZIONE-LCG-2425/LEZIONE 3/HOUSES/index.html" class="project-button" style="background-image: url('../imghome/houses-bg.jpg');">
             <h3>Lezione 3</h3>
           </a>
+          <!-- Project 2: Assignment 1 -->
           <a href="../LEZIONE-LCG-2425/ES01/index.html" class="project-button" style="background-image: url('../imghome/assignment1-bg.jpg');">
             <h3>Assignment 1</h3>
           </a>
+          <!-- Project 3: Assignment 2 -->
           <a href="../LEZIONE-LCG-2425/ASSIGNMENT 2/index.html" class="project-button" style="background-image: url('../imghome/assignment2-bg.jpg');">
             <h3>Assignment 2</h3>
           </a>
+          <!-- Project 4: GRAPHIC 2 (Placeholder) -->
           <a href="#" class="project-button" style="background-image: url('path-to-image');">
             <h3>GRAPHIC 2</h3>
           </a>
         </div>
       </div>
-    
-    </div> <!-- Fine project-grid -->
+    </div> <!-- End of project-grid -->
   </section>
 
-  <!-- TRANSITION COVER -->
+  <!-- Transition Cover (used for page transitions) -->
   <div id="transition-cover">
     <img src="imghome/logo_zinco.svg" alt="Logo">
   </div>
 
   <script>
-    // Add click event listener for all external links
+    // Script to handle transition animation when clicking external links
     const transitionCover = document.getElementById('transition-cover');
     const externalLinks = document.querySelectorAll('.project-button');
 
     externalLinks.forEach(link => {
       link.addEventListener('click', (event) => {
         event.preventDefault(); // Prevent default link behavior
-        document.body.classList.add('locked'); // Lock the page
+        document.body.classList.add('locked'); // Lock the page for animation
         
-        // Show the transition cover animation
+        // Trigger transition cover animation
         transitionCover.classList.add('active');
 
-        // Wait for the animation to finish before navigating
+        // Wait for animation to finish before navigating
         setTimeout(() => {
           window.location.href = link.href; // Navigate to the external link
-        }, 1000); // Match this time with the duration of your animation
+        }, 1000); // Duration of the animation
       });
     });
 
-    // Add event listener for when the new page is loaded
+    // Event listener for when a new page is loaded
     window.addEventListener('load', () => {
-      // Once the page has loaded, slide the square down
+      // Hide the transition cover after loading
       transitionCover.classList.remove('active');
       transitionCover.classList.add('inactive');
 
@@ -153,15 +165,15 @@
   <!-- Footer Section -->
   <footer>
     <div class="footer-content">
+      <!-- Contact Information -->
       <p>Contatti</p>
       <a href="mailto:francesco.zanchetta@mail.polimi.it">francesco.zanchetta@mail.polimi.it</a>
     </div>
     <div class="footer-bottom">
+      <!-- Copyright -->
       <p>&copy; 2024 Francesco Zanchetta.</p>
     </div>
   </footer>
 
-  
-  
 </body>
 </html>

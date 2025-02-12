@@ -11,24 +11,6 @@
   <link rel="icon" type="image/x-icon" href="../imghome/logo_zinco">
   <script src="https://kit.fontawesome.com/21fc0bb23c.js" crossorigin="anonymous"></script>
   <script async src="https://tally.so/widgets/embed.js"></script>
-
-  <script>
-  window.TallyConfig = {
-    "formId": "3EWYBN",
-    "popup": {
-      "width": 370,
-      "emoji": {
-        "text": "👋",
-        "animation": "head-shake"
-      },
-      "autoClose": 2000,
-      "open": {
-        "trigger": "time",
-        "ms": 4000
-      }
-    }
-  };
-  </script>
 </head>
 <body>
 
@@ -56,6 +38,8 @@
       </ul>
     </nav>
   </div>
+  
+
   
 
   
@@ -197,69 +181,88 @@
     });
   </script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const sidebarbox = document.getElementById("sidebarbox");
+      const pdfViewer = document.getElementById("pdf-viewer");
+
+      // Create an IntersectionObserver to monitor when the PDF viewer is visible
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // If the PDF viewer is in the viewport, hide the sidebar with sliding animation
+            sidebarbox.classList.add("hidden");
+          } else {
+            // If the PDF viewer is not visible, show the sidebar again with sliding animation
+            sidebarbox.classList.remove("hidden");
+          }
+        });
+      }, {
+        threshold: 0.5 // Trigger when at least 50% of the PDF viewer is in view
+      });
+
+      // Start observing the PDF viewer element
+      observer.observe(pdfViewer);
+    });
+  </script>
+
   <div class="news-container">
-    <div class="news-item">
-      <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
-      <section id="introduction">
-        <h2 class="news-title">Introduction</h2>
-        <p class="news-meta">Francesco Zanchetta and Roxy Team</p>
-        <p class="news-content">
-          The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
-
-          <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
-
-          <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
-
-          <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
-        </p>
-      </section>
-      
-
-      <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
-      <p class="news-content">
-        The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
-
-        <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
-
-        <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
-
-        <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
+    <!-- INTRODUCTION Section -->
+    <section id="introduction" class="section">
+      <h2>Introduction</h2>
+      <p>
+        AM Decor is a building firm operating in Nothern Italy. 
+        <br>The project involves the reimagining of the logo, definition of typography, colors and main graphic elements.
+        <br>Furthermore, new shop signs and vehicle stickers are designed, in addition to the official website.
       </p>
+      <a href="https://amdecorsrl.com" target="_blank">amdecorsrl.com</a>
+    </section>
 
-      <img src="../imghome/roxy.png" alt="News Photo" class="news-photo">
-      <p class="news-content">
-        The Roxy team embarked on an extensive rebranding project for the cigarette brand Roxy as part of a university assignment, with the challenge of reinventing a brand that had a storied heritage dating back to 1951. Roxy Cigarettes was founded by the Dutch industrialist Theodorus Niemeijer, marking the birth of what would become one of the most iconic tobacco companies in the Netherlands. In a market dominated by large American corporations, Roxy quickly distinguished itself with an innovative and health-conscious approach. In response to growing consumer concerns about the risks of smoking, Roxy introduced low-nicotine and low-tar products, positioning itself as a safer alternative to traditional cigarettes. This strategy proved successful, particularly following a comparative study conducted by the Consumentenbond in 1962, which confirmed the superior safety of Roxy cigarettes compared to its competitors.
-
-        <br><br>As decades passed, Roxy developed a strong, bold identity, characterized by irreverence and a sense of sophistication. Its creative and provocative advertising campaigns highlighted the product’s superiority, positioning it as a responsible yet pleasurable choice for smokers. One of the most iconic moments in the brand’s history was its collaboration with Johan Cruijff, the legendary Dutch footballer, whose image conveyed the brand’s values of quality, originality, and European spirit. These initiatives helped Roxy establish an authentic and deep connection with its consumers, transforming it into not just a daily product, but a symbol of shared enjoyment and social pleasure.
-
-        <br><br>The longevity of Roxy as a brand can be attributed to its ability to thrive in a competitive market, thanks to a distinctive positioning that allowed it to successfully compete with the tobacco giants. Roxy became synonymous with transgression and high society, capturing the imagination of its era with its bold language and strategic choices. However, despite its popularity, the brand was forced off the market in 2005 due to a ban introduced by the Dutch government in 2003. Nevertheless, Roxy remains in the collective memory as an innovative and daring company, setting new standards in the world of tobacco.
-
-        <br><br>For this university project, the Roxy team’s goal was to revitalize the brand for a contemporary audience, reimagining it with a modern, bold identity that still honored its rich history. The rebranding process involved updating the visual elements of the brand—such as the logo, packaging, and marketing materials—while maintaining the core values that made Roxy so distinctive. In addition to the rebrand, the team also conceptualized a brand activation campaign as if Roxy were being relaunched into the market. This activation sought to generate excitement and engage consumers through unique, interactive experiences, aiming to forge a deep connection with a new generation of Roxy enthusiasts. Through this project, the Roxy team worked to preserve the brand’s legacy of audacity, irreverence, and social enjoyment, while introducing it to a new audience in a way that felt fresh and relevant.
+    <!-- APPEARANCE Section -->
+    <section id="appearance" class="section">
+      <h2>Appearance</h2>
+      <img src="../images/appearance.jpg" alt="Appearance Image">
+      <p>
+        The chosen color palette and visual elements reflect a daring yet elegant aesthetic, with vibrant reds and metallic accents as the core colors.
       </p>
-    </div>
+      <div class="colors">
+        <div class="color-swatch" style="background-color: #a51f22;"></div>
+        <div class="color-swatch" style="background-color: #3a3a3a;"></div>
+        <div class="color-swatch" style="background-color: #ffffff;"></div>
+      </div>
+    </section>
+
+    <!-- LOGO Section -->
+    <section id="logo" class="section">
+      <h2>Logo</h2>
+      <img src="img/amlogo.svg" alt="Logo Image">
+      <p>
+        The redesigned logo embraces minimalism while preserving the brand’s iconic boldness, ensuring instant recognizability.
+      </p>
+    </section>
+
+    <!-- TYPOGRAPHY Section -->
+    <section id="typography" class="section">
+      <h2>Typography</h2>
+      <h2>Helvetica Bold</h2>
+      <h2>HELVETICA BOLD</h2>
+      <p id="light">Helvetica Light</p>
+
+      <p>
+        The typography features clean, sans-serif fonts to communicate modernity and sophistication, paired with occasional decorative typefaces for emphasis.
+      </p>
+    </section>
+
+    <!-- MOCKUPS Section -->
+    <section id="mockups" class="section">
+      <h2>Mockups</h2>
+      <img src="../images/mockups.jpg" alt="Mockups Image">
+      <p>
+        These mockups showcase the application of the rebrand across packaging, digital media, and physical touchpoints, emphasizing consistency and boldness.
+      </p>
+    </section>
   </div>
 
-  <h1 class="title">Roxy BrandBook</h1>
-
-  <div class="book-container">
-    <div class="page" id="page1-container">
-      <canvas id="page1"></canvas>
-    </div>
-    <div class="page" id="page2-container" style="display: none;">
-      <canvas id="page2"></canvas>
-    </div>
-    <div class="page" id="page3-container" style="display: none;">
-      <canvas id="page3"></canvas>
-    </div>
-    <div class="magnifier" id="magnifier">
-      <canvas id="magnifierCanvas"></canvas>
-    </div>
-  </div>
-
-  <div class="button-container">
-    <button id="prevButton" disabled><</button>
-    <button id="nextButton">></button>
-  </div>
 
   <script>
     function toggleOverlay() {
@@ -284,6 +287,9 @@
       }
     }
 
+  </script>
+
+  <script>
     // PDF.js Variables
     const url = 'versionesofi.pdf'; 
     let pdfDoc = null;
@@ -445,6 +451,64 @@
   
       window.addEventListener('scroll', highlightLink);
       highlightLink(); // Initial highlight
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const links = document.querySelectorAll('a[href^="#"]');
+
+      links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          const targetId = link.getAttribute("href").substring(1); // Get the ID without the #
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            customScrollTo(targetElement);
+          }
+        });
+      });
+
+      function customScrollTo(targetElement) {
+        const start = window.scrollY;
+        const h2Element = targetElement.querySelector("h2");
+        const h2OffsetTop = h2Element
+          ? h2Element.getBoundingClientRect().top + window.scrollY
+          : targetElement.getBoundingClientRect().top + window.scrollY;
+
+        // Adjust to center the <h2> in the viewport
+        const viewportHeight = window.innerHeight;
+        const end =
+          h2OffsetTop - viewportHeight / 2 + (h2Element ? h2Element.offsetHeight / 2 : 0);
+
+        const distance = Math.abs(end - start);
+
+        // Faster durations
+        const baseDuration = 400; // Minimum duration for short distances (in ms)
+        const maxExtraDuration = 600; // Additional duration for long distances (in ms)
+        const duration = baseDuration + (distance / viewportHeight) * maxExtraDuration;
+
+        const easingFunction = (t) => t * t * (3 - 2 * t); // Ease-out effect
+
+        let startTime;
+
+        function scrollAnimation(currentTime) {
+          if (!startTime) startTime = currentTime;
+          const elapsedTime = currentTime - startTime;
+          const progress = Math.min(elapsedTime / duration, 1); // Ensure progress does not exceed 1
+          const easedProgress = easingFunction(progress);
+
+          const newScrollPosition = start + (end - start) * easedProgress;
+          window.scrollTo(0, newScrollPosition);
+
+          if (progress < 1) {
+            requestAnimationFrame(scrollAnimation);
+          }
+        }
+
+        requestAnimationFrame(scrollAnimation);
+      }
     });
   </script>
 

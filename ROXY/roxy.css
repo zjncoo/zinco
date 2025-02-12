@@ -14,10 +14,32 @@ body {
     height: fit-content;
     background-color: #1a1a1a; /* Almost black background */
     color: white; /* White text for contrast */
-    overflow-x: hidden;
+    width: 100vw;
+    
   }
 
+  #introduction a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    background: rgba(100, 100, 100, 0.3);
+    border-radius: 50px;
+    border: 0.5px solid rgba(255, 255, 255, 0.176);
+    margin-top: 20%;
+  }
+
+  #introduction p {
+    margin-bottom: 40px;
+  }
   
+  #logo img {
+    width: 40%;
+  }
+
+  #introduction a:hover {
+    background: linear-gradient(45deg, #a5a5a584, #38383855); /* Reverse or change the gradient */
+    transform: scale(1.02); /* Slightly increase the button size on hover */
+  }
   
   /* Navbar */
   .navbar {
@@ -31,7 +53,6 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    z-index: 1000;
   }
   
   .logo {
@@ -251,6 +272,7 @@ body {
     padding: 20px;
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
+    overflow: hidden;
   }
   
   .news-item {
@@ -356,7 +378,7 @@ body {
 }
 
 #square {
-  height: 140vh;
+  height: 100vh;
   width: 100vw;
   color: grey;
 }
@@ -388,12 +410,31 @@ body {
   color: white;
 }
 
+#backtoprojects {
+  top: 15px;
+  bottom: auto;
+  background-color: none;
+  border: none;
+  background: none;
+  z-index: 100;
+  text-decoration: none;
+  z-index: 9999;
+}
+
+#backtoprojects:hover {
+  background: linear-gradient(45deg, #a5a5a584, #38383855); /* Reverse or change the gradient */
+  transform: scale(1.02); /* Slightly increase the button size on hover */
+  color: white;
+  border: 0.5px solid rgba(255, 255, 255, 0.176);
+  border-radius: 50px; /* Sleek rounded corners */
+}
+
 .links-column {
   display: flex;
   flex-direction: column;
   gap: 10px; /* Space between links */
-  position: absolute;
   top: 50%;
+  margin: 10px;
   right: 20px;
   width: 30%;
   transform: translateY(-50%);
@@ -406,6 +447,7 @@ body {
   color: #ffffff; /* White color */
   background-color: #444; /* Subtle background for better visibility */
   padding: 10px 20px;
+  margin: 10px;
   border-radius: 10px;
   transition: background-color 0.3s, transform 0.2s;
 }
@@ -452,12 +494,136 @@ footer {
   font-weight: 300;
 }
 
-/* Animation container */
+#tabella {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 73vh;
+  width: 100vw;
+}
+
+#form {
+  width: 30vw;
+  margin: 20vh;
+}
+
+h1 {
+  margin: 10%;
+}
+
+.square-container {
+  display: flex; /* Flexbox for squares */
+  gap: 2vw; /* Spacing between the squares */
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+}
+
+.square {
+  width: 5vw; /* Set square size */
+  height: 5vw; /* Equal width and height for a square */
+  background-color: #0073e6; /* Default color for squares */
+}
+
+#square1 {
+  background-color: #ffffff; /* Default color for squares */
+}
+
+#square2 {
+  background-color: #9A1F20; /* Default color for squares */
+}
+
+#square3 {
+  background-color: #3A3A3A; /* Default color for squares */
+}
+
+
+/* General Section Styling */
+.section {
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.section img {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+/* Color Palette Styling */
+.colors {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.color-swatch {
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+}
+#typography h2 {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+#typography #light {
+  font-family: Helvetica, sans-serif;
+  font-weight: lighter;
+}
+
+
+/*SIDEBAR*/
+
+/* Sidebar styles */
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+}
+
+.sidebar-link {
+  color: #818181;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.sidebar-link:hover,
+.sidebar-link.highlight {
+  color: #fff;
+  font-weight: bold;
+}
+
+
+/* PAGE ANIMATIONS */
 #transition-cover {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background: #000;
   display: flex;
@@ -496,57 +662,184 @@ body.locked {
   pointer-events: none;
 }
 
-/*SIDEBAR*/
 
-/* Sidebar styles */
-#sidebarbox {
-  height: 100vh;
-  vertical-align: middle;
-  display: table-cell; /* table-cell display*/
-  justify-items: center;
+
+
+/* Default styles are for larger screens. */
+
+/* Extra Large Screens (1200px and above) */
+@media (min-width: 1200px) {
+  #logo img {
+    width: 30%;
+  }
+
+  .news-container {
+    max-width: 30%;
+  }
+
+  .book-container {
+    width: 700px; /* Adjust for larger screens */
+    height: 500px;
+  }
 }
 
+/* Large Screens (992px - 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .news-container {
+    max-width: 50%;
+  }
+
+  .book-container {
+    width: 600px;
+    height: 450px;
+  }
+
+  #logo img {
+    width: 35%;
+  }
+}
+
+/* Medium Screens (768px - 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .news-container {
+    max-width: 70%;
+  }
+
+  #logo img {
+    width: 50%;
+  }
+
+  .book-container {
+    width: 500px;
+    height: 350px;
+  }
+
+  .circle-button {
+    width: 35px;
+    height: 35px;
+    font-size: 120%;
+  }
+}
+
+/* Small Screens (576px - 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+  body {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  #logo img {
+    width: 60%;
+  }
+
+  .book-container {
+    width: 100%;
+    height: auto;
+  }
+
+  .news-container {
+    max-width: 90%;
+  }
+
+  .fixed-button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+/* Extra Small Screens (up to 575px) */
+@media (max-width: 575px) {
+  body {
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  #logo img {
+    width: 70%;
+  }
+
+  #square {
+    height: 40vh;
+  }
+
+  .book-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .news-container {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+  
+
+  .home_button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .fixed-button {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
+
+/* Main Sidebar Styles */
+#sidebarbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200px; /* You can adjust the width */
+  
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out; /* Smooth transition for sliding */
+  transform: translateX(15); /* Default position (visible) */
+  z-index: 10; /* Ensure it's above other content */
+}
+
+/* Hidden sidebar */
+#sidebarbox.hidden {
+  transform: translateX(-100%); /* Slide it off-screen */
+}
+
+/* Sidebar content styles (if using .sidebar for internal content) */
 .sidebar {
   transform: translateY(-50%);
-  top: 50%;
   position: fixed;
+  top: 50%;
   left: 2%;
-  width: fit-content;
-  height: fit-content + 10px;
+  width: auto;
+  height: auto;
   padding: 15px;
-  background: linear-gradient(45deg, #a5a5a537, #38383800); /* Reverse or change the gradient */
+  background: linear-gradient(45deg, #a5a5a537, #38383800); /* Adjust gradient */
   border-radius: 50px;
   border: 0.5px solid rgba(255, 255, 255, 0.176);
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  z-index: 10;
+  z-index: 20; /* Ensure this stays above #sidebarbox */
   padding-right: 5%;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  padding: 10px;
-}
-
-.sidebar-link {
-  color: #818181;
-  text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  transition: color 0.3s;
-}
-
-.sidebar-link:hover,
-.sidebar-link.highlight {
-  color: #fff;
-  font-weight: bold;
-}
 
 
 #pdf-viewer {
