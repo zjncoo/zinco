@@ -17,6 +17,7 @@
   
   
   <!-- Navbar -->
+  <a class="fixed-button" class="navbarbutton" id="backtoprojects" href="../index.html#projects">< Back to My Projects</a>
   <div class="navbar">
     <a href="../index.html" class="home_button">
       <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
@@ -47,25 +48,30 @@
   <!-- Overlay Section -->
   <div class="overlay" id="overlay" onclick="closeOverlay(event)">
     <div class="overlay-content" onclick="event.stopPropagation()">
-      <div class="card">
-        <div class="profile">
-          <img src="../imghome/io.png" alt="Profile">
-          <div>
-            <strong>Francesco</strong>
-            <p>Hi, I'm a Communication Design student! This website is a repository / portfolio of my work.</p>
+      <div class="grid-container">
+        <!-- Profile Card -->
+        <div class="card profile-card">
+          <div class="profile">
+            <img src="../imghome/io.png" alt="Profile">
+            <div>
+              <strong>Francesco</strong>
+              <p>Hi, I'm a Communication Design student! This website is a repository / portfolio of my work.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card">
-        <button>Escape Lake Como</button>
-        <button>AM Decor</button>
-      </div>
-      <div class="links-column">
-        <a href="../index.html" class="overlay-link">Home</a>
-        <a href="../index.html#progetti" class="overlay-link">My Projects</a>
-        <a href="../CONTACTS/contacts.html" class="overlay-link">Contacts</a>
-        <a href="#" class="overlay-link">Link 4</a>
-        <a href="#" class="overlay-link">Link 5</a>
+        <!-- Button Card -->
+        <div class="card button-card">
+          <button>Escape Lake Como</button>
+          <button>AM Decor</button>
+        </div>
+        <!-- Links Column -->
+        <div class="links-column">
+          <a href="../index.html" class="overlay-link">Home</a>
+          <a href="../index.html#progetti" class="overlay-link">My Projects</a>
+          <a href="../CONTACTS/contacts.html" class="overlay-link">Contacts</a>
+          <a href="#" class="overlay-link">Link 4</a>
+          <a href="#" class="overlay-link">Link 5</a>
+        </div>
       </div>
     </div>
   </div>
@@ -79,9 +85,6 @@
     </a>
   </div>
 
-  
-
-  <div id="square"></div>
 
   <h1>PDF Viewer</h1>
   <div id="pdf-viewer-container">
@@ -417,27 +420,13 @@
     });
   </script>
 
-  <div class="folder-container">
-    <img src="../imgroxy/folderclosed.png" alt="Folder" class="folder" id="folder">
-    <img src="../imghome/roxy.png" alt="Photos" class="photos" id="photos">
-  </div>
 
-  <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          const folder = document.getElementById("folder");
-          const photos = document.getElementById("photos");
-
-          folder.addEventListener("mouseover", function() {
-              folder.src = "../imgroxy/folderopen.webp"; // Ensure this image exists
-          });
-          
-          folder.addEventListener("mouseout", function() {
-              folder.src = "../imgroxy/folderclosed.png";
-          });
-      });
-  </script>
   <!-- Fixed Button -->
-  <button class="fixed-button">@zjncoo</button>
+  <a href="../CONTACTS/contacts.html">
+    <button class="fixed-button">contact me</button>
+  </a>
+  
+  
 
   <!--SCRIPT LEFT NAVBAR-->
   <script>
@@ -563,13 +552,17 @@
   </script>
 
   <!-- Footer Section -->
-  <footer>
+  <footer id="footer">
     <div class="footer-content">
-      <p>Contatti</p>
-      <a href="mailto:francesco.zanchetta@mail.polimi.it">francesco.zanchetta@mail.polimi.it</a>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 Francesco Zanchetta.</p>
+      <!-- Logo on the left -->
+      <div class="footer-logo">
+        <img src="../imghome/logo_zinco.svg" alt="Logo" style="height: 40px;">
+      </div>
+      <!-- Contact info -->
+      <div class="footer-contact">
+        <p>Hi, I'm a Communication Design student! This website is a repository / portfolio of my work.</p>
+        <p>&copy; 2025 Francesco Zanchetta | Communication Designer</p>
+      </div>
     </div>
   </footer>
 </body>

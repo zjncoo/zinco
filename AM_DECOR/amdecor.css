@@ -18,6 +18,26 @@ body {
     
   }
 
+
+  #backtoprojects {
+    top: 15px;
+    bottom: auto;
+    background-color: none;
+    border: none;
+    background: none;
+    z-index: 100;
+    text-decoration: none;
+    z-index: 9999;
+  }
+  
+  #backtoprojects:hover {
+    background: linear-gradient(45deg, #a5a5a584, #38383855); /* Reverse or change the gradient */
+    transform: scale(1.02); /* Slightly increase the button size on hover */
+    color: white;
+    border: 0.5px solid rgba(255, 255, 255, 0.176);
+    border-radius: 50px; /* Sleek rounded corners */
+  }
+
   #introduction a {
     color: white;
     text-decoration: none;
@@ -53,6 +73,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    z-index: 300;
   }
   
   .logo {
@@ -333,7 +354,6 @@ body {
 }
 
 #intro {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -342,7 +362,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9998;
+  z-index: 200;
   overflow: hidden;
   transition: opacity 0.5s ease; /* Smooth fading for the intro */
 }
@@ -366,7 +386,8 @@ body {
 }
 
 #username {
-  position: fixed; /* Keep it fixed at the bottom center of the page */
+  position: absolute;
+ /* Keep it fixed at the bottom center of the page */
   bottom: 20px; /* Distance from the bottom of the page */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Adjust alignment for perfect centering */
@@ -377,11 +398,7 @@ body {
   z-index: 10; /* Ensure it stays above other elements */
 }
 
-#square {
-  height: 100vh;
-  width: 100vw;
-  color: grey;
-}
+
 
 
 
@@ -458,41 +475,36 @@ body {
   transform: scale(1.05);
 }
 
-/* Footer Styles */
+/*FOOTER*/
+
 footer {
-  color: #fff;
-  padding: 30px 0;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
   width: 100vw;
-}
-
-.footer-content p {
-  font-size: 1.5em;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.footer-content a {
+  background-color: #000000;
   color: #fff;
-  text-decoration: none;
-  font-weight: 400;
-  transition: color 0.3s ease;
+  z-index: 199;
 }
 
-.footer-content a:hover {
-  color: #ccc;
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10%;
 }
 
-.footer-bottom {
-  margin-top: 20px;
-  border-top: 1px solid #444; /* Light border for separation */
-  padding-top: 10px;
+.footer-logo img {
+  height: 20px; /* Adjust to fit your logo */
 }
 
-.footer-bottom p {
-  font-size: 0.9em;
-  font-weight: 300;
+.footer-contact {
+  text-align: right;
 }
+
+
+
+
+
 
 #tabella {
   display: flex;
@@ -592,31 +604,7 @@ h1 {
 /*SIDEBAR*/
 
 /* Sidebar styles */
-#sidebarbox {
-  height: 100vh;
-  vertical-align: middle;
-  display: table-cell; /* table-cell display*/
-  justify-items: center;
-}
 
-.sidebar {
-  transform: translateY(-50%);
-  top: 50%;
-  position: fixed;
-  left: 2%;
-  width: fit-content;
-  height: fit-content + 10px;
-  padding: 15px;
-  background: linear-gradient(45deg, #a5a5a537, #38383800); /* Reverse or change the gradient */
-  border-radius: 50px;
-  border: 0.5px solid rgba(255, 255, 255, 0.176);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 10;
-  padding-right: 5%;
-}
 
 .sidebar ul {
   list-style: none;
@@ -819,4 +807,115 @@ body.locked {
     font-size: 12px;
     padding: 6px 8px;
   }
+}
+
+/* Main Sidebar Styles */
+#sidebarbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: fit-content;
+  width: 200px; /* You can adjust the width */
+  
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out; /* Smooth transition for sliding */
+  transform: translateX(15); /* Default position (visible) */
+  z-index: 10; /* Ensure it's above other content */
+}
+
+/* Hidden sidebar */
+#sidebarbox.hidden {
+  transform: translateX(-100%); /* Slide it off-screen */
+}
+
+/* Sidebar content styles (if using .sidebar for internal content) */
+.sidebar {
+  transform: translateY(-50%);
+  position: fixed;
+  top: 50%;
+  left: 2%;
+  width: auto;
+  height: auto;
+  padding: 15px;
+  background: linear-gradient(45deg, #a5a5a537, #38383800); /* Adjust gradient */
+  border-radius: 50px;
+  border: 0.5px solid rgba(255, 255, 255, 0.176);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 20; /* Ensure this stays above #sidebarbox */
+  padding-right: 5%;
+}
+
+
+#pdf-viewer-container {
+  width: 60%; /* Set the container width to 60% of the page */
+  margin: 20px auto;
+  text-align: center;
+}
+
+#pdf-viewer {
+  position: relative;
+  margin-bottom: 20px; /* Space between the viewer and the thumbnails */
+}
+
+canvas {
+  border-radius: 22px;
+  border: 0.5px solid rgba(255, 255, 255, 0.176);
+  width: 100%;
+  height: auto;
+}
+
+.side-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #000000;
+  border: 1px solid #dfdfdfb9;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.left {
+  left: 0; /* Position on the left side */
+}
+
+.right {
+  right: 0; /* Position on the right side */
+}
+
+#thumbnails-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+#thumbnails-container canvas {
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 10px;
+  width: 80px; /* Set a fixed width for the thumbnails */
+  border: 1px solid #dddddd00;
+  height: auto; /* Maintain aspect ratio */
+}
+
+#thumbnails-container canvas:hover {
+  border: 1px solid #ddd;
+}
+
+.navigation {
+  margin: 10px;
+  text-align: center;
+}
+
+.navigation span {
+  font-size: 16px;
 }
