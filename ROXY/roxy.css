@@ -846,16 +846,59 @@ body.locked {
   margin: 20px auto;
   max-width: 80%;
   z-index: 11;
+  position: relative; /* Ensure buttons are positioned relative to the viewer */
 }
+
 canvas {
   border: 1px solid #ccc;
   width: 100%;
   height: auto;
 }
+
+.side-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #000000;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  z-index: 20; /* Ensure buttons are above other elements */
+}
+
+.left {
+  left: 0; /* Position on the left side */
+}
+
+.right {
+  right: 0; /* Position on the right side */
+}
+
+#thumbnails-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+#thumbnails-container canvas {
+  cursor: pointer;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  width: 80px;  /* Set a fixed width for the thumbnails */
+  height: auto; /* Maintain aspect ratio */
+}
+
+#thumbnails-container canvas:hover {
+  border-color: #333;
+}
+
 .navigation {
   margin: 10px;
+  text-align: center;
 }
-.navigation button {
-  padding: 10px 15px;
+
+.navigation span {
   font-size: 16px;
 }

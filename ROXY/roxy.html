@@ -117,62 +117,99 @@
   <h1>PDF Viewer</h1>
   <div id="pdf-viewer">
     <canvas id="pdf-canvas"></canvas>
+    <button id="prev-page" class="side-button left">Previous</button>
+    <button id="next-page" class="side-button right">Next</button>
   </div>
   <div class="navigation">
-    <button id="prev-page">Previous</button>
     <span>Page <span id="current-page">1</span> of <span id="total-pages">0</span></span>
-    <button id="next-page">Next</button>
   </div>
-
+  <div id="thumbnails-container" style="overflow-x: auto; white-space: nowrap; margin-top: 20px;">
+    <!-- Thumbnails will go here -->
+  </div>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
     const pdfUrl = 'roxy.pdf'; // Replace with the path to your PDF file
-
+  
     let pdfDoc = null,
         currentPage = 1,
         totalPages = 0,
         pageRendering = false,
         canvas = document.getElementById('pdf-canvas'),
         ctx = canvas.getContext('2d');
-
+  
     // Load the PDF
     pdfjsLib.getDocument(pdfUrl).promise.then((doc) => {
       pdfDoc = doc;
       totalPages = pdfDoc.numPages;
       document.getElementById('total-pages').textContent = totalPages;
-
+  
       // Render the first page
       renderPage(currentPage);
+  
+      // Render thumbnails for all pages
+      renderThumbnails();
     });
-
-    // Render a specific page
+  
+    // Render a specific page on the main canvas
     function renderPage(pageNumber) {
       pageRendering = true;
       pdfDoc.getPage(pageNumber).then((page) => {
         const viewport = page.getViewport({ scale: 1.5 });
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-
+  
         const renderContext = {
           canvasContext: ctx,
           viewport: viewport
         };
-
+  
         page.render(renderContext).promise.then(() => {
           pageRendering = false;
         });
-
+  
         document.getElementById('current-page').textContent = pageNumber;
       });
     }
+  
+    // Render thumbnails for all pages
+    function renderThumbnails() {
+      const thumbnailsContainer = document.getElementById('thumbnails-container');
+      for (let i = 1; i <= totalPages; i++) {
+        const thumbnailCanvas = document.createElement('canvas');
+        const thumbnailCtx = thumbnailCanvas.getContext('2d');
+        pdfDoc.getPage(i).then((page) => {
+          const viewport = page.getViewport({ scale: 0.1 }); // Reduced scale for smaller thumbnails
+          thumbnailCanvas.height = viewport.height;
+          thumbnailCanvas.width = viewport.width;
 
+  
+          const renderContext = {
+            canvasContext: thumbnailCtx,
+            viewport: viewport
+          };
+  
+          page.render(renderContext).promise.then(() => {
+            thumbnailCanvas.style.marginRight = '10px';
+            thumbnailCanvas.style.cursor = 'pointer';
+            thumbnailCanvas.addEventListener('click', () => {
+              currentPage = i;
+              renderPage(currentPage);
+            });
+  
+            thumbnailsContainer.appendChild(thumbnailCanvas);
+          });
+        });
+      }
+    }
+  
     // Go to the previous page
     document.getElementById('prev-page').addEventListener('click', () => {
       if (currentPage <= 1 || pageRendering) return;
       currentPage--;
       renderPage(currentPage);
     });
-
+  
     // Go to the next page
     document.getElementById('next-page').addEventListener('click', () => {
       if (currentPage >= totalPages || pageRendering) return;
