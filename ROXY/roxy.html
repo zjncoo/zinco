@@ -77,40 +77,9 @@
     <a href="https://www.instagram.com/zjncoo/" target=”_blank”>
       <div id="username">@zjncoo</div>
     </a>
-     <!-- Add your username here -->
-    <div class="navbar">
-      <a href="../index.html" class="home_button">
-        <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
-      </a>
-      
-      
-    </div>
   </div>
 
-  <script>
-    const intro = document.getElementById('intro');
-    const introText = document.getElementById('intro-text');
   
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const maxScroll = window.innerHeight; // Height of the intro section
-      const progress = Math.min(scrollTop / maxScroll, 1); // Progress between 0 and 1
-  
-      // Update the zoom and opacity of the intro text based on scroll progress
-      const scale = 1 + progress * 9; // Scale from 1 to 10
-      const opacity = 1 - progress; // Opacity from 1 to 0
-  
-      introText.style.transform = `scale(${scale})`;
-      introText.style.opacity = opacity;
-  
-      // When the animation finishes, remove the intro section
-      if (progress >= 1) {
-        intro.style.display = 'none'; // Completely remove intro from view
-      } else {
-        intro.style.display = 'flex'; // Show the intro when scrolling back up
-      }
-    });
-  </script>
 
   <div id="square"></div>
 

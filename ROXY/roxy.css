@@ -53,6 +53,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    z-index: 300;
   }
   
   .logo {
@@ -333,7 +334,6 @@ body {
 }
 
 #intro {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -342,7 +342,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9998;
+  z-index: 200;
   overflow: hidden;
   transition: opacity 0.5s ease; /* Smooth fading for the intro */
 }
@@ -366,7 +366,8 @@ body {
 }
 
 #username {
-  position: fixed; /* Keep it fixed at the bottom center of the page */
+  position: absolute;
+ /* Keep it fixed at the bottom center of the page */
   bottom: 20px; /* Distance from the bottom of the page */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Adjust alignment for perfect centering */
