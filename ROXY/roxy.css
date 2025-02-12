@@ -849,6 +849,8 @@ body.locked {
 }
 canvas {
   border: 1px solid #ccc;
+  width: 100%;
+  height: auto;
 }
 .navigation {
   margin: 10px;
