@@ -394,16 +394,16 @@ body {
 /* Mute Button */
 #mute-btn {
   position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 3%;  /* Adjust bottom position for better alignment */
+  left: 3%;    /* Position it towards the left */
   padding: 10px 20px;
   font-size: 1rem;
-  border: none;
-  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 0.5px solid rgba(255, 255, 255, 0.176);
+  background: rgba(100, 100, 100, 0.3);
   color: white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 22px;
   z-index: 2;
 }
 

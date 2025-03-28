@@ -83,12 +83,12 @@
   
 
   <div id="intro" class="intro">
-    <video src="../ROXY/img/video finito.mp4" autoplay loop muted playsinline></video>
+    <button id="mute-btn">🔊 Unmute</button>
+    <video id="bg-video" src="img/video finito.mp4" autoplay loop></video>
     <h1 id="intro-text">ROXY</h1>
     <a href="https://www.instagram.com/zjncoo/" target=”_blank”>
       <div id="username">@zjncoo</div>
     </a>
-    <button id="mute-btn">🔇 Mute</button>
   </div>
   
 
@@ -121,96 +121,8 @@
     </div>
   </div>
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-  <script>
-    const pdfUrl = 'roxy.pdf'; // Replace with the path to your PDF file
   
-    let pdfDoc = null,
-        currentPage = 1,
-        totalPages = 0,
-        pageRendering = false,
-        canvas = document.getElementById('pdf-canvas'),
-        ctx = canvas.getContext('2d');
   
-    // Load the PDF
-    pdfjsLib.getDocument(pdfUrl).promise.then((doc) => {
-      pdfDoc = doc;
-      totalPages = pdfDoc.numPages;
-      document.getElementById('total-pages').textContent = totalPages;
-  
-      // Render the first page
-      renderPage(currentPage);
-  
-      // Render thumbnails for all pages
-      renderThumbnails();
-    });
-  
-    // Render a specific page on the main canvas
-    function renderPage(pageNumber) {
-      pageRendering = true;
-      pdfDoc.getPage(pageNumber).then((page) => {
-        const viewport = page.getViewport({ scale: 1.5 });
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-  
-        const renderContext = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-  
-        page.render(renderContext).promise.then(() => {
-          pageRendering = false;
-        });
-  
-        document.getElementById('current-page').textContent = pageNumber;
-      });
-    }
-  
-    // Render thumbnails for all pages
-    function renderThumbnails() {
-      const thumbnailsContainer = document.getElementById('thumbnails-container');
-      for (let i = 1; i <= totalPages; i++) {
-        const thumbnailCanvas = document.createElement('canvas');
-        const thumbnailCtx = thumbnailCanvas.getContext('2d');
-        pdfDoc.getPage(i).then((page) => {
-          const viewport = page.getViewport({ scale: 0.1 }); // Reduced scale for smaller thumbnails
-          thumbnailCanvas.height = viewport.height;
-          thumbnailCanvas.width = viewport.width;
-
-  
-          const renderContext = {
-            canvasContext: thumbnailCtx,
-            viewport: viewport
-          };
-  
-          page.render(renderContext).promise.then(() => {
-            thumbnailCanvas.style.marginRight = '10px';
-            thumbnailCanvas.style.cursor = 'pointer';
-            thumbnailCanvas.addEventListener('click', () => {
-              currentPage = i;
-              renderPage(currentPage);
-            });
-  
-            thumbnailsContainer.appendChild(thumbnailCanvas);
-          });
-        });
-      }
-    }
-  
-    // Go to the previous page
-    document.getElementById('prev-page').addEventListener('click', () => {
-      if (currentPage <= 1 || pageRendering) return;
-      currentPage--;
-      renderPage(currentPage);
-    });
-  
-    // Go to the next page
-    document.getElementById('next-page').addEventListener('click', () => {
-      if (currentPage >= totalPages || pageRendering) return;
-      currentPage++;
-      renderPage(currentPage);
-    });
-  </script>
 
   
 
@@ -271,148 +183,9 @@
   </div>
 
 
-  <script>
-    function toggleOverlay() {
-      const overlay = document.getElementById('overlay');
-      if (overlay.classList.contains('active')) {
-        overlay.classList.remove('active');
-        // Use a timeout to hide the element after the animation
-        setTimeout(() => {
-          overlay.style.display = 'none';
-        }, 300); // Match the transition duration in CSS
-      } else {
-        overlay.style.display = 'flex';
-        // Add the active class after ensuring the display is set
-        setTimeout(() => overlay.classList.add('active'), 10);
-      }
-    }
+  
 
-    function closeOverlay(event) {
-      // Close the overlay if the transparent background is clicked
-      if (event.target === event.currentTarget) {
-        toggleOverlay();
-      }
-    }
-
-  </script>
-
-  <script>
-    // PDF.js Variables
-    const url = 'versionesofi.pdf'; 
-    let pdfDoc = null;
-    let currentPage = 1;
-    const canvasCover = document.getElementById('page1');
-    const canvasLeft = document.getElementById('page2');
-    const canvasRight = document.getElementById('page3');
-    const ctxCover = canvasCover.getContext('2d');
-    const ctxLeft = canvasLeft.getContext('2d');
-    const ctxRight = canvasRight.getContext('2d');
-
-    const magnifier = document.getElementById('magnifier');
-    const magnifierCanvas = document.getElementById('magnifierCanvas');
-    const magnifierCtx = magnifierCanvas.getContext('2d');
-
-    magnifierCanvas.width = 150;
-    magnifierCanvas.height = 150;
-
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-
-    // Load PDF
-    pdfjsLib.getDocument(url).promise.then((pdf) => {
-      pdfDoc = pdf;
-      renderPages();
-    });
-
-    // Render Pages
-    function renderPages() {
-      if (pdfDoc) {
-        if (currentPage === 1) {
-          pdfDoc.getPage(currentPage).then((page) => {
-            renderPage(page, canvasCover, ctxCover);
-            document.getElementById('page1-container').style.display = 'flex';
-            document.getElementById('page2-container').style.display = 'none';
-            document.getElementById('page3-container').style.display = 'none';
-          });
-        } else {
-          pdfDoc.getPage(currentPage).then((page) => {
-            renderPage(page, canvasLeft, ctxLeft);
-          });
-
-          const nextPage = currentPage + 1 <= pdfDoc.numPages ? currentPage + 1 : null;
-          if (nextPage) {
-            pdfDoc.getPage(nextPage).then((page) => {
-              renderPage(page, canvasRight, ctxRight);
-            });
-          } else {
-            ctxRight.clearRect(0, 0, canvasRight.width, canvasRight.height);
-          }
-
-          document.getElementById('page1-container').style.display = 'none';
-          document.getElementById('page2-container').style.display = 'flex';
-          document.getElementById('page3-container').style.display = 'flex';
-        }
-
-        prevButton.disabled = currentPage === 1;
-        nextButton.disabled = currentPage >= pdfDoc.numPages;
-      }
-    }
-
-    function renderPage(page, canvas, ctx) {
-      const scale = 2.0;
-      const viewport = page.getViewport({ scale: scale });
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      page.render({ canvasContext: ctx, viewport: viewport });
-    }
-
-    nextButton.addEventListener('click', () => {
-      if (currentPage < pdfDoc.numPages) {
-        currentPage += currentPage === 1 ? 1 : 2;
-        renderPages();
-      }
-    });
-
-    prevButton.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage -= currentPage === 2 ? 1 : 2;
-        renderPages();
-      }
-    });
-
-    document.querySelectorAll('.page canvas').forEach((canvas) => {
-      canvas.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        magnifier.style.display = 'flex';
-        magnifier.style.left = `${e.clientX - magnifier.offsetWidth / 2}px`;
-        magnifier.style.top = `${e.clientY - magnifier.offsetHeight / 2}px`;
-        magnifierCtx.clearRect(0, 0, magnifierCanvas.width, magnifierCanvas.height);
-        magnifierCtx.drawImage(
-          canvas,
-          x - magnifierCanvas.width / 4,
-          y - magnifierCanvas.height / 4,
-          magnifierCanvas.width / 2,
-          magnifierCanvas.height / 2,
-          0,
-          0,
-          magnifierCanvas.width,
-          magnifierCanvas.height
-        );
-      });
-
-      canvas.addEventListener('mouseenter', () => {
-        document.body.style.cursor = 'none';
-        magnifier.style.display = 'block';
-      });
-
-      canvas.addEventListener('mouseleave', () => {
-        document.body.style.cursor = 'default';
-        magnifier.style.display = 'none';
-      });
-    });
-  </script>
+  
 
 
   <!-- Fixed Button -->
@@ -422,88 +195,7 @@
   
   
 
-  <!--SCRIPT LEFT NAVBAR-->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.sidebar-link');
-      const sections = document.querySelectorAll('.section');
   
-      const highlightLink = () => {
-        const scrollPos = window.scrollY + window.innerHeight / 2; // Middle of the screen
-  
-        sections.forEach((section, index) => {
-          const top = section.offsetTop;
-          const bottom = top + section.offsetHeight;
-  
-          if (scrollPos >= top && scrollPos <= bottom) {
-            links.forEach((link) => link.classList.remove('highlight'));
-            links[index].classList.add('highlight');
-          }
-        });
-      };
-  
-      window.addEventListener('scroll', highlightLink);
-      highlightLink(); // Initial highlight
-    });
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const links = document.querySelectorAll('a[href^="#"]');
-
-      links.forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          const targetId = link.getAttribute("href").substring(1); // Get the ID without the #
-          const targetElement = document.getElementById(targetId);
-
-          if (targetElement) {
-            customScrollTo(targetElement);
-          }
-        });
-      });
-
-      function customScrollTo(targetElement) {
-        const start = window.scrollY;
-        const h2Element = targetElement.querySelector("h2");
-        const h2OffsetTop = h2Element
-          ? h2Element.getBoundingClientRect().top + window.scrollY
-          : targetElement.getBoundingClientRect().top + window.scrollY;
-
-        // Adjust to center the <h2> in the viewport
-        const viewportHeight = window.innerHeight;
-        const end =
-          h2OffsetTop - viewportHeight / 2 + (h2Element ? h2Element.offsetHeight / 2 : 0);
-
-        const distance = Math.abs(end - start);
-
-        // Faster durations
-        const baseDuration = 400; // Minimum duration for short distances (in ms)
-        const maxExtraDuration = 600; // Additional duration for long distances (in ms)
-        const duration = baseDuration + (distance / viewportHeight) * maxExtraDuration;
-
-        const easingFunction = (t) => t * t * (3 - 2 * t); // Ease-out effect
-
-        let startTime;
-
-        function scrollAnimation(currentTime) {
-          if (!startTime) startTime = currentTime;
-          const elapsedTime = currentTime - startTime;
-          const progress = Math.min(elapsedTime / duration, 1); // Ensure progress does not exceed 1
-          const easedProgress = easingFunction(progress);
-
-          const newScrollPosition = start + (end - start) * easedProgress;
-          window.scrollTo(0, newScrollPosition);
-
-          if (progress < 1) {
-            requestAnimationFrame(scrollAnimation);
-          }
-        }
-
-        requestAnimationFrame(scrollAnimation);
-      }
-    });
-  </script>
 
   <!-- INITIAL TRANSITION -->
   <div id="transition-cover">
