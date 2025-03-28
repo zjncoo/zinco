@@ -11,6 +11,7 @@
   <link rel="icon" type="image/x-icon" href="../imghome/logo_zinco">
   <script src="https://kit.fontawesome.com/21fc0bb23c.js" crossorigin="anonymous"></script>
   <script async src="https://tally.so/widgets/embed.js"></script>
+
 </head>
 <body>
 
@@ -27,8 +28,11 @@
     </button>
   </div>
 
+  <!-- Sidebar Button -->
+  <button id="toggle-sidebar-button" class="sidebar-button">☰</button>
+
   <!-- Sidebar Navigation -->
-  <div id="sidebarbox">
+  <div id="sidebarbox" class="sidebarbox">
     <nav class="sidebar">
       <ul>
         <li><a href="#introduction" class="sidebar-link">Introduction</a></li>
@@ -79,10 +83,24 @@
   
 
   <div id="intro" class="intro">
+    <video src="../ROXY/img/video finito.mp4" autoplay loop muted playsinline></video>
     <h1 id="intro-text">ROXY</h1>
     <a href="https://www.instagram.com/zjncoo/" target=”_blank”>
       <div id="username">@zjncoo</div>
     </a>
+    <button id="mute-btn">🔇 Mute</button>
+  </div>
+  
+
+  <div id="spotify-card">
+    <iframe 
+        src="https://open.spotify.com/embed/track/13DNuiQyuTDcAw6Y8thZFM?utm_source=generator&theme=0" 
+        width="300" 
+        height="80" 
+        frameborder="0" 
+        allowtransparency="true" 
+        allow="encrypted-media">
+    </iframe>
   </div>
 
 
@@ -194,41 +212,18 @@
     });
   </script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const sidebarbox = document.getElementById("sidebarbox");
-      const pdfViewer = document.getElementById("pdf-viewer");
-
-      // Create an IntersectionObserver to monitor when the PDF viewer is visible
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // If the PDF viewer is in the viewport, hide the sidebar with sliding animation
-            sidebarbox.classList.add("hidden");
-          } else {
-            // If the PDF viewer is not visible, show the sidebar again with sliding animation
-            sidebarbox.classList.remove("hidden");
-          }
-        });
-      }, {
-        threshold: 0.5 // Trigger when at least 50% of the PDF viewer is in view
-      });
-
-      // Start observing the PDF viewer element
-      observer.observe(pdfViewer);
-    });
-  </script>
+  
 
   <div class="news-container">
     <!-- INTRODUCTION Section -->
     <section id="introduction" class="section">
       <h2>Introduction</h2>
       <p>
-        AM Decor is a building firm operating in Nothern Italy. 
-        <br>The project involves the reimagining of the logo, definition of typography, colors and main graphic elements.
-        <br>Furthermore, new shop signs and vehicle stickers are designed, in addition to the official website.
+        RoxyGen is an ipotethical Activation performed by the Roxy Brand.
+        <br>Roxy has undergone a rebranding during the Metaproject Course. 
+        <br>It was a well-known cigarettes' brand in the 80's.
       </p>
-      <a href="https://amdecorsrl.com" target="_blank">amdecorsrl.com</a>
+      <a href="https://en.wikipedia.org/wiki/Roxy_(cigarette)" target="_blank">wikipedia page</a>
     </section>
 
     <!-- APPEARANCE Section -->
@@ -239,16 +234,15 @@
         The chosen color palette and visual elements reflect a daring yet elegant aesthetic, with vibrant reds and metallic accents as the core colors.
       </p>
       <div class="colors">
-        <div class="color-swatch" style="background-color: #a51f22;"></div>
-        <div class="color-swatch" style="background-color: #3a3a3a;"></div>
-        <div class="color-swatch" style="background-color: #ffffff;"></div>
+        <div class="color-swatch" style="background-color: #D51119;"></div>
+        <div class="color-swatch" style="background-color: #FEFDE8;"></div>
       </div>
     </section>
 
     <!-- LOGO Section -->
     <section id="logo" class="section">
       <h2>Logo</h2>
-      <img src="img/amlogo.svg" alt="Logo Image">
+      <img src="img/logo roxy.svg" alt="Logo Image">
       <p>
         The redesigned logo embraces minimalism while preserving the brand’s iconic boldness, ensuring instant recognizability.
       </p>
@@ -516,40 +510,7 @@
     <img src="../imghome/logo_zinco.svg" alt="Logo">
   </div>
 
-  <script>
-    // Wait for the page to load and trigger the initial transition animation
-    window.addEventListener('load', () => {
-      const transitionCover = document.getElementById('transition-cover');
-      
-      // Initially, transition cover takes up the entire screen
-      transitionCover.classList.add('show');
-
-      // After the page has loaded, start the transition to move it down
-      setTimeout(() => {
-        transitionCover.classList.add('move-down');
-      }, 50); // Small delay to ensure page load is fully processed
-    });
-
-    // For external link navigation (handling exit transition before page load)
-    const transitionCover = document.getElementById('transition-cover');
-    const externalLinks = document.querySelectorAll('.home_button, #backtoprojects');
-
-    externalLinks.forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent default link behavior
-        document.body.classList.add('locked'); // Lock the page to prevent interaction
-
-        // Trigger the exit transition (slide-up)
-        transitionCover.classList.remove('move-down'); // Remove 'move-down' if already applied
-        transitionCover.classList.add('move-up'); // Apply move-up transition to cover the screen
-
-        // Wait for the exit animation to finish before navigating
-        setTimeout(() => {
-          window.location.href = link.href; // Navigate to the external link
-        }, 1000); // Match this time with the duration of your animation
-      });
-    });
-  </script>
+  
 
   <!-- Footer Section -->
   <footer id="footer">
@@ -565,5 +526,6 @@
       </div>
     </div>
   </footer>
+  <script src="roxy.js"></script>
 </body>
 </html>
