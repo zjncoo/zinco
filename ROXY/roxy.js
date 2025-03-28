@@ -18,18 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const sidebarBox = document.getElementById('sidebarbox');
-    const toggleButton = document.getElementById('toggle-sidebar-button');
 
-    // Initially hide the sidebar by setting left off-screen
-    sidebarBox.style.left = '-250px'; 
-
-    // Toggle sidebar visibility when the button is clicked
-    toggleButton.addEventListener('click', function() {
-        sidebarBox.classList.toggle('active'); // Toggle the 'active' class
-    });
-});
   
 // Wait for the page to load and trigger the initial transition animation
 window.addEventListener('load', () => {

@@ -38,6 +38,10 @@ body {
     border-radius: 50px; /* Sleek rounded corners */
   }
 
+  @media (max-width: 768px) {
+    #backtoprojects {display: none;}
+  }
+
   #introduction a {
     color: white;
     text-decoration: none;
@@ -533,6 +537,18 @@ footer {
   text-align: right;
 }
 
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column; /* Stack vertically on mobile */
+  }
+  .footer-logo img {
+    margin-bottom: 10px; /* Space between logo and text */
+  }
+  .footer-contact {
+    text-align: center; /* Center align the contact text */
+  }
+}
+
 
 
 
@@ -636,16 +652,7 @@ h1 {
 
 
 /* Sidebar styles */
-.sidebarbox {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Initially off-screen */
-  width: 250px;
-  height: 100%;
-  background-color: #333;
-  transition: left 0.3s ease-in-out;
-  z-index: 999;
-}
+
 
 .sidebar {
   padding-top: 50px;
@@ -657,7 +664,7 @@ h1 {
 }
 
 .sidebar-link {
-  color: white;
+  color: rgba(142, 142, 142, 0.603);
   text-decoration: none;
   display: block;
   padding: 10px 0;
@@ -666,23 +673,6 @@ h1 {
   transition: color 0.3s;
 }
 
-.sidebar-button {
-  position: fixed;
-  top: 50%;
-  left: 20px;
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 30px;
-  cursor: pointer;
-  z-index: 1001; /* Button stays above the sidebar */
-}
-
-/* Sidebar active state: when toggled */
-.sidebarbox.active {
-  left: 0; /* Sidebar slides in */
-}
 
 .sidebar-link:hover,
 .sidebar-link.highlight {
@@ -690,6 +680,11 @@ h1 {
   font-weight: bold;
 }
 
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
 
 
 /* PAGE ANIMATIONS */
@@ -914,6 +909,12 @@ body.locked {
   padding-right: 5%;
 }
 
+@media (max-width: 768px) {
+  #sidebarbox {
+    display: none;
+  }
+}
+
 
 #pdf-viewer-container {
   width: 60%; /* Set the container width to 60% of the page */
@@ -1002,4 +1003,14 @@ canvas {
 
 #spotify-card:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  #spotify-card {
+    width: 100px;
+    height: 80px;
+  }
+  iframe {
+    width: 100px;
+  }
 }
