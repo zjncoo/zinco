@@ -293,8 +293,8 @@ body {
 
   .news-container {
     max-width: 40%;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 0;
+    padding: 0px;
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow: hidden;
@@ -519,6 +519,7 @@ footer {
   width: 100vw;
   background-color: #000000;
   color: #fff;
+  margin: 0;
   z-index: 199;
 }
 
