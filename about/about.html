@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - zinco</title>
-  <link rel="stylesheet" href="contact.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
+  <title>About Me - zinco</title>
+  <link rel="stylesheet" href="about.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="custom-cursor" id="cursor"></div>
 
-  <a href="#" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+  <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt=""></a>
 
-  <!-- Bottoni angolari -->
+  <!-- Corner Buttons -->
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
- 
+  <a href="../contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
 
   <div id="dropdownMenu">
     <div class="menu-columns">
@@ -34,9 +34,9 @@
         <a href="#" class="menu-link">Press</a>
       </div>
     </div>
-  
+
     <div class="menu-bottom">
-        <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
@@ -44,32 +44,34 @@
   <main>
     <div class="shapes"></div>
     <p class="intro">
-      I am Francesco, <span class="underline"><span class="colorful">Communication Design Student</span></span>.
+      Learn more about the person behind the work.
     </p>
-
-    <!-- Sezione di Contatto -->
-    <section class="contact-section">
-      <h2>Contact Me</h2>
-      <div class="contact-content">
-        <!-- Iframe per il modulo di contatto -->
-        <iframe src="https://tally.so/embed/3EWYBN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" width="100%" height="500px" frameborder="0"></iframe>
-        
-        <div class="contact-info">
-          <h3>Our Contact Information</h3>
-          <p>Email: <a href="mailto:zinco.work@gmail.com">zinco.work@gmail.com</a></p>
-          <p>Based in Milan, Italy</p>
-        </div>
-      </div>
-    </section>
   </main>
+
+  <!-- About Me Section -->
+  <section class="cookie-policy-section">
+    <h2>About Me</h2>
+    <div class="cookie-policy-content">
+      <img src="/about/IMG_5685.JPG" alt="Portrait of Me" style="width: 200px; border-radius: 10px; margin-bottom: 1em;">
+
+      <p><strong>Name:</strong> Francesco Z.</p>
+      <p><strong>Age:</strong> 20</p>
+      <p><strong>Studies:</strong> Communication Design at Politecnico di Milano</p>
+
+      <h3>Description</h3>
+      <p>
+        I’m a communication design student with a passion for playful, conceptual visual languages and narrative structures. I focus on branding, digital experiences, and installations, often exploring the overlap between everyday life and speculative fiction. 
+      </p>
+    </div>
+  </section>
 
   <footer>
     <div class="cookie-banner" id="cookieBanner">
-      <span>my website uses <a href="cookies.html" class="cookie-link">cookies</a></span>
+      <span>my website uses <a href="#" class="cookie-link">cookies</a></span>
       <span class="close-btn cursor-target" id="closeCookie">✕</span>
     </div>
     <div class="footer-content">
-      <a href="#" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+      <a href="#" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
       <div class="footer-text">
         <p>&copy; 2025 zinco</p>
         <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
@@ -77,6 +79,6 @@
     </div>
   </footer>
 
-  <script src="index.js"></script>
+  <script src="../index.js"></script>
 </body>
 </html>

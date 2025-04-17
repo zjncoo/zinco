@@ -1,73 +1,11 @@
-.branding-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-    padding: 60px 20px 80px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  
-  .branding-item {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    background: #f9f9f9;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    text-align: left;
-  }
-  
-  .branding-item h3 {
-    margin-top: 0;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .button-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 14px;
-    background-color: black;
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: bold;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s ease;
-  }
-  
-  .button-link:hover {
-    background-color: #333;
-  }
-  
-  .branding-item.logo img,
-  .branding-item.graphics img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .branding-item.color {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-  }
-  
-  .color1 { background-color: #d04d27; }
-  .color2 { background-color: #3f3c3c; }
-  .color3 { background-color: #8c8c94; color: black; }
-  
-
-  body {
+body {
     margin: 0;
     font-family: 'DM Sans', sans-serif;
     background: white;
     color: black;
+    align-items: center;
+    justify-items: center;
+    width: 100vw;
   }
   
   .fixed-link {
@@ -105,6 +43,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 140px 20px 80px; /* more top padding for fixed elements */
   }
@@ -373,7 +312,6 @@ body, a, button {
   color: white;
 }
 
-
 /*FOOTER*/
 footer {
   background-color: #000;
@@ -427,6 +365,34 @@ body {
   margin-bottom: 100px; /* Aggiungi margine inferiore per evitare che il footer e i bottoni si sovrappongano */
 }
 
-video {
-  width: 100vw;
+/* Sezione cookie-banner */
+.cookie-banner {
+  display: flex;
+  align-items: center;
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  gap: 10px;
+  bottom: 20%;
+  position: fixed;
+  max-width: fit-content;
+}
+
+.cookie-link {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.close-btn {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.cookie-policy-section {
+    padding: 5%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
 }
