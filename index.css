@@ -308,3 +308,200 @@ body, a, button {
   color: white;
 }
 
+/*FOOTER*/
+footer {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 30px;
+  
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  margin-bottom: 80px; /* Aggiungi margine per evitare la sovrapposizione con i bottoni */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  gap: 15px;
+}
+
+.footer-logo img {
+  height: 40px;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer-text p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-email {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.footer-email:hover {
+  text-decoration: underline;
+}
+
+body {
+  margin-bottom: 100px; /* Aggiungi margine inferiore per evitare che il footer e i bottoni si sovrappongano */
+}
+
+/* Sezione cookie-banner */
+.cookie-banner {
+  display: flex;
+  align-items: center;
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  gap: 10px;
+  bottom: 20%;
+  position: fixed;
+  max-width: fit-content;
+}
+
+.cookie-link {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.close-btn {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*SEARCH BAR*/
+/* Global Styles */
+body {
+  font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Search Bar Container */
+#search-bar-container {
+  position: fixed;
+  top: 40px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#search-button {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+#search-bar {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+  width: fit-content;
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+#search-bar input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 3px solid black;
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  outline: none;
+}
+
+#filters {
+  display: flex;
+  border: #000;
+  align-items: center;
+}
+
+#filters .filter-icon {
+  width: 20px;
+  height: 20px;
+  background-color: #f00; /* Red circle */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+#category-select {
+  font-size: 1rem;
+  padding: 5px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+}
+
+#search-suggestions {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid #ddd;
+}
+
+#search-suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#search-suggestions li:hover {
+  background-color: #000000;
+}
+
+/* Show Search Bar when Active */
+#search-bar.show {
+  display: flex;
+}
+
+/* Screen Background Turned White */
+body.search-active {
+  background-color: white;
+  transition: background-color 0.5s ease;
+}
+
+/* Suggestions Style */
+.suggestions li {
+  background-color: white;
+  color: black;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: #f0f0f0;
+}
+
+.hidden {
+  display: none;
+}

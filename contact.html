@@ -3,22 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Illo Style Page</title>
-  <link rel="stylesheet" href="index.css" />
+  <title>Contact Page</title>
+  <link rel="stylesheet" href="contact.css" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="custom-cursor" id="cursor"></div>
 
-  
-  <a href="#" id="button-logo"><img src="imghome/logo_zinco.svg"  id="logo" alt=""></a>
+  <a href="#" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+
   <!-- Bottoni angolari -->
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
-  <a href="contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
-
-  
+ 
 
   <div id="dropdownMenu">
     <div class="menu-columns">
@@ -38,40 +36,32 @@
     </div>
   
     <div class="menu-bottom">
-      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+        <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
+
   <main>
     <div class="shapes"></div>
     <p class="intro">
       I am Francesco, <span class="underline"><span class="colorful">Communication Design Student</span></span>.
-      
     </p>
-  </main>
 
-  <section class="projects-section">
-    <h2>Branding</h2>
-    <div class="project-grid">
-      <a href="project1.html"><img src="branding1.jpg" alt="Branding Project 1" class="cursor-target" /></a>
-      <a href="project2.html"><img src="branding2.jpg" alt="Branding Project 2" class="cursor-target" /></a>
-      <a href="project3.html"><img src="branding3.jpg" alt="Branding Project 3" class="cursor-target" /></a>
-    </div>
-  
-    <h2>p5</h2>
-    <div class="project-grid">
-      <a href="p5_1.html"><img src="p5_1.jpg" alt="p5 Project 1" class="cursor-target" /></a>
-      <a href="p5_2.html"><img src="p5_2.jpg" alt="p5 Project 2" class="cursor-target" /></a>
-      <a href="p5_3.html"><img src="p5_3.jpg" alt="p5 Project 3" class="cursor-target" /></a>
-    </div>
-  
-    <h2>p5</h2>
-    <div class="project-grid">
-      <a href="p5_1.html"><img src="p5_1.jpg" alt="p5 Project 1" class="cursor-target" /></a>
-      <a href="p5_2.html"><img src="p5_2.jpg" alt="p5 Project 2" class="cursor-target" /></a>
-      <a href="p5_3.html"><img src="p5_3.jpg" alt="p5 Project 3" class="cursor-target" /></a>
-    </div>
-  </section>
+    <!-- Sezione di Contatto -->
+    <section class="contact-section">
+      <h2>Contact Me</h2>
+      <div class="contact-content">
+        <!-- Iframe per il modulo di contatto -->
+        <iframe src="https://tally.so/embed/3EWYBN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" width="100%" height="500px" frameborder="0"></iframe>
+        
+        <div class="contact-info">
+          <h3>Our Contact Information</h3>
+          <p>Email: <a href="mailto:zinco.work@gmail.com">zinco.work@gmail.com</a></p>
+          <p>Based in Milan, Italy</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="cookie-banner" id="cookieBanner">
@@ -82,7 +72,7 @@
       <a href="#" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
       <div class="footer-text">
         <p>&copy; 2025 zinco</p>
-        <a href="zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
       </div>
     </div>
   </footer>

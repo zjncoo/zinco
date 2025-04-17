@@ -87,3 +87,65 @@ document.getElementById('randomProjectButton').addEventListener('click', () => {
     window.location.href = randomHref;
   }
 });
+
+//smooth scrolling
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+  smooth: true,
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  smoothTouch: true,
+  touchMultiplier: 2,
+  infinite: false,
+});
+
+// Update on each frame
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+requestAnimationFrame(raf)
+
+//search bar
+document.getElementById("search-button").addEventListener("click", function () {
+  const searchBar = document.getElementById("search-bar");
+  const body = document.body;
+  
+  searchBar.classList.toggle("show");
+  body.classList.toggle("search-active");
+});
+
+document.getElementById("search-input").addEventListener("input", function () {
+  const query = this.value.toLowerCase();
+  const category = document.getElementById("category-select").value;
+  
+  // Get all project links and titles
+  const projects = [
+    { title: "Branding Project 1", category: "branding", link: "project1.html" },
+    { title: "Branding Project 2", category: "branding", link: "project2.html" },
+    { title: "Branding Project 3", category: "branding", link: "project3.html" },
+    { title: "p5 Project 1", category: "p5", link: "p5_1.html" },
+    { title: "p5 Project 2", category: "p5", link: "p5_2.html" },
+    { title: "p5 Project 3", category: "p5", link: "p5_3.html" },
+  ];
+
+  const filteredProjects = projects.filter(project => {
+    const matchesQuery = project.title.toLowerCase().includes(query);
+    const matchesCategory = category ? project.category === category : true;
+    return matchesQuery && matchesCategory;
+  });
+
+  // Display suggestions
+  const suggestionsList = document.getElementById("search-suggestions");
+  suggestionsList.innerHTML = "";
+  
+  filteredProjects.forEach(project => {
+    const li = document.createElement("li");
+    li.textContent = project.title;
+    li.addEventListener("click", function () {
+      window.location.href = project.link;
+    });
+    suggestionsList.appendChild(li);
+  });
+});
