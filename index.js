@@ -108,27 +108,29 @@ function raf(time) {
 requestAnimationFrame(raf)
 
 //search bar
+// Toggle search bar visibility
 document.getElementById("search-button").addEventListener("click", function () {
   const searchBar = document.getElementById("search-bar");
   const body = document.body;
-  
-  searchBar.classList.toggle("show");
+
+  searchBar.classList.toggle("hidden");
   body.classList.toggle("search-active");
 });
 
+// Project list
+const projects = [
+  { title: "Branding Project 1", category: "branding", link: "project1.html" },
+  { title: "Branding Project 2", category: "branding", link: "project2.html" },
+  { title: "Branding Project 3", category: "branding", link: "project3.html" },
+  { title: "p5 Project 1", category: "p5", link: "p5_1.html" },
+  { title: "p5 Project 2", category: "p5", link: "p5_2.html" },
+  { title: "p5 Project 3", category: "p5", link: "p5_3.html" },
+];
+
+// Live search logic
 document.getElementById("search-input").addEventListener("input", function () {
   const query = this.value.toLowerCase();
   const category = document.getElementById("category-select").value;
-  
-  // Get all project links and titles
-  const projects = [
-    { title: "Branding Project 1", category: "branding", link: "project1.html" },
-    { title: "Branding Project 2", category: "branding", link: "project2.html" },
-    { title: "Branding Project 3", category: "branding", link: "project3.html" },
-    { title: "p5 Project 1", category: "p5", link: "p5_1.html" },
-    { title: "p5 Project 2", category: "p5", link: "p5_2.html" },
-    { title: "p5 Project 3", category: "p5", link: "p5_3.html" },
-  ];
 
   const filteredProjects = projects.filter(project => {
     const matchesQuery = project.title.toLowerCase().includes(query);
@@ -136,10 +138,9 @@ document.getElementById("search-input").addEventListener("input", function () {
     return matchesQuery && matchesCategory;
   });
 
-  // Display suggestions
   const suggestionsList = document.getElementById("search-suggestions");
   suggestionsList.innerHTML = "";
-  
+
   filteredProjects.forEach(project => {
     const li = document.createElement("li");
     li.textContent = project.title;
@@ -148,4 +149,13 @@ document.getElementById("search-input").addEventListener("input", function () {
     });
     suggestionsList.appendChild(li);
   });
+});
+
+// Click outside to close suggestions
+document.addEventListener("click", function (e) {
+  const searchBar = document.getElementById("search-bar");
+  const searchButton = document.getElementById("search-button");
+  if (!searchBar.contains(e.target) && e.target !== searchButton) {
+    document.getElementById("search-suggestions").innerHTML = "";
+  }
 });
