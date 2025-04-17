@@ -40,3 +40,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//open menu
+
+const moreButton = document.getElementById("btnTopRight");
+const dropdownMenu = document.getElementById("dropdownMenu");
+
+function toggleMenu(e) {
+  e.preventDefault();
+  const isOpen = dropdownMenu.classList.contains("open");
+
+  if (isOpen) {
+    dropdownMenu.classList.remove("open");
+    moreButton.textContent = "more";
+    moreButton.classList.remove("open");
+  } else {
+    dropdownMenu.classList.add("open");
+    moreButton.textContent = "close";
+    moreButton.classList.add("open");
+  }
+}
+
+function handleClickOutside(e) {
+  const isClickInsideMenu = dropdownMenu.contains(e.target);
+  const isClickOnButton = moreButton.contains(e.target);
+
+  if (!isClickInsideMenu && !isClickOnButton && dropdownMenu.classList.contains("open")) {
+    dropdownMenu.classList.remove("open");
+    moreButton.textContent = "more";
+    moreButton.classList.remove("open");
+  }
+}
+
+moreButton.addEventListener("click", toggleMenu);
+document.addEventListener("click", handleClickOutside);
+
+
+//random project
+document.getElementById('randomProjectButton').addEventListener('click', () => {
+  const projectLinks = Array.from(document.querySelectorAll('.projects-section .project-grid a'));
+  if (projectLinks.length === 0) return;
+
+  const randomIndex = Math.floor(Math.random() * projectLinks.length);
+  const randomHref = projectLinks[randomIndex].getAttribute('href');
+
+  if (randomHref) {
+    window.location.href = randomHref;
+  }
+});
