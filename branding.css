@@ -1,4 +1,54 @@
-body {
+.branding-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    padding: 160px 20px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .branding-item {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #f9f9f9;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  .branding-item h3 {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .branding-item.logo img,
+  .branding-item.graphics img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .branding-item.color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+  }
+  
+  .color1 { background-color: #FF5733; }
+  .color2 { background-color: #009688; }
+  .color3 { background-color: #F4D03F; color: black; }
+  .color4 { background-color: #8E44AD; }
+  .color5 { background-color: #34495E; }
+  .color6 { background-color: #ECF0F1; color: black; }
+
+  body {
     margin: 0;
     font-family: 'DM Sans', sans-serif;
     background: white;

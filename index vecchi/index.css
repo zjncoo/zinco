@@ -1,0 +1,392 @@
+/* Reset and Body Styling */
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'dm-sans', sans-serif;
+}
+
+body {
+    background-color: #ffffff; /* Black background */
+    color: #fff; /* White text */
+}
+
+/* Landing Section */
+.landing {
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    backdrop-filter: blur(10px);
+    position: relative;
+    flex-direction: column;
+}
+
+.corner-button {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+}
+
+#covering {
+    bottom: 0px;
+    right: 0px;
+    width: 100vw;
+    background-color: #ffffff;
+    height: 10vh;
+    z-index: 2;
+    position: absolute;
+}
+
+/* Logo styling */
+#logo {
+    width: 50vw;
+    padding: 40px;
+    z-index: -1;
+}
+
+/* Scroll button styling */
+.scroll-btn {
+    color: #000;
+    padding: 10px 20px;
+    position: absolute;
+    top: 70vh;
+    translate: +50%;
+    right: 50vw;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 0.5px solid rgba(255, 255, 255, 0.176);
+    border-radius: 22px;
+    background: #ffd104;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 3;
+}
+
+.scroll-btn:hover {
+    background: linear-gradient(45deg, #a5a5a5e8, #000000e4); /* Reverse or change the gradient */
+    transform: scale(1.02); /* Slightly increase the button size on hover */
+    color: rgb(255, 255, 255);
+}
+
+/* Links Section */
+.links {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: #ffffff;
+    margin-bottom: 10%;
+    color: #000000;
+}
+
+.links h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.links ul {
+    list-style: none;
+}
+
+.links li {
+    margin: 20px 0;
+}
+
+.links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 400;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* Parallax effect */
+body {
+    height: 200vh;
+    overflow-x: hidden;
+}
+
+.landing {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Contenitore principale */
+.project-grid {
+    display: flex;
+    flex-direction: column;
+    width: 70vw; /* Occupa il 70% della finestra */
+    margin: 0 auto; /* Centra il contenitore */
+    gap: 40px;
+    margin-top: 5%;
+}
+
+/* Griglia 2x2 per ogni sezione */
+.project-subgrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* Stile dei rettangoli */
+.project-button {
+    display: flex;
+    align-items: center; /* Allinea il titolo al centro verticalmente */
+    justify-content: center; /* Allinea il titolo al centro orizzontalmente */
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 32vh;
+    text-decoration: none;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Nasconde il titolo inizialmente */
+.project-button h3 {
+    font-size: 0;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+    font-family: "headline-gothic-atf", sans-serif;
+    transition: font-size 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    position: absolute;
+}
+
+/* Quando si passa sopra il pulsante, il titolo appare */
+.project-button:hover h3 {
+    font-size: 70px;
+    opacity: 1;
+}
+
+/* Effetto di sfondo bianco su hover */
+.project-button:hover {
+    background: #ffd104 !important;
+    background-image: none !important;
+}
+
+
+#coso {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+}
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    transform: translateY(0%);
+    transition: transform 0.5s ease-out;
+}
+
+#logoanimation {
+    width: 120px;
+}
+
+#logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#percentage {
+    color: white;
+    font-size: 24px;
+    margin-top: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Hidden class to hide main content initially */
+.hidden {
+    display: none;
+}
+
+/* Fixed Button */
+.fixed-button {
+    padding: 10px 13px;
+    position: fixed;
+    margin: 5px;
+    bottom: 3%;
+    backdrop-filter: blur(10px);
+    border: 0.5px solid rgba(255, 255, 255, 0.176);
+    background: rgba(100, 100, 100, 0.3);
+    color: white;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.fixed-button:hover {
+    background: linear-gradient(45deg, #a5a5a584, #38383855);
+    transform: scale(1.02);
+    color: white;
+}
+
+/* Transition cover */
+#transition-cover {
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: top 0.5s ease;
+}
+
+#transition-cover.active {
+    top: 0;
+}
+
+#transition-cover img {
+    width: 100px;
+    height: auto;
+    opacity: 1;
+}
+
+/* Media Queries for Mobile Devices */
+@media screen and (max-width: 768px) {
+    /* Landing Section */
+    .landing {
+        padding: 20px;
+    }
+
+    #logo {
+        width: 70vw;
+        padding: 20px;
+    }
+
+    .scroll-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+        top: 60vh;
+        right: 50vw;
+    }
+
+    .links {
+        height: fit-content;
+        padding: 10%;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr; /* Stacked layout on smaller screens */
+    }
+
+    .project-button {
+        width: 100%; /* Make buttons take up full width */
+        height: 120px; /* Adjust height for better mobile usability */
+    }
+
+    .footer-content p, .footer-content a {
+        font-size: 1em; /* Smaller font size for mobile */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Further adjustments for smaller screens */
+    #logo {
+        width: 90vw;
+    }
+
+    .scroll-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .project-column {
+        width: 70vw;
+    }
+
+    .links h2 {
+        font-size: 2em; /* Smaller heading */
+    }
+
+    .links {
+        height: fit-content;
+        padding: 10%;
+    }
+
+    .project-button {
+        font-size: 14px; /* Adjust text size */
+        height: 100px;
+    }
+}
+
+/*FOOTER*/
+
+footer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    background-color: #000000;
+    color: #fff;
+    z-index: 199;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10%;
+  }
+  
+  .footer-logo img {
+    height: 20px; /* Adjust to fit your logo */
+  }
+  
+  .footer-contact {
+    text-align: right;
+  }
+  
