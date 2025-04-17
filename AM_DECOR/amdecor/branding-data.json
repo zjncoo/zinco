@@ -1,0 +1,17 @@
+[
+  { "type": "image", "subtype": "logo", "label": "Logo", "src": "../img/amlogo.svg" },
+  { "type": "image", "subtype": "graphics", "label": "Graphic Elements", "src": "branding/graphics.png" },
+  { "type": "color", "class": "color1", "label": "Pantone 1" },
+  { "type": "color", "class": "color2", "label": "Pantone 2" },
+  { "type": "color", "class": "color3", "label": "Pantone 3" },
+  { "type": "color", "class": "color4", "label": "Pantone 4" },
+  { "type": "color", "class": "color5", "label": "Pantone 5" },
+  { "type": "color", "class": "color6", "label": "Pantone 6" },
+  { "type": "text", "label": "Naming", "content": "AM Decor" },
+  { "type": "text", "label": "Payoff", "content": "Bold Elegance" },
+  { "type": "text", "label": "Valori", "content": "Sostenibilità, Artigianalità, Inclusività" },
+  { "type": "text", "label": "Mission", "content": "Ridefinire la bellezza in modo autentico." },
+  { "type": "text", "label": "Vision", "content": "Un mondo dove la bellezza è consapevolezza." },
+  { "type": "text", "label": "Brand Essence", "content": "Consapevole. Elegante. Indipendente." },
+  { "type": "text", "label": "Brand Architecture", "content": "SRL" }
+]

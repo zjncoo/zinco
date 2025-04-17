@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Branding Projects</title>
+  <link rel="stylesheet" href="branding.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <a href="#" id="button-logo"><img src="../../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
+  <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
+  <a href="#" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+
+  <div id="dropdownMenu">
+    <div class="menu-columns">
+      <div class="menu-column left">
+        <a href="#" class="menu-link">About Me</a>
+        <a href="#" class="menu-link">Work</a>
+        <a href="#" class="menu-link">Services</a>
+      </div>
+      <div class="menu-column right">
+        <a href="#" class="menu-link">Archive</a>
+        <a href="#" class="menu-link">Research</a>
+        <a href="#" class="menu-link">Clients</a>
+        <a href="#" class="menu-link">Events</a>
+        <a href="#" class="menu-link">Exhibitions</a>
+        <a href="#" class="menu-link">Press</a>
+      </div>
+    </div>
+    <div class="menu-bottom">
+      <a href="mailto:hello@example.com" class="menu-email">hello@example.com</a>
+      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+    </div>
+  </div>
+
+
+  <section class="branding-grid" id="brandingGrid">
+    <!-- Contenuto dinamico -->
+  </section>
+
+  <footer>
+    <div class="cookie-banner" id="cookieBanner">
+      <span>my website uses <a href="#" class="cookie-link">cookies</a></span>
+      <span class="close-btn cursor-target" id="closeCookie">✕</span>
+    </div>
+  </footer>
+
+  <script>
+    // Caricamento del file JSON dinamicamente
+    fetch('branding-data.json')
+      .then(response => response.json())
+      .then(data => {
+        const grid = document.getElementById('brandingGrid');
+
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.classList.add('branding-item');
+
+          if (item.type === 'color') {
+            div.classList.add('color', item.class); // es: color1, color2
+            div.innerText = item.label || '';
+          } else if (item.type === 'image') {
+            div.classList.add(item.subtype); // es: logo, graphics
+            div.innerHTML = `<h3>${item.label}</h3><img src="${item.src}" alt="${item.label}" />`;
+          } else {
+            div.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
+          }
+
+          grid.appendChild(div);
+        });
+      });
+  </script>
+
+  <script src="branding-project.js"></script>
+</body>
+</html>
