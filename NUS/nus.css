@@ -373,3 +373,56 @@ body, a, button {
   color: white;
 }
 
+
+/*FOOTER*/
+footer {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 30px;
+  
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  margin-bottom: 80px; /* Aggiungi margine per evitare la sovrapposizione con i bottoni */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  gap: 15px;
+}
+
+.footer-logo img {
+  height: 40px;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer-text p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-email {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.footer-email:hover {
+  text-decoration: underline;
+}
+
+body {
+  margin-bottom: 100px; /* Aggiungi margine inferiore per evitare che il footer e i bottoni si sovrappongano */
+}

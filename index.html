@@ -11,14 +11,31 @@
 <body>
   <div class="custom-cursor" id="cursor"></div>
 
-  
   <a href="#" id="button-logo"><img src="imghome/logo_zinco.svg"  id="logo" alt=""></a>
   <!-- Bottoni angolari -->
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
   <a href="contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
 
-  
+  <!-- Search Button (Magnifier Icon) -->
+  <div id="search-bar-container">
+    <button id="search-button" class="search-icon cursor-target">🔍</button>
+    <div id="search-bar" class="hidden">
+      <input type="text" id="search-input" placeholder="Search projects..." />
+      <div id="filters" class="filters">
+        <span class="filter-icon"></span>
+        <select id="category-select">
+          <option value="">All</option>
+          <option value="branding">Branding</option>
+          <option value="p5">p5.js</option>
+        </select>
+      </div>
+      <!-- Suggestions appear here -->
+      <ul id="search-suggestions" class="suggestions-list"></ul>
+    </div>
+  </div>
+
+  </div>
 
   <div id="dropdownMenu">
     <div class="menu-columns">
@@ -36,35 +53,28 @@
         <a href="#" class="menu-link">Press</a>
       </div>
     </div>
-  
+
     <div class="menu-bottom">
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
+
   <main>
     <div class="shapes"></div>
     <p class="intro">
       I am Francesco, <span class="underline"><span class="colorful">Communication Design Student</span></span>.
-      
     </p>
   </main>
 
   <section class="projects-section">
     <h2>Branding</h2>
     <div class="project-grid">
-      <a href="project1.html"><img src="branding1.jpg" alt="Branding Project 1" class="cursor-target" /></a>
+      <a href="AM_DECOR/amdecor/amdecor.html"><img src="AM_DECOR/img/amlogo.svg" alt="Branding Project 1" class="cursor-target" /></a>
       <a href="project2.html"><img src="branding2.jpg" alt="Branding Project 2" class="cursor-target" /></a>
       <a href="project3.html"><img src="branding3.jpg" alt="Branding Project 3" class="cursor-target" /></a>
     </div>
-  
-    <h2>p5</h2>
-    <div class="project-grid">
-      <a href="p5_1.html"><img src="p5_1.jpg" alt="p5 Project 1" class="cursor-target" /></a>
-      <a href="p5_2.html"><img src="p5_2.jpg" alt="p5 Project 2" class="cursor-target" /></a>
-      <a href="p5_3.html"><img src="p5_3.jpg" alt="p5 Project 3" class="cursor-target" /></a>
-    </div>
-  
+
     <h2>p5</h2>
     <div class="project-grid">
       <a href="p5_1.html"><img src="p5_1.jpg" alt="p5 Project 1" class="cursor-target" /></a>
@@ -88,5 +98,7 @@
   </footer>
 
   <script src="index.js"></script>
+  <div id="overlay" class="hidden"></div>
+
 </body>
 </html>
