@@ -119,9 +119,10 @@ document.getElementById("search-button").addEventListener("click", function () {
 
 // Project list
 const projects = [
-  { title: "Branding Project 1", category: "branding", link: "project1.html" },
-  { title: "Branding Project 2", category: "branding", link: "project2.html" },
-  { title: "Branding Project 3", category: "branding", link: "project3.html" },
+  { title: "AM Decor", category: "branding", link: "project1.html" },
+  { title: "NUS", category: "branding", link: "NUS/nus.html" },
+  { title: "escapes", category: "branding", link: "escapes/escapes.html" },
+  { title: "ROXY", category: "branding", link: "ROXY/roxy.html" },
   { title: "p5 Project 1", category: "p5", link: "p5_1.html" },
   { title: "p5 Project 2", category: "p5", link: "p5_2.html" },
   { title: "p5 Project 3", category: "p5", link: "p5_3.html" },
