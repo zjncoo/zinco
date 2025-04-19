@@ -115,3 +115,38 @@ video {
   font-family: 'DM Sans', sans-serif;
   font-weight: bold;
 }
+
+@media (max-width: 767px) {
+  #pdfViewerContainer {
+    position: relative;
+    width: 100vw;
+    text-align: center;
+    background: #fff;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .pdf-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(280%);
+    font-size: 2rem;
+    border: none;
+    
+    font-weight: bold;
+    z-index: 2;
+    background-color: #ffffff;
+    mix-blend-mode: difference;
+  }
+
+  .pdf-nav.left {
+    left: 20px;
+  }
+  
+  .pdf-nav.right {
+    right: 20px;
+  }
+}

@@ -7,7 +7,7 @@ let pdfDoc = null,
     ctx = canvas.getContext('2d');
 
 // Inserisci qui il percorso effettivo del tuo file PDF
-const url = '../ROXY/roxy.pdf';
+const url = 'nus.pdf';
 
 function renderPage(num) {
   pageRendering = true;
