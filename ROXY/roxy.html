@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NUS - zinco</title>
   <link rel="stylesheet" href="roxy.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script> <!--pdf!-->
+  <link rel="stylesheet" href="../index.css" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -34,26 +34,26 @@
       </div>
     </div>
     <div class="menu-bottom">
-      <a href="mailto:hello@example.com" class="menu-email">hello@example.com</a>
+      <a href="zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
 
-  <video id="myVideo" autoplay loop controls src="img/video finito.mp4"></video>
+  <video id="myVideo" autoplay loop src="img/video finito.mp4"></video>
   
 
   <section class="branding-grid" id="brandingGrid">
     <!-- Contenuto dinamico -->
   </section>
 
-  <section class="pdf-section">
-    <div class="pdf-controls">
-      <button id="prevPage" class="pdf-nav">←</button>
-      <span id="pageInfo">1 / ?</span>
-      <button id="nextPage" class="pdf-nav">→</button>
-    </div>
-    <canvas id="pdf-canvas"></canvas>
-  </section>
+  <div id="pdfViewerContainer">
+    <button id="prevPage" class="pdf-nav left">←</button>
+    <canvas id="pdfCanvas"></canvas>
+    <button id="nextPage" class="pdf-nav right">→</button>
+    <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-viewer.js" defer></script>
 
   <footer>
     <div class="cookie-banner" id="cookieBanner">
@@ -86,6 +86,8 @@
           } else if (item.type === 'image') {
             div.classList.add(item.subtype); // es: logo, graphics
             div.innerHTML = `<h3>${item.label}</h3><img src="${item.src}" alt="${item.label}" />`;
+          } else if (item.type === 'link') {
+            div.innerHTML = `<h3>${item.label}</h3><a href="${item.url}" class="button-link" target="_blank" rel="noopener noreferrer">${item.label} ↗</a>`;
           } else {
             div.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
           }
@@ -94,7 +96,9 @@
         });
       });
   </script>
+  
 
-  <script src="branding-project.js"></script>
+  
+  <script src="branding-project.js" defer></script>
 </body>
 </html>

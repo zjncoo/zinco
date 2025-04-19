@@ -1,475 +1,117 @@
 .branding-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-    padding: 60px 20px 80px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  
-  .branding-item {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    background: #f9f9f9;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    text-align: left;
-  }
-  
-  .branding-item h3 {
-    margin-top: 0;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .button-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 14px;
-    background-color: black;
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: bold;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s ease;
-  }
-  
-  .button-link:hover {
-    background-color: #333;
-  }
-  
-  .branding-item.logo img,
-  .branding-item.graphics img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .branding-item.color {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-  }
-  
-  .color1 { background-color: #d04d27; }
-  .color2 { background-color: #3f3c3c; }
-  .color3 { background-color: #8c8c94; color: black; }
-  
-
-  body {
-    margin: 0;
-    font-family: 'DM Sans', sans-serif;
-    background: white;
-    color: black;
-  }
-  
-  .fixed-link {
-    position: fixed;
-    font-weight: bold;
-    font-size: 20px;
-    text-decoration: none;
-    color: black;
-    z-index: 10;
-  }
-
-  #logo {
-    width: 20%;
-    padding: 8px;
-    top: 20px;
-    left: 20px;
-    position: fixed;
-  }
-
-  #button-logo {
-    width: fit-content;
-  }
-  
-  .top-left {
-    top: 30px;
-    left: 30px;
-  }
-  
-  .top-right {
-    top: 30px;
-    right: 30px;
-  }
-  
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 140px 20px 80px; /* more top padding for fixed elements */
-  }
-  
-  .intro {
-    font-size: 28px;
-    max-width: 800px;
-    line-height: 1.4;
-  }
-  
-  .underline {
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  
-  .colorful {
-    font-weight: bold;
-    background: linear-gradient(to right, #dddddd, rgb(252, 109, 0), blue, orange);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .shapes {
-    width: 100%;
-    height: 200px;
-    background: url('your-shapes-image.svg') center/contain no-repeat;
-    margin-bottom: 40px;
-  }
-  
-  footer {
-    padding: 20px 30px 60px;
-  }
-  
-  .cookie-banner {
-    display: flex;
-    align-items: center;
-    background: black;
-    color: white;
-    padding: 10px 20px;
-    gap: 10px;
-    bottom: 20%;
-    position: fixed;
-    max-width: fit-content;
-  }
-  
-  
-  .cookie-link {
-    color: white;
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  
-  .close-btn {
-    margin-left: auto;
-    cursor: pointer;
-    font-size: 20px;
-  }
-  
-  .footer-links {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 40px;
-    font-weight: bold;
-    font-size: 20px;
-  }
-  
-  .footer-links a {
-    color: black;
-    text-decoration: none;
-  }
-
-/* HIDE SYSTEM CURSOR */
-body, a, button {
-  cursor: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 60px 20px 80px;
+  max-width: 100vw;
+  margin: 0 auto;
+  overflow-x: none;
 }
 
-/* BASE CUSTOM CURSOR */
-.custom-cursor {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  background-color: white;
-  mix-blend-mode: difference;
-  transition: transform 0.2s ease;
+.branding-item {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #f9f9f9;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  text-align: left;
 }
 
-/* ON CLICKABLE ELEMENTS */
-.custom-cursor.cursor-hover {
-  transform: translate(-50%, -50%) scale(2);
-  background-color: rgb(255, 255, 255);
-  mix-blend-mode: difference; /* optional, for cool contrast */
+.branding-item h3 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-/* Stile condiviso dei bottoni */
-.corner-button {
-    position: fixed;
-    font-family: 'DM Sans', sans-serif;
-    color: black;
-    text-decoration: none;
-    font-size: 30px;
-    font-weight: 900;
-    z-index: 1000;
-    padding: 8px;
-  }
-  
-  /* Posizionamenti individuali */
-  #btnTopLeft {
-    top: 20px;
-    left: 20px;
-  }
-  
-  #btnTopRight {
-    top: 20px;
-    right: 20px;
-  }
-  
-  #btnBottomLeft {
-    bottom: 20px;
-    left: 20px;
-  }
-  
-  #btnBottomRight {
-    bottom: 20px;
-    right: 20px;
-  }
+.button-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 14px;
+  background-color: black;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.button-link:hover {
+  background-color: #333;
+}
+
+.branding-item.logo img,
+.branding-item.graphics img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.branding-item.color {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+}
+
+.color1 { background-color: #d04d27; }
+.color2 { background-color: #3f3c3c; }
+.color3 { background-color: #8c8c94; color: black; }
 
 
-/*PROJECT GRID*/
+video {
+  width: 100vw;
+}
 
 
-.projects-section {
-  padding: 80px 20px;
-  max-width: 1200px;
+/*PDF VIEWER*/
+
+#pdfViewerContainer {
+  position: relative;
+  width: 70vw;
+  text-align: center;
+  background: #fff;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
 }
 
-.projects-section h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 24px;
-  margin: 40px 0 20px;
-  color: black;
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-bottom: 60px;
-}
-
-.project-grid img {
-  width: 100%;
+#pdfCanvas {
+  max-width: 100%;
   height: auto;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  cursor: pointer;
 }
 
-.project-grid img:hover {
-  border: 2px solid rgb(255, 255, 255);
-  filter: brightness(1.1);
-}
-
-/*MENU*/
-#dropdownMenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 0;
-  width: 100vw;
-  background-color: black;
-  overflow: hidden;
-  z-index: 999;
-  transition: height 0.4s ease;
-}
-
-/* When menu is open */
-#dropdownMenu.open {
-  height: 60vh;
-}
-
-/* Solo stile, non tocca layout */
-.menu-columns {
-  display: flex;
-  justify-content: center; /* centra il gruppo di colonne */
-  gap: 40rem; /* spazio tra le due colonne – puoi anche usare 2rem per meno spazio */
-  padding: 2rem 4rem;
-  margin-top: 10%;
-}
-
-.menu-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.right {
-  align-items: flex-end;
-  text-align: right;
-}
-
-.menu-link {
-  color: white;
-  text-decoration: underline;
-  font-family: 'DM Sans', sans-serif;
+.pdf-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 2rem;
-  line-height: 1; /* 👈 più stretto rispetto al default */
-  font-weight: 400;
-  transition: opacity 0.2s ease;
+  border: none;
+  
+  font-weight: bold;
+  z-index: 2;
+  background-color: #d04d27;
+  mix-blend-mode: difference;
 }
 
-.menu-link:hover {
-  opacity: 0.6;
-  font-weight: 800;
+.pdf-nav.left {
+  left: 10px;
 }
 
-
-.menu-bottom {
-  display: flex;
-  justify-content: left;
-  gap: 2rem;
-  align-items: center;
-  padding: 0 4rem 2rem;
+.pdf-nav.right {
+  right: 10px;
 }
 
-.menu-email {
-  color: white;
-  text-decoration: underline;
+#pageIndicator {
+  margin-top: 12px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
+  font-weight: bold;
 }
-
-.menu-random {
-  background: none;
-  border: 1px solid white;
-  color: white;
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  font-family: 'DM Sans', sans-serif;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.menu-random:hover {
-  background: white;
-  color: black;
-}
-
-
-/* Optional: keep logo in place */
-#button-logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000; /* higher than dropdownMenu */
-}
-
-/* Style for the 'more' button when menu is open */
-#btnTopRight.open {
-  color: white;
-}
-
-
-/*FOOTER*/
-footer {
-  background-color: #000;
-  color: #fff;
-  padding: 10px 30px;
-  
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 100;
-  margin-bottom: 80px; /* Aggiungi margine per evitare la sovrapposizione con i bottoni */
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  max-width: 1200px;
-  gap: 15px;
-}
-
-.footer-logo img {
-  height: 40px;
-}
-
-.footer-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.footer-text p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.footer-email {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-.footer-email:hover {
-  text-decoration: underline;
-}
-
-body {
-  margin-bottom: 100px; /* Aggiungi margine inferiore per evitare che il footer e i bottoni si sovrappongano */
-}
-
-video {
-  height: 100vh;
-}
-
-/*pdf*/
-.pdf-section {
-    width: 100vw;
-    padding: 60px 20px;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .pdf-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .pdf-nav {
-    background: none;
-    border: 2px solid black;
-    border-radius: 6px;
-    padding: 6px 14px;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 18px;
-    transition: background 0.2s ease;
-  }
-  
-  .pdf-nav:hover {
-    background: black;
-    color: white;
-  }
-  
-  #pdf-canvas {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-  }
