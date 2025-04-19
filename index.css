@@ -391,7 +391,7 @@ body {
 /* Search bar container */
 #search-bar-container {
   position: relative;
-  display: inline-block;s
+  display: inline-block;
 }
 
 /* Toggle visibility */
@@ -494,7 +494,8 @@ body {
   }
 
   .custom-cursor {
-    display: none;
+    width: 3px;
+    height: 3px;
   }
   
 
