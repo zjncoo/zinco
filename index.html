@@ -35,12 +35,18 @@
             <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
             <input type="text" id="search-input" placeholder="Search projects..." />
             <div id="filters" class="filters">
-              <span class="filter-icon"></span>
-              <select id="category-select">
-                <option value="">All</option>
-                <option value="branding">Branding</option>
-                <option value="p5">p5.js</option>
-              </select>
+              <!-- Filter Button with Down Arrow -->
+              <button id="category-select" onclick="toggleDropdown()">
+                <span>Filters</span>
+                <span class="arrow">▼</span>
+              </button>
+
+              <!-- Filter Dropdown Options -->
+              <div id="category-select-options">
+                <a href="#" data-filter="all" class="filter-option">All</a>
+                <a href="#" data-filter="branding" class="filter-option">Branding</a>
+                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
+              </div>
             </div>
             <!-- Suggestions appear here -->
             <ul id="search-suggestions" class="suggestions-list"></ul>
