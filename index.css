@@ -3,7 +3,8 @@ body {
     font-family: 'DM Sans', sans-serif;
     background: white;
     color: black;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   
   .fixed-link {
