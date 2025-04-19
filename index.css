@@ -124,6 +124,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: fit-content;
     padding: 10px 20px;
     background-color: #eee;
     font-size: 14px;
@@ -138,9 +139,7 @@ body {
   .close-btn {
     cursor: pointer;
     font-size: 20px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: relative;
     color: white;
     background: none;
     border: none;
@@ -234,6 +233,7 @@ body, a, button {
 .project-grid img {
   width: 100%;
   height: auto;
+  padding: 2%;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -692,6 +692,7 @@ body {
 
   .cookie-banner {
     flex-direction: column;
+    width: fit-content;
     bottom: 10%;
     font-size: 14px;
   }
