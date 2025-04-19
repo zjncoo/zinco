@@ -67,3 +67,51 @@
 video {
   width: 100vw;
 }
+
+
+/*PDF VIEWER*/
+
+#pdfViewerContainer {
+  position: relative;
+  width: 70vw;
+  text-align: center;
+  background: #fff;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+#pdfCanvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.pdf-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  border: none;
+  
+  font-weight: bold;
+  z-index: 2;
+  background-color: #d04d27;
+  mix-blend-mode: difference;
+}
+
+.pdf-nav.left {
+  left: 10px;
+}
+
+.pdf-nav.right {
+  right: 10px;
+}
+
+#pageIndicator {
+  margin-top: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: bold;
+}

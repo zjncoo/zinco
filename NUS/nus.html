@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="menu-bottom">
-      <a href="mailto:hello@example.com" class="menu-email">hello@example.com</a>
+      <a href="zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
@@ -45,6 +45,15 @@
   <section class="branding-grid" id="brandingGrid">
     <!-- Contenuto dinamico -->
   </section>
+
+  <div id="pdfViewerContainer">
+    <button id="prevPage" class="pdf-nav left">←</button>
+    <canvas id="pdfCanvas"></canvas>
+    <button id="nextPage" class="pdf-nav right">→</button>
+    <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-viewer.js" defer></script>
 
   <footer>
     <div class="cookie-banner" id="cookieBanner">
@@ -85,7 +94,9 @@
         });
       });
   </script>
+  
 
-<script src="branding-project.js" defer></script>
+  
+  <script src="branding-project.js" defer></script>
 </body>
 </html>
