@@ -3,6 +3,7 @@ body {
     font-family: 'DM Sans', sans-serif;
     background: white;
     color: black;
+    overflow: hidden;
   }
   
   .fixed-link {
@@ -390,7 +391,7 @@ body {
 /* Search bar container */
 #search-bar-container {
   position: relative;
-  display: inline-block;
+  display: inline-block;s
 }
 
 /* Toggle visibility */
@@ -465,14 +466,11 @@ body {
 
 /* Search icon button */
 .search-icon {
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   background: none;
   border: none;
   cursor: pointer;
   color: white;
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
   z-index: 1100;
 }
 
@@ -489,22 +487,21 @@ body {
 
 @media (max-width: 767px) {
   #logo {
-    width: 40%;
+    width: 50%;
     top: 10px;
     left: 10px;
     padding: 4px;
   }
 
-  .fixed-link, 
-  .corner-button {
-    font-size: 16px;
-    padding: 4px;
+  .custom-cursor {
+    display: none;
   }
+  
 
   .top-left,
   .top-right {
-    top: 15px;
-    left: 15px;
+    top: 10px;
+    left: 10px;
     right: 15px;
   }
 
@@ -532,6 +529,10 @@ body {
     grid-template-columns: 1fr;
   }
 
+  #dropdownMenu.open {
+    height: 100vh;
+  }
+
   .menu-columns {
     flex-direction: column;
     gap: 2rem;
@@ -541,6 +542,7 @@ body {
 
   .menu-link {
     font-size: 1.5rem;
+    margin-top: 5%;
   }
 
   .menu-bottom {
@@ -550,16 +552,34 @@ body {
     padding: 0 2rem 2rem;
   }
 
-  .search-icon {
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.2rem;
-  }
+  
 
   .cookie-banner {
     flex-direction: column;
     bottom: 10%;
     font-size: 14px;
+  }
+
+  footer {
+    flex-direction: column;
+    width: 100vw;
+    padding: none;
+    margin: none;
+  }
+
+  .footer-content {
+    width: 100vw;
+    margin: 0;
+    padding: none;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding: none;
+    margin: 0;
   }
 }
 
@@ -571,9 +591,7 @@ body {
   }
 
   .fixed-link, 
-  .corner-button {
-    font-size: 18px;
-  }
+  
 
   .top-left,
   .top-right {
@@ -618,5 +636,27 @@ body {
 
   .cookie-banner {
     bottom: 15%;
+  }
+
+  footer {
+    flex-direction: column;
+    width: 100vw;
+    padding: none;
+    margin: none;
+  }
+
+  .footer-content {
+    width: 100vw;
+    margin: 0;
+    padding: none;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding: none;
+    margin: 0;
   }
 }
