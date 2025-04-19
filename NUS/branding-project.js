@@ -1,59 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('project-data.json')
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('brandingGrid');
-  
-        // Trova il logo
-        const logo = data.find(item => item.type === 'image' && item.subtype === 'logo');
-        const logoHtml = logo
-          ? `<img src="${logo.src}" alt="Logo of ${logo.label}" class="branding-logo">`
-          : '';
-  
-        // Trova il link al sito
-        const website = data.find(item => item.type === 'link' && item.label === 'Visit Website');
-        const websiteHtml = website
-          ? `<a href="${website.url}" class="button-link" target="_blank">Visit Website ↗</a>`
-          : '';
-  
-        // Colori
-        const colorHtml = data
-          .filter(item => item.type === 'color')
-          .map(color => `
-            <div class="color-swatch ${color.class}" style="background-color: ${color.label};">
-              <span>${color.label}</span>
-            </div>
-          `).join('');
-  
-        // Helper per i testi
-        const getText = label =>
-          data.find(item => item.type === 'text' && item.label === label)?.content || '';
-  
-        const html = `
-          <div class="branding-grid">
-            <div class="logo-box">
-              ${logoHtml}
-              ${websiteHtml}
-            </div>
-  
-            <div class="color-box">
-              <h3>Color Palette</h3>
-              <div class="colors">${colorHtml}</div>
-            </div>
-  
-            <div class="info-box"><strong>Naming:</strong> ${getText('Naming')}</div>
-            <div class="info-box"><strong>Payoff:</strong> ${getText('Payoff')}</div>
-            <div class="info-box"><strong>Values:</strong> ${getText('Valori')}</div>
-            <div class="info-box"><strong>Mission:</strong> ${getText('Mission')}</div>
-            <div class="info-box"><strong>Vision:</strong> ${getText('Vision')}</div>
-            <div class="info-box"><strong>Brand Essence:</strong> ${getText('Brand Essence')}</div>
-            <div class="info-box"><strong>Architecture:</strong> ${getText('Brand Architecture')}</div>
+  fetch('branding-data.json')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('brandingGrid');
+
+      // Logo section
+      const logo = data.find(item => item.type === 'image' && item.subtype === 'logo');
+      const logoHtml = logo
+        ? `<div class="${logo.class}"><img src="${logo.src}" alt="Logo of ${logo.label}" class="branding-logo"></div>`
+        : '';
+
+      // Website link section
+      const website = data.find(item => item.type === 'link' && item.label === 'Visit Website');
+      const websiteHtml = website
+        ? `<div class="${website.class}"><a href="${website.url}" target="_blank">Visit Website ↗</a></div>`
+        : '';
+
+      // Color palette section
+      const colorHtml = data
+        .filter(item => item.type === 'color')
+        .map(color => `
+          <div class="${color.class}" style="background-color: ${color.label};">
+            <span>${color.label}</span>
           </div>
-        `;
-  
-        container.innerHTML = html;
-      })
-      .catch(error => console.error('Error loading branding project:', error));
+        `).join('');
+
+      // Text sections (e.g., Naming, Payoff, etc.)
+      const getText = label =>
+        data.find(item => item.type === 'text' && item.label === label)?.content || '';
+
+      // HTML Structure generation
+      const html = `
+        <div class="branding-grid">
+          <div class="branding-item">
+            ${logoHtml}
+            ${websiteHtml}
+          </div>
+
+          <div class="branding-item">
+            <h3>Color Palette</h3>
+            <div class="colors">${colorHtml}</div>
+          </div>
+
+          ${data.filter(item => item.type === 'typography').map(font => `
+            <div class="branding-item">
+              <h3>${font.label}</h3>
+              <p>${font.content}</p>
+            </div>
+          `).join('')}
+
+          ${data.filter(item => item.type === 'image' && item.subtype === 'graphic').map(graphic => `
+            <div class="${graphic.class}">
+              <img src="${graphic.src}" alt="${graphic.label}">
+            </div>
+          `).join('')}
+
+          <div class="${getClass('Naming')}"><strong>Naming:</strong> ${getText('Naming')}</div>
+          <div class="${getClass('Payoff')}"><strong>Payoff:</strong> ${getText('Payoff')}</div>
+          <div class="${getClass('Valori')}"><strong>Values:</strong> ${getText('Valori')}</div>
+          <div class="${getClass('Mission')}"><strong>Mission:</strong> ${getText('Mission')}</div>
+          <div class="${getClass('Vision')}"><strong>Vision:</strong> ${getText('Vision')}</div>
+          <div class="${getClass('Brand Essence')}"><strong>Brand Essence:</strong> ${getText('Brand Essence')}</div>
+          <div class="${getClass('Brand Architecture')}"><strong>Architecture:</strong> ${getText('Brand Architecture')}</div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    })
+    .catch(error => console.error('Error loading branding project:', error));
   });
   
   
