@@ -86,6 +86,8 @@
           } else if (item.type === 'image') {
             div.classList.add(item.subtype); // es: logo, graphics
             div.innerHTML = `<h3>${item.label}</h3><img src="${item.src}" alt="${item.label}" />`;
+          } else if (item.type === 'link') {
+            div.innerHTML = `<h3>${item.label}</h3><a href="${item.url}" class="button-link" target="_blank" rel="noopener noreferrer">${item.label} ↗</a>`;
           } else {
             div.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
           }

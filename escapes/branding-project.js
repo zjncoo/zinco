@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Website link section
       const website = data.find(item => item.type === 'link' && item.label === 'Visit Website');
       const websiteHtml = website
-        ? `<div class="${website.class}"><a href="${website.url}" target="_blank">Visit Website ↗</a></div>`
+        ? `<div class="branding-link"><a href="${website.url}" target="_blank">Visit Website ↗</a></div>`
         : '';
 
       // Color palette section
