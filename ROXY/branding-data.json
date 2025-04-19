@@ -1,0 +1,19 @@
+[
+  { "type": "image", "subtype": "logo", "label": "Logo", "src": "img/logo roxy.svg" },
+  { "type": "text", "label": "Naming", "content": "ROXY" },
+  { "type": "text", "label": "Payoff", "content": "“Make future a shared place”" },
+  { "type": "text", "label": "Valori", "content": "Irriverence, Audacity, Mundanity" },
+  { "type": "link", "label": "Visit Website", "url": "https://www.amdecor.com" },
+  
+  
+  
+  
+  { "type": "text", "label": "Mission", "content": "“To make practical and theoretical tools available to people, enabling them to understand and value the communities in which they will operate.”" },
+  { "type": "text", "label": "Vision", "content": "“We believe in a society that cooperates in a synergic way, in which everyone collaborates actively for common well-being.”" },
+  { "type": "text", "label": "Brand Essence", "content": "Consapevole. Elegante. Indipendente." },
+  { "type": "text", "label": "Brand Architecture", "content": "2nd Level Monolitic Model" },
+  { "type": "image", "subtype": "graphics", "label": "Graphic Elements", "src": "branding/graphics.png" },
+  { "type": "color", "class": "color1", "label": "#d04d27" },
+  { "type": "color", "class": "color2", "label": "#3f3c3c" },
+  { "type": "color", "class": "color3", "label": "#8c8c94" }
+]

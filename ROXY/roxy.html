@@ -1,223 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>roxy - zinco</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="roxy.css">
-  <link rel="stylesheet" href="https://use.typekit.net/npp3dgf.css">
-  <link rel="icon" type="image/x-icon" href="../imghome/logo_zinco">
-  <script src="https://kit.fontawesome.com/21fc0bb23c.js" crossorigin="anonymous"></script>
-  <script async src="https://tally.so/widgets/embed.js"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NUS - zinco</title>
+  <link rel="stylesheet" href="roxy.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script> <!--pdf!-->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="custom-cursor" id="cursor"></div>
 
-  
-  
-  <!-- Navbar -->
-  <a class="fixed-button" class="navbarbutton" id="backtoprojects" href="../index.html#projects">< Back to My Projects</a>
-  <div class="navbar">
-    <a href="../index.html" class="home_button">
-      <img src="../imghome/logo_zinco.svg" alt="Logo" class="logo">
-    </a>
-    <button class="circle-button" onclick="toggleOverlay()">
-      <i class="fa-solid fa-plus" style="color: #ffffff;"></i>
-    </button>
-  </div>
+  <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
+  <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
+  <a href="../contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
 
-  <!-- Sidebar Button -->
-
-
-  <!-- Sidebar Navigation -->
-  <div id="sidebarbox" class="sidebarbox">
-    <nav class="sidebar">
-      <ul>
-        <li><a href="#introduction" class="sidebar-link">Introduction</a></li>
-        <li><a href="#appearance" class="sidebar-link">Appearance</a></li>
-        <li><a href="#logo" class="sidebar-link">Logo</a></li>
-        <li><a href="#typography" class="sidebar-link">Typography</a></li>
-        <li><a href="#mockups" class="sidebar-link">Mockups</a></li>
-      </ul>
-    </nav>
-  </div>
-  
-
-  
-
-  
-
-  <!-- Overlay Section -->
-  <div class="overlay" id="overlay" onclick="closeOverlay(event)">
-    <div class="overlay-content" onclick="event.stopPropagation()">
-      <div class="grid-container">
-        <!-- Profile Card -->
-        <div class="card profile-card">
-          <div class="profile">
-            <img src="../imghome/io.png" alt="Profile">
-            <div>
-              <strong>Francesco</strong>
-              <p>Hi, I'm a Communication Design student! This website is a repository / portfolio of my work.</p>
-            </div>
-          </div>
-        </div>
-        <!-- Button Card -->
-        <div class="card button-card">
-          <button>Escape Lake Como</button>
-          <button>AM Decor</button>
-        </div>
-        <!-- Links Column -->
-        <div class="links-column">
-          <a href="../index.html" class="overlay-link">Home</a>
-          <a href="../index.html#progetti" class="overlay-link">My Projects</a>
-          <a href="../CONTACTS/contacts.html" class="overlay-link">Contacts</a>
-          <a href="#" class="overlay-link">Link 4</a>
-          <a href="#" class="overlay-link">Link 5</a>
-        </div>
+  <div id="dropdownMenu">
+    <div class="menu-columns">
+      <div class="menu-column left">
+        <a href="#" class="menu-link">About Me</a>
+        <a href="#" class="menu-link">Work</a>
+        <a href="#" class="menu-link">Services</a>
+      </div>
+      <div class="menu-column right">
+        <a href="#" class="menu-link">Archive</a>
+        <a href="#" class="menu-link">Research</a>
+        <a href="#" class="menu-link">Clients</a>
+        <a href="#" class="menu-link">Events</a>
+        <a href="#" class="menu-link">Exhibitions</a>
+        <a href="#" class="menu-link">Press</a>
       </div>
     </div>
-  </div>
-
-  
-
-  <div id="intro" class="intro">
-    <button id="mute-btn">🔊 Unmute</button>
-    <video id="bg-video" src="img/video finito.mp4" autoplay loop></video>
-    <h1 id="intro-text">ROXY</h1>
-    <a href="https://www.instagram.com/zjncoo/" target=”_blank”>
-      <div id="username">@zjncoo</div>
-    </a>
-  </div>xx
-  
-
-  <div id="spotify-card">
-    <iframe 
-        src="https://open.spotify.com/embed/track/13DNuiQyuTDcAw6Y8thZFM?utm_source=generator&theme=0" 
-        width="300" 
-        height="80" 
-        frameborder="0" 
-        allowtransparency="true" 
-        allow="encrypted-media">
-    </iframe>
-  </div>
-
-
-  <h1>PDF Viewer</h1>
-  <div id="pdf-viewer-container">
-    <div id="pdf-viewer">
-      <canvas id="pdf-canvas"></canvas>
-      <button id="prev-page" class="side-button left"><</button>
-      <button id="next-page" class="side-button right">></button>
-    </div>
-    
-    <!-- Thumbnails container -->
-    <div id="thumbnails-container"></div>
-    
-    <!-- Progress number container -->
-    <div class="navigation">
-      <span>Page <span id="current-page">1</span> of <span id="total-pages">0</span></span>
+    <div class="menu-bottom">
+      <a href="mailto:hello@example.com" class="menu-email">hello@example.com</a>
+      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
-  
-  
-  
 
+  <video id="myVideo" autoplay loop controls src="img/video finito.mp4"></video>
   
 
-  <div class="news-container">
-    <!-- INTRODUCTION Section -->
-    <section id="introduction" class="section">
-      <h2>Introduction</h2>
-      <p>
-        RoxyGen is an ipotethical Activation performed by the Roxy Brand.
-        <br>Roxy has undergone a rebranding during the Metaproject Course. 
-        <br>It was a well-known cigarettes' brand in the 80's.
-      </p>
-      <a href="https://en.wikipedia.org/wiki/Roxy_(cigarette)" target="_blank">wikipedia page</a>
-    </section>
+  <section class="branding-grid" id="brandingGrid">
+    <!-- Contenuto dinamico -->
+  </section>
 
-    <!-- APPEARANCE Section -->
-    <section id="appearance" class="section">
-      <h2>Appearance</h2>
-      <img src="img/scritta.png" alt="Appearance Image">
-      <p>
-        The chosen color palette and visual elements reflect a daring aesthetic, with vibrant reds and light beige for a strong contrast.
-      </p>
-      <div class="colors">
-        <div class="color-swatch" style="background-color: #D51119;"></div>
-        <div class="color-swatch" style="background-color: #FEFDE8;"></div>
-      </div>
-    </section>
+  <section class="pdf-section">
+    <div class="pdf-controls">
+      <button id="prevPage" class="pdf-nav">←</button>
+      <span id="pageInfo">1 / ?</span>
+      <button id="nextPage" class="pdf-nav">→</button>
+    </div>
+    <canvas id="pdf-canvas"></canvas>
+  </section>
 
-    <!-- LOGO Section -->
-    <section id="logo" class="section">
-      <h2>Logo</h2>
-      <img src="img/logo roxy.svg" alt="Logo Image">
-      <p>
-        The redesigned logo embraces minimalism while preserving the brand’s iconic boldness, ensuring instant recognizability.
-      </p>
-    </section>
-
-    <!-- TYPOGRAPHY Section -->
-    <section id="typography" class="section">
-      <h2>Typography</h2>
-      <h2>Helvetica Bold</h2>
-      <h2>HELVETICA BOLD</h2>
-      <p id="light">Helvetica Light</p>
-
-      <p>
-        The typography features clean, sans-serif fonts to communicate modernity and sophistication, paired with occasional decorative typefaces for emphasis.
-      </p>
-    </section>
-
-    <!-- MOCKUPS Section -->
-    <section id="mockups" class="section">
-      <h2>Mockups</h2>
-      <img src="../images/mockups.jpg" alt="Mockups Image">
-      <p>
-        These mockups showcase the application of the rebrand across packaging, digital media, and physical touchpoints, emphasizing consistency and boldness.
-      </p>
-    </section>
-  </div>
-
-
-  
-
-  
-
-
-  <!-- Fixed Button -->
-  <a href="../CONTACTS/contacts.html">
-    <button class="fixed-button">contact me</button>
-  </a>
-  
-  
-
-  
-
-  <!-- INITIAL TRANSITION -->
-  <div id="transition-cover">
-    <img src="../imghome/logo_zinco.svg" alt="Logo">
-  </div>
-
-  
-
-  <!-- Footer Section -->
-  <footer id="footer">
+  <footer>
+    <div class="cookie-banner" id="cookieBanner">
+      <span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span>
+      <span class="close-btn cursor-target" id="closeCookie">✕</span>
+    </div>
     <div class="footer-content">
-      <!-- Logo on the left -->
-      <div class="footer-logo">
-        <img src="../imghome/logo_zinco.svg" alt="Logo" style="height: 40px;">
-      </div>
-      <!-- Contact info -->
-      <div class="footer-contact">
-        <p>Hi, I'm a Communication Design student! This website is a repository / portfolio of my work.</p>
-        <p>&copy; 2025 Francesco Zanchetta | Communication Designer</p>
+      <a href="../index.html" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+      <div class="footer-text">
+        <p>&copy; 2025 zinco</p>
+        <a href="zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
       </div>
     </div>
   </footer>
-  <script src="roxy.js"></script>
+
+  <script>
+    // Caricamento del file JSON dinamicamente
+    fetch('branding-data.json')
+      .then(response => response.json())
+      .then(data => {
+        const grid = document.getElementById('brandingGrid');
+
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.classList.add('branding-item');
+
+          if (item.type === 'color') {
+            div.classList.add('color', item.class); // es: color1, color2
+            div.innerText = item.label || '';
+          } else if (item.type === 'image') {
+            div.classList.add(item.subtype); // es: logo, graphics
+            div.innerHTML = `<h3>${item.label}</h3><img src="${item.src}" alt="${item.label}" />`;
+          } else {
+            div.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
+          }
+
+          grid.appendChild(div);
+        });
+      });
+  </script>
+
+  <script src="branding-project.js"></script>
 </body>
 </html>
