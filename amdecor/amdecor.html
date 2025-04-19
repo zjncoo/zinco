@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AM Decor - zinco</title>
+  <title>NUS - zinco</title>
   <link rel="stylesheet" href="amdecor.css" />
+  <link rel="stylesheet" href="../index.css" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="custom-cursor" id="cursor"></div>
 
-  <a href="../../index.html" id="button-logo"><img src="../../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+  <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
-  <a href="../../contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+  <a href="../contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
 
   <div id="dropdownMenu">
     <div class="menu-columns">
@@ -33,23 +34,34 @@
       </div>
     </div>
     <div class="menu-bottom">
-      <a href="mailto:hello@example.com" class="menu-email">hello@example.com</a>
+      <a href="zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
 
+  <video id="myVideo" autoplay loop src="img/Screen Recording 2025-04-18 at 00.21.13.mov"></video>
+  
 
   <section class="branding-grid" id="brandingGrid">
     <!-- Contenuto dinamico -->
   </section>
 
+  <div id="pdfViewerContainer">
+    <button id="prevPage" class="pdf-nav left">←</button>
+    <canvas id="pdfCanvas"></canvas>
+    <button id="nextPage" class="pdf-nav right">→</button>
+    <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-viewer.js" defer></script>
+
   <footer>
     <div class="cookie-banner" id="cookieBanner">
-      <span>my website uses <a href="../../cookies.html" class="cookie-link">cookies</a></span>
+      <span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span>
       <span class="close-btn cursor-target" id="closeCookie">✕</span>
     </div>
     <div class="footer-content">
-      <a href="../../index.html" class="footer-logo"><img src="../../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+      <a href="../index.html" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
       <div class="footer-text">
         <p>&copy; 2025 zinco</p>
         <a href="zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
@@ -74,6 +86,8 @@
           } else if (item.type === 'image') {
             div.classList.add(item.subtype); // es: logo, graphics
             div.innerHTML = `<h3>${item.label}</h3><img src="${item.src}" alt="${item.label}" />`;
+          } else if (item.type === 'link') {
+            div.innerHTML = `<h3>${item.label}</h3><a href="${item.url}" class="button-link" target="_blank" rel="noopener noreferrer">${item.label} ↗</a>`;
           } else {
             div.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
           }
@@ -82,7 +96,9 @@
         });
       });
   </script>
+  
 
-  <script src="branding-project.js"></script>
+  
+  <script src="branding-project.js" defer></script>
 </body>
 </html>

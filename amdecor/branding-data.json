@@ -3,7 +3,7 @@
     "type": "image",
     "subtype": "logo",
     "label": "Logo",
-    "src": "img/logo_escapes.svg"
+    "src": "img/amlogo.svg"
   },
   {
     "type": "text",
@@ -13,7 +13,7 @@
   {
     "type": "link",
     "label": "Visit Website",
-    "url": "https://escapeslakecomo.com"
+    "url": "https://amdecorsrl.com"
   },
   {
     "type": "text",
