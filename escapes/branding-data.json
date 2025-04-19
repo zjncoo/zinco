@@ -1,0 +1,68 @@
+[
+  {
+    "type": "image",
+    "subtype": "logo",
+    "label": "Logo",
+    "src": "img/logo_nus.svg"
+  },
+  {
+    "type": "text",
+    "label": "Description",
+    "content": "This Project is part of the Corporate Identity Course and was developed in collaboration with four other students, however these graphic elements, in particular were created by me."
+  },
+  {
+    "type": "link",
+    "label": "Visit Website",
+    "url": "https://example.com"
+  },
+  {
+    "type": "text",
+    "label": "Naming",
+    "content": "Neighbourhood Urban Studies Institute - Nus"
+  },
+  {
+    "type": "text",
+    "label": "Payoff",
+    "content": "Il tuo futuro comincia qui"
+  },
+  {
+    "type": "text",
+    "label": "Values",
+    "content": "Sostenibilità, innovazione, trasparenza"
+  },
+  {
+    "type": "text",
+    "label": "Mission",
+    "content": "Rendere la bellezza accessibile a tutti"
+  },
+  {
+    "type": "text",
+    "label": "Vision",
+    "content": "Diventare il punto di riferimento nel settore estetico"
+  },
+  {
+    "type": "text",
+    "label": "Brand Essence",
+    "content": "Armonia e cura"
+  },
+  {
+    "type": "text",
+    "label": "Brand Architecture",
+    "content": "Master brand con sub-brand regionali"
+  },
+  {
+    "type": "color",
+    "label": "#FF0000",
+    "class": "color1"
+  },
+  {
+    "type": "color",
+    "label": "#00FF00",
+    "class": "color2"
+  },
+  {
+    "type": "color",
+    "label": "#0000FF",
+    "class": "color3"
+  }
+]
