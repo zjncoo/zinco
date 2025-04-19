@@ -1,0 +1,16 @@
+
+.cookie-policy-section {
+  padding: 30%;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+@media (max-width: 767px) {
+.cookie-policy-section {
+  padding: 5%;
+  align-items: center;
+}
+
+}
