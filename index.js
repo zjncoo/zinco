@@ -111,10 +111,29 @@ requestAnimationFrame(raf)
 // Toggle search bar visibility
 document.getElementById("search-button").addEventListener("click", function () {
   const searchBar = document.getElementById("search-bar");
+  const searchOverlay = document.getElementById("search-overlay");
   const body = document.body;
 
   searchBar.classList.toggle("hidden");
+  searchOverlay.classList.toggle("hidden");
   body.classList.toggle("search-active");
+});
+
+document.getElementById("search-overlay").addEventListener("click", function () {
+  const searchBar = document.getElementById("search-bar");
+  const searchOverlay = document.getElementById("search-overlay");
+  searchBar.classList.add("hidden");
+  searchOverlay.classList.add("hidden");
+  document.body.classList.remove("search-active");
+});
+
+// Close button for search bar
+document.getElementById("closeSearch").addEventListener("click", function () {
+  const searchBar = document.getElementById("search-bar");
+  const searchOverlay = document.getElementById("search-overlay");
+  searchBar.classList.add("hidden");
+  searchOverlay.classList.add("hidden");
+  document.body.classList.remove("search-active");
 });
 
 // Project list
@@ -159,4 +178,13 @@ document.addEventListener("click", function (e) {
   if (!searchBar.contains(e.target) && e.target !== searchButton) {
     document.getElementById("search-suggestions").innerHTML = "";
   }
+});
+
+// Close button for search bar
+document.getElementById("search-close").addEventListener("click", function () {
+  const searchBar = document.getElementById("search-bar");
+  const searchOverlay = document.getElementById("search-overlay");
+  searchBar.classList.add("hidden");
+  searchOverlay.classList.add("hidden");
+  document.body.classList.remove("search-active");
 });
