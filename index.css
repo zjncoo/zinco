@@ -563,7 +563,7 @@ body {
 
   .menu-link {
     font-size: 1.5rem;
-    margin-top: 5%;
+    margin-top: 3%;
   }
 
   .menu-bottom {
@@ -571,6 +571,7 @@ body {
     align-items: flex-start;
     gap: 1rem;
     padding: 0 2rem 2rem;
+    margin-top: 10%;
   }
 
   
