@@ -3,7 +3,12 @@
     "type": "image",
     "subtype": "logo",
     "label": "Logo",
-    "src": "images/logo.png"
+    "src": "img/logo_nus.svg"
+  },
+  {
+    "type": "text",
+    "label": "Description",
+    "content": "This Project is part of the Corporate Identity Course and was developed in collaboration with four other students, however these graphic elements, in particular were created by me."
   },
   {
     "type": "link",
@@ -11,24 +16,9 @@
     "url": "https://example.com"
   },
   {
-    "type": "color",
-    "label": "#FF0000",
-    "class": "color1"
-  },
-  {
-    "type": "color",
-    "label": "#00FF00",
-    "class": "color2"
-  },
-  {
-    "type": "color",
-    "label": "#0000FF",
-    "class": "color3"
-  },
-  {
     "type": "text",
     "label": "Naming",
-    "content": "Nome del brand"
+    "content": "Neighbourhood Urban Studies Institute - Nus"
   },
   {
     "type": "text",
@@ -37,7 +27,7 @@
   },
   {
     "type": "text",
-    "label": "Valori",
+    "label": "Values",
     "content": "Sostenibilità, innovazione, trasparenza"
   },
   {
@@ -59,5 +49,20 @@
     "type": "text",
     "label": "Brand Architecture",
     "content": "Master brand con sub-brand regionali"
+  },
+  {
+    "type": "color",
+    "label": "#FF0000",
+    "class": "color1"
+  },
+  {
+    "type": "color",
+    "label": "#00FF00",
+    "class": "color2"
+  },
+  {
+    "type": "color",
+    "label": "#0000FF",
+    "class": "color3"
   }
 ]

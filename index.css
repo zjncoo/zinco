@@ -7,6 +7,13 @@ body {
     overflow-y: auto;
   }
   
+  body, html {
+    overflow-x: hidden;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
   .fixed-link {
     position: fixed;
     font-weight: bold;
@@ -204,7 +211,7 @@ body, a, button {
 
 .projects-section {
   padding: 80px 20px;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -220,6 +227,8 @@ body, a, button {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin-bottom: 60px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .project-grid img {
@@ -347,6 +356,7 @@ footer {
   justify-content: center;
   z-index: 100;
   margin-bottom: 80px; /* Aggiungi margine per evitare la sovrapposizione con i bottoni */
+  overflow-x: hidden;
 }
 
 .footer-content {
