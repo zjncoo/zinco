@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVIZI - il Francescone</title>
+    <link rel="stylesheet" href="../css/servizi.css">
+    <link rel="icon" type="image/x-icon" href="../img_home/logo.png"> <!--viene specificato il favicon (icona nella barra di ricerca) del sito web-->
+    <script src="../script/services.js"></script>
+    <noscript>Your browser does not support JavaScript!</noscript>
+</head>
+<body>
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, I COLLEGAMENTI VARIANO A SECONDA DELLA PAGINA VISITATA (IL COLLEGAMENTO ALLA PAGINA VISUALIZZATA VIENE SOSTITUITO POICHÉ RIDONDANTE)-->
+    <div class="topnav">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div>
+            <a class="linkmenu" href="../PAGES/home.html">HOME</a></li> 
+            <a class="linkmenu" href="../PAGES/shop.html">SHOP</a></li>
+            <a class="alogo" href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="linkmenu" href="../PAGES/contatti.html">CONTATTI</a></li>
+            <a class="linkmenu" href="../PAGES/foto.html">FOTO</a></li>
+        </nav>
+    </div>
+
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, ESSO SOSTITUISCE IL MENU SOVRASTANTE NEL CASO DI VISUALIZZAZIONE SU DISPOSITIVI MOBILI, DOVE I COLLEGAMENTI CON TESTO VENGONO SOSTITUITI DA ICONE: PIÙ SEMPLICI E ADATTE.-->
+    <div class="topnavmobile">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div>
+            <a class="iconamenu"      href="../PAGES/home.html">
+                <img id="logo" src="../img_topnav/home.png" alt="logo">
+            </a>
+            <a class="iconamenu" href="../PAGES/shop.html">
+                <img id="logo" src="../img_topnav/shop.png" alt="shop">
+            </a>
+            <a class="alogo"      href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="iconamenu" href="../PAGES/contatti.html">
+                <img id="logo" src="../img_topnav/contatti.png" alt="contatti">
+            </a>
+            <a class="iconamenu"      href="../PAGES/foto.html">
+                <img id="logo" src="../img_topnav/foto.png" alt="foto">
+            </a>
+        </nav>
+    </div>
+
+    <h1>I Nostri Servizi</h1>
+
+    <!--GRIGLIA RESPONSIVE CON 9 OGGETTI SUDDIVISI SU 3 COLONNE: AFFIANCATE SU DESKTOP E IN COLONNA SU DISPOSITIVI MOBILI-->
+    <div class="servicesgrid">
+    
+        <!--PRIMA COLONNA-->
+        <div class="colonna">
+            <div class="elementogriglia" class="riparazioni">
+                <img src="../img_servizi/riparazioni.svg" alt="riparazioni" class="foto">
+                <h2>Riparazioni attente</h2>
+                <p>Effetuamo riparazioni professionali su qualsiasi tipologia di collane, bracciali e orecchini; rispettando il materiali e ripristinandone le condizioni originarie.</p>
+            </div>
+            <div class="elementogriglia" class="lucidatura">
+                <img src="../img_servizi/lucidatura.svg" alt="lucidatura" class="foto">
+                <h2>Lucidatura Argenteria</h2>
+                <p>Effettuiamo il ripristino di lucidature e satinature secondo gli standard qualitativi delle case produttrici, garantendo un risultato impeccabile.</p>
+            </div>
+            <div class="elementogriglia" class="regalo">
+                <img src="../img_servizi/su misura.svg" alt="il regalo perfetto" class="foto">
+                <h2>il Regalo perfetto</h2>
+                <p>Trova il perfetto presente per ogni occasione, matrimoni, eventi religiosi e compleanni.</p>
+            </div>
+        </div>
+        
+        <!--SECONDA COLONNA-->
+        <div class="colonna">
+            <div class="elementogriglia" class="custom">
+                <img src="../img_servizi/custom.svg" alt="design personalizzato" class="foto">
+                <h2>Design personalizzato</h2>
+                <p>Realizziamo il tuo gioielli da zero: dalla fase di progettazione e disegno fino alla sua realizzazione.</p>
+            </div>
+            <div class="elementogriglia" class="valutazioni">
+                <img src="../img_servizi/stime.svg" alt="valutazioni" class="foto">
+                <h2>Valutazioni e Perizie</h2>
+                <p>Forniamo stime, perizie e valutazioni certificate, garantite da enti riconosciuti, utilizzando macchinari con certificazione di qualit&agrave;.</p>
+            </div>
+            <div class="elementogriglia" class="fedi">
+                <img src="../img_servizi/fedi.svg" alt="fedi nuziali" class="foto">
+                <h2>Fedi Nuziali</h2>
+                <p>Completa il tuo giorno speciale con anelli incisi su misura.</p>
+            </div>
+            
+        </div>
+        
+        <!--TERZA COLONNA-->
+        <div class="colonna">
+            <div class="elementogriglia" class="revisioni">
+                <img src="../img_servizi/revisioni.svg" alt="revisioni orologeria" class="foto">
+                <h2>Revisioni Orologeria</h2>
+                <p>Offriamo interventi di riparazione meccanica utilizzando attrezzature all&rsquo;avanguardia e componenti originali, garantendo l’affidabilità dei nostri servizi con certificazioni.</p>
+            </div>
+            <div class="elementogriglia" class="impermeabilità">
+                <img src="../img_servizi/waterproofing.svg" alt="impermeabilità" class="foto">
+                <h2>Impermeabilit&agrave;</h2>
+                <p>Testiamo l&rsquo;effettiva tenuta all&rsquo;acqua del vostro orologio per le immersioni con strumenti cerificati.</p>
+            </div>
+            <div class="elementogriglia" class="cinturini">
+                <img src="../img_servizi/cinturini.svg" alt="cinturini" class="foto">
+                <h2>Cinturini su Misura</h2>
+                <p>Creiamo artigianalmente qualsiasi cinturino con una vasta scelta di pellame di alta qualità.</p>
+            </div>
+        </div>
+    </div>
+
+  <!--FOOTER DELLA PAGINA-->
+  <footer>
+    <div class="footer">
+      <a class="logofooter" href="../PAGES/home.html">
+        <img src="../img_servizi/logo.png" id="logofooter"    alt="logo">
+      </a>
+
+      <p>Gioielleria - il Francescone &copy 2024</p>
+      <p>di Silvio Casonato  via Piero della Francesca,27 Milano  Rea:1960949</p>
+      
+      <a id="emailfooter" href="mailto:info@ilfrancesco.it">info@ilfrancescone.it</a>
+      
+      <br><a href="https://zinco.framer.website">
+        <img src="../img_home/deisgned by zinco grey.svg" id="zinco">
+      </a>
+
+    </div>
+  </footer>
+    
+</body>
+</html>

@@ -1,0 +1,450 @@
+body {
+    margin: 0;
+}
+
+/*CAMBIO TEMA*/
+#change_mode{
+    width: 20px;
+    padding: 0;
+    border-radius: 50px;
+    box-shadow: 0px 0px 0px white;
+    background-color: white;
+    text-align: center;
+}
+  
+#change_mode:hover {
+    cursor: pointer;
+    background-color: grey;
+}
+  
+#button_mode {
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    top: 4.5vh;
+    margin-left: -95%;
+    background-color: black;
+    position: relative;
+    display: flex;
+    position: absolute;
+}
+
+@media (max-width:678px) {
+    #button_mode {
+        width: 40px;
+        top: 1.3vh;
+        margin-right: 0%;
+    }
+
+    #change_mode{
+        width: 40px;
+    }
+}
+  
+/*BODY DARK*/
+.dark-mode {
+    margin: 0;
+    background-color: black;
+    color: white;
+
+    .instagram #div_tag {
+        background-color: black;
+        box-shadow: 0px 0px 2px white;
+    }
+
+    .instagram #div_tagtop {
+        background-color: black;
+        box-shadow: 0px 0px 2px white;
+    }
+
+    .instagram a {
+        color: white;
+    }
+
+    .prev,.next {
+        color: white;
+    }
+}
+  
+/*BODY LIGHT*/
+body {
+    margin: 0;
+    background-color: white;
+    color: black;
+}
+
+/*TOPNAV*/
+
+.topnav {
+    height: fit-content;
+    width: 100vw;
+    min-height: 6vh;
+    background-color: black;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    position: fixed;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    z-index: 2;
+
+    #logo {
+        display: inline-block;
+        min-width: 40px;
+        max-width: 4%;
+        justify-content: center;
+        box-shadow: 0px 0px 10px white;
+        border-radius: 50%;
+        animation: sizeInLogo 1s;
+    }
+}
+@keyframes sizeInLogo {
+    0% { min-width: 0%; box-shadow: 10px 0px 0px white; }
+    100% { min-width: 100%; box-shadow: 0px 0px 10px white; }
+}
+
+
+.topnavmobile {
+    display: none;  /*"display: none" non permette la visualizzazione del menu mobile su desktop*/
+}
+
+/*TOPNAV SU DISPOSITIVI MOBILI*/
+@media (max-width:678px) {
+    .topnavmobile {
+        display: flex;   /*ora il menu mobile viene mostrato su dispositivi mobili*/
+        flex-direction: row;
+        height: fit-content;
+        width: 100vw;
+        min-height: 6vh;
+        background-color: black;
+        padding-top: 1.5%;
+        padding-bottom: 1.5%;
+        position: fixed;
+        align-items: center;
+        align-content: center;
+        text-align: center;
+        justify-content: center;
+        z-index: 2;
+    }
+    
+    .iconamenu {
+        width: 4vh;
+        height: 4vh;
+        display: flex;
+        margin-left: 20px;
+        margin-right: 20px;
+
+    }
+    
+    .topnav {
+        display: none; /*"display: none" su ".topnav" non mostra il menu desktop che viene sostituito da ".topnavmobile"*/
+    }
+    
+    .alogo {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+
+nav {
+    justify-items: center;
+    text-align: center;
+    text-justify: center;
+    justify-content: center;
+    display: flex;
+
+    .linkmenu {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        margin-left: 2%;
+        margin-right: 2%;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        animation: fadeInNav 1s;
+    }
+
+    .alogo {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        border-radius: 50%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+.linkmenu:hover {
+    color: rgb(116, 116, 116);
+}
+
+
+/*CONTENUTO DELLA PAGINA*/
+
+/*TITOLI*/
+h2 {
+    font-size: 4vh;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+
+/*SLIDESHOW FOTOGRAFIE*/
+.slideshow {
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    overflow: hidden;
+}
+
+.slideshow .content {
+    min-height: 80vh;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/*IL CONTENUTO DELLO SLIDESHOW SI RIDIMENSIONA SU MOBILE*/
+@media (max-width:768px) {
+    .slideshow .content {
+        width: 80vw;
+        height: 70vh;
+    }
+    h2 {
+        padding-top: 30%;
+        padding-bottom: 10%;
+        margin-bottom: 0;
+        font-size: 3vh;
+    }
+}
+
+.slideshow .slide {
+    width: fit-content;
+    height: fit-content;
+    display: none;
+    text-align: center;
+    color: white;
+    border-radius: 10%;
+}
+
+.slideshow .slide:first-child {
+    display: block;
+}
+
+.slideshow .slide img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10%;
+}
+
+.slideshow .punti {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding-top: 5%;
+}
+
+/*I PUNTI DI NAVIGAZIONE DELLO SLIDESHOW SPARISCONO SU MOBILE PERCHÈ RISULTANO DIFFICILI DA UTILIZZARE*/
+@media (max-width:900px) {
+    .slideshow .punti {
+        display: none;
+    }
+}
+
+.slideshow .punto {
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 50%;
+    background-color: rgb(211, 210, 210);
+}
+
+.slideshow .punto:hover {
+    cursor: pointer;
+    background-color: grey;
+}
+
+.prev,.next {padding: 2%;}
+
+.prev:hover, .next:hover {
+    cursor: pointer;
+    font-size: large;
+}
+
+/*SEZIONE CON POST DI INSTAGRAM*/
+.instagram {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10%;
+}
+
+/*LA FOTO*/
+#vetrina {
+    width: 30vw;
+    margin: 0;
+    box-shadow: 0px 0px 2px black;
+}
+
+#div_tag {
+    background-color: white;
+    width: 30vw;
+    margin: 0;
+    box-shadow: 0px 0px 2px black;
+}
+
+#div_tagtop {
+    background-color: white;
+    width: 30vw;
+    margin: 0;
+    box-shadow: 0px 0px 2px black;
+}
+
+/*FOTO PROFILO INSTAGRAM*/
+#logo_instagram {
+    width: 30px;
+    margin: 0;
+    padding-top: 4%;
+    padding-left: 4%;
+}
+
+.instagram_label {
+    font-family:'Courier New', Courier, monospace;
+    padding-left: 4%;
+    padding-right: 4%;
+    text-decoration: none;
+}
+
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*GRIGLIA DI FOTOGRAFIE*/
+.griglia_foto img {
+    width: 30vw;
+    margin-bottom: 10%;
+    margin-bottom: 10%;
+}
+
+.griglia_foto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/*LE FOTOGRAFIE SU RIDIMENSIONANO SU MOBILE*/
+@media (max-width:890px) {
+
+    #vetrina {
+        width: 80vw;
+        margin: 0;
+        box-shadow: 0px 0px 2px black;
+    }
+    
+    #div_tag {
+        background-color: white;
+        width: 80vw;
+        margin: 0;
+        box-shadow: 0px 0px 2px black;
+    }
+
+    #div_tagtop {
+        background-color: white;
+        width: 80vw;
+        margin: 0;
+        box-shadow: 0px 0px 2px black;
+    }
+
+    .griglia_foto img {
+        width: 80vw;
+    }
+}
+
+
+
+/*FOOTER*/
+
+footer {
+    min-height: 62vh;
+    width: 100vw;
+    background-color: black;
+    display: grid;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+}
+  
+.footer {
+    animation: fadeInFooter 1.5s;
+}
+  
+@keyframes fadeInFooter {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+  
+#logofooter {
+    display: flex;
+    width: 15%;
+}
+  
+.logofooter {
+    justify-items: center;
+    display: grid;
+    margin: 10%;
+}
+  
+#emailfooter {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-decoration: none;
+}
+  
+footer p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(135, 135, 135);
+}
+  
+#zinco {
+    width: 70px;
+    margin: 15%;
+}
+  
+@media (max-width:768px) {
+    footer p {
+      padding-left: 10%;
+      padding-right: 10%;
+      display: grid;
+    }
+  
+    #emailfooter {
+      padding: 5%;
+      display: block;
+    }
+}

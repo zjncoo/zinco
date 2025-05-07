@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOTO - il Francescone</title>
+    <link rel="stylesheet" href="../css/foto.css">
+    <link rel="icon" type="image/x-icon" href="../img_home/logo.png"> <!--viene specificato il favicon (icona nella barra di ricerca) del sito web-->
+    <script src="../script/foto.js"></script>
+    <noscript>Your browser does not support JavaScript!</noscript>
+</head>
+
+<body>
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, I COLLEGAMENTI VARIANO A SECONDA DELLA PAGINA VISITATA (IL COLLEGAMENTO ALLA PAGINA VISUALIZZATA VIENE SOSTITUITO POICHÉ RIDONDANTE)-->
+    <div class="topnav">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div>
+            <a class="linkmenu" href="../PAGES/home.html">HOME</a></li> 
+            <a class="linkmenu" href="../PAGES/shop.html">SHOP</a></li>
+            <a class="alogo"      href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="linkmenu" href="../PAGES/contatti.html">CONTATTI</a></li>
+            <a class="linkmenu" href="../PAGES/services.html">SERVIZI</a></li>
+        </nav>
+    </div>
+
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, ESSO SOSTITUISCE IL MENU SOVRASTANTE NEL CASO DI VISUALIZZAZIONE SU DISPOSITIVI MOBILI, DOVE I COLLEGAMENTI CON TESTO VENGONO SOSTITUITI DA ICONE: PIÙ SEMPLICI E ADATTE.-->
+    <div class="topnavmobile">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div>
+            <a class="iconamenu"      href="../PAGES/home.html">
+                <img id="logo" src="../img_topnav/home.png" alt="home">
+            </a>
+            <a class="iconamenu" href="../PAGES/services.html">
+                <img id="logo" src="../img_topnav/servizi.png" alt="servizi">
+            </a>
+            <a class="alogo"      href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="iconamenu" href="../PAGES/shop.html">
+                <img id="logo" src="../img_topnav/shop.png" alt="shop">
+            </a>
+            <a class="iconamenu"      href="../PAGES/contatti.html">
+                <img id="logo" src="../img_topnav/contatti.png" alt="contatti">
+            </a>
+        </nav>
+    </div>
+
+    <!--SEZIONE DELLA PAGINA CONTENENTE UN POST DI INSTRAGRAM-->
+    <div class="instagram">
+        <div id="div_tagtop">
+            <img id="logo_instagram" src="../img_servizi/logo.png" alt="logo">
+            <a href="https://www.instagram.com/p/CzUd85zrWDr/">
+               <p class="instagram_label">@ilfrancescone_gioielleria</p>
+            </a>
+        </div>
+    
+        <img id="vetrina" src="../img_galleriafoto/vetrina1.jpg" alt="">
+        <div id="div_tag">
+            <p class="instagram_label">
+                Finalmente aperti 🎉🍾
+                Vi aspettiamo con tante novità! 💎💍
+            </p>
+        </div>
+    </div>
+
+
+    
+    <!--SLIDESHOW CON FOTOGRAFIE, PUNTI E FRECCE DI AVANZAMENTO-->
+    <h2>Revisione Orologeria</h2>
+
+    <div class="slideshow" id="slideshow1">
+        <a class="prev" id="prev1" onclick="nextSlide(-1)">&#10094;</a>
+        <div class="content" id="content1">
+            <div class="slide" id="slide0">
+                <img src="../img_galleriafoto/fotoorologi1.png" alt="">
+            </div>
+            <div class="slide">
+                <img src="../img_galleriafoto/fotoorologi2.png" alt="">
+            </div>
+            <div class="slide">
+                <img src="../img_galleriafoto/fotoorologi3.png" alt="">
+            </div>
+            <div class="slide">
+                <img src="../img_galleriafoto/fotoorologi4.png" alt="">
+            </div>
+            <div class="slide">
+                <img src="../img_galleriafoto/fotoorologi5.png" alt="">
+            </div>
+            <div class="slide">
+                <img src="../img_galleriafoto/fotoorologi6.png" alt="">
+            </div>
+            <div class="punti">
+                <span class="punto" onclick="setSlide(0);"></span>
+                <span class="punto" onclick="setSlide(1);"></span>
+                <span class="punto" onclick="setSlide(2);"></span>
+                <span class="punto" onclick="setSlide(3);"></span>
+                <span class="punto" onclick="setSlide(4);"></span>
+                <span class="punto" onclick="setSlide(5);"></span>
+            </div>
+        </div>
+        <a class="next" id="next1" onclick="nextSlide(1)">&#10095;</a>
+    </div>
+
+
+    <!--GRIGLIA DI FOTOGRAFIE IN COLONNA-->
+    <h2>Le Nostre Vetrine</h2>
+
+    <div class="griglia_foto">
+        <img src="../img_galleriafoto/vetrina1.jpg" alt="">
+        <img src="../img_galleriafoto/vetrina2.jpg" alt="">
+        <img src="../img_galleriafoto/vetrina3.jpg" alt="">
+        <img src="../img_galleriafoto/vetrina4.jpg" alt="">
+        <img src="../img_galleriafoto/vetrina5.jpg" alt="">
+        <img src="../img_galleriafoto/vetrina6.jpg" alt="">
+        <img src="../img_galleriafoto/vetrina7.jpg" alt="">
+
+    </div>
+
+    <!--FOOTER DELLA PAGINA-->
+  <footer>
+    <div class="footer">
+      <a class="logofooter" href="../PAGES/home.html">
+        <img src="../img_servizi/logo.png" id="logofooter"    alt="logo">
+      </a>
+
+      <p>Gioielleria - il Francescone &copy 2024</p>
+      <p>di Silvio Casonato  via Piero della Francesca,27 Milano  Rea:1960949</p>
+      
+      <a id="emailfooter" href="mailto:info@ilfrancesco.it">info@ilfrancescone.it</a>
+      
+      <br><a href="https://zinco.framer.website">
+        <img src="../img_home/deisgned by zinco grey.svg" id="zinco">
+      </a>
+
+    </div>
+  </footer>
+    
+
+</body>
+</html>

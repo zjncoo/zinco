@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP - il Francescone</title>
+    <link rel="stylesheet" href="../css/shop.css">
+    <link rel="icon" type="image/x-icon" href="../img_home/logo.png"> <!--viene specificato il favicon (icona nella barra di ricerca) del sito web-->
+    <script src="../script/shop.js"></script> 
+    <noscript>Your browser does not support JavaScript!</noscript>
+</head>
+<body>
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, I COLLEGAMENTI VARIANO A SECONDA DELLA PAGINA VISITATA (IL COLLEGAMENTO ALLA PAGINA VISUALIZZATA VIENE SOSTITUITO POICHÉ RIDONDANTE)-->
+    <div class="topnav">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div>
+            <a class="linkmenu" href="../PAGES/home.html">HOME</a></li> 
+            <a class="linkmenu" href="../PAGES/services.html">SERVIZI</a></li>
+            <a class="alogo" href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="linkmenu" href="../PAGES/contatti.html">CONTATTI</a></li>
+            <a class="linkmenu" href="../PAGES/foto.html">FOTO</a></li>
+        </nav>
+    </div>
+
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, ESSO SOSTITUISCE IL MENU SOVRASTANTE NEL CASO DI VISUALIZZAZIONE SU DISPOSITIVI MOBILI, DOVE I COLLEGAMENTI CON TESTO VENGONO SOSTITUITI DA ICONE: PIÙ SEMPLICI E ADATTE.-->
+    <div class="topnavmobile">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div>
+            <a class="iconamenu" href="../PAGES/home.html">
+                <img id="logo" src="../img_topnav/home.png" alt="home">
+            </a>
+            <a class="iconamenu" href="../PAGES/services.html">
+                <img id="logo" src="../img_topnav/servizi.png" alt="servizi">
+            </a>
+            <a class="alogo" href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="iconamenu" href="../PAGES/contatti.html">
+                <img id="logo" src="../img_topnav/contatti.png" alt="contatti">
+            </a>
+            <a class="iconamenu" href="../PAGES/foto.html">
+                <img id="logo" src="../img_topnav/foto.png" alt="foto">
+            </a>
+        </nav>
+    </div>
+
+    <!--MENU DELLE SEZIONI DI PRODOTTI SULLA PAGINA, UTILIZZA "ANCHOR" (CLICCANDO SUL LINK LA PAGINA SCROLLA AL PUNTO IDENTIFICATO DALLO SPECIFICO #ID)-->
+    <div class="contenitoresezioni">
+        <h1 id="shop">Shop</h1>
+        <!--RIGA SUPERIORE DI BOTTONI-->
+        <div class="sezioni">
+            <a class="bottonesezione" href="#braccialidiamanti">Bracciali - Diamanti</a>
+            <a class="bottonesezione" href="#anellidiamanti">Anelli - Diamanti</a>
+            <a class="bottonesezione" href="#braccialioro">Bracciali - Oro 18Kt</a>
+        </div>
+
+        <!--RIGA INFERIORE DI BOTTONI-->
+        <div  class="sezioni" id="sezioni2">
+            <a class="bottonesezione" href="#anellioro">Anelli - Oro 18Kt</a>
+            <a class="bottonesezione" href="#orecchinioro">Orecchini - Oro 18Kt</a>
+            <a class="bottonesezione" href="#collaneoro">Collane - Oro 18Kt</a>
+        </div>
+    </div>
+
+    <!--GRIGLIA RESPONSIVE CON PRODOTTI DEL NEGOZIO, ORGANIZZATA IN RIGHE CHE SU DISPOSITIVI MOBILI DIVENTANO COLONNE-->
+    <div class="shopgrid">
+        <h1 id="braccialidiamanti">Bracciali - Diamanti</h1>
+        
+        <div class="colonna">
+            <div class="elementogriglia">
+                <img src="../img_shop/bracciale1.jpg" alt="" class="foto">
+                <img src="../img_shop/bracciale1.jpg" alt="riparazioni" class="fotodet">
+                <h2>Bracciale maglia cubana &mdash; diamanti</h2>
+                <p>&#8364 9.100,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/bracciale2detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/bracciale2.jpg" alt="riparazioni" class="fotodet">
+                <h2>Bracciale tennis &mdash; peridoto e diamanti</h2>
+                <p>&#8364 2.690,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/bracciale3detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/bracciale3.jpg" alt="riparazioni" class="fotodet">
+                <h2>Bracciale cipolline &mdash; diamanti</h2>
+                <p>&#8364 950,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+        </div>
+        
+        <h1 id="anellidiamanti">Anelli - Diamanti</h1>
+        <div class="colonna">
+    
+            <div class="elementogriglia">
+                <img src="../img_shop/anello1detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/anello1.jpg" alt="riparazioni" class="fotodet">
+                <h2>Anello solitario &mdash; Diamante</h2>
+                <p>&#8364 1.520,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/anello2detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/anello2.jpg" alt="riparazioni" class="fotodet">
+                <h2>Anello pav&egrave; e solitario &mdash; diamanti</h2>
+                <p>&#8364 1.620,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/anello3detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/anello3.jpg" alt="riparazioni" class="fotodet">
+                <h2>Anello solitario &mdash; Diamante</h2>
+                <p>&#8364 1.520,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            
+        </div>
+        
+        <h1 id="braccialioro">Bracciali - Oro 18Kt</h1>
+        <div class="colonna">
+            <div class="elementogriglia">
+                <img src="../img_shop/bracciale4detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/bracciale4.jpg" alt="riparazioni" class="fotodet">
+                <h2>Bracciale Rigido Superior</h2>
+                <p>&#8364 1.597,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/bracciale5detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/bracciale5.jpg" alt="riparazioni" class="fotodet">
+                <h2>Bracciale maglia marina &mdash; 18cm</h2>
+                <p>&#8364 570,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/bracciale6detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/bracciale6.jpg" alt="riparazioni" class="fotodet">
+                <h2>Anello solitario &mdash; Diamante</h2>
+                <p>&#8364 1.520,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+        </div>
+
+        <h1 id="anellioro">Anelli - Oro 18Kt</h1>
+        <div class="colonna">
+            <div class="elementogriglia">
+                <img src="../img_shop/anello4detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/anello4.jpg" alt="riparazioni" class="fotodet">
+                <h2>Anello Contrari&eacute; ”Chiodi“</h2>
+                <p>&#8364 243,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/anello5detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/anello5.jpg" alt="riparazioni" class="fotodet">
+                <h2>Anello Donna Superior</h2>
+                <p>&#8364 1.733,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/anello6detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/anello6.jpg" alt="riparazioni" class="fotodet">
+                <h2>Anello maglia cubana con solitario zaffiro</h2>
+                <p>&#8364 511,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+        </div>
+
+        <h1 id="orecchinioro">Orecchini - Oro 18Kt</h1>
+        <div class="colonna">
+            <div class="elementogriglia">
+                <img src="../img_shop/orecchini1detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/orecchini1.jpg" alt="riparazioni" class="fotodet">
+                <h2>Orecchini Rol&ograve;</h2>
+                <p>&#8364 963,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/orecchini2detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/orecchini2.jpg" alt="riparazioni" class="fotodet">
+                <h2>Orecchini maglia cubana &mdash; Zaffiro</h2>
+                <p>&#8364 744,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/orecchini3detail.jpg" alt="riparazioni" class="foto">
+                <img src="../img_shop/orecchini3.jpg" alt="orecchini Rolò" class="fotodet">
+                <h2>Pendenti a maglie Rol&ograve;</h2>
+                <p>&#8364 3.170,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+        </div>
+
+        <h1 id="collaneoro">Collane - Oro 18Kt</h1>
+        <div class="colonna">
+            <div class="elementogriglia">
+                <img src="../img_shop/collana1detail.jpg" alt="collana con zaffiro" class="foto">
+                <img src="../img_shop/collana1.jpg" alt="riparazioni" class="fotodet">
+                <h2>Girocollo tennis “Zaffiro” - Oro Bianco</h2>
+                <p>&#8364 1.349,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/collana2detail.jpg" alt="collana maglia Traversino" class="foto">
+                <img src="../img_shop/collana2.jpg" alt="riparazioni" class="fotodet">
+                <h2>Collana maglia Traversino (50cm) &mdash; Oro Bianco</h2>
+                <p>&#8364 1.004,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+            <div class="elementogriglia">
+                <img src="../img_shop/collana3detail.jpg" alt="collana groumette" class="foto">
+                <img src="../img_shop/collana3.jpg" alt="riparazioni" class="fotodet">
+                <h2>Catena groumette (50cm) &mdash; Oro 18Kt</h2>
+                <p>&#8364 436,00 - IVA INCLUSA</p>
+                <button onclick="acquista()">ACQUISTA</button>
+            </div>
+        </div>
+        
+        
+    </div>
+
+  <!--FOOTER DELLA PAGINA-->
+  <footer>
+    <div class="footer">
+      <a class="logofooter" href="../PAGES/home.html">
+        <img src="../img_servizi/logo.png" id="logofooter"    alt="logo">
+      </a>
+
+      <p>Gioielleria - il Francescone &copy 2024</p>
+      <p>di Silvio Casonato  via Piero della Francesca,27 Milano  Rea:1960949</p>
+      
+      <a id="emailfooter" href="mailto:info@ilfrancesco.it">info@ilfrancescone.it</a>
+      
+      <br><a href="https://zinco.framer.website">
+        <img src="../img_home/deisgned by zinco grey.svg" id="zinco">
+      </a>
+
+    </div>
+  </footer>
+
+</body>
+</html>

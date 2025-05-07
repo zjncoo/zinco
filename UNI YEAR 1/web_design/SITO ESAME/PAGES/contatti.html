@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTATTI - il Francescone</title>
+    <link rel="stylesheet" href="../css/contatti.css">
+    <link rel="icon" type="image/x-icon" href="../img_home/logo.png"> <!--viene specificato il favicon (icona nella barra di ricerca) del sito web-->
+    
+    <noscript>Your browser does not support JavaScript!</noscript>
+</head>
+
+<body>
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, I COLLEGAMENTI VARIANO A SECONDA DELLA PAGINA VISITATA (IL COLLEGAMENTO ALLA PAGINA VISUALIZZATA VIENE SOSTITUITO POICHÉ RIDONDANTE)-->
+    <div class="topnav">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div> 
+            <a class="linkmenu" href="../PAGES/services.html">SERVIZI</a></li> 
+            <a class="linkmenu" href="../PAGES/shop.html">SHOP</a></li>
+            <a class="alogo"      href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="linkmenu" href="../PAGES/contatti.html">CONTATTI</a></li>
+            <a class="linkmenu" href="../PAGES/foto.html">FOTO</a></li>
+        </nav>
+    </div>
+
+    <!--MENU NAVIGABILE CON LOGO CENTRALE, ESSO SOSTITUISCE IL MENU SOVRASTANTE NEL CASO DI VISUALIZZAZIONE SU DISPOSITIVI MOBILI, DOVE I COLLEGAMENTI CON TESTO VENGONO SOSTITUITI DA ICONE: PIÙ SEMPLICI E ADATTE.-->
+    <div class="topnavmobile">
+        <nav>
+            <div onclick="mode();" id="button_mode">
+                <img src="../img_home/mode.png" id="change_mode">
+            </div> 
+            <a class="iconamenu"      href="../PAGES/home.html">
+                <img id="logo" src="../img_topnav/home.png" alt="home">
+            </a>
+            <a class="iconamenu" href="../PAGES/services.html">
+                <img id="logo" src="../img_topnav/servizi.png" alt="servizi">
+            </a>
+            <a class="alogo"      href="../PAGES/home.html">
+                <img id="logo" src="../img_servizi/logo.png" alt="logo">
+            </a>
+            <a class="iconamenu" href="../PAGES/shop.html">
+                <img id="logo" src="../img_topnav/shop.png" alt="shop">
+            </a>
+            <a class="iconamenu"      href="../PAGES/foto.html">
+                <img id="logo" src="../img_topnav/foto.png" alt="foto">
+            </a>
+        </nav>
+    </div>
+
+
+
+
+    <div class="contatti">
+        
+        <!--colonna di sinistra con il titolo "contatti" e gli orari di apertura-->
+        <div class="colonna1">
+            <h1>Contatti</h1>
+            <div class="orari">
+                <p>I Nostri Orari:</p>
+                <p>Marted&igrave; - Sabato</p>
+                <p>9.30 - 12.30 / 14.00 - 19.00</p>
+            </div>
+        </div>
+
+        <!--colonna con tutti i contatti-->
+        <div class="colonna2">
+            <div class="links">
+                <p>Email</p>
+                <a href="mailto: info@ilfrancescone.it">info@ilfrancescone.it</a> <!--"mailto:" permette di creare un link cliccabile per aprire direttamente il software di posta elettronica per comporre una mail all'indirizzo specificato-->
+                <p>Telefono</p>
+                <a href="tel: +39 392 002 2682">+39 392 002 2682</a> <!--"tel:" permette di creare un link cliccabile per effettuare una chiamata telefonica-->
+                <p>Instagram</p>
+                <a href="https://www.instagram.com/ilfrancescone_gioielleria">@ilfrancescone_gioielleria</a>
+                <p>TikTok</p>
+                <a href="https://www.tiktok.com/@ilfrancesconemilano?_t=8n0WiDfLfHM&_r=1">@ilfrancesconemilano</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!--FORM DI RICHIESTA DI CONTATTO-->
+    <div class="sfondoform">
+        <form id="myform">
+            <h2>Richiesta di contatto</h2>
+    
+            <input type="text" class="text" name="nome"   placeholder="Nome">
+      
+            <input type="text" class="text" name="cognome"   placeholder="Cognome">
+
+            <input type="number" class="text" name="telefono"  placeholder="Numero di telefono">
+      
+            <textarea class="text" name="oggetto"  placeholder="La sua richiesta"  style="height:200px"></textarea>
+      
+            <button type="submit" id="text_button">Invia</button>
+        </form>
+    </div>
+
+    <script src="../script/contatti.js"></script>
+    
+
+
+    <!--iframe di google maps con location del negozio-->
+    <iframe src="https://maps.google.com/maps?width=763&amp;height=519&amp;hl=it&amp;q=il francescone &amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+    
+    
+    <!--FOOTER DELLA PAGINA-->
+  <footer>
+    <div class="footer">
+      <a class="logofooter" href="../PAGES/home.html">
+        <img src="../img_servizi/logo.png" id="logofooter"    alt="logo">
+      </a>
+
+      <p>Gioielleria - il Francescone &copy 2024</p>
+      <p>di Silvio Casonato  via Piero della Francesca,27 Milano  Rea:1960949</p>
+      
+      <a id="emailfooter" href="mailto:info@ilfrancesco.it">info@ilfrancescone.it</a>
+      
+      <br><a href="https://zinco.framer.website">
+        <img src="../img_home/deisgned by zinco grey.svg" id="zinco">
+      </a>
+
+    </div>
+  </footer>
+</body>
+</html>
