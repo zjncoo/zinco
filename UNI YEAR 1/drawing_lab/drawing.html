@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NUS - zinco</title>
+  <link rel="stylesheet" href="nus.css" />
+  <link rel="stylesheet" href="../../index.css" />
+  <link rel="icon" href="img/logo_nus.svg" type="image/svg+xml" />
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <a href="../../index.html" id="button-logo"><img src="../../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
+  <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
+  <a href="../../contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+
+  <div id="dropdownMenu">
+    <div class="menu-columns">
+      <div class="menu-column left">
+        <a href="#" class="menu-link">About Me</a>
+        <a href="#" class="menu-link">Work</a>
+        <a href="#" class="menu-link">Services</a>
+      </div>
+      <div class="menu-column right">
+        <a href="#" class="menu-link">Archive</a>
+        <a href="#" class="menu-link">Research</a>
+        <a href="#" class="menu-link">Clients</a>
+        <a href="#" class="menu-link">Events</a>
+        <a href="#" class="menu-link">Exhibitions</a>
+        <a href="#" class="menu-link">Press</a>
+      </div>
+    </div>
+    <div class="menu-bottom">
+      <a href="zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+    </div>
+  </div>
+
+  <video id="myVideo" autoplay loop src="img/Screen Recording 2025-04-18 at 00.21.13.mov"></video>
+  
+
+  <div id="pdfThumbContainer" class="branding-grid"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+  <script src="pdf-thumbs.js"></script>
+
+  <div id="pdfViewerContainer">
+    <button id="prevPage" class="pdf-nav left">←</button>
+    <canvas id="pdfCanvas"></canvas>
+    <button id="nextPage" class="pdf-nav right">→</button>
+    <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="pdf-viewer.js" defer></script>
+
+  <footer>
+    <div class="cookie-banner" id="cookieBanner">
+      <span>my website uses <a href="../../cookies.html" class="cookie-link">cookies</a></span>
+      <span class="close-btn cursor-target" id="closeCookie">✕</span>
+    </div>
+    <div class="footer-content">
+      <a href="../../index.html" class="footer-logo"><img src="../../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+      <div class="footer-text">
+        <p>&copy; 2025 zinco</p>
+        <a href="zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+ 
+  
+
+  
+  <script src="../../index.js" defer></script>
+</body>
+</html>
