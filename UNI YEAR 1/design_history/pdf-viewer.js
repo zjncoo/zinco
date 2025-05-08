@@ -7,7 +7,7 @@ let pdfDoc = null,
     ctx = canvas.getContext('2d');
 
 // Inserisci qui il percorso effettivo del tuo file PDF
-const url = 'nus.pdf';
+const url = 'img/42_Potter_1980.pdf';
 
 function renderPage(num) {
   pageRendering = true;
