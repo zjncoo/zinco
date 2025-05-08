@@ -1,7 +1,6 @@
 const pdfPaths = [
     'img/cover vinile.pdf',
     'img/uv.pdf',
-    'img/uv.pdf' // Add your paths here
   ];
   
   const container = document.getElementById('pdfThumbContainer');

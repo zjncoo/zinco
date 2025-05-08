@@ -45,7 +45,10 @@
 
   <div id="pdfThumbContainer" class="branding-grid"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
-  <script src="pdf-thumbs.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js';
+  </script>
+  <script src="pdf-thumbs.js" defer></script>
 
   <div id="pdfViewerContainer">
     <button id="prevPage" class="pdf-nav left">←</button>
@@ -53,7 +56,6 @@
     <button id="nextPage" class="pdf-nav right">→</button>
     <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="pdf-viewer.js" defer></script>
 
   <footer>
