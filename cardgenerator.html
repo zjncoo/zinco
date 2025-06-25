@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tessere Fedeltà Personalizzate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      color: #222;
+    }
+
+    .container {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 25px;
+      color: #111;
+      user-select: none;
+    }
+
+    /* Box istruzioni */
+    .instructions {
+      background: #f5f5f5;
+      border-left: 6px solid #333;
+      padding: 20px 25px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      color: #111;
+      font-size: 1rem;
+      line-height: 1.5;
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      user-select: none;
+    }
+    .instructions svg {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      fill: #333;
+      margin-top: 4px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #222;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1.8px solid #666;
+      transition: border-color 0.3s ease;
+      cursor: pointer;
+      background: #fff;
+      margin-bottom: 25px; /* Maggior spazio tra i due input */
+    }
+    input[type="file"]:focus,
+    input[type="file"]:hover {
+      border-color: #000;
+      background: #fff;
+      outline: none;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      font-size: 1.15rem;
+      padding: 14px 0;
+      background-color: #222;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.25s ease, box-shadow 0.25s ease;
+      user-select: none;
+    }
+    button:hover:not(:disabled) {
+      background-color: #000;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+    }
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-style: italic;
+      color: #333;
+      min-height: 1.3em;
+      text-align: center;
+      user-select: text;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 20px;
+      }
+      button {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tessere Fedeltà Personalizzate</h1>
+
+    <div class="instructions" role="region" aria-label="Istruzioni per l'uso">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm.75 15.5a1.25 1.25 0 1 1-1.25-1.25 1.25 1.25 0 0 1 1.25 1.25zm1.9-7.75-1.4 1.41a1.5 1.5 0 1 0-2.12 2.12l.7.7v1.17h1.25v-.55l-1.03-1.04a.75.75 0 0 1 1.06-1.06l1.4-1.41a.75.75 0 0 0-1.06-1.06z"/>
+      </svg>
+      <div>
+        <strong>Come funziona:</strong>
+        <ul>
+          <li>Carica il PDF template della tessera.</li>
+          <li>Carica il file CSV con le colonne <code>Nome</code> e <code>Cognome</code>.</li>
+          <li>Clicca su "Genera tessere PDF in ZIP" per scaricare tutte le tessere in un unico file ZIP.</li>
+          <li>Ogni tessera sarà un PDF singolo personalizzato con Nome e Cognome.</li>
+        </ul>
+      </div>
+    </div>
+
+    <label for="pdfTemplate">Carica PDF template tessera</label>
+    <input type="file" id="pdfTemplate" accept="application/pdf" />
+
+    <label for="csvFile">Carica file CSV (con colonne Nome, Cognome)</label>
+    <input type="file" id="csvFile" accept=".csv,text/csv" />
+
+    <button id="generateBtn" disabled>Genera tessere PDF in ZIP</button>
+
+    <div id="status" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+  <script>
+    const pdfTemplateInput = document.getElementById('pdfTemplate');
+    const csvFileInput = document.getElementById('csvFile');
+    const generateBtn = document.getElementById('generateBtn');
+    const status = document.getElementById('status');
+
+    let pdfTemplateBytes = null;
+    let csvData = null;
+
+    function readFileAsync(file, asText = false) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        if (asText) {
+          reader.readAsText(file);
+        } else {
+          reader.readAsArrayBuffer(file);
+        }
+      });
+    }
+
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      const headers = lines[0].split(',').map(h => h.trim());
+      const rows = lines.slice(1).map(line => {
+        const values = line.split(',').map(v => v.trim());
+        let obj = {};
+        headers.forEach((h, i) => { obj[h] = values[i]; });
+        return obj;
+      });
+      return rows;
+    }
+
+    function checkReady() {
+      generateBtn.disabled = !(pdfTemplateBytes && csvData);
+    }
+
+    pdfTemplateInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      pdfTemplateBytes = await readFileAsync(file);
+      status.textContent = `Template PDF caricato: ${file.name}`;
+      checkReady();
+    });
+
+    csvFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const text = await readFileAsync(file, true);
+      try {
+        csvData = parseCSV(text);
+        if (!csvData[0].hasOwnProperty('Nome') || !csvData[0].hasOwnProperty('Cognome')) {
+          status.textContent = 'Errore: il CSV deve contenere le colonne "Nome" e "Cognome"';
+          csvData = null;
+        } else {
+          status.textContent = `CSV caricato: ${file.name}, ${csvData.length} righe`;
+        }
+      } catch (err) {
+        status.textContent = 'Errore nel parsing del CSV';
+        csvData = null;
+      }
+      checkReady();
+    });
+
+    function mmToPt(mm) {
+      return mm * 2.83465;
+    }
+
+    generateBtn.addEventListener('click', async () => {
+      status.textContent = 'Sto generando i PDF e preparando lo ZIP...';
+      generateBtn.disabled = true;
+
+      const { PDFDocument, rgb, StandardFonts } = PDFLib;
+
+      try {
+        // Carica template PDF
+        const pdfDocTemplate = await PDFDocument.load(pdfTemplateBytes);
+
+        const zip = new JSZip();
+
+        const x = mmToPt(4.5);
+        const yNome_mm = 39.55;
+        const yCognome_mm = 43.673;
+        const fontSize = 12;
+
+        for (let i = 0; i < csvData.length; i++) {
+          const { Nome, Cognome } = csvData[i];
+
+          // Crea un nuovo PDF per ogni tessera
+          const pdfDoc = await PDFDocument.create();
+
+          // Copia la pagina template
+          const [templatePage] = await pdfDoc.copyPages(pdfDocTemplate, [0]);
+          pdfDoc.addPage(templatePage);
+
+          const page = pdfDoc.getPage(0);
+          const pageHeight = page.getHeight();
+
+          // Ripristina le righe originali per yNome e yCognome
+          const yNome = pageHeight - mmToPt(yNome_mm);
+          const yCognome = pageHeight - mmToPt(yCognome_mm);
+
+          const embeddedFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+          // Funzione wrapText per suddividere il testo in più righe
+          function wrapText(text, maxWidth, font, fontSize) {
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+              const word = words[i];
+              const width = font.widthOfTextAtSize(currentLine + ' ' + word, fontSize);
+              if (width <= maxWidth) {
+                currentLine += ' ' + word;
+              } else {
+                lines.push(currentLine);
+                currentLine = word;
+              }
+            }
+            lines.push(currentLine);
+            return lines;
+          }
+
+          const maxTextWidth = mmToPt(49.5);
+          const nomeLines = wrapText(Nome, maxTextWidth, embeddedFont, fontSize);
+          const cognomeLines = wrapText(Cognome, maxTextWidth, embeddedFont, fontSize);
+
+          // Se il nome va a capo (nomeLines.length > 1), applica traslazione verso l'alto solo in quel caso
+          const nomeBlockOffset = nomeLines.length > 1 ? 7 : 0;
+          const yNomeAdjusted = yNome + nomeBlockOffset;
+
+          nomeLines.forEach((line, index) => {
+            page.drawText(line, {
+              x,
+              y: yNomeAdjusted - index * (fontSize + 1),
+              size: fontSize,
+              font: embeddedFont,
+              color: rgb(0, 0, 0),
+            });
+          });
+
+          // Calcola altezza effettiva del blocco nome
+          const nomeBlockHeight = nomeLines.length * (fontSize + 1);
+          // Applica la distanza aggiuntiva di 4 pt solo in caso di nome multilinea
+          const extraSpacing = nomeLines.length > 1 ? 4 : 0;
+          const yCognomeAdjusted = yNomeAdjusted - nomeBlockHeight - extraSpacing;
+
+          cognomeLines.forEach((line, index) => {
+            page.drawText(line, {
+              x,
+              y: yCognomeAdjusted - index * (fontSize + 1),
+              size: fontSize,
+              font: embeddedFont,
+              color: rgb(0, 0, 0),
+            });
+          });
+
+          const pdfBytes = await pdfDoc.save();
+
+          // Nome file pulito
+          const safeNome = Nome.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');
+          const safeCognome = Cognome.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');
+
+          // Aggiungi al ZIP
+          zip.file(`Tessera_${safeNome}_${safeCognome}.pdf`, pdfBytes);
+
+          status.textContent = `Preparata tessera ${i + 1} / ${csvData.length}`;
+        }
+
+        status.textContent = 'Compressione ZIP in corso... attendere.';
+
+        // Genera il file ZIP (blob)
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+
+        // Scarica il file ZIP
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(zipBlob);
+        link.download = 'Tessere_Fedelta.zip';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        status.textContent = `Generazione completata! ZIP creato con ${csvData.length} tessere.`;
+
+      } catch (error) {
+        console.error(error);
+        status.textContent = `Errore: ${error.message}`;
+      }
+
+      generateBtn.disabled = false;
+    });
+  </script>
+</body>
+</html>
