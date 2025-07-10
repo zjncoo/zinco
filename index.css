@@ -1,149 +1,164 @@
+/* --- IMPOSTAZIONI FONT --- */
+
+/* Corpo del testo: Inter Regular */
 body {
-    margin: 0;
-    font-family: 'DM Sans', sans-serif;
-    background: white;
-    color: black;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  
-  body, html {
-    overflow-x: hidden;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  .fixed-link {
-    position: fixed;
-    font-weight: bold;
-    font-size: 20px;
-    text-decoration: none;
-    color: black;
-    z-index: 10;
-  }
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: white;
+  color: black;
+  overflow-x: hidden;
+  overflow-y: auto;
+  counter-reset: grid-counter; /* Inizializza il contatore per la griglia */
+}
 
-  #logo {
-    width: 20%;
-    padding: 8px;
-    top: 20px;
-    left: 20px;
-    position: fixed;
-  }
+/* Titoli, sottotitoli e link importanti: Helvetica Neue Bold */
+h1, h2, h3, h4, h5, h6,
+.corner-button,
+.menu-link,
+.projects-section h2,
+.project-grid a p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
 
-  #button-logo {
-    width: fit-content;
-  }
-  
-  .top-left {
-    top: 30px;
-    left: 30px;
-  }
-  
-  .top-right {
-    top: 30px;
-    right: 30px;
-  }
-  
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 140px 20px 80px; /* more top padding for fixed elements */
-  }
-  
-  .intro {
-    font-size: 28px;
-    max-width: 800px;
-    line-height: 1.4;
-  }
-  
-  .underline {
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  
-  .colorful {
-    font-weight: bold;
-    background: linear-gradient(to right, #dddddd, rgb(252, 109, 0), blue, orange);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .shapes {
-    width: 100%;
-    height: 200px;
-    background: url('your-shapes-image.svg') center/contain no-repeat;
-    margin-bottom: 40px;
-  }
-  
-  footer {
-    background-color: #f9f9f9; /* o il colore che usi */
-    padding: 20px 20px; /* spazio uniforme ai lati */
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    max-width: 1400px;
-    margin: 0 auto; /* centra il contenuto */
-    width: 100%;
-    padding: 0 20px; /* questo garantisce il padding ai lati */
-    box-sizing: border-box;
-  }
-  
-  .footer-logo img {
-    max-width: 140px;
-    height: auto;
-    display: block;
-  }
-  
-  .footer-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
-    word-break: break-word;
-    gap: 4px;
-  }
-  
-  .footer-email {
-  
-    text-decoration: none;
-    color: black;
-  }
-  
-  /* Cookie banner fix */
-  .cookie-banner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: fit-content;
-    padding: 10px 20px;
-    background-color: #eee;
-    font-size: 14px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .cookie-link {
-    text-decoration: underline;
-  }
-  
-  .close-btn {
-    
-    font-size: 20px;
-    position: relative;
-    color: white;
-    background: none;
-    border: none;
-  }
+
+/* --- STILI ESISTENTI (con font rimossi dove necessario) --- */
+
+body, html {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+.fixed-link {
+  position: fixed;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  z-index: 10;
+}
+
+#logo {
+  width: 20%;
+  padding: 8px;
+  top: 20px;
+  left: 20px;
+  position: fixed;
+}
+
+#button-logo {
+  width: fit-content;
+}
+
+.top-left {
+  top: 30px;
+  left: 30px;
+}
+
+.top-right {
+  top: 30px;
+  right: 30px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 140px 40px 80px; /* Aggiunto padding laterale per coerenza */
+}
+
+.intro {
+  font-size: 28px;
+  max-width: 800px;
+  line-height: 1.4;
+}
+
+.underline {
+  text-decoration: underline;
+  /* font-weight: bold; rimosso */
+}
+
+.colorful {
+  font-weight: normal;
+  color: black;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
+.shapes {
+  width: 100%;
+  height: 200px;
+  background: url('your-shapes-image.svg') center/contain no-repeat;
+  margin-bottom: 40px;
+}
+
+footer {
+  background-color: #f9f9f9; /* o il colore che usi */
+  padding: 20px 40px; /* spazio uniforme ai lati */
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto; /* centra il contenuto */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-logo img {
+  max-width: 140px;
+  height: auto;
+  display: block;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  word-break: break-word;
+  gap: 4px;
+}
+
+.footer-email {
+  text-decoration: none;
+  color: black;
+}
+
+/* Cookie banner fix */
+.cookie-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 20px;
+  background-color: #eee;
+  font-size: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cookie-link {
+  text-decoration: underline;
+}
+
+.close-btn {
+  font-size: 20px;
+  position: relative;
+  color: white;
+  background: none;
+  border: none;
+}
 /* HIDE SYSTEM CURSOR */
 body, a, button {
   cursor: none;
@@ -174,83 +189,129 @@ body, a, button {
 /* Stile condiviso dei bottoni */
 .corner-button {
     position: fixed;
-    font-family: 'DM Sans', sans-serif;
     color: black;
     text-decoration: none;
     font-size: 30px;
-    font-weight: 900;
     z-index: 1000;
     padding: 8px;
   }
   
-  /* Posizionamenti individuali */
-  #btnTopLeft {
-    top: 20px;
-    left: 20px;
-  }
-  
-  #btnTopRight {
-    top: 20px;
-    right: 20px;
-  }
-  
-  #btnBottomLeft {
-    bottom: 20px;
-    left: 20px;
-  }
-  
-  #btnBottomRight {
-    bottom: 20px;
-    right: 20px;
-  }
+/* Posizionamenti individuali */
+#btnTopLeft {
+  top: 20px;
+  left: 20px;
+}
+
+#btnTopRight {
+  top: 20px;
+  right: 20px;
+}
+
+#btnBottomLeft {
+  bottom: 20px;
+  left: 20px;
+}
+
+#btnBottomRight {
+  bottom: 20px;
+  right: 20px;
+}
 
 
-/*PROJECT GRID*/
-
+/* --- PROJECT GRID (SWISS STYLE) --- */
 
 .projects-section {
-  padding: 80px 20px;
+  padding: 40px; /* Aggiunto padding per creare margine dai bordi */
   max-width: 100%;
   margin: 0 auto;
 }
 
-.projects-section h2 {
-  font-family: 'DM Sans', sans-serif;
+/* Stile per il contenitore esterno della griglia */
+.grid-container {
+  border: 2px solid red;
+  margin-bottom: 40px; /* Spazio tra le diverse griglie */
+}
+
+.grid-container h2 {
   font-size: 24px;
-  margin: 40px 0 20px;
+  margin: 0;
   color: black;
+  padding: 20px;
+  border-bottom: 2px solid red; /* Linea sotto il titolo */
 }
-
-a #folderlable {
-  color: black;
-  text-decoration: none;
-  position: absolute;
-}
-
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-bottom: 60px;
-  max-width: 100%;
-  overflow-x: hidden;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px; /* MODIFICATO: Spazio tra gli item della griglia */
+  padding: 10px; /* MODIFICATO: Spazio tra il bordo del contenitore e gli item */
 }
 
+/* Stile per ogni cella della griglia (i link <a>) */
+.project-grid a {
+  background-color: white;
+  aspect-ratio: 1 / 1; /* Forza le celle ad essere quadrate */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  transition: background-color 0.2s ease;
+  border: 2px solid red;
+  padding: 15px;
+}
+
+/* Aggiunge il numero del contatore in basso a destra */
+.project-grid a::after {
+  counter-increment: grid-counter; /* Incrementa il contatore per ogni cella */
+  content: counter(grid-counter); /* Mostra il valore del contatore */
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: red;
+  z-index: 1; /* Assicura che il numero sia sopra il contenuto */
+}
+
+
+.project-grid a:hover {
+  background-color: #f2f2f2; /* Leggero effetto hover */
+}
+
+/* Stile per le immagini all'interno delle celle */
 .project-grid img {
-  width: 100%;
-  height: auto;
-  padding: 2%;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  
+  width: auto;
+  max-width: 100%;
+  max-height: 65%; /* Lascia spazio per il testo sotto */
+  object-fit: contain;
+  /* Resetta stili precedenti */
+  padding: 0;
+  border-radius: 0;
+  transition: none;
+  border: none;
+  filter: none;
 }
 
 .project-grid img:hover {
-  border: 2px solid rgb(255, 255, 255);
-  filter: brightness(1.1);
+  border: none;
+  filter: none;
 }
+
+/* Stile per il testo (etichetta) sotto l'immagine */
+.project-grid a p {
+  color: black;
+  text-decoration: none;
+  position: static; /* Rimuove il posizionamento assoluto */
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+  font-family: 'Inter', sans-serif; /* Usa il font del corpo per coerenza */
+  font-weight: 400; /* Peso regular */
+}
+
 
 /*MENU*/
 #dropdownMenu {
@@ -293,10 +354,8 @@ a #folderlable {
 .menu-link {
   color: white;
   text-decoration: underline;
-  font-family: 'DM Sans', sans-serif;
   font-size: 2rem;
   line-height: 1; /* 👈 più stretto rispetto al default */
-  font-weight: 400;
   transition: opacity 0.2s ease;
 }
 
@@ -317,7 +376,6 @@ a #folderlable {
 .menu-email {
   color: white;
   text-decoration: underline;
-  font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
 }
 
@@ -327,7 +385,6 @@ a #folderlable {
   color: white;
   padding: 0.4rem 0.8rem;
   font-size: 1rem;
-  font-family: 'DM Sans', sans-serif;
   transition: all 0.2s ease;
 }
 
@@ -598,6 +655,7 @@ body {
   
 }
 
+/* --- MEDIA QUERIES (con griglia aggiornata) --- */
 @media (max-width: 767px) {
   #logo {
     width: 50%;
@@ -611,6 +669,13 @@ body {
     height: 3px;
   }
   
+  .projects-section {
+    padding: 20px;
+  }
+
+  .projects-section h2 {
+    padding: 0;
+  }
 
   .top-left,
   .top-right {
@@ -620,7 +685,7 @@ body {
   }
 
   main {
-    padding: 100px 15px 60px;
+    padding: 100px 20px 60px;
   }
 
   .intro {
@@ -640,7 +705,7 @@ body {
   }
 
   .project-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonne su mobile */
   }
 
   #dropdownMenu.open {
@@ -667,8 +732,6 @@ body {
     margin-top: 10%;
   }
 
-  
-
   .cookie-banner {
     flex-direction: column;
     width: fit-content;
@@ -679,23 +742,30 @@ body {
   footer {
     flex-direction: column;
     width: 100vw;
-    padding: none;
-    margin: none;
+    padding: 0;
+    margin: 0;
   }
 
   .footer-content {
     width: 100vw;
     margin: 0;
-    padding: none;
-  }
-
-  .footer-content {
+    padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    padding: none;
-    margin: 0;
+  }
+  
+  .menu.open {
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+
+  .menu.open a {
+    display: block;
+    text-align: left;
+    padding: 1rem;
+    width: 100%;
   }
 }
 
@@ -707,8 +777,6 @@ body {
   }
 
   .fixed-link, 
-  
-
   .top-left,
   .top-right {
     top: 20px;
@@ -733,7 +801,7 @@ body {
   }
 
   .project-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 colonne su tablet */
   }
 
   .menu-columns {
@@ -757,35 +825,17 @@ body {
   footer {
     flex-direction: column;
     width: 100vw;
-    padding: none;
-    margin: none;
+    padding: 0;
+    margin: 0;
   }
 
   .footer-content {
     width: 100vw;
     margin: 0;
-    padding: none;
-  }
-
-  .footer-content {
+    padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    padding: none;
-    margin: 0;
-  }
-}
-@media (max-width: 768px) {
-  .menu.open {
-    overflow-y: auto;
-    max-height: 100vh;
-  }
-
-  .menu.open a {
-    display: block;
-    text-align: left;
-    padding: 1rem;
-    width: 100%;
   }
 }

@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!-- FONT AGGIORNATO: Importa 'Inter' da Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="custom-cursor" id="cursor"></div>
@@ -78,14 +81,19 @@
   </main>
 
   <section class="projects-section">
+  <!-- Contenitore per la prima griglia -->
+  <div class="grid-container">
     <h2>uni year 1</h2>
     <div class="project-grid">
-      <a href="UNI YEAR 1/drawing_lab/drawing.html"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p id="folderlable">drawing_lab</p></a>
-      <a href="UNI YEAR 1/design_history/history.html"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p id="folderlable">design_history</p></a>
-      <a href="https://mammainfanzina.framer.website"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p id="folderlable">web_design</p></a>
-      <a href="https://mammainfanzina.framer.website"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p id="folderlable">project_basics_lab</p></a>
+      <a href="UNI YEAR 1/drawing_lab/drawing.html"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p>drawing_lab</p></a>
+      <a href="UNI YEAR 1/design_history/history.html"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p>design_history</p></a>
+      <a href="https://mammainfanzina.framer.website"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p>web_design</p></a>
+      <a href="https://mammainfanzina.framer.website"><img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" /><p>project_basics_lab</p></a>
     </div>
+  </div>
 
+  <!-- Contenitore per la seconda griglia -->
+  <div class="grid-container">
     <h2>Branding</h2>
     <div class="project-grid">
       <a href="amdecor/amdecor.html"><img src="amdecor/img/amlogo.svg" alt="AM Decor" class="cursor-target" /></a>
@@ -93,7 +101,10 @@
       <a href="escapes/escapes.html"><img src="escapes/img/logo_escapes.svg" alt="escapes" class="cursor-target" /></a>
       <a href="ROXY/roxy.html"><img src="ROXY/img/scritta.png" alt="ROXY" class="cursor-target" /></a>
     </div>
+  </div>
 
+  <!-- Contenitore per la terza griglia -->
+  <div class="grid-container">
     <h2>Websites</h2>
     <div class="project-grid">
       <a href="https://mammainfanzina.framer.website" target="_blank"><img src="mammainfanzina/logo mamma.svg" alt="p5 Project 1" class="cursor-target" /></a>
@@ -103,7 +114,9 @@
       <a href="https://zjncoo.github.io/RifiutiSpaziali/" target="_blank"><img src="imghome/razzino.png" alt="p5 Project 3" class="cursor-target" /></a>
       <a href="UNI YEAR 1/web_design/SITO ESAME/img_home/" target="_blank"><img src="UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png" alt="p5 Project 3" class="cursor-target" /></a>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <footer>
     <div class="cookie-banner" id="cookieBanner">
