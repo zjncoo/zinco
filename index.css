@@ -22,7 +22,8 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h2 {
-  font-size: 30px;;
+  font-size: 30px;
+  left: 40px;
 }
 
 /* --- STILI ESISTENTI --- */
@@ -43,7 +44,6 @@ body, html {
   z-index: 10;
 }
 
-/* MODIFICATO: Ripristinata la larghezza e mantenuto l'allineamento di precisione */
 #logo {
   width: 20vw; 
   padding: 0px;
@@ -56,13 +56,11 @@ body, html {
   width: fit-content;
 }
 
-/* MODIFICATO: Spostato di 8px per compensare il padding interno e allineare il testo */
 .top-left {
   top: 30px;
   left: 32px; /* 40px - 8px */
 }
 
-/* MODIFICATO: Spostato di 8px per compensare il padding interno e allineare il testo */
 .top-right {
   top: 30px;
   right: 32px; /* 40px - 8px */
@@ -73,13 +71,15 @@ main {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 140px 40px 80px;
+  /* Rimosso padding laterale per permettere alla griglia di estendersi */
+  padding: 140px 0 80px; 
 }
 
 .intro {
   font-size: 28px;
   max-width: 800px;
   line-height: 1.4;
+  padding: 0 40px; /* Aggiunto padding per centrare il testo */
 }
 
 .underline {
@@ -102,15 +102,16 @@ main {
 }
 
 /* --- SEZIONE FOOTER --- */
-/* MODIFICATO: Rimosso il padding orizzontale per allineare il contenuto interno alla griglia */
+/* MODIFICATO: Reso a tutta larghezza con padding interno */
 footer {
   background-color: white;
   color: black;
-  padding: 20px 0; /* Rimosso padding laterale */
-  margin: 0 40px 40px;
-  margin-bottom: 100px;
-  margin-top: 20px;
-  border: 1px solid red;
+  padding: 20px 40px; /* Spostato il padding qui */
+  margin: 20px 0 100px 0; /* Rimosso margine laterale */
+  border-top: 2px solid red;
+  border-bottom: 2px solid red;
+  border-left: none;
+  border-right: none;
   position: relative;
   z-index: 100;
 }
@@ -120,12 +121,11 @@ footer {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 15px;
+  gap: 20px;
 }
 
 .footer-logo img {
   height: 40px;
-  left: 32px;
 }
 
 .footer-text {
@@ -213,7 +213,6 @@ body, a, button {
   }
 
 /* Posizionamenti individuali */
-/* MODIFICATO: Spostati di 8px per compensare il padding e allineare il testo alla griglia */
 #btnTopLeft {
   top: 20px;
   left: 32px; /* 40px - 8px */
@@ -237,46 +236,64 @@ body, a, button {
 
 /* --- PROJECT GRID (SWISS STYLE) --- */
 
+/* MODIFICATO: Rimosso padding per griglia a tutta larghezza */
 .projects-section {
-  padding: 0 40px; /* Padding laterale per staccare la griglia dai bordi */
-  max-width: 100%;
+  padding: 0;
+  width: 100%;
   margin: 0 auto;
 }
 
-/* Contenitore logico, senza stili visivi */
 .grid-container {
   margin-bottom: 40px;
 }
 
-/* MODIFICATO: Dimensione del font aumentata per corrispondere ai bottoni */
 
 
+/* MODIFICATO: Griglia a tutta larghezza con linee rosse */
 .project-grid {
   display: grid;
-  /* Ripristinato a 4 colonne come nell'originale, puoi cambiarlo a 6 se preferisci item più piccoli */
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px; /* Spazio tra gli item della griglia */
+  gap: 20px; /* Spessore delle linee */
+  background-color: white; /* Colore delle linee */
+  border-top: 2px solid red;
+  border-bottom: 2px solid red;
+
+  
 }
 
-/* Stile per ogni cella della griglia (i link <a>) */
+.projects-section h2 {
+  left: 40px;
+}
+
+/* MODIFICATO: Rimosso bordo, aggiunto padding laterale selettivo */
 .project-grid a {
   background-color: white;
-  aspect-ratio: 1 / 1; /* Forza le celle ad essere quadrate */
+  aspect-ratio: 1 / 1;
   display: flex;
+  outline: 2px solid red;
+  border-radius: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   position: relative;
   transition: background-color 0.2s ease;
-  border: 1px solid red; /* Bordo rosso a ogni item */
-  padding: 15px;
+  padding: 30px; /* Padding di base */
 }
 
-/* Aggiunge il numero del contatore in basso a destra */
+/* Aggiunge padding laterale alla prima colonna */
+.project-grid a:nth-child(4n + 1) {
+  padding-left: 40px;
+}
+
+/* Aggiunge padding laterale all'ultima colonna */
+.project-grid a:nth-child(4n) {
+  padding-right: 40px;
+}
+
 .project-grid a::after {
-  counter-increment: grid-counter; /* Incrementa il contatore per ogni cella */
-  content: counter(grid-counter); /* Mostra il valore del contatore */
+  counter-increment: grid-counter;
+  content: counter(grid-counter);
   position: absolute;
   bottom: 10px;
   right: 15px;
@@ -284,19 +301,18 @@ body, a, button {
   font-size: 16px;
   font-weight: bold;
   color: red;
-  z-index: 1; /* Assicura che il numero sia sopra il contenuto */
+  z-index: 1;
 }
 
 
 .project-grid a:hover {
-  background-color: #f2f2f2; /* Leggero effetto hover */
+  background-color: #f2f2f2;
 }
 
-/* Stile per le immagini all'interno delle celle */
 .project-grid img {
   width: auto;
-  max-width: 100%;
-  max-height: 65%; /* Lascia spazio per il testo sotto */
+  max-width: 50%;
+  max-height: 65%;
   object-fit: contain;
   padding: 0;
   border-radius: 0;
@@ -310,16 +326,15 @@ body, a, button {
   filter: none;
 }
 
-/* Stile per il testo (etichetta) sotto l'immagine */
 .project-grid a p {
   color: black;
   text-decoration: none;
-  position: static; /* Rimuove il posizionamento assoluto */
+  position: static;
   margin-top: 15px;
   font-size: 14px;
   text-align: center;
-  font-family: 'Inter', sans-serif; /* Usa il font del corpo per coerenza */
-  font-weight: 400; /* Peso regular */
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 
@@ -336,16 +351,14 @@ body, a, button {
   transition: height 0.4s ease;
 }
 
-/* When menu is open */
 #dropdownMenu.open {
   height: 60vh;
 }
 
-/* Solo stile, non tocca layout */
 .menu-columns {
   display: flex;
-  justify-content: center; /* centra il gruppo di colonne */
-  gap: 40rem; /* spazio tra le due colonne – puoi anche usare 2rem per meno spazio */
+  justify-content: center;
+  gap: 40rem;
   padding: 2rem 4rem;
   margin-top: 10%;
 }
@@ -365,7 +378,7 @@ body, a, button {
   color: white;
   text-decoration: underline;
   font-size: 2rem;
-  line-height: 1; /* 👈 più stretto rispetto al default */
+  line-height: 1;
   transition: opacity 0.2s ease;
 }
 
@@ -404,384 +417,134 @@ body, a, button {
 }
 
 
-/* Optional: keep logo in place */
 #button-logo {
   position: fixed;
   top: 20px;
   left: 20px;
-  z-index: 1000; /* higher than dropdownMenu */
+  z-index: 1000;
 }
 
-/* Style for the 'more' button when menu is open */
 #btnTopRight.open {
   color: white;
 }
 
-/*SEARCH BAR*/
-/* Search bar container */
-#search-bar-container {
-  position: relative;
-  display: inline-block;
-}
-
-
-
-/* Toggle visibility */
-#search-bar.hidden {
-  display: none;
-}
-/* Search overlay styles */
-#search-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 1);
-  z-index: 999;
-  display: none;
-}
-
-#search-overlay.hidden {
-  display: none;
-}
-
-#search-overlay:not(.hidden) {
-  display: block;
-}
-
-/* Centered Search Bar */
-#search-bar {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: black;
-  padding: 2rem;
-  border: 1px solid #333;
-  z-index: 1000;
-  width: 90%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* Toggle visibility */
-#search-bar.hidden {
-  display: none;
-}
-
-
-/* Input styling */
-#search-input {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.2rem;
-  background: #111;
-  color: white;
-  border: 1px solid #333;
-  outline: none;
-}
-
-
-#category-select .arrow {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-
-/* Add styles for when the dropdown is open */
-#category-select.open .arrow {
-  transform: rotate(180deg); /* Rotate the arrow when the dropdown is open */
-}
-
-/* Hide the select dropdown by default */
-#category-select-options {
-  display: none; /* Hide the options initially */
-  position: absolute;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  top: 100%;
-  width: 160px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-#category-select.open #category-select-options {
-  display: block; /* Show the dropdown options when the dropdown is open */
-}
-
-#category-select-options a {
-  display: block;
-  padding: 10px;
-  text-decoration: none;
-  color: black;
-}
-
-#category-select-options a:hover {
-  background-color: #f1f1f1;
-}
-
-/* Optional: Make the filter option links look nice */
-#category-select-options a.active {
-  font-weight: bold;
-}
-
-/* Suggestions list */
-.suggestions-list {
-  z-index: 1100;
-  background: black;
-  color: white;
-  border: 1px solid #333;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.suggestions-list li {
-  padding: 0.75rem 1rem;
-  font-size: 1.1rem;
-
-  transition: background 0.2s ease;
-}
-
-.suggestions-list li:hover {
-  background-color: #1a1a1a;
-}
-
-/* Search icon button */
-.search-icon {
-  font-size: 2.2rem;
-  background: none;
-  border: none;
-
-  color: white;
-  z-index: 1100;
-}
-
-#overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-}
-
-#overlay.hidden {
-  display: none;
-}
-
-/* Style for the close button */
-.search-bar-close {
-  color: white;
-  position: fixed; /* Fixes the button on the screen */
-  top: 10%; /* Position the button a bit down from the top */
-  left: 50%; /* Centers the button horizontally */
-  transform: translateX(-50%); /* True centering */
-  font-size: 30px; /* Make the button bigger */
-  z-index: 9999; /* Ensure it stays above other content */
-  background-color: transparent; /* Optional: Remove background */
-  border: none; /* Optional: Remove any border */
-
-}
-
-/* --- MEDIA QUERIES (con griglia aggiornata) --- */
+/* --- MEDIA QUERIES --- */
 @media (max-width: 767px) {
-  /* Il padding della sezione rimane 20px */
-  .projects-section {
+  .intro {
     padding: 0 20px;
   }
-
-  /* MODIFICATO: Ripristinata larghezza e ricalcolata posizione */
+  .grid-container h2 {
+    padding: 20px;
+  }
   #logo {
     width: 50%;
-    top: 10px;
-    left: 16px; /* 20px (padding sezione) - 4px (padding elemento) */
+    left: 16px;
     padding: 4px;
   }
-
-  .custom-cursor {
-    width: 3px;
-    height: 3px;
-  }
-
-  .grid-container h2 {
-    padding: 20px 0;
-  }
-
-  /* MODIFICATO: Spostati per compensare il padding e allineare il testo */
   .top-left, #btnTopLeft, #btnBottomLeft {
-    left: 12px; /* 20px - 8px */
+    left: 12px;
   }
   .top-right, #btnTopRight, #btnBottomRight {
-    right: 12px; /* 20px - 8px */
+    right: 12px;
   }
-  .top-left, .top-right {
-     top: 10px;
-  }
-  #btnBottomLeft, #btnBottomRight {
-      bottom: 20px;
-  }
-
-
-  main {
-    padding: 100px 20px 60px;
-  }
-
-  .intro {
-    font-size: 20px;
-    line-height: 1.4;
-  }
-
-  .shapes {
-    height: 120px;
-  }
-
-  .footer-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-  }
-
   .project-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 colonne su mobile */
+    grid-template-columns: repeat(2, 1fr);
   }
-
-  #dropdownMenu.open {
-    height: 100vh;
+  .project-grid a:nth-child(4n + 1),
+  .project-grid a:nth-child(4n) {
+    padding-left: 15px; /* Reset per mobile */
+    padding-right: 15px;
   }
-
-  .menu-columns {
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem;
-    margin-top: 20%;
+  .project-grid a:nth-child(2n + 1) {
+    padding-left: 20px;
   }
-
-  .menu-link {
-    font-size: 1.5rem;
-    margin-top: 3%;
+  .project-grid a:nth-child(2n) {
+    padding-right: 20px;
   }
-
-  .menu-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 0 2rem 2rem;
-    margin-top: 10%;
-  }
-
-  .cookie-banner {
-    flex-direction: column;
-    width: fit-content;
-    bottom: 10%;
-    font-size: 14px;
-  }
-
-  /* MODIFICATO: Allineato al padding della sezione (20px) e rimosso padding interno */
   footer {
-    margin: 0 20px 20px;
-    padding: 20px 0;
+    padding: 20px;
+    margin: 0 0 20px 0;
   }
+}
 
-  .footer-content {
-    padding: 0;
+@media (min-width: 768px) and (max-width: 1024px) {
+  .intro {
+    padding: 0 30px;
   }
-
-  .menu.open {
-    overflow-y: auto;
-    max-height: 100vh;
+  .grid-container h2 {
+    padding: 20px 30px;
   }
-
-  .menu.open a {
-    display: block;
-    text-align: left;
-    padding: 1rem;
-    width: 100%;
+  #logo {
+    width: 30%;
+    left: 24px;
+    padding: 6px;
+  }
+  .top-left, #btnTopLeft, #btnBottomLeft {
+    left: 22px;
+  }
+  .top-right, #btnTopRight, #btnBottomRight {
+    right: 22px;
+  }
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .project-grid a:nth-child(4n + 1),
+  .project-grid a:nth-child(4n) {
+    padding-left: 15px; /* Reset per tablet */
+    padding-right: 15px;
+  }
+  .project-grid a:nth-child(3n + 1) {
+    padding-left: 30px;
+  }
+  .project-grid a:nth-child(3n) {
+    padding-right: 30px;
+  }
+  footer {
+    padding: 20px 30px;
+    margin: 0 0 30px 0;
   }
 }
 
 
+/* --- LINEE VERTICALI FISSE --- */
+.vertical-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: red;
+  z-index: 500; /* Assicura che siano sopra il contenuto ma sotto elementi come menu o popup */
+}
+
+/* Posizionamento della linea sinistra per schermi grandi (desktop) */
+.vertical-line.left {
+  left: 40px;
+}
+
+/* Posizionamento della linea destra per schermi grandi (desktop) */
+.vertical-line.right {
+  right: 40px;
+}
+
+
+/* --- MEDIA QUERIES PER LE LINEE --- */
+
+/* Adattamento per Tablet */
 @media (min-width: 768px) and (max-width: 1024px) {
-  /* Il padding della sezione rimane 30px */
-  .projects-section {
-    padding: 0 30px;
+  .vertical-line.left {
+    left: 30px;
   }
+  .vertical-line.right {
+    right: 30px;
+  }
+}
 
-  /* MODIFICATO: Ripristinata larghezza e ricalcolata posizione */
-  #logo {
-    width: 30%;
-    padding: 6px;
-    left: 24px; /* 30px (padding sezione) - 6px (padding elemento) */
+/* Adattamento per Mobile */
+@media (max-width: 767px) {
+  .vertical-line.left {
+    left: 20px;
   }
-
-  /* MODIFICATO: Spostati per compensare il padding e allineare il testo */
-  .fixed-link,
-  .top-left, #btnTopLeft, #btnBottomLeft {
-    left: 22px; /* 30px - 8px */
-  }
-  .top-right, #btnTopRight, #btnBottomRight {
-    right: 22px; /* 30px - 8px */
-  }
-   .fixed-link, .top-left, .top-right {
-    top: 20px;
-  }
-  #btnBottomLeft, #btnBottomRight {
-      bottom: 20px;
-  }
-
-  main {
-    padding: 120px 30px 70px;
-  }
-
-  .intro {
-    font-size: 24px;
-  }
-
-  .shapes {
-    height: 160px;
-  }
-
-  .footer-links {
-    font-size: 18px;
-  }
-
-  .project-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne su tablet */
-  }
-
-  .grid-container h2 {
-    padding: 20px 0;
-  }
-
-  .menu-columns {
-    gap: 8rem;
-    padding: 2rem 3rem;
-  }
-
-  .menu-link {
-    font-size: 1.75rem;
-  }
-
-  .menu-bottom {
-    gap: 1.5rem;
-    padding: 0 3rem 2rem;
-  }
-
-  .cookie-banner {
-    bottom: 15%;
-  }
-
-  /* MODIFICATO: Allineato al padding della sezione (30px) e rimosso padding interno */
-  footer {
-    margin: 0 30px 30px;
-    padding: 20px 0;
-  }
-
-  .footer-content {
-    padding: 0;
+  .vertical-line.right {
+    right: 20px;
   }
 }
