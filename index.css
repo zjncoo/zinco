@@ -72,7 +72,7 @@ main {
   align-items: center;
   text-align: center;
   /* Rimosso padding laterale per permettere alla griglia di estendersi */
-  padding: 140px 0 80px; 
+  padding: 0% 0 80px; 
 }
 
 .intro {
@@ -101,17 +101,17 @@ main {
   margin-bottom: 40px;
 }
 
-/* --- SEZIONE FOOTER --- */
-/* MODIFICATO: Reso a tutta larghezza con padding interno */
+/* --- SEZIONE FOOTER (MODIFICATA) --- */
+/* --- SEZIONE FOOTER (MODIFICATA) --- */
 footer {
   background-color: white;
   color: black;
-  padding: 20px 40px; /* Spostato il padding qui */
-  margin: 20px 0 100px 0; /* Rimosso margine laterale */
-  border-top: 2px solid red;
-  border-bottom: 2px solid red;
-  border-left: none;
-  border-right: none;
+  /* Rimosso il padding verticale, mantenuto solo quello laterale */
+  padding: 0 40px;
+  /* Ripristinato il margine per avere spazio sotto il footer */
+  margin: 20px 0 100px 0;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
   position: relative;
   z-index: 100;
 }
@@ -122,6 +122,7 @@ footer {
   align-items: center;
   width: 100%;
   gap: 20px;
+  /* Spostato qui il padding verticale per dare spazio al contenuto */
 }
 
 .footer-logo img {
@@ -253,10 +254,10 @@ body, a, button {
 .project-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px; /* Spessore delle linee */
+  gap: 0px; /* Spessore delle linee */
   background-color: white; /* Colore delle linee */
-  border-top: 2px solid red;
-  border-bottom: 2px solid red;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 
   
 }
@@ -270,7 +271,7 @@ body, a, button {
   background-color: white;
   aspect-ratio: 1 / 1;
   display: flex;
-  outline: 2px solid red;
+  outline: 2px solid black;
   border-radius: 0;
   flex-direction: column;
   justify-content: center;
@@ -300,7 +301,7 @@ body, a, button {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: bold;
-  color: red;
+  color: black;
   z-index: 1;
 }
 
@@ -382,9 +383,9 @@ body, a, button {
 
 .menu-link {
   color: white;
-  text-decoration: underline;
+  text-decoration: none;
   font-size: 2rem;
-  line-height: 1;
+  line-height: 0.8;
   transition: opacity 0.2s ease;
 }
 
@@ -592,8 +593,9 @@ body, a, button {
   .project-grid a:nth-child(2n) {
     padding-right: 20px;
   }
+  /* Footer mobile (modificato) */
   footer {
-    padding: 20px;
+    padding: 0 20px; 
     margin: 0 0 20px 0;
   }
   /* MODIFICATO: Padding corretto per mobile */
@@ -644,8 +646,9 @@ body, a, button {
   .project-grid a:nth-child(3n) {
     padding-right: 30px;
   }
+  /* Footer tablet (modificato) */
   footer {
-    padding: 20px 30px;
+    padding: 0 30px; 
     margin: 0 0 30px 0;
   }
   /* MODIFICATO: Padding corretto per tablet */
@@ -664,39 +667,8 @@ body, a, button {
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: red;
+  background-color: black;
   z-index: 500; /* Assicura che siano sopra il contenuto ma sotto elementi come menu o popup */
 }
 
-/* Posizionamento della linea sinistra per schermi grandi (desktop) */
-.vertical-line.left {
-  left: 40px;
-}
 
-/* Posizionamento della linea destra per schermi grandi (desktop) */
-.vertical-line.right {
-  right: 40px;
-}
-
-
-/* --- MEDIA QUERIES PER LE LINEE --- */
-
-/* Adattamento per Tablet */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .vertical-line.left {
-    left: 30px;
-  }
-  .vertical-line.right {
-    right: 30px;
-  }
-}
-
-/* Adattamento per Mobile */
-@media (max-width: 767px) {
-  .vertical-line.left {
-    left: 20px;
-  }
-  .vertical-line.right {
-    right: 20px;
-  }
-}

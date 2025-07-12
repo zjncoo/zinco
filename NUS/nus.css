@@ -1,152 +1,196 @@
-.branding-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  padding: 60px 20px 80px;
-  max-width: 100vw;
-  margin: 0 auto;
-  overflow-x: none;
+/*
+ * ===================================
+ * STILI SPECIFICI PER LA PAGINA NUS
+ * ===================================
+ */
+
+
+/* 1. Stile per il video introduttivo
+ * Lo facciamo comportare come l'intro della prima pagina.
+ */
+#myVideo {
+  width: 100%;
+  height: auto;
+  max-height: 70vh; /* Limita l'altezza per non occupare troppo spazio */
+  object-fit: cover;
 }
 
+
+/* * 2. Stile per la griglia dei moduli quadrati (ADATTATO)
+ * Stile e spaziatura presi dal primo file CSS.
+ */
+.branding-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonne su desktop */
+  gap: 0px; /* Spessore delle linee, come nel primo file */
+  background-color: white; /* Colore di sfondo, non delle fughe */
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  width: 100%;
+  padding: 0;
+}
+
+/* Ogni modulo nella griglia (ADATTATO) */
 .branding-item {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #f9f9f9;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  text-align: left;
+  background-color: white;
+  aspect-ratio: 1 / 1; /* Forza la forma quadrata */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  transition: background-color 0.2s ease;
+  color: black;
+  /* Aggiunto outline per i bordi di ogni cella */
+  outline: 2px solid black; 
+  padding: 30px; /* Padding di base */
+}
+
+/* Aggiunge padding laterale alla prima colonna per allineamento */
+.branding-item:nth-child(4n + 1) {
+  padding-left: 40px;
+}
+
+/* Aggiunge padding laterale all'ultima colonna per allineamento */
+.branding-item:nth-child(4n) {
+  padding-right: 40px;
+}
+
+
+/* Immagini e testo dentro i moduli */
+.branding-item img {
+  max-width: 50%;
+  max-height: 65%;
+  object-fit: contain;
+  margin-top: 10px;
 }
 
 .branding-item h3 {
-  margin-top: 0;
-  font-size: 18px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
+  font-size: 16px;
+  margin: 0 0 5px 0;
 }
 
-.button-link {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 14px;
+.branding-item p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+/* Effetto hover (identico alla prima pagina) */
+.branding-item:hover {
   background-color: black;
-  color: white;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: bold;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background 0.2s ease;
 }
 
-.button-link:hover {
-  background-color: #333;
-}
-
-.branding-item.logo img,
-.branding-item.graphics img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.branding-item.color {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-}
-
-.color1 { background-color: #d04d27; }
-.color2 { background-color: #3f3c3c; }
-.color3 { background-color: #8c8c94; color: black; }
-
-
-video {
-  width: 100vw;
+.branding-item:hover > * {
+  filter: grayscale(1) invert(1);
 }
 
 
-/*PDF VIEWER*/
-
+/* 3. Stile per il visualizzatore PDF (MODIFICATO)
+ * Lo integriamo nel design con uno stile pulito e coerente.
+ */
 #pdfViewerContainer {
-  position: relative;
-  width: 70vw;
-  text-align: center;
-  background: #fff;
-  padding: 40px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto;
+  gap: 20px; /* Spazio tra il canvas e i controlli sotto */
+  margin: 80px auto;
+  padding: 0 40px; /* Allineamento con le linee verticali */
+  max-width: 900px; /* Larghezza massima per la leggibilità */
 }
 
 #pdfCanvas {
-  max-width: 100%;
+  border: 2px solid black;
+  width: 100%;
   height: auto;
 }
 
+/* NUOVA REGOLA per il contenitore dei bottoni */
+.pdf-controls {
+  display: flex;
+  flex-direction: row; /* Allinea i bottoni in orizzontale */
+  justify-content: center;
+  align-items: center;
+  gap: 25px; /* Spazio tra i bottoni e l'indicatore di pagina */
+}
+
 .pdf-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  border: none;
-  
+  background-color: transparent;
+  border: 2px solid black;
+  color: black;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  z-index: 2;
-  background-color: #d04d27;
-  mix-blend-mode: difference;
+  font-size: 16px;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  cursor: pointer; /* Aggiunge il puntatore per indicare che è cliccabile */
 }
 
-.pdf-nav.left {
-  left: 10px;
-}
-
-.pdf-nav.right {
-  right: 10px;
+.pdf-nav:hover {
+  background-color: black;
+  color: white;
 }
 
 #pageIndicator {
-  margin-top: 12px;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
 }
 
-@media (max-width: 767px) {
-  #pdfViewerContainer {
-    position: relative;
-    width: 100vw;
-    text-align: center;
-    background: #fff;
-    padding: 40px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-  }
-  .pdf-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(280%);
-    font-size: 2rem;
-    border: none;
-    
-    font-weight: bold;
-    z-index: 2;
-    background-color: #ffffff;
-    mix-blend-mode: difference;
+
+/*
+ * ====================================================
+ * 4. Media Queries per la responsività (ADATTATE)
+ * ====================================================
+ */
+
+/* Stile per Tablet 📱 */
+@media (max-width: 1024px) {
+  .branding-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 colonne */
   }
 
-  .pdf-nav.left {
-    left: 20px;
+  /* Reset padding per layout a 4 colonne */
+  .branding-item:nth-child(4n + 1),
+  .branding-item:nth-child(4n) {
+    padding-left: 30px; 
+    padding-right: 30px;
+  }
+
+  /* Adatta il padding al layout a 3 colonne */
+  .branding-item:nth-child(3n + 1) {
+    padding-left: 30px;
+  }
+  .branding-item:nth-child(3n) {
+    padding-right: 30px;
+  }
+}
+
+/* Stile per Mobile 🤳 */
+@media (max-width: 767px) {
+  .branding-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonne */
+  }
+
+  /* Reset padding per layout a 3 e 4 colonne */
+  .branding-item:nth-child(4n + 1),
+  .branding-item:nth-child(4n),
+  .branding-item:nth-child(3n + 1),
+  .branding-item:nth-child(3n) {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   
-  .pdf-nav.right {
-    right: 20px;
+  /* Adatta il padding al layout a 2 colonne */
+  .branding-item:nth-child(2n + 1) {
+    padding-left: 20px;
+  }
+  .branding-item:nth-child(2n) {
+    padding-right: 20px;
+  }
+  
+  #pdfViewerContainer {
+    padding: 0 20px;
   }
 }
