@@ -11,11 +11,6 @@
     "content": "This Project is part of the Corporate Identity Course and was developed in collaboration with four other students, however these graphic elements, in particular were created by me."
   },
   {
-    "type": "link",
-    "label": "Visit Website",
-    "url": "https://example.com"
-  },
-  {
     "type": "text",
     "label": "Naming",
     "content": "Neighbourhood Urban Studies Institute - Nus"
@@ -47,22 +42,138 @@
   },
   {
     "type": "text",
+    "label": "Target",
+    "content": "Studenti e ricercatori urbani"
+  },
+  {
+    "type": "text",
+    "label": "Positioning",
+    "content": "Istituto di alta formazione specializzato"
+  },
+  {
+    "type": "text",
     "label": "Brand Architecture",
     "content": "Master brand con sub-brand regionali"
   },
   {
-    "type": "color",
-    "label": "#FF0000",
-    "class": "color1"
+    "type": "header",
+    "label": "Marchio"
+  },
+  {
+    "type": "image",
+    "subtype": "marchio",
+    "label": "Costruzione",
+    "src": "img/brand/marchio_costruttivo.png"
+  },
+  {
+    "type": "image",
+    "subtype": "marchio",
+    "label": "B/N",
+    "src": "img/brand/marchio_bn.png"
+  },
+    {
+    "type": "image",
+    "subtype": "marchio",
+    "label": "Colore",
+    "src": "img/brand/marchio_colore.png"
+  },
+  {
+    "type": "image",
+    "subtype": "marchio",
+    "label": "Negativo",
+    "src": "img/brand/marchio_negativo.png"
+  },
+  {
+    "type": "header",
+    "label": "Tipografia"
+  },
+  {
+    "type": "image",
+    "subtype": "identita",
+    "label": "Tipografia",
+    "src": "img/brand/tipografia.png"
+  },
+  {
+    "type": "header",
+    "label": "Elementi Grafici"
+  },
+  {
+    "type": "image",
+    "subtype": "identita",
+    "label": "Elementi Grafici",
+    "src": "img/brand/elementi_grafici.png"
+  },
+  {
+    "type": "header",
+    "label": "Palette Colori"
   },
   {
     "type": "color",
-    "label": "#00FF00",
-    "class": "color2"
+    "label": "#DF5A10",
+    "class": "color1",
+    "hex": "#DF5A10"
   },
   {
     "type": "color",
-    "label": "#0000FF",
-    "class": "color3"
+    "label": "#1E3237",
+    "class": "color2",
+    "hex": "#1E3237"
+  },
+  {
+    "type": "color",
+    "label": "#CFDFEA",
+    "class": "color3",
+    "hex": "#CFDFEA"
+  },
+  {
+    "type": "color",
+    "label": "#CABD3C",
+    "class": "color4",
+    "hex": "#CABD3C"
+  },
+  {
+    "type": "color",
+    "label": "#EAEAF0",
+    "class": "color5",
+    "hex": "#EAEAF0"
+  },
+  {
+    "type": "color",
+    "label": "#ffffff",
+    "class": "color5",
+    "hex": "#ffffff"
+  },
+  {
+    "type": "color",
+    "label": "#000000",
+    "class": "color5",
+    "hex": "#000000"
+  },
+  {
+    "type": "header",
+    "label": "Applicazioni"
+  },
+  {
+    "type": "image",
+    "subtype": "applicazione",
+    "label": "Manifesti",
+    "src": "img/applicazioni/manifesti.png"
+  },
+  {
+    "type": "image",
+    "subtype": "applicazione",
+    "label": "Mockup",
+    "src": "img/applicazioni/mockup.png"
+  },
+  {
+    "type": "figma",
+    "label": "Sito Web - Prototipo",
+    "embedUrl": "https://embed.figma.com/proto/wF1HPUS18DSGwC0eHSEUV5/SITO-NUS--Copy-?page-id=0%3A1&node-id=166-147&p=f&viewport=485%2C-22%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=166%3A147&embed-host=share"
+  },
+  {
+    "type": "image",
+    "subtype": "applicazione",
+    "label": "App",
+    "src": "img/applicazioni/app.png"
   }
 ]

@@ -4,36 +4,103 @@
  * ===================================
  */
 
+/* ========= STILI PER GRIGLIA-ANTEPRIMA ========= */
+#glance-container {
+  width: 100vw;
+  position: relative;
+  padding: 0;
+  border-bottom: 2px solid black;
+  box-sizing: border-box;
+  background-color: black;
+}
+#glance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 2px;
+}
+.glance-item {
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: background-color 0.2s ease;
+}
+.glance-item:hover { background-color: black; }
+.glance-item:hover > * { filter: invert(1); }
+.glance-item img {
+  width: 80%; height: 80%;
+  object-fit: contain;
+  transition: filter 0.2s ease;
+}
+.scroll-down-arrow {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  color: black;
+  background-color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  text-decoration: none;
+}
 
-/* 1. Stile per il video introduttivo
- * Lo facciamo comportare come l'intro della prima pagina.
- */
-#myVideo {
+/* ========= STILI PER LA SEZIONE HERO (MODIFICATA) ========= */
+#project-hero {
+  height: 70vh;
   width: 100%;
-  height: auto;
-  max-height: 70vh; /* Limita l'altezza per non occupare troppo spazio */
-  object-fit: cover;
+  background-color: white;
+  display: flex;
+  /* MODIFICA 1: Allinea il contenuto in basso invece che al centro */
+  align-items: flex-end; 
+  box-sizing: border-box;
+  border-bottom: 2px solid black;
+  /* MODIFICA 2: Imposta il padding per creare lo spazio nell'angolo */
+  padding: 32px; /* Un padding uniforme su tutti i lati per semplicità */
+  padding-top: 0; /* Rimuoviamo quello superiore che non serve */
+}
+#project-hero h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: clamp(2rem, 8vw, 7rem);
+  margin: 0;
+  max-width: 70vw;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
 }
 
 
-/* * 2. Stile per la griglia dei moduli quadrati (ADATTATO)
- * Stile e spaziatura presi dal primo file CSS.
- */
+/* ========= STILI CONTENUTO PRINCIPALE ========= */
+#myVideo {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+}
+
 .branding-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colonne su desktop */
-  gap: 0px; /* Spessore delle linee, come nel primo file */
-  background-color: white; /* Colore di sfondo, non delle fughe */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px; 
+  background-color: white;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   width: 100%;
   padding: 0;
 }
 
-/* Ogni modulo nella griglia (ADATTATO) */
 .branding-item {
   background-color: white;
-  aspect-ratio: 1 / 1; /* Forza la forma quadrata */
+  aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,23 +109,28 @@
   position: relative;
   transition: background-color 0.2s ease;
   color: black;
-  /* Aggiunto outline per i bordi di ogni cella */
   outline: 2px solid black; 
-  padding: 30px; /* Padding di base */
+  padding: 30px;
 }
 
-/* Aggiunge padding laterale alla prima colonna per allineamento */
-.branding-item:nth-child(4n + 1) {
-  padding-left: 40px;
+.branding-item:nth-child(4n + 1) { padding-left: 40px; }
+.branding-item:nth-child(4n) { padding-right: 40px; }
+
+.branding-header {
+  grid-column: 1 / -1; 
+  background-color: black;
+  color: white;
+  padding: 15px 40px;
+  text-align: left;
 }
 
-/* Aggiunge padding laterale all'ultima colonna per allineamento */
-.branding-item:nth-child(4n) {
-  padding-right: 40px;
+.branding-header h2 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
 }
 
-
-/* Immagini e testo dentro i moduli */
 .branding-item img {
   max-width: 50%;
   max-height: 65%;
@@ -70,7 +142,7 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 16px;
-  margin: 0 0 5px 0;
+  margin: 0 0 15px 0;
 }
 
 .branding-item p {
@@ -78,27 +150,42 @@
   font-size: 14px;
 }
 
-/* Effetto hover (identico alla prima pagina) */
-.branding-item:hover {
-  background-color: black;
+.text-item p {
+  max-width: 30ch;
 }
 
-.branding-item:hover > * {
-  filter: grayscale(1) invert(1);
+.branding-item:hover { background-color: black; }
+.branding-item:hover > * { filter: grayscale(1) invert(1); }
+
+#figma-container {
+  width: 100%;
+  margin-top: 40px;
 }
 
+.figma-embed-wrapper {
+  width: 100vw;
+  height: 85vh;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  background-color: #f0f0f0;
+}
 
-/* 3. Stile per il visualizzatore PDF (MODIFICATO)
- * Lo integriamo nel design con uno stile pulito e coerente.
- */
+.figma-embed-wrapper iframe {
+  width: 100%;
+  height: 100%;
+}
+
 #pdfViewerContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* Spazio tra il canvas e i controlli sotto */
+  gap: 20px;
   margin: 80px auto;
-  padding: 0 40px; /* Allineamento con le linee verticali */
-  max-width: 900px; /* Larghezza massima per la leggibilità */
+  padding: 0 40px;
+  max-width: 900px;
 }
 
 #pdfCanvas {
@@ -107,13 +194,12 @@
   height: auto;
 }
 
-/* NUOVA REGOLA per il contenitore dei bottoni */
 .pdf-controls {
   display: flex;
-  flex-direction: row; /* Allinea i bottoni in orizzontale */
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 25px; /* Spazio tra i bottoni e l'indicatore di pagina */
+  gap: 25px;
 }
 
 .pdf-nav {
@@ -125,74 +211,64 @@
   font-size: 16px;
   padding: 8px 16px;
   transition: all 0.2s ease;
-  cursor: pointer; /* Aggiunge il puntatore per indicare che è cliccabile */
+  cursor: pointer;
 }
 
-.pdf-nav:hover {
+.pdf-nav:hover { background-color: black; color: white; }
+#pageIndicator { font-family: 'Inter', sans-serif; font-size: 14px; }
+
+.placeholder-container {
+  width: 100%;
+  padding: 60px 40px;
+  border: 2px dashed #ccc;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.placeholder-container h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+}
+
+.placeholder-container p { margin: 0 0 20px 0; color: #666; }
+
+.load-btn {
   background-color: black;
   color: white;
+  border: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px 24px;
+  transition: all 0.2s ease;
 }
 
-#pageIndicator {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-}
+.load-btn:hover { opacity: 0.8; }
+.custom-cursor { will-change: transform; }
 
 
-/*
- * ====================================================
- * 4. Media Queries per la responsività (ADATTATE)
- * ====================================================
- */
-
-/* Stile per Tablet 📱 */
+/* ========= MEDIA QUERIES PER RESPONSIVITÀ ========= */
 @media (max-width: 1024px) {
-  .branding-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne */
-    max-width: 100%;
-  }
-
-  /* Reset padding per layout a 4 colonne */
-  .branding-item:nth-child(4n + 1),
-  .branding-item:nth-child(4n) {
-    padding-left: 30px; 
-    padding-right: 30px;
-  }
-
-  /* Adatta il padding al layout a 3 colonne */
-  .branding-item:nth-child(3n + 1) {
-    padding-left: 30px;
-  }
-  .branding-item:nth-child(3n) {
-    padding-right: 30px;
-  }
+  #glance-grid { grid-template-columns: repeat(5, 1fr); }
+  #project-hero { padding: 30px; padding-top: 0; } /* Adatta il padding su tablet */
+  .branding-grid { grid-template-columns: repeat(3, 1fr); }
+  .branding-item:nth-child(4n + 1), .branding-item:nth-child(4n) { padding-left: 30px; padding-right: 30px; }
+  .branding-item:nth-child(3n + 1) { padding-left: 30px; }
+  .branding-item:nth-child(3n) { padding-right: 30px; }
+  .branding-header { padding: 15px 30px; }
 }
 
-/* Stile per Mobile 🤳 */
 @media (max-width: 767px) {
-  .branding-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 colonne */
-    max-width: 100%;
-  }
-
-  /* Reset padding per layout a 3 e 4 colonne */
-  .branding-item:nth-child(4n + 1),
-  .branding-item:nth-child(4n),
-  .branding-item:nth-child(3n + 1),
-  .branding-item:nth-child(3n) {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  
-  /* Adatta il padding al layout a 2 colonne */
-  .branding-item:nth-child(2n + 1) {
-    padding-left: 20px;
-  }
-  .branding-item:nth-child(2n) {
-    padding-right: 20px;
-  }
-  
-  #pdfViewerContainer {
-    padding: 0 20px;
-  }
+  #glance-grid { grid-template-columns: repeat(4, 1fr); }
+  #project-hero { padding: 20px; padding-top: 0; height: 50vh; } /* Adatta il padding su mobile */
+  .branding-grid { grid-template-columns: repeat(2, 1fr); }
+  .branding-item:nth-child(4n + 1), .branding-item:nth-child(4n), .branding-item:nth-child(3n + 1), .branding-item:nth-child(3n) { padding-left: 20px; padding-right: 20px; }
+  .branding-item:nth-child(2n + 1) { padding-left: 20px; }
+  .branding-item:nth-child(2n) { padding-right: 20px; }
+  #pdfViewerContainer { padding: 0 20px; }
+  .branding-header { padding: 15px 20px; }
+  .branding-header h2 { font-size: 20px; }
 }
