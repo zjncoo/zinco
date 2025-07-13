@@ -149,6 +149,7 @@
 @media (max-width: 1024px) {
   .branding-grid {
     grid-template-columns: repeat(3, 1fr); /* 3 colonne */
+    max-width: 100%;
   }
 
   /* Reset padding per layout a 4 colonne */
@@ -171,6 +172,7 @@
 @media (max-width: 767px) {
   .branding-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 colonne */
+    max-width: 100%;
   }
 
   /* Reset padding per layout a 3 e 4 colonne */

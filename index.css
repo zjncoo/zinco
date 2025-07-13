@@ -596,7 +596,7 @@ body, a, button {
   /* Footer mobile (modificato) */
   footer {
     padding: 0 20px; 
-    margin: 0 0 20px 0;
+    margin: 0 0 20px 20;
   }
   /* MODIFICATO: Padding corretto per mobile */
   .menu-columns {
@@ -604,6 +604,7 @@ body, a, button {
     gap: 2rem;
     padding: 2rem 20px;
     margin-top: 20%;
+    height: fit-content;
   }
   .menu-bottom {
     flex-direction: column;
