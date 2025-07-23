@@ -287,6 +287,9 @@
   .branding-item {
     padding: 15px;
   }
+  #figma-container {
+    display: none;
+  }
 }
 
 /* Query per ridurre le animazioni per accessibilità */
