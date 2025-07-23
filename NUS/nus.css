@@ -1,11 +1,11 @@
 /*
  * ===================================
  * STILI SPECIFICI PER LA PAGINA NUS
- * (Versione finale con griglia multi-colonna e sezioni separate)
+ * (Versione finale, completa e ottimizzata)
  * ===================================
  */
 
-/* ========= STILI HERO E GLANCE (invariati) ========= */
+/* ========= STILI HERO E GLANCE ========= */
 #hero-wrapper {
   height: 100vh;
   display: flex;
@@ -60,17 +60,21 @@
   align-items: center;
   text-decoration: none;
   overflow: hidden;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
-.glance-item:hover { background-color: black; }
-.glance-item:hover > * { filter: invert(1); }
+.glance-item:hover {
+  background-color: black;
+}
+.glance-item:hover img {
+  opacity: 0.7;
+}
 .glance-item img {
   width: 80%; height: 80%;
   object-fit: contain;
-  transition: filter 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
-/* ========= SEZIONE VIDEO (invariata) ========= */
+/* ========= SEZIONE VIDEO ========= */
 .video-container {
   position: relative;
   width: 100%;
@@ -107,10 +111,10 @@
   color: black;
 }
 
-/* ========= GRIGLIA BRANDING (SOLO PER LOGHI, TESTI, COLORI, ECC.) ========= */
+/* ========= GRIGLIA BRANDING ========= */
 .branding-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 COLONNE su desktop */
+  grid-template-columns: repeat(4, 1fr);
   gap: 0px; 
   background-color: white;
   border-top: 2px solid black;
@@ -131,6 +135,8 @@
   font-size: 24px;
   margin: 0;
 }
+
+/* Stile per gli elementi "QUADRATI" (default) */
 .branding-item {
   aspect-ratio: 1 / 1;
   background-color: white;
@@ -140,17 +146,15 @@
   align-items: center;
   text-decoration: none;
   position: relative;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   color: black;
   outline: 2px solid black; 
   padding: 30px;
 }
 .branding-item:hover {
   background-color: black;
-  color: white; /* Rende il testo bianco */
+  color: white;
 }
-
-/* Applichiamo una leggera trasparenza all'immagine invece di invertirla */
 .branding-item:hover img {
   opacity: 1;
 }
@@ -159,6 +163,7 @@
   max-height: 65%;
   object-fit: contain;
   margin-top: 10px;
+  transition: opacity 0.2s ease;
 }
 .branding-item h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -173,7 +178,7 @@
   text-align: center;
 }
 
-/* Stile per le FOTO APP a tutta larghezza (ALL'INTERNO DELLA GRIGLIA) */
+/* Stile per le FOTO APP a tutta larghezza */
 .branding-item.full-width-app {
   grid-column: 1 / -1;
   aspect-ratio: unset;
@@ -196,10 +201,9 @@
   display: none;
 }
 
-/* ========= SEZIONI FIGMA E PDF (NON TOCCATE DALLA GRIGLIA) ========= */
+/* ========= SEZIONI FIGMA E PDF ========= */
 #figma-container {
   width: 100%;
-  margin-top: 0; /* Rimosso il margine per unire le sezioni */
 }
 .figma-embed-wrapper {
   width: 100vw;
@@ -221,9 +225,9 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin: 0 auto; /* Rimosso il margine verticale */
   padding: 80px 40px;
   max-width: 900px;
+  margin: 0 auto;
 }
 #pdfCanvas {
   border: 2px solid black;
@@ -250,6 +254,7 @@
 #pageIndicator { font-family: 'Inter', sans-serif; font-size: 14px; }
 
 /* ========= MEDIA QUERIES PER RESPONSIVITÀ ========= */
+
 @media (max-width: 1024px) {
   .branding-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -271,11 +276,25 @@
   }
   #project-hero h1 {
     max-width: 100%;
+    font-size: clamp(3rem, 12vw, 4rem);
   }
   .scroll-down-arrow {
     font-size: 4rem;
   }
   .video-controls {
     left: 20px;
+  }
+  .branding-item {
+    padding: 15px;
+  }
+}
+
+/* Query per ridurre le animazioni per accessibilità */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

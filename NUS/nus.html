@@ -51,14 +51,12 @@
             <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
           <div id="search-bar" class="hidden">
-            
             <input type="text" id="search-input" placeholder="browse projects..." />
             <div id="filters" class="filters">
               <button id="category-select" onclick="toggleDropdown()">
                 <span>Filters</span>
                 <span class="arrow">▼</span>
               </button>
-
               <div id="category-select-options">
                 <a href="#" data-filter="all" class="filter-option">All</a>
                 <a href="#" data-filter="branding" class="filter-option">branding</a>
@@ -84,7 +82,10 @@
 
   <main id="sezione-progetto">
     <div class="video-container">
-      <video id="myVideo" autoplay loop muted playsinline src="img/Screen Recording 2025-04-18 at 00.21.13.mov"></video>
+      <video id="myVideo" autoplay loop muted playsinline>
+        <source src="img/Screen Recording 2025-04-18 at 00.21.13.mov" type="video/mp4">
+        Il tuo browser non supporta il tag video.
+      </video>
       
       <div class="video-controls">
         <button id="playPauseBtn" class="video-btn cursor-target"></button>
@@ -108,8 +109,14 @@
 
   <footer>
     <div class="cookie-banner" id="cookieBanner"><span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span><span class="close-btn cursor-target" id="closeCookie">✕</span></div>
-    <div class="footer-content"><a href="../index.html" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
-      <div class="footer-text"><p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a></div>
+    <div class="footer-content">
+      <a href="../index.html" class="footer-logo">
+        <img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo" loading="lazy">
+      </a>
+      <div class="footer-text">
+        <p>&copy; 2025 zinco</p>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+      </div>
     </div>
   </footer>
 
