@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
             mainItem.innerHTML = `<h2>${item.label}</h2>`;
           } else {
             mainItem.classList.add('branding-item', 'cursor-target');
+
+            // --- MODIFICA CHIAVE ---
+            // Aggiunge una classe speciale se l'item è una foto dell'app
+            if (item.subtype === 'app-screenshot') {
+              mainItem.classList.add('full-width-app');
+            }
+            
             if (item.type === 'color') {
               mainItem.style.backgroundColor = item.hex;
               mainItem.innerHTML = `<h3>${item.label || ''}</h3>`;
@@ -73,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           const targetId = link.getAttribute('href');
           
-          // Usa l'istanza di Lenis globale
           if (targetId && typeof window.lenis !== 'undefined') {
              window.lenis.scrollTo(targetId, { duration: 2, offset: -20 });
           }
@@ -110,7 +116,6 @@ if (video && playPauseBtn && muteBtn) {
   });
 
   // Assicura che il testo del bottone sia corretto al caricamento
-  // dato che il video parte in autoplay e muted.
   playPauseBtn.textContent = 'Pause';
   muteBtn.textContent = 'Unmute';
 }
