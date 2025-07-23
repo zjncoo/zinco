@@ -564,6 +564,11 @@ body, a, button {
 
 /* --- Per Tablet e dispositivi simili (fino a 1024px) --- */
 @media (max-width: 1024px) {
+
+  .custom-cursor {
+    display: none !important;
+  }
+
   /* Definiamo una guida di allineamento a 30px per tablet */
   .intro,
   footer,
@@ -609,6 +614,7 @@ body, a, button {
   }
   .project-grid a:nth-child(3n + 1) { padding-left: 30px; }
   .project-grid a:nth-child(3n) { padding-right: 30px; }
+
 }
 
 
