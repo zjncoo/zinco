@@ -1,3 +1,22 @@
-a #email {
-  color: black;
+
+
+
+
+#tabella {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 73vh;
+  width: 100vw;
+}
+
+#form {
+  width: 30vw;
+  margin: 20vh;
+}
+
+h1 {
+  margin: 10%;
 }
