@@ -95,17 +95,17 @@
   },
   {
     "type": "header",
-    "label": "Elementi Grafici"
+    "label": "Graphic Elements"
   },
   {
     "type": "image",
     "subtype": "identita",
-    "label": "Elementi Grafici",
+    "label": "Graphic Elements",
     "src": "img/brand/elementi_grafici.png"
   },
   {
     "type": "header",
-    "label": "Palette Colori"
+    "label": "Color Palette"
   },
   {
     "type": "color",

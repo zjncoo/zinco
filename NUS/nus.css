@@ -325,25 +325,88 @@
 #pageIndicator { font-family: 'Inter', sans-serif; font-size: 14px; }
 
 
-/* ========= MEDIA QUERIES PER RESPONSIVITÀ ========= */
+/*
+ * =========================================================
+ * MEDIA QUERIES MINIMALI PER RESPONSIVITÀ
+ * =========================================================
+*/
+
+/* --- Per Tablet (fino a 1024px) --- */
 @media (max-width: 1024px) {
-  #glance-grid { grid-template-columns: repeat(5, 1fr); }
-  #project-hero { padding: 30px; }
-  .branding-grid { grid-template-columns: repeat(3, 1fr); }
-  .branding-item:nth-child(4n + 1), .branding-item:nth-child(4n) { padding-left: 30px; padding-right: 30px; }
+  /* Adeguamo i padding principali */
+  #project-hero,
+  .branding-header {
+    padding: 30px;
+  }
+
+  /* La griglia branding passa a 3 colonne, un buon compromesso per iPad */
+  .branding-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Adattiamo il padding laterale per la griglia a 3 colonne */
+  .branding-item:nth-child(4n + 1), 
+  .branding-item:nth-child(4n) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
   .branding-item:nth-child(3n + 1) { padding-left: 30px; }
   .branding-item:nth-child(3n) { padding-right: 30px; }
-  .branding-header { padding: 15px 30px; }
+  
+  /* Riduciamo leggermente la freccia */
+  .scroll-down-arrow {
+    font-size: 5rem;
+  }
 }
 
+
+/* --- Per Telefoni (fino a 767px) --- */
 @media (max-width: 767px) {
-  #glance-grid { grid-template-columns: repeat(4, 1fr); }
-  #project-hero { padding: 20px; }
-  .branding-grid { grid-template-columns: repeat(2, 1fr); }
-  .branding-item:nth-child(4n + 1), .branding-item:nth-child(4n), .branding-item:nth-child(3n + 1), .branding-item:nth-child(3n) { padding-left: 20px; padding-right: 20px; }
-  .branding-item:nth-child(2n + 1) { padding-left: 20px; }
-  .branding-item:nth-child(2n) { padding-right: 20px; }
-  #pdfViewerContainer { padding: 0 20px; }
-  .branding-header { padding: 15px 20px; }
-  .branding-header h2 { font-size: 20px; }
+  /* Adeguamo i padding per schermi piccoli */
+  #project-hero,
+  .branding-header {
+    padding: 20px;
+    height: fit-content;
+  }
+
+  #website a {
+      padding: 0.8rem 1.2rem; /* Pulsante sull'iframe leggermente più piccolo */
+  }
+
+  /* Titolo a tutta larghezza */
+  #project-hero h1 {
+    max-width: 80%;
+    font-size: clamp(7rem, 8vw, 7rem);
+  }
+  
+
+  /* Riduciamo ulteriormente la freccia */
+  .scroll-down-arrow {
+    font-size: 4rem;
+  }
+
+  /* La griglia branding passa a 2 colonne, come da tua indicazione */
+  .branding-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Resettiamo e adattiamo il padding per la griglia a 2 colonne su telefono */
+  .branding-item,
+  .branding-item:nth-child(4n + 1), 
+  .branding-item:nth-child(4n),
+  .branding-item:nth-child(3n + 1),
+  .branding-item:nth-child(3n) {
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+  
+  /* Centriamo il testo descrittivo per una migliore leggibilità */
+  .branding-item p {
+      text-align: center;
+  }
+  
+  .video-controls {
+    left: 20px; /* Avviciniamo i controlli video al bordo */
+  }
 }
+

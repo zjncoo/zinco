@@ -23,7 +23,6 @@ h1, h2, h3, h4, h5, h6,
 
 h2 {
   font-size: 30px;
-  left: 40px;
 }
 
 /* --- STILI ESISTENTI --- */
@@ -253,7 +252,9 @@ body, a, button {
 }
 
 .projects-section h2 {
-  left: 40px;
+  position: relative; /* Rende 'left' funzionante */
+  left: 40px;         /* Allinea l'elemento a 40px dal bordo */
+  text-align: left;   /* Allinea il testo all'interno dell'elemento */
 }
 
 .project-grid a {
@@ -555,99 +556,125 @@ body, a, button {
 }
 
 
-/* --- MEDIA QUERIES --- */
-@media (max-width: 767px) {
-  .intro {
-    padding: 0 20px;
+/*
+ * =========================================================
+ * MEDIA QUERIES OTTIMIZZATE
+ * =========================================================
+*/
+
+/* --- Per Tablet e dispositivi simili (fino a 1024px) --- */
+@media (max-width: 1024px) {
+  /* Definiamo una guida di allineamento a 30px per tablet */
+  .intro,
+  footer,
+  .menu-columns,
+  .menu-bottom {
+    padding-left: 30px;
+    padding-right: 30px;
   }
-  .grid-container h2 {
-    padding: 20px;
+
+  .projects-section h2 {
+    left: 30px; /* Allineiamo gli h2 */
   }
+
+  /* Allineiamo logo e bottoni d'angolo */
+  #button-logo {
+    left: 22px; /* 30px - 8px di padding del bottone */
+  }
+  #btnTopLeft, #btnBottomLeft {
+    left: 22px;
+  }
+  #btnTopRight, #btnBottomRight {
+    right: 22px;
+  }
+  
   #logo {
-    width: 50%;
-    left: 16px;
-    padding: 4px;
+    width: 200px; /* Usiamo una larghezza fissa più gestibile della % */
+    left: 0;
+    position: relative;
+    padding: 0;
   }
-  .top-left, #btnTopLeft, #btnBottomLeft {
+
+  /* Layout della griglia a 3 colonne */
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Adattiamo il padding per la griglia a 3 colonne */
+  .project-grid a,
+  .project-grid a:nth-child(4n + 1),
+  .project-grid a:nth-child(4n) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .project-grid a:nth-child(3n + 1) { padding-left: 30px; }
+  .project-grid a:nth-child(3n) { padding-right: 30px; }
+}
+
+
+/* --- Per Telefoni (fino a 767px) --- */
+@media (max-width: 767px) {
+  /* Definiamo una guida di allineamento a 20px per mobile */
+  .intro,
+  footer,
+  .menu-columns,
+  .menu-bottom {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .projects-section h2 {
+    left: 20px; /* Allineiamo gli h2 */
+  }
+
+  /* Allineiamo logo e bottoni d'angolo */
+  #button-logo {
+    left: 12px; /* 20px - 8px di padding del bottone */
+  }
+  #btnTopLeft, #btnBottomLeft {
     left: 12px;
   }
-  .top-right, #btnTopRight, #btnBottomRight {
+  #btnTopRight, #btnBottomRight {
     right: 12px;
   }
+  
+  #logo {
+    width: 150px; /* Logo ancora più piccolo */
+  }
+
+  /* Layout della griglia a 2 colonne */
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Semplifichiamo il padding per la griglia a 2 colonne: un padding uniforme è più pulito */
+  .project-grid a,
   .project-grid a:nth-child(4n + 1),
-  .project-grid a:nth-child(4n) {
-    padding-left: 15px; 
-    padding-right: 15px;
-  }
-  .project-grid a:nth-child(2n + 1) {
-    padding-left: 20px;
-  }
+  .project-grid a:nth-child(4n),
+  .project-grid a:nth-child(3n + 1),
+  .project-grid a:nth-child(3n),
+  .project-grid a:nth-child(2n + 1),
   .project-grid a:nth-child(2n) {
-    padding-right: 20px;
+    padding: 20px; /* Applichiamo un padding uniforme e pulito a tutti gli elementi */
   }
+  
   footer {
-    padding: 0 20px; 
-    margin: 0 0 20px 20;
+    /* Corretto il typo nel margine */
+    margin: 40px 0 20px 0;
+    margin-bottom: 150px;
   }
+
+  /* Il menu diventa verticale */
   .menu-columns {
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem 20px;
     margin-top: 20%;
-    height: fit-content;
   }
   .menu-bottom {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    padding: 0 20px 2rem;
+    padding-top: 2rem;
     margin-top: 10%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .intro {
-    padding: 0 30px;
-  }
-  .grid-container h2 {
-    padding: 20px 30px;
-  }
-  #logo {
-    width: 30%;
-    left: 24px;
-    padding: 6px;
-  }
-  .top-left, #btnTopLeft, #btnBottomLeft {
-    left: 22px;
-  }
-  .top-right, #btnTopRight, #btnBottomRight {
-    right: 22px;
-  }
-  .project-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .project-grid a:nth-child(4n + 1),
-  .project-grid a:nth-child(4n) {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .project-grid a:nth-child(3n + 1) {
-    padding-left: 30px;
-  }
-  .project-grid a:nth-child(3n) {
-    padding-right: 30px;
-  }
-  footer {
-    padding: 0 30px; 
-    margin: 0 0 30px 0;
-  }
-  .menu-columns {
-    padding: 2rem 30px;
-  }
-  .menu-bottom {
-    padding: 0 30px 2rem;
   }
 }

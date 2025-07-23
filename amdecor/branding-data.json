@@ -53,21 +53,21 @@
   },
   {
     "type": "header",
-    "label": "Palette Colori"
+    "label": "Color Palette"
   },
   {
     "type": "color",
-    "label": "#FF0000",
-    "hex": "#FF0000"
+    "label": "#941c21",
+    "hex": "#941c21"
   },
   {
     "type": "color",
-    "label": "#00FF00",
-    "hex": "#00FF00"
+    "label": "#ffffff",
+    "hex": "#ffffff"
   },
   {
     "type": "color",
-    "label": "#0000FF",
-    "hex": "#0000FF"
+    "label": "#3f3e3e",
+    "hex": "#3f3e3e"
   }
 ]
