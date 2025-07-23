@@ -8,12 +8,13 @@
   {
     "type": "text",
     "label": "Description",
-    "content": "This Project (which includes Branding and Website) was commissioned by a Tour Company based in Torno, Lake Como"
+    "content": "escapes Lake Como è un tour operator specializzato in esperienze uniche e autentiche. Creiamo itinerari su misura per scoprire gli angoli più nascosti e affascinanti del Lago di Como."
   },
   {
-    "type": "link",
+    "type": "text",
     "label": "Visit Website",
-    "url": "https://escapeslakecomo.com"
+    "content": "<a href='https://escapeslakecomo.com' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>Visit Website ↗</a>",
+    "linkUrl": "https://escapeslakecomo.com"
   },
   {
     "type": "text",
@@ -23,46 +24,50 @@
   {
     "type": "text",
     "label": "Payoff",
-    "content": "Il tuo futuro comincia qui"
+    "content": "Scopri l'anima del lago."
   },
   {
     "type": "text",
     "label": "Values",
-    "content": "Sostenibilità, innovazione, trasparenza"
+    "content": "Autenticità, Esclusività, Passione per il territorio"
   },
   {
     "type": "text",
     "label": "Mission",
-    "content": "Discover the less know Lake Como attractions."
+    "content": "Offrire esperienze di viaggio immersive e personalizzate, svelando le gemme nascoste del Lago di Como e andando oltre le classiche mete turistiche."
   },
   {
     "type": "text",
     "label": "Vision",
-    "content": "Let everyone know yet nearly undiscovered places"
+    "content": "Diventare il punto di riferimento per un turismo consapevole e di alta gamma sul Lago di Como, facendo conoscere la sua vera essenza a un pubblico internazionale."
   },
   {
     "type": "text",
     "label": "Brand Essence",
-    "content": "Armonia e cura"
+    "content": "Scoperta Esclusiva"
   },
   {
     "type": "text",
     "label": "Brand Architecture",
-    "content": "Single One Person Brand"
+    "content": "Brand Monolitico"
+  },
+  {
+    "type": "header",
+    "label": "Palette Colori"
   },
   {
     "type": "color",
     "label": "#FF0000",
-    "class": "color1"
+    "hex": "#FF0000"
   },
   {
     "type": "color",
     "label": "#00FF00",
-    "class": "color2"
+    "hex": "#00FF00"
   },
   {
     "type": "color",
     "label": "#0000FF",
-    "class": "color3"
+    "hex": "#0000FF"
   }
 ]
