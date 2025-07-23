@@ -1,105 +1,44 @@
 /*
  * ===================================
  * STILI SPECIFICI PER LA PAGINA NUS
+ * (Versione finale con griglia multi-colonna e sezioni separate)
  * ===================================
  */
 
-/* ========= STILI PER LA SEZIONE HERO INIZIALE (CORRETTI) ========= */
-/* 1. Rendi il contenitore principale un punto di riferimento per il posizionamento */
-#website {
-  position: relative; /* Fondamentale per posizionare elementi figli al suo interno */
-  width: 100%;        /* Assicurati che abbia una dimensione definita */
-  height: 40vh;      /* Esempio: altezza pari al 100% della finestra */
-  display: block;
-}
-
-/* 2. Posiziona il link in modo assoluto, al di sopra di tutto */
-#website a {
-  position: absolute;   /* Sgancia il link dal flusso normale */
-  top: 50%;             /* Posiziona il suo bordo superiore al 50% dall'alto */
-  left: 50%; 
-  border: black solid 2px; /* Rimuove il bordo di default */           /* Posiziona il suo bordo sinistro al 50% da sinistra */
-  
-  /* Questa è la magia per centrarlo perfettamente */
-  transform: translate(-50%, -50%); 
-  
-  z-index: 10;          /* Mettilo su un livello superiore rispetto all'iframe */
-
-  /* Stili aggiuntivi per renderlo più visibile e cliccabile */
-  background-color: rgba(255, 255, 255, 0);
-  color: black;
-  padding: 1rem 2rem;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-/* Stile per quando ci passi sopra con il mouse */
-#website a:hover {
-    background-color: rgb(0, 0, 0);
-    color: white;
-}
-
-
-/* 3. Assicurati che l'iframe occupi tutto lo spazio del contenitore */
-#website iframe {
-  width: 100%;
-  height: 40vh;
-  border: black solid 2px; /* Rimuove il bordo di default */
-  filter: blur(7px);
-}
-
-
-/* Il contenitore che occupa tutto lo schermo */
+/* ========= STILI HERO E GLANCE (invariati) ========= */
 #hero-wrapper {
   height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: white;
 }
-
-/* La sezione del titolo ora allinea gli elementi in colonna */
 #project-hero {
   flex-grow: 1; 
   width: 100%;
   display: flex;
-  flex-direction: column;      /* MODIFICA: Imposta la direzione verticale */
-  justify-content: flex-end;   /* Spinge il blocco (freccia + titolo) in basso */
-  align-items: flex-start;     /* Allinea tutto a sinistra */
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   box-sizing: border-box;
-  padding: 32px;
+  padding: 40px;
   border-bottom: 2px solid black;
 }
-
 #project-hero h1 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  font-size: clamp(2rem, 8vw, 7rem);
+  font-size: clamp(2.5rem, 8vw, 7rem);
   margin: 0;
-  max-width: 70%; /* Può occupare tutta la larghezza ora */
+  max-width: 70%;
   line-height: 0.9;
   letter-spacing: -0.02em;
 }
-
-/* Stile per la freccia posizionata sopra */
 .scroll-down-arrow {
-  position: static;
-  transform: none;
-  width: auto;
-  height: auto;
-  border: none;
-  background-color: transparent;
+  font-size: 6rem;
+  line-height: 1;
+  margin-bottom: 1rem;
   color: black;
   text-decoration: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 6rem; /* Dimensione ridotta per stare sopra il titolo */
-  line-height: 1;
-  margin-bottom: 1rem; /* Spazio tra la freccia e il titolo */
 }
-
-
-/* ========= STILI PER GRIGLIA-ANTEPRIMA ========= */
 #glance-container {
   width: 100%;
   position: relative;
@@ -108,17 +47,14 @@
   background-color: black;
   z-index: 1001; 
 }
-
 #glance-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 2px;
 }
-
 .glance-item {
   aspect-ratio: 1 / 1;
   background-color: white;
-  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,33 +70,25 @@
   transition: filter 0.2s ease;
 }
 
-
-/* ========= STILI CONTENUTO PRINCIPALE ========= */
+/* ========= SEZIONE VIDEO (invariata) ========= */
+.video-container {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
 #myVideo {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
-
-/* Stili per il contenitore del video e i controlli */
-.video-container {
-  position: relative;
-  width: 100%;
-  line-height: 0; /* Rimuove spazio extra sotto il video */
-}
-
 .video-controls {
   position: absolute;
   bottom: 12%;
-  /* CORREZIONE: Allineamento a sinistra, in linea con gli altri elementi */
   left: 40px; 
-  transform: none;
   display: flex;
   gap: 10px;
   z-index: 10;
 }
-
-/* CORREZIONE: Stile basato sul pulsante "surprise me" */
 .video-btn {
   background-color: transparent;
   color: white;
@@ -170,21 +98,19 @@
   font-weight: bold;
   font-size: 14px;
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
   border-radius: 0; 
   transition: all 0.2s ease;
-  
-  /* Aggiungi questa riga */
   mix-blend-mode: difference;
 }
-
 .video-btn:hover {
   background-color: white;
   color: black;
 }
+
+/* ========= GRIGLIA BRANDING (SOLO PER LOGHI, TESTI, COLORI, ECC.) ========= */
 .branding-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 4 COLONNE su desktop */
   gap: 0px; 
   background-color: white;
   border-top: 2px solid black;
@@ -192,19 +118,22 @@
   width: 100%;
   padding: 0;
 }
-
-.card-link {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Assicura che il link sia sopra il contenuto */
+.branding-header {
+  grid-column: 1 / -1; 
+  background-color: black;
+  color: white;
+  padding: 15px 40px;
+  text-align: left;
 }
-
+.branding-header h2 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+}
 .branding-item {
-  background-color: white;
   aspect-ratio: 1 / 1;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -216,56 +145,55 @@
   outline: 2px solid black; 
   padding: 30px;
 }
-
-.branding-item:nth-child(4n + 1) { padding-left: 40px; }
-.branding-item:nth-child(4n) { padding-right: 40px; }
-
-.branding-header {
-  grid-column: 1 / -1; 
-  background-color: black;
-  color: white;
-  padding: 15px 40px;
-  text-align: left;
-}
-
-.branding-header h2 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 24px;
-  margin: 0;
-}
-
+.branding-item:hover { background-color: black; }
+.branding-item:hover > * { filter: grayscale(1) invert(1); }
 .branding-item img {
   max-width: 50%;
   max-height: 65%;
   object-fit: contain;
   margin-top: 10px;
 }
-
 .branding-item h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 16px;
   margin: 0 0 15px 0;
 }
-
 .branding-item p {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
+  max-width: 35ch;
+  text-align: center;
 }
 
-.text-item p {
-  max-width: 30ch;
+/* Stile per le FOTO APP a tutta larghezza (ALL'INTERNO DELLA GRIGLIA) */
+.branding-item.full-width-app {
+  grid-column: 1 / -1;
+  aspect-ratio: unset;
+  height: fit-content;
+  padding: 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.branding-item.full-width-app img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+  object-fit: cover;
+  margin-top: 0;
+}
+.branding-item.full-width-app h3 {
+  display: none;
 }
 
-.branding-item:hover { background-color: black; }
-.branding-item:hover > * { filter: grayscale(1) invert(1); }
-
+/* ========= SEZIONI FIGMA E PDF (NON TOCCATE DALLA GRIGLIA) ========= */
 #figma-container {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 0; /* Rimosso il margine per unire le sezioni */
 }
-
 .figma-embed-wrapper {
   width: 100vw;
   height: 85vh;
@@ -276,39 +204,31 @@
   border-bottom: 2px solid black;
   background-color: #f0f0f0;
 }
-
 .figma-embed-wrapper iframe {
   width: 100%;
   height: 100%;
   border: none;
 }
-
 #pdfViewerContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin: 80px auto;
-  padding: 0 40px;
+  margin: 0 auto; /* Rimosso il margine verticale */
+  padding: 80px 40px;
   max-width: 900px;
-  height: 100vh;
 }
-
 #pdfCanvas {
-  margin-top: 10%;
   border: 2px solid black;
   width: 100%;
   height: auto;
 }
-
 .pdf-controls {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 25px;
 }
-
 .pdf-nav {
   background-color: transparent;
   border: 2px solid black;
@@ -318,95 +238,37 @@
   font-size: 16px;
   padding: 8px 16px;
   transition: all 0.2s ease;
-  cursor: pointer;
 }
-
 .pdf-nav:hover { background-color: black; color: white; }
 #pageIndicator { font-family: 'Inter', sans-serif; font-size: 14px; }
 
-
-/*
- * =========================================================
- * MEDIA QUERIES MINIMALI PER RESPONSIVITÀ
- * =========================================================
-*/
-
-/* --- Per Tablet (fino a 1024px) --- */
+/* ========= MEDIA QUERIES PER RESPONSIVITÀ ========= */
 @media (max-width: 1024px) {
-  /* Adeguamo i padding principali */
-  #project-hero,
-  .branding-header {
-    padding: 30px;
-  }
-
-  /* La griglia branding passa a 3 colonne, un buon compromesso per iPad */
   .branding-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  /* Adattiamo il padding laterale per la griglia a 3 colonne */
-  .branding-item:nth-child(4n + 1), 
-  .branding-item:nth-child(4n) {
-    padding-left: 30px;
-    padding-right: 30px;
+  #project-hero, .branding-header {
+    padding: 30px;
   }
-  .branding-item:nth-child(3n + 1) { padding-left: 30px; }
-  .branding-item:nth-child(3n) { padding-right: 30px; }
-  
-  /* Riduciamo leggermente la freccia */
   .scroll-down-arrow {
     font-size: 5rem;
   }
 }
 
-
-/* --- Per Telefoni (fino a 767px) --- */
 @media (max-width: 767px) {
-  /* Adeguamo i padding per schermi piccoli */
-  #project-hero,
-  .branding-header {
-    padding: 20px;
-    height: fit-content;
-  }
-
-  #website a {
-      padding: 0.8rem 1.2rem; /* Pulsante sull'iframe leggermente più piccolo */
-  }
-
-  /* Titolo a tutta larghezza */
-  #project-hero h1 {
-    max-width: 80%;
-    font-size: clamp(7rem, 8vw, 7rem);
-  }
-  
-
-  /* Riduciamo ulteriormente la freccia */
-  .scroll-down-arrow {
-    font-size: 4rem;
-  }
-
-  /* La griglia branding passa a 2 colonne, come da tua indicazione */
   .branding-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  /* Resettiamo e adattiamo il padding per la griglia a 2 colonne su telefono */
-  .branding-item,
-  .branding-item:nth-child(4n + 1), 
-  .branding-item:nth-child(4n),
-  .branding-item:nth-child(3n + 1),
-  .branding-item:nth-child(3n) {
-      padding-left: 20px;
-      padding-right: 20px;
+  #project-hero, .branding-header {
+    padding: 20px;
   }
-  
-  /* Centriamo il testo descrittivo per una migliore leggibilità */
-  .branding-item p {
-      text-align: center;
+  #project-hero h1 {
+    max-width: 100%;
   }
-  
+  .scroll-down-arrow {
+    font-size: 4rem;
+  }
   .video-controls {
-    left: 20px; /* Avviciniamo i controlli video al bordo */
+    left: 20px;
   }
 }
-

@@ -155,13 +155,13 @@
   },
   {
     "type": "image",
-    "subtype": "applicazione",
+    "subtype": "app-screenshot",
     "label": "Manifesti",
     "src": "img/applicazioni/manifesti.png"
   },
   {
     "type": "image",
-    "subtype": "applicazione",
+    "subtype": "app-screenshot",
     "label": "Mockup",
     "src": "img/applicazioni/mockup.png"
   },
@@ -172,7 +172,7 @@
   },
   {
     "type": "image",
-    "subtype": "applicazione",
+    "subtype": "app-screenshot",
     "label": "App",
     "src": "img/applicazioni/app.png"
   }
