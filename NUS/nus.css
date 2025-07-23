@@ -45,7 +45,7 @@
   border-bottom: 2px solid black;
   box-sizing: border-box;
   background-color: black;
-  z-index: 1001; 
+  z-index: 999; 
 }
 #glance-grid {
   display: grid;
