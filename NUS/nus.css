@@ -271,6 +271,11 @@
   .branding-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .branding-item {
+    width: 50vw;
+    aspect-ratio: 1 / 1;
+    padding: 15px;
+  }
   #project-hero, .branding-header {
     padding: 20px;
   }
