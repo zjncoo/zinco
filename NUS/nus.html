@@ -17,14 +17,16 @@
 </head>
 
 <body>
-  <section id="project-hero">
-    <h1 id="hero-title"></h1>
-  </section>
+  <div id="hero-wrapper">
+    <section id="project-hero">
+      <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+      <h1 id="hero-title"></h1>
+    </section>
 
-  <section id="glance-container">
-    <div id="glance-grid"></div>
-    <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
-  </section>
+    <section id="glance-container">
+      <div id="glance-grid"></div>
+    </section>
+  </div>
 
   <div class="vertical-line left"></div>
   <div class="vertical-line right"></div>
@@ -45,7 +47,14 @@
   </div>
 
   <main id="sezione-progetto">
-    <video id="myVideo" autoplay loop muted playsinline src="img/Screen Recording 2025-04-18 at 00.21.13.mov"></video>
+    <div class="video-container">
+      <video id="myVideo" autoplay loop muted playsinline src="img/Screen Recording 2025-04-18 at 00.21.13.mov"></video>
+      
+      <div class="video-controls">
+        <button id="playPauseBtn" class="video-btn cursor-target"></button>
+        <button id="muteBtn" class="video-btn cursor-target"></button>
+      </div>
+    </div>
     
     <section class="branding-grid" id="brandingGrid"></section>
 
@@ -69,107 +78,10 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="pdf-viewer.js" defer></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const lenis = new Lenis();
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
-      fetch('branding-data.json')
-        .then(response => response.json())
-        .then(data => {
-
-          // --- MODIFICA: Ho reinserito qui la logica mancante per il titolo ---
-          const heroTitle = document.getElementById('hero-title');
-          const namingItem = data.find(item => item.label === 'Naming');
-          if (heroTitle && namingItem) {
-            heroTitle.textContent = namingItem.content;
-          }
-          // --- FINE MODIFICA ---
-          
-          const glanceGrid = document.getElementById('glance-grid');
-          const mainGrid = document.getElementById('brandingGrid');
-          const figmaSection = document.getElementById('figma-container');
-          
-          const figmaItem = data.find(item => item.type === 'figma');
-          const gridData = data.filter(item => item.type !== 'figma');
-
-          gridData.forEach((item, index) => {
-            const uniqueId = `content-item-${index}`;
-            const mainItem = document.createElement(item.type === 'link' ? 'a' : 'div');
-            mainItem.id = uniqueId;
-
-            if (item.type === 'link') {
-              mainItem.classList.add('branding-item', 'cursor-target');
-              mainItem.href = item.url;
-              mainItem.target = '_blank';
-              mainItem.rel = 'noopener noreferrer';
-              mainItem.innerHTML = `<h3>${item.label}</h3><p style="text-decoration: underline;">${item.url.replace('https://', '')} ↗</p>`;
-            } else if (item.type === 'header') {
-              mainItem.classList.add('branding-header');
-              mainItem.innerHTML = `<h2>${item.label}</h2>`;
-            } else {
-              mainItem.classList.add('branding-item', 'cursor-target');
-              if (item.type === 'color') {
-                mainItem.style.backgroundColor = item.hex;
-                mainItem.innerHTML = `<h3>${item.label || ''}</h3>`;
-              } else if (item.type === 'image') {
-                mainItem.innerHTML = `<h3>${item.label}</h3><img src="${item.src}" alt="${item.label}" />`;
-              } else { // text
-                mainItem.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
-              }
-            }
-            mainGrid.appendChild(mainItem);
-          });
-
-          if (figmaItem && figmaSection) {
-            const uniqueId = 'content-item-figma';
-            figmaSection.id = uniqueId;
-            figmaSection.innerHTML = `
-              <div class="branding-header"><h2>${figmaItem.label}</h2></div>
-              <div class="figma-embed-wrapper"><iframe src="${figmaItem.embedUrl}" allowfullscreen></iframe></div>
-            `;
-          }
-          
-          data.forEach((item, index) => {
-            const isGraphical = item.type === 'image' || item.type === 'color' || item.type === 'figma';
-            
-            if (isGraphical) {
-              const uniqueId = (item.type === 'figma') ? 'content-item-figma' : `content-item-${index}`;
-              const glanceLink = document.createElement('a');
-              glanceLink.href = `#${uniqueId}`;
-              glanceLink.classList.add('glance-item', 'cursor-target');
-
-              if (item.type === 'color') {
-                glanceLink.style.backgroundColor = item.hex;
-              } else if (item.type === 'image') {
-                glanceLink.innerHTML = `<img src="${item.src}" alt="Anteprima di ${item.label}" />`;
-              } else if (item.type === 'figma') {
-                glanceLink.classList.add('glance-figma');
-                glanceLink.innerHTML = '<span>Figma</span>';
-              }
-              glanceGrid.appendChild(glanceLink);
-            }
-          });
-
-          const allLinks = document.querySelectorAll('#glance-grid a, .scroll-down-arrow');
-          allLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-              e.preventDefault();
-              const targetId = link.getAttribute('href');
-              if (targetId) lenis.scrollTo(targetId, { duration: 2, offset: -20 });
-            });
-          });
-        });
-    });
-  </script>
-  
+  <script src="../index.js" defer></script>
   <script src="branding-project.js" defer></script>
+  <script src="pdf-viewer.js" defer></script>
 
 </body>
 </html>

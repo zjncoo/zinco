@@ -11,16 +11,6 @@
     "content": "This Project is part of the Metaproject Design Course, it was developed with other 4 students. Thee objective of the project was to operate an ipothetical rebrand of our chosen brand: Roxy, which was a famous European Cigarettes brand in the '80s"
   },
   {
-    "type": "link",
-    "label": "Roxy APP",
-    "url": "https://www.figma.com/proto/q8vhcmNWryqmNsHCULiCAW/ROXY-APP?page-id=0%3A1&node-id=2-2&p=f&viewport=401%2C287%2C0.05&t=cnmhGaI7p669IQu2-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2%3A2"
-  },
-  {
-    "type": "link",
-    "label": "Roxy QUIZ",
-    "url": "https://www.figma.com/proto/q8vhcmNWryqmNsHCULiCAW/ROXY-APP?node-id=354-197&t=18F13nsdvUp2iJlE-1"
-  },
-  {
     "type": "text",
     "label": "Naming",
     "content": "ROXY"
@@ -56,18 +46,43 @@
     "content": "Master brand con sub-brand regionali"
   },
   {
-    "type": "color",
-    "label": "#FF0000",
-    "class": "color1"
+    "type": "text",
+    "label": "Target",
+    "content": "Il target di ROXYGEN è l’individuo AMBIZIOSO, che desidera essere il migliore, ma che allo stesso tempo riesce a prendere la vita con leggerezza ed ironia e riconosce quando ha bisogno di un momento di svago."
+  },
+  {
+    "type": "header",
+    "label": "Prototipi Interattivi"
+  },
+  {
+    "type": "text",
+    "label": "Roxy APP",
+    "content": "<a href='https://www.figma.com/proto/q8vhcmNWryqmNsHCULiCAW/ROXY-APP?page-id=0%3A1&node-id=2-2&p=f&viewport=401%2C287%2C0.05&t=cnmhGaI7p669IQu2-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2%3A2' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>Apri prototipo ↗</a>",
+    "linkUrl": "https://www.figma.com/proto/q8vhcmNWryqmNsHCULiCAW/ROXY-APP?page-id=0%3A1&node-id=2-2&p=f&viewport=401%2C287%2C0.05&t=cnmhGaI7p669IQu2-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2%3A2"
+  },
+  {
+    "type": "text",
+    "label": "Roxy QUIZ",
+    "content": "<a href='https://www.figma.com/proto/q8vhcmNWryqmNsHCULiCAW/ROXY-APP?node-id=354-197&t=18F13nsdvUp2iJlE-1' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>Apri prototipo ↗</a>",
+    "linkUrl": "https://www.figma.com/proto/q8vhcmNWryqmNsHCULiCAW/ROXY-APP?node-id=354-197&t=18F13nsdvUp2iJlE-1"
+  },
+  {
+    "type": "header",
+    "label": "Palette Colori"
   },
   {
     "type": "color",
-    "label": "#00FF00",
-    "class": "color2"
+    "label": "#D51119",
+    "hex": "#D51119"
   },
   {
     "type": "color",
-    "label": "#0000FF",
-    "class": "color3"
+    "label": "#FEFDE8",
+    "hex": "#FEFDE8"
+  },
+  {
+    "type": "color",
+    "label": "#000000",
+    "hex": "#000000"
   }
 ]

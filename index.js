@@ -1,190 +1,89 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const closeButton = document.getElementById('closeCookie');
-    const banner = document.getElementById('cookieBanner');
-  
-    closeButton.addEventListener('click', () => {
-      banner.style.display = 'none';
-    });
+// --- INIZIALIZZAZIONE GLOBALE DELLO SCROLL ---
+// Assegnamo lenis all'oggetto 'window' per renderlo
+// esplicitamente globale e accessibile da altri script.
+window.lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
 });
 
+function raf(time) {
+  // Assicurati che lenis esista prima di chiamare raf
+  if (window.lenis) {
+    window.lenis.raf(time);
+  }
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Close cookie banner
-    const closeButton = document.getElementById('closeCookie');
-    const banner = document.getElementById('cookieBanner');
-    closeButton.addEventListener('click', () => {
-      banner.style.display = 'none';
-    });
+
   
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-  
-    // Move the cursor
+  // --- CURSORE PERSONALIZZATO (versione fluida e performante) ---
+  const cursor = document.getElementById('cursor');
+  if (cursor) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    const speed = 0.3;
+
     document.addEventListener('mousemove', (e) => {
-      cursor.style.top = `${e.clientY}px`;
-      cursor.style.left = `${e.clientX}px`;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
-  
-    // Detect interactive elements
+
+    const animateCursor = () => {
+      const distX = mouseX - cursorX;
+      const distY = mouseY - cursorY;
+      cursorX += distX * speed;
+      cursorY += distY * speed;
+      cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+      requestAnimationFrame(animateCursor);
+    };
+    requestAnimationFrame(animateCursor);
+
     document.addEventListener('mouseover', (e) => {
-      const isInteractive = e.target.closest('a, button, .clickable, [role="button"], [onclick]');
-      if (isInteractive) {
+      if (e.target.closest('a, button, .cursor-target, [role="button"], [onclick]')) {
         cursor.classList.add('cursor-hover');
-      } else {
+      }
+    });
+    
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest('a, button, .cursor-target, [role="button"], [onclick]')) {
         cursor.classList.remove('cursor-hover');
       }
     });
-  
-    // Remove class on mouseout to avoid stickiness
-    document.addEventListener('mouseout', (e) => {
-      cursor.classList.remove('cursor-hover');
+  }
+
+  // --- GESTIONE MENU ---
+  const moreButton = document.getElementById("btnTopRight");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  if (moreButton && dropdownMenu) {
+    const toggleMenu = (e) => {
+      e.preventDefault();
+      const isOpen = dropdownMenu.classList.toggle("open");
+      moreButton.textContent = isOpen ? "close" : "more";
+      moreButton.classList.toggle("open");
+    };
+    const handleClickOutside = (e) => {
+      if (!dropdownMenu.contains(e.target) && !moreButton.contains(e.target) && dropdownMenu.classList.contains("open")) {
+        toggleMenu(e);
+      }
+    };
+    moreButton.addEventListener("click", toggleMenu);
+    document.addEventListener("click", handleClickOutside);
+  }
+
+  // --- GESTIONE COOKIE BANNER ---
+  const closeCookieButton = document.getElementById('closeCookie');
+  const cookieBanner = document.getElementById('cookieBanner');
+  if (closeCookieButton && cookieBanner) {
+    closeCookieButton.addEventListener('click', () => {
+      cookieBanner.style.display = 'none';
     });
-});
-
-//open menu
-
-const moreButton = document.getElementById("btnTopRight");
-const dropdownMenu = document.getElementById("dropdownMenu");
-
-function toggleMenu(e) {
-  e.preventDefault();
-  const isOpen = dropdownMenu.classList.contains("open");
-
-  if (isOpen) {
-    dropdownMenu.classList.remove("open");
-    moreButton.textContent = "more";
-    moreButton.classList.remove("open");
-  } else {
-    dropdownMenu.classList.add("open");
-    moreButton.textContent = "close";
-    moreButton.classList.add("open");
   }
-}
-
-function handleClickOutside(e) {
-  const isClickInsideMenu = dropdownMenu.contains(e.target);
-  const isClickOnButton = moreButton.contains(e.target);
-
-  if (!isClickInsideMenu && !isClickOnButton && dropdownMenu.classList.contains("open")) {
-    dropdownMenu.classList.remove("open");
-    moreButton.textContent = "more";
-    moreButton.classList.remove("open");
-  }
-}
-
-moreButton.addEventListener("click", toggleMenu);
-document.addEventListener("click", handleClickOutside);
 
 
-//random project
-document.getElementById('randomProjectButton').addEventListener('click', () => {
-  const projectLinks = Array.from(document.querySelectorAll('.projects-section .project-grid a'));
-  if (projectLinks.length === 0) return;
-
-  const randomIndex = Math.floor(Math.random() * projectLinks.length);
-  const randomHref = projectLinks[randomIndex].getAttribute('href');
-
-  if (randomHref) {
-    window.location.href = randomHref;
-  }
-});
-
-//smooth scrolling
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
-  smooth: true,
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  smoothTouch: true,
-  touchMultiplier: 2,
-  infinite: false,
-});
-
-// Update on each frame
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
-requestAnimationFrame(raf)
-
-//search bar
-// Toggle search bar visibility
-document.getElementById("search-button").addEventListener("click", function () {
-  const searchBar = document.getElementById("search-bar");
-  const searchOverlay = document.getElementById("search-overlay");
-  const body = document.body;
-
-  searchBar.classList.toggle("hidden");
-  searchOverlay.classList.toggle("hidden");
-  body.classList.toggle("search-active");
-});
-
-document.getElementById("search-overlay").addEventListener("click", function () {
-  const searchBar = document.getElementById("search-bar");
-  const searchOverlay = document.getElementById("search-overlay");
-  searchBar.classList.add("hidden");
-  searchOverlay.classList.add("hidden");
-  document.body.classList.remove("search-active");
-});
-
-// Close button for search bar
-document.getElementById("closeSearch").addEventListener("click", function () {
-  const searchBar = document.getElementById("search-bar");
-  const searchOverlay = document.getElementById("search-overlay");
-  searchBar.classList.add("hidden");
-  searchOverlay.classList.add("hidden");
-  document.body.classList.remove("search-active");
-});
-
-// Project list
-const projects = [
-  { title: "AM Decor", category: "branding", link: "project1.html" },
-  { title: "NUS", category: "branding", link: "NUS/nus.html" },
-  { title: "escapes", category: "branding", link: "escapes/escapes.html" },
-  { title: "ROXY", category: "branding", link: "ROXY/roxy.html" },
-  { title: "p5 Project 1", category: "p5", link: "p5_1.html" },
-  { title: "p5 Project 2", category: "p5", link: "p5_2.html" },
-  { title: "p5 Project 3", category: "p5", link: "p5_3.html" },
-];
-
-// Live search logic
-document.getElementById("search-input").addEventListener("input", function () {
-  const query = this.value.toLowerCase();
-  const category = document.getElementById("category-select").value;
-
-  const filteredProjects = projects.filter(project => {
-    const matchesQuery = project.title.toLowerCase().includes(query);
-    const matchesCategory = category ? project.category === category : true;
-    return matchesQuery && matchesCategory;
-  });
-
-  const suggestionsList = document.getElementById("search-suggestions");
-  suggestionsList.innerHTML = "";
-
-  filteredProjects.forEach(project => {
-    const li = document.createElement("li");
-    li.textContent = project.title;
-    li.addEventListener("click", function () {
-      window.location.href = project.link;
-    });
-    suggestionsList.appendChild(li);
-  });
-});
-
-// Click outside to close suggestions
-document.addEventListener("click", function (e) {
-  const searchBar = document.getElementById("search-bar");
-  const searchButton = document.getElementById("search-button");
-  if (!searchBar.contains(e.target) && e.target !== searchButton) {
-    document.getElementById("search-suggestions").innerHTML = "";
-  }
-});
-
-// Close button for search bar
-document.getElementById("search-close").addEventListener("click", function () {
-  const searchBar = document.getElementById("search-bar");
-  const searchOverlay = document.getElementById("search-overlay");
-  searchBar.classList.add("hidden");
-  searchOverlay.classList.add("hidden");
-  document.body.classList.remove("search-active");
 });

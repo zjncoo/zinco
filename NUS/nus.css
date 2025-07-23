@@ -4,20 +4,73 @@
  * ===================================
  */
 
+/* ========= STILI PER LA SEZIONE HERO INIZIALE (CORRETTI) ========= */
+
+/* Il contenitore che occupa tutto lo schermo */
+#hero-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+/* La sezione del titolo ora allinea gli elementi in colonna */
+#project-hero {
+  flex-grow: 1; 
+  width: 100%;
+  display: flex;
+  flex-direction: column;      /* MODIFICA: Imposta la direzione verticale */
+  justify-content: flex-end;   /* Spinge il blocco (freccia + titolo) in basso */
+  align-items: flex-start;     /* Allinea tutto a sinistra */
+  box-sizing: border-box;
+  padding: 32px;
+  border-bottom: 2px solid black;
+}
+
+#project-hero h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: clamp(2rem, 8vw, 7rem);
+  margin: 0;
+  max-width: 70%; /* Può occupare tutta la larghezza ora */
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+/* Stile per la freccia posizionata sopra */
+.scroll-down-arrow {
+  position: static;
+  transform: none;
+  width: auto;
+  height: auto;
+  border: none;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 6rem; /* Dimensione ridotta per stare sopra il titolo */
+  line-height: 1;
+  margin-bottom: 1rem; /* Spazio tra la freccia e il titolo */
+}
+
+
 /* ========= STILI PER GRIGLIA-ANTEPRIMA ========= */
 #glance-container {
-  width: 100vw;
+  width: 100%;
   position: relative;
-  padding: 0;
   border-bottom: 2px solid black;
   box-sizing: border-box;
   background-color: black;
+  z-index: 1001; 
 }
+
 #glance-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 2px;
 }
+
 .glance-item {
   aspect-ratio: 1 / 1;
   background-color: white;
@@ -36,57 +89,55 @@
   object-fit: contain;
   transition: filter 0.2s ease;
 }
-.scroll-down-arrow {
-  position: absolute;
-  bottom: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2.5rem;
-  color: black;
-  background-color: white;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid black;
-  text-decoration: none;
-}
-
-/* ========= STILI PER LA SEZIONE HERO (MODIFICATA) ========= */
-#project-hero {
-  height: 70vh;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  /* MODIFICA 1: Allinea il contenuto in basso invece che al centro */
-  align-items: flex-end; 
-  box-sizing: border-box;
-  border-bottom: 2px solid black;
-  /* MODIFICA 2: Imposta il padding per creare lo spazio nell'angolo */
-  padding: 32px; /* Un padding uniforme su tutti i lati per semplicità */
-  padding-top: 0; /* Rimuoviamo quello superiore che non serve */
-}
-#project-hero h1 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: clamp(2rem, 8vw, 7rem);
-  margin: 0;
-  max-width: 70vw;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-}
 
 
 /* ========= STILI CONTENUTO PRINCIPALE ========= */
 #myVideo {
   width: 100%;
   height: auto;
-  max-height: 70vh;
   object-fit: cover;
 }
 
+/* Stili per il contenitore del video e i controlli */
+.video-container {
+  position: relative;
+  width: 100%;
+  line-height: 0; /* Rimuove spazio extra sotto il video */
+}
+
+.video-controls {
+  position: absolute;
+  bottom: 12%;
+  /* CORREZIONE: Allineamento a sinistra, in linea con gli altri elementi */
+  left: 40px; 
+  transform: none;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+/* CORREZIONE: Stile basato sul pulsante "surprise me" */
+.video-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 0.4rem 0.8rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 0; 
+  transition: all 0.2s ease;
+  
+  /* Aggiungi questa riga */
+  mix-blend-mode: difference;
+}
+
+.video-btn:hover {
+  background-color: white;
+  color: black;
+}
 .branding-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -176,6 +227,7 @@
 .figma-embed-wrapper iframe {
   width: 100%;
   height: 100%;
+  border: none;
 }
 
 #pdfViewerContainer {
@@ -186,9 +238,11 @@
   margin: 80px auto;
   padding: 0 40px;
   max-width: 900px;
+  height: 100vh;
 }
 
 #pdfCanvas {
+  margin-top: 10%;
   border: 2px solid black;
   width: 100%;
   height: auto;
@@ -217,43 +271,11 @@
 .pdf-nav:hover { background-color: black; color: white; }
 #pageIndicator { font-family: 'Inter', sans-serif; font-size: 14px; }
 
-.placeholder-container {
-  width: 100%;
-  padding: 60px 40px;
-  border: 2px dashed #ccc;
-  box-sizing: border-box;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-}
-
-.placeholder-container h3 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin: 0 0 10px 0;
-}
-
-.placeholder-container p { margin: 0 0 20px 0; color: #666; }
-
-.load-btn {
-  background-color: black;
-  color: white;
-  border: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 12px 24px;
-  transition: all 0.2s ease;
-}
-
-.load-btn:hover { opacity: 0.8; }
-.custom-cursor { will-change: transform; }
-
 
 /* ========= MEDIA QUERIES PER RESPONSIVITÀ ========= */
 @media (max-width: 1024px) {
   #glance-grid { grid-template-columns: repeat(5, 1fr); }
-  #project-hero { padding: 30px; padding-top: 0; } /* Adatta il padding su tablet */
+  #project-hero { padding: 30px; }
   .branding-grid { grid-template-columns: repeat(3, 1fr); }
   .branding-item:nth-child(4n + 1), .branding-item:nth-child(4n) { padding-left: 30px; padding-right: 30px; }
   .branding-item:nth-child(3n + 1) { padding-left: 30px; }
@@ -263,7 +285,7 @@
 
 @media (max-width: 767px) {
   #glance-grid { grid-template-columns: repeat(4, 1fr); }
-  #project-hero { padding: 20px; padding-top: 0; height: 50vh; } /* Adatta il padding su mobile */
+  #project-hero { padding: 20px; }
   .branding-grid { grid-template-columns: repeat(2, 1fr); }
   .branding-item:nth-child(4n + 1), .branding-item:nth-child(4n), .branding-item:nth-child(3n + 1), .branding-item:nth-child(3n) { padding-left: 20px; padding-right: 20px; }
   .branding-item:nth-child(2n + 1) { padding-left: 20px; }

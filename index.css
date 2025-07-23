@@ -101,14 +101,11 @@ main {
   margin-bottom: 40px;
 }
 
-/* --- SEZIONE FOOTER (MODIFICATA) --- */
-/* --- SEZIONE FOOTER (MODIFICATA) --- */
+/* --- SEZIONE FOOTER --- */
 footer {
   background-color: white;
   color: black;
-  /* Rimosso il padding verticale, mantenuto solo quello laterale */
   padding: 0 40px;
-  /* Ripristinato il margine per avere spazio sotto il footer */
   margin: 20px 0 100px 0;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -122,7 +119,6 @@ footer {
   align-items: center;
   width: 100%;
   gap: 20px;
-  /* Spostato qui il padding verticale per dare spazio al contenuto */
 }
 
 .footer-logo img {
@@ -152,7 +148,7 @@ footer {
 }
 
 
-/* Cookie banner fix */
+/* --- COOKIE BANNER --- */
 .cookie-banner {
   display: flex;
   justify-content: space-between;
@@ -176,34 +172,34 @@ footer {
   background: none;
   border: none;
 }
+/* --- CURSORE PERSONALIZZATO (CODICE CORRETTO) --- */
 /* HIDE SYSTEM CURSOR */
 body, a, button {
   cursor: none;
 }
 
-/* BASE CUSTOM CURSOR */
+/* --- CURSORE PERSONALIZZATO (versione performante) --- */
+
 .custom-cursor {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   pointer-events: none;
   position: fixed;
-  top: 0;
-  left: 0;
   z-index: 10000;
-  background-color: white;
+  top: 0; left: 0; /* Necessari per il posizionamento iniziale */
+  background-color: transparent;
+  border: 2px solid white;
   mix-blend-mode: difference;
-  transition: transform 0.2s ease;
+  /* CORREZIONE CHIAVE: Nessuna transizione su 'transform' per evitare lag */
+  transition: width 0.3s ease, height 0.3s ease;
 }
-
-/* ON CLICKABLE ELEMENTS */
 .custom-cursor.cursor-hover {
-  transform: translate(-50%, -50%) scale(2);
-  background-color: rgb(255, 255, 255);
-  mix-blend-mode: difference; /* optional, for cool contrast */
+  width: 45px;
+  height: 45px;
 }
 
-/* Stile condiviso dei bottoni */
+/* --- BOTTONI D'ANGOLO --- */
 .corner-button {
     position: fixed;
     color: black;
@@ -235,9 +231,8 @@ body, a, button {
 }
 
 
-/* --- PROJECT GRID (SWISS STYLE) --- */
+/* --- PROJECT GRID --- */
 
-/* MODIFICATO: Rimosso padding per griglia a tutta larghezza */
 .projects-section {
   padding: 0;
   width: 100%;
@@ -248,25 +243,19 @@ body, a, button {
   margin-bottom: 40px;
 }
 
-
-
-/* MODIFICATO: Griglia a tutta larghezza con linee rosse */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0px; /* Spessore delle linee */
-  background-color: white; /* Colore delle linee */
+  gap: 0px; 
+  background-color: white; 
   border-top: 2px solid black;
   border-bottom: 2px solid black;
-
-  
 }
 
 .projects-section h2 {
   left: 40px;
 }
 
-/* MODIFICATO: Rimosso bordo, aggiunto padding laterale selettivo */
 .project-grid a {
   background-color: white;
   aspect-ratio: 1 / 1;
@@ -279,15 +268,13 @@ body, a, button {
   text-decoration: none;
   position: relative;
   transition: background-color 0.2s ease;
-  padding: 30px; /* Padding di base */
+  padding: 30px; 
 }
 
-/* Aggiunge padding laterale alla prima colonna */
 .project-grid a:nth-child(4n + 1) {
   padding-left: 40px;
 }
 
-/* Aggiunge padding laterale all'ultima colonna */
 .project-grid a:nth-child(4n) {
   padding-right: 40px;
 }
@@ -305,7 +292,6 @@ body, a, button {
   z-index: 1;
 }
 
-/* MODIFICATO: Effetto hover con sfondo nero e contenuto in scala di grigi */
 .project-grid a:hover {
   background-color: black;
 }
@@ -345,7 +331,7 @@ body, a, button {
 }
 
 
-/*MENU*/
+/*--- MENU ---*/
 #dropdownMenu {
   position: fixed;
   top: 0;
@@ -362,11 +348,10 @@ body, a, button {
   height: 60vh;
 }
 
-/* MODIFICATO: Allineamento e padding corretti */
 .menu-columns {
   display: flex;
-  justify-content: space-between; /* Spinge le colonne ai lati */
-  padding: 2rem 40px; /* Allinea il contenuto alle linee verticali */
+  justify-content: space-between; 
+  padding: 2rem 40px; 
   margin-top: 10%;
 }
 
@@ -394,13 +379,12 @@ body, a, button {
   font-weight: 800;
 }
 
-/* MODIFICATO: Padding corretto */
 .menu-bottom {
   display: flex;
   justify-content: left;
   gap: 2rem;
   align-items: center;
-  padding: 0 40px 2rem; /* Allinea il contenuto alle linee verticali */
+  padding: 0 40px 2rem; 
 }
 
 .menu-email {
@@ -435,7 +419,7 @@ body, a, button {
   color: white;
 }
 
-/* --- SEARCH BAR (RIPRISTINATO) --- */
+/* --- SEARCH BAR --- */
 #search-bar-container {
   position: relative;
   display: inline-block;
@@ -560,6 +544,17 @@ body, a, button {
   z-index: 1100;
 }
 
+/* --- LINEE VERTICALI FISSE --- */
+.vertical-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: black;
+  z-index: 500; 
+}
+
+
 /* --- MEDIA QUERIES --- */
 @media (max-width: 767px) {
   .intro {
@@ -584,7 +579,7 @@ body, a, button {
   }
   .project-grid a:nth-child(4n + 1),
   .project-grid a:nth-child(4n) {
-    padding-left: 15px; /* Reset per mobile */
+    padding-left: 15px; 
     padding-right: 15px;
   }
   .project-grid a:nth-child(2n + 1) {
@@ -593,12 +588,10 @@ body, a, button {
   .project-grid a:nth-child(2n) {
     padding-right: 20px;
   }
-  /* Footer mobile (modificato) */
   footer {
     padding: 0 20px; 
     margin: 0 0 20px 20;
   }
-  /* MODIFICATO: Padding corretto per mobile */
   .menu-columns {
     flex-direction: column;
     gap: 2rem;
@@ -638,7 +631,7 @@ body, a, button {
   }
   .project-grid a:nth-child(4n + 1),
   .project-grid a:nth-child(4n) {
-    padding-left: 15px; /* Reset per tablet */
+    padding-left: 15px;
     padding-right: 15px;
   }
   .project-grid a:nth-child(3n + 1) {
@@ -647,12 +640,10 @@ body, a, button {
   .project-grid a:nth-child(3n) {
     padding-right: 30px;
   }
-  /* Footer tablet (modificato) */
   footer {
     padding: 0 30px; 
     margin: 0 0 30px 0;
   }
-  /* MODIFICATO: Padding corretto per tablet */
   .menu-columns {
     padding: 2rem 30px;
   }
@@ -660,16 +651,3 @@ body, a, button {
     padding: 0 30px 2rem;
   }
 }
-
-
-/* --- LINEE VERTICALI FISSE --- */
-.vertical-line {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background-color: black;
-  z-index: 500; /* Assicura che siano sopra il contenuto ma sotto elementi come menu o popup */
-}
-
-
