@@ -1,0 +1,88 @@
+[
+  {
+    "type": "image",
+    "subtype": "logo",
+    "label": "logo",
+    "src": "img/gizeta.png"
+  },
+  {
+    "type": "text",
+    "label": "description",
+    "content": "Gizeta SAS è un'impresa di costruzioni specializzata in edilizia residenziale, ristrutturazioni e manutenzioni. Operiamo con precisione e materiali di qualità per garantire risultati solidi e duraturi nel tempo."
+  },
+  {
+    "type": "text",
+    "label": "naming",
+    "content": "Gizeta SAS"
+  },
+  {
+    "type": "text",
+    "label": "payoff",
+    "content": "Costruiamo valore, mattone dopo mattone."
+  },
+  {
+    "type": "text",
+    "label": "values",
+    "content": "Solidità, Qualità, Affidabilità, Sicurezza"
+  },
+  {
+    "type": "text",
+    "label": "mission",
+    "content": "Realizzare opere edili che superino le aspettative dei clienti, garantendo sicurezza, durabilità e rispetto dei tempi e dei budget concordati."
+  },
+  {
+    "type": "text",
+    "label": "vision",
+    "content": "Diventare un punto di riferimento nel settore delle costruzioni locali per l'eccellenza esecutiva, la trasparenza e l'integrità professionale."
+  },
+  {
+    "type": "text",
+    "label": "brand essence",
+    "content": "Costruire per durare."
+  },
+  {
+    "type": "text",
+    "label": "brand architecture",
+    "content": "Brand Monolitico"
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "Clienti privati, architetti e piccole-medie imprese che cercano un partner affidabile per la realizzazione o la ristrutturazione di immobili."
+  },
+  {
+    "type": "header",
+    "label": "Applicazioni del Marchio"
+  },
+  {
+    "type": "image",
+    "subtype": "mockup",
+    "label": "Biglietto da Visita",
+    "src": "img/gizeta_biglietto.png"
+  },
+  {
+    "type": "image",
+    "subtype": "mockup",
+    "label": "Automezzo Aziendale",
+    "src": "img/gizeta_furgone.png"
+  },
+  {
+    "type": "header",
+    "label": "palette colori"
+  },
+  {
+    "type": "color",
+    "label": "#343a40",
+    "hex": "#343a40"
+  },
+  {
+    "type": "color",
+    "label": "#fca311",
+    "hex": "#fca311"
+  },
+  {
+    "type": "color",
+    "label": "#e9ecef",
+    "hex": "#e9ecef"
+  }
+]

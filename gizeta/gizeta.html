@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gizeta SAS - zinco</title>
+  
+  <link rel="stylesheet" href="../index.css" />
+  <link rel="stylesheet" href="../NUS/nus.css" />
+
+  <link rel="icon" href="img/logo roxy.svg" type="image/svg+xml" />
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="preloader">
+    <a href="/index.html" id="logo"><img src="/imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+    <div class="loader-bar-container">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <div id="hero-wrapper">
+    <section id="project-hero">
+      <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+      <h1 id="hero-title"></h1>
+    </section>
+
+    <section id="glance-container">
+      <div id="glance-grid"></div>
+    </section>
+  </div>
+
+  <div class="vertical-line left"></div>
+  <div class="vertical-line right"></div>
+
+  <div class="custom-cursor" id="cursor"></div>
+
+  <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
+  <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
+  <a href="../contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+
+  <div id="dropdownMenu">
+    <div class="menu-columns">
+      <div class="menu-column left">
+        <a href="../about/about.html" class="menu-link">about me</a>
+        <a href="../contact.html" class="menu-link">contacts</a>
+        <a href="../cardgenerator.html" class="menu-link">card generator</a>
+  
+        <div id="search-bar-container">
+          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <div id="search-overlay" class="hidden">
+            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
+          </div>
+          <div id="search-bar" class="hidden">
+            <input type="text" id="search-input" placeholder="browse projects..." />
+            <div id="filters" class="filters">
+              <button id="category-select" onclick="toggleDropdown()">
+                <span>Filters</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div id="category-select-options">
+                <a href="#" data-filter="all" class="filter-option">All</a>
+                <a href="#" data-filter="branding" class="filter-option">branding</a>
+                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
+              </div>
+            </div>
+            <ul id="search-suggestions" class="suggestions-list"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="menu-column right">
+        <a href="#" class="menu-link">archive</a>
+        <a href="#" class="menu-link">research</a>
+        <a href="#" class="menu-link">clients</a>
+      </div>
+    </div>
+
+    <div class="menu-bottom">
+      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+    </div>
+  </div>
+
+  <main id="sezione-progetto">
+    <div class="video-container">
+      <video id="myVideo" autoplay loop muted playsinline src="img/video finito.mp4"></video>
+      
+      <div class="video-controls">
+        <button id="playPauseBtn" class="video-btn cursor-target"></button>
+        <button id="muteBtn" class="video-btn cursor-target"></button>
+      </div>
+    </div>
+    
+    <section class="branding-grid" id="brandingGrid"></section>
+
+    <section id="figma-container"></section>
+  
+    <div id="pdfViewerContainer">
+      <canvas id="pdfCanvas"></canvas>
+      <div class="pdf-controls">
+        <button id="prevPage" class="pdf-nav">←</button>
+        <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
+        <button id="nextPage" class="pdf-nav">→</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="cookie-banner" id="cookieBanner"><span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span><span class="close-btn cursor-target" id="closeCookie">✕</span></div>
+    <div class="footer-content"><a href="../index.html" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+      <div class="footer-text"><p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a></div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <script src="../index.js" defer></script>
+  <script src="../NUS/branding-project.js" defer></script>
+  <script src="pdf-viewer.js" defer></script>
+
+</body>
+</html>
