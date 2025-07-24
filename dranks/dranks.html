@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Drink</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Elenco Cocktail</h1>
+        <button id="open-filters-btn">Filtri</button>
+    </header>
+
+    <div id="filter-overlay" class="overlay">
+        <div class="overlay-content">
+            <a href="javascript:void(0)" class="close-btn" id="close-filters-btn">&times;</a>
+            <h2>Filtri</h2>
+            <div class="filter-section">
+                <label for="spirit-filter">Distillato Principale:</label>
+                <select id="spirit-filter"></select>
+            </div>
+            <div class="filter-section">
+                <h3>Ingredienti Aggiuntivi:</h3>
+                <div id="ingredient-filters"></div>
+            </div>
+        </div>
+    </div>
+
+    <main id="drink-list" class="drink-grid">
+        </main>
+
+    <script src="drinks.js"></script> 
+    <script src="script.js"></script>
+</body>
+</html>
