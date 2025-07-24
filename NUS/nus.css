@@ -279,6 +279,9 @@
   #project-hero, .branding-header {
     padding: 20px;
   }
+  #project-hero {
+    padding-top: 10%;
+  }
   #project-hero h1 {
     max-width: 100%;
     font-size: clamp(3rem, 12vw, 4rem);
