@@ -1,4 +1,4 @@
-/* Stile grafico e minimalista - v11 con filtro prezzo */
+/* Stile grafico e minimalista - v12 con correzioni layout */
 
 /* --- IMPOSTAZIONI GLOBALI E FONT --- */
 :root {
@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6, .beer-name {
 }
 
 .logo-placeholder img {
-    height: 40px; /* Imposta l'altezza del tuo logo */
+    height: 100px; /* Imposta l'altezza del tuo logo */
     width: auto;  /* La larghezza si adatterà in modo proporzionale */
     display: block; /* Rimuove spazi extra sotto l'immagine */
 }
@@ -79,7 +79,7 @@ h1, h2, h3, h4, h5, h6, .beer-name {
 #country-filter {
     width: 100%;
     max-width: 350px;
-    padding: 12px 16px;
+    padding: 12px 40px 12px 16px; /* Aumentato padding a destra per la freccia */
     border: var(--border-width) solid var(--border-color);
     border-radius: 0;
     background-color: var(--main-bg);
@@ -160,6 +160,11 @@ input[type="range"]::-moz-range-thumb {
     transition: background-color 0.2s ease, color 0.2s ease;
     position: relative;
     /* border-bottom gestito da ::after */
+    
+    /* MODIFICA: Rendi tutti gli item 100vw */
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Riepilogo Birra */
