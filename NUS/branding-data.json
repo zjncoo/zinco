@@ -18,7 +18,7 @@
   {
     "type": "text",
     "label": "payoff",
-    "content": "il tuo futuro comincia qui"
+    "content": "Make Future a shared Place"
   },
   {
     "type": "text",
@@ -27,18 +27,18 @@
   },
   {
     "type": "text",
+    "label": "brand essence",
+    "content": "We shape shared futures by grounding knowledge in place, people, and purpose."
+  },
+  {
+    "type": "text",
     "label": "mission",
-    "content": "rendere la bellezza accessibile a tutti"
+    "content": "To make practical and theoretical tools available to people, enabling them to understand and value the communities in which they will operate."
   },
   {
     "type": "text",
     "label": "vision",
-    "content": "diventare il punto di riferimento nel settore estetico"
-  },
-  {
-    "type": "text",
-    "label": "brand essence",
-    "content": "armonia e cura"
+    "content": "We believe in a society that cooperates in a synergic way, in which everyone collaborates actively for common well-being."
   },
   {
     "type": "text",
@@ -54,6 +54,11 @@
     "type": "text",
     "label": "brand architecture",
     "content": "master brand con sub-brand regionali"
+  },
+  {
+    "type": "text",
+    "label": "creators",
+    "content": "francesco z., lucrezia s., gaia b., aurelia la c., martina s. "
   },
   {
     "type": "header",

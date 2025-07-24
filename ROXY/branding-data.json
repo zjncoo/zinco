@@ -51,6 +51,11 @@
     "content": "il target di roxygen è l’individuo ambizioso, che desidera essere il migliore, ma che allo stesso tempo riesce a prendere la vita con leggerezza ed ironia e riconosce quando ha bisogno di un momento di svago."
   },
   {
+    "type": "text",
+    "label": "creators",
+    "content": "francesco z., sofia, r., gaia b., silvia a., matteo b. "
+  },
+  {
     "type": "header",
     "label": "prototipi interattivi"
   },
