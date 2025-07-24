@@ -6,6 +6,12 @@
     "src": "img/amlogo.svg"
   },
   {
+    "type": "image",
+    "subtype": "logo",
+    "label": "Logo",
+    "src": "img/logovecchio.jpeg"
+  },
+  {
     "type": "text",
     "label": "Description",
     "content": "Progetto di identità visiva e branding per una S.r.l. specializzata in costruzioni e ristrutturazioni di alta qualità."
@@ -69,5 +75,45 @@
     "type": "color",
     "label": "#3f3e3e",
     "hex": "#3f3e3e"
+  },
+  {
+    "type": "header",
+    "label": "Applicazioni"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/tag mockup.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/van mockup.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/insegne amdecor-02.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/insegne amdecor-03.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/insegne amdecor-04.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/insegne amdecor-05.png"
   }
 ]
