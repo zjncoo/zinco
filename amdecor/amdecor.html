@@ -41,34 +41,28 @@
   <div id="dropdownMenu">
     <div class="menu-columns">
       <div class="menu-column left">
-        <a href="about/about.html" class="menu-link">about me</a>
-        <a href="#" class="menu-link">contacts</a>
-        <a href="cardgenerator.html" class="menu-link">card generator</a>
+        <a href="../about/about.html" class="menu-link">about me</a>
+        <a href="../contact.html" class="menu-link">contacts</a>
+        <a href="../cardgenerator.html" class="menu-link">card generator</a>
   
-        <!-- Search Button (Magnifier Icon) -->
         <div id="search-bar-container">
           <button id="search-button" class="search-icon cursor-target">🔍</button>
           <div id="search-overlay" class="hidden">
             <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
           <div id="search-bar" class="hidden">
-            
             <input type="text" id="search-input" placeholder="browse projects..." />
             <div id="filters" class="filters">
-              <!-- Filter Button with Down Arrow -->
               <button id="category-select" onclick="toggleDropdown()">
                 <span>Filters</span>
                 <span class="arrow">▼</span>
               </button>
-
-              <!-- Filter Dropdown Options -->
               <div id="category-select-options">
                 <a href="#" data-filter="all" class="filter-option">All</a>
                 <a href="#" data-filter="branding" class="filter-option">branding</a>
                 <a href="#" data-filter="p5" class="filter-option">p5.js</a>
               </div>
             </div>
-            <!-- Suggestions appear here -->
             <ul id="search-suggestions" class="suggestions-list"></ul>
           </div>
         </div>
