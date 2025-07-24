@@ -2,64 +2,64 @@
   {
     "type": "image",
     "subtype": "logo",
-    "label": "Logo",
+    "label": "logo",
     "src": "img/amlogo.svg"
   },
   {
     "type": "image",
     "subtype": "logo",
-    "label": "Old Logo",
+    "label": "old logo",
     "src": "img/logovecchio.jpeg"
   },
   {
     "type": "text",
-    "label": "Description",
-    "content": "Progetto di identità visiva e branding per una S.r.l. specializzata in costruzioni e ristrutturazioni di alta qualità."
+    "label": "description",
+    "content": "progetto di identità visiva e branding per una s.r.l. specializzata in costruzioni e ristrutturazioni di alta qualità."
   },
   {
     "type": "text",
-    "label": "Visit Website",
-    "content": "<a href='https://amdecorsrl.com' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>Visit Website ↗</a>",
+    "label": "visit website",
+    "content": "<a href='https://amdecorsrl.com' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>visit website ↗</a>",
     "linkUrl": "https://amdecorsrl.com"
   },
   {
     "type": "text",
-    "label": "Naming",
-    "content": "AM Decor SRL"
+    "label": "naming",
+    "content": "am decor srl"
   },
   {
     "type": "text",
-    "label": "Payoff",
-    "content": "Costruiamo valore, edificio dopo edificio."
+    "label": "payoff",
+    "content": "costruiamo valore, edificio dopo edificio."
   },
   {
     "type": "text",
-    "label": "Values",
-    "content": "Solidità, Qualità, Innovazione, Trasparenza"
+    "label": "values",
+    "content": "solidità, qualità, innovazione, trasparenza"
   },
   {
     "type": "text",
-    "label": "Mission",
-    "content": "Realizzare opere edili che uniscono funzionalità, estetica e sicurezza, garantendo la massima soddisfazione del cliente attraverso l'uso di materiali eccellenti e processi efficienti."
+    "label": "mission",
+    "content": "realizzare opere edili che uniscono funzionalità, estetica e sicurezza, garantendo la massima soddisfazione del cliente attraverso l'uso di materiali eccellenti e processi efficienti."
   },
   {
     "type": "text",
-    "label": "Vision",
-    "content": "Diventare un punto di riferimento nel settore per la capacità di integrare soluzioni costruttive tradizionali con l'innovazione tecnologica e la sostenibilità ambientale."
+    "label": "vision",
+    "content": "diventare un punto di riferimento nel settore per la capacità di integrare soluzioni costruttive tradizionali con l'innovazione tecnologica e la sostenibilità ambientale."
   },
   {
     "type": "text",
-    "label": "Brand Essence",
-    "content": "Solidità e Design"
+    "label": "brand essence",
+    "content": "solidità e design"
   },
   {
     "type": "text",
-    "label": "Brand Architecture",
-    "content": "Brand Monolitico"
+    "label": "brand architecture",
+    "content": "brand monolitico"
   },
   {
     "type": "header",
-    "label": "Color Palette"
+    "label": "color palette"
   },
   {
     "type": "color",
@@ -78,7 +78,7 @@
   },
   {
     "type": "header",
-    "label": "Applicazioni"
+    "label": "applicazioni"
   },
   {
     "type": "image",

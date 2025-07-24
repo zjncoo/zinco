@@ -1,4 +1,49 @@
+// Preloader logic (MODIFIED)
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  
+  if (preloader) {
+    // A short delay for a smoother effect after the loading bar animation
+    setTimeout(() => {
+      preloader.classList.add('loaded');
+    }, 500); 
+    
+    // The 'transitionend' event listener has been REMOVED. That's it!
+  }
+});
 
+// Page Transition logic
+document.addEventListener('DOMContentLoaded', () => {
+  const preloader = document.getElementById('preloader');
+
+  // Find all internal links
+  const links = document.querySelectorAll('a[href^="/"], a[href^="."], a:not([href^="http"])');
+
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Get the destination URL
+      const destination = link.getAttribute('href');
+
+      // Check if it's a new tab click or a non-navigational link
+      if (link.target === '_blank' || e.ctrlKey || e.metaKey || destination.startsWith('#') || destination.startsWith('mailto:') || destination.startsWith('tel:')) {
+        return; // Let the browser handle it normally
+      }
+      
+      // If it's a same-page navigation, prevent default and trigger the animation
+      e.preventDefault();
+
+      // 1. Bring the preloader back down by removing the 'loaded' class
+      if (preloader) {
+        preloader.classList.remove('loaded');
+      }
+
+      // 2. Wait for the animation to finish, then navigate
+      setTimeout(() => {
+        window.location.href = destination;
+      }, 800); // This duration should match your CSS transition time (0.8s)
+    });
+  });
+});
 
 // --- INIZIALIZZAZIONE GLOBALE DELLO SCROLL ---
 // Assegnamo lenis all'oggetto 'window' per renderlo

@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
   // Funzione per convertire i percorsi delle immagini in .webp
   const toWebp = (url) => {
@@ -14,61 +16,67 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       const heroTitle = document.getElementById('hero-title');
       const mainGrid = document.getElementById('brandingGrid');
-      const figmaSection = document.getElementById('figma-container');
       const glanceGrid = document.getElementById('glance-grid');
 
-      const namingItem = data.find(item => item.label === 'Naming');
+      const namingItem = data.find(item => item.label === 'naming');
       if (heroTitle && namingItem) {
         heroTitle.textContent = namingItem.content;
       }
 
-      // --- PRIMO CICLO: COSTRUZIONE GRIGLIA PRINCIPALE ---
+      // --- PRIMO CICLO: COSTRUZIONE GRIGLIA PRINCIPALE (MODIFICATO) ---
       data.forEach((item, index) => {
         const uniqueId = `content-item-${index}`;
-        if (item.type === 'figma') {
-          if (figmaSection) {
-            figmaSection.id = uniqueId;
-            figmaSection.innerHTML = `
-              <div class="branding-header"><h2>${item.label}</h2></div>
-              <div class="figma-embed-wrapper"><iframe src="${item.embedUrl}" allowfullscreen></iframe></div>`;
+
+        // Se l'elemento è di tipo 'header', lo gestiamo separatamente
+        if (item.type === 'header') {
+          const headerItem = document.createElement('div');
+          headerItem.classList.add('branding-header');
+          headerItem.innerHTML = `<h2>${item.label}</h2>`;
+          mainGrid.appendChild(headerItem);
+        }
+        // Per tutti gli altri elementi, creiamo un riquadro nella griglia
+        else {
+          let mainItem; // Dichiariamo la variabile qui
+
+          // Se è il link a Figma, creiamo un tag <a>
+          if (item.type === 'figma') {
+            mainItem = document.createElement('a'); // <-- Elemento <a> cliccabile
+            mainItem.href = item.embedUrl;
+            mainItem.target = '_blank'; // Per aprire in una nuova scheda
+            mainItem.rel = 'noopener noreferrer';
+            mainItem.innerHTML = `<h3>${item.label}</h3><p>Apri prototipo →</p>`;
           }
-        } else {
-          const mainItem = document.createElement('div');
-          mainItem.id = uniqueId;
-          if (item.type === 'header') {
-            mainItem.classList.add('branding-header');
-            mainItem.innerHTML = `<h2>${item.label}</h2>`;
-          } else {
-            mainItem.classList.add('branding-item', 'cursor-target');
-
-            if (item.subtype === 'app-screenshot') {
-              mainItem.classList.add('full-width-app');
-            }
-
+          // Altrimenti, per immagini, colori, etc., creiamo un <div> come prima
+          else {
+            mainItem = document.createElement('div');
             if (item.type === 'color') {
               mainItem.style.backgroundColor = item.hex;
               mainItem.innerHTML = `<h3>${item.label || ''}</h3>`;
             } else if (item.type === 'image') {
-              // --- OTTIMIZZAZIONE IMMAGINI PRINCIPALI ---
               const title = document.createElement('h3');
               title.textContent = item.label;
-
               const img = document.createElement('img');
-              img.src = toWebp(item.src); // Usa la versione .webp
+              img.src = toWebp(item.src);
               img.alt = item.label;
-              img.loading = 'lazy';      // Caricamento pigro
-              img.decoding = 'async';    // Decodifica asincrona
-              
-              mainItem.append(title, img); // Aggiunge gli elementi creati
-              // --- FINE OTTIMIZZAZIONE ---
+              img.loading = 'lazy';
+              img.decoding = 'async';
+              mainItem.append(title, img);
             } else if (item.type === 'text') {
               mainItem.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
             }
           }
+
+          // Aggiungiamo le classi comuni e l'ID a tutti i riquadri
+          mainItem.id = uniqueId;
+          mainItem.classList.add('branding-item', 'cursor-target');
+          if (item.subtype === 'app-screenshot') {
+            mainItem.classList.add('full-width-app');
+          }
+
           mainGrid.appendChild(mainItem);
         }
       });
-      
+
       // --- SECONDO CICLO: COSTRUZIONE GRIGLIA "AT A GLANCE" ---
       data.forEach((item, index) => {
         const isGraphical = item.type === 'image' || item.type === 'color' || item.type === 'figma';
@@ -80,15 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
           if (item.type === 'color') {
             glanceLink.style.backgroundColor = item.hex;
           } else if (item.type === 'image') {
-            // --- OTTIMIZZAZIONE IMMAGINI ANTEPRIMA ---
             const thumbImg = document.createElement('img');
-            thumbImg.src = toWebp(item.src); // Usa la versione .webp
+            thumbImg.src = toWebp(item.src);
             thumbImg.alt = `Anteprima di ${item.label}`;
             thumbImg.loading = 'lazy';
             thumbImg.decoding = 'async';
-            
             glanceLink.appendChild(thumbImg);
-            // --- FINE OTTIMIZZAZIONE ---
           } else if (item.type === 'figma') {
             glanceLink.classList.add('glance-figma');
             glanceLink.innerHTML = '<span>Figma</span>';
@@ -97,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
+      // Gestione scroll con Lenis
       const allLinks = document.querySelectorAll('#glance-grid a, .scroll-down-arrow');
       allLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -115,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // --- CONTROLLI VIDEO PERSONALIZZATI ---
-// ... il resto del codice per i controlli video rimane invariato ...
 const video = document.getElementById('myVideo');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const muteBtn = document.getElementById('muteBtn');

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zinco - WebP Converter</title>
+    
+    <link rel="stylesheet" href="../../index.css" /> 
+    <link rel="stylesheet" href="converter.css" />
+
+    <link rel="icon" href="../../imghome/logo_zinco.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="../../index.html" id="button-logo"><img src="../../imghome/logo_zinco.svg" id="logo" alt="Logo Zinco"></a>
+
+    <main id="converter-container">
+        <div class="converter-header">
+            <h1>WebP Converter</h1>
+            <p>Trascina le tue immagini qui sotto o clicca per selezionarle. Verranno convertite automaticamente in formato .webp.</p>
+        </div>
+
+        <div id="upload-area" class="upload-area">
+            <input type="file" id="file-input" multiple accept="image/png, image/jpeg" style="display: none;">
+            <p>Trascina le immagini qui o <strong>clicca per sfogliare</strong></p>
+        </div>
+
+        <div id="preview-container" class="preview-container">
+            </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <a href="../../index.html" class="footer-logo">
+                <img src="../../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo" loading="lazy">
+            </a>
+            <div class="footer-text">
+                <p>&copy; 2025 zinco</p>
+                <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="converter.js"></script>
+    <script src="../../index.js"></script>
+</body>
+</html>

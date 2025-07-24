@@ -2,72 +2,72 @@
   {
     "type": "image",
     "subtype": "logo",
-    "label": "Logo",
+    "label": "logo",
     "src": "img/logo_escapes.svg"
   },
   {
     "type": "text",
-    "label": "Description",
-    "content": "escapes Lake Como è un tour operator specializzato in esperienze uniche e autentiche. Creiamo itinerari su misura per scoprire gli angoli più nascosti e affascinanti del Lago di Como."
+    "label": "description",
+    "content": "escapes lake como è un tour operator specializzato in esperienze uniche e autentiche. creiamo itinerari su misura per scoprire gli angoli più nascosti e affascinanti del lago di como."
   },
   {
     "type": "text",
-    "label": "Visit Website",
-    "content": "<a href='https://escapeslakecomo.com' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>Visit Website ↗</a>",
+    "label": "visit website",
+    "content": "<a href='https://escapeslakecomo.com' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>visit website ↗</a>",
     "linkUrl": "https://escapeslakecomo.com"
   },
   {
     "type": "text",
-    "label": "Naming",
-    "content": "escapes Lake Como"
+    "label": "naming",
+    "content": "escapes lake como"
   },
   {
     "type": "text",
-    "label": "Payoff",
-    "content": "Scopri l'anima del lago."
+    "label": "payoff",
+    "content": "scopri l'anima del lago."
   },
   {
     "type": "text",
-    "label": "Values",
-    "content": "Autenticità, Esclusività, Passione per il territorio"
+    "label": "values",
+    "content": "autenticità, esclusività, passione per il territorio"
   },
   {
     "type": "text",
-    "label": "Mission",
-    "content": "Offrire esperienze di viaggio immersive e personalizzate, svelando le gemme nascoste del Lago di Como e andando oltre le classiche mete turistiche."
+    "label": "mission",
+    "content": "offrire esperienze di viaggio immersive e personalizzate, svelando le gemme nascoste del lago di como e andando oltre le classiche mete turistiche."
   },
   {
     "type": "text",
-    "label": "Vision",
-    "content": "Diventare il punto di riferimento per un turismo consapevole e di alta gamma sul Lago di Como, facendo conoscere la sua vera essenza a un pubblico internazionale."
+    "label": "vision",
+    "content": "diventare il punto di riferimento per un turismo consapevole e di alta gamma sul lago di como, facendo conoscere la sua vera essenza a un pubblico internazionale."
   },
   {
     "type": "text",
-    "label": "Brand Essence",
-    "content": "Scoperta Esclusiva"
+    "label": "brand essence",
+    "content": "scoperta esclusiva"
   },
   {
     "type": "text",
-    "label": "Brand Architecture",
-    "content": "Brand Monolitico"
+    "label": "brand architecture",
+    "content": "brand monolitico"
   },
   {
     "type": "header",
-    "label": "Palette Colori"
+    "label": "palette colori"
   },
   {
     "type": "color",
-    "label": "#FF0000",
+    "label": "#ff0000",
     "hex": "#FF0000"
   },
   {
     "type": "color",
-    "label": "#00FF00",
+    "label": "#00ff00",
     "hex": "#00FF00"
   },
   {
     "type": "color",
-    "label": "#0000FF",
+    "label": "#0000ff",
     "hex": "#0000FF"
   }
 ]

@@ -5,6 +5,72 @@
  * ===================================
  */
 
+/* LOADER*/
+/* ======================== */
+/* Preloader Styles         */
+/* ======================== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff; /* Or your site's main background color */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Gentle slide-up transition */
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* This class will be added by JavaScript when the page is loaded */
+#preloader.loaded {
+  transform: translateY(-100%);
+}
+
+#preloader-logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 45px; /* Adjust size as needed */
+  z-index: 10000;
+}
+
+.loader-bar-container {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.loader-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #000000;
+  /* This animation simulates the loading process */
+  animation: loading-animation 1.5s ease-out forwards;
+}
+
+@keyframes loading-animation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* On smaller screens, you might want to adjust the logo position */
+@media (max-width: 767px) {
+  #preloader-logo {
+    top: 20px;
+    left: 20px;
+  }
+}
+
 /* ========= STILI HERO E GLANCE ========= */
 #hero-wrapper {
   height: 100vh;
@@ -232,25 +298,8 @@
   display: none;
 }
 
-/* ========= SEZIONI FIGMA E PDF ========= */
-#figma-container {
-  width: 100%;
-}
-.figma-embed-wrapper {
-  width: 100vw;
-  height: 85vh;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  background-color: #f0f0f0;
-}
-.figma-embed-wrapper iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
+/* ========= SEZIONE PDF ========= */
+
 #pdfViewerContainer {
   display: flex;
   flex-direction: column;
