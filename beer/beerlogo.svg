@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 182.19 96.62">
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.39 108.71">
   <defs>
     <style>
       .cls-1 {
@@ -7,32 +7,21 @@
       }
 
       .cls-2 {
-        fill: #231f20;
-      }
-
-      .cls-3, .cls-4 {
         fill: #fff;
+        font-family: HelveticaNeue-Bold, 'Helvetica Neue';
+        font-size: 79.62px;
+        font-weight: 700;
       }
 
-      .cls-4 {
-        font-family: HelveticaNeue-Bold, 'Helvetica Neue';
-        font-size: 67.69px;
-        font-weight: 700;
+      .cls-3 {
+        fill: #231f20;
       }
     </style>
   </defs>
   <g id="Layer_1-2" data-name="Layer 1">
-    <path class="cls-2" d="M75.74,79.12l-75.74.05V.05l75.74-.05,88.25,20.03c4.52,1.03,7.74,5.05,7.74,9.69v20.05c0,4.66-3.24,8.69-7.78,9.7l-88.21,19.65Z"/>
-    <polygon class="cls-2" points="171.73 21.51 182.19 25.56 182.19 53.95 171.73 57.79 171.73 21.51"/>
-    <rect class="cls-1" x="10.5" y="11.07" width="65.2" height="56.97"/>
-    <text class="cls-4" transform="translate(10.07 64.06)"><tspan x="0" y="0">B</tspan></text>
-    <polygon class="cls-3" points="171.73 53.82 175.25 53.82 171.73 55.27 171.73 53.82"/>
-    <polygon class="cls-3" points="171.73 49.78 175.25 49.78 171.73 51.23 171.73 49.78"/>
-    <polygon class="cls-3" points="171.73 45.73 175.25 45.73 171.73 47.18 171.73 45.73"/>
-    <polygon class="cls-3" points="171.73 40.92 175.25 40.92 171.73 42.36 171.73 40.92"/>
-    <polygon class="cls-3" points="171.73 25.41 175.25 25.41 171.73 23.97 171.73 25.41"/>
-    <polygon class="cls-3" points="171.73 29.46 175.25 29.46 171.73 28.01 171.73 29.46"/>
-    <polygon class="cls-3" points="171.73 33.5 175.25 33.5 171.73 32.05 171.73 33.5"/>
-    <polygon class="cls-3" points="171.73 37.93 175.25 37.93 171.73 36.48 171.73 37.93"/>
+    <rect class="cls-3" x="6.61" y="6.61" width="69.95" height="69.95"/>
+    <rect class="cls-1" x="6.61" y="6.61" width="69.95" height="69.95"/>
+    <text class="cls-2" transform="translate(7.81 70.41)"><tspan x="0" y="0">B</tspan></text>
+    <path class="cls-3" d="M116.97,13.19v3.86l5.52,2.27h-5.52L83.17,0H0v83.17h83.17l33.8-19.25h5.52l-5.52,2.28v3.96l16.42-6.04V19.55l-16.42-6.36ZM76.56,76.56H6.61V6.61h69.95v69.95ZM116.97,59.85v-2.27h5.52l-5.52,2.27ZM116.97,53.5v-2.27h5.52l-5.52,2.27ZM116.97,45.93v-2.27h5.52l-5.52,2.27ZM116.97,38.98v-2.28l5.52,2.28h-5.52ZM116.97,32.02v-2.27l5.52,2.27h-5.52ZM116.97,25.67v-2.27l5.52,2.27h-5.52Z"/>
   </g>
 </svg>
