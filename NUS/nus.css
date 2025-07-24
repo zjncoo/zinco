@@ -295,6 +295,12 @@
   #figma-container {
     display: none;
   }
+  .figma-embed-wrapper {
+  display: none;
+}
+.figma-embed-wrapper iframe {
+  display: none;
+}
 }
 
 /* Query per ridurre le animazioni per accessibilità */
