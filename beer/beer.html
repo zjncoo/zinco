@@ -10,23 +10,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font per i titoli -->
+    <link href="https://fonts.cdnfonts.com/css/helvetica-neue-5" rel="stylesheet">
 </head>
 <body>
 
     <header class="site-header">
         <div class="logo-placeholder">
-            <!-- Sostituisci l'URL qui sotto con il percorso del tuo file logo -->
             <img id="logo" src="beerlogo.svg" alt="Logo del sito">
         </div>
     </header>
 
     <main class="container">
         <div class="filter-section">
-            <label for="country-filter">Filtra per paese:</label>
-            <select id="country-filter">
-                <option value="all">Tutti i paesi</option>
-                <!-- Le opzioni verranno popolate da JavaScript -->
-            </select>
+            <div class="country-filter">
+                <label for="country-filter">Filtra per paese:</label>
+                <select id="country-filter">
+                    <option value="all">Tutti i paesi</option>
+                    <!-- Le opzioni verranno popolate da JavaScript -->
+                </select>
+            </div>
+            <div class="price-filter">
+                <label for="price-filter">Prezzo massimo: <span id="price-value"></span></label>
+                <input type="range" id="price-filter" min="0" max="10" step="0.10">
+            </div>
         </div>
 
         <div id="beer-list" class="beer-list-container">

@@ -1,69 +1,65 @@
-// --- DATABASE DELLE BIRRE ---
-// Questo array contiene tutte le informazioni. Puoi aggiungere o modificare oggetti qui.
+// --- DATABASE DELLE BIRRE (Aggiornato dal sito fattiunabirra.it) ---
 const beers = [
     {
         id: 1,
-        name: 'La Chouffe',
-        country: 'Belgio',
-        rating: 5,
-        price: '€3.50',
-        description: 'Birra belga bionda, forte e speziata con note di coriandolo e un leggero sapore fruttato.',
-        review: 'Una delle mie preferite in assoluto. Complessa ma beverina, con un finale piacevolmente fruttato. Il tenore alcolico (8%) si nasconde bene.',
-        imageUrl: 'https://placehold.co/100x100/ffc107/FFFFFF?text=B'
+        name: 'Ganjala',
+        country: 'Italia',
+        rating: 4,
+        price: 4.20, // Convertito in numero
+        description: 'Birra chiara ad alta fermentazione dal colore dorato e dai riflessi ambrati. Al naso e al palato si percepiscono note agrumate e resinose.',
+        review: 'Qui puoi inserire la tua recensione personale...',
+        imageUrl: 'https://www.fattiunabirra.it/5243-large_default/ganjala.jpg'
     },
     {
         id: 2,
-        name: 'Punk IPA',
-        country: 'Scozia',
-        rating: 4,
-        price: '€3.00',
-        description: 'Una India Pale Ale esplosiva con sentori di frutta tropicale, pompelmo e caramello.',
-        review: 'Un classico moderno che non delude mai. L\'amaro è presente ma ben bilanciato dalla base maltata. Ottima per chi si avvicina al mondo delle IPA.',
-        imageUrl: 'https://placehold.co/100x100/1E90FF/FFFFFF?text=B'
+        name: 'Bibock',
+        country: 'Italia',
+        rating: 5,
+        price: 3.80, // Convertito in numero
+        description: 'Birra Bock di colore ambrato carico, con schiuma compatta e persistente. Profumi di malto, caramello e frutta secca.',
+        review: 'Qui puoi inserire la tua recensione personale...',
+        imageUrl: 'https://www.fattiunabirra.it/5223-large_default/bibock.jpg'
     },
     {
         id: 3,
-        name: 'Weihenstephaner Hefeweissbier',
+        name: 'Helles',
         country: 'Germania',
-        rating: 5,
-        price: '€2.80',
-        description: 'La più antica birra weizen del mondo. Colore dorato torbido e aroma di banana e chiodi di garofano.',
-        review: 'Il punto di riferimento per ogni weizen. Incredibilmente rinfrescante, cremosa e saporita. Perfetta per ogni occasione.',
-        imageUrl: 'https://placehold.co/100x100/DAA520/FFFFFF?text=B'
+        rating: 4,
+        price: 3.30, // Convertito in numero
+        description: 'Classica Helles bavarese, birra a bassa fermentazione, colore giallo paglierino, corpo leggero e schiuma fine e compatta.',
+        review: 'Qui puoi inserire la tua recensione personale...',
+        imageUrl: 'https://www.fattiunabirra.it/5195-large_default/helles.jpg'
     },
     {
         id: 4,
-        name: 'Guinness Draught',
-        country: 'Irlanda',
-        rating: 4,
-        price: '€2.50',
-        description: 'Iconica stout irlandese, famosa per la sua schiuma cremosa e il suo colore scuro con riflessi rubino.',
-        review: 'Morbida e setosa al palato, con note di caffè tostato e cioccolato. Nonostante l\'aspetto, è sorprendentemente leggera e facile da bere.',
-        imageUrl: 'https://placehold.co/100x100/000000/FFFFFF?text=B'
-    },
-     {
-        id: 5,
-        name: 'Tipopils',
+        name: 'Californ-Ipa',
         country: 'Italia',
+        rating: 4,
+        price: 4.20, // Convertito in numero
+        description: 'Una West Coast IPA dal colore dorato carico. Al naso esplodono profumi agrumati e tropicali grazie ai luppoli americani.',
+        review: 'Qui puoi inserire la tua recensione personale...',
+        imageUrl: 'https://www.fattiunabirra.it/5190-large_default/californ-ipa.jpg'
+    },
+    {
+        id: 5,
+        name: 'Blanche de Namur',
+        country: 'Belgio',
         rating: 5,
-        price: '€4.00',
-        description: 'Pilsner italiana che ha ridefinito lo stile. Chiara, secca e con un amaro erbaceo elegante dato dal dry-hopping.',
-        review: 'Una birra che ha fatto scuola in tutto il mondo. Pulita, profumata e incredibilmente dissetante. Un capolavoro di equilibrio.',
-        imageUrl: 'https://placehold.co/100x100/008000/FFFFFF?text=B'
+        price: 3.00, // Convertito in numero
+        description: 'Birra di frumento belga (Blanche), torbida e leggera. Speziata con coriandolo e scorza d\'arancia amara.',
+        review: 'Qui puoi inserire la tua recensione personale...',
+        imageUrl: 'https://www.fattiunabirra.it/4862-large_default/blanche-de-namur.jpg'
     }
 ];
 
 // --- ELEMENTI DEL DOM ---
 const beerListContainer = document.getElementById('beer-list');
 const countryFilter = document.getElementById('country-filter');
+const priceFilter = document.getElementById('price-filter');
+const priceValue = document.getElementById('price-value');
 
 // --- FUNZIONI ---
 
-/**
- * Genera le stelle (pallini) per la valutazione.
- * @param {number} rating - La valutazione da 1 a 5.
- * @returns {string} L'HTML per i pallini di valutazione.
- */
 function createRatingDots(rating) {
     let dotsHtml = '';
     for (let i = 1; i <= 5; i++) {
@@ -73,40 +69,40 @@ function createRatingDots(rating) {
     return dotsHtml;
 }
 
-/**
- * Mostra le birre nel DOM, filtrando per paese se necessario.
- * @param {string} filter - Il paese selezionato, o 'all' per mostrarle tutte.
- */
-function displayBeers(filter = 'all') {
-    beerListContainer.innerHTML = ''; // Pulisce la lista prima di ridisegnarla
+function displayBeers(country, maxPrice) {
+    beerListContainer.innerHTML = '';
 
-    const filteredBeers = beers.filter(beer => filter === 'all' || beer.country === filter);
+    const filteredBeers = beers.filter(beer =>
+        (country === 'all' || beer.country === country) &&
+        (beer.price <= maxPrice)
+    );
 
     if (filteredBeers.length === 0) {
-        beerListContainer.innerHTML = '<p>Nessuna birra trovata per questo filtro.</p>';
+        beerListContainer.innerHTML = '<p class="no-results">Nessuna birra trovata per questi filtri.</p>';
         return;
     }
 
     filteredBeers.forEach(beer => {
         const beerElement = document.createElement('div');
         beerElement.classList.add('beer-item');
-        beerElement.dataset.beerId = beer.id; // Utile per la gestione del click
+        beerElement.dataset.beerId = beer.id;
 
         beerElement.innerHTML = `
             <div class="beer-summary">
-                <img src="${beer.imageUrl}" alt="Foto di ${beer.name}" class="beer-photo">
+                <img src="${beer.imageUrl}" alt="Foto di ${beer.name}" class="beer-photo" onerror="this.style.display='none'">
                 <div class="beer-info">
                     <div class="beer-name">${beer.name}</div>
                     <div class="beer-rating">
                         ${createRatingDots(beer.rating)}
                     </div>
                 </div>
+                <div class="expand-icon"></div>
             </div>
             <div class="beer-details">
                 <h3>Descrizione</h3>
                 <p>${beer.description}</p>
                 <h3>Prezzo Indicativo</h3>
-                <p class="price-tag">${beer.price}</p>
+                <p class="price-tag">€${beer.price.toFixed(2).replace('.', ',')}</p>
                 <h3>La mia recensione</h3>
                 <p>${beer.review}</p>
             </div>
@@ -115,12 +111,9 @@ function displayBeers(filter = 'all') {
     });
 }
 
-/**
- * Popola il menu a tendina dei filtri con i paesi unici presenti nell'array.
- */
-function populateFilters() {
+function populateCountryFilter() {
     const countries = [...new Set(beers.map(beer => beer.country))];
-    countries.sort(); // Ordina i paesi alfabeticamente
+    countries.sort();
     countries.forEach(country => {
         const option = document.createElement('option');
         option.value = country;
@@ -129,14 +122,28 @@ function populateFilters() {
     });
 }
 
-// --- EVENT LISTENERS ---
+function setupPriceFilter() {
+    if (beers.length === 0) return;
+    const maxPrice = Math.ceil(Math.max(...beers.map(b => b.price)));
+    priceFilter.max = maxPrice;
+    priceFilter.value = maxPrice;
+    priceValue.textContent = `€${parseFloat(maxPrice).toFixed(2).replace('.', ',')}`;
+}
 
-// Evento per il cambio di filtro
-countryFilter.addEventListener('change', (e) => {
-    displayBeers(e.target.value);
+function updateDisplay() {
+    const country = countryFilter.value;
+    const price = parseFloat(priceFilter.value);
+    displayBeers(country, price);
+}
+
+// --- EVENT LISTENERS ---
+countryFilter.addEventListener('change', updateDisplay);
+
+priceFilter.addEventListener('input', () => {
+    priceValue.textContent = `€${parseFloat(priceFilter.value).toFixed(2).replace('.', ',')}`;
+    updateDisplay();
 });
 
-// Evento per espandere/collassare la recensione (usando event delegation)
 beerListContainer.addEventListener('click', (e) => {
     const beerItem = e.target.closest('.beer-item');
     if (beerItem) {
@@ -144,10 +151,9 @@ beerListContainer.addEventListener('click', (e) => {
     }
 });
 
-
 // --- INIZIALIZZAZIONE ---
-// Al caricamento della pagina, popola i filtri e mostra tutte le birre.
 document.addEventListener('DOMContentLoaded', () => {
-    populateFilters();
-    displayBeers();
+    populateCountryFilter();
+    setupPriceFilter();
+    updateDisplay();
 });
