@@ -1,12 +1,8 @@
-
-
-
-
+/* Stili di base per desktop */
 #tabella {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-items: center;
   justify-content: center;
   height: 73vh;
   width: 100vw;
@@ -19,4 +15,39 @@
 
 h1 {
   margin: 10%;
+}
+
+/* ========== Stili per iPad e Tablet (fino a 1024px) ========== */
+@media (max-width: 1024px) {
+  #tabella {
+    flex-direction: column; /* Impila gli elementi verticalmente */
+    height: auto; /* Altezza automatica per adattarsi al contenuto */
+    padding: 40px 20px;
+  }
+
+  #form {
+    width: 60vw; /* Aumenta la larghezza del form */
+    margin: 10vh 0; /* Riduce il margine verticale */
+  }
+
+  h1 {
+    margin: 5%;
+  }
+}
+
+/* ========== Stili per Smartphone (fino a 767px) ========== */
+@media (max-width: 767px) {
+  #tabella {
+    padding: 20px 15px; /* Riduci ulteriormente il padding */
+  }
+
+  #form {
+    width: 90vw; /* Il form occupa quasi tutta la larghezza */
+    margin: 5vh 0; /* Margine minimo */
+  }
+
+  h1 {
+    font-size: 2rem; /* Riduci la dimensione del titolo per schermi piccoli */
+    margin: 8% 0;
+  }
 }
