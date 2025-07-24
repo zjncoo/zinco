@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recensioni Birre</title>
+    <!-- Link al file CSS esterno -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts per un look minimalista -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logo-placeholder">
+            <!-- Sostituisci l'URL qui sotto con il percorso del tuo file logo -->
+            <img id="logo" src="beerlogo.svg" alt="Logo del sito">
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="filter-section">
+            <label for="country-filter">Filtra per paese:</label>
+            <select id="country-filter">
+                <option value="all">Tutti i paesi</option>
+                <!-- Le opzioni verranno popolate da JavaScript -->
+            </select>
+        </div>
+
+        <div id="beer-list" class="beer-list-container">
+            <!-- Le recensioni delle birre verranno inserite qui da JavaScript -->
+        </div>
+    </main>
+
+    <!-- Link al file JavaScript esterno (messo alla fine per performance) -->
+    <script src="script.js"></script>
+</body>
+</html>

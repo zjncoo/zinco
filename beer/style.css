@@ -1,0 +1,357 @@
+/* Stile grafico e minimalista - v10 con sfondo foto trasparente */
+
+/* --- IMPOSTAZIONI GLOBALI E FONT --- */
+:root {
+    --main-bg: #ffffff;
+    --main-text: #000000;
+    --border-color: #000000;
+    --border-width: 2px;
+    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --container-padding: 30px; /* Padding di default per tablet */
+}
+
+/* Reset e stili di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--main-bg);
+    color: var(--main-text);
+    line-height: 1.5;
+    overflow-x: hidden; /* Previene lo scroll orizzontale */
+    padding-top: 100px; /* Spazio per il logo fisso */
+}
+
+/* Il container ora gestisce solo header e filtri */
+.container {
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* Tipografia per i titoli */
+h1, h2, h3, h4, h5, h6, .beer-name {
+    font-family: var(--font-heading);
+    font-weight: bold;
+}
+
+/* --- HEADER E LOGO --- */
+.site-header {
+    /* Questo contenitore ora serve solo per il markup, lo stile è sul logo */
+}
+
+.logo-placeholder {
+    position: fixed;
+    top: 30px;
+    left: var(--container-padding);
+    z-index: 1000;
+}
+
+.logo-placeholder img {
+    height: 100px; /* Imposta l'altezza del tuo logo */
+    width: auto;  /* La larghezza si adatterà in modo proporzionale */
+    display: block; /* Rimuove spazi extra sotto l'immagine */
+}
+
+/* --- SEZIONE FILTRI --- */
+.filter-section {
+    padding: 30px 0;
+    position: relative;
+    /* border-bottom gestito da ::after */
+}
+
+.filter-section label {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+#country-filter {
+    width: 100%;
+    max-width: 350px;
+    padding: 12px 16px;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 0;
+    background-color: var(--main-bg);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    color: var(--main-text);
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 1.2em;
+}
+
+#country-filter:focus {
+    outline: var(--border-width) solid var(--main-text);
+    outline-offset: 2px;
+}
+
+/* --- LISTA BIRRE --- */
+.beer-list-container {
+    width: 100%;
+    position: relative;
+    /* border-top gestito da ::before */
+}
+
+.beer-item {
+    background-color: var(--main-bg);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    position: relative;
+    /* border-bottom gestito da ::after */
+}
+
+/* Riepilogo Birra */
+.beer-summary {
+    display: flex;
+    align-items: stretch;
+    padding: 0 var(--container-padding);
+    position: relative;
+    min-height: 150px;
+}
+
+.beer-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    background-color: transparent; /* Sfondo rimosso */
+    padding: 10px;
+    border-right: var(--border-width) solid var(--border-color);
+    flex-shrink: 0;
+    transition: width 0.5s ease, height 0.5s ease, border-color 0.2s ease;
+    margin-left: calc(-1 * var(--container-padding));
+}
+
+.beer-info {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.beer-name {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.beer-rating {
+    display: flex;
+    gap: 5px;
+}
+
+.rating-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-color);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.rating-dot.filled {
+    background-color: var(--main-text);
+}
+
+/* Icona per espandere */
+.expand-icon {
+    width: 60px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2.5' stroke='%23000000'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M12 4.5v15m7.5-7.5h-15' /%3e%3c/svg%3e");
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.4s ease, background-image 0.2s ease, background-color 0.2s ease;
+    margin-right: calc(-1 * var(--container-padding));
+}
+
+/* --- EFFETTO HOVER --- */
+.beer-item:hover:not(.expanded) {
+    background-color: #000000;
+    color: #ffffff;
+}
+.beer-item:hover:not(.expanded) .beer-photo {
+    border-color: #ffffff;
+}
+.beer-item:hover:not(.expanded) .rating-dot {
+    border-color: #ffffff;
+}
+.beer-item:hover:not(.expanded) .rating-dot.filled {
+    background-color: #ffffff;
+}
+.beer-item:hover:not(.expanded) .expand-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2.5' stroke='%23ffffff'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M12 4.5v15m7.5-7.5h-15' /%3e%3c/svg%3e");
+    background-color: inherit; /* Correzione: Eredita il colore di sfondo nero */
+}
+
+
+/* --- LOGICA DI ESPANSIONE --- */
+.beer-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    padding: 0 var(--container-padding);
+    background: #f8f8f8;
+}
+
+.beer-item.expanded {
+    background-color: #f8f8f8;
+}
+
+.beer-item.expanded .beer-summary {
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+    /* border-bottom gestito da ::after */
+}
+
+.beer-item.expanded .beer-photo {
+    width: 200px;
+    height: 200px;
+}
+
+.beer-item.expanded .expand-icon {
+    transform: rotate(45deg);
+}
+
+.beer-item.expanded .beer-details {
+    max-height: 800px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.beer-details h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+.beer-details h3:first-child {
+    margin-top: 0;
+}
+
+.beer-details p {
+    font-size: 1rem;
+    max-width: 75ch;
+}
+
+.price-tag {
+    font-weight: bold;
+    font-family: var(--font-heading);
+}
+
+/* --- LOGICA PER LINEE A TUTTO SCHERMO --- */
+
+/* Linea in alto per la lista delle birre */
+.beer-list-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: var(--border-width);
+    background-color: var(--border-color);
+}
+
+/* Linee in basso per le sezioni e ogni elemento */
+.filter-section::after,
+.beer-item::after,
+.beer-item.expanded .beer-summary::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: var(--border-width);
+    background-color: var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+
+/* --- MEDIA QUERIES --- */
+
+/* Stili per Desktop (schermi più grandi di 1200px) */
+@media (min-width: 1200px) {
+    :root {
+        --content-width-capped: min(60vw, 1100px);
+        --container-padding: calc((100vw - var(--content-width-capped)) / 2);
+    }
+}
+
+/* Stili per Mobile (schermi più piccoli di 767px) */
+@media (max-width: 767px) {
+    :root {
+        --container-padding: 20px;
+    }
+    
+    .logo-placeholder {
+        top: 20px;
+    }
+
+    body {
+        padding-top: 80px;
+    }
+
+    .beer-summary {
+        min-height: 120px;
+    }
+
+    .beer-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .beer-info {
+        padding: 15px;
+    }
+
+    .beer-name {
+        font-size: 1.2rem;
+    }
+
+    .rating-dot {
+        width: 12px;
+        height: 12px;
+    }
+
+    .expand-icon {
+        width: 50px;
+        background-size: 20px;
+    }
+    
+    .beer-item.expanded .beer-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .beer-item.expanded .beer-photo {
+        width: 150px;
+        height: 150px;
+        border-right: none;
+        margin-left: 0;
+    }
+    
+    .beer-item.expanded .expand-icon {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        border-left: none;
+        margin-right: calc(-1 * var(--container-padding));
+    }
+}
