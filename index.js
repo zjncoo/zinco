@@ -1,3 +1,5 @@
+
+
 // --- INIZIALIZZAZIONE GLOBALE DELLO SCROLL ---
 // Assegnamo lenis all'oggetto 'window' per renderlo
 // esplicitamente globale e accessibile da altri script.
@@ -87,3 +89,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+

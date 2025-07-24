@@ -74,6 +74,7 @@
   transition: opacity 0.2s ease;
 }
 
+
 /* ========= SEZIONE VIDEO ========= */
 .video-container {
   position: relative;
@@ -110,6 +111,36 @@
   background-color: white;
   color: black;
 }
+#website {
+  width: 100vw;
+  height: 30vh;
+  z-index: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-items: center;
+}
+#website a {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: block;
+  justify-self: center;
+  text-align: center;
+  text-justify: center;
+}
+#website a:hover {
+  background-color: black;
+  color: white
+
+}
+
 
 /* ========= GRIGLIA BRANDING ========= */
 .branding-grid {

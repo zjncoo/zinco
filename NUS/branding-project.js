@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // Carica i dati JSON e costruisce la pagina
+  // Funzione per convertire i percorsi delle immagini in .webp
+  const toWebp = (url) => {
+    if (typeof url !== 'string') return '';
+    // Sostituisce .jpg, .jpeg, o .png (case-insensitive) con .webp
+    return url.replace(/\.(jpe?g|png)$/i, '.webp');
+  };
+
   fetch('branding-data.json')
     .then(response => {
       if (!response.ok) throw new Error(`Errore nel caricamento: ${response.status}`);
@@ -16,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (heroTitle && namingItem) {
         heroTitle.textContent = namingItem.content;
       }
-      
+
+      // --- PRIMO CICLO: COSTRUZIONE GRIGLIA PRINCIPALE ---
       data.forEach((item, index) => {
         const uniqueId = `content-item-${index}`;
         if (item.type === 'figma') {
@@ -35,17 +41,26 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             mainItem.classList.add('branding-item', 'cursor-target');
 
-            // --- MODIFICA CHIAVE ---
-            // Aggiunge una classe speciale se l'item è una foto dell'app
             if (item.subtype === 'app-screenshot') {
               mainItem.classList.add('full-width-app');
             }
-            
+
             if (item.type === 'color') {
               mainItem.style.backgroundColor = item.hex;
               mainItem.innerHTML = `<h3>${item.label || ''}</h3>`;
             } else if (item.type === 'image') {
-              mainItem.innerHTML = `<h3>${item.label}</h3><img src="${item.src}" alt="${item.label}" />`;
+              // --- OTTIMIZZAZIONE IMMAGINI PRINCIPALI ---
+              const title = document.createElement('h3');
+              title.textContent = item.label;
+
+              const img = document.createElement('img');
+              img.src = toWebp(item.src); // Usa la versione .webp
+              img.alt = item.label;
+              img.loading = 'lazy';      // Caricamento pigro
+              img.decoding = 'async';    // Decodifica asincrona
+              
+              mainItem.append(title, img); // Aggiunge gli elementi creati
+              // --- FINE OTTIMIZZAZIONE ---
             } else if (item.type === 'text') {
               mainItem.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
             }
@@ -53,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
           mainGrid.appendChild(mainItem);
         }
       });
-
+      
+      // --- SECONDO CICLO: COSTRUZIONE GRIGLIA "AT A GLANCE" ---
       data.forEach((item, index) => {
         const isGraphical = item.type === 'image' || item.type === 'color' || item.type === 'figma';
         if (isGraphical) {
@@ -64,7 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
           if (item.type === 'color') {
             glanceLink.style.backgroundColor = item.hex;
           } else if (item.type === 'image') {
-            glanceLink.innerHTML = `<img src="${item.src}" alt="Anteprima di ${item.label}" />`;
+            // --- OTTIMIZZAZIONE IMMAGINI ANTEPRIMA ---
+            const thumbImg = document.createElement('img');
+            thumbImg.src = toWebp(item.src); // Usa la versione .webp
+            thumbImg.alt = `Anteprima di ${item.label}`;
+            thumbImg.loading = 'lazy';
+            thumbImg.decoding = 'async';
+            
+            glanceLink.appendChild(thumbImg);
+            // --- FINE OTTIMIZZAZIONE ---
           } else if (item.type === 'figma') {
             glanceLink.classList.add('glance-figma');
             glanceLink.innerHTML = '<span>Figma</span>';
@@ -73,15 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Aggiunge gli event listener per lo scorrimento
       const allLinks = document.querySelectorAll('#glance-grid a, .scroll-down-arrow');
       allLinks.forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const targetId = link.getAttribute('href');
-          
           if (targetId && typeof window.lenis !== 'undefined') {
-             window.lenis.scrollTo(targetId, { duration: 2, offset: -20 });
+            window.lenis.scrollTo(targetId, { duration: 2, offset: -20 });
           }
         });
       });
@@ -93,12 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // --- CONTROLLI VIDEO PERSONALIZZATI ---
+// ... il resto del codice per i controlli video rimane invariato ...
 const video = document.getElementById('myVideo');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const muteBtn = document.getElementById('muteBtn');
 
 if (video && playPauseBtn && muteBtn) {
-  // Logica per il bottone Play/Pausa
   playPauseBtn.addEventListener('click', () => {
     if (video.paused) {
       video.play();
@@ -109,13 +131,11 @@ if (video && playPauseBtn && muteBtn) {
     }
   });
 
-  // Logica per il bottone Mute/Unmute
   muteBtn.addEventListener('click', () => {
     video.muted = !video.muted;
     muteBtn.textContent = video.muted ? 'Unmute' : 'Mute';
   });
 
-  // Assicura che il testo del bottone sia corretto al caricamento
   playPauseBtn.textContent = 'Pause';
   muteBtn.textContent = 'Unmute';
 }
