@@ -30,8 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const handleFiles = (files) => {
-        // Svuota le anteprime precedenti
-        previewContainer.innerHTML = ''; 
+        // Ora la funzione non svuota più i risultati precedenti
         
         // Controlla se ci sono file
         if (!files || files.length === 0) {

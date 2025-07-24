@@ -2,173 +2,172 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tessere Fedeltà Personalizzate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zinco - Generatore Tessere</title>
+  
+  <link rel="stylesheet" href="../index.css" />
+  <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Reset base */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    /* ========== MODIFICHE CHIAVE ========== */
+    body {
+      display: flex;
+      flex-direction: column; /* Imposta la direzione a colonna */
+      min-height: 100vh;      /* Assicura che il body sia alto almeno quanto lo schermo */
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #fff;
-      margin: 0;
-      padding: 20px;
+    main {
+      padding: 150px 20px 40px 20px;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      color: #222;
+      width: 100%;
     }
 
-    .container {
-      background: white;
-      max-width: 600px;
+    footer {
+      margin-top: auto; /* Questa è la regola magica che spinge il footer in basso */
       width: 100%;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    /* ========== FINE MODIFICHE ========== */
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      border: 2px solid #000;
+      padding: 40px;
     }
 
     h1 {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      font-size: clamp(2rem, 8vw, 3rem);
       text-align: center;
-      font-weight: 600;
-      margin-bottom: 25px;
-      color: #111;
-      user-select: none;
+      margin: 0 0 40px 0;
+      letter-spacing: -0.02em;
     }
 
-    /* Box istruzioni */
     .instructions {
-      background: #f5f5f5;
-      border-left: 6px solid #333;
-      padding: 20px 25px;
+      border: 2px solid #000;
+      padding: 20px;
       margin-bottom: 30px;
-      border-radius: 8px;
-      color: #111;
-      font-size: 1rem;
-      line-height: 1.5;
       display: flex;
       gap: 15px;
       align-items: flex-start;
-      user-select: none;
     }
     .instructions svg {
       flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      fill: #333;
-      margin-top: 4px;
+      width: 24px;
+      height: 24px;
+      fill: #000;
+      margin-top: 3px;
+    }
+    .instructions ul {
+      padding-left: 20px;
+      margin: 0;
     }
 
     label {
       display: block;
       margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: #222;
-      cursor: pointer;
-      user-select: none;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      font-size: 16px;
     }
 
     input[type="file"] {
       display: block;
       width: 100%;
-      padding: 12px 15px;
+      padding: 12px;
       font-size: 1rem;
-      border-radius: 8px;
-      border: 1.8px solid #666;
-      transition: border-color 0.3s ease;
-      cursor: pointer;
+      border: 2px solid #000;
       background: #fff;
-      margin-bottom: 25px; /* Maggior spazio tra i due input */
-    }
-    input[type="file"]:focus,
-    input[type="file"]:hover {
-      border-color: #000;
-      background: #fff;
-      outline: none;
+      margin-bottom: 25px;
     }
 
     button {
       margin-top: 25px;
       width: 100%;
-      font-size: 1.15rem;
+      font-size: 1rem;
       padding: 14px 0;
-      background-color: #222;
+      background-color: #000;
       color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-      transition: background-color 0.25s ease, box-shadow 0.25s ease;
-      user-select: none;
+      border: 2px solid #000;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
     button:hover:not(:disabled) {
-      background-color: #000;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+      background-color: #fff;
+      color: #000;
     }
     button:disabled {
-      background-color: #999;
+      background-color: #ccc;
+      border-color: #ccc;
+      color: #888;
       cursor: not-allowed;
-      box-shadow: none;
     }
 
     #status {
       margin-top: 20px;
-      font-style: italic;
-      color: #333;
       min-height: 1.3em;
       text-align: center;
-      user-select: text;
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .container {
-        padding: 25px 20px;
-      }
-      button {
-        font-size: 1.1rem;
-      }
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Tessere Fedeltà Personalizzate</h1>
+  <div class="custom-cursor" id="cursor"></div>
+  <a href="../index.html" id="button-logo" class="cursor-target"><img src="../imghome/logo_zinco.svg" id="logo" alt="Logo Zinco"></a>
 
-    <div class="instructions" role="region" aria-label="Istruzioni per l'uso">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm.75 15.5a1.25 1.25 0 1 1-1.25-1.25 1.25 1.25 0 0 1 1.25 1.25zm1.9-7.75-1.4 1.41a1.5 1.5 0 1 0-2.12 2.12l.7.7v1.17h1.25v-.55l-1.03-1.04a.75.75 0 0 1 1.06-1.06l1.4-1.41a.75.75 0 0 0-1.06-1.06z"/>
-      </svg>
-      <div>
-        <strong>Come funziona:</strong>
-        <ul>
-          <li>Carica il PDF template della tessera.</li>
-          <li>Carica il file CSV con le colonne <code>Nome</code> e <code>Cognome</code>.</li>
-          <li>Clicca su "Genera tessere PDF in ZIP" per scaricare tutte le tessere in un unico file ZIP.</li>
-          <li>Ogni tessera sarà un PDF singolo personalizzato con Nome e Cognome.</li>
-        </ul>
+  <main>
+    <div class="container">
+      <h1>Tessere Fedeltà Personalizzate</h1>
+
+      <div class="instructions" role="region" aria-label="Istruzioni per l'uso">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm.75 15.5a1.25 1.25 0 1 1-1.25-1.25 1.25 1.25 0 0 1 1.25 1.25zm1.9-7.75-1.4 1.41a1.5 1.5 0 1 0-2.12 2.12l.7.7v1.17h1.25v-.55l-1.03-1.04a.75.75 0 0 1 1.06-1.06l1.4-1.41a.75.75 0 0 0-1.06-1.06z"/>
+        </svg>
+        <div>
+          <strong>Come funziona:</strong>
+          <ul>
+            <li>Carica il PDF template della tessera.</li>
+            <li>Carica il file CSV con le colonne <code>Nome</code> e <code>Cognome</code>.</li>
+            <li>Clicca su "Genera tessere" per scaricare il file ZIP.</li>
+          </ul>
+        </div>
+      </div>
+
+      <label for="pdfTemplate">1. Carica PDF template</label>
+      <input type="file" id="pdfTemplate" accept="application/pdf" class="cursor-target" />
+
+      <label for="csvFile">2. Carica file CSV</label>
+      <input type="file" id="csvFile" accept=".csv,text/csv" class="cursor-target" />
+
+      <button id="generateBtn" disabled class="cursor-target">Genera tessere PDF in ZIP</button>
+
+      <div id="status" role="status" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="../index.html" class="footer-logo cursor-target">
+        <img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo" loading="lazy">
+      </a>
+      <div class="footer-text">
+        <p>&copy; 2025 zinco</p>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
       </div>
     </div>
-
-    <label for="pdfTemplate">Carica PDF template tessera</label>
-    <input type="file" id="pdfTemplate" accept="application/pdf" />
-
-    <label for="csvFile">Carica file CSV (con colonne Nome, Cognome)</label>
-    <input type="file" id="csvFile" accept=".csv,text/csv" />
-
-    <button id="generateBtn" disabled>Genera tessere PDF in ZIP</button>
-
-    <div id="status" role="status" aria-live="polite"></div>
-  </div>
+  </footer>
 
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+  <script src="../index.js" defer></script>
   <script>
     const pdfTemplateInput = document.getElementById('pdfTemplate');
     const csvFileInput = document.getElementById('csvFile');
@@ -245,11 +244,8 @@
       const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
       try {
-        // Carica template PDF
         const pdfDocTemplate = await PDFDocument.load(pdfTemplateBytes);
-
         const zip = new JSZip();
-
         const x = mmToPt(4.5);
         const yNome_mm = 39.55;
         const yCognome_mm = 43.673;
@@ -257,29 +253,19 @@
 
         for (let i = 0; i < csvData.length; i++) {
           const { Nome, Cognome } = csvData[i];
-
-          // Crea un nuovo PDF per ogni tessera
           const pdfDoc = await PDFDocument.create();
-
-          // Copia la pagina template
           const [templatePage] = await pdfDoc.copyPages(pdfDocTemplate, [0]);
           pdfDoc.addPage(templatePage);
-
           const page = pdfDoc.getPage(0);
           const pageHeight = page.getHeight();
-
-          // Ripristina le righe originali per yNome e yCognome
           const yNome = pageHeight - mmToPt(yNome_mm);
           const yCognome = pageHeight - mmToPt(yCognome_mm);
-
           const embeddedFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-          // Funzione wrapText per suddividere il testo in più righe
           function wrapText(text, maxWidth, font, fontSize) {
             const words = text.split(' ');
             const lines = [];
             let currentLine = words[0];
-
             for (let i = 1; i < words.length; i++) {
               const word = words[i];
               const width = font.widthOfTextAtSize(currentLine + ' ' + word, fontSize);
@@ -297,69 +283,42 @@
           const maxTextWidth = mmToPt(49.5);
           const nomeLines = wrapText(Nome, maxTextWidth, embeddedFont, fontSize);
           const cognomeLines = wrapText(Cognome, maxTextWidth, embeddedFont, fontSize);
-
-          // Se il nome va a capo (nomeLines.length > 1), applica traslazione verso l'alto solo in quel caso
           const nomeBlockOffset = nomeLines.length > 1 ? 7 : 0;
           const yNomeAdjusted = yNome + nomeBlockOffset;
 
           nomeLines.forEach((line, index) => {
-            page.drawText(line, {
-              x,
-              y: yNomeAdjusted - index * (fontSize + 1),
-              size: fontSize,
-              font: embeddedFont,
-              color: rgb(0, 0, 0),
-            });
+            page.drawText(line, { x, y: yNomeAdjusted - index * (fontSize + 1), size: fontSize, font: embeddedFont, color: rgb(0, 0, 0) });
           });
 
-          // Calcola altezza effettiva del blocco nome
           const nomeBlockHeight = nomeLines.length * (fontSize + 1);
-          // Applica la distanza aggiuntiva di 4 pt solo in caso di nome multilinea
           const extraSpacing = nomeLines.length > 1 ? 4 : 0;
           const yCognomeAdjusted = yNomeAdjusted - nomeBlockHeight - extraSpacing;
 
           cognomeLines.forEach((line, index) => {
-            page.drawText(line, {
-              x,
-              y: yCognomeAdjusted - index * (fontSize + 1),
-              size: fontSize,
-              font: embeddedFont,
-              color: rgb(0, 0, 0),
-            });
+            page.drawText(line, { x, y: yCognomeAdjusted - index * (fontSize + 1), size: fontSize, font: embeddedFont, color: rgb(0, 0, 0) });
           });
 
           const pdfBytes = await pdfDoc.save();
-
-          // Nome file pulito
           const safeNome = Nome.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');
           const safeCognome = Cognome.replace(/\s+/g, '_').replace(/[^\w\-]/g, '');
-
-          // Aggiungi al ZIP
           zip.file(`Tessera_${safeNome}_${safeCognome}.pdf`, pdfBytes);
-
           status.textContent = `Preparata tessera ${i + 1} / ${csvData.length}`;
         }
 
         status.textContent = 'Compressione ZIP in corso... attendere.';
-
-        // Genera il file ZIP (blob)
         const zipBlob = await zip.generateAsync({ type: "blob" });
-
-        // Scarica il file ZIP
         const link = document.createElement('a');
         link.href = URL.createObjectURL(zipBlob);
         link.download = 'Tessere_Fedelta.zip';
         document.body.appendChild(link);
         link.click();
         link.remove();
-
         status.textContent = `Generazione completata! ZIP creato con ${csvData.length} tessere.`;
 
       } catch (error) {
         console.error(error);
         status.textContent = `Errore: ${error.message}`;
       }
-
       generateBtn.disabled = false;
     });
   </script>
