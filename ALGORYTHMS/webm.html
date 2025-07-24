@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zinco - WebM Converter</title>
+  
+  <link rel="stylesheet" href="../index.css" />
+  <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{display:flex;flex-direction:column;min-height:100vh}main{padding:150px 20px 40px;display:flex;justify-content:center;width:100%;flex-grow:1}footer{margin-top:auto;width:100%}.container{max-width:700px;width:100%;border:2px solid #000;padding:40px;text-align:center}h1{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:clamp(2rem,8vw,3rem);margin:0 0 20px;letter-spacing:-.02em}.upload-area{border:2px dashed #000;padding:60px 30px;cursor:pointer;transition:background-color .2s ease,border-color .2s ease;margin-top:40px}.upload-area.dragover{background-color:#f0f0f0}.upload-area p strong{text-decoration:underline}#video-preview-container{margin-top:20px;text-align:center}video{max-width:100%;border:2px solid #000;background-color:#f0f0f0}.action-button{margin-top:20px;width:100%;font-size:1rem;padding:14px 0;background-color:#000;color:#fff;border:2px solid #000;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;text-transform:uppercase;cursor:pointer;transition:background-color .2s ease,color .2s ease}.action-button:hover{background-color:#fff;color:#000}#download-link{display:none}#status{margin-top:20px;min-height:1.3em;font-size:14px}#progress-bar{width:100%;height:8px;margin-top:15px;display:none;-webkit-appearance:none;appearance:none;border:2px solid #000}#progress-bar::-webkit-progress-bar{background-color:#fff}#progress-bar::-webkit-progress-value{background-color:#000}#progress-bar::-moz-progress-bar{background-color:#000}
+  </style>
+</head>
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+  <a href="../index.html" id="button-logo" class="cursor-target"><img src="../imghome/logo_zinco.svg" id="logo" alt="Logo Zinco"></a>
+  <div id="preloader"><a href="../index.html" id="preloader-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a><div class="loader-bar-container"><div class="loader-bar"></div></div></div>
+
+  <main>
+    <div class="container">
+      <h1>WebM Converter</h1>
+      <p>Converti i tuoi file video (es. MP4, MOV) in formato WebM per il web.</p>
+      <div id="upload-area" class="upload-area cursor-target"><input type="file" id="video-input" accept="video/*" style="display:none"><p>Trascina un video qui o <strong>clicca per sfogliare</strong></p></div>
+      <div id="video-preview-container"></div>
+      <div id="status">Seleziona un file per iniziare</div>
+      <progress id="progress-bar" value="0" max="100"></progress>
+      <a href="#" id="download-link" class="action-button cursor-target">Download WebM</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content"><a href="../index.html" class="footer-logo cursor-target"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo" loading="lazy"></a><div class="footer-text"><p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a></div></div>
+  </footer>
+
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg/dist/ffmpeg.min.js"></script>
+  
+  <script src="../index.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const uploadArea = document.getElementById('upload-area');
+      const videoInput = document.getElementById('video-input');
+      const status = document.getElementById('status');
+      const progressBar = document.getElementById('progress-bar');
+      const downloadLink = document.getElementById('download-link');
+      const previewContainer = document.getElementById('video-preview-container');
+
+      const { FFmpeg } = window.FFmpeg; // Accediamo a FFmpeg in questo modo
+      let ffmpeg;
+
+      const loadFFmpeg = async () => {
+        status.textContent = 'Caricamento del motore di conversione...';
+        ffmpeg = new FFmpeg();
+        ffmpeg.on('log', ({ message }) => { /* console.log(message); */ });
+        ffmpeg.on('progress', ({ progress }) => {
+          if (progress >= 0 && progress <= 1) {
+            const progressValue = progress * 100;
+            progressBar.style.display = 'block';
+            progressBar.value = progressValue;
+            status.textContent = `Conversione in corso... ${Math.round(progressValue)}%`;
+          }
+        });
+        await ffmpeg.load();
+        status.textContent = 'Motore pronto. Seleziona un file.';
+      };
+
+      loadFFmpeg();
+
+      uploadArea.addEventListener('click', () => videoInput.click());
+      videoInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+      uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+      uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+      uploadArea.addEventListener('drop', (e) => { e.preventDefault(); uploadArea.classList.remove('dragover'); handleFile(e.dataTransfer.files[0]); });
+
+      const handleFile = async (file) => {
+        if (!file) return;
+        if (!file.type.startsWith('video/')) {
+          status.textContent = 'Per favore, seleziona un file video.'; return;
+        }
+        previewContainer.innerHTML = '';
+        const videoElement = document.createElement('video');
+        videoElement.src = URL.createObjectURL(file);
+        videoElement.controls = true;
+        videoElement.muted = true;
+        previewContainer.appendChild(videoElement);
+        downloadLink.style.display = 'none';
+        progressBar.style.display = 'none';
+        progressBar.value = 0;
+        const convertButton = document.createElement('button');
+        convertButton.textContent = 'Converti in WebM';
+        convertButton.className = 'action-button cursor-target';
+        previewContainer.appendChild(convertButton);
+        status.textContent = `File caricato: ${file.name}. Clicca per convertire.`;
+        convertButton.addEventListener('click', async () => {
+          convertButton.style.display = 'none';
+          await convertToWebM(file);
+        });
+      };
+
+      const convertToWebM = async (file) => {
+        try {
+          status.textContent = 'Preparazione del file...';
+          const { fetchFile } = window.FFmpeg;
+          const fileData = await fetchFile(file);
+          const inputFileName = 'input.' + file.name.split('.').pop();
+          const outputFileName = 'output.webm';
+          await ffmpeg.writeFile(inputFileName, fileData);
+          status.textContent = 'Avvio conversione... (potrebbe richiedere tempo)';
+          await ffmpeg.exec(['-i', inputFileName, '-c:v', 'libvpx-vp9', '-crf', '30', '-b:v', '0', '-c:a', 'libopus', outputFileName]);
+          const data = await ffmpeg.readFile(outputFileName);
+          const webmBlob = new Blob([data.buffer], { type: 'video/webm' });
+          const webmUrl = URL.createObjectURL(webmBlob);
+          downloadLink.href = webmUrl;
+          downloadLink.download = file.name.replace(/\.[^/.]+$/, "") + ".webm";
+          downloadLink.style.display = 'inline-block';
+          status.textContent = 'Conversione completata!';
+          progressBar.style.display = 'none';
+          await ffmpeg.deleteFile(inputFileName);
+          await ffmpeg.deleteFile(outputFileName);
+        } catch (error) {
+          console.error(error);
+          status.textContent = 'Si è verificato un errore durante la conversione.';
+          progressBar.style.display = 'none';
+        }
+      };
+    });
+  </script>
+</body>
+</html>
