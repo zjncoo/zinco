@@ -19,7 +19,7 @@
     "ingredients": "5 cl di Brandy, 1.5 cl di liquore all'arancia, 0.75 cl di Maraschino, 1.5 cl di succo di limone, 2 gocce di aromatic bitter",
     "description": "Un grande classico della miscelazione nato a New Orleans, precursore di molti drink moderni. La crusta di zucchero sul bordo è la sua firma.",
     "procedure": "Inumidire il bordo della coppetta con una fetta di limone e passarlo nello zucchero, poi metterla in freezer. Shakerare tutti gli ingredienti con ghiaccio e filtrare nella coppetta. Guarnire con una lunga scorza d'arancia.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/11/Brandy-Crusta.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/15-09-26-RalfR-WLC-0306.jpg"
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "ingredients": "5 cl di Cognac, 2 cl di liquore all'arancia, 2 cl di succo di limone",
     "description": "Un cocktail in perfetto equilibrio tra la dolcezza e l'acidità. Nato presumibilmente a Parigi, è diventato un simbolo di eleganza.",
     "procedure": "Versare tutti gli ingredienti nello shaker con ghiaccio. Shakerare energicamente e filtrare la miscela in una coppetta precedentemente raffreddata.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Sidecar-cocktail.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/Sidecar-cocktail.jpg"
   },
   {
     "id": 4,
@@ -41,7 +41,7 @@
     "ingredients": "5 cl di Rye Whiskey o Cognac, 1 zolletta di zucchero, 2 gocce di Peychaud's Bitter, 1 spruzzo di assenzio",
     "description": "Cocktail ufficiale di New Orleans. La sua preparazione rituale, con il bicchiere sciacquato nell'assenzio, lo rende unico.",
     "procedure": "Bagnare un tumbler basso con l'assenzio, roteando il bicchiere. In un mixing glass, pestare la zolletta di zucchero con il bitter. Aggiungere il distillato e il ghiaccio, mescolare. Filtrare nel bicchiere preparato. Strizzare la scorzetta di limone sul bordo del bicchiere e lasciarla cadere all'interno.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/Sazerac_drink.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Sazerac_Cocktail.jpg/1200px-Sazerac_Cocktail.jpg"
   },
   {
     "id": 5,
@@ -1229,7 +1229,7 @@
     "ingredients": "5 cl di vodka, 2 cl di liquore al caffè",
     "description": "Inventato nel 1949 dal barman belga Gustave Tops per l'ambasciatrice americana Pearl Mesta. Un cocktail semplice e forte che unisce due ingredienti iconici, la vodka russa e il liquore al caffè dal colore scuro.",
     "procedure": "Riempire un bicchiere old fashioned con cubetti di ghiaccio. Versare prima la vodka e poi il liquore al caffè. Mescolare delicatamente per raffreddare e servire.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Black_Russian_in_an_Old_Fashioned_Glass.jpg/800px-Black_Russian_in_an_Old_Fashioned_Glass.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/75/Black_Russian_Glass_%28Shenton%2C_2016%29.png"
   },
   {
     "id": 113,
@@ -1317,7 +1317,7 @@
     "ingredients": "3 cl di vodka, 3 cl di triple sec, 3 cl di succo di limone",
     "description": "Un sour aromatico e fresco, la cui origine è incerta ma collocata intorno agli anni '70. È un cocktail semplice, composto da parti uguali dei tre ingredienti, spesso servito anche come shot.",
     "procedure": "Versare gli ingredienti in uno shaker con ghiaccio e agitare bene. Filtrare in una coppetta da cocktail precedentemente raffreddata e guarnire con una rondella di lime.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Kamikaze_Cocktail.jpg/800px-Kamikaze_Cocktail.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Kamikaze-cocktail.jpg"
   },
   {
     "id": 121,
@@ -1328,7 +1328,7 @@
     "ingredients": "3 cl di vodka al limone, 2 cl di triple sec, 1.5 cl di succo di limone",
     "description": "Inventato negli anni '70 a San Francisco, questo drink deve il suo nome alle caramelle al limone. È un cocktail dal sapore fresco e agrumato, con un piacevole equilibrio tra dolce e aspro, accentuato dall'orlatura di zucchero sul bicchiere.",
     "procedure": "Orlare il bordo di una coppetta con lo zucchero. Versare gli ingredienti in uno shaker con ghiaccio, agitare bene e filtrare nella coppetta.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Lemon_Drop_Martini_in_a_sugar-rimmed_cocktail_glass.jpg/800px-Lemon_Drop_Martini_in_a_sugar-rimmed_cocktail_glass.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Lemon_Drop_Martini_prepared_with_raspberry_liquor_and_a_sugared_rim.jpg/250px-Lemon_Drop_Martini_prepared_with_raspberry_liquor_and_a_sugared_rim.jpg"
   },
   {
     "id": 122,
