@@ -8,7 +8,7 @@
     "ingredients": "3 cl di Campari, 3 cl di Vermouth rosso, Top di soda",
     "description": "Uno dei cocktail più iconici, nato come variante del Milano-Torino. Un classico aperitivo italiano, semplice e rinfrescante.",
     "procedure": "Riempire il bicchiere di cubetti di ghiaccio, versare il bitter e il vermouth. Spremere una scorza di arancia e versarla nel drink, quindi colmare con soda. Mescolare delicatamente e guarnire con uno spicchio di arancia.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Americano_cocktail_at_Nightjar_in_London.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Americano_cocktail.jpg"
   },
   {
     "id": 2,
@@ -162,7 +162,7 @@
     "ingredients": "4.5 cl di vino bianco secco, 4.5 cl di Campari, 1.5 cl di succo di limone, 1.5 cl di sciroppo di zucchero",
     "description": "Spesso le origini di questo cocktail sono avvolte nel mistero, ma il suo sapore è una certezza. Un aperitivo leggero e rinfrescante.",
     "procedure": "Inserire tutti gli ingredienti in uno shaker con cubetti di ghiaccio. Shakerare con vigore per una decina di secondi. Filtrare il liquido nel bicchiere, su ghiaccio o liscio. Guarnire con una scorza di limone e arancia.",
-    "imageUrl": "https://images.unsplash.com/photo-1551538852-6fb545a2a466?q=80&w=1887&auto=format&fit=crop"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/Stinger_Cocktail.jpg"
   },
   {
     "id": 16,
@@ -250,7 +250,7 @@
     "ingredients": "3 cl di Gin, 3 cl di Apricot Brandy, 3 cl di Calvados",
     "description": "Piuttosto secco, questo cocktail ha un gusto rotondo e fruttato, ed è ideale da abbinare a un dessert.",
     "procedure": "Riempire di ghiaccio lo shaker con cubetti di ghiaccio e aggiungere gli ingredienti. Agitare bene per qualche secondo e filtrare nella coppetta precedentemente raffreddata.",
-    "imageUrl": "https://www.diffordsguide.com/g/1075/1080/angel-face.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Angel_Face_cocktail_-_martini_glass_%28italy%2C_2023%29.png"
   },
   {
     "id": 24,
@@ -272,7 +272,7 @@
     "ingredients": "4.5 cl di Gin, 1.5 cl di Maraschino, 1.5 cl di succo di limone, 1 cucchiaino di Crème de Violette",
     "description": "Questo raffinato cocktail, nato durante il primo conflitto mondiale, ha un caratteristico color azzurro cielo. È un drink molto difficile da reperire nei bar.",
     "procedure": "Versare tutti gli ingredienti nello shaker riempito di cubetti di ghiaccio e agitare con energia. Filtrare in una coppetta, raffreddata e guarnita con una ciliegia al maraschino.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Aviation_Cocktail.jpg/800px-Aviation_Cocktail.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Aviation_Cocktail.jpg"
   },
   {
     "id": 26,
@@ -657,7 +657,7 @@
     "ingredients": "5 cl di liquore amaretto, 3 cl di succo di limone, 1.5 cl di sciroppo di zucchero, 1 cl di albume d'uovo",
     "description": "L'amaretto è un classico liquore italiano ottenuto dalla macerazione in alcol di mandorle amare e altri componenti aromatici.",
     "procedure": "Versate tutti gli ingredienti in uno shaker, chiudete e agitate il tutto con energia. Unite il ghiaccio e shakerate ancora per qualche secondo. Filtrate nel bicchiere la scorzetta su ghiaccio, e decorate.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Amaretto_Sour.jpg/800px-Amaretto_Sour.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/16/15-09-26-RalfR-WLC-0191.jpg"
   },
   {
     "id": 61,
@@ -712,7 +712,7 @@
     "ingredients": "3 cl di rum ambrato, 1.5 cl di succo di lime, 1.5 cl di sciroppo di miele, 5 cl di Champagne brut",
     "description": "Il primo riferimento conosciuto a questo drink - probabilmente ispirato al French 75 - proviene da una brochure pubblicitaria di Bacardi.",
     "procedure": "Versate tutti gli ingredienti, tranne lo Champagne, in uno shaker con ghiaccio e agitate bene per una decina di secondi. Filtrate la miscela nel bicchiere pieno di cubetti di ghiaccio e colmate con lo Champagne ben freddo.",
-    "imageUrl": "https://www.diffordsguide.com/g/1072/1080/air-mail.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Air_Mail_Cocktail.png"
   },
   {
     "id": 66,
@@ -723,7 +723,7 @@
     "ingredients": "4.5 cl di Rum Carta Bianca, 2 cl di succo di lime, 1 cl di granatina",
     "description": "Siamo di fronte a uno dei pochi cocktail che nel titolo hanno il nome di un'azienda. In questo caso la famosissima distilleria fondata nel 1862 da Don Facundo Bacardí Massó.",
     "procedure": "Inserire tutti gli ingredienti in uno shaker con ghiaccio, chiuderlo e agitare bene per 8-10 secondi. Versate filtrando la miscela in una coppetta precedentemente raffreddata.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Bacardi_Cocktail.jpg/800px-Bacardi_Cocktail.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Bacardi_cocktail.jpg"
   },
   {
     "id": 67,
@@ -1086,7 +1086,7 @@
     "ingredients": "4.5 cl di sherry, 2.5 cl di vermut rosso, 1-2 gocce di orange bitter",
     "description": "Nato a fine Ottocento, questo cocktail aromatico prende il nome da un musical di Broadway. La sua particolarità è di non contenere distillati, ma solo sherry e vermouth.",
     "procedure": "Versare gli ingredienti in un mixing glass con ghiaccio. Mescolare e filtrare in una coppetta cocktail precedentemente raffreddata. Strizzare una scorza d'arancia sulla superficie per rilasciare gli oli essenziali.",
-    "imageUrl": "https://www.diffordsguide.com/g/1071/1080/adonis-cocktail.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/db/Adonis_Cocktail.JPG"
   },
   {
     "id": 100,
@@ -1108,7 +1108,7 @@
     "ingredients": "7.5 cl di Champagne, 7.5 cl di birra stout",
     "description": "Una semplice combinazione di birra stout (tipicamente Guinness) e Champagne. Inventato nel 1861 al Brook's Club di Londra per commemorare la morte del principe Alberto.",
     "procedure": "Versare la birra stout fredda in una flûte fino a metà. Colmare lentamente con Champagne, versandolo sul dorso di un bar spoon per creare un effetto stratificato.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Black_Velvet_cocktail.jpg/800px-Black_Velvet_cocktail.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Black_velvet_Cocktail.png"
   },
   {
     "id": 102,
@@ -1218,7 +1218,7 @@
     "ingredients": "4 cl di vodka, 1.5 cl di liquore alla mela verde, 1.5 cl di triple sec",
     "description": "Noto anche come Appletini, è una variante del Martini comparsa alla fine degli anni '90. Un cocktail versatile, in equilibrio tra colore e dolcezza, che ha fatto parte della lista IBA dal 2004 al 2011.",
     "procedure": "Riempire un mixing glass con ghiaccio. Versare la vodka, il liquore alla mela e il triple sec. Mescolare adagio e filtrare in una coppetta precedentemente raffreddata. Guarnire con una fettina di mela.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Appletini_served_in_a_cocktail_glass.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/En_hemgjord_appletini.jpg"
   },
   {
     "id": 112,
@@ -1240,7 +1240,7 @@
     "ingredients": "4.5 cl di vodka, 9 cl di succo di pomodoro, 1.5 cl di succo di limone, 2-3 gocce di salsa Worcestershire, 2 gocce di Tabasco, un pizzico di sale e pepe",
     "description": "Un cocktail dal sapore ricco e speziato e dal colore inconfondibile. La sua paternità è contesa, ma è universalmente riconosciuto come un classico, perfetto per il brunch e come \"rimedio\" post-sbornia.",
     "procedure": "Versare tutti gli ingredienti in un mixing glass o direttamente in un tumbler alto. Riempire di ghiaccio e mescolare bene (tecnica \"rolling\" o \"stir\"). Guarnire con un gambo di sedano e una fetta di limone.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/A_Bloody_Mary_cocktail_in_a_tall_glass.jpg/800px-A_Bloody_Mary_cocktail_in_a_tall_glass.jpg"
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Bloody_Mary_with_cold_drink_in_restaurant.jpg/1200px-Bloody_Mary_with_cold_drink_in_restaurant.jpg"
   },
   {
     "id": 114,
