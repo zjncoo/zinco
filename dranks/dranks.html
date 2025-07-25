@@ -3,35 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista Drink</title>
+    <title>Dranks</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>Elenco Cocktail</h1>
-        <button id="open-filters-btn">Filtri</button>
+        <img src="drankslogo.svg" alt="Dranks Logo">
+        <div id="search-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+        </div>
     </header>
+
+    <div class="main-content">
+        <div class="filters-bar container">
+            <button id="open-filters-btn">Filtri</button>
+        </div>
+        <main id="drink-list" class="drink-list-container"></main>
+    </div>
 
     <div id="filter-overlay" class="overlay">
         <div class="overlay-content">
             <a href="javascript:void(0)" class="close-btn" id="close-filters-btn">&times;</a>
-            <h2>Filtri</h2>
-            <div class="filter-section">
-                <label for="spirit-filter">Distillato Principale:</label>
-                <select id="spirit-filter"></select>
-            </div>
-            <div class="filter-section">
-                <h3>Ingredienti Aggiuntivi:</h3>
-                <div id="ingredient-filters"></div>
+            <div class="filter-wrapper">
+                <button id="reset-filters-btn" class="reset-button">Rimuovi Filtri</button>
+                <div class="filter-section">
+                    <label for="spirit-filter">Distillato Principale</label>
+                    <select id="spirit-filter"></select>
+                </div>
+                <div class="filter-section">
+                    <label for="price-filter">Prezzo Massimo: <span id="price-value"></span></label>
+                    <input type="range" id="price-filter" min="6" max="15" value="15">
+                </div>
+                <div class="filter-section">
+                    <label>Ingredienti Aggiuntivi</label>
+                    <div id="ingredient-filters"></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <main id="drink-list" class="drink-grid">
-        </main>
+    <div id="search-overlay" class="overlay">
+        <div class="overlay-content">
+            <a href="javascript:void(0)" class="close-btn" id="close-search-btn">&times;</a>
+            <div class="search-wrapper">
+                <input type="text" id="search-input" placeholder="Cerca un drink..." autocomplete="off">
+                <div id="search-results"></div>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="script.js" defer></script>
 
-    <script src="drinks.js"></script> 
-    <script src="script.js"></script>
 </body>
 </html>
