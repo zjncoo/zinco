@@ -17,15 +17,50 @@
         .past-activity {
             opacity: 0.5;
         }
+        .edit-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #000;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .edit-input:focus {
+            outline: 2px solid #2563eb;
+            outline-offset: 1px;
+        }
+        textarea.edit-input {
+            resize: vertical;
+        }
+        .loader {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900 antialiased">
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-3xl">
 
-        <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Ibiza Lesbica</h1>
-            <p class="text-md sm:text-lg text-gray-600 mt-2">Ibiza & Formentera</p>
+        <header class="text-center sm:text-left mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Programma di Viaggio</h1>
+                <p class="text-md sm:text-lg text-gray-600 mt-2">Ibiza & Formentera</p>
+            </div>
+            <button id="edit-toggle-btn" class="w-full sm:w-auto bg-white border-2 border-black px-4 py-2 font-semibold text-sm hover:bg-black hover:text-white transition-colors duration-200">
+                Modifica
+            </button>
         </header>
 
         <!-- Sezione Attuale e Prossima -->
@@ -74,7 +109,7 @@
 
     <script>
         // --- ITINERARIO COMPLETO ---
-        const itinerary = [
+        let itinerary = [
             // Giorno 1: 27 Luglio
             { day: '2025-07-27', startTime: '23:00', endTime: '23:30', title: 'Arrivo in Aeroporto (IBZ)', location: 'Aeroporto di Ibiza', description: 'Atterraggio e ritiro bagagli.', coordinates: '38.8729,1.3731', travelTime: '', travelMethod: 'Aereo' },
             { day: '2025-07-27', startTime: '23:30', endTime: '00:15', title: 'Trasferimento a Ibiza Town', location: 'Porto di Ibiza', description: 'Prendere Autobus L10 fino al porto di Ibiza (Eivissa).', coordinates: '38.9092,1.4339', travelTime: '30 min', travelMethod: 'Autobus L10' },
@@ -108,21 +143,24 @@
         const currentActivityContent = document.getElementById('current-activity-content');
         const nextActivityContent = document.getElementById('next-activity-content');
         const timelineTitle = document.getElementById('timeline-title');
+        const editToggleButton = document.getElementById('edit-toggle-btn');
+        
         let currentFilter = 'all';
+        let isEditing = false;
 
         function getTravelIcon(method) {
             const lowerMethod = method.toLowerCase();
             let iconSvg = '';
             if (lowerMethod.includes('scooter')) {
-                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V14.5C5 12.5 6.5 11 8.5 11H12V16H5Z"></path><path d="M8 11V8L10 6"></path><path d="M12 16V11H15.5C17.5 11 19 12.5 19 14.5V16H12Z"></path><circle cx="7" cy="16" r="2"></circle><circle cx="17" cy="16" r="2"></circle></svg>`;
+                iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h13.5m-13.5 7.5h13.5m-1.875-7.5a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" /></svg>`;
             } else if (lowerMethod.includes('bus')) {
-                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-5.747h18M5.25 6.253h13.5A2.25 2.25 0 0121 8.503v7.004a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15.507V8.503a2.25 2.25 0 012.25-2.25z" /></svg>`;
+                iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-5.747h18M5.25 6.253h13.5A2.25 2.25 0 0121 8.503v7.004a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15.507V8.503a2.25 2.25 0 012.25-2.25z" /></svg>`;
             } else if (lowerMethod.includes('traghetto')) {
-                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5l1.179-1.677a.625.625 0 01.956-.054l4.36 3.733 4.36-3.733a.625.625 0 01.956.054l1.179 1.677m-17.25 4.5l-2.47-3.502a1.125 1.125 0 01.27-1.615L6 10.22l4.36 3.733 4.36-3.733L21.23 8.103a1.125 1.125 0 011.615.27l2.47 3.502M6.375 10.22l4.36 3.733 4.36-3.733" /></svg>`;
+                iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L4.5 21m0 0l15-7.5M4.5 21V3l15 7.5" /></svg>`;
             } else if (lowerMethod.includes('a piedi')) {
-                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z"></path><path d="M19 22v-6h-2l-2-4-3 3-2 3H5v6h14z"></path></svg>`;
+                iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>`;
             } else if (lowerMethod.includes('aereo')) {
-                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>`;
+                iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>`;
             }
             return iconSvg;
         }
@@ -190,17 +228,90 @@
             }
         }
 
+        async function fetchAndUpdateTravelInfo(eventIndex, newLocation, button) {
+            const previousEvent = itinerary[eventIndex - 1];
+            if (!previousEvent) {
+                alert("Impossibile calcolare il percorso per la prima attività.");
+                return;
+            }
+
+            button.innerHTML = '<div class="loader"></div>'; // Show loader
+
+            const prompt = `Un utente sta pianificando un viaggio a Ibiza. La tappa precedente è "${previousEvent.location}". La nuova destinazione è "${newLocation}, Ibiza". Fornisci le seguenti informazioni in un oggetto JSON: 1. "coordinates": le coordinate geografiche (lat,lon). 2. "travelTime": il tempo di percorrenza stimato in scooter. 3. "travelMethod": il mezzo di trasporto consigliato (es. "Scooter"). Il formato JSON deve essere: {"coordinates": "stringa", "travelTime": "stringa", "travelMethod": "stringa"}`;
+            
+            try {
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { 
+                    contents: chatHistory,
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "coordinates": { "type": "STRING" },
+                                "travelTime": { "type": "STRING" },
+                                "travelMethod": { "type": "STRING" }
+                            }
+                        }
+                    }
+                };
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                 if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0]) {
+                    const travelData = JSON.parse(result.candidates[0].content.parts[0].text);
+                    itinerary[eventIndex].coordinates = travelData.coordinates;
+                    itinerary[eventIndex].travelTime = travelData.travelTime;
+                    itinerary[eventIndex].travelMethod = travelData.travelMethod;
+                    updateActivitiesList(); // Rerender the list with new data
+                } else {
+                    throw new Error("Risposta AI non valida.");
+                }
+            } catch (error) {
+                console.error("Errore durante il recupero delle info di viaggio:", error);
+                alert("Impossibile aggiornare le informazioni di viaggio. Riprova.");
+                button.innerHTML = 'Aggiorna Info'; // Reset button
+            }
+        }
+
+        function saveChanges() {
+            const activityCards = document.querySelectorAll('#upcoming-activities .activity-card');
+            activityCards.forEach(card => {
+                const index = parseInt(card.dataset.index, 10);
+                if (!isNaN(index) && itinerary[index]) {
+                    const titleInput = card.querySelector(`[data-prop='title']`);
+                    const locationInput = card.querySelector(`[data-prop='location']`);
+                    const descriptionInput = card.querySelector(`[data-prop='description']`);
+                    const startTimeInput = card.querySelector(`[data-prop='startTime']`);
+                    const endTimeInput = card.querySelector(`[data-prop='endTime']`);
+                    
+                    if(titleInput) itinerary[index].title = titleInput.value;
+                    if(locationInput) itinerary[index].location = locationInput.value;
+                    if(descriptionInput) itinerary[index].description = descriptionInput.value;
+                    if(startTimeInput) itinerary[index].startTime = startTimeInput.value;
+                    if(endTimeInput) itinerary[index].endTime = endTimeInput.value;
+                }
+            });
+        }
+
         function updateActivitiesList() {
             const now = new Date();
             let eventsToShow;
 
             if (currentFilter === 'all') {
                 timelineTitle.textContent = "Prossime Attività";
-                eventsToShow = itinerary.map(e => ({ ...e, startDate: new Date(`${e.day}T${e.startTime}`) })).filter(e => e.startDate > now).sort((a, b) => a.startDate - b.startDate);
+                eventsToShow = itinerary.map((e, i) => ({ ...e, originalIndex: i, startDate: new Date(`${e.day}T${e.startTime}`) })).filter(e => e.startDate > now).sort((a, b) => a.startDate - b.startDate);
             } else {
                 const dayString = new Date(`${currentFilter}T00:00:00`).toLocaleDateString('it-IT', {day: 'numeric', month: 'long'});
                 timelineTitle.textContent = `Programma del ${dayString}`;
-                eventsToShow = itinerary.filter(e => e.day === currentFilter).map(e => ({ ...e, startDate: new Date(`${e.day}T${e.startTime}`) })).sort((a, b) => a.startDate - b.startDate);
+                eventsToShow = itinerary.map((e, i) => ({ ...e, originalIndex: i, startDate: new Date(`${e.day}T${e.startTime}`) })).filter(e => e.day === currentFilter).sort((a, b) => a.startDate - b.startDate);
             }
 
             upcomingActivitiesContainer.innerHTML = '';
@@ -211,21 +322,38 @@
                     const isPast = event.startDate < now && currentFilter !== 'all';
                     const previousEvent = eventsToShow[index - 1];
                     if (index > 0 && event.day === previousEvent.day && event.travelTime) {
-                        const travelInfoHTML = `
-                            <div class="flex items-center justify-center gap-3 my-4 ${isPast ? 'past-activity' : ''}">
-                                <div class="w-8 h-px bg-gray-300"></div>
-                                <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-bold">
-                                    ${getTravelIcon(event.travelMethod)}
-                                    <span>${event.travelMethod} &bull; ${event.travelTime}</span>
-                                </div>
-                                <div class="w-8 h-px bg-gray-300"></div>
-                            </div>`;
+                        const travelInfoHTML = `<div class="flex items-center justify-center gap-3 my-4 ${isPast ? 'past-activity' : ''}"><div class="w-8 h-px bg-gray-300"></div><div class="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-bold">${getTravelIcon(event.travelMethod)}<span>${event.travelMethod} &bull; ${event.travelTime}</span></div><div class="w-8 h-px bg-gray-300"></div></div>`;
                         upcomingActivitiesContainer.innerHTML += travelInfoHTML;
                     }
 
                     const appleMapsUrl = `https://maps.apple.com/?daddr=${event.coordinates}&q=${encodeURIComponent(event.location)}`;
-                    const activityCard = `
-                        <div class="bg-white p-4 sm:p-5 border-2 border-black transition-all duration-300 ${isPast ? 'past-activity' : ''}">
+                    
+                    let activityHTML;
+
+                    if (isEditing) {
+                        activityHTML = `
+                        <div class="activity-card bg-white p-4 sm:p-5 border-2 border-black" data-index="${event.originalIndex}">
+                            <div class="flex-grow mb-3 sm:mb-0">
+                                <span class="text-xs sm:text-sm font-bold text-blue-700">${new Date(event.startDate).toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric' })}</span>
+                                <input type="text" value="${event.title}" class="edit-input font-bold mt-1" data-prop="title">
+                                <div class="flex items-center gap-2 mt-2">
+                                    <input type="text" value="${event.location}" class="edit-input" data-prop="location" placeholder="Nuovo luogo">
+                                    <button class="update-info-btn p-1 bg-blue-500 text-white" data-index="${event.originalIndex}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M11.983 1.904a.75.75 0 00-1.292-.868l-6.5 9.5a.75.75 0 001.044 1.243l2.52-1.727L6 14.25a.75.75 0 001.244.82l6.5-9.5a.75.75 0 00-1.044-1.243l-2.52 1.727L12 5.75a.75.75 0 00-1.244-.82z" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mt-3 pt-3 border-t border-gray-200">
+                                <textarea class="edit-input" data-prop="description" rows="3">${event.description}</textarea>
+                                <div class="flex gap-4 mt-2">
+                                    <input type="time" value="${event.startTime}" class="edit-input" data-prop="startTime">
+                                    <input type="time" value="${event.endTime}" class="edit-input" data-prop="endTime">
+                                </div>
+                            </div>
+                        </div>`;
+                    } else {
+                        activityHTML = `
+                        <div class="activity-card bg-white p-4 sm:p-5 border-2 border-black transition-all duration-300 ${isPast ? 'past-activity' : ''}">
                             <div class="flex flex-col sm:flex-row justify-between sm:items-start">
                                 <div class="flex-grow mb-3 sm:mb-0">
                                     <span class="text-xs sm:text-sm font-bold text-blue-700">${new Date(event.startDate).toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric' })} alle ${event.startTime}</span>
@@ -243,12 +371,38 @@
                                 <p class="text-sm text-gray-700">${event.description}</p>
                             </div>
                         </div>`;
-                    upcomingActivitiesContainer.innerHTML += activityCard;
+                    }
+                    upcomingActivitiesContainer.innerHTML += activityHTML;
+                });
+                // Add event listeners for the new update buttons
+                document.querySelectorAll('.update-info-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const index = parseInt(e.currentTarget.dataset.index, 10);
+                        const card = e.currentTarget.closest('.activity-card');
+                        const locationInput = card.querySelector("[data-prop='location']");
+                        fetchAndUpdateTravelInfo(index, locationInput.value, e.currentTarget);
+                    });
                 });
             } else {
                 noActivitiesMessage.classList.remove('hidden');
             }
         }
+
+        editToggleButton.addEventListener('click', () => {
+            if (isEditing) {
+                saveChanges();
+                editToggleButton.textContent = 'Modifica';
+                editToggleButton.classList.remove('bg-black', 'text-white');
+                editToggleButton.classList.add('bg-white', 'text-black');
+            } else {
+                editToggleButton.textContent = 'Salva';
+                editToggleButton.classList.remove('bg-white', 'text-black');
+                editToggleButton.classList.add('bg-black', 'text-white');
+            }
+            isEditing = !isEditing;
+            updateActivitiesList();
+            updateNowAndNext();
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             setupDayFilterMenu();
@@ -257,7 +411,11 @@
             updateActivitiesList();
             setInterval(updateClock, 1000); 
             setInterval(updateNowAndNext, 5000);
-            setInterval(updateActivitiesList, 60000); 
+            setInterval(() => {
+                if (!isEditing) {
+                   updateActivitiesList();
+                }
+            }, 60000); 
         });
     </script>
 </body>
