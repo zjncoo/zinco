@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Tuo Programma di Viaggio - Ibiza</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Script e CSS per Leaflet (Mappa) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -55,12 +58,20 @@
 
         <header class="text-center sm:text-left mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Ibiza Lesbica</h1>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Ibiza Lesbiche</h1>
                 <p class="text-md sm:text-lg text-gray-600 mt-2">Ibiza & Formentera</p>
             </div>
-            <button id="edit-toggle-btn" class="w-full sm:w-auto bg-white border-2 border-black px-4 py-2 font-semibold text-sm hover:bg-black hover:text-white transition-colors duration-200">
-                Modifica
-            </button>
+            <div class="flex flex-row gap-2 w-full sm:w-auto items-center">
+                 <button id="add-activity-btn" class="w-auto bg-blue-600 text-white border-2 border-black p-2 font-semibold text-sm hover:bg-blue-700 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                    </svg>
+                 </button>
+                <button id="show-map-btn" class="w-full sm:w-auto bg-white border-2 border-black px-4 py-2 font-semibold text-sm hover:bg-black hover:text-white transition-colors duration-200">Mostra Mappa</button>
+                <button id="edit-toggle-btn" class="w-full sm:w-auto bg-white border-2 border-black px-4 py-2 font-semibold text-sm hover:bg-black hover:text-white transition-colors duration-200">
+                    Modifica
+                </button>
+            </div>
         </header>
 
         <!-- Sezione Attuale e Prossima -->
@@ -107,6 +118,39 @@
         </div>
     </div>
 
+    <!-- Map Overlay -->
+    <div id="map-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white border-2 border-black w-full h-full max-w-4xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b-2 border-black flex justify-between items-center">
+                <h2 class="font-bold text-lg">Mappa Itinerario</h2>
+                <button id="close-map-btn" class="font-bold text-xl">&times;</button>
+            </div>
+            <div id="map-container" class="flex-grow"></div>
+        </div>
+    </div>
+
+    <!-- Add Activity Modal -->
+    <div id="add-activity-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white border-2 border-black w-full max-w-md flex flex-col">
+            <div class="p-4 border-b-2 border-black flex justify-between items-center">
+                <h2 class="font-bold text-lg">Aggiungi Nuova Attività</h2>
+                <button id="close-add-modal-btn" class="font-bold text-xl">&times;</button>
+            </div>
+            <form id="add-activity-form" class="p-6 space-y-4">
+                <input type="text" name="title" placeholder="Titolo Attività" class="edit-input" required>
+                <input type="text" name="location" placeholder="Luogo (es. Cala Bassa, Ibiza)" class="edit-input" required>
+                <textarea name="description" placeholder="Descrizione" class="edit-input" rows="3"></textarea>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="date" name="day" class="edit-input" required>
+                    <input type="time" name="startTime" class="edit-input" required>
+                </div>
+                <input type="time" name="endTime" placeholder="Orario di fine" class="edit-input" required>
+                <button type="submit" class="w-full bg-black text-white font-bold py-3 hover:bg-gray-700 transition-colors">Salva Attività</button>
+            </form>
+        </div>
+    </div>
+
+
     <script>
         // --- ITINERARIO COMPLETO ---
         let itinerary = [
@@ -144,9 +188,18 @@
         const nextActivityContent = document.getElementById('next-activity-content');
         const timelineTitle = document.getElementById('timeline-title');
         const editToggleButton = document.getElementById('edit-toggle-btn');
+        const showMapButton = document.getElementById('show-map-btn');
+        const closeMapButton = document.getElementById('close-map-btn');
+        const mapOverlay = document.getElementById('map-overlay');
+        const mapContainer = document.getElementById('map-container');
+        const addActivityBtn = document.getElementById('add-activity-btn');
+        const addActivityModal = document.getElementById('add-activity-modal');
+        const closeAddModalBtn = document.getElementById('close-add-modal-btn');
+        const addActivityForm = document.getElementById('add-activity-form');
         
         let currentFilter = 'all';
         let isEditing = false;
+        let map;
 
         function getTravelIcon(method) {
             const lowerMethod = method.toLowerCase();
@@ -173,7 +226,7 @@
         }
         
         function setupDayFilterMenu() {
-            const days = ['all', ...new Set(itinerary.map(event => event.day))];
+            const days = ['all', ...new Set(itinerary.map(event => event.day))].sort();
             dayFilterMenu.innerHTML = '';
             days.forEach(day => {
                 const btn = document.createElement('button');
@@ -235,7 +288,7 @@
                 return;
             }
 
-            button.innerHTML = '<div class="loader"></div>'; // Show loader
+            button.innerHTML = '<div class="loader"></div>';
 
             const prompt = `Un utente sta pianificando un viaggio a Ibiza. La tappa precedente è "${previousEvent.location}". La nuova destinazione è "${newLocation}, Ibiza". Fornisci le seguenti informazioni in un oggetto JSON: 1. "coordinates": le coordinate geografiche (lat,lon). 2. "travelTime": il tempo di percorrenza stimato in scooter. 3. "travelMethod": il mezzo di trasporto consigliato (es. "Scooter"). Il formato JSON deve essere: {"coordinates": "stringa", "travelTime": "stringa", "travelMethod": "stringa"}`;
             
@@ -270,14 +323,14 @@
                     itinerary[eventIndex].coordinates = travelData.coordinates;
                     itinerary[eventIndex].travelTime = travelData.travelTime;
                     itinerary[eventIndex].travelMethod = travelData.travelMethod;
-                    updateActivitiesList(); // Rerender the list with new data
+                    updateActivitiesList();
                 } else {
                     throw new Error("Risposta AI non valida.");
                 }
             } catch (error) {
                 console.error("Errore durante il recupero delle info di viaggio:", error);
                 alert("Impossibile aggiornare le informazioni di viaggio. Riprova.");
-                button.innerHTML = 'Aggiorna Info'; // Reset button
+                button.innerHTML = 'Aggiorna Info';
             }
         }
 
@@ -402,6 +455,126 @@
             isEditing = !isEditing;
             updateActivitiesList();
             updateNowAndNext();
+        });
+
+        function initializeMap() {
+             if (map) {
+                map.remove();
+                map = null;
+            }
+            map = L.map(mapContainer).setView([38.9833, 1.4329], 10);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            const markers = [];
+            itinerary.forEach(event => {
+                const [latitude, longitude] = event.coordinates.split(',').map(Number);
+                if (!isNaN(latitude) && !isNaN(longitude)) {
+                    const marker = L.marker([latitude, longitude]).addTo(map)
+                        .bindPopup(`<b>${event.title}</b><br>${event.location}`);
+                    markers.push(marker);
+                }
+            });
+            
+            if (markers.length > 0) {
+                const group = new L.featureGroup(markers);
+                map.fitBounds(group.getBounds().pad(0.2));
+            }
+        }
+
+        showMapButton.addEventListener('click', () => {
+            mapOverlay.classList.remove('hidden');
+            mapOverlay.classList.add('flex');
+            // A small delay to ensure the container is visible before initializing the map
+            setTimeout(() => {
+                initializeMap();
+            }, 10);
+        });
+
+        closeMapButton.addEventListener('click', () => {
+            mapOverlay.classList.add('hidden');
+            mapOverlay.classList.remove('flex');
+        });
+
+        addActivityBtn.addEventListener('click', () => {
+            addActivityModal.classList.remove('hidden');
+            addActivityModal.classList.add('flex');
+        });
+
+        closeAddModalBtn.addEventListener('click', () => {
+            addActivityModal.classList.add('hidden');
+            addActivityModal.classList.remove('flex');
+        });
+
+        addActivityForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const newEventData = Object.fromEntries(formData.entries());
+
+            const tempEvent = { ...newEventData, startDate: new Date(`${newEventData.day}T${newEventData.startTime}`) };
+            const tempItinerary = [...itinerary.map(ev => ({...ev, startDate: new Date(`${ev.day}T${ev.startTime}`)})), tempEvent];
+            tempItinerary.sort((a, b) => a.startDate - b.startDate);
+            
+            const newEventIndexInSorted = tempItinerary.findIndex(ev => ev === tempEvent);
+            const previousEvent = newEventIndexInSorted > 0 ? tempItinerary[newEventIndexInSorted - 1] : itinerary[0]; // fallback to first event if no predecessor
+
+            // Fetch travel info for the new event
+            const button = e.target.querySelector('button[type="submit"]');
+            button.disabled = true;
+            button.innerHTML = '<div class="loader mx-auto"></div>';
+
+            const prompt = `Un utente sta pianificando un viaggio a Ibiza. La tappa precedente è "${previousEvent.location}". La nuova destinazione è "${newEventData.location}, Ibiza". Fornisci le seguenti informazioni in un oggetto JSON: 1. "coordinates": le coordinate geografiche (lat,lon). 2. "travelTime": il tempo di percorrenza stimato in scooter. 3. "travelMethod": il mezzo di trasporto consigliato (es. "Scooter"). Il formato JSON deve essere: {"coordinates": "stringa", "travelTime": "stringa", "travelMethod": "stringa"}`;
+            
+            try {
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { 
+                    contents: chatHistory,
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "coordinates": { "type": "STRING" },
+                                "travelTime": { "type": "STRING" },
+                                "travelMethod": { "type": "STRING" }
+                            }
+                        }
+                    }
+                };
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0]) {
+                    const travelData = JSON.parse(result.candidates[0].content.parts[0].text);
+                    const finalNewEvent = { ...newEventData, ...travelData };
+                    itinerary.push(finalNewEvent);
+                    itinerary.sort((a, b) => new Date(`${a.day}T${a.startTime}`) - new Date(`${b.day}T${b.startTime}`));
+                    
+                    addActivityForm.reset();
+                    addActivityModal.classList.add('hidden');
+                    addActivityModal.classList.remove('flex');
+
+                    setupDayFilterMenu();
+                    updateActivitiesList();
+                    updateNowAndNext();
+                } else {
+                    throw new Error("Risposta AI non valida.");
+                }
+            } catch (error) {
+                console.error("Errore durante la creazione dell'attività:", error);
+                alert("Impossibile creare la nuova attività. Riprova.");
+            } finally {
+                button.disabled = false;
+                button.innerHTML = 'Salva Attività';
+            }
         });
 
         document.addEventListener('DOMContentLoaded', () => {
