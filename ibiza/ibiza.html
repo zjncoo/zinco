@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Tuo Programma di Viaggio - Ibiza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        .filter-btn.active {
+            background-color: #000000;
+            color: white;
+            border-color: #000000;
+        }
+        .past-activity {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-3xl">
+
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Programma di Viaggio</h1>
+            <p class="text-md sm:text-lg text-gray-600 mt-2">Ibiza & Formentera</p>
+        </header>
+
+        <!-- Sezione Attuale e Prossima -->
+        <div id="now-next-section" class="mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Attività Attuale -->
+                <div id="current-activity-card" class="p-5 text-white bg-blue-700 border-2 border-black">
+                     <h3 class="font-bold text-lg text-blue-200 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clip-rule="evenodd" /></svg>
+                        Adesso
+                     </h3>
+                     <div id="current-activity-content" class="mt-2">
+                        <p class="text-blue-100">Nessuna attività in corso.</p>
+                     </div>
+                </div>
+                <!-- Prossima Attività -->
+                <div id="next-activity-card" class="p-5 bg-white border-2 border-black">
+                     <h3 class="font-bold text-lg text-gray-500 flex items-center gap-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4.75A.75.75 0 015.75 4h8.5a.75.75 0 010 1.5h-8.5A.75.75 0 015 4.75zM5.75 8a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM5 12.75a.75.75 0 01.75-.75h8.5a.75.75 0 010 1.5h-8.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" /></svg>
+                        Prossima
+                     </h3>
+                      <div id="next-activity-content">
+                        <p class="text-gray-500">Nessuna attività in programma.</p>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-6 mb-8 border-2 border-black">
+            <h2 class="text-sm font-semibold text-gray-400 mb-2 text-center uppercase tracking-wider">Ora Attuale</h2>
+            <div id="current-time" class="text-xl sm:text-2xl font-bold text-center text-gray-900"></div>
+        </div>
+        
+        <div id="day-filter-menu" class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+            <!-- Pulsanti filtro -->
+        </div>
+
+        <div class="space-y-2">
+            <h2 id="timeline-title" class="text-xl sm:text-2xl font-bold border-b-2 border-black pb-3 mb-6">Programma</h2>
+            <div id="upcoming-activities" class="space-y-4"></div>
+            <div id="no-activities-message" class="bg-white p-8 text-center text-gray-500 hidden border-2 border-black">
+                <p class="text-lg font-medium">Nessuna attività in programma per la data selezionata.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- ITINERARIO COMPLETO ---
+        const itinerary = [
+            // Giorno 1: 27 Luglio
+            { day: '2025-07-27', startTime: '23:00', endTime: '23:30', title: 'Arrivo in Aeroporto (IBZ)', location: 'Aeroporto di Ibiza', description: 'Atterraggio e ritiro bagagli.', coordinates: '38.8729,1.3731', travelTime: '', travelMethod: 'Aereo' },
+            { day: '2025-07-27', startTime: '23:30', endTime: '00:15', title: 'Trasferimento a Ibiza Town', location: 'Porto di Ibiza', description: 'Prendere Autobus L10 fino al porto di Ibiza (Eivissa).', coordinates: '38.9092,1.4339', travelTime: '30 min', travelMethod: 'Autobus L10' },
+            { day: '2025-07-28', startTime: '00:15', endTime: '00:45', title: 'Deposito Bagagli', location: 'Locker Ibiza Port', description: 'Lasciare i bagagli in un deposito automatico vicino al porto.', coordinates: '38.9092,1.4339', travelTime: 'pochi min', travelMethod: 'A piedi' },
+            { day: '2025-07-28', startTime: '00:45', endTime: '06:00', title: 'Serata al Pacha', location: 'Pacha, Ibiza', description: 'Godersi la festa in una delle discoteche più famose.', coordinates: '38.9165,1.4435', travelTime: '15-20 min', travelMethod: 'A piedi o Taxi' },
+            // Giorno 2: 28 Luglio
+            { day: '2025-07-28', startTime: '06:00', endTime: '07:00', title: 'Trasferimento a Santa Eulària', location: 'Santa Eulària des Riu', description: 'Recupero bagagli e Discobus L13-18 per Santa Eulària.', coordinates: '38.9847,1.5303', travelTime: '30-40 min', travelMethod: 'Discobus' },
+            { day: '2025-07-28', startTime: '07:00', endTime: '15:00', title: 'Relax in attesa del Check-in', location: 'Platja de Santa Eulària', description: 'Riposo in spiaggia e pranzo sul Paseo Marítimo.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: 'A piedi' },
+            { day: '2025-07-28', startTime: '15:00', endTime: '17:00', title: 'Check-in e Riposo', location: 'Alloggio a Santa Eulària', description: 'Check-in, doccia e riposo obbligatorio.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: '' },
+            { day: '2025-07-28', startTime: '17:00', endTime: '18:00', title: 'Noleggio Scooter', location: 'Noleggio a Santa Eulària', description: 'Ritiro dello scooter per i prossimi giorni.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: '' },
+            { day: '2025-07-28', startTime: '18:00', endTime: '21:00', title: 'Tramonto a Cala Comte', location: 'Cala Comte', description: 'Guidare fino a Cala Comte per godersi lo spettacolo al Sunset Ashram.', coordinates: '38.9625,1.2206', travelTime: '35-40 min', travelMethod: 'Scooter' },
+            // Giorno 3: 29 Luglio
+            { day: '2025-07-29', startTime: '09:00', endTime: '10:00', title: 'Traghetto per Formentera', location: 'Porto di Santa Eulària', description: 'Imbarco sul traghetto diretto per Formentera (prenotato online).', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: 'Traghetto' },
+            { day: '2025-07-29', startTime: '10:00', endTime: '18:00', title: 'Giornata a Formentera', location: 'Formentera', description: 'Noleggio scooter al porto La Savina ed esplorazione di Ses Illetes e Platja de Llevant.', coordinates: '38.7333,1.4167', travelTime: '', travelMethod: 'Scooter' },
+            { day: '2025-07-29', startTime: '18:00', endTime: '19:00', title: 'Rientro a Ibiza', location: 'Porto di Santa Eulària', description: 'Riconsegna scooter e traghetto di ritorno per Santa Eulària.', coordinates: '38.9847,1.5303', travelTime: '1h', travelMethod: 'Traghetto' },
+            { day: '2025-07-29', startTime: '20:30', endTime: '22:30', title: 'Cena a Santa Eulària', location: 'Carrer de Sant Vicent', description: 'Cena nella "Via dei Ristoranti".', coordinates: '38.9852,1.5326', travelTime: '', travelMethod: 'A piedi' },
+            // Giorno 4: 30 Luglio
+            { day: '2025-07-30', startTime: '10:00', endTime: '13:30', title: 'Visita a Cala Salada', location: 'Cala Salada', description: 'Mattinata a Cala Salada e la vicina Cala Saladeta.', coordinates: '39.0195,1.3054', travelTime: '30-35 min', travelMethod: 'Scooter' },
+            { day: '2025-07-30', startTime: '14:00', endTime: '16:30', title: 'Pomeriggio a Cala Bassa', location: 'Cala Bassa', description: 'Rilassarsi nelle acque turchesi e al beach club.', coordinates: '38.9644,1.2422', travelTime: '20-25 min', travelMethod: 'Scooter' },
+            { day: '2025-07-30', startTime: '16:30', endTime: '18:00', title: 'Rientro e Preparazione', location: 'Alloggio a Santa Eulària', description: 'Rientro alla base per prepararsi per la serata.', coordinates: '38.9847,1.5303', travelTime: '30 min', travelMethod: 'Scooter' },
+            { day: '2025-07-30', startTime: '19:00', endTime: '23:59', title: 'Serata all\'Ushuaïa', location: 'Ushuaïa Ibiza Beach Hotel', description: 'Godersi l\'evento. ATTENZIONE: se bevi, non guidare! Usa il Discobus L13-18 per un rientro sicuro.', coordinates: '38.8878,1.4069', travelTime: '25 min', travelMethod: 'Scooter' },
+            // Giorno 5: 31 Luglio
+            { day: '2025-07-31', startTime: '06:00', endTime: '07:00', title: 'Preparazione e Riconsegna Scooter', location: 'Noleggio a Santa Eulària', description: 'Sveglia, bagagli e riconsegna dello scooter.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: '' },
+            { day: '2025-07-31', startTime: '07:00', endTime: '08:00', title: 'Trasferimento in Aeroporto', location: 'Aeroporto di Ibiza', description: 'Prendere Autobus L24 o un Taxi per l\'aeroporto.', coordinates: '38.8729,1.3731', travelTime: '40 min', travelMethod: 'Autobus/Taxi' }
+        ];
+        
+        const timeDisplay = document.getElementById('current-time');
+        const upcomingActivitiesContainer = document.getElementById('upcoming-activities');
+        const noActivitiesMessage = document.getElementById('no-activities-message');
+        const dayFilterMenu = document.getElementById('day-filter-menu');
+        const currentActivityContent = document.getElementById('current-activity-content');
+        const nextActivityContent = document.getElementById('next-activity-content');
+        const timelineTitle = document.getElementById('timeline-title');
+        let currentFilter = 'all';
+
+        function getTravelIcon(method) {
+            const lowerMethod = method.toLowerCase();
+            let iconSvg = '';
+            if (lowerMethod.includes('scooter')) {
+                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V14.5C5 12.5 6.5 11 8.5 11H12V16H5Z"></path><path d="M8 11V8L10 6"></path><path d="M12 16V11H15.5C17.5 11 19 12.5 19 14.5V16H12Z"></path><circle cx="7" cy="16" r="2"></circle><circle cx="17" cy="16" r="2"></circle></svg>`;
+            } else if (lowerMethod.includes('bus')) {
+                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-5.747h18M5.25 6.253h13.5A2.25 2.25 0 0121 8.503v7.004a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15.507V8.503a2.25 2.25 0 012.25-2.25z" /></svg>`;
+            } else if (lowerMethod.includes('traghetto')) {
+                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5l1.179-1.677a.625.625 0 01.956-.054l4.36 3.733 4.36-3.733a.625.625 0 01.956.054l1.179 1.677m-17.25 4.5l-2.47-3.502a1.125 1.125 0 01.27-1.615L6 10.22l4.36 3.733 4.36-3.733L21.23 8.103a1.125 1.125 0 011.615.27l2.47 3.502M6.375 10.22l4.36 3.733 4.36-3.733" /></svg>`;
+            } else if (lowerMethod.includes('a piedi')) {
+                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z"></path><path d="M19 22v-6h-2l-2-4-3 3-2 3H5v6h14z"></path></svg>`;
+            } else if (lowerMethod.includes('aereo')) {
+                iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>`;
+            }
+            return iconSvg;
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
+            timeDisplay.innerHTML = `${now.toLocaleDateString('it-IT', dateOptions)} &mdash; ${now.toLocaleTimeString('it-IT', timeOptions)}`;
+        }
+        
+        function setupDayFilterMenu() {
+            const days = ['all', ...new Set(itinerary.map(event => event.day))];
+            dayFilterMenu.innerHTML = '';
+            days.forEach(day => {
+                const btn = document.createElement('button');
+                btn.dataset.day = day;
+                btn.className = 'filter-btn px-3 py-2 border-2 border-black font-semibold text-xs sm:text-sm transition-colors duration-200 bg-white hover:bg-black hover:text-white';
+                btn.textContent = day === 'all' ? 'Prossime Attività' : new Date(`${day}T00:00:00`).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
+                if (day === currentFilter) btn.classList.add('active');
+                btn.addEventListener('click', () => {
+                    currentFilter = day;
+                    updateActivitiesList();
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+                dayFilterMenu.appendChild(btn);
+            });
+        }
+        
+        function updateNowAndNext() {
+            const now = new Date();
+            const sortedEvents = itinerary.map(e => {
+                const startDate = new Date(`${e.day}T${e.startTime}`);
+                let endDate = new Date(`${e.day}T${e.endTime}`);
+                if (e.endTime < e.startTime) { endDate.setDate(endDate.getDate() + 1); }
+                return {...e, startDate, endDate };
+            }).sort((a, b) => a.startDate - b.startDate);
+
+            const currentActivity = sortedEvents.find(e => now >= e.startDate && now <= e.endDate);
+            const nextActivity = sortedEvents.find(e => e.startDate > now);
+
+            if (currentActivity) {
+                currentActivityContent.innerHTML = `<p class="font-bold text-lg sm:text-xl">${currentActivity.title}</p><p class="text-sm text-blue-200">Fino alle ${currentActivity.endTime}</p>`;
+            } else {
+                currentActivityContent.innerHTML = `<p class="text-blue-100">Nessuna attività in corso. Goditi il relax!</p>`;
+            }
+
+            if (nextActivity) {
+                 const appleMapsUrl = `https://maps.apple.com/?daddr=${nextActivity.coordinates}&q=${encodeURIComponent(nextActivity.location)}`;
+                nextActivityContent.innerHTML = `
+                <div class="flex justify-between items-start gap-3">
+                    <div>
+                        <p class="font-bold text-lg sm:text-xl text-gray-800">${nextActivity.title}</p>
+                        <p class="text-sm text-gray-500">Alle ${nextActivity.startTime} del ${nextActivity.startDate.toLocaleDateString('it-IT', {day: 'numeric', month: 'short'})}</p>
+                    </div>
+                    <a href="${appleMapsUrl}" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 transition-colors duration-300 text-center flex items-center justify-center gap-2">
+                        <span>Vai</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+                `;
+            } else {
+                nextActivityContent.innerHTML = `<p class="text-gray-500">Viaggio concluso!</p>`;
+            }
+        }
+
+        function updateActivitiesList() {
+            const now = new Date();
+            let eventsToShow;
+
+            if (currentFilter === 'all') {
+                timelineTitle.textContent = "Prossime Attività";
+                eventsToShow = itinerary.map(e => ({ ...e, startDate: new Date(`${e.day}T${e.startTime}`) })).filter(e => e.startDate > now).sort((a, b) => a.startDate - b.startDate);
+            } else {
+                const dayString = new Date(`${currentFilter}T00:00:00`).toLocaleDateString('it-IT', {day: 'numeric', month: 'long'});
+                timelineTitle.textContent = `Programma del ${dayString}`;
+                eventsToShow = itinerary.filter(e => e.day === currentFilter).map(e => ({ ...e, startDate: new Date(`${e.day}T${e.startTime}`) })).sort((a, b) => a.startDate - b.startDate);
+            }
+
+            upcomingActivitiesContainer.innerHTML = '';
+
+            if (eventsToShow.length > 0) {
+                noActivitiesMessage.classList.add('hidden');
+                eventsToShow.forEach((event, index) => {
+                    const isPast = event.startDate < now && currentFilter !== 'all';
+                    const previousEvent = eventsToShow[index - 1];
+                    if (index > 0 && event.day === previousEvent.day && event.travelTime) {
+                        const travelInfoHTML = `
+                            <div class="flex items-center justify-center gap-3 my-4 ${isPast ? 'past-activity' : ''}">
+                                <div class="w-8 h-px bg-gray-300"></div>
+                                <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-bold">
+                                    ${getTravelIcon(event.travelMethod)}
+                                    <span>${event.travelMethod} &bull; ${event.travelTime}</span>
+                                </div>
+                                <div class="w-8 h-px bg-gray-300"></div>
+                            </div>`;
+                        upcomingActivitiesContainer.innerHTML += travelInfoHTML;
+                    }
+
+                    const appleMapsUrl = `https://maps.apple.com/?daddr=${event.coordinates}&q=${encodeURIComponent(event.location)}`;
+                    const activityCard = `
+                        <div class="bg-white p-4 sm:p-5 border-2 border-black transition-all duration-300 ${isPast ? 'past-activity' : ''}">
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-start">
+                                <div class="flex-grow mb-3 sm:mb-0">
+                                    <span class="text-xs sm:text-sm font-bold text-blue-700">${new Date(event.startDate).toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric' })} alle ${event.startTime}</span>
+                                    <h3 class="text-lg sm:text-xl font-bold mt-1 text-gray-900 flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.23a2.25 2.25 0 003.62 0l6.25-10.5c.8-1.333.13-3.23-1.54-3.23H2.38c-1.67 0-2.34 1.9-1.54 3.23l6.25 10.5zM10 12a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                                        ${event.title}
+                                    </h3>
+                                </div>
+                                <a href="${appleMapsUrl}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-shrink-0 bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 transition-colors duration-300 text-center flex items-center justify-center gap-2">
+                                    <span>Vai</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" /></svg>
+                                </a>
+                            </div>
+                            <div class="mt-3 pt-3 border-t border-gray-200">
+                                <p class="text-sm text-gray-700">${event.description}</p>
+                            </div>
+                        </div>`;
+                    upcomingActivitiesContainer.innerHTML += activityCard;
+                });
+            } else {
+                noActivitiesMessage.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupDayFilterMenu();
+            updateClock();
+            updateNowAndNext();
+            updateActivitiesList();
+            setInterval(updateClock, 1000); 
+            setInterval(updateNowAndNext, 5000);
+            setInterval(updateActivitiesList, 60000); 
+        });
+    </script>
+</body>
+</html>
