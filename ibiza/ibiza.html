@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Tuo Programma di Viaggio - Ibiza</title>
+    <title>Il Tuo Programma di Viaggio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Script e CSS per Leaflet (Mappa) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -30,6 +32,7 @@
             -moz-appearance: none;
             font-size: 1rem;
             line-height: 1.5;
+            border-radius: 0;
         }
         .edit-input:focus {
             outline: 2px solid #2563eb;
@@ -50,16 +53,159 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Wizard Specific Styles */
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active {
+            display: block;
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #000;
+            width: 0%;
+            transition: width 0.4s ease-in-out;
+        }
+        .activity-item-setup {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-placeholder {
+            width: 100px;
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Flatpickr customizations */
+        .flatpickr-calendar {
+            border: 2px solid #000 !important;
+            box-shadow: none !important;
+        }
+        .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
+            background: #000 !important;
+            border-color: #000 !important;
+            color: #fff !important;
+        }
+        .flatpickr-day.inRange {
+            background: #f0f0f0 !important;
+            box-shadow: -5px 0 0 #f0f0f0, 5px 0 0 #f0f0f0 !important;
+            border-color: #f0f0f0 !important;
+        }
+        .flatpickr-day.today:not(.selected) {
+            border-color: #000 !important;
+        }
+        .flatpickr-day.today:not(.selected):hover {
+            background: #f0f0f0 !important;
+        }
+        .flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-month:hover {
+            background: #f0f0f0 !important;
+        }
+        .flatpickr-months .flatpickr-next-month:hover svg, .flatpickr-months .flatpickr-prev-month:hover svg {
+            fill: #000 !important;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900 antialiased">
+<body class="bg-white text-gray-900 antialiased">
 
-    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-3xl">
+    <div id="welcome-page" class="flex flex-col items-center justify-center min-h-screen bg-white text-black p-4 text-center">
+        <h1 class="text-5xl font-extrabold mb-6">✈️ Travel Planner 🗺️</h1>
+        <p class="text-xl mb-8">Organizza i tuoi viaggi in modo semplice e veloce</p>
+        <button id="start-planning-btn" class="bg-black text-white font-bold py-3 px-8 border-2 border-black hover:bg-gray-700 transition-all duration-300">
+            Inizia a Pianificare
+        </button>
+    </div>
+
+    <div id="setup-wizard" class="hidden min-h-screen flex flex-col items-center justify-center bg-white p-4">
+        <div class="logo-placeholder mb-6">IL TUO LOGO</div>
+        <div class="bg-white border-2 border-black p-6 sm:p-8 w-full max-w-2xl">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-800">Crea il Tuo Nuovo Viaggio</h2>
+            
+            <div class="progress-bar-container mb-8">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <form id="travel-setup-form" class="space-y-6">
+                <div id="step-title" class="wizard-step active">
+                    <label for="travel-title" class="block text-lg font-semibold text-gray-700 mb-2">Dai un titolo al tuo viaggio:</label>
+                    <input type="text" id="travel-title" name="travelTitle" class="edit-input" placeholder="Es. Avventura a Tokyo, Relax in Sardegna" required>
+                    <div class="flex justify-end mt-6">
+                        <button type="button" data-next-step class="bg-black text-white font-bold py-2 px-6 hover:bg-gray-700 transition-colors">Avanti</button>
+                    </div>
+                </div>
+
+                <div id="step-location" class="wizard-step">
+                    <label for="travel-location" class="block text-lg font-semibold text-gray-700 mb-2">Qual è la destinazione principale?</label>
+                    <input type="text" id="travel-location" name="travelLocation" class="edit-input" placeholder="Es. Tokyo, Sardegna, New York" required>
+                    <div class="flex justify-between mt-6">
+                        <button type="button" data-prev-step class="bg-gray-300 text-gray-800 font-bold py-2 px-6 hover:bg-gray-400 transition-colors">Indietro</button>
+                        <button type="button" data-next-step class="bg-black text-white font-bold py-2 px-6 hover:bg-gray-700 transition-colors">Avanti</button>
+                    </div>
+                </div>
+
+                <div id="step-dates" class="wizard-step">
+                    <label class="block text-lg font-semibold text-gray-700 mb-2">Quando inizia e finisce il tuo viaggio?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="start-date" class="block text-sm font-medium text-gray-600 mb-1">Data di Inizio:</label>
+                            <input type="text" id="start-date" name="startDate" class="edit-input flatpickr" placeholder="Seleziona una data" required>
+                        </div>
+                        <div>
+                            <label for="end-date" class="block text-sm font-medium text-gray-600 mb-1">Data di Fine:</label>
+                            <input type="text" id="end-date" name="endDate" class="edit-input flatpickr" placeholder="Seleziona una data" required>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-6">
+                        <button type="button" data-prev-step class="bg-gray-300 text-gray-800 font-bold py-2 px-6 hover:bg-gray-400 transition-colors">Indietro</button>
+                        <button type="button" data-next-step class="bg-black text-white font-bold py-2 px-6 hover:bg-gray-700 transition-colors">Avanti</button>
+                    </div>
+                </div>
+
+                <div id="step-participants" class="wizard-step">
+                    <label for="travel-participants" class="block text-lg font-semibold text-gray-700 mb-2">Quante persone viaggeranno?</label>
+                    <input type="number" id="travel-participants" name="travelParticipants" class="edit-input" min="1" value="1" required>
+                    <div class="flex justify-between mt-6">
+                        <button type="button" data-prev-step class="bg-gray-300 text-gray-800 font-bold py-2 px-6 hover:bg-gray-400 transition-colors">Indietro</button>
+                        <button type="button" data-next-step class="bg-black text-white font-bold py-2 px-6 hover:bg-gray-700 transition-colors">Avanti</button>
+                    </div>
+                </div>
+
+                <div id="step-daily-activities" class="wizard-step">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Aggiungi attività per ogni giorno:</h3>
+                    <div id="daily-activities-container" class="space-y-4">
+                        </div>
+                    <div class="flex justify-between mt-6">
+                        <button type="button" data-prev-step class="bg-gray-300 text-gray-800 font-bold py-2 px-6 hover:bg-gray-400 transition-colors">Indietro</button>
+                        <button type="submit" class="bg-green-600 text-white font-bold py-2 px-6 hover:bg-green-700 transition-colors">Crea Viaggio</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-itinerary-view" class="hidden container mx-auto p-4 sm:p-6 md:p-8 max-w-3xl">
 
         <header class="text-center sm:text-left mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-black">Ibiza Lesbiche</h1>
-                <p class="text-md sm:text-lg text-gray-600 mt-2">Ibiza & Formentera</p>
+                 <div class="logo-placeholder mb-4 sm:mb-0">IL TUO LOGO</div>
+                <h1 id="itinerary-main-title" class="text-3xl sm:text-4xl md:text-5xl font-bold text-black"></h1>
+                <p id="itinerary-main-location" class="text-md sm:text-lg text-gray-600 mt-2"></p>
             </div>
             <div class="flex flex-row gap-2 w-full sm:w-auto items-center">
                  <button id="add-activity-btn" class="w-auto bg-blue-600 text-white border-2 border-black p-2 font-semibold text-sm hover:bg-blue-700 transition-colors duration-200">
@@ -74,10 +220,8 @@
             </div>
         </header>
 
-        <!-- Sezione Attuale e Prossima -->
         <div id="now-next-section" class="mb-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Attività Attuale -->
                 <div id="current-activity-card" class="p-5 text-white bg-blue-700 border-2 border-black">
                      <h3 class="font-bold text-lg text-blue-200 flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clip-rule="evenodd" /></svg>
@@ -87,7 +231,6 @@
                         <p class="text-blue-100">Nessuna attività in corso.</p>
                      </div>
                 </div>
-                <!-- Prossima Attività -->
                 <div id="next-activity-card" class="p-5 bg-white border-2 border-black">
                      <h3 class="font-bold text-lg text-gray-500 flex items-center gap-2 mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4.75A.75.75 0 015.75 4h8.5a.75.75 0 010 1.5h-8.5A.75.75 0 015 4.75zM5.75 8a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM5 12.75a.75.75 0 01.75-.75h8.5a.75.75 0 010 1.5h-8.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" /></svg>
@@ -106,8 +249,7 @@
         </div>
         
         <div id="day-filter-menu" class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
-            <!-- Pulsanti filtro -->
-        </div>
+            </div>
 
         <div class="space-y-2">
             <h2 id="timeline-title" class="text-xl sm:text-2xl font-bold border-b-2 border-black pb-3 mb-6">Programma</h2>
@@ -118,7 +260,6 @@
         </div>
     </div>
 
-    <!-- Map Overlay -->
     <div id="map-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
         <div class="bg-white border-2 border-black w-full h-full max-w-4xl max-h-[90vh] flex flex-col">
             <div class="p-4 border-b-2 border-black flex justify-between items-center">
@@ -129,7 +270,6 @@
         </div>
     </div>
 
-    <!-- Add Activity Modal -->
     <div id="add-activity-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
         <div class="bg-white border-2 border-black w-full max-w-md flex flex-col">
             <div class="p-4 border-b-2 border-black flex justify-between items-center">
@@ -141,7 +281,7 @@
                 <input type="text" name="location" placeholder="Luogo (es. Cala Bassa, Ibiza)" class="edit-input" required>
                 <textarea name="description" placeholder="Descrizione" class="edit-input" rows="3"></textarea>
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="date" name="day" class="edit-input" required>
+                    <input type="text" name="day" class="edit-input flatpickr" placeholder="Seleziona data" required>
                     <input type="time" name="startTime" class="edit-input" required>
                 </div>
                 <input type="time" name="endTime" placeholder="Orario di fine" class="edit-input" required>
@@ -150,35 +290,20 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/it.js"></script>
 
     <script>
         // --- ITINERARIO COMPLETO ---
-        let itinerary = [
-            // Giorno 1: 27 Luglio
-            { day: '2025-07-27', startTime: '23:00', endTime: '23:30', title: 'Arrivo in Aeroporto (IBZ)', location: 'Aeroporto di Ibiza', description: 'Atterraggio e ritiro bagagli.', coordinates: '38.8729,1.3731', travelTime: '', travelMethod: 'Aereo' },
-            { day: '2025-07-27', startTime: '23:30', endTime: '00:15', title: 'Trasferimento a Ibiza Town', location: 'Porto di Ibiza', description: 'Prendere Autobus L10 fino al porto di Ibiza (Eivissa).', coordinates: '38.9092,1.4339', travelTime: '30 min', travelMethod: 'Autobus L10' },
-            { day: '2025-07-28', startTime: '00:15', endTime: '00:45', title: 'Deposito Bagagli', location: 'Locker Ibiza Port', description: 'Lasciare i bagagli in un deposito automatico vicino al porto.', coordinates: '38.9092,1.4339', travelTime: 'pochi min', travelMethod: 'A piedi' },
-            { day: '2025-07-28', startTime: '00:45', endTime: '06:00', title: 'Serata al Pacha', location: 'Pacha, Ibiza', description: 'Godersi la festa in una delle discoteche più famose.', coordinates: '38.9165,1.4435', travelTime: '15-20 min', travelMethod: 'A piedi o Taxi' },
-            // Giorno 2: 28 Luglio
-            { day: '2025-07-28', startTime: '06:00', endTime: '07:00', title: 'Trasferimento a Santa Eulària', location: 'Santa Eulària des Riu', description: 'Recupero bagagli e Discobus L13-18 per Santa Eulària.', coordinates: '38.9847,1.5303', travelTime: '30-40 min', travelMethod: 'Discobus' },
-            { day: '2025-07-28', startTime: '07:00', endTime: '15:00', title: 'Relax in attesa del Check-in', location: 'Platja de Santa Eulària', description: 'Riposo in spiaggia e pranzo sul Paseo Marítimo.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: 'A piedi' },
-            { day: '2025-07-28', startTime: '15:00', endTime: '17:00', title: 'Check-in e Riposo', location: 'Alloggio a Santa Eulària', description: 'Check-in, doccia e riposo obbligatorio.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: '' },
-            { day: '2025-07-28', startTime: '17:00', endTime: '18:00', title: 'Noleggio Scooter', location: 'Noleggio a Santa Eulària', description: 'Ritiro dello scooter per i prossimi giorni.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: '' },
-            { day: '2025-07-28', startTime: '18:00', endTime: '21:00', title: 'Tramonto a Cala Comte', location: 'Cala Comte', description: 'Guidare fino a Cala Comte per godersi lo spettacolo al Sunset Ashram.', coordinates: '38.9625,1.2206', travelTime: '35-40 min', travelMethod: 'Scooter' },
-            // Giorno 3: 29 Luglio
-            { day: '2025-07-29', startTime: '09:00', endTime: '10:00', title: 'Traghetto per Formentera', location: 'Porto di Santa Eulària', description: 'Imbarco sul traghetto diretto per Formentera (prenotato online).', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: 'Traghetto' },
-            { day: '2025-07-29', startTime: '10:00', endTime: '18:00', title: 'Giornata a Formentera', location: 'Formentera', description: 'Noleggio scooter al porto La Savina ed esplorazione di Ses Illetes e Platja de Llevant.', coordinates: '38.7333,1.4167', travelTime: '', travelMethod: 'Scooter' },
-            { day: '2025-07-29', startTime: '18:00', endTime: '19:00', title: 'Rientro a Ibiza', location: 'Porto di Santa Eulària', description: 'Riconsegna scooter e traghetto di ritorno per Santa Eulària.', coordinates: '38.9847,1.5303', travelTime: '1h', travelMethod: 'Traghetto' },
-            { day: '2025-07-29', startTime: '20:30', endTime: '22:30', title: 'Cena a Santa Eulària', location: 'Carrer de Sant Vicent', description: 'Cena nella "Via dei Ristoranti".', coordinates: '38.9852,1.5326', travelTime: '', travelMethod: 'A piedi' },
-            // Giorno 4: 30 Luglio
-            { day: '2025-07-30', startTime: '10:00', endTime: '13:30', title: 'Visita a Cala Salada', location: 'Cala Salada', description: 'Mattinata a Cala Salada e la vicina Cala Saladeta.', coordinates: '39.0195,1.3054', travelTime: '30-35 min', travelMethod: 'Scooter' },
-            { day: '2025-07-30', startTime: '14:00', endTime: '16:30', title: 'Pomeriggio a Cala Bassa', location: 'Cala Bassa', description: 'Rilassarsi nelle acque turchesi e al beach club.', coordinates: '38.9644,1.2422', travelTime: '20-25 min', travelMethod: 'Scooter' },
-            { day: '2025-07-30', startTime: '16:30', endTime: '18:00', title: 'Rientro e Preparazione', location: 'Alloggio a Santa Eulària', description: 'Rientro alla base per prepararsi per la serata.', coordinates: '38.9847,1.5303', travelTime: '30 min', travelMethod: 'Scooter' },
-            { day: '2025-07-30', startTime: '19:00', endTime: '23:59', title: 'Serata all\'Ushuaïa', location: 'Ushuaïa Ibiza Beach Hotel', description: 'Godersi l\'evento. ATTENZIONE: se bevi, non guidare! Usa il Discobus L13-18 per un rientro sicuro.', coordinates: '38.8878,1.4069', travelTime: '25 min', travelMethod: 'Scooter' },
-            // Giorno 5: 31 Luglio
-            { day: '2025-07-31', startTime: '06:00', endTime: '07:00', title: 'Preparazione e Riconsegna Scooter', location: 'Noleggio a Santa Eulària', description: 'Sveglia, bagagli e riconsegna dello scooter.', coordinates: '38.9847,1.5303', travelTime: '', travelMethod: '' },
-            { day: '2025-07-31', startTime: '07:00', endTime: '08:00', title: 'Trasferimento in Aeroporto', location: 'Aeroporto di Ibiza', description: 'Prendere Autobus L24 o un Taxi per l\'aeroporto.', coordinates: '38.8729,1.3731', travelTime: '40 min', travelMethod: 'Autobus/Taxi' }
-        ];
+        let itinerary = []; // Now empty, will be populated by the wizard
+        let travelData = {
+            title: '',
+            location: '',
+            startDate: '',
+            endDate: '',
+            participants: 1,
+            dailyActivities: {} // To store activities temporarily during setup
+        };
         
         const timeDisplay = document.getElementById('current-time');
         const upcomingActivitiesContainer = document.getElementById('upcoming-activities');
@@ -196,17 +321,221 @@
         const addActivityModal = document.getElementById('add-activity-modal');
         const closeAddModalBtn = document.getElementById('close-add-modal-btn');
         const addActivityForm = document.getElementById('add-activity-form');
-        
+
+        // New elements for Welcome and Setup Wizard
+        const welcomePage = document.getElementById('welcome-page');
+        const startPlanningBtn = document.getElementById('start-planning-btn');
+        const setupWizard = document.getElementById('setup-wizard');
+        const progressBar = document.getElementById('progress-bar');
+        const wizardSteps = Array.from(document.querySelectorAll('.wizard-step'));
+        const travelSetupForm = document.getElementById('travel-setup-form');
+        const dailyActivitiesContainer = document.getElementById('daily-activities-container');
+        const mainItineraryView = document.getElementById('main-itinerary-view');
+        const itineraryMainTitle = document.getElementById('itinerary-main-title');
+        const itineraryMainLocation = document.getElementById('itinerary-main-location');
+
         let currentFilter = 'all';
         let isEditing = false;
         let map;
+        let currentWizardStep = 0;
+
+        // Initialize Flatpickr
+        flatpickr('.flatpickr', {
+            dateFormat: 'Y-m-d',
+            locale: 'it',
+        });
+        
+        // --- Wizard Functions ---
+        function showStep(stepIndex) {
+            wizardSteps.forEach((step, index) => {
+                step.classList.remove('active');
+                if (index === stepIndex) {
+                    step.classList.add('active');
+                }
+            });
+            updateProgressBar();
+            // Focus on the first input of the new step
+            const currentStepElement = wizardSteps[stepIndex];
+            const firstInput = currentStepElement.querySelector('input, textarea');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentWizardStep + 1) / wizardSteps.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                currentWizardStep++;
+                if (currentWizardStep < wizardSteps.length) {
+                    showStep(currentWizardStep);
+                    if (wizardSteps[currentWizardStep].id === 'step-daily-activities') {
+                        generateDailyActivityInputs();
+                    }
+                }
+            }
+        }
+
+        function prevStep() {
+            currentWizardStep--;
+            if (currentWizardStep >= 0) {
+                showStep(currentWizardStep);
+            }
+        }
+
+        function validateCurrentStep() {
+            const currentStepElement = wizardSteps[currentWizardStep];
+            const inputs = currentStepElement.querySelectorAll('input[required], textarea[required]');
+            let allValid = true;
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.reportValidity(); // Show browser's validation message
+                    allValid = false;
+                }
+            });
+
+            if (currentStepElement.id === 'step-dates') {
+                const startDate = document.getElementById('start-date').value;
+                const endDate = document.getElementById('end-date').value;
+                if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+                    alert('La data di fine non può essere precedente alla data di inizio.');
+                    allValid = false;
+                }
+            }
+            return allValid;
+        }
+
+        function generateDailyActivityInputs() {
+            dailyActivitiesContainer.innerHTML = '';
+            const startDate = new Date(document.getElementById('start-date').value);
+            const endDate = new Date(document.getElementById('end-date').value);
+            let currentDate = new Date(startDate);
+
+            while (currentDate <= endDate) {
+                const dayString = currentDate.toISOString().split('T')[0]; // YYYY-MM-DD
+                const displayDate = currentDate.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+
+                const daySection = document.createElement('div');
+                daySection.classList.add('border-2', 'border-black', 'p-4', 'bg-white');
+                daySection.innerHTML = `
+                    <h4 class="text-md font-bold mb-3 text-gray-800">${displayDate}</h4>
+                    <div id="activities-for-${dayString}" class="space-y-3">
+                        ${(travelData.dailyActivities[dayString] || []).map((activity, index) => `
+                            <div class="activity-item-setup" data-day="${dayString}" data-index="${index}">
+                                <span>${activity.title} (${activity.startTime}-${activity.endTime})</span>
+                                <button type="button" class="remove-daily-activity-btn text-red-600 hover:text-red-800">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button type="button" class="add-daily-activity-btn mt-3 bg-black text-white py-1 px-3 text-sm hover:bg-gray-700 transition-colors" data-day="${dayString}">
+                        Aggiungi Attività
+                    </button>
+                `;
+                dailyActivitiesContainer.appendChild(daySection);
+
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            document.querySelectorAll('.add-daily-activity-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const day = e.target.dataset.day;
+                    const title = prompt('Titolo attività:');
+                    const location = prompt('Luogo:');
+                    const description = prompt('Descrizione:');
+                    const startTime = prompt('Ora inizio (HH:MM):');
+                    const endTime = prompt('Ora fine (HH:MM):');
+
+                    if (title && location && startTime && endTime) {
+                        const newActivity = { day, title, location, description, startTime, endTime, coordinates: '', travelTime: '', travelMethod: '' };
+                        if (!travelData.dailyActivities[day]) {
+                            travelData.dailyActivities[day] = [];
+                        }
+                        travelData.dailyActivities[day].push(newActivity);
+                        generateDailyActivityInputs(); // Regenerate to show new activity
+                    } else {
+                        alert('Tutti i campi sono obbligatori per aggiungere un\'attività.');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.remove-daily-activity-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const activityItem = e.target.closest('.activity-item-setup');
+                    const day = activityItem.dataset.day;
+                    const index = parseInt(activityItem.dataset.index);
+                    
+                    if (confirm('Sei sicuro di voler rimuovere questa attività?')) {
+                        travelData.dailyActivities[day].splice(index, 1);
+                        generateDailyActivityInputs(); // Regenerate to update the list
+                    }
+                });
+            });
+        }
+
+        travelSetupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            travelData.title = document.getElementById('travel-title').value;
+            travelData.location = document.getElementById('travel-location').value;
+            travelData.startDate = document.getElementById('start-date').value;
+            travelData.endDate = document.getElementById('end-date').value;
+            travelData.participants = document.getElementById('travel-participants').value;
+
+            itinerary = [];
+            for (const day in travelData.dailyActivities) {
+                itinerary.push(...travelData.dailyActivities[day]);
+            }
+            itinerary.sort((a, b) => {
+                const dateA = new Date(`${a.day}T${a.startTime}`);
+                const dateB = new Date(`${b.day}T${b.startTime}`);
+                return dateA - dateB;
+            });
+
+            itineraryMainTitle.textContent = travelData.title;
+            itineraryMainLocation.textContent = travelData.location;
+
+            setupWizard.classList.add('hidden');
+            mainItineraryView.classList.remove('hidden');
+            setupDayFilterMenu();
+            updateNowAndNext();
+            updateActivitiesList();
+            startClock();
+        });
+
+        document.querySelectorAll('[data-next-step]').forEach(button => {
+            button.addEventListener('click', nextStep);
+        });
+
+        document.querySelectorAll('[data-prev-step]').forEach(button => {
+            button.addEventListener('click', prevStep);
+        });
+        
+        // --- Keyboard Navigation for Wizard ---
+        travelSetupForm.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const activeStep = document.querySelector('.wizard-step.active');
+                const nextButton = activeStep.querySelector('[data-next-step]');
+                if (nextButton) {
+                    e.preventDefault();
+                    nextStep();
+                }
+            }
+        });
+
+        // --- Existing Functions adapted for dynamic itinerary ---
 
         function getTravelIcon(method) {
             const lowerMethod = method.toLowerCase();
             let iconSvg = '';
             if (lowerMethod.includes('scooter')) {
                 iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h13.5m-13.5 7.5h13.5m-1.875-7.5a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" /></svg>`;
-            } else if (lowerMethod.includes('bus')) {
+            } else if (lowerMethod.includes('bus') || lowerMethod.includes('autobus')) {
                 iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-5.747h18M5.25 6.253h13.5A2.25 2.25 0 0121 8.503v7.004a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15.507V8.503a2.25 2.25 0 012.25-2.25z" /></svg>`;
             } else if (lowerMethod.includes('traghetto')) {
                 iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L4.5 21m0 0l15-7.5M4.5 21V3l15 7.5" /></svg>`;
@@ -214,6 +543,8 @@
                 iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>`;
             } else if (lowerMethod.includes('aereo')) {
                 iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>`;
+            } else if (lowerMethod.includes('taxi')) {
+                iconSvg = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>`;
             }
             return iconSvg;
         }
@@ -232,7 +563,7 @@
                 const btn = document.createElement('button');
                 btn.dataset.day = day;
                 btn.className = 'filter-btn px-3 py-2 border-2 border-black font-semibold text-xs sm:text-sm transition-colors duration-200 bg-white hover:bg-black hover:text-white';
-                btn.textContent = day === 'all' ? 'Prossime Attività' : new Date(`${day}T00:00:00`).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
+                btn.textContent = day === 'all' ? 'Tutte le Attività' : new Date(`${day}T00:00:00`).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
                 if (day === currentFilter) btn.classList.add('active');
                 btn.addEventListener('click', () => {
                     currentFilter = day;
@@ -270,10 +601,10 @@
                         <p class="font-bold text-lg sm:text-xl text-gray-800">${nextActivity.title}</p>
                         <p class="text-sm text-gray-500">Alle ${nextActivity.startTime} del ${nextActivity.startDate.toLocaleDateString('it-IT', {day: 'numeric', month: 'short'})}</p>
                     </div>
-                    <a href="${appleMapsUrl}" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 transition-colors duration-300 text-center flex items-center justify-center gap-2">
+                    ${nextActivity.coordinates ? `<a href="${appleMapsUrl}" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 transition-colors duration-300 text-center flex items-center justify-center gap-2">
                         <span>Vai</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" /></svg>
-                    </a>
+                    </a>` : ''}
                 </div>
                 `;
             } else {
@@ -282,15 +613,17 @@
         }
 
         async function fetchAndUpdateTravelInfo(eventIndex, newLocation, button) {
-            const previousEvent = itinerary[eventIndex - 1];
+            const currentEvent = itinerary[eventIndex];
+            const previousEvent = itinerary[eventIndex - 1]; 
+
             if (!previousEvent) {
-                alert("Impossibile calcolare il percorso per la prima attività.");
+                alert("Impossibile calcolare il percorso per la prima attività. Assicurati che abbia un punto di partenza valido.");
+                if (button) button.innerHTML = 'Aggiorna Info';
                 return;
             }
+             if (button) button.innerHTML = '<div class="loader"></div>';
 
-            button.innerHTML = '<div class="loader"></div>';
-
-            const prompt = `Un utente sta pianificando un viaggio a Ibiza. La tappa precedente è "${previousEvent.location}". La nuova destinazione è "${newLocation}, Ibiza". Fornisci le seguenti informazioni in un oggetto JSON: 1. "coordinates": le coordinate geografiche (lat,lon). 2. "travelTime": il tempo di percorrenza stimato in scooter. 3. "travelMethod": il mezzo di trasporto consigliato (es. "Scooter"). Il formato JSON deve essere: {"coordinates": "stringa", "travelTime": "stringa", "travelMethod": "stringa"}`;
+            const prompt = `Un utente sta pianificando un viaggio. La tappa precedente è "${previousEvent.location || 'un punto sconosciuto'}" con coordinate ${previousEvent.coordinates || 'sconosciute'}. La nuova destinazione è "${newLocation || 'un luogo sconosciuto'}". Fornisci le seguenti informazioni in un oggetto JSON: 1. "coordinates": le coordinate geografiche (lat,lon) della nuova destinazione. 2. "travelTime": il tempo di percorrenza stimato e il mezzo più logico (es. "30 min in auto", "15 min a piedi"). 3. "travelMethod": il mezzo di trasporto consigliato (es. "Auto", "A piedi", "Treno"). Il formato JSON deve essere: {"coordinates": "stringa", "travelTime": "stringa", "travelMethod": "stringa"}`;
             
             try {
                 let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
@@ -308,7 +641,11 @@
                         }
                     }
                 };
-                const apiKey = ""; 
+                const apiKey = "YOUR_GEMINI_API_KEY";
+                if (apiKey === "YOUR_GEMINI_API_KEY" || apiKey === "") {
+                    throw new Error("API Key non configurata. Inserisci la tua chiave API di Gemini.");
+                }
+
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 
                 const response = await fetch(apiUrl, {
@@ -318,19 +655,21 @@
                 });
                 
                 const result = await response.json();
+                console.log("Gemini API Response:", result);
                  if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0]) {
-                    const travelData = JSON.parse(result.candidates[0].content.parts[0].text);
-                    itinerary[eventIndex].coordinates = travelData.coordinates;
-                    itinerary[eventIndex].travelTime = travelData.travelTime;
-                    itinerary[eventIndex].travelMethod = travelData.travelMethod;
-                    updateActivitiesList();
+                    const travelDataAI = JSON.parse(result.candidates[0].content.parts[0].text);
+                    itinerary[eventIndex].coordinates = travelDataAI.coordinates;
+                    itinerary[eventIndex].travelTime = travelDataAI.travelTime;
+                    itinerary[eventIndex].travelMethod = travelDataAI.travelMethod;
+                    updateActivitiesList(); 
                 } else {
-                    throw new Error("Risposta AI non valida.");
+                    throw new Error("Risposta AI non valida o incompleta.");
                 }
             } catch (error) {
                 console.error("Errore durante il recupero delle info di viaggio:", error);
-                alert("Impossibile aggiornare le informazioni di viaggio. Riprova.");
-                button.innerHTML = 'Aggiorna Info';
+                alert("Impossibile aggiornare le informazioni di viaggio. Controlla la console per i dettagli. " + error.message);
+            } finally {
+                if (button) button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M11.983 1.904a.75.75 0 00-1.292-.868l-6.5 9.5a.75.75 0 001.044 1.243l2.52-1.727L6 14.25a.75.75 0 001.244.82l6.5-9.5a.75.75 0 00-1.044-1.243l-2.52 1.727L12 5.75a.75.75 0 00-1.244-.82z" /></svg>`;
             }
         }
 
@@ -344,14 +683,24 @@
                     const descriptionInput = card.querySelector(`[data-prop='description']`);
                     const startTimeInput = card.querySelector(`[data-prop='startTime']`);
                     const endTimeInput = card.querySelector(`[data-prop='endTime']`);
-                    
+                    const dayInput = card.querySelector(`[data-prop='day']`);
+
                     if(titleInput) itinerary[index].title = titleInput.value;
                     if(locationInput) itinerary[index].location = locationInput.value;
                     if(descriptionInput) itinerary[index].description = descriptionInput.value;
                     if(startTimeInput) itinerary[index].startTime = startTimeInput.value;
                     if(endTimeInput) itinerary[index].endTime = endTimeInput.value;
+                    if(dayInput) itinerary[index].day = dayInput.value;
                 }
             });
+            itinerary.sort((a, b) => {
+                const dateA = new Date(`${a.day}T${a.startTime}`);
+                const dateB = new Date(`${b.day}T${b.startTime}`);
+                return dateA - dateB;
+            });
+            setupDayFilterMenu();
+            updateActivitiesList();
+            updateNowAndNext();
         }
 
         function updateActivitiesList() {
@@ -373,28 +722,44 @@
                 noActivitiesMessage.classList.add('hidden');
                 eventsToShow.forEach((event, index) => {
                     const isPast = event.startDate < now && currentFilter !== 'all';
-                    const previousEvent = eventsToShow[index - 1];
-                    if (index > 0 && event.day === previousEvent.day && event.travelTime) {
-                        const travelInfoHTML = `<div class="flex items-center justify-center gap-3 my-4 ${isPast ? 'past-activity' : ''}"><div class="w-8 h-px bg-gray-300"></div><div class="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-bold">${getTravelIcon(event.travelMethod)}<span>${event.travelMethod} &bull; ${event.travelTime}</span></div><div class="w-8 h-px bg-gray-300"></div></div>`;
+                    const previousEventToShow = eventsToShow[index - 1];
+
+                    if (index > 0 && event.day === previousEventToShow.day && event.travelTime) {
+                        const travelInfoHTML = `
+                            <div class="flex items-center justify-center gap-3 my-4 ${isPast ? 'past-activity' : ''}">
+                                <div class="w-8 h-px bg-gray-300"></div>
+                                <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-600 font-bold">
+                                    ${getTravelIcon(event.travelMethod)}
+                                    <span>${event.travelMethod} &bull; ${event.travelTime}</span>
+                                </div>
+                                <div class="w-8 h-px bg-gray-300"></div>
+                            </div>`;
                         upcomingActivitiesContainer.innerHTML += travelInfoHTML;
                     }
 
-                    const appleMapsUrl = `https://maps.apple.com/?daddr=${event.coordinates}&q=${encodeURIComponent(event.location)}`;
+                    const appleMapsUrl = event.coordinates ? `https://maps.apple.com/?daddr=${event.coordinates}&q=${encodeURIComponent(event.location)}` : '#';
                     
                     let activityHTML;
 
                     if (isEditing) {
                         activityHTML = `
                         <div class="activity-card bg-white p-4 sm:p-5 border-2 border-black" data-index="${event.originalIndex}">
-                            <div class="flex-grow mb-3 sm:mb-0">
-                                <span class="text-xs sm:text-sm font-bold text-blue-700">${new Date(event.startDate).toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric' })}</span>
-                                <input type="text" value="${event.title}" class="edit-input font-bold mt-1" data-prop="title">
-                                <div class="flex items-center gap-2 mt-2">
-                                    <input type="text" value="${event.location}" class="edit-input" data-prop="location" placeholder="Nuovo luogo">
-                                    <button class="update-info-btn p-1 bg-blue-500 text-white" data-index="${event.originalIndex}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M11.983 1.904a.75.75 0 00-1.292-.868l-6.5 9.5a.75.75 0 001.044 1.243l2.52-1.727L6 14.25a.75.75 0 001.244.82l6.5-9.5a.75.75 0 00-1.044-1.243l-2.52 1.727L12 5.75a.75.75 0 00-1.244-.82z" /></svg>
-                                    </button>
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-start mb-3 sm:mb-0">
+                                <div class="flex-grow">
+                                    <input type="text" value="${event.day}" class="edit-input flatpickr mb-2" data-prop="day">
+                                    <input type="text" value="${event.title}" class="edit-input font-bold text-lg sm:text-xl" data-prop="title">
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <input type="text" value="${event.location}" class="edit-input" data-prop="location" placeholder="Nuovo luogo">
+                                        <button class="update-info-btn p-1 bg-blue-500 text-white flex-shrink-0" data-index="${event.originalIndex}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M11.983 1.904a.75.75 0 00-1.292-.868l-6.5 9.5a.75.75 0 001.044 1.243l2.52-1.727L6 14.25a.75.75 0 001.244.82l6.5-9.5a.75.75 0 00-1.044-1.243l-2.52 1.727L12 5.75a.75.75 0 00-1.244-.82z" /></svg>
+                                        </button>
+                                    </div>
                                 </div>
+                                <button class="delete-activity-btn w-auto bg-red-600 text-white border-2 border-black p-2 font-semibold text-sm hover:bg-red-700 transition-colors duration-200 mt-3 sm:mt-0 sm:ml-4 flex-shrink-0" data-index="${event.originalIndex}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
                             </div>
                             <div class="mt-3 pt-3 border-t border-gray-200">
                                 <textarea class="edit-input" data-prop="description" rows="3">${event.description}</textarea>
@@ -414,82 +779,79 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.23a2.25 2.25 0 003.62 0l6.25-10.5c.8-1.333.13-3.23-1.54-3.23H2.38c-1.67 0-2.34 1.9-1.54 3.23l6.25 10.5zM10 12a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
                                         ${event.title}
                                     </h3>
+                                    <p class="text-sm text-gray-600 mt-1">${event.location}</p>
+                                    ${event.description ? `<p class="text-sm text-gray-500 mt-2">${event.description}</p>` : ''}
                                 </div>
-                                <a href="${appleMapsUrl}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-shrink-0 bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 transition-colors duration-300 text-center flex items-center justify-center gap-2">
+                                ${event.coordinates ? `<a href="${appleMapsUrl}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-shrink-0 bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 transition-colors duration-300 text-center flex items-center justify-center gap-2">
                                     <span>Vai</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" /></svg>
-                                </a>
-                            </div>
-                            <div class="mt-3 pt-3 border-t border-gray-200">
-                                <p class="text-sm text-gray-700">${event.description}</p>
+                                </a>` : ''}
                             </div>
                         </div>`;
                     }
                     upcomingActivitiesContainer.innerHTML += activityHTML;
                 });
-                // Add event listeners for the new update buttons
-                document.querySelectorAll('.update-info-btn').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const index = parseInt(e.currentTarget.dataset.index, 10);
-                        const card = e.currentTarget.closest('.activity-card');
-                        const locationInput = card.querySelector("[data-prop='location']");
-                        fetchAndUpdateTravelInfo(index, locationInput.value, e.currentTarget);
+
+                if (isEditing) {
+                    flatpickr('.edit-input.flatpickr', {
+                        dateFormat: 'Y-m-d',
+                        locale: 'it',
                     });
-                });
+                    document.querySelectorAll('.update-info-btn').forEach(button => {
+                        button.addEventListener('click', async (e) => {
+                            const index = parseInt(e.currentTarget.dataset.index, 10);
+                            const card = e.currentTarget.closest('.activity-card');
+                            const locationInput = card.querySelector(`[data-prop='location']`);
+                            if (locationInput) {
+                                await fetchAndUpdateTravelInfo(index, locationInput.value, e.currentTarget);
+                            }
+                        });
+                    });
+                    document.querySelectorAll('.delete-activity-btn').forEach(button => {
+                        button.addEventListener('click', (e) => {
+                            const indexToDelete = parseInt(e.currentTarget.dataset.index, 10);
+                            if (confirm('Sei sicuro di voler eliminare questa attività?')) {
+                                itinerary.splice(indexToDelete, 1);
+                                saveChanges();
+                            }
+                        });
+                    });
+                }
+
             } else {
                 noActivitiesMessage.classList.remove('hidden');
             }
         }
 
-        editToggleButton.addEventListener('click', () => {
-            if (isEditing) {
-                saveChanges();
-                editToggleButton.textContent = 'Modifica';
-                editToggleButton.classList.remove('bg-black', 'text-white');
-                editToggleButton.classList.add('bg-white', 'text-black');
-            } else {
-                editToggleButton.textContent = 'Salva';
-                editToggleButton.classList.remove('bg-white', 'text-black');
-                editToggleButton.classList.add('bg-black', 'text-white');
-            }
-            isEditing = !isEditing;
-            updateActivitiesList();
-            updateNowAndNext();
-        });
-
-        function initializeMap() {
-             if (map) {
-                map.remove();
-                map = null;
-            }
-            map = L.map(mapContainer).setView([38.9833, 1.4329], 10);
+        // --- Map Functions ---
+        function initMap() {
+            if (map) map.remove();
+            map = L.map(mapContainer).setView([38.906, 1.42], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
+        }
 
-            const markers = [];
+        function addMarkersToMap() {
             itinerary.forEach(event => {
-                const [latitude, longitude] = event.coordinates.split(',').map(Number);
-                if (!isNaN(latitude) && !isNaN(longitude)) {
-                    const marker = L.marker([latitude, longitude]).addTo(map)
-                        .bindPopup(`<b>${event.title}</b><br>${event.location}`);
-                    markers.push(marker);
+                if (event.coordinates) {
+                    const [lat, lon] = event.coordinates.split(',').map(Number);
+                    L.marker([lat, lon]).addTo(map)
+                        .bindPopup(`<b>${event.title}</b><br>${event.location}<br>${event.day} ${event.startTime}`);
                 }
             });
-            
-            if (markers.length > 0) {
-                const group = new L.featureGroup(markers);
-                map.fitBounds(group.getBounds().pad(0.2));
+            if (itinerary.length > 0 && itinerary[0].coordinates) {
+                const [firstLat, firstLon] = itinerary[0].coordinates.split(',').map(Number);
+                map.setView([firstLat, firstLon], 12);
             }
         }
 
         showMapButton.addEventListener('click', () => {
             mapOverlay.classList.remove('hidden');
             mapOverlay.classList.add('flex');
-            // A small delay to ensure the container is visible before initializing the map
-            setTimeout(() => {
-                initializeMap();
-            }, 10);
+            initMap();
+            addMarkersToMap();
+            setTimeout(() => map.invalidateSize(), 100);
         });
 
         closeMapButton.addEventListener('click', () => {
@@ -497,99 +859,91 @@
             mapOverlay.classList.remove('flex');
         });
 
+        // --- Edit Mode ---
+        editToggleButton.addEventListener('click', () => {
+            isEditing = !isEditing;
+            editToggleButton.textContent = isEditing ? 'Salva Modifiche' : 'Modifica';
+            if (!isEditing) {
+                saveChanges();
+            }
+            updateActivitiesList();
+        });
+
+        // --- Add Activity Modal ---
         addActivityBtn.addEventListener('click', () => {
             addActivityModal.classList.remove('hidden');
             addActivityModal.classList.add('flex');
+            const newDateInput = document.querySelector('#add-activity-form input[name="day"]');
+            flatpickr(newDateInput, {
+                dateFormat: 'Y-m-d',
+                locale: 'it'
+            });
+
+            if (currentFilter !== 'all') {
+                newDateInput.value = currentFilter;
+            } else {
+                const today = new Date().toISOString().split('T')[0];
+                newDateInput.value = today;
+            }
         });
 
         closeAddModalBtn.addEventListener('click', () => {
             addActivityModal.classList.add('hidden');
             addActivityModal.classList.remove('flex');
+            addActivityForm.reset();
         });
 
         addActivityForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(e.target);
-            const newEventData = Object.fromEntries(formData.entries());
+            const formData = new FormData(addActivityForm);
+            const newActivity = {
+                day: formData.get('day'),
+                startTime: formData.get('startTime'),
+                endTime: formData.get('endTime'),
+                title: formData.get('title'),
+                location: formData.get('location'),
+                description: formData.get('description'),
+                coordinates: '',
+                travelTime: '',
+                travelMethod: ''
+            };
 
-            const tempEvent = { ...newEventData, startDate: new Date(`${newEventData.day}T${newEventData.startTime}`) };
-            const tempItinerary = [...itinerary.map(ev => ({...ev, startDate: new Date(`${ev.day}T${ev.startTime}`)})), tempEvent];
-            tempItinerary.sort((a, b) => a.startDate - b.startDate);
-            
-            const newEventIndexInSorted = tempItinerary.findIndex(ev => ev === tempEvent);
-            const previousEvent = newEventIndexInSorted > 0 ? tempItinerary[newEventIndexInSorted - 1] : itinerary[0]; // fallback to first event if no predecessor
+            itinerary.push(newActivity);
+            itinerary.sort((a, b) => {
+                const dateA = new Date(`${a.day}T${a.startTime}`);
+                const dateB = new Date(`${b.day}T${b.startTime}`);
+                return dateA - dateB;
+            });
 
-            // Fetch travel info for the new event
-            const button = e.target.querySelector('button[type="submit"]');
-            button.disabled = true;
-            button.innerHTML = '<div class="loader mx-auto"></div>';
-
-            const prompt = `Un utente sta pianificando un viaggio a Ibiza. La tappa precedente è "${previousEvent.location}". La nuova destinazione è "${newEventData.location}, Ibiza". Fornisci le seguenti informazioni in un oggetto JSON: 1. "coordinates": le coordinate geografiche (lat,lon). 2. "travelTime": il tempo di percorrenza stimato in scooter. 3. "travelMethod": il mezzo di trasporto consigliato (es. "Scooter"). Il formato JSON deve essere: {"coordinates": "stringa", "travelTime": "stringa", "travelMethod": "stringa"}`;
-            
-            try {
-                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                const payload = { 
-                    contents: chatHistory,
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                        responseSchema: {
-                            type: "OBJECT",
-                            properties: {
-                                "coordinates": { "type": "STRING" },
-                                "travelTime": { "type": "STRING" },
-                                "travelMethod": { "type": "STRING" }
-                            }
-                        }
-                    }
-                };
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-                
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
-                const result = await response.json();
-                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts[0]) {
-                    const travelData = JSON.parse(result.candidates[0].content.parts[0].text);
-                    const finalNewEvent = { ...newEventData, ...travelData };
-                    itinerary.push(finalNewEvent);
-                    itinerary.sort((a, b) => new Date(`${a.day}T${a.startTime}`) - new Date(`${b.day}T${b.startTime}`));
-                    
-                    addActivityForm.reset();
-                    addActivityModal.classList.add('hidden');
-                    addActivityModal.classList.remove('flex');
-
-                    setupDayFilterMenu();
-                    updateActivitiesList();
-                    updateNowAndNext();
-                } else {
-                    throw new Error("Risposta AI non valida.");
-                }
-            } catch (error) {
-                console.error("Errore durante la creazione dell'attività:", error);
-                alert("Impossibile creare la nuova attività. Riprova.");
-            } finally {
-                button.disabled = false;
-                button.innerHTML = 'Salva Attività';
+            const newActivityIndex = itinerary.findIndex(act => act === newActivity);
+            if (newActivityIndex !== -1) {
+                await fetchAndUpdateTravelInfo(newActivityIndex, newActivity.location, null);
             }
+
+            addActivityModal.classList.add('hidden');
+            addActivityModal.classList.remove('flex');
+            addActivityForm.reset();
+            setupDayFilterMenu();
+            updateActivitiesList();
+            updateNowAndNext();
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            setupDayFilterMenu();
+
+        // --- Initial Load ---
+        function startClock() {
             updateClock();
-            updateNowAndNext();
-            updateActivitiesList();
-            setInterval(updateClock, 1000); 
-            setInterval(updateNowAndNext, 5000);
-            setInterval(() => {
-                if (!isEditing) {
-                   updateActivitiesList();
-                }
-            }, 60000); 
+            setInterval(updateClock, 1000);
+        }
+
+        startPlanningBtn.addEventListener('click', () => {
+            welcomePage.classList.add('hidden');
+            setupWizard.classList.remove('hidden');
+            showStep(currentWizardStep);
         });
+
+        welcomePage.classList.remove('hidden');
+        setupWizard.classList.add('hidden');
+        mainItineraryView.classList.add('hidden');
     </script>
 </body>
 </html>
