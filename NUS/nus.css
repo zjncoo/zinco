@@ -250,92 +250,92 @@
 * ===================================
 */
 #pdfViewerContainer {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 20px;
-padding: 80px 40px;
-max-width: 900px;
-margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 80px 40px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 #pdfCanvas {
-border: 2px solid black;
-width: 100%;
-height: auto;
+  border: 2px solid black;
+  width: 100%;
+  height: auto;
 }
 
 .pdf-controls {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
 /*BOOK*/
 .book-container {
-max-width: 90vw;
-width: 100%;
-text-align: center;
+  max-width: 90vw;
+  width: 100%;
+  text-align: center;
 }
 
 #viewer-header {
-margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #viewer-header h2 {
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #viewer-header p {
-font-family: 'Inter', sans-serif;
-line-height: 1.6;
-color: #333;
-margin-bottom: 30px;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 30px;
 }
 
 @media (min-width: 768px) {
-#viewer-header p {
-max-width: 60ch;
-margin-left: auto;
-margin-right: auto;
-}
+  #viewer-header p {
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 #book-viewer {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 0;
-min-height: 80vh;
-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  min-height: 80vh;
+  width: 100%;
 }
 
 .page-canvas {
-max-height: 80vh;
-max-width: 50%;
-width: auto;
-height: auto;
-border: 2px solid black;
+  max-height: 80vh;
+  max-width: 50%;
+  width: auto;
+  height: auto;
+  border: 2px solid black;
 }
 
 .page-canvas.hidden {
-border: none;
-visibility: hidden;
+  border: none;
+  visibility: hidden;
 }
 
 #book-controls {
-margin-top: 20px;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 25px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
 }
 
 #page-indicator {
-font-family: 'Inter', sans-serif;
-font-size: 16px;
-min-width: 120px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  min-width: 120px;
 }
 
 /*
@@ -410,20 +410,37 @@ min-width: 120px;
     padding: 20px;
   }
 
-  /* Adattamento Book Viewer per mobile */
-#book-viewer {
-flex-direction: column;
-gap: 20px;
-}
-.page-canvas {
-max-width: 90%;
-width: 90%;
-height: auto;
-max-height: none;
-}
-#canvas-right.page-canvas {
-display: none;
-}
+  /* ======================================= */
+  /* === INIZIO BLOCCO CON LA CORREZIONE === */
+  /* ======================================= */
+  
+  #book-viewer {
+    /* Non serve più 'flex-direction: column' perché nascondiamo la seconda pagina */
+  }
+  
+  .page-canvas {
+    /*
+     * CORREZIONE: Invece di forzare una larghezza fissa (che causa lo "stretch"
+     * verticale su pagine alte), impostiamo dei limiti massimi sia in
+     * larghezza (vw) che in altezza (vh). Il browser manterrà le proporzioni
+     * corrette rispettando questi limiti.
+     */
+    max-width: 90vw;   /* Limite larghezza: 90% della larghezza della finestra */
+    max-height: 75vh;  /* Limite altezza: 75% dell'altezza della finestra */
+
+    /* Le prossime due regole vengono ereditate, ma le esplicito per chiarezza */
+    width: auto;
+    height: auto;
+  }
+  
+  #canvas-right.page-canvas {
+    /* Corretto, nasconde la seconda pagina su mobile per una visualizzazione singola */
+    display: none;
+  }
+
+  /* =================================== */
+  /* === FINE BLOCCO CON LA CORREZIONE === */
+  /* =================================== */
 }
 
 
@@ -441,9 +458,6 @@ display: none;
   .branding-grid { 
     grid-template-columns: 1fr; /* 1 colonna per smartphone */
   }
-
-  /* La regola per .branding-item è stata rimossa da qui per mantenere l'aspect-ratio: 1/1
-     degli stili di base, garantendo che rimangano quadrati. */
 
   #glance-grid {
     /* Aumenta la dimensione minima per una migliore toccabilità */
