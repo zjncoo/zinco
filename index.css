@@ -375,6 +375,13 @@ footer {
  * ===================================================================
 */
 
+/* --- Titoli delle sezioni della griglia --- */
+.projects-section h2 {
+  text-align: left;     /* Allinea il testo a sinistra */
+  padding-left: 40px;   /* Aggiunge un rientro per allinearsi con il footer e la griglia */
+  width: 100%;          /* Assicura che l'elemento occupi tutto lo spazio per un allineamento corretto */
+}
+
 /* --- STRUTTURA GRIGLIA GENERICA (PER HOMEPAGE) --- */
 .content-grid {
   display: grid;
