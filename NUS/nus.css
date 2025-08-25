@@ -277,3 +277,93 @@
   .video-controls { left: 20px; }
   .branding-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+
+
+/*BOOK*/
+/* File: ../scripts_components/book_component.css */
+
+/* File: ../scripts_components/book_component.css */
+
+.book-container { 
+  max-width: 90vw; 
+  width: 100%; 
+  text-align: center; 
+}
+
+#viewer-header { 
+  margin-bottom: 20px; 
+}
+
+#viewer-header h2 {
+  margin-bottom: 10px;
+}
+
+#viewer-header p {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  #viewer-header p {
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+#book-viewer { 
+  display: flex; 
+  justify-content: center; 
+  /* MODIFICA: Centra le pagine verticalmente, utile se sono più basse del massimo */
+  align-items: center; 
+  gap: 0;
+  min-height: 80vh; 
+  width: 100%;
+}
+
+.page-canvas { 
+  /* MODIFICA: Invece di un'altezza fissa, impostiamo dei limiti massimi */
+  max-height: 80vh;
+  max-width: 50%;
+  width: auto;
+  height: auto; /* L'altezza e larghezza precise saranno impostate da JS */
+  border: 2px solid black; 
+}
+
+.page-canvas.hidden { 
+  border: none;
+  visibility: hidden;
+}
+
+#book-controls { 
+  margin-top: 20px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 25px; 
+}
+
+#page-indicator { 
+  font-family: 'Inter', sans-serif; 
+  font-size: 16px; 
+  min-width: 120px; 
+}
+
+@media (max-width: 767px) {
+  #book-viewer { 
+    flex-direction: column; 
+    gap: 20px; 
+  }
+  .page-canvas { 
+    max-width: 90%;
+    width: 90%;
+    height: auto;
+    max-height: none; /* Rimuove il limite di altezza su mobile */
+  }
+  #canvas-right.page-canvas { 
+    display: none;
+  }
+}

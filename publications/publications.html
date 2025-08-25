@@ -6,14 +6,21 @@
   <title>ARCHIVE - zinco</title>
   
   <link rel="stylesheet" href="../index.css" />
-  <link rel="stylesheet" href="NUS/nus.css" />
   <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
   
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-</head>
+
+  <style>
+    .project-item img {
+      width: 100%;
+      height: auto;
+      object-fit: cover; /* Assicura che l'immagine copra l'area senza distorsioni */
+    }
+  </style>
+  </head>
 <body>
   <div id="preloader">
     <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
@@ -36,60 +43,42 @@
         <a href="../contact.html" class="menu-link">contacts</a>
         <a href="../ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
         <div id="search-bar-container">
-          <button id="search-button" class="search-icon cursor-target">🔍</button>
-          <div id="search-overlay" class="hidden">
-            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
-          <div id="search-bar" class="hidden">
-            <input type="text" id="search-input" placeholder="browse projects..." />
-            <div id="filters" class="filters">
-              <button id="category-select" onclick="toggleDropdown()">
-                <span>Filters</span>
-                <span class="arrow">▼</span>
-              </button>
-              <div id="category-select-options">
-                <a href="#" data-filter="all" class="filter-option">All</a>
-                <a href="#" data-filter="branding" class="filter-option">branding</a>
-                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
-              </div>
-            </div>
-            <ul id="search-suggestions" class="suggestions-list"></ul>
-          </div>
-        </div>
       </div>
       <div class="menu-column right">
-        <a href="#" class="menu-link">archive</a> <a href="#" class="menu-link">research</a>
+        <a href="#" class="menu-link">archive</a>
+        <a href="#" class="menu-link">research</a>
         <a href="#" class="menu-link">clients</a>
       </div>
     </div>
     <div class="menu-bottom">
-      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
     </div>
   </div>
 
   <section class="projects-section">
-    <div style="height: 10vh; width: 100vw;" width></div>
+    <div style="height: 10vh; width: 100vw;"></div>
     <h2>2025</h2>
-    <div class="project-grid">
-      <a href="fomo/fomo.html" class="grid-item">
-        <img src="fomo/img/mockup fomo 1.webp" alt="Descrizione Mockup 1" class="cursor-target" id="fotogriglia" />
+    <div class="content-grid">
+      <a href="fomo/fomo.html" class="project-item">
+        <img src="fomo/img/mockup fomo 1.webp" alt="Progetto FOMO" class="cursor-target" />
       </a>
-      <a href="femsvertising/femvertising.html" class="grid-item">
-        <img src="femsvertising/img/femvertising_mockup_1.webp" alt="Descrizione Mockup 2" class="cursor-target" id="fotogriglia"/>
+      <a href="femsvertising/femvertising.html" class="project-item">
+        <img src="femsvertising/img/femvertising_mockup_1.webp" alt="Progetto Femvertising" class="cursor-target" />
       </a>
-      <a href="cos'è_un_designer/history.html" class="grid-item">
-        <img src="cos'è_un_designer/img/" alt="Descrizione Mockup 2" class="cursor-target" id="fotogriglia"/>
+      <a href="cos'è_un_designer/history.html" class="project-item">
+        <img src="cos'è_un_designer/img/" alt="Progetto Cos'è un designer" class="cursor-target" />
       </a>
-      <a href="fotografie_come_lettere_di _un_alfabeto/fotografia.html" class="grid-item">
-        <img src="fotografie_come_lettere_di _un_alfabeto/img/fotografia book mockup 1.webp" alt="Descrizione Mockup 2" class="cursor-target" id="fotogriglia" />
+      <a href="fotografie_come_lettere_di _un_alfabeto/fotografia.html" class="project-item">
+        <img src="fotografie_come_lettere_di _un_alfabeto/img/fotografia book mockup 1.webp" alt="Progetto Fotografia" class="cursor-target" />
       </a>
     </div>
 
     <h2>2024</h2>
-    <div class="project-grid">
-        <a href="zoom/zoom.html" class="grid-item">
-            <img src="zoom/img/ayumi_mockup_1.webp" alt="Descrizione Mockup 4" class="cursor-target" />
+    <div class="content-grid">
+        <a href="zoom/zoom.html" class="project-item">
+            <img src="zoom/img/ayumi_mockup_1.webp" alt="Progetto Zoom" class="cursor-target" />
         </a>
     </div>
   </section>

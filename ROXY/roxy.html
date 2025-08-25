@@ -26,8 +26,10 @@
 
   <div id="hero-wrapper">
     <section id="project-hero">
-      <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
-      <h1 id="hero-title"></h1>
+      <div class="hero-title-container">
+        <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+        <h1 id="hero-title"></h1>
+      </div>
     </section>
 
     <section id="glance-container">
@@ -50,7 +52,7 @@
       <div class="menu-column left">
         <a href="../about/about.html" class="menu-link">about me</a>
         <a href="../contact.html" class="menu-link">contacts</a>
-        <a href="../cardgenerator.html" class="menu-link">card generator</a>
+        <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
   
         <div id="search-bar-container">
           <button id="search-button" class="search-icon cursor-target">🔍</button>
@@ -75,14 +77,14 @@
         </div>
       </div>
       <div class="menu-column right">
-        <a href="#" class="menu-link">archive</a>
-        <a href="#" class="menu-link">research</a>
+        <a href="../portfolio.html" class="menu-link">portfolio</a>
+        <a href="../publications/publications.html" class="menu-link">publications</a>
         <a href="#" class="menu-link">clients</a>
       </div>
     </div>
 
     <div class="menu-bottom">
-      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
     </div>
   </div>
@@ -90,10 +92,9 @@
   <main id="sezione-progetto">
     <div class="video-container">
       <video id="myVideo" autoplay loop muted playsinline src="img/video finito.mp4"></video>
-      
       <div class="video-controls">
-        <button id="playPauseBtn" class="video-btn cursor-target"></button>
-        <button id="muteBtn" class="video-btn cursor-target"></button>
+        <button id="playPauseBtn" class="btn btn--outline-light cursor-target"></button>
+        <button id="muteBtn" class="btn btn--outline-light cursor-target"></button>
       </div>
     </div>
     
@@ -102,11 +103,11 @@
     <section id="figma-container"></section>
   
     <div id="pdfViewerContainer">
-      <canvas id="pdfCanvas"></canvas>
+      <canvas id="pdfCanvas" data-pdf-source="roxy.pdf"></canvas>
       <div class="pdf-controls">
-        <button id="prevPage" class="pdf-nav">←</button>
-        <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
-        <button id="nextPage" class="pdf-nav">→</button>
+        <button id="prevPage" class="btn btn--outline-dark">←</button>
+        <div id="pageIndicator">Page <span id="pageNum">1</span> of <span id="pageCount"></span></div>
+        <button id="nextPage" class="btn btn--outline-dark">→</button>
       </div>
     </div>
   </main>
@@ -122,7 +123,7 @@
 
   <script src="../index.js" defer></script>
   <script src="../NUS/branding-project.js" defer></script>
-  <script src="pdf-viewer.js" defer></script>
+  <script src="../scripts_components/pdf_viewer.js" defer></script>
 
 </body>
 </html>

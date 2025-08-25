@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../index.css" />
   <link rel="stylesheet" href="../NUS/nus.css" />
 
-  <link rel="icon" href="img/logo roxy.svg" type="image/svg+xml" />
+  <link rel="icon" href="img/logo_escapes.svg" type="image/svg+xml" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,8 +26,10 @@
 
   <div id="hero-wrapper">
     <section id="project-hero">
-      <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
-      <h1 id="hero-title"></h1>
+      <div class="hero-title-container">
+        <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+        <h1 id="hero-title"></h1>
+      </div>
     </section>
 
     <section id="glance-container">
@@ -51,28 +53,8 @@
         <a href="../about/about.html" class="menu-link">about me</a>
         <a href="../contact.html" class="menu-link">contacts</a>
         <a href="../cardgenerator.html" class="menu-link">card generator</a>
-  
         <div id="search-bar-container">
-          <button id="search-button" class="search-icon cursor-target">🔍</button>
-          <div id="search-overlay" class="hidden">
-            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
-          <div id="search-bar" class="hidden">
-            <input type="text" id="search-input" placeholder="browse projects..." />
-            <div id="filters" class="filters">
-              <button id="category-select" onclick="toggleDropdown()">
-                <span>Filters</span>
-                <span class="arrow">▼</span>
-              </button>
-              <div id="category-select-options">
-                <a href="#" data-filter="all" class="filter-option">All</a>
-                <a href="#" data-filter="branding" class="filter-option">branding</a>
-                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
-              </div>
-            </div>
-            <ul id="search-suggestions" class="suggestions-list"></ul>
-          </div>
-        </div>
       </div>
       <div class="menu-column right">
         <a href="#" class="menu-link">archive</a>
@@ -82,7 +64,7 @@
     </div>
 
     <div class="menu-bottom">
-      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
     </div>
   </div>
@@ -91,6 +73,7 @@
     <a href="https://www.escapeslakecomo.com" target="_blank">Visit Website</a>
     <iframe src="https://www.escapeslakecomo.com" width="100%" height="100%" title="Descrizione del sito incorporato"></iframe>
   </div>
+
   <main id="sezione-progetto">
     
     <section class="branding-grid" id="brandingGrid"></section>
@@ -98,11 +81,11 @@
     <section id="figma-container"></section>
   
     <div id="pdfViewerContainer">
-      <canvas id="pdfCanvas"></canvas>
+      <canvas id="pdfCanvas" data-pdf-source="pdf/escapes_brandbook.pdf"></canvas>
       <div class="pdf-controls">
-        <button id="prevPage" class="pdf-nav">←</button>
+        <button id="prevPage" class="btn btn--outline-dark">←</button>
         <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
-        <button id="nextPage" class="pdf-nav">→</button>
+        <button id="nextPage" class="btn btn--outline-dark">→</button>
       </div>
     </div>
   </main>
@@ -118,7 +101,7 @@
 
   <script src="../index.js" defer></script>
   <script src="../NUS/branding-project.js" defer></script>
-  <script src="pdf-viewer.js" defer></script>
+  <script src="../scripts_components/pdf_viewer.js" defer></script>
 
 </body>
 </html>
