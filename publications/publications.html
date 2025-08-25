@@ -57,15 +57,36 @@
         <a href="../about/about.html" class="menu-link">about me</a>
         <a href="../contact.html" class="menu-link">contacts</a>
         <a href="../ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
+  
         <div id="search-bar-container">
+          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <div id="search-overlay" class="hidden">
+            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
+          <div id="search-bar" class="hidden">
+            <input type="text" id="search-input" placeholder="browse projects..." />
+            <div id="filters" class="filters">
+              <button id="category-select" onclick="toggleDropdown()">
+                <span>Filters</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div id="category-select-options">
+                <a href="#" data-filter="all" class="filter-option">All</a>
+                <a href="#" data-filter="branding" class="filter-option">branding</a>
+                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
+              </div>
+            </div>
+            <ul id="search-suggestions" class="suggestions-list"></ul>
+          </div>
+        </div>
       </div>
       <div class="menu-column right">
-        <a href="#" class="menu-link">archive</a>
-        <a href="#" class="menu-link">research</a>
+        <a href="../portfolio.html" class="menu-link">portfolio</a>
+        <a href="../publications/publications.html" class="menu-link">publications</a>
         <a href="#" class="menu-link">clients</a>
       </div>
     </div>
+
     <div class="menu-bottom">
       <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>

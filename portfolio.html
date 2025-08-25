@@ -5,78 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Femvertising - zinco</title>
   
-  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="index.css" />
-  <link rel="stylesheet" href="nus.css" />
+  <link rel="stylesheet" href="NUS/nus.css" />
 
+  <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
   
+
+  <style>
+    .download-section {
+      margin-top: 50px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Preloader -->
-  <div id="preloader"><a href="index.html" id="preloader-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a><div class="loader-bar-container"><div class="loader-bar"></div></div></div>
-  
-  <!-- Elementi fissi dell'interfaccia -->
+  <div id="preloader">
+    <a href="/index.html" id="logo"><img src="/imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+    <div class="loader-bar-container">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
   <div class="vertical-line left"></div>
   <div class="vertical-line right"></div>
   <div class="custom-cursor" id="cursor"></div>
 
-  <!-- Sezione Hero a tutto schermo -->
   <div id="hero-wrapper">
     <section id="project-hero">
-      <h1 id="hero-title">femvertising</h1>
+      <h1 id="hero-title">portfolio</h1>
     </section>
   </div>
   
-  <!-- Navigazione principale -->
   <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
   <a href="contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
-  <div id="dropdownMenu"><div class="menu-columns"><div class="menu-column left"><a href="about/about.html" class="menu-link">about me</a><a href="contact.html" class="menu-link">contacts</a><a href="ALGORYTHMS/algoritmi.html" class="menu-link">algoritmi</a></div><div class="menu-column right"><a href="#" class="menu-link">archive</a><a href="#" class="menu-link">research</a><a href="#" class="menu-link">clients</a></div></div><div class="menu-bottom"><button id="randomProjectButton" class="menu-random cursor-target">surprise me</button><a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a></div></div>
 
-  <!-- Contenuto principale con il visualizzatore PDF -->
-  <main>
-    <div class="book-container">
-      <div id="viewer-header">
-        <h2>femvertising</h2>
-        <p>booklet for the graphic design history course in collaboration with sofia splendore. it explains femvertising: a kind of advertising designed by women for women; from the 1940s till today.</p>
+  <div id="dropdownMenu">
+    <div class="menu-columns">
+      <div class="menu-column left">
+        <a href="about/about.html" class="menu-link">about me</a>
+        <a href="contact.html" class="menu-link">contacts</a>
+        <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
+  
+        <div id="search-bar-container">
+          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <div id="search-overlay" class="hidden">
+            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
+          </div>
+          <div id="search-bar" class="hidden">
+            <input type="text" id="search-input" placeholder="browse projects..." />
+            <div id="filters" class="filters">
+              <button id="category-select" onclick="toggleDropdown()">
+                <span>Filters</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div id="category-select-options">
+                <a href="#" data-filter="all" class="filter-option">All</a>
+                <a href="#" data-filter="branding" class="filter-option">branding</a>
+                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
+              </div>
+            </div>
+            <ul id="search-suggestions" class="suggestions-list"></ul>
+          </div>
+        </div>
       </div>
-      <!-- L'attributo data-pdf-url specifica quale file caricare -->
-      <div id="book-viewer" data-pdf-url="femvertising.pdf">
+      <div class="menu-column right">
+        <a href="portfolio.html" class="menu-link">portfolio</a>
+        <a href="publications/publications.html" class="menu-link">publications</a>
+        <a href="#" class="menu-link">clients</a>
+      </div>
+    </div>
+
+    <div class="menu-bottom">
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
+      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="book-container" data-pdf-src="Francesco_Zanchetta_portfolio.pdf" data-layout="spread">
+      <div id="viewer-header">
+        <h2>portfolio</h2>
+        <p>personal portfolio of Francesco Zanchetta</p>
+      </div>
+      <div id="book-viewer">
         <canvas id="canvas-left" class="page-canvas"></canvas>
         <canvas id="canvas-right" class="page-canvas"></canvas>
       </div>
       <div id="book-controls">
-        <button id="prev-page" class="nav-btn cursor-target">←</button>
+        <button id="prev-page" class="btn btn--solid-dark cursor-target">←</button>
         <div id="page-indicator">Pagina – / –</div>
-        <button id="next-page" class="nav-btn cursor-target">→</button>
+        <button id="next-page" class="btn btn--solid-dark cursor-target">→</button>
       </div>
     </div>
+
+    <div class="download-section">
+      <a href="Francesco_Zanchetta_portfolio.pdf" class="btn btn--solid-dark cursor-target" download="Francesco_Zanchetta_portfolio.pdf">
+        Download Portfolio
+      </a>
+    </div>
+   
   </main>
 
-  <!-- Sezione per il download del PDF -->
-  <section class="download-container">
-    <a href="femvertising.pdf" class="download-btn cursor-target" download="Femvertising_Booklet_Zinco.pdf">
-      Download PDF
-    </a>
-  </section>
 
-  <!-- Footer -->
+
+
   <footer>
     <div class="cookie-banner" id="cookieBanner"><span>my website uses <a href="cookies.html" class="cookie-link">cookies</a></span><span class="close-btn cursor-target" id="closeCookie">✕</span></div>
-    <div class="footer-content"><a href="index.html" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a><div class="footer-text"><p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a></div></div>
+    <div class="footer-content">
+      <a href="index.html" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+      <div class="footer-text"><p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a></div>
+    </div>
   </footer>
 
-  <!-- Libreria esterna per il PDF viewer -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="index.js" defer></script>
   
-  <!-- SCRIPT SPECIFICO PER IL BOOK CONTAINER -->
-  <script src="scripts_components/book_container.js" defer></script>
-  
+  <script src="scripts_components/book_container.js" defer></script> <script src="../scripts_components/book_component.js" defer></script>
+
 </body>
 </html>
