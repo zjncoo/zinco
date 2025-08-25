@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Femvertising - zinco</title>
+  
+  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="nus.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+  
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="preloader"><a href="index.html" id="preloader-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a><div class="loader-bar-container"><div class="loader-bar"></div></div></div>
+  
+  <!-- Elementi fissi dell'interfaccia -->
+  <div class="vertical-line left"></div>
+  <div class="vertical-line right"></div>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <!-- Sezione Hero a tutto schermo -->
+  <div id="hero-wrapper">
+    <section id="project-hero">
+      <h1 id="hero-title">femvertising</h1>
+    </section>
+  </div>
+  
+  <!-- Navigazione principale -->
+  <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
+  <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
+  <a href="contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+  <div id="dropdownMenu"><div class="menu-columns"><div class="menu-column left"><a href="about/about.html" class="menu-link">about me</a><a href="contact.html" class="menu-link">contacts</a><a href="ALGORYTHMS/algoritmi.html" class="menu-link">algoritmi</a></div><div class="menu-column right"><a href="#" class="menu-link">archive</a><a href="#" class="menu-link">research</a><a href="#" class="menu-link">clients</a></div></div><div class="menu-bottom"><button id="randomProjectButton" class="menu-random cursor-target">surprise me</button><a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a></div></div>
+
+  <!-- Contenuto principale con il visualizzatore PDF -->
+  <main>
+    <div class="book-container">
+      <div id="viewer-header">
+        <h2>femvertising</h2>
+        <p>booklet for the graphic design history course in collaboration with sofia splendore. it explains femvertising: a kind of advertising designed by women for women; from the 1940s till today.</p>
+      </div>
+      <!-- L'attributo data-pdf-url specifica quale file caricare -->
+      <div id="book-viewer" data-pdf-url="femvertising.pdf">
+        <canvas id="canvas-left" class="page-canvas"></canvas>
+        <canvas id="canvas-right" class="page-canvas"></canvas>
+      </div>
+      <div id="book-controls">
+        <button id="prev-page" class="nav-btn cursor-target">←</button>
+        <div id="page-indicator">Pagina – / –</div>
+        <button id="next-page" class="nav-btn cursor-target">→</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sezione per il download del PDF -->
+  <section class="download-container">
+    <a href="femvertising.pdf" class="download-btn cursor-target" download="Femvertising_Booklet_Zinco.pdf">
+      Download PDF
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="cookie-banner" id="cookieBanner"><span>my website uses <a href="cookies.html" class="cookie-link">cookies</a></span><span class="close-btn cursor-target" id="closeCookie">✕</span></div>
+    <div class="footer-content"><a href="index.html" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a><div class="footer-text"><p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a></div></div>
+  </footer>
+
+  <!-- Libreria esterna per il PDF viewer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  
+  <!-- SCRIPT SPECIFICO PER IL BOOK CONTAINER -->
+  <script src="scripts_components/book_container.js" defer></script>
+  
+</body>
+</html>

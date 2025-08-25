@@ -1,83 +1,21 @@
 /*
  * ===================================
  * STILI SPECIFICI PER LA PAGINA NUS
- * (Versione finale, completa e ottimizzata)
  * ===================================
  */
 
-/* LOADER*/
-/* ======================== */
-/* Preloader Styles         */
-/* ======================== */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: #ffffff; /* Or your site's main background color */
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Gentle slide-up transition */
-  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-/* This class will be added by JavaScript when the page is loaded */
-#preloader.loaded {
-  transform: translateY(-100%);
-}
-
-#preloader-logo {
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  width: 45px; /* Adjust size as needed */
-  z-index: 10000;
-}
-
-.loader-bar-container {
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-
-.loader-bar {
-  width: 0%;
-  height: 100%;
-  background-color: #000000;
-  /* This animation simulates the loading process */
-  animation: loading-animation 1.5s ease-out forwards;
-}
-
-@keyframes loading-animation {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* On smaller screens, you might want to adjust the logo position */
-@media (max-width: 767px) {
-  #preloader-logo {
-    top: 20px;
-    left: 20px;
-  }
-}
-
-/* ========= STILI HERO E GLANCE ========= */
+/* * ===================================
+ * Sezione 1: Hero, Video e altri componenti unici
+ * ===================================
+ */
 #hero-wrapper {
   height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: white;
+  position: relative;
 }
+
 #project-hero {
   flex-grow: 1; 
   width: 100%;
@@ -89,22 +27,47 @@
   padding: 40px;
   border-bottom: 2px solid black;
 }
+
+/* Contenitore per posizionare titolo e freccia insieme */
+.hero-title-container {
+  position: relative;
+  padding-top: 80px; /* Spazio sopra al titolo per la freccia */
+}
+
+/* Stile per la freccia di scorrimento (come TESTO) */
+.scroll-down-arrow {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  text-decoration: none;
+  color: black;
+  font-size: 3rem; /* Dimensione del carattere della freccia */
+  line-height: 1;  /* Per un posizionamento più preciso */
+  animation: bounce 2.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
 #project-hero h1 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: clamp(2.5rem, 8vw, 7rem);
   margin: 0;
-  max-width: 70%;
+  max-width: 60%; /* MODIFICA: Ridotta la larghezza per forzare l'andata a capo */
   line-height: 0.9;
   letter-spacing: -0.02em;
 }
-.scroll-down-arrow {
-  font-size: 6rem;
-  line-height: 1;
-  margin-bottom: 1rem;
-  color: black;
-  text-decoration: none;
-}
+
 #glance-container {
   width: 100%;
   position: relative;
@@ -113,11 +76,13 @@
   background-color: black;
   z-index: 999; 
 }
+
 #glance-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 2px;
 }
+
 .glance-item {
   aspect-ratio: 1 / 1;
   background-color: white;
@@ -128,30 +93,28 @@
   overflow: hidden;
   transition: background-color 0.2s ease, opacity 0.2s ease;
 }
-.glance-item:hover {
-  background-color: black;
-}
-.glance-item:hover img {
-  opacity: 0.7;
-}
+
+.glance-item:hover { background-color: black; }
+.glance-item:hover img { opacity: 0.7; }
 .glance-item img {
-  width: 80%; height: 80%;
+  width: 80%; 
+  height: 80%;
   object-fit: contain;
   transition: opacity 0.2s ease;
 }
 
-
-/* ========= SEZIONE VIDEO ========= */
 .video-container {
   position: relative;
   width: 100%;
   line-height: 0;
 }
+
 #myVideo {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
+
 .video-controls {
   position: absolute;
   bottom: 12%;
@@ -160,55 +123,12 @@
   gap: 10px;
   z-index: 10;
 }
-.video-btn {
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
-  padding: 0.4rem 0.8rem;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  backdrop-filter: blur(5px);
-  border-radius: 0; 
-  transition: all 0.2s ease;
-  mix-blend-mode: difference;
-}
-.video-btn:hover {
-  background-color: white;
-  color: black;
-}
-#website {
-  width: 100vw;
-  height: 30vh;
-  z-index: 0;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  justify-items: center;
-}
-#website a {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background-color: white;
-  color: black;
-  text-decoration: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  display: block;
-  justify-self: center;
-  text-align: center;
-  text-justify: center;
-}
-#website a:hover {
-  background-color: black;
-  color: white
-
-}
 
 
-/* ========= GRIGLIA BRANDING ========= */
+/* * =============================================================
+ * Sezione 2: Griglia Branding (Moduli Quadrati)
+ * =============================================================
+ */
 .branding-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -219,13 +139,15 @@
   width: 100%;
   padding: 0;
 }
+
 .branding-header {
-  grid-column: 1 / -1; 
+  grid-column: 1 / -1;
   background-color: black;
   color: white;
   padding: 15px 40px;
   text-align: left;
 }
+
 .branding-header h2 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -233,9 +155,8 @@
   margin: 0;
 }
 
-/* Stile per gli elementi "QUADRATI" (default) */
 .branding-item {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; 
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -247,27 +168,33 @@
   color: black;
   outline: 2px solid black; 
   padding: 30px;
+  text-align: center;
 }
+
 .branding-item:hover {
   background-color: black;
   color: white;
 }
+
 .branding-item:hover img {
   opacity: 1;
 }
+
 .branding-item img {
   max-width: 50%;
-  max-height: 65%;
+  max-height: 50%;
   object-fit: contain;
-  margin-top: 10px;
+  margin-bottom: 15px;
   transition: opacity 0.2s ease;
 }
+
 .branding-item h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 16px;
   margin: 0 0 15px 0;
 }
+
 .branding-item p {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -275,7 +202,6 @@
   text-align: center;
 }
 
-/* Stile per le FOTO APP a tutta larghezza */
 .branding-item.full-width-app {
   grid-column: 1 / -1;
   aspect-ratio: unset;
@@ -285,7 +211,9 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  outline: none;
 }
+
 .branding-item.full-width-app img {
   width: 100%;
   height: auto;
@@ -293,13 +221,23 @@
   max-height: none;
   object-fit: cover;
   margin-top: 0;
+  margin-bottom: 0;
 }
-.branding-item.full-width-app h3 {
+
+.branding-item.full-width-app h3,
+.branding-item.full-width-app p {
   display: none;
 }
 
-/* ========= SEZIONE PDF ========= */
+.branding-item.full-width-app:hover {
+  background-color: transparent;
+}
 
+
+/* * ===================================
+ * Sezione 3: PDF Viewer e Media Queries
+ * ===================================
+ */
 #pdfViewerContainer {
   display: flex;
   flex-direction: column;
@@ -309,89 +247,33 @@
   max-width: 900px;
   margin: 0 auto;
 }
+
 #pdfCanvas {
   border: 2px solid black;
   width: 100%;
   height: auto;
 }
+
 .pdf-controls {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 25px;
 }
-.pdf-nav {
-  background-color: transparent;
-  border: 2px solid black;
-  color: black;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 8px 16px;
-  transition: all 0.2s ease;
-}
-.pdf-nav:hover { background-color: black; color: white; }
-#pageIndicator { font-family: 'Inter', sans-serif; font-size: 14px; }
-
-/* ========= MEDIA QUERIES PER RESPONSIVITÀ ========= */
 
 @media (max-width: 1024px) {
-  .branding-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  #project-hero, .branding-header {
-    padding: 30px;
-  }
-  .scroll-down-arrow {
-    font-size: 5rem;
-  }
+  #project-hero { padding: 30px; }
+  .branding-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 767px) {
-  .branding-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .branding-item {
-    width: 50vw;
-    aspect-ratio: 1 / 1;
-    padding: 15px;
-  }
-  #project-hero, .branding-header {
-    padding: 20px;
-  }
-  #project-hero {
-    padding-top: 10%;
-  }
+  #project-hero { padding: 20px; }
+  .hero-title-container { padding-top: 60px; }
+  .scroll-down-arrow { font-size: 2.5rem; }
   #project-hero h1 {
     max-width: 100%;
     font-size: clamp(3rem, 12vw, 4rem);
   }
-  .scroll-down-arrow {
-    font-size: 4rem;
-  }
-  .video-controls {
-    left: 20px;
-  }
-  .branding-item {
-    padding: 15px;
-  }
-  #figma-container {
-    display: none;
-  }
-  .figma-embed-wrapper {
-  display: none;
-}
-.figma-embed-wrapper iframe {
-  display: none;
-}
-}
-
-/* Query per ridurre le animazioni per accessibilità */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  .video-controls { left: 20px; }
+  .branding-grid { grid-template-columns: repeat(2, 1fr); }
 }

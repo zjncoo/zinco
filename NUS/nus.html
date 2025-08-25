@@ -26,8 +26,14 @@
 
   <div id="hero-wrapper">
     <section id="project-hero">
-      <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
-      <h1 id="hero-title"></h1>
+      
+      <div class="hero-title-container">
+        
+        <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+
+        <h1 id="hero-title"></h1>
+      </div>
+
     </section>
 
     <section id="glance-container">
@@ -82,7 +88,7 @@
     </div>
 
     <div class="menu-bottom">
-      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
     </div>
   </div>
@@ -95,8 +101,8 @@
       </video>
       
       <div class="video-controls">
-        <button id="playPauseBtn" class="video-btn cursor-target"></button>
-        <button id="muteBtn" class="video-btn cursor-target"></button>
+        <button id="playPauseBtn" class="btn btn--outline-light cursor-target"></button>
+        <button id="muteBtn" class="btn btn--outline-light cursor-target"></button>
       </div>
     </div>
     
@@ -107,9 +113,9 @@
     <div id="pdfViewerContainer">
       <canvas id="pdfCanvas"></canvas>
       <div class="pdf-controls">
-        <button id="prevPage" class="pdf-nav">←</button>
+        <button id="prevPage" class="btn btn--outline-dark">←</button>
         <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
-        <button id="nextPage" class="pdf-nav">→</button>
+        <button id="nextPage" class="btn btn--outline-dark">→</button>
       </div>
     </div>
   </main>

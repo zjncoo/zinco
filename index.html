@@ -6,8 +6,7 @@
   <title>HOME - zinco</title>
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
-  <!-- FONT AGGIORNATO: Importa 'Inter' da Google Fonts -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
@@ -23,7 +22,6 @@
   <div class="custom-cursor" id="cursor"></div>
 
   <a href="#" id="button-logo"><img src="imghome/logo_zinco.svg"  id="logo" alt=""></a>
-  <!-- Bottoni angolari -->
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
   <a href="contact.html" class="corner-button cursor-target" id="btnBottomRight">contacts</a>
@@ -35,43 +33,37 @@
         <a href="contact.html" class="menu-link">contacts</a>
         <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
   
-        <!-- Search Button (Magnifier Icon) -->
         <div id="search-bar-container">
           <button id="search-button" class="search-icon cursor-target">🔍</button>
           <div id="search-overlay" class="hidden">
             <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
           <div id="search-bar" class="hidden">
-            
             <input type="text" id="search-input" placeholder="browse projects..." />
             <div id="filters" class="filters">
-              <!-- Filter Button with Down Arrow -->
               <button id="category-select" onclick="toggleDropdown()">
                 <span>Filters</span>
                 <span class="arrow">▼</span>
               </button>
-
-              <!-- Filter Dropdown Options -->
               <div id="category-select-options">
                 <a href="#" data-filter="all" class="filter-option">All</a>
                 <a href="#" data-filter="branding" class="filter-option">branding</a>
                 <a href="#" data-filter="p5" class="filter-option">p5.js</a>
               </div>
             </div>
-            <!-- Suggestions appear here -->
             <ul id="search-suggestions" class="suggestions-list"></ul>
           </div>
         </div>
       </div>
       <div class="menu-column right">
-        <a href="#" class="menu-link">archive</a>
+        <a href="portfolio.html" class="menu-link">portfolio</a>
         <a href="publications/publications.html" class="menu-link">publications</a>
         <a href="#" class="menu-link">clients</a>
       </div>
     </div>
 
     <div class="menu-bottom">
-      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
     </div>
   </div>
@@ -85,38 +77,38 @@
 
   <section class="projects-section">
     <h2>uni year 1</h2>
-    <div class="project-grid">
-      <a href="UNI YEAR 1/drawing_lab/drawing.html" class="grid-item">
-        <img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" />
+    <div class="content-grid">
+      <a href="UNI YEAR 1/drawing_lab/drawing.html" class="project-item">
+        <img src="imghome/folder.png" alt="Drawing Lab" class="cursor-target" />
       </a>
-      <a href="UNI YEAR 1/design_history/history.html" class="grid-item">
-        <img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" />
+      <a href="UNI YEAR 1/design_history/history.html" class="project-item">
+        <img src="imghome/folder.png" alt="Design History" class="cursor-target" />
       </a>
-      <a href="https://mammainfanzina.framer.website" class="grid-item">
-        <img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" />
+      <a href="https://mammainfanzina.framer.website" class="project-item">
+        <img src="imghome/folder.png" alt="Mamma Infanzina" class="cursor-target" />
       </a>
-      <a href="https://mammainfanzina.framer.website" class="grid-item">
-        <img src="imghome/folder.png" alt="p5 Project 1" class="cursor-target" />
+      <a href="https://mammainfanzina.framer.website" class="project-item">
+        <img src="imghome/folder.png" alt="Placeholder" class="cursor-target" />
       </a>
     </div>
 
     <h2>branding</h2>
-    <div class="project-grid">
-      <a href="amdecor/amdecor.html" class="grid-item"><img src="amdecor/img/amlogo.svg" alt="AM Decor" class="cursor-target" /></a>
-      <a href="NUS/nus.html" class="grid-item"><img src="NUS/img/logo_nus.svg" alt="NUS" class="cursor-target" /></a>
-      <a href="escapes/escapes.html" class="grid-item"><img src="escapes/img/logo_escapes.svg" alt="escapes" class="cursor-target" /></a>
-      <a href="ROXY/roxy.html" class="grid-item"><img src="ROXY/img/scritta.png" alt="ROXY" class="cursor-target" /></a>
-      <a href="gizeta/gizeta.html" class="grid-item"><img src="imghome/gizeta.png" alt="gizeta" class="cursor-target" /></a>
+    <div class="content-grid">
+      <a href="amdecor/amdecor.html" class="project-item"><img src="amdecor/img/amlogo.svg" alt="AM Decor" class="cursor-target" /></a>
+      <a href="NUS/nus.html" class="project-item"><img src="NUS/img/logo_nus.svg" alt="NUS" class="cursor-target" /></a>
+      <a href="escapes/escapes.html" class="project-item"><img src="escapes/img/logo_escapes.svg" alt="escapes" class="cursor-target" /></a>
+      <a href="ROXY/roxy.html" class="project-item"><img src="ROXY/img/scritta.png" alt="ROXY" class="cursor-target" /></a>
+      <a href="gizeta/gizeta.html" class="project-item"><img src="imghome/gizeta.png" alt="gizeta" class="cursor-target" /></a>
     </div>
 
     <h2>websites</h2>
-    <div class="project-grid">
-      <a href="https://mammainfanzina.framer.website" target="_blank" class="grid-item"><img src="mammainfanzina/logo mamma.svg" alt="p5 Project 1" class="cursor-target" /></a>
-      <a href="https://www.gizeta-zanchetta.it/home" target="_blank" class="grid-item"><img src="imghome/gizeta.png" alt="p5 Project 2" class="cursor-target" /></a>
-      <a href="https://amdecorsrl.com" target="_blank" class="grid-item"><img src="amdecor/img/amlogo.svg" alt="p5 Project 3" class="cursor-target" /></a>
-      <a href="https://escapeslakecomo.com" target="_blank" class="grid-item"><img src="escapes/img/logo_escapes.svg" alt="p5 Project 3" class="cursor-target" /></a>
-      <a href="https://zjncoo.github.io/RifiutiSpaziali/" target="_blank" class="grid-item"><img src="imghome/razzino.png" alt="p5 Project 3" class="cursor-target" /></a>
-      <a href="UNI YEAR 1/web_design/SITO ESAME/img_home/" target="_blank" class="grid-item"><img src="UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png" alt="p5 Project 3" class="cursor-target" /></a>
+    <div class="content-grid">
+      <a href="https://mammainfanzina.framer.website" target="_blank" class="project-item"><img src="mammainfanzina/logo mamma.svg" alt="Mamma Infanzina Website" class="cursor-target" /></a>
+      <a href="https://www.gizeta-zanchetta.it/home" target="_blank" class="project-item"><img src="imghome/gizeta.png" alt="Gizeta Website" class="cursor-target" /></a>
+      <a href="https://amdecorsrl.com" target="_blank" class="project-item"><img src="amdecor/img/amlogo.svg" alt="AM Decor Website" class="cursor-target" /></a>
+      <a href="https://escapeslakecomo.com" target="_blank" class="project-item"><img src="escapes/img/logo_escapes.svg" alt="Escapes Website" class="cursor-target" /></a>
+      <a href="https://zjncoo.github.io/RifiutiSpaziali/" target="_blank" class="project-item"><img src="imghome/razzino.png" alt="Rifiuti Spaziali" class="cursor-target" /></a>
+      <a href="UNI YEAR 1/web_design/SITO ESAME/img_home/" target="_blank" class="project-item"><img src="UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png" alt="Web Design Exam" class="cursor-target" /></a>
     </div>
   </section>
 
@@ -129,7 +121,7 @@
       <a href="#" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
       <div class="footer-text">
         <p>&copy; 2025 zinco</p>
-        <a href="zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
       </div>
     </div>
   </footer>
