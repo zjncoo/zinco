@@ -135,3 +135,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+
+
+//filtri foto 
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Seleziona tutti i bottoni dei filtri e tutti gli elementi della griglia
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const gridItems = document.querySelectorAll('.grid-item');
+
+  // Aggiunge un "click listener" a ogni bottone
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      
+      // Rimuove la classe 'active' da tutti i bottoni
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      // Aggiunge la classe 'active' solo al bottone cliccato
+      button.classList.add('active');
+
+      // Ottiene il valore del filtro dal bottone cliccato (es. 'branding', 'web', 'all')
+      const filter = button.getAttribute('data-filter');
+
+      // Scorre ogni elemento della griglia
+      gridItems.forEach(item => {
+        // Controlla se l'elemento deve essere mostrato o nascosto
+        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+          item.style.display = 'block'; // Mostra l'elemento
+        } else {
+          item.style.display = 'none';  // Nasconde l'elemento
+        }
+      });
+    });
+  });
+
+});

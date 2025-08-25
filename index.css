@@ -377,12 +377,12 @@ footer {
 
 /* --- Titoli delle sezioni della griglia --- */
 .projects-section h2 {
-  text-align: left;     /* Allinea il testo a sinistra */
-  padding-left: 40px;   /* Aggiunge un rientro per allinearsi con il footer e la griglia */
-  width: 100%;          /* Assicura che l'elemento occupi tutto lo spazio per un allineamento corretto */
+  text-align: left;
+  padding-left: 40px;
+  width: 100%;
 }
 
-/* --- STRUTTURA GRIGLIA GENERICA (PER HOMEPAGE) --- */
+/* --- STRUTTURA GRIGLIA GENERICA (Vecchia) --- */
 .content-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -391,7 +391,6 @@ footer {
   border-bottom: 2px solid black;
 }
 
-/* --- STILE ELEMENTI GRIGLIA: TIPO 1 (Homepage) --- */
 .project-item {
   background-color: white;
   aspect-ratio: 1 / 1;
@@ -424,6 +423,148 @@ footer {
 .project-item:nth-child(4n + 1) { padding-left: 40px; }
 .project-item:nth-child(4n) { padding-right: 40px; }
 
+
+/* --- GRIGLIA FOTOGRAFICA PORTFOLIO (Dinamica e Ottimizzata) --- */
+
+/* Keyframes per l'animazione di entrata */
+@keyframes fadeInScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Contenitore principale */
+.portfolio-container {
+  width: 100%;
+  padding: 0 40px;
+  margin: 4rem auto;
+  text-align: left;
+}
+
+/* Contenitore per i bottoni dei filtri */
+#project-filters {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Stile per i bottoni dei filtri */
+.filter-btn {
+  background: none;
+  border: 2px solid black;
+  color: black;
+  padding: 8px 20px;
+  margin: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: black;
+  color: white;
+}
+
+/* La griglia fotografica con layout dinamico */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  grid-auto-rows: minmax(300px, auto);
+  gap: 20px;
+}
+
+/* Ogni elemento della griglia */
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  border: 2px solid black;
+  opacity: 0;
+  animation: fadeInScaleUp 0.5s ease forwards;
+}
+
+/* Layout dinamico: alcuni elementi occupano più spazio */
+.grid-item:nth-child(5n) { grid-column: span 2; }
+.grid-item:nth-child(7n) { grid-row: span 2; }
+
+/* Ritardo nell'animazione per un effetto a cascata */
+.grid-item:nth-child(2) { animation-delay: 0.1s; }
+.grid-item:nth-child(3) { animation-delay: 0.2s; }
+.grid-item:nth-child(4) { animation-delay: 0.3s; }
+.grid-item:nth-child(5) { animation-delay: 0.15s; }
+
+/* L'immagine dentro l'elemento */
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* L'overlay che appare al passaggio del mouse */
+.grid-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black; /* SFONDO NERO PIENO */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Stile del titolo del progetto nell'overlay */
+.grid-item-overlay h3 {
+  margin: 0 0 15px 0; /* Aumentato leggermente il margine inferiore */
+  font-size: 1.5rem;
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+}
+
+/* Stile del bottone nell'overlay, simile ai filtri */
+.grid-item-overlay .visit-btn {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transform: translateY(10px);
+}
+
+/* Effetti Hover */
+.grid-item:hover .grid-item-overlay { opacity: 1; }
+.grid-item:hover img { transform: scale(1.1); }
+.grid-item:hover .grid-item-overlay h3,
+.grid-item:hover .grid-item-overlay .visit-btn {
+  transform: translateY(0);
+}
+.grid-item-overlay .visit-btn:hover {
+    background-color: white;
+    color: black;
+}
 
 /*--- MENU ---*/
 #dropdownMenu {
@@ -592,10 +733,17 @@ footer {
     display: none !important;
   }
 
+  /* Aggiungi questo dentro @media (max-width: 1024px) */
+  .photo-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 colonne su tablet */
+    gap: 15px;
+  }
+
   .intro,
   footer,
   .menu-columns,
-  .menu-bottom {
+  .menu-bottom,
+  .portfolio-container {
     padding-left: 30px;
     padding-right: 30px;
   }
@@ -629,6 +777,27 @@ footer {
 
 /* --- Per Telefoni (fino a 767px) --- */
 @media (max-width: 767px) {
+
+    /* Aggiungi questo dentro @media (max-width: 767px) */
+  .photo-grid {
+    grid-template-columns: 1fr; /* 1 colonna su telefono */
+    gap: 20px;
+  }
+
+  /* Reset del layout dinamico su colonna singola */
+  .grid-item:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .grid-item-overlay h3 {
+    font-size: 1.2rem; /* Riduciamo la dimensione del font per il titolo */
+  }
+
+  .grid-item-overlay .visit-btn {
+    font-size: 0.8rem; /* E per il bottone */
+    padding: 6px 16px;
+  }
   #preloader-logo {
     top: 20px;
     left: 20px;
@@ -637,7 +806,8 @@ footer {
   .intro,
   footer,
   .menu-columns,
-  .menu-bottom {
+  .menu-bottom,
+  .portfolio-container {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -681,4 +851,9 @@ footer {
     padding-top: 2rem;
     margin-top: 10%;
   }
+
+  .photo-grid {
+    grid-template-columns: 1fr; /* Una colonna su schermi piccoli */
+  }
 }
+
