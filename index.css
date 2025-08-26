@@ -377,9 +377,9 @@ footer {
 
 /* --- Titoli delle sezioni della griglia --- */
 .projects-section h2 {
-  text-align: left;
-  padding-left: 40px;
-  width: 100%;
+  text-align: left;     /* Allinea il testo a sinistra */
+  padding-left: 40px;   /* Aggiunge un rientro per allinearsi con il footer e la griglia */
+  width: 100%;          /* Assicura che l'elemento occupi tutto lo spazio per un allineamento corretto */
 }
 
 /* --- STRUTTURA GRIGLIA GENERICA (Vecchia) --- */
@@ -391,6 +391,7 @@ footer {
   border-bottom: 2px solid black;
 }
 
+/* --- STILE ELEMENTI GRIGLIA: TIPO 1 (Homepage) --- */
 .project-item {
   background-color: white;
   aspect-ratio: 1 / 1;
@@ -523,63 +524,6 @@ footer {
 .tile-large { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
 
 
-/*
- * ===================================================================
- * 9. MEDIA QUERIES (Trasformazione in Carosello su Mobile)
- * ===================================================================
-*/
-@media (max-width: 767px) {
-  
-  .portfolio-grid-container {
-    padding: 0; /* Rimuove il padding laterale per il layout a filo */
-  }
-
-  /* Mostra l'area del titolo dinamico */
-  .carousel-info-mobile {
-    display: block;
-    padding: 0 20px; /* Aggiunge un po' di spazio interno per il testo */
-  }
-
-  /* Trasforma la griglia in un carosello */
-  .photo-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 15px;
-    padding: 0 20px; /* Mantiene un padding interno per non far "attaccare" le card ai lati durante lo scroll */
-    clip-path: inset(0 0 0 0); /* Workaround per alcuni browser che tagliano le ombre/bordi */
-    
-    /* Nasconde la barra di scorrimento */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .photo-grid::-webkit-scrollbar { display: none; }
-
-  /* Stile delle card nel carosello */
-  .grid-item,
-  .tile-wide,
-  .tile-tall,
-  .tile-large {
-    flex: 0 0 80%;
-    width: 80%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    scroll-snap-align: center; /* Allinea la card al centro */
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  /* Rimuovi l'animazione di flip su hover, inutile su mobile */
-  .grid-item:hover .card-flipper {
-    transform: none;
-  }
-
-  /* Nascondi il retro delle card */
-  .card-back {
-    display: none;
-  }
-}
-
 /*--- MENU ---*/
 #dropdownMenu {
   position: fixed;
@@ -689,26 +633,50 @@ footer {
   outline: none;
 }
 
+/* File: index.css */
+
+/* --- Stili per i Suggerimenti della Ricerca --- */
+
+/* Contenitore della lista dei risultati */
 .suggestions-list {
-  z-index: 1100;
-  background: black;
-  color: white;
-  border: 1px solid #333;
   list-style: none;
+  margin: 1rem 0 0 0;
+  padding: 0;
+  max-height: 25vh; /* Altezza massima, per evitare liste troppo lunghe */
+  overflow-y: auto;
+  border-top: 1px solid #333; /* Linea di separazione */
+}
+
+/* Stile per ogni elemento della lista (<li>) */
+.suggestions-list li {
   margin: 0;
   padding: 0;
-  max-height: 200px;
-  overflow-y: auto;
 }
 
-.suggestions-list li {
-  padding: 0.75rem 1rem;
-  font-size: 1.1rem;
-  transition: background 0.2s ease;
+/* Stile per i link dei risultati (<a>) */
+.suggestions-list li a {
+  display: block; /* Occupa tutto lo spazio per essere facilmente cliccabile */
+  padding: 1rem 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #222; /* Separatore tra i risultati */
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.suggestions-list li:hover {
+/* Stile per il messaggio "Nessun progetto trovato" */
+.suggestions-list li:not(:has(a)) {
+  padding: 1rem 0.5rem;
+  color: #777; /* Colore più spento */
+  font-style: italic;
+}
+
+
+/* Effetto al passaggio del mouse */
+.suggestions-list li a:hover {
   background-color: #1a1a1a;
+  color: #ccc;
 }
 
 .search-icon {
@@ -717,6 +685,76 @@ footer {
   border: none;
   color: white;
   z-index: 1100;
+}
+
+/* Stile Pulsante "Chiudi" della Ricerca (Modificato) */
+#closeSearch {
+  position: fixed; /* Lo fissa allo schermo */
+  top: 20px;
+  right: 32px;
+  z-index: 1101; /* Sopra l'overlay della ricerca */
+  background: none;
+  border: none;
+  color: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 30px; /* Allineato con il pulsante "more/close" */
+  cursor: pointer; /* Cambiato da 'none' a 'pointer' */
+  text-transform: lowercase;
+}
+#closeSearch:before {
+  content: "close"; /* Usa il testo invece della "X" */
+}
+
+/* Stile Pulsante Filtri (Modificato) */
+#filters { 
+  position: relative; 
+}
+#category-select {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+  width: 100%;
+  text-align: center; /* Centra il testo */
+  transition: all 0.2s ease;
+}
+#category-select:hover {
+  background-color: white;
+  color: black;
+}
+#category-select .arrow {
+  display: inline-block;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Stile Menu a Tendina dei Filtri (Modificato) */
+#category-select-options {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  border: 1px solid #444;
+  z-index: 1200;
+  width: 100%;
+}
+#category-select-options.show {
+  display: block;
+}
+.filter-option {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.filter-option:hover {
+  background-color: #333;
 }
 
 
@@ -732,6 +770,12 @@ footer {
   width: 2px;
   background-color: black;
   z-index: 500; 
+}
+
+/* Aggiungi alla fine del tuo CSS, prima delle Media Queries */
+.search-is-active #btnTopRight {
+  opacity: 0;
+  pointer-events: none;
 }
 
 
@@ -791,13 +835,7 @@ footer {
 
 /* --- Per Telefoni (fino a 767px) --- */
 @media (max-width: 767px) {
-
-    /* Aggiungi questo dentro @media (max-width: 767px) */
-  .photo-grid {
-    grid-template-columns: 1fr; /* 1 colonna su telefono */
-    gap: 20px;
-  }
-
+    
   /* Reset del layout dinamico su colonna singola */
   .grid-item:nth-child(n) {
     grid-column: auto;
@@ -866,8 +904,41 @@ footer {
     margin-top: 10%;
   }
 
+  /* --- Trasformazione in Carosello su Mobile --- */
+  .portfolio-grid-container {
+    padding: 0; /* Rimuove il padding laterale per il layout a filo */
+  }
+  .carousel-info-mobile {
+    display: block;
+    padding: 0 20px; /* Aggiunge un po' di spazio interno per il testo */
+  }
   .photo-grid {
-    grid-template-columns: 1fr; /* Una colonna su schermi piccoli */
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 0 20px;
+    clip-path: inset(0 0 0 0);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .photo-grid::-webkit-scrollbar { display: none; }
+  .grid-item,
+  .tile-wide,
+  .tile-tall,
+  .tile-large {
+    flex: 0 0 80%;
+    width: 80%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    scroll-snap-align: center;
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .grid-item:hover .card-flipper {
+    transform: none;
+  }
+  .card-back {
+    display: none;
   }
 }
-
