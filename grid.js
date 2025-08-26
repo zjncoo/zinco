@@ -1,35 +1,50 @@
 // File: animations.js
 
-// Aspetta che l'intero contenuto della pagina sia caricato prima di eseguire lo script.
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // Seleziona tutti gli elementi della griglia.
-  const gridItems = document.querySelectorAll('.grid-item');
 
-  // Se per qualche motivo non ci sono elementi, interrompi lo script.
-  if (gridItems.length === 0) {
-    console.log("Nessun elemento della griglia trovato da animare.");
+  // Esegui lo script solo se siamo in visualizzazione mobile
+  if (window.innerWidth > 767) {
     return;
   }
 
-  // Imposta l'Intersection Observer, la tecnologia che rileva quando un elemento è visibile.
-  const observer = new IntersectionObserver((entries, observer) => {
+  const photoGrid = document.querySelector('.photo-grid');
+  const projectTitleElement = document.getElementById('project-title-mobile');
+  const projectLinkElement = document.getElementById('project-link-mobile');
+  const items = document.querySelectorAll('.grid-item');
+
+  // Se non ci sono gli elementi necessari, interrompi
+  if (!photoGrid || !projectTitleElement || !projectLinkElement || items.length === 0) {
+    return;
+  }
+  
+  // Funzione per aggiornare il titolo e il link
+  const updateInfo = (item) => {
+    const title = item.dataset.title;
+    const link = item.dataset.link;
+    if (title && link) {
+      projectTitleElement.textContent = title;
+      projectLinkElement.href = link;
+    }
+  };
+
+  // Imposta le informazioni del primo elemento al caricamento della pagina
+  updateInfo(items[0]);
+
+  // Usa un Intersection Observer per rilevare quale elemento è al centro
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Se l'elemento è entrato nello schermo...
+      // Se un elemento è per più del 70% visibile, significa che è quello centrato
       if (entry.isIntersecting) {
-        // ...aggiungi la classe .is-visible per far partire l'animazione CSS.
-        entry.target.classList.add('is-visible');
-        // E smetti di osservarlo per non ripetere l'animazione.
-        observer.unobserve(entry.target);
+        updateInfo(entry.target);
       }
     });
   }, {
-    threshold: 0.1 // L'animazione parte quando almeno il 10% dell'elemento è visibile.
+    root: photoGrid, // L'osservazione avviene all'interno del carosello
+    threshold: 0.7 // Soglia di visibilità alta per beccare solo quello al centro
   });
 
-  // Applica l'observer a ogni elemento della griglia.
-  gridItems.forEach(item => {
+  // Applica l'observer a ogni elemento del carosello
+  items.forEach(item => {
     observer.observe(item);
   });
-
 });
