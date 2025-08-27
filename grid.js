@@ -47,4 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
   items.forEach(item => {
     observer.observe(item);
   });
+
+  // --- AVVIO SICURO DEI VIDEO IN AUTOPLAY ---
+  const allVideos = document.querySelectorAll('.card-front video');
+  allVideos.forEach(video => {
+    // Prova a far partire il video, ignorando eventuali errori se il browser lo blocca.
+    video.play().catch(error => {
+      console.log("Autoplay bloccato dal browser per il video:", video.src, error);
+    });
+  });
 });

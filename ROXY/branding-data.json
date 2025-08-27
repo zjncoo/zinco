@@ -12,6 +12,12 @@
   },
   {
     "type": "text",
+    "label": "discover ROXY brandbook",
+    "content": "<a href='../publications/roxy_brandbook/roxy_brandbook.html' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>open brandbook ↗</a>",
+    "linkUrl": "../publications/roxy_brandbook/roxy_brandbook.html"
+  },
+  {
+    "type": "text",
     "label": "naming",
     "content": "ROXY"
   },
