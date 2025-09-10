@@ -29,7 +29,6 @@ window.addEventListener('load', () => {
 const lenis = new Lenis();
 function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
-
 // Aggiungi questa riga per rendere lenis accessibile a tutti gli altri script
 window.lenis = lenis; 
 

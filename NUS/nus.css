@@ -338,6 +338,73 @@
   min-width: 120px;
 }
 
+
+/* =================================================================== */
+/* === CODICE FINALE CON FIX PER CURSORE/CLICK (v. definitiva)     === */
+/* =================================================================== */
+
+.right-panel-integrated {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    z-index: 100;
+    background-color: #f8f9fa;
+    border-left: 2px solid black;
+    box-sizing: border-box;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    pointer-events: none; /* FIX: Ignora il mouse quando è chiuso */
+}
+
+.right-panel-integrated.is-open {
+    transform: translateX(0);
+    pointer-events: auto; /* FIX: Riattiva il mouse quando è aperto */
+}
+
+.right-panel-integrated .panel-content-inner {
+    padding: 40px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* === Stile AGGIORNATO per il bottone 'Apri Info' === */
+.btn-info-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 101;
+
+    /* Stile richiesto */
+    background-color: white;     /* Interno bianco */
+    color: black;                /* Scritta nera */
+    border: 2px solid black;     /* Bordo nero 2px */
+    border-radius: 0;            /* Squadrato */
+
+    padding: 10px 20px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-info-panel:hover {
+    /* Stile richiesto per l'hover */
+    background-color: black;     /* Dentro nero */
+    color: white;                /* Scritta bianca */
+}
+
+@media (max-width: 768px) {
+    .right-panel-integrated {
+        width: 85%;
+    }
+}
+
 /*
  * ===================================
  * MEDIA QUERIES
