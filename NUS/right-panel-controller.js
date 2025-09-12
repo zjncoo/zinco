@@ -1,33 +1,46 @@
+// Contenuto finale e definitivo per right-panel-controller.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const triggerButton = document.getElementById('info-trigger-button');
-    const rightPanel = document.getElementById('rightPanel');
+    const infoPanel = document.getElementById('infoPanel');
     
-    if (triggerButton && rightPanel) {
+    // Controlliamo che tutti gli elementi e Lenis siano pronti
+    if (triggerButton && infoPanel && typeof window.lenis !== 'undefined') {
         
-        // Funzione per aggiornare il testo del bottone
         const updateButtonText = () => {
-            const isOpen = rightPanel.classList.contains('is-open');
+            const isOpen = infoPanel.classList.contains('is-open');
             const isMobile = window.innerWidth <= 768;
 
             if (isMobile) {
-                // Su mobile: usa "+" e "-"
-                triggerButton.textContent = isOpen ? "−" : "+"; // Ho usato un meno tipografico, più bello
+                triggerButton.textContent = isOpen ? "−" : "+";
             } else {
-                // Su desktop: usa il testo completo
-                triggerButton.textContent = isOpen ? "- info" : "+ info";
+                triggerButton.textContent = isOpen ? "Chiudi Info" : "Apri Info";
             }
         };
 
         // Imposta il testo corretto al caricamento della pagina
         updateButtonText();
 
-        // Aggiungi l'evento per il click
+        // Aggiungi l'evento per il click sul bottone
         triggerButton.addEventListener('click', () => {
-            rightPanel.classList.toggle('is-open');
-            updateButtonText(); // Aggiorna il testo dopo ogni click
+            const isOpen = infoPanel.classList.toggle('is-open');
+
+            // GESTIONE DEFINITIVA DELLO SCROLL DI LENIS
+            if (isOpen) {
+                // Ferma lo scroll della pagina principale
+                window.lenis.stop();
+            } else {
+                // Riattiva lo scroll della pagina principale
+                window.lenis.start();
+            }
+            
+            updateButtonText(); // Aggiorna il testo del bottone
         });
 
-        // (Opzionale ma consigliato) Aggiorna il testo se l'utente ridimensiona la finestra
+        // Aggiorna il testo se l'utente ridimensiona la finestra
         window.addEventListener('resize', updateButtonText);
+
+    } else {
+        console.error("ERRORE CRITICO: Il pannello non può essere inizializzato. Controllare la presenza di #info-trigger-button, #infoPanel e della libreria Lenis.");
     }
 });
