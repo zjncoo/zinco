@@ -1,16 +1,94 @@
+/* ================================================ */
+/* STILI PER LA PAGINA ABOUT            */
+/* ================================================ */
 
+/* --- Sezione principale --- */
+/* Questo contenitore tiene sia il titolo H2 che il blocco con foto e testo */
 .cookie-policy-section {
-  padding: 30%;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
+  padding: 5% 10%; /* Spazio ai lati della sezione */
+  min-height: 100vh; /* La sezione occupa almeno tutta l'altezza dello schermo */
+  
+  /* Usiamo Flexbox per centrare il contenuto verticalmente e orizzontalmente */
+  display: flex;
+  flex-direction: column; /* <-- Impila i figli (titolo e contenuto) uno sopra l'altro */
+  align-items: center;    /* Centra orizzontalmente */
+  justify-content: center;/* Centra verticalmente */
 }
 
-
-@media (max-width: 767px) {
-.cookie-policy-section {
-  padding: 5%;
-  align-items: center;
+/* --- Titolo "About Me" --- */
+.cookie-policy-section h2 {
+  margin-bottom: 3em; /* Spazio tra il titolo e il blocco sottostante */
+  text-align: center;   /* Assicura che il titolo sia centrato */
+  font-size: 2rem;      /* Puoi aggiustare la dimensione del font */
 }
 
+/* --- Contenitore del contenuto (immagine + testi) --- */
+/* Questo contenitore mette l'immagine e i testi uno accanto all'altro */
+.cookie-policy-content {
+  display: flex;         /* Attiva Flexbox */
+  align-items: flex-start; /* Allinea immagine e testo partendo dall'alto */
+  gap: 4em;              /* Spazio tra immagine e testo */
+  max-width: 1300px;     /* Limita la larghezza massima per leggibilità su schermi grandi */
+  width: 100%;
+}
+
+/* --- Immagine del profilo --- */
+.cookie-policy-content img {
+  flex: 0 0 45%;    /* L'immagine occupa il 45% dello spazio, non si deforma */
+  width: auto;         /* Fallback per la larghezza */
+  height: 100vh;       /* L'immagine è alta l'85% dello schermo */
+  object-fit: cover;  /* Ritaglia l'immagine per riempire lo spazio senza distorcerla */
+  border-radius: 15px; /* Angoli arrotondati */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Ombra leggera per dare profondità */
+}
+
+/* --- Blocco dei testi a destra --- */
+/* Se hai aggiunto il div "text-content-wrapper" nell'HTML, usa queste regole */
+.text-content-wrapper {
+  flex: 1; /* Occupa lo spazio rimanente */
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em; /* Spazio tra il blocco "info personali" e "descrizione" */
+  padding-top: 2em; /* Spazio in alto per allinearsi meglio visivamente */
+}
+
+/* Stili generici per i paragrafi nel blocco di testo */
+.cookie-policy-content p,
+.cookie-policy-content h3 {
+  margin: 0 0 0.75em 0; /* Pulisce i margini di default e aggiunge spazio sotto */
+  line-height: 1.6;
+}
+
+/* ================================================ */
+/* REGOLE PER IL MOBILE (RESPONSIVE)      */
+/* ================================================ */
+@media (max-width: 768px) {
+
+  .cookie-policy-section {
+    padding: 15% 5%; /* Più spazio sopra/sotto, meno ai lati su mobile */
+    min-height: auto;  /* L'altezza si adatta al contenuto su mobile */
+  }
+  
+  .cookie-policy-section h2 {
+    margin-bottom: 2em; /* Riduci lo spazio sotto il titolo */
+  }
+
+  /* Il contenuto (foto e testi) va in colonna */
+  .cookie-policy-content {
+    flex-direction: column; /* <-- La regola chiave per il mobile */
+    align-items: center;    /* Centra tutto */
+    gap: 2em;
+  }
+
+  /* L'immagine diventa a larghezza piena */
+  .cookie-policy-content img {
+    width: 100%;
+    height: 60vh; /* Altezza ridotta per non occupare troppo schermo */
+    margin-bottom: 1em;
+  }
+  
+  .text-content-wrapper {
+    padding-top: 0; /* Rimuovi lo spazio in alto su mobile */
+    width: 100%;    /* Assicurati che il testo occupi tutta la larghezza */
+  }
 }
