@@ -99,3 +99,41 @@ main {
     width: 100%;
   }
 }
+
+/* ================================================ */
+/* STILI PER I LINK SOCIAL (AGGIUNTO)     */
+/* ================================================ */
+
+.social-links {
+  /* Aggiunge uno spazio sopra per separarlo dalla descrizione */
+  margin-top: 1.5em; 
+  border-top: 2px solid #f0f0f0; /* Linea separatrice leggera */
+  padding-top: 2.5em;
+}
+
+.social-link-item {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Spazio tra logo e testo */
+  text-decoration: none;
+  color: black;
+  margin-bottom: 1em; /* Spazio tra un link e l'altro */
+  transition: opacity 0.2s ease;
+  width: fit-content; /* Fa sì che l'area cliccabile non sia a tutta larghezza */
+}
+
+.social-link-item:hover {
+  opacity: 0.6; /* Semplice effetto al passaggio del mouse */
+}
+
+.social-link-item img {
+  width: 28px; /* Dimensione del logo */
+  height: 28px;
+}
+
+.social-link-item span {
+  font-size: 1rem;
+  font-weight: 500; /* Puoi cambiarlo in 'bold' se preferisci */
+  text-decoration: underline;
+  text-underline-offset: 4px; /* Distanza della sottolineatura dal testo */
+}
