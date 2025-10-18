@@ -47,9 +47,40 @@ requestAnimationFrame(raf);
 // Aggiungi questa riga per rendere lenis accessibile a tutti gli altri script
 window.lenis = lenis; 
 
+// --- NUOVA FUNZIONE PER LA PROTEZIONE DEI CONTENUTI ---
+const setupContentProtection = () => {
+  // 1. Disabilita il menu del click destro
+  document.addEventListener('contextmenu', event => {
+    event.preventDefault();
+    console.log("Right-click is disabled to protect content."); // Messaggio opzionale per la console
+  });
+
+  // 2. Disabilita il trascinamento di tutte le immagini
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', event => event.preventDefault());
+  });
+
+  // 3. Disabilita le scorciatoie da tastiera comuni per salvare/copiare
+  document.addEventListener('keydown', event => {
+    // Blocca Ctrl+S (Salva) e Cmd+S su Mac
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+      event.preventDefault();
+    }
+    // Blocca Ctrl+C (Copia) e Cmd+C su Mac
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'c') {
+      event.preventDefault();
+    }
+    // Blocca Ctrl+U (Visualizza sorgente) e Cmd+U su Mac
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'u') {
+      event.preventDefault();
+    }
+  });
+};
+
 // --- EVENT LISTENER PRINCIPALE ---
 document.addEventListener('DOMContentLoaded', () => {
   setupPageTransitions();
+  setupContentProtection();
 
   // --- CURSORE PERSONALIZZATO ---
   const cursor = document.getElementById('cursor');
