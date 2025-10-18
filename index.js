@@ -17,11 +17,26 @@ const setupPageTransitions = () => {
   });
 };
 
-// --- LOGICA DEL PRELOADER ---
-window.addEventListener('load', () => {
+// --- LOGICA DEL PRELOADER (OTTIMIZZATA PER VELOCITÀ) ---
+
+const hidePreloader = () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
-    setTimeout(() => { preloader.classList.add('loaded'); }, 500);
+    // Un piccolo timeout per assicurarsi che il primo rendering della pagina sia completo
+    setTimeout(() => {
+      preloader.classList.add('loaded');
+    }, 100);
+  }
+};
+
+// MODIFICA CHIAVE: Usa 'DOMContentLoaded' invece di 'load'.
+// Si attiva non appena la struttura HTML è pronta, senza aspettare le immagini.
+document.addEventListener('DOMContentLoaded', hidePreloader);
+
+// Questo gestisce il tasto "indietro" del browser, lascialo così com'è.
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    hidePreloader();
   }
 });
 
