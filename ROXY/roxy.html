@@ -107,7 +107,13 @@
       <canvas id="pdfCanvas" data-pdf-source="roxy.pdf"></canvas>
       <div class="pdf-controls">
         <button id="prevPage" class="btn btn--outline-dark">←</button>
-        <div id="pageIndicator">Page <span id="pageNum">1</span> of <span id="pageCount"></span></div>
+        <div id="pageIndicator">
+          Page 
+          <span id="pageNum" class="page-num-display">1</span>
+          <input type="number" id="pageNumInput" class="page-num-input" />
+          of 
+          <span id="pageCount"></span>
+        </div>
         <button id="nextPage" class="btn btn--outline-dark">→</button>
       </div>
     </div>

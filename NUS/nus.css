@@ -273,7 +273,7 @@
   align-items: center;
   gap: 20px;
   padding: 80px 40px;
-  max-width: 900px;
+  max-width: 70vw;
   margin: 0 auto;
 }
 
@@ -290,7 +290,60 @@
   gap: 25px;
 }
 
+/* Stile per rendere il numero di pagina cliccabile */
+/* Stile per il link "Back" nelle pagine progetto */
+.back-to-link {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* Corpo normale */
+  font-size: 1rem;  /* 16px */
+  color: black;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  
+  /* Spazio tra il link e il titolo h1 sotto di lui */
+  margin-bottom: 1.5rem; 
+}
+
+.back-to-link:hover {
+  opacity: 0.6; /* Un leggero effetto al passaggio */
+}
+
+.page-num-display {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 0 3px; /* Aggiunge un po' di spazio */
+}
+.page-num-display:hover {
+  color: #555; /* Leggero cambio colore al passaggio del mouse */
+}
+
+/* Stile per l'input, nascosto di default */
+.page-num-input {
+  display: none;
+  width: 50px; /* Larghezza per 3-4 cifre */
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 0 3px;
+}
+
+/* Nasconde le freccette dall'input di tipo 'number' */
+.page-num-input {
+  -moz-appearance: textfield;
+}
+.page-num-input::-webkit-outer-spin-button,
+.page-num-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /*BOOK*/
+
 .book-container {
   max-width: 90vw;
   width: 100%;

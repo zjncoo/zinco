@@ -18,6 +18,7 @@
   </head>
 
 <body>
+  <div id="scroll-progress-bar"></div>
   <div id="preloader">
     <a href="../../index.html" id="logo"><img src="../../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
     <div class="loader-bar-container">
@@ -31,6 +32,9 @@
 
   <div id="hero-wrapper">
     <section id="project-hero">
+      <a href="../publications.html" class="back-to-link cursor-target">
+        &larr; back to publications
+      </a>
       <h1 id="hero-title">ROXY - brandbook</h1>
     </section>
   </div>
@@ -94,7 +98,12 @@
       </div>
       <div id="book-controls">
         <button id="prev-page" class="btn btn--solid-dark cursor-target">←</button>
-        <div id="page-indicator">Pagina – / –</div>
+        <div class="page-indicator-container"> 
+          <span id="pageLabel">Pagina</span>
+          <span id="pageNumbers" class="page-num-display">1</span>
+          <input type="number" id="pageInput" class="page-num-input" />
+          <span id="pageTotal">/ </span>
+        </div>
         <button id="next-page" class="btn btn--solid-dark cursor-target">→</button>
       </div>
     </div>

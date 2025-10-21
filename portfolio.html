@@ -102,7 +102,12 @@
       </div>
       <div id="book-controls">
         <button id="prev-page" class="btn btn--solid-dark cursor-target">←</button>
-        <div id="page-indicator">Pagina – / –</div>
+        <div class="page-indicator-container"> 
+          <span id="pageLabel">Pagina</span>
+          <span id="pageNumbers" class="page-num-display">1</span>
+          <input type="number" id="pageInput" class="page-num-input" />
+          <span id="pageTotal">/ </span>
+        </div>
         <button id="next-page" class="btn btn--solid-dark cursor-target">→</button>
       </div>
     </div>

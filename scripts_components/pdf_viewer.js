@@ -1,18 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Cerca il canvas nella pagina
   const canvas = document.getElementById('pdfCanvas');
-  
-  // Se non c'è un canvas, interrompi lo script per evitare errori
   if (!canvas) {
     return; 
   }
-
-  // 1. Leggiamo l'URL dall'attributo "data-pdf-source" del canvas
   const url = canvas.dataset.pdfSource;
-
-  // 2. Aggiungiamo un controllo di sicurezza
-  // Se l'attributo non è stato specificato nell'HTML, mostra un errore e fermati.
   if (!url) {
     console.error("Attributo 'data-pdf-source' non trovato sull'elemento #pdfCanvas. Impossibile caricare il PDF.");
     return;
@@ -25,9 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
       scale = 1.5,
       ctx = canvas.getContext('2d');
 
+  const pageNumSpan = document.getElementById('pageNum');
+  const pageNumInput = document.getElementById('pageNumInput');
+  const pageCountSpan = document.getElementById('pageCount');
+
   /**
    * Renderizza la pagina richiesta nel canvas.
-   * @param {number} num Il numero della pagina da renderizzare.
    */
   function renderPage(num) {
     pageRendering = true;
@@ -49,14 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
           pageNumPending = null;
         }
       });
-
-      document.getElementById('pageNum').textContent = num;
+      pageNumSpan.textContent = num;
     });
   }
 
   /**
-   * Mette in coda il rendering di una pagina se un'altra è già in corso.
-   * @param {number} num Il numero della pagina.
+   * Mette in coda il rendering di una pagina.
    */
   function queueRenderPage(num) {
     if (pageRendering) {
@@ -79,18 +72,64 @@ document.addEventListener('DOMContentLoaded', () => {
     queueRenderPage(pageNum);
   }
 
-  // Collega gli eventi ai bottoni
   document.getElementById('prevPage').addEventListener('click', onPrevPage);
   document.getElementById('nextPage').addEventListener('click', onNextPage);
   
-  // 3. Carica il documento usando l'URL ottenuto dall'HTML
+  // --- Logica per mostrare/nascondere l'input ---
+
+  function showPageInput() {
+    pageNumSpan.style.display = 'none';
+    pageNumInput.style.display = 'inline-block';
+    pageNumInput.value = pageNum;
+    pageNumInput.focus();
+    pageNumInput.select();
+  }
+
+  function hidePageInput() {
+    pageNumInput.style.display = 'none';
+    pageNumSpan.style.display = 'inline-block';
+  }
+
+  // --- MODIFICA: Funzione unificata per gestire l'input ---
+  function handlePageInput() {
+    // Controlla se l'input è visibile, altrimenti esci
+    if (pageNumInput.style.display === 'none') return;
+    
+    let desiredPage = parseInt(pageNumInput.value, 10);
+
+    // Validazione
+    if (isNaN(desiredPage)) desiredPage = 1;
+    if (desiredPage > pdfDoc.numPages) desiredPage = pdfDoc.numPages;
+    if (desiredPage < 1) desiredPage = 1;
+
+    pageNum = desiredPage;
+    queueRenderPage(pageNum);
+    
+    hidePageInput(); // Nasconde l'input
+  }
+  // --- FINE MODIFICA ---
+
+  // Attiva l'input quando si clicca sul numero
+  pageNumSpan.addEventListener('click', showPageInput);
+
+  // Gestisce il "salto" alla pagina quando si preme Invio
+  pageNumInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); 
+      handlePageInput(); // <-- Usa la nuova funzione
+    }
+  });
+
+  // Gestisce il "clic fuori" (blur)
+  pageNumInput.addEventListener('blur', handlePageInput); // <-- Usa la nuova funzione
+  
+  // Carica il documento
   pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;
-    document.getElementById('pageCount').textContent = pdfDoc.numPages;
+    pageCountSpan.textContent = pdfDoc.numPages;
     renderPage(pageNum);
   }).catch(error => {
     console.error(`Errore nel caricamento del PDF da "${url}":`, error);
-    // Potresti mostrare un messaggio di errore all'utente qui
   });
 
 });

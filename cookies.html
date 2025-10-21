@@ -10,6 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="scroll-progress-bar"></div>
+
+  <div id="preloader">
+    <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+    <div class="loader-bar-container">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+  
   <div class="custom-cursor" id="cursor"></div>
 
   <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt=""></a>
@@ -22,23 +31,42 @@
   <div id="dropdownMenu">
     <div class="menu-columns">
       <div class="menu-column left">
-        <a href="#" class="menu-link">About Me</a>
-        <a href="#" class="menu-link">Work</a>
-        <a href="#" class="menu-link">Services</a>
+        <a href="about/about.html" class="menu-link">about me</a>
+        <a href="contact.html" class="menu-link">contacts</a>
+        <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
+  
+        <div id="search-bar-container">
+          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <div id="search-overlay" class="hidden">
+            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
+          </div>
+          <div id="search-bar" class="hidden">
+            <input type="text" id="search-input" placeholder="browse projects..." />
+            <div id="filters" class="filters">
+              <button id="category-select" onclick="toggleDropdown()">
+                <span>Filters</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div id="category-select-options">
+                <a href="#" data-filter="all" class="filter-option">All</a>
+                <a href="#" data-filter="branding" class="filter-option">branding</a>
+                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
+              </div>
+            </div>
+            <ul id="search-suggestions" class="suggestions-list"></ul>
+          </div>
+        </div>
       </div>
       <div class="menu-column right">
-        <a href="#" class="menu-link">Archive</a>
-        <a href="#" class="menu-link">Research</a>
-        <a href="#" class="menu-link">Clients</a>
-        <a href="#" class="menu-link">Events</a>
-        <a href="#" class="menu-link">Exhibitions</a>
-        <a href="#" class="menu-link">Press</a>
+        <a href="portfolio.html" class="menu-link">portfolio</a>
+        <a href="publications/publications.html" class="menu-link">publications</a>
+        <a href="#" class="menu-link">clients</a>
       </div>
     </div>
 
     <div class="menu-bottom">
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
-      <button id="randomProjectButton" class="menu-random cursor-target">surprise me</button>
     </div>
   </div>
 

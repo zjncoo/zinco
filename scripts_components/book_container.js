@@ -1,4 +1,4 @@
-// File: ../scripts_components/book_component.js
+// File: ../scripts_components/book_component.js (Con "Invio" su blur)
 
 document.addEventListener('DOMContentLoaded', () => {
   const bookContainer = document.querySelector('.book-container');
@@ -20,17 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctxLeft = canvasLeft.getContext('2d');
   const canvasRight = document.getElementById('canvas-right');
   const ctxRight = canvasRight.getContext('2d');
-  const pageIndicator = document.getElementById('page-indicator');
+  
+  const pageLabel = document.getElementById('pageLabel');
+  const pageNumbers = document.getElementById('pageNumbers');
+  const pageTotal = document.getElementById('pageTotal');
+  const pageInput = document.getElementById('pageInput');
+
   const prevBtn = document.getElementById('prev-page');
   const nextBtn = document.getElementById('next-page');
 
   let pdfDoc = null;
-  let currentPage = 1; // La pagina corrente si riferisce sempre alla pagina "logica" che l'utente vede
+  let currentPage = 1;
   let totalPages = 0;
   let isRendering = false;
 
   const renderPage = async (canvas, ctx, pageNum) => {
-    // Questa funzione rimane invariata, gestisce la qualità e il ridimensionamento corretto
     try {
       if (!pdfDoc || pageNum <= 0 || pageNum > totalPages) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -63,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       await page.render(renderContext).promise;
 
     } catch (error) {
-      console.error(`Errore durante il rendering della pagina ${pageNum}:`, error);
+      console.error(`Errore during il rendering della pagina ${pageNum}:`, error);
     }
   };
 
@@ -77,18 +81,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isSinglePageView) {
       await renderPage(canvasLeft, ctxLeft, currentPage);
       canvasRight.classList.add('hidden');
-      pageIndicator.textContent = `Pagina ${currentPage} / ${totalPages}`;
+      pageLabel.textContent = 'Pagina ';
+      pageNumbers.textContent = currentPage;
+      pageTotal.textContent = ` / ${totalPages}`;
     } else {
-      // Logica per la vista desktop a doppia pagina
       if (currentPage === 1) {
-        // Vista Copertina: pagina 1 a destra, sinistra vuota
         await Promise.all([
           renderPage(canvasLeft, ctxLeft, 0),
           renderPage(canvasRight, ctxRight, 1)
         ]);
-        pageIndicator.textContent = `Pagina 1 / ${totalPages}`;
+        pageLabel.textContent = 'Pagina ';
+        pageNumbers.textContent = '1';
+        pageTotal.textContent = ` / ${totalPages}`;
       } else {
-        // Vista interna: calcola la pagina sinistra (deve essere sempre pari)
         const leftPageNum = (currentPage % 2 === 0) ? currentPage : currentPage - 1;
         await Promise.all([
           renderPage(canvasLeft, ctxLeft, leftPageNum),
@@ -96,9 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ]);
         
         if (leftPageNum + 1 <= totalPages) {
-          pageIndicator.textContent = `Pagine ${leftPageNum}-${leftPageNum + 1} / ${totalPages}`;
+          pageLabel.textContent = 'Pagine ';
+          pageNumbers.textContent = `${leftPageNum}-${leftPageNum + 1}`;
+          pageTotal.textContent = ` / ${totalPages}`;
         } else {
-          pageIndicator.textContent = `Pagina ${leftPageNum} / ${totalPages}`;
+          pageLabel.textContent = 'Pagina ';
+          pageNumbers.textContent = leftPageNum;
+          pageTotal.textContent = ` / ${totalPages}`;
         }
       }
     }
@@ -125,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isSinglePageView = isMobile || layoutMode === 'single';
     
     if (!isSinglePageView && currentPage === 1) {
-      currentPage = 2; // Dalla copertina, passa a pagina 2
+      currentPage = 2;
     } else {
       currentPage += isSinglePageView ? 1 : 2;
     }
@@ -138,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isSinglePageView = isMobile || layoutMode === 'single';
      
     if (!isSinglePageView && currentPage === 2) {
-       currentPage = 1; // Dalle pagine 2-3, torna alla copertina
+       currentPage = 1;
     } else {
        currentPage -= isSinglePageView ? 1 : 2;
     }
@@ -149,9 +158,60 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.addEventListener('click', goPrev);
     nextBtn.addEventListener('click', goNext);
     
+    // --- Logica per input pagina (aggiornata) ---
+    const showInput = () => {
+      pageNumbers.style.display = 'none';
+      pageLabel.style.display = 'inline';
+      pageTotal.style.display = 'inline';
+      pageInput.style.display = 'inline-block';
+      pageInput.value = currentPage; 
+      pageInput.focus();
+      pageInput.select();
+    };
+
+    const hideInput = () => {
+      pageInput.style.display = 'none';
+      pageNumbers.style.display = 'inline-block';
+      pageLabel.style.display = 'inline';
+      pageTotal.style.display = 'inline';
+    };
+
+    // --- NUOVA FUNZIONE PER GESTIRE L'INPUT ---
+    const handlePageInput = () => {
+      // Controlla se l'input è visibile, altrimenti esci
+      if (pageInput.style.display === 'none') return;
+      
+      let desiredPage = parseInt(pageInput.value, 10);
+
+      // Validazione
+      if (isNaN(desiredPage)) desiredPage = 1;
+      if (desiredPage > totalPages) desiredPage = totalPages;
+      if (desiredPage < 1) desiredPage = 1;
+
+      currentPage = desiredPage; 
+      renderSpread(); 
+      hideInput(); 
+    };
+    // --- FINE NUOVA FUNZIONE ---
+
+    pageNumbers.addEventListener('click', showInput);
+
+    // Gestisce il tasto "Invio"
+    pageInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handlePageInput(); // <-- Usa la nuova funzione
+      }
+    });
+
+    // Gestisce il "clic fuori" (blur)
+    pageInput.addEventListener('blur', handlePageInput); // <-- Usa la nuova funzione
+    // --- FINE MODIFICA ---
+    
     try {
       pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
       totalPages = pdfDoc.numPages;
+      pageTotal.textContent = ` / ${totalPages}`;
       
       let initialRenderDone = false;
       const observer = new ResizeObserver(() => {
@@ -170,7 +230,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (error) {
       console.error('Errore durante il caricamento del PDF:', error);
-      pageIndicator.textContent = 'Errore nel caricamento.';
+      pageLabel.textContent = 'Errore nel caricamento.';
+      pageNumbers.style.display = 'none';
+      pageTotal.style.display = 'none';
     }
   };
 
