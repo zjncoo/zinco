@@ -216,6 +216,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- GESTIONE BARRA AVANZAMENTO LETTURA ---
+  const progressBar = document.getElementById('scroll-progress-bar');
+  if (progressBar) {
+    const updateProgressBar = () => {
+      // Calcola l'altezza totale che si può scorrere
+      const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      
+      // Calcola la percentuale di scorrimento attuale
+      const scrollPercentage = (window.scrollY / scrollTotal) * 100;
+      
+      // Applica la percentuale alla larghezza della barra
+      progressBar.style.width = scrollPercentage + '%';
+    };
+
+    // Ascolta l'evento di scroll e aggiorna la barra
+    window.addEventListener('scroll', updateProgressBar);
+  }
+
   // --- GESTIONE TITOLO CAROSELLO MOBILE ---
   if (window.innerWidth <= 767) {
     const photoGrid = document.querySelector('.photo-grid');

@@ -72,6 +72,22 @@ h2 {
   -webkit-text-fill-color: unset;
 }
 
+/* In: index.css (fuori da @media) */
+
+#scroll-progress-bar {
+  position: fixed;
+  bottom: 0; /* Come richiesto, "in basso a tutto" */
+  left: 0;
+  width: 0%; /* Inizia da 0 e cresce con lo scroll */
+  height: 5px; /* Puoi cambiare lo spessore se vuoi */
+  
+  /* Usa il giallo esatto del tuo logo! */
+  background-color: #FFD600; 
+  
+  z-index: 9998; /* Sotto il preloader/menu ma sopra il contenuto */
+  transition: width 0.1s linear; /* Rende il movimento più fluido */
+}
+
 
 /*
  * ===================================================================
@@ -700,22 +716,21 @@ footer {
 
 /* Stile Pulsante "Chiudi" della Ricerca (Modificato) */
 #closeSearch {
-  position: fixed; /* Lo fissa allo schermo */
+  position: fixed;
   top: 20px;
   right: 32px;
-  z-index: 1101; /* Sopra l'overlay della ricerca */
+  z-index: 1101;
   background: none;
   border: none;
   color: white;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  font-size: 30px; /* Allineato con il pulsante "more/close" */
-  cursor: pointer; /* Cambiato da 'none' a 'pointer' */
+  font-size: 30px;
+  cursor: pointer;
   text-transform: lowercase;
+  padding: 8px; /* <-- Allinea il padding agli altri bottoni */
 }
-#closeSearch:before {
-  content: "close"; /* Usa il testo invece della "X" */
-}
+
 
 /* Stile Pulsante Filtri (Modificato) */
 #filters { 
@@ -846,6 +861,13 @@ footer {
 
 /* --- Per Telefoni (fino a 767px) --- */
 @media (max-width: 767px) {
+
+  /* In: index.css (dentro @media (max-width: 767px) { ... } ) */
+
+  #scroll-progress-bar {
+    top: 0;       /* La sposta in alto */
+    bottom: auto; /* Rimuove l'impostazione 'bottom: 0' del desktop */  
+  }
     
   /* Reset del layout dinamico su colonna singola */
   .grid-item:nth-child(n) {
@@ -875,15 +897,35 @@ footer {
     padding-right: 20px;
   }
 
-  #button-logo {
-    left: 12px;
+  /* --- MODIFICHE PER ALLINEAMENTO E SPAZIO --- */
+  
+  /* Sposta logo e 'more' più in alto */
+  #button-logo,
+  #btnTopRight {
+    top: 12px;
   }
-  #btnTopLeft, #btnBottomLeft {
-    left: 12px;
+
+  /* Allinea i bottoni d'angolo e il logo al padding generale di 20px */
+  #button-logo,
+  #btnTopLeft {
+    left: 20px;
   }
-  #btnTopRight, #btnBottomRight {
-    right: 12px;
+
+  #btnTopRight {
+    right: 20px;
   }
+
+  /* Allinea i titoli H2 (es. "uni year 1") al padding di 20px */
+  .projects-section h2 {
+    padding-left: 20px;
+  }
+
+  /* Nasconde i link "portfolio" e "contacts" in basso */
+  #btnBottomLeft,
+  #btnBottomRight {
+    display: none;
+  }
+  /* --- FINE MODIFICHE ALLINEAMENTO --- */
   
   #logo {
     width: 150px;
@@ -902,18 +944,26 @@ footer {
     margin: 40px 0 150px 0;
   }
 
+  /* --- MODIFICHE MENU A TENDINA --- */
   .menu-columns {
     flex-direction: column;
     gap: 2rem;
-    margin-top: 20%;
+    margin-top: 15vh; /* Ridotto il margine superiore */
   }
   .menu-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.5rem;
     padding-top: 2rem;
-    margin-top: 10%;
+    margin-top: 4rem; /* Ridotto il margine superiore */
   }
+
+  /* Fix per menu tagliato */
+  #dropdownMenu.open {
+    height: 100vh; /* Occupa tutto lo schermo */
+    overflow-y: auto; /* Aggiunge scroll se serve */
+  }
+  /* --- FINE MODIFICHE MENU --- */
 
   /* --- Trasformazione in Carosello su Mobile --- */
   .portfolio-grid-container {
