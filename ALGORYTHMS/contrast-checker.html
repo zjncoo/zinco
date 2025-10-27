@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Titolo dalla pagina del tool -->
-    <title>Palette Contrast Checker - zinco</title>
+    <!-- Titolo dalla pagina del tool --><title>Palette Contrast Checker - zinco</title>
 
-    <!-- Link e script dall'header della tua home, con percorsi corretti -->
-    <link rel="stylesheet" href="../index.css" />
+    <!-- Link e script dall'header della tua home, con percorsi corretti --><link rel="stylesheet" href="../index.css" />
     <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,37 +16,432 @@
 
     <meta name="google-site-verification" content="abF1uAFHMaZMEShE6pzZfc7RbheD3mUS6pWfEQKTMPg" />
 
-    <!-- Stili CSS interni del Contrast Checker -->
-    <style>
-        /* Stili Globali - Rimossa la regola font-family per ereditare 'Inter' dal sito */
+    <!-- Stili CSS interni del Contrast Checker --><style>
+        /* Stili Globali - Eredita i font da index.css */
         body {
-            /* background-color: #f0f0f0; */ /* Rimosso per lasciare il controllo a index.css */
             color: #1a1a1a;
             margin: 0;
-            /* Le regole 'display:flex' sono rimosse per non confliggere con il layout del sito */
             box-sizing: border-box; 
         }
 
         /* Wrapper per il contenuto principale del tool */
         .tool-main-content {
-            padding: 4rem 1rem; /* Aggiunge spazio dall'header/footer */
-            background-color: #f0f0f0; /* Sfondo grigio solo per l'area del tool */
+            display: flex;
+            flex-direction: column;
+            /* Rimosso min-height, margin-top, margin-bottom per layout sticky */
+            background-color: #ffffff;
+            font-family: 'Inter', sans-serif; /* Assicura il font base corretto */
+             /* Aggiungi padding top per evitare sovrapposizione iniziale con header fisso */
+            padding-top: 60px; /* Altezza header sito */
+             /* Aggiungi padding bottom per evitare sovrapposizione con footer */
+             padding-bottom: 60px; /* Altezza footer sito */
+             min-height: 100vh; /* Assicura che occupi almeno tutta l'altezza */
+             box-sizing: border-box;
+        }
+        
+        /* Applica font heading del sito a pulsanti e titoli del tool */
+        .tool-main-content button,
+        .tool-main-content h1,
+        .tool-main-content h2 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: bold;
+        }
+        
+        /* Contenitore per le due viste principali */
+        #paletteGeneratorView, #contrastReportView {
+             flex-grow: 1; /* Occupa lo spazio disponibile */
+             display: flex; /* Necessario per .flex-grow-1 interno */
+             flex-direction: column; /* Necessario per header + container */
+        }
+
+
+        /* --- Palette Generator View --- */
+        
+        /* Questo è il #colorPaletteContainer */
+        .palette-generator-view-container { /* Nuovo wrapper per lo scroll */
+            flex-grow: 1; /* Occupa lo spazio sotto l'header sticky */
+            display: flex;
+            overflow-x: auto; /* Abilita scroll orizzontale se necessario */
+            position: relative;
+            background-color: #f0f0f0; /* Sfondo per visibilità scroll */
+        }
+        
+        .color-column {
+            flex: 1 1 200px; /* Permette di restringersi, base 200px */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            position: relative; /* Necessario per il pulsante + */
+            user-select: none; /* Impedisce selezione del testo durante drag */
+            transition: background-color 0.2s; /* Transizione per cambio colore */
+            border-right: 1px solid rgba(0,0,0,0.1); /* Separatore sottile */
+            min-height: 100%; /* Assicura che la colonna riempia l'altezza */
+        }
+        .color-column:last-child {
+            border-right: none;
+        }
+        
+        /* Stili per le icone della colonna */
+        .column-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .column-picker-input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: 2px solid black;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .column-picker-input::-webkit-color-swatch-wrapper { padding: 4px; }
+        .column-picker-input::-webkit-color-swatch { border: none; }
+        .column-picker-input::-moz-color-swatch { border: none; }
+
+
+        .column-actions-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .column-action-btn {
+            background: rgba(255,255,255,0.8);
+            border: 2px solid black;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            transition: all 0.2s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+        }
+        .column-action-btn:hover {
+            transform: scale(1.1);
+            background-color: white;
+            color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        .shades-btn {
+            font-size: 1.5rem; /* Icona più grande */
+            line-height: 1; /* Centra l'icona */
         }
 
-        /* Contenitore principale del tool */
-        .main-container {
+        /* Contenitore per tutti gli input di testo */
+        .column-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+            margin-top: auto; /* Allinea in basso */
+            padding-top: 1rem;
+        }
+        .column-inputs div {
+            position: relative;
+        }
+        
+        .column-inputs label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: inherit;
+            opacity: 0.7;
+            position: absolute;
+            top: 6px;
+            left: 8px;
+            pointer-events: none;
+        }
+
+        .column-hex-input,
+        .column-rgb-input,
+        .column-cmyk-input {
+            background: rgba(0,0,0,0.1);
+            border: 2px solid black;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 700;
+            color: inherit; /* Eredita il colore del testo dalla colonna (chiaro/scuro) */
+            outline: none;
+            width: 100%;
+            margin: 0;
+            padding: 1.25rem 0.5rem 0.5rem 0.5rem; /* Padding per far spazio alla label */
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+        
+        .column-hex-input:focus,
+        .column-rgb-input:focus,
+        .column-cmyk-input:focus {
+            background-color: rgba(255,255,255,0.2);
+            border-color: #3b82f6;
+        }
+
+        /* Pulsante Aggiungi Colore (sulla colonna) */
+        .add-color-btn-on-column {
+            position: absolute;
+            right: -21px; /* Metà larghezza + metà bordo */
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f0f0f0;
+            color: black;
+            border: 2px solid black;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.2s ease-in-out;
+            opacity: 0; /* Nascosto di default */
+            pointer-events: none;
+        }
+        .color-column:hover .add-color-btn-on-column {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .color-column:last-child .add-color-btn-on-column {
+            display: none; /* Nasconde il + sull'ultima colonna */
+        }
+         .add-color-btn-on-column:hover {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+         }
+
+
+        /* Testo della colonna per contrasto */
+        .color-column.light-text { color: white; }
+        .color-column.dark-text { color: black; }
+
+        /* Drag feedback */
+        .color-column.dragging {
+            opacity: 0.5;
+            border: 2px dashed #1a1a1a;
+            cursor: grabbing;
+        }
+        .color-column.drag-over {
+            box-shadow: inset 0 0 0 4px #3b82f6;
+        }
+        
+        /* --- Shades Panel (Coolors style) --- */
+        #shadesPanelOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+            z-index: 1000;
+            display: flex;
+            align-items: flex-start; /* Allinea in alto */
+            justify-content: flex-start; /* Allinea a sinistra */
+        }
+        #shadesPanel {
+            position: absolute; /* Posizionamento assoluto rispetto all'overlay */
+            background-color: white;
+            border: 2px solid black;
+            padding: 0.5rem; /* Padding ridotto */
+            width: 160px; /* Larghezza fissa per il pannello */
+            max-height: 90vh; /* Altezza massima del 90% del viewport */
+            overflow-y: auto; /* Scroll se troppe sfumature */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem; /* Spazio tra le sfumature */
+        }
+        
+        #closeShadesBtn {
+            position: absolute;
+            top: 0.2rem; /* Più vicino al bordo */
+            right: 0.2rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem; /* Dimensione ridotta */
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            padding: 0.2rem;
+            line-height: 1;
+            z-index: 1002; /* Sopra le sfumature */
+        }
+        #closeShadesBtn:hover {
+            color: black;
+        }
+
+        #shadesPanelTitle {
+            font-size: 0.9rem; /* Titolo più piccolo */
+            font-weight: bold;
+            text-align: center;
+            margin: 0.5rem 0 0.5rem 0;
+            color: #1a1a1a;
+            text-transform: uppercase;
+        }
+
+        .shade-swatch {
+            width: 100%; /* Occupa tutta la larghezza del pannello */
+            height: 50px; /* Altezza fissa */
+            border: 1px solid rgba(0,0,0,0.1); /* Bordo sottile */
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center; /* Centra il testo verticalmente */
+            justify-content: center;
+            transition: all 0.1s ease-in-out;
+            font-family: monospace; /* Font monospace per l'hex */
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white; /* Default white, verrà corretto da JS */
+        }
+        .shade-swatch:hover {
+            transform: scale(1.02); /* Leggero ingrandimento */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-color: black;
+        }
+        /* Testo della shade, per leggibilità */
+        .shade-hex-text.light-text { color: white; }
+        .shade-hex-text.dark-text { color: black; }
+
+
+        /* --- Generator Header (per il pulsante Check Contrast) --- */
+        .generator-header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #ffffff; /* Sfondo bianco */
+            border-bottom: 2px solid black;
+            gap: 1rem;
+            flex-wrap: wrap; /* Per responsività */
+            position: sticky; /* Fissa l'header */
+            top: 60px; /* Sotto l'header principale del sito (aggiustare se necessario) */
+            z-index: 900; /* Assicura che sia sopra le colonne colore */
+        }
+        
+        @media (max-width: 767px) {
+            .generator-header {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                top: 0; /* Su mobile, attacca in alto */
+            }
+            .tool-main-content {
+                 padding-top: 0; /* Rimuove padding top su mobile */
+            }
+
+        }
+
+        .generator-header h2 {
+            margin: 0 auto 0 0; /* Spinge il titolo a sinistra, il resto a destra */
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 767px) {
+            .generator-header h2 {
+                margin: 0 auto 0.5rem 0; /* Allinea a sinistra, con spazio sotto */
+            }
+        }
+        
+        /* Controlli palette */
+        .palette-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        @media (max-width: 767px) {
+            .palette-controls {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* Bottoni 50/50 */
+            }
+        }
+
+        /* Stile pulsanti in linea con index.css */
+        #checkContrastButton, #backToGeneratorButton {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #000;
+            padding: 10px 25px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: all .2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        #checkContrastButton:hover, #backToGeneratorButton:hover {
+            background-color: #fff;
+            color: #000;
+        }
+        
+        #randomPaletteButton {
+            background-color: transparent;
+            color: black;
+            border: 2px solid black;
+            padding: 10px 25px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: all .2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        #randomPaletteButton:hover {
+            background-color: black;
+            color: white;
+        }
+
+
+        /* --- Contrast Report View --- */
+        .contrast-report-view {
+            padding: 2rem 1rem; /* Padding ridotto */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Allinea in alto */
+            min-height: 100%;
+            flex-grow: 1; /* Occupa spazio disponibile */
+        }
+
+        .report-header {
+            width: 100%;
+            max-width: 1024px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .report-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .main-container { /* Questo è il contenitore effettivo per il report */
             background-color: #ffffff;
             padding: 1.5rem; /* Padding ridotto per mobile */
             border: 2px solid black; /* Bordo nero 2px */
             width: 100%;
             max-width: 1024px; /* Max-width aumentata per schermi più grandi */
             box-sizing: border-box;
-            margin-top: 5rem; /* Spazio per l'header fisso */
-            margin-bottom: 5rem; /* Spazio per il footer */
         }
         
         @media (min-width: 640px) { /* sm: */
@@ -57,203 +450,33 @@
             }
         }
 
-        .main-container h1 { /* Selettore più specifico per evitare conflitti */
-            font-size: 2rem; /* Testo più piccolo su mobile */
-            font-weight: 700;
-            text-align: center;
-            color: #1a1a1a;
-            margin-bottom: 2rem; /* Meno spazio su mobile */
-        }
-        @media (min-width: 640px) {
-            .main-container h1 {
-                font-size: 2.5rem; /* Testo più grande */
-                margin-bottom: 3rem; /* Più spazio sotto il titolo */
-            }
-        }
-
-        /* Sezione Input Colori */
-        .input-section {
+        /* Rimosso H1 specifico per .main-container per evitare conflitti */
+        
+        .legend-box { /* Classe per la legenda, non .input-section */
             margin-bottom: 2rem;
             padding: 1.5rem; /* Padding ridotto per mobile */
             background-color: #fcfcfc;
             border: 2px solid black; /* Bordo nero 2px */
         }
         @media (min-width: 640px) {
-            .input-section {
+            .legend-box {
                 padding: 30px; /* Padding originale */
             }
         }
-        
-        .input-header {
-            display: flex;
-            flex-direction: column; /* Stack verticale su mobile */
-            align-items: flex-start; /* Allinea a sinistra */
-            justify-content: space-between;
-            gap: 1rem; /* Spazio tra label e select */
-        }
-        @media (min-width: 640px) {
-            .input-header {
-                flex-direction: row; /* Layout orizzontale */
-                align-items: center; /* Allineamento centrato */
-                gap: 1.5rem; /* Più spazio tra elementi */
-            }
-        }
-        
-        .input-header label {
-            font-size: 1.25rem; /* Testo più grande */
-            font-weight: 500;
-            color: #333333;
-            flex-grow: 1; /* Permette all'etichetta di crescere */
+        .legend-box h4 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 0;
         }
 
-        #colorCount {
-            width: 100%; /* Larghezza piena su mobile */
-            flex-shrink: 0;
-        }
-        @media (min-width: 640px) {
-            #colorCount {
-                width: auto; /* Larghezza automatica su desktop */
-            }
-        }
 
         hr {
             border-color: #cccccc;
             margin-top: 2rem;
             margin-bottom: 2rem;
         }
-
-        /* Input singola riga di colore */
-        .color-input-row {
-            display: flex;
-            align-items: center;
-            gap: 1rem; /* Spazio tra gli elementi della riga */
-            background-color: #ffffff;
-            border: 2px solid black; /* Bordo nero 2px */
-            padding: 1rem;
-            box-sizing: border-box;
-            flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
-        }
         
-        /* Layout responsivo per gli input colore */
-        #colorInputsContainer {
-            display: grid;
-            grid-template-columns: 1fr; /* Una colonna di default */
-            gap: 1.5rem;
-        }
-        @media (min-width: 768px) { /* Da tablet in su */
-            #colorInputsContainer {
-                grid-template-columns: repeat(2, 1fr); /* Due colonne */
-            }
-        }
-        @media (min-width: 1024px) { /* Da desktop in su */
-            #colorInputsContainer {
-                grid-template-columns: repeat(3, 1fr); /* Tre colonne */
-            }
-        }
-
-        .color-input-row label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #555555;
-            display: block; /* Per far sì che occupi la sua riga */
-            margin-bottom: 0.25rem;
-        }
-
-        .color-picker {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: 48px;
-            height: 48px;
-            padding: 0;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
-        .color-picker::-webkit-color-swatch { border: none; }
-        .color-picker::-moz-color-swatch { border: none; }
-
-        /* Stile per gli input di testo e select */
-        input[type="text"], .custom-select {
-            background-color: #f9f9f9;
-            color: #1a1a1a;
-            font-size: 1rem;
-            display: block;
-            width: 100%;
-            padding: 0.5rem 0.75rem; /* Padding uniforme */
-            height: 40px; /* Altezza fissa */
-            box-sizing: border-box;
-            border-radius: 0; /* Squadrato */
-            border: 2px solid black; /* Bordo nero 2px */
-        }
-        input[type="text"]:focus, .custom-select:focus {
-            border-color: #3b82f6; /* Bordo blu al focus */
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-            box-shadow: 0 0 0 2px #bfdbfe; /* Anello di focus leggero */
-        }
-        input[type="text"].invalid-input { /* Stile per input non validi */
-            border-color: #ef4444; /* Rosso */
-        }
-
-        /* Stile personalizzato per i selettori <select> */
-        .custom-select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.75rem center;
-            background-repeat: no-repeat;
-            background-size: 1.25em 1.25em;
-            padding-right: 2.5rem; /* Per lasciare spazio alla freccia */
-        }
-        .custom-select:focus {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233b82f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-        }
-
-        /* Pulsante Analizza */
-        #checkContrastButton {
-            width: 100%;
-            background-color: #1a1a1a; /* Nero */
-            color: #ffffff;
-            font-size: 1.25rem; /* Testo più grande */
-            font-weight: 700;
-            padding: 0.9rem 1.5rem;
-            border: 2px solid black; /* Bordo nero 2px */
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-            box-sizing: border-box;
-            margin-bottom: 2rem; /* Spazio prima della sezione Gemini */
-        }
-        #checkContrastButton:hover {
-            background-color: #333333; /* Grigio scuro all'hover */
-            border-color: #3b82f6; /* Bordo blu all'hover */
-        }
-        
-        /* Sezione Risultati */
-        #resultsContainer {
-            margin-top: 3rem;
-        }
-
-        .legend-box {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background-color: #e6f2ff; /* Azzurro chiaro */
-            border: 2px solid black; /* Bordo nero 2px */
-            font-size: 0.95rem;
-            color: #004d99; /* Blu scuro */
-        }
-        .legend-box h4 {
-            font-weight: 600;
-            color: #003366;
-            margin-bottom: 0.75rem;
-        }
-        .legend-box p {
-            margin-bottom: 0.4rem;
-        }
-
         /* Layout responsivo per le card delle coppie di colore */
         #color-pairs-grid {
             display: grid;
@@ -365,34 +588,51 @@
             color: #1a1a1a;
         }
 
-        /* Stili per i badge di pass/fail del WCAG */
+        /* === STILI PER I BADGE === */
         .wcag-badge {
             display: inline-block;
-            padding: 2px 8px;
-            font-size: 0.7rem;
-            font-weight: 600;
+            padding: 4px 10px; /* Padding leggermente aumentato */
+            font-size: 0.8rem; /* Dimensione del font leggermente aumentata */
+            font-weight: 700; /* Bold per risaltare */
             margin-right: 4px;
             line-height: 1.2;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border: 1px solid transparent; /* Bordi per i badge, questi restano 1px per essere meno invasivi */
+            border: 2px solid black; /* Bordo nero 2px per tutti i badge */
+            border-radius: 0; /* Squadrato */
+            transition: all 0.15s ease-in-out; /* Animazione all'hover */
+            cursor: default; /* Non è cliccabile */
         }
         .wcag-pass {
-            background-color: #d4edda; /* Verde chiaro */
-            color: #155724; /* Verde scuro */
-            border-color: #c3e6cb;
+            background-color: #e0e0e0; /* Grigio chiaro per i pass */
+            color: #1a1a1a; /* Testo nero */
         }
         .wcag-fail {
-            background-color: #f8d7da; /* Rosso chiaro */
-            color: #721c24; /* Rosso scuro */
-            border-color: #f5c6cb;
+            background-color: #f2c7c7; /* Rosso molto tenue per i fail */
+            color: #721c24; /* Testo rosso scuro, come prima, perché il fail è importante */
         }
+
+        /* Effetti all'hover per i badge (opzionale, ma aggiunge interattività) */
+        .wcag-badge:hover {
+            transform: scale(1.03); /* Leggero ingrandimento */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombra discreta */
+        }
+
+        /* Specifico per il badge FAIL all'hover per renderlo più "allarmante" */
+        .wcag-fail:hover {
+            border-color: #dc3545; /* Bordo rosso più evidente all'hover */
+        }
+
+        /* Utilities */
+        .hidden {
+            display: none !important;
+        }
+        
     </style>
 </head>
 <body>
 
-  <!-- Elementi Header/Menu dal tuo sito, con percorsi corretti -->
-  <div id="scroll-progress-bar"></div>
+  <!-- Elementi Header/Menu dal tuo sito, con percorsi corretti --><div id="scroll-progress-bar"></div>
 
   <div id="preloader">
     <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
@@ -449,51 +689,40 @@
       <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
     </div>
   </div>
-  <!-- Fine elementi Header/Menu -->
-
-
-  <!-- Contenuto Principale (Il tuo Tool) -->
-  <main class="tool-main-content">
-    <div class="main-container">
-        
-        <h1>Palette Contrast Checker</h1>
-        
-        <div class="input-section">
-            <div class="input-header">
-                <label for="colorCount">How many colors to analyze?</label>
-                <select id="colorCount" class="custom-select">
-                    <option value="2">2 Colors</option>
-                    <option value="3">3 Colors</option>
-                    <option value="4" selected>4 Colors</option>
-                    <option value="5">5 Colors</option>
-                    <option value="6">6 Colors</option>
-                    <option value="7">7 Colors</option>
-                    <option value="8">8 Colors</option>
-                </select>
-            </div>
-            
-            <hr>
-            
-            <div id="colorInputsContainer">
-                
+  <!-- Fine elementi Header/Menu --><!-- Contenuto Principale (Il tuo Tool) --><main class="tool-main-content">
+    
+    <!-- Palette Generator View --><div id="paletteGeneratorView" class="flex-grow-1">
+        <div class="generator-header">
+            <h2>Palette Generator</h2>
+            <div class="palette-controls">
+                <button id="randomPaletteButton" class="cursor-target">Generate Random Palette</button>
+                <button id="checkContrastButton" class="cursor-target">Check Contrast</button>
             </div>
         </div>
-        
-        <button id="checkContrastButton">
-            Analyze Contrast
-        </button>
-        
-        <div id="resultsContainer">
-            
-        </div>
-
+        <div id="colorPaletteContainer" class="palette-generator-view-container">
+            <!-- Colonne colore verranno inserite qui dal JavaScript --></div>
     </div>
+
+    <!-- Contrast Report View (Nascosta di default) --><div id="contrastReportView" class="contrast-report-view hidden">
+        <div class="report-header">
+            <h1>Contrast Report</h1>
+            <button id="backToGeneratorButton" class="cursor-target">Back to Generator</button>
+        </div>
+        <div class="main-container">
+            <div id="resultsContainer">
+                <!-- I risultati del contrasto verranno inseriti qui dal JavaScript --></div>
+        </div>
+    </div>
+
   </main>
-  <!-- Fine Contenuto Principale -->
+  <!-- Fine Contenuto Principale --><!-- Shades Panel (nascosto di default) --><div id="shadesPanelOverlay" class="hidden">
+    <!-- shadesPanel will be dynamically positioned --><div id="shadesPanel" style="display: none;">
+      <button id="closeShadesBtn" class="cursor-target">×</button>
+      <h3 id="shadesPanelTitle">Color Shades</h3>
+      <!-- Shades will be appended here --></div>
+  </div>
 
-
-  <!-- Footer dal tuo sito, con percorsi corretti -->
-  <footer>
+  <!-- Footer dal tuo sito, con percorsi corretti --><footer>
     <div class="cookie-banner" id="cookieBanner">
       <span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span>
       <span class="close-btn cursor-target" id="closeCookie">✕</span>
@@ -507,117 +736,477 @@
     </div>
   </footer>
 
-  <!-- Script del Tool -->
-  <script>
+  <!-- Script del Tool --><script>
       document.addEventListener('DOMContentLoaded', () => {
-          // DOM Elements
-          const colorCountSelect = document.getElementById('colorCount');
-          const colorInputsContainer = document.getElementById('colorInputsContainer');
+          // --- DOM Elements ---
+          const paletteGeneratorView = document.getElementById('paletteGeneratorView');
+          const contrastReportView = document.getElementById('contrastReportView');
+          const colorPaletteContainer = document.getElementById('colorPaletteContainer');
           const checkContrastButton = document.getElementById('checkContrastButton');
+          const backToGeneratorButton = document.getElementById('backToGeneratorButton');
+          const randomPaletteButton = document.getElementById('randomPaletteButton');
           const resultsContainer = document.getElementById('resultsContainer');
+          const shadesPanelOverlay = document.getElementById('shadesPanelOverlay');
+          const shadesPanel = document.getElementById('shadesPanel');
+          const closeShadesBtn = document.getElementById('closeShadesBtn');
+          const shadesPanelTitle = document.getElementById('shadesPanelTitle');
 
-          // Default colors for quick start
+
+          // --- State Variables ---
+          let currentPalette = [];
+          let draggingColumn = null;
+          let dragOverColumn = null;
+          let editingShadeIndex = -1; // Indice del colore per cui mostriamo le sfumature
+
+          // --- Default Colors for Quick Start ---
           const defaultColors = [
-              { hex: '#FFFFFF', format: 'hex' },
-              { hex: '#1a1a1a', format: 'hex' },
-              { hex: '#007bff', format: 'hex' }, // Primary Blue
-              { hex: '#28a745', format: 'hex' }, // Success Green
-              { hex: '#ffc107', format: 'hex' }, // Warning Yellow
-              { hex: '#dc3545', format: 'hex' }, // Error Red
-              { hex: '#6f42c1', format: 'hex' }, // Purple
-              { hex: '#fd7e14', format: 'hex' }, // Orange
+              { hex: '#A8577F', format: 'hex' }, 
+              { hex: '#8C5383', format: 'hex' },
+              { hex: '#4A5899', format: 'hex' },
+              { hex: '#559CAD', format: 'hex' },
+              { hex: '#C1B2AB', format: 'hex' }
           ];
+
+          // --- VIEW MANAGEMENT ---
+
+          function showGeneratorView() {
+              paletteGeneratorView.classList.remove('hidden');
+              contrastReportView.classList.add('hidden');
+              renderPalette();
+          }
+
+          function showReportView() {
+              paletteGeneratorView.classList.add('hidden');
+              contrastReportView.classList.remove('hidden');
+              calculateAllContrasts(currentPalette);
+          }
+
+          // --- PALETTE GENERATOR FUNCTIONS ---
+
+          function initializePalette() {
+              const savedPalette = localStorage.getItem('contrastPalette');
+              if (savedPalette) {
+                  try {
+                      currentPalette = JSON.parse(savedPalette);
+                      if (!Array.isArray(currentPalette) || currentPalette.length < 2) {
+                          currentPalette = JSON.parse(JSON.stringify(defaultColors)); 
+                      }
+                  } catch (e) {
+                      console.error("Failed to parse saved palette, using defaults.", e);
+                      currentPalette = JSON.parse(JSON.stringify(defaultColors));
+                  }
+              } else {
+                  currentPalette = JSON.parse(JSON.stringify(defaultColors)); 
+              }
+              renderPalette();
+          }
+
+          function savePalette() {
+              localStorage.setItem('contrastPalette', JSON.stringify(currentPalette));
+          }
+
+          function renderPalette() {
+              colorPaletteContainer.innerHTML = ''; 
+              currentPalette.forEach((color, index) => {
+                  createColorColumn(color, index);
+              });
+              savePalette();
+          }
+
+          function createColorColumn(colorObj, index) {
+              const column = document.createElement('div');
+              column.className = 'color-column';
+              column.style.backgroundColor = colorObj.hex;
+              column.dataset.index = index;
+              column.draggable = true;
+
+              const textColor = getReadableTextColor(colorObj.hex);
+              column.classList.add(textColor === 'white' ? 'light-text' : 'dark-text');
+              
+              const rgb = hexToRgb(colorObj.hex);
+              const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+
+              column.innerHTML = `
+                  <div class="column-controls">
+                      <input type="color" class="column-picker-input cursor-target" value="${colorObj.hex}" title="Change color">
+                      <div class="column-actions-group">
+                          <button class="column-action-btn shades-btn cursor-target" data-index="${index}" title="Show Shades">🎨</button>
+                          <button class="column-action-btn copy-hex-btn cursor-target" title="Copy HEX">📋</button>
+                          <button class="column-action-btn remove-color-btn cursor-target" title="Remove color">✕</button>
+                      </div>
+                  </div>
+                  <div class="column-inputs">
+                      <div>
+                          <label for="hex-${index}">HEX</label>
+                          <input type="text" id="hex-${index}" value="${colorObj.hex.toUpperCase()}" class="column-hex-input cursor-target" data-index="${index}">
+                      </div>
+                      <div>
+                          <label for="rgb-${index}">RGB</label>
+                          <input type="text" id="rgb-${index}" value="${rgbToString(rgb)}" class="column-rgb-input cursor-target" data-index="${index}">
+                      </div>
+                      <div>
+                          <label for="cmyk-${index}">CMYK</label>
+                          <input type="text" id="cmyk-${index}" value="${cmykToString(cmyk)}" class="column-cmyk-input cursor-target" data-index="${index}">
+                      </div>
+                  </div>
+                  <button class="add-color-btn-on-column cursor-target" data-insert-index="${index}">+</button> 
+              `;
+              colorPaletteContainer.appendChild(column);
+          }
+
+          function generateRandomHex() {
+              return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase();
+          }
           
-          // --- MAIN FUNCTIONS ---
+          function generateRandomPalette() {
+              const numColors = Math.max(2, currentPalette.length || 5); 
+              currentPalette = [];
+              for (let i = 0; i < numColors; i++) {
+                  currentPalette.push({ hex: generateRandomHex(), format: 'hex' });
+              }
+              renderPalette();
+          }
+
+          // --- SHADES PANEL FUNCTIONS ---
 
           /**
-           * Updates the number of color input rows based on the selection
+           * Opens the shades panel for a given color index, positioning it relative to the column.
+           * @param {number} index - The index of the color in currentPalette.
+           * @param {HTMLElement} originBtn - The button that triggered the panel, for positioning.
            */
-          function updateColorInputs() {
-              const count = parseInt(colorCountSelect.value, 10);
-              colorInputsContainer.innerHTML = ''; // Clear old inputs
+          function openShadesPanel(index, originBtn) {
+              editingShadeIndex = index;
+              const color = currentPalette[index];
+              if (!color) return;
 
-              for (let i = 0; i < count; i++) {
-                  const colorData = defaultColors[i] || { hex: '#000000', format: 'hex' };
-                  let initialValue = colorData.hex;
-                  
-                  const inputRow = document.createElement('div');
-                  inputRow.className = 'color-input-row';
-                  inputRow.innerHTML = `
-                      <input type="color" id="color-picker-${i}" value="${colorData.hex}" class="color-picker">
-                      
-                      <div style="flex-grow: 1; min-width: 100px;">
-                          <label for="color-text-${i}">Value</label>
-                          <input type="text" id="color-text-${i}" value="${initialValue}" data-index="${i}" class="color-text-input">
-                      </div>
-                      
-                      <div style="flex-grow: 1; min-width: 100px;">
-                          <label for="color-format-${i}">Format</label>
-                          <select id="color-format-${i}" data-index="${i}" class="custom-select color-format-select">
-                              <option value="hex" ${colorData.format === 'hex' ? 'selected' : ''}>HEX</option>
-                              <option value="rgb" ${colorData.format === 'rgb' ? 'selected' : ''}>RGB</option>
-                              <option value="cmyk" ${colorData.format === 'cmyk' ? 'selected' : ''}>CMYK</option>
-                          </select>
-                      </div>
-                  `;
-                  colorInputsContainer.appendChild(inputRow);
+              shadesPanelTitle.textContent = `SHADES OF ${color.hex.toUpperCase()}`;
+              
+              // Clear previous shades from the panel, leaving the title
+              while (shadesPanel.children.length > 2) { // Keep title and close button
+                  shadesPanel.removeChild(shadesPanel.lastChild);
               }
-              // Update text values to reflect the correct format
-              for (let i = 0; i < count; i++) {
-                  updateTextInput(i);
+
+              const shades = generateShades(color.hex, 11); // Generate 11 shades (5 lighter, 5 darker + original)
+
+              shades.forEach(shadeHex => {
+                  const swatch = document.createElement('div');
+                  swatch.className = 'shade-swatch cursor-target';
+                  swatch.style.backgroundColor = shadeHex;
+                  swatch.dataset.hex = shadeHex;
+                  
+                  const textColorClass = getReadableTextColor(shadeHex) === 'white' ? 'light-text' : 'dark-text';
+                  swatch.innerHTML = `<span class="shade-hex-text ${textColorClass}">${shadeHex.toUpperCase()}</span>`;
+
+                  swatch.addEventListener('click', handleShadeSelection);
+                  shadesPanel.appendChild(swatch);
+              });
+
+              // Position the shades panel next to the originating column
+              const column = originBtn.closest('.color-column');
+              if (column) {
+                  const columnRect = column.getBoundingClientRect();
+                  const panelWidth = 160; // Defined in CSS
+                  
+                  // Temporarily display to calculate height
+                  shadesPanel.style.display = 'flex'; 
+                  shadesPanel.style.visibility = 'hidden'; 
+                  const panelHeight = shadesPanel.offsetHeight; 
+                  shadesPanel.style.visibility = 'visible'; 
+
+
+                  let left = columnRect.left + columnRect.width + 10; // 10px right of the column
+                  let top = columnRect.top;
+
+                  // Adjust if panel goes off screen to the right
+                  if (left + panelWidth > window.innerWidth - 20) { // 20px padding from right edge
+                      left = columnRect.left - panelWidth - 10; // To the left of the column
+                      if (left < 10) { // If it still goes off screen to the left
+                          left = (window.innerWidth - panelWidth) / 2; // Center it
+                      }
+                  }
+                  // Adjust if panel goes off screen at the bottom
+                  if (top + panelHeight > window.innerHeight - 20) { // 20px padding from bottom edge
+                      top = window.innerHeight - panelHeight - 20;
+                      if (top < 10) { // If it's too high
+                          top = 10; // Align to top
+                      }
+                  }
+                  
+                  shadesPanel.style.left = `${left}px`;
+                  shadesPanel.style.top = `${top}px`;
+                  // shadesPanel.style.display = 'flex'; // Already set above
+                  shadesPanelOverlay.classList.remove('hidden'); // Show overlay
               }
           }
 
           /**
-           * Calculates and displays all contrast ratios
+           * Closes the shades panel.
            */
-          function calculateAllContrasts() {
-              resultsContainer.innerHTML = '';
-              const colors = []; // Array to store color objects {hex, rgb, id}
+          function closeShadesPanel() {
+              shadesPanelOverlay.classList.add('hidden');
+              shadesPanel.style.display = 'none'; // Hide the panel itself
+              editingShadeIndex = -1; // Reset index
+          }
 
-              // 1. Collect all valid colors
-              const rows = colorInputsContainer.querySelectorAll('.color-input-row');
-              let allInputsValid = true;
+          /**
+           * Handles the click event when a shade is selected.
+           * @param {Event} e - The click event.
+           */
+          function handleShadeSelection(e) {
+              const selectedHex = e.currentTarget.dataset.hex;
+              if (editingShadeIndex !== -1 && selectedHex) {
+                  const rgb = hexToRgb(selectedHex);
+                  const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+                  updatePaletteAndColumn(editingShadeIndex, selectedHex, rgb, cmyk);
+              }
+              closeShadesPanel();
+          }
 
-              rows.forEach((row, i) => {
-                  const textInput = row.querySelector(`#color-text-${i}`);
-                  const picker = row.querySelector(`#color-picker-${i}`);
-                  
-                  if (!textInput || !picker) return;
-                  
-                  const rgb = hexToRgb(picker.value);
+          // Event listener for the close button
+          closeShadesBtn.addEventListener('click', closeShadesPanel);
+          // Event listener to close by clicking the overlay background
+          shadesPanelOverlay.addEventListener('click', (e) => {
+              // Ensure the click is directly on the overlay, not its children
+              if (e.target === shadesPanelOverlay) { 
+                  closeShadesPanel();
+              }
+          });
 
-                  if (rgb) {
-                      colors.push({
-                          hex: picker.value,
-                          rgb: rgb,
-                          id: i
-                      });
-                      textInput.classList.remove('invalid-input');
-                  } else {
-                      allInputsValid = false;
-                      textInput.classList.add('invalid-input');
+
+          // --- DRAG & DROP HANDLERS ---
+          colorPaletteContainer.addEventListener('dragstart', (e) => {
+              const column = e.target.closest('.color-column');
+              if (column) {
+                  draggingColumn = column;
+                  e.dataTransfer.effectAllowed = 'move';
+                  e.dataTransfer.setData('text/plain', column.dataset.index);
+                  setTimeout(() => column.classList.add('dragging'), 0); 
+              }
+          });
+
+          colorPaletteContainer.addEventListener('dragover', (e) => {
+              e.preventDefault(); 
+              const column = e.target.closest('.color-column');
+              if (column && column !== draggingColumn) {
+                  if (dragOverColumn && dragOverColumn !== column) {
+                      dragOverColumn.classList.remove('drag-over');
                   }
-              });
+                  column.classList.add('drag-over');
+                  dragOverColumn = column;
+                  e.dataTransfer.dropEffect = 'move';
+              } else if (dragOverColumn) {
+                  dragOverColumn.classList.remove('drag-over');
+                  dragOverColumn = null;
+              }
+          });
 
-              if (!allInputsValid) {
-                  resultsContainer.innerHTML = `<p style="color: #dc3545; text-align: center; margin-top: 1rem;">Some color values are not valid. Please correct them and try again.</p>`;
+          colorPaletteContainer.addEventListener('dragleave', (e) => {
+              const column = e.target.closest('.color-column');
+              if (column && column === dragOverColumn) {
+                  column.classList.remove('drag-over');
+                  dragOverColumn = null;
+              }
+          });
+
+          colorPaletteContainer.addEventListener('drop', (e) => {
+              e.preventDefault();
+              if (draggingColumn && dragOverColumn) {
+                  const fromIndex = parseInt(draggingColumn.dataset.index, 10);
+                  const toIndex = parseInt(dragOverColumn.dataset.index, 10);
+
+                  const [movedColor] = currentPalette.splice(fromIndex, 1);
+                  currentPalette.splice(toIndex, 0, movedColor);
+
+                  renderPalette();
+              }
+              // Clean up drag classes
+              if (draggingColumn) draggingColumn.classList.remove('dragging');
+              if (dragOverColumn) dragOverColumn.classList.remove('drag-over');
+              draggingColumn = null;
+              dragOverColumn = null;
+          });
+
+          colorPaletteContainer.addEventListener('dragend', () => {
+              // Clean up in case drop event didn't fire
+              if (draggingColumn) draggingColumn.classList.remove('dragging');
+              if (dragOverColumn) dragOverColumn.classList.remove('drag-over');
+              draggingColumn = null;
+              dragOverColumn = null;
+          });
+
+
+          // --- PALETTE INTERACTION HANDLERS ---
+          colorPaletteContainer.addEventListener('click', (e) => {
+              // Remove color button
+              const removeBtn = e.target.closest('.remove-color-btn');
+              if (removeBtn) {
+                  const column = removeBtn.closest('.color-column');
+                  const indexToRemove = parseInt(column.dataset.index, 10);
+                  if (currentPalette.length > 2) { 
+                      currentPalette.splice(indexToRemove, 1);
+                      renderPalette();
+                  } else {
+                      alert("You must have at least two colors in the palette.");
+                  }
                   return;
               }
 
+              // Copy HEX button
+              const copyBtn = e.target.closest('.copy-hex-btn');
+              if (copyBtn) {
+                  const column = copyBtn.closest('.color-column');
+                  const hexInput = column.querySelector('.column-hex-input');
+                  navigator.clipboard.writeText(hexInput.value).then(() => {
+                      copyBtn.innerText = '✅';
+                      setTimeout(() => { copyBtn.innerText = '📋'; }, 1000);
+                  }).catch(err => {
+                      console.error('Failed to copy text: ', err);
+                  });
+                  return;
+              }
+              
+              // Add color button (on column edge)
+              const addBtn = e.target.closest('.add-color-btn-on-column');
+              if (addBtn) {
+                  if (currentPalette.length >= 10) { 
+                      alert("You can add a maximum of 10 colors.");
+                      return;
+                  }
+                  const targetIndex = parseInt(addBtn.dataset.insertIndex, 10);
+                  const newColor = generateRandomHex();
+                  currentPalette.splice(targetIndex + 1, 0, { hex: newColor, format: 'hex' });
+                  renderPalette();
+                  return;
+              }
+              
+              // Shades button
+              const shadesBtn = e.target.closest('.shades-btn');
+              if (shadesBtn) {
+                  const index = parseInt(shadesBtn.dataset.index, 10);
+                  openShadesPanel(index, shadesBtn); // Pass the button for positioning
+                  return;
+              }
+          });
+
+          /**
+           * Refactored function to update palette state and column DOM from any input
+           */
+          function updatePaletteAndColumn(index, hex, rgb, cmyk) {
+              if (hex === null || rgb === null || cmyk === null) {
+                console.warn("Update aborted due to invalid color conversion at index", index);
+                return; // Invalid conversion
+              }
+              
+              const upperHex = hex.toUpperCase();
+              
+              // Prevent unnecessary updates if hex hasn't really changed
+              // And also update related fields if they don't match calculated values
+              const needsUpdate = currentPalette[index].hex !== upperHex || 
+                                  document.getElementById(`rgb-${index}`).value !== rgbToString(rgb) ||
+                                  document.getElementById(`cmyk-${index}`).value !== cmykToString(cmyk);
+
+              if (!needsUpdate) return;
+              
+              currentPalette[index].hex = upperHex;
+              
+              const column = colorPaletteContainer.querySelector(`.color-column[data-index="${index}"]`);
+              if (!column) return;
+              
+              column.style.backgroundColor = hex;
+              
+              // Update all input values
+              const hexInput = column.querySelector('.column-hex-input');
+              const rgbInput = column.querySelector('.column-rgb-input');
+              const cmykInput = column.querySelector('.column-cmyk-input');
+              const pickerInput = column.querySelector('.column-picker-input');
+
+              hexInput.value = upperHex;
+              rgbInput.value = rgbToString(rgb);
+              cmykInput.value = cmykToString(cmyk);
+              pickerInput.value = hex.toLowerCase(); // Picker uses lowercase hex
+              
+              // Update text color for readability
+              column.classList.remove('light-text', 'dark-text');
+              const textColor = getReadableTextColor(hex);
+              column.classList.add(textColor === 'white' ? 'light-text' : 'dark-text');
+              
+              savePalette();
+          }
+
+
+          colorPaletteContainer.addEventListener('input', (e) => {
+              const target = e.target;
+              const column = target.closest('.color-column');
+              if (!column) return;
+
+              const index = parseInt(column.dataset.index, 10);
+              let hex = null, rgb = null, cmyk = null;
+
+              try { // Add try-catch for robustness during parsing
+                  if (target.classList.contains('column-hex-input')) {
+                      hex = target.value;
+                      rgb = hexToRgb(hex);
+                      if (rgb) cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+                  } else if (target.classList.contains('column-rgb-input')) {
+                      rgb = parseColorString(target.value, 'rgb');
+                      if (rgb) {
+                          hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+                          cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+                      }
+                  } else if (target.classList.contains('column-cmyk-input')) {
+                      cmyk = parseColorString(target.value, 'cmyk');
+                      if (cmyk) {
+                          rgb = cmykToRgb(cmyk.c, cmyk.m, cmyk.y, cmyk.k);
+                          if (rgb) hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+                      }
+                  } else if (target.classList.contains('column-picker-input')) {
+                      hex = target.value;
+                      rgb = hexToRgb(hex);
+                      if (rgb) cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+                  }
+                  
+                  // Only update if conversion was successful
+                  if (hex !== null && rgb !== null && cmyk !== null) {
+                     updatePaletteAndColumn(index, hex, rgb, cmyk);
+                  } else {
+                     // Optionally add error class to input
+                     target.classList.add('invalid-input-temp'); // Add a temporary class
+                     setTimeout(() => target.classList.remove('invalid-input-temp'), 1500); // Remove after a bit
+                  }
+
+              } catch (error) {
+                  console.error("Error updating color:", error);
+                  target.classList.add('invalid-input-temp'); 
+                  setTimeout(() => target.classList.remove('invalid-input-temp'), 1500);
+              }
+          });
+
+
+          // --- CONTRAST REPORT FUNCTIONS (Copied/Adapted from previous version) ---
+
+          function calculateAllContrasts(colorsToAnalyze) {
+              resultsContainer.innerHTML = ''; // Clear previous results
+              const colors = []; 
+              colorsToAnalyze.forEach((colorObj, i) => {
+                  const rgb = hexToRgb(colorObj.hex);
+                  if (rgb) {
+                      colors.push({ hex: colorObj.hex, rgb: rgb });
+                  } else {
+                      console.warn(`Invalid color in palette: ${colorObj.hex}`);
+                  }
+              });
+
               if (colors.length < 2) {
-                  resultsContainer.innerHTML = `<p style="color: #ffc107; text-align: center; margin-top: 1rem;">Please add at least two colors to compare pairs.</p>`;
+                  resultsContainer.innerHTML = `<p style="color: #ffc107; text-align: center; margin-top: 1rem;">Please select at least two colors in the palette to compare pairs.</p>`;
                   return;
               }
               
               resultsContainer.innerHTML = getLegendHTML();
 
-              // 2. Generate a container for all pairs
               const pairsContainer = document.createElement('div');
               pairsContainer.id = 'color-pairs-grid';
               resultsContainer.appendChild(pairsContainer);
 
-              // 3. For each unique pair, create the card
               for (let i = 0; i < colors.length; i++) {
                   for (let j = i + 1; j < colors.length; j++) {
                       const color1 = colors[i];
@@ -635,11 +1224,6 @@
               }
           }
           
-          /**
-           * Generates the HTML for a single color pair card's content
-           * @param {object} textColorObj - The color object for the text ({hex, rgb})
-           * @param {object} bgColorObj - The color object for the background ({hex, rgb})
-           */
           function getPairCardContent(textColorObj, bgColorObj) {
               const ratio = getContrastRatio(textColorObj.rgb, bgColorObj.rgb);
               const wcagTags = getWcagPassTags(ratio);
@@ -653,7 +1237,7 @@
                               <span class="color-hex-value">${textColorObj.hex.toUpperCase()}</span>
                           </div>
                       </div>
-                      <button class="invert-button" title="Invert Text/Background">
+                      <button class="invert-button cursor-target" title="Invert Text/Background">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" transform="rotate(90 10 10)" />
                           </svg>
@@ -678,103 +1262,32 @@
               `;
           }
 
-          /**
-           * Inverts a pair of colors and updates only its card
-           */
           function invertColorPair(button) {
               const pairCard = button.closest('.pair-card');
               if (!pairCard) return;
-
               const color1_hex = pairCard.dataset.color1;
               const color2_hex = pairCard.dataset.color2;
               let isInverted = pairCard.dataset.inverted === 'true';
-
-              // Invert the state
               isInverted = !isInverted;
               pairCard.dataset.inverted = isInverted.toString();
-
               let textColorObj, bgColorObj;
-
               if (isInverted) {
-                  // If inverted, color2 is text, color1 is background
                   textColorObj = { hex: color2_hex, rgb: hexToRgb(color2_hex) };
                   bgColorObj = { hex: color1_hex, rgb: hexToRgb(color1_hex) };
               } else {
-                  // Otherwise, color1 is text, color2 is background (initial order)
                   textColorObj = { hex: color1_hex, rgb: hexToRgb(color1_hex) };
                   bgColorObj = { hex: color2_hex, rgb: hexToRgb(color2_hex) };
               }
-              
               pairCard.innerHTML = getPairCardContent(textColorObj, bgColorObj);
           }
 
-
-          // --- EVENT HANDLERS ---
-
-          /**
-           * Handles changes to any input in a row (picker, text, format)
-           */
-          function handleInputChange(e) {
-              const target = e.target;
-              if (!target) return;
-
-              const row = target.closest('.color-input-row');
-              if (!row) return;
-
-              const index = row.querySelector('.color-text-input').dataset.index;
-              const textInput = row.querySelector(`#color-text-${index}`);
-              const picker = row.querySelector(`#color-picker-${index}`);
-              const formatSelect = row.querySelector(`#color-format-${index}`);
-
-              if (target.type === 'color') {
-                  // Picker is the source of truth
-                  updateTextInput(index, target.value);
-              
-              } else if (target.type === 'text') {
-                  // Text is the source of truth
-                  const rgb = parseColorString(target.value, formatSelect.value);
-                  if (rgb) {
-                      picker.value = rgbToHex(rgb.r, rgb.g, rgb.b);
-                      textInput.classList.remove('invalid-input');
-                  } else {
-                      textInput.classList.add('invalid-input');
-                  }
-              } else if (target.classList.contains('color-format-select')) {
-                  // Format changed
-                  updateTextInput(index, picker.value);
+          resultsContainer.addEventListener('click', (e) => {
+              if (e.target.closest('.invert-button')) {
+                  invertColorPair(e.target.closest('.invert-button'));
               }
-          }
-          
-          /**
-           * Updates the text input field based on the picker value and selected format
-           */
-          function updateTextInput(index, hexValue = null) {
-              const textInput = document.getElementById(`color-text-${index}`);
-              const picker = document.getElementById(`color-picker-${index}`);
-              const formatSelect = document.getElementById(`color-format-${index}`);
+          });
 
-              const hex = hexValue || picker.value;
-              const format = formatSelect.value;
-              const rgb = hexToRgb(hex);
-
-              if (!rgb) {
-                  textInput.classList.add('invalid-input');
-                  return;
-              }
-              textInput.classList.remove('invalid-input');
-
-              if (format === 'hex') {
-                  textInput.value = hex;
-              } else if (format === 'rgb') {
-                  textInput.value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-              } else if (format === 'cmyk') {
-                  const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
-                  textInput.value = `cmyk(${cmyk.c.toFixed(0)}, ${cmyk.m.toFixed(0)}, ${cmyk.y.toFixed(0)}, ${cmyk.k.toFixed(0)})`;
-              }
-          }
-
-
-          // --- LOGIC HELPERS ---
+          // --- UTILITY FUNCTIONS ---
           
           function getLegendHTML() {
               return `
@@ -799,43 +1312,57 @@
               } else if (ratio >= 4.5) {
                   tags.push('<span class="wcag-badge wcag-pass">AA</span>');
               }
-              
-              if (ratio >= 4.5) { /* If it passes AA, it also passes AA Large, and if it passes AAA, it also passes AAA Large */
+              if (ratio >= 4.5) {
                   tags.push('<span class="wcag-badge wcag-pass">AAA Large</span>');
               } else if (ratio >= 3) {
                   tags.push('<span class="wcag-badge wcag-pass">AA Large</span>');
               }
-
               if (tags.length === 0) {
                   tags.push('<span class="wcag-badge wcag-fail">FAIL</span>');
               }
               return tags.join(' ');
           }
           
+          function getReadableTextColor(hex) {
+              const rgb = hexToRgb(hex);
+              if (!rgb) return 'black'; 
+              const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
+              return luminance > 0.22 ? 'black' : 'white'; 
+          }
 
-          // --- COLOR CALCULATION FUNCTIONS ---
+          function rgbToString(rgb) {
+              if (!rgb) return 'Invalid RGB';
+              return `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+          }
+          
+          function cmykToString(cmyk) {
+              if (!cmyk) return 'Invalid CMYK';
+              return `${cmyk.c}, ${cmyk.m}, ${cmyk.y}, ${cmyk.k}`;
+          }
+
+          // --- COLOR CALCULATION FUNCTIONS (from previous version) ---
 
           /**
-           * Converts a color string (HEX, RGB, CMYK) to an {r, g, b} object
+           * Converte una stringa colore (HEX, RGB, CMYK) in un oggetto
            */
           function parseColorString(value, format) {
-              if (format === 'hex') {
-                  return hexToRgb(value);
-              }
               if (format === 'rgb') {
-                  const match = value.match(/(\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+                  const match = value.match(/(\d+)[,\s]*(\d+)[,\s]*(\d+)/); // Tollerante agli spazi
                   if (match) {
-                      return { r: parseInt(match[1]), g: parseInt(match[2]), b: parseInt(match[3]) };
+                      const r = parseInt(match[1]), g = parseInt(match[2]), b = parseInt(match[3]);
+                      if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) return { r, g, b };
                   }
               }
               if (format === 'cmyk') {
                   const match = value.match(/(\d+)%?[,\s]*(\d+)%?[,\s]*(\d+)%?[,\s]*(\d+)%?/);
                   if (match) {
-                      return cmykToRgb(parseFloat(match[1]), parseFloat(match[2]), parseFloat(match[3]), parseFloat(match[4]));
+                      const c = parseFloat(match[1]), m = parseFloat(match[2]), y = parseFloat(match[3]), k = parseFloat(match[4]);
+                      if (c >= 0 && c <= 100 && m >= 0 && m <= 100 && y >= 0 && y <= 100 && k >= 0 && k <= 100) return { c, m, y, k };
                   }
               }
-              return null;
+              return null; 
           }
+
 
           function hexToRgb(hex) {
               if (!hex || typeof hex !== 'string') return null;
@@ -854,35 +1381,27 @@
           }
 
           function rgbToHex(r, g, b) {
-              const toHex = (c) => ('0' + Math.max(0, Math.min(255, c)).toString(16)).slice(-2);
+              const toHex = (c) => ('0' + Math.round(Math.max(0, Math.min(255, c)))).toString(16).slice(-2);
               return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
           }
-
-          function cmykToRgb(c, m, y, k) {
-              c = c / 100; m = m / 100; y = y / 100; k = k / 100;
-              
-              const r = Math.round(255 * (1 - c) * (1 - k));
-              const g = Math.round(255 * (1 - m) * (1 - k));
-              const b = Math.round(255 * (1 - y) * (1 - k));
-              
-              return { r, g, b };
-          }
-
+          
           function rgbToCmyk(r, g, b) {
               if (r === 0 && g === 0 && b === 0) {
                   return { c: 0, m: 0, y: 0, k: 100 };
               }
-
               let c = 1 - (r / 255);
               let m = 1 - (g / 255);
               let y = 1 - (b / 255);
-              
               let k = Math.min(c, m, y);
+              
+              // Evita divisione per zero se k è 1
+              if (k === 1) { 
+                 return { c: 0, m: 0, y: 0, k: 100 };
+              }
 
               c = (c - k) / (1 - k);
               m = (m - k) / (1 - k);
               y = (y - k) / (1 - k);
-
               return { 
                   c: Math.round(c * 100), 
                   m: Math.round(m * 100), 
@@ -890,10 +1409,15 @@
                   k: Math.round(k * 100)
               };
           }
+          
+          function cmykToRgb(c, m, y, k) {
+              c = c / 100; m = m / 100; y = y / 100; k = k / 100;
+              const r = Math.round(255 * (1 - c) * (1 - k));
+              const g = Math.round(255 * (1 - m) * (1 - k));
+              const b = Math.round(255 * (1 - y) * (1 - k));
+              return { r, g, b };
+          }
 
-          /**
-           * Calculates the relative luminance of an RGB color
-           */
           function getLuminance(r, g, b) {
               const a = [r, g, b].map((v) => {
                   v /= 255;
@@ -901,50 +1425,113 @@
               });
               return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
           }
-
+          
           /**
-           * Calculates the contrast ratio between two RGB colors
+           * Generates shades for a given hex color, maintaining hue and saturation, varying lightness.
+           * @param {string} hex - The base hex color.
+           * @param {number} count - Total number of shades (e.g., 11 for 5 lighter, original, 5 darker).
+           * @returns {string[]} An array of hex color strings.
            */
+          function generateShades(hex, count = 11) {
+              const rgb = hexToRgb(hex);
+              if (!rgb) return [hex];
+              
+              const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+              const shades = [];
+              const halfCount = Math.floor(count / 2);
+              
+              // Lighter shades
+              for (let i = halfCount; i >= 1; i--) {
+                  let l = hsl.l + (1 - hsl.l) * (i / (halfCount + 1));
+                  l = Math.min(0.95, Math.max(0.05, l)); // Clamp 
+                  const shadeRgb = hslToRgb(hsl.h, hsl.s, l);
+                  shades.push(rgbToHex(shadeRgb.r, shadeRgb.g, shadeRgb.b));
+              }
+
+              // Original color
+              shades.push(hex);
+
+              // Darker shades
+              for (let i = 1; i <= halfCount; i++) {
+                  let l = hsl.l - hsl.l * (i / (halfCount + 1));
+                  l = Math.min(0.95, Math.max(0.05, l)); // Clamp
+                  const shadeRgb = hslToRgb(hsl.h, hsl.s, l);
+                  shades.push(rgbToHex(shadeRgb.r, shadeRgb.g, shadeRgb.b));
+              }
+              
+              return shades;
+          }
+
+
+          // --- HSL Conversion Helpers ---
+          function rgbToHsl(r, g, b) {
+              r /= 255; g /= 255; b /= 255;
+              const max = Math.max(r, g, b), min = Math.min(r, g, b);
+              let h, s, l = (max + min) / 2;
+              if (max === min) {
+                  h = s = 0; // achromatic
+              } else {
+                  const d = max - min;
+                  s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                  switch (max) {
+                      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                      case g: h = (b - r) / d + 2; break;
+                      case b: h = (r - g) / d + 4; break;
+                  }
+                  h /= 6;
+              }
+              return { h, s, l };
+          }
+          function hslToRgb(h, s, l) {
+              let r, g, b;
+              if (s === 0) {
+                  r = g = b = l; // achromatic
+              } else {
+                  const hue2rgb = (p, q, t) => {
+                      if (t < 0) t += 1;
+                      if (t > 1) t -= 1;
+                      if (t < 1/6) return p + (q - p) * 6 * t;
+                      if (t < 1/2) return q;
+                      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                      return p;
+                  };
+                  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                  const p = 2 * l - q;
+                  r = hue2rgb(p, q, h + 1/3);
+                  g = hue2rgb(p, q, h);
+                  b = hue2rgb(p, q, h - 1/3);
+              }
+              return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+          }
+
+
           function getContrastRatio(rgb1, rgb2) {
-              if (!rgb1 || !rgb2) return 1; // Return a neutral value for invalid RGB
+              if (!rgb1 || !rgb2) return 1; 
               const lum1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
-              const lum2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+              const lum2 = getLuminance(rgb2.r, rgb2.g, rgb2.b); 
               const lighter = Math.max(lum1, lum2);
               const darker = Math.min(lum1, lum2);
+              if (darker + 0.05 === 0) return 1; 
               return (lighter + 0.05) / (darker + 0.05);
           }
 
           // --- INITIALIZATION ---
           
-          updateColorInputs();
+          initializePalette();
+          showGeneratorView(); // Start with the generator view
 
-          // Main listeners
-          colorCountSelect.addEventListener('change', updateColorInputs);
-          checkContrastButton.addEventListener('click', calculateAllContrasts);
-          
-          // Listeners for dynamic inputs
-          colorInputsContainer.addEventListener('change', handleInputChange);
-          colorInputsContainer.addEventListener('input', (e) => {
-               // Trigger only for text inputs or pickers for immediate reactivity
-               if (e.target.type === 'text' || e.target.type === 'color') {
-                  handleInputChange(e);
-               }
-          });
+          // Event Listeners for view switching
+          checkContrastButton.addEventListener('click', showReportView);
+          backToGeneratorButton.addEventListener('click', showGeneratorView);
+          randomPaletteButton.addEventListener('click', generateRandomPalette);
 
-          // Listeners for dynamic results
-          resultsContainer.addEventListener('click', (e) => {
-              if (e.target.closest('.invert-button')) {
-                  invertColorPair(e.target.closest('.invert-button'));
-              }
-          });
-          
       });
   </script>
 
-  <!-- Script del tuo sito, con percorsi corretti -->
-  <script src="../index.js"></script>
+  <!-- Script del tuo sito, con percorsi corretti --><script src="../index.js"></script>
   <div id="overlay" class="hidden"></div>
   <script src="../grid.js"></script>
 
 </body>
 </html>
+
