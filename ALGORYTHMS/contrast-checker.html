@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Titolo dalla pagina del tool -->
+    <title>Palette Contrast Checker - zinco</title>
+
+    <!-- Link e script dall'header della tua home, con percorsi corretti -->
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+    <script src="../projects-data.js" defer></script>
+
+    <meta name="google-site-verification" content="abF1uAFHMaZMEShE6pzZfc7RbheD3mUS6pWfEQKTMPg" />
+
+    <!-- Stili CSS interni del Contrast Checker -->
+    <style>
+        /* Stili Globali - Rimossa la regola font-family per ereditare 'Inter' dal sito */
+        body {
+            /* background-color: #f0f0f0; */ /* Rimosso per lasciare il controllo a index.css */
+            color: #1a1a1a;
+            margin: 0;
+            /* Le regole 'display:flex' sono rimosse per non confliggere con il layout del sito */
+            box-sizing: border-box; 
+        }
+
+        /* Wrapper per il contenuto principale del tool */
+        .tool-main-content {
+            padding: 4rem 1rem; /* Aggiunge spazio dall'header/footer */
+            background-color: #f0f0f0; /* Sfondo grigio solo per l'area del tool */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Contenitore principale del tool */
+        .main-container {
+            background-color: #ffffff;
+            padding: 1.5rem; /* Padding ridotto per mobile */
+            border: 2px solid black; /* Bordo nero 2px */
+            width: 100%;
+            max-width: 1024px; /* Max-width aumentata per schermi più grandi */
+            box-sizing: border-box;
+            margin-top: 5rem; /* Spazio per l'header fisso */
+            margin-bottom: 5rem; /* Spazio per il footer */
+        }
+        
+        @media (min-width: 640px) { /* sm: */
+            .main-container {
+                padding: 40px; /* Padding originale per schermi più grandi */
+            }
+        }
+
+        .main-container h1 { /* Selettore più specifico per evitare conflitti */
+            font-size: 2rem; /* Testo più piccolo su mobile */
+            font-weight: 700;
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 2rem; /* Meno spazio su mobile */
+        }
+        @media (min-width: 640px) {
+            .main-container h1 {
+                font-size: 2.5rem; /* Testo più grande */
+                margin-bottom: 3rem; /* Più spazio sotto il titolo */
+            }
+        }
+
+        /* Sezione Input Colori */
+        .input-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem; /* Padding ridotto per mobile */
+            background-color: #fcfcfc;
+            border: 2px solid black; /* Bordo nero 2px */
+        }
+        @media (min-width: 640px) {
+            .input-section {
+                padding: 30px; /* Padding originale */
+            }
+        }
+        
+        .input-header {
+            display: flex;
+            flex-direction: column; /* Stack verticale su mobile */
+            align-items: flex-start; /* Allinea a sinistra */
+            justify-content: space-between;
+            gap: 1rem; /* Spazio tra label e select */
+        }
+        @media (min-width: 640px) {
+            .input-header {
+                flex-direction: row; /* Layout orizzontale */
+                align-items: center; /* Allineamento centrato */
+                gap: 1.5rem; /* Più spazio tra elementi */
+            }
+        }
+        
+        .input-header label {
+            font-size: 1.25rem; /* Testo più grande */
+            font-weight: 500;
+            color: #333333;
+            flex-grow: 1; /* Permette all'etichetta di crescere */
+        }
+
+        #colorCount {
+            width: 100%; /* Larghezza piena su mobile */
+            flex-shrink: 0;
+        }
+        @media (min-width: 640px) {
+            #colorCount {
+                width: auto; /* Larghezza automatica su desktop */
+            }
+        }
+
+        hr {
+            border-color: #cccccc;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Input singola riga di colore */
+        .color-input-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Spazio tra gli elementi della riga */
+            background-color: #ffffff;
+            border: 2px solid black; /* Bordo nero 2px */
+            padding: 1rem;
+            box-sizing: border-box;
+            flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
+        }
+        
+        /* Layout responsivo per gli input colore */
+        #colorInputsContainer {
+            display: grid;
+            grid-template-columns: 1fr; /* Una colonna di default */
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) { /* Da tablet in su */
+            #colorInputsContainer {
+                grid-template-columns: repeat(2, 1fr); /* Due colonne */
+            }
+        }
+        @media (min-width: 1024px) { /* Da desktop in su */
+            #colorInputsContainer {
+                grid-template-columns: repeat(3, 1fr); /* Tre colonne */
+            }
+        }
+
+        .color-input-row label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #555555;
+            display: block; /* Per far sì che occupi la sua riga */
+            margin-bottom: 0.25rem;
+        }
+
+        .color-picker {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+        .color-picker::-webkit-color-swatch { border: none; }
+        .color-picker::-moz-color-swatch { border: none; }
+
+        /* Stile per gli input di testo e select */
+        input[type="text"], .custom-select {
+            background-color: #f9f9f9;
+            color: #1a1a1a;
+            font-size: 1rem;
+            display: block;
+            width: 100%;
+            padding: 0.5rem 0.75rem; /* Padding uniforme */
+            height: 40px; /* Altezza fissa */
+            box-sizing: border-box;
+            border-radius: 0; /* Squadrato */
+            border: 2px solid black; /* Bordo nero 2px */
+        }
+        input[type="text"]:focus, .custom-select:focus {
+            border-color: #3b82f6; /* Bordo blu al focus */
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px #bfdbfe; /* Anello di focus leggero */
+        }
+        input[type="text"].invalid-input { /* Stile per input non validi */
+            border-color: #ef4444; /* Rosso */
+        }
+
+        /* Stile personalizzato per i selettori <select> */
+        .custom-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.25em 1.25em;
+            padding-right: 2.5rem; /* Per lasciare spazio alla freccia */
+        }
+        .custom-select:focus {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233b82f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        }
+
+        /* Pulsante Analizza */
+        #checkContrastButton {
+            width: 100%;
+            background-color: #1a1a1a; /* Nero */
+            color: #ffffff;
+            font-size: 1.25rem; /* Testo più grande */
+            font-weight: 700;
+            padding: 0.9rem 1.5rem;
+            border: 2px solid black; /* Bordo nero 2px */
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            box-sizing: border-box;
+            margin-bottom: 2rem; /* Spazio prima della sezione Gemini */
+        }
+        #checkContrastButton:hover {
+            background-color: #333333; /* Grigio scuro all'hover */
+            border-color: #3b82f6; /* Bordo blu all'hover */
+        }
+        
+        /* Sezione Risultati */
+        #resultsContainer {
+            margin-top: 3rem;
+        }
+
+        .legend-box {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #e6f2ff; /* Azzurro chiaro */
+            border: 2px solid black; /* Bordo nero 2px */
+            font-size: 0.95rem;
+            color: #004d99; /* Blu scuro */
+        }
+        .legend-box h4 {
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 0.75rem;
+        }
+        .legend-box p {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Layout responsivo per le card delle coppie di colore */
+        #color-pairs-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Una colonna di default */
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) { /* Da tablet in su */
+            #color-pairs-grid {
+                grid-template-columns: repeat(2, 1fr); /* Due colonne */
+            }
+        }
+        @media (min-width: 1024px) { /* Da desktop in su */
+            #color-pairs-grid {
+                grid-template-columns: repeat(3, 1fr); /* Tre colonne */
+            }
+        }
+
+        .pair-card {
+            background-color: #fcfcfc;
+            padding: 1.2rem;
+            border: 2px solid black; /* Bordo nero 2px per le card */
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-sizing: border-box;
+        }
+
+        .pair-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .color-label-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+        }
+        .color-label-group.right-align {
+            align-items: flex-end;
+            text-align: right;
+        }
+        .color-label {
+            font-size: 0.75rem;
+            color: #666666;
+            font-weight: 500;
+        }
+        .color-value-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .color-hex-value {
+            font-family: monospace;
+        }
+
+        .color-swatch {
+            flex-shrink: 0;
+            width: 28px; /* Dimensione swatch leggermente più grande */
+            height: 28px;
+            border: 1px solid #cccccc;
+        }
+
+        .invert-button {
+            color: #666666;
+            transition: all 0.15s ease-in-out;
+            padding: 0.25rem;
+            flex-shrink: 0;
+            border: 2px solid black; /* Bordo nero 2px per il pulsante inverti */
+            background-color: #ffffff;
+            cursor: pointer;
+            display: flex; /* Centra l'SVG */
+            align-items: center;
+            justify-content: center;
+        }
+        .invert-button:hover {
+            color: #2563eb;
+            border-color: #3b82f6;
+        }
+        .invert-button svg {
+            height: 1.25rem;
+            width: 1.25rem;
+        }
+
+        .color-pair-preview {
+            width: 100%;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            min-height: 60px; /* Altezza minima per la preview */
+            border: 2px solid black; /* Bordo nero 2px per la preview */
+            font-size: 1.1rem;
+        }
+
+        .contrast-score {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .contrast-score span {
+            font-size: 1.75rem; /* Dimensione score più grande */
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        /* Stili per i badge di pass/fail del WCAG */
+        .wcag-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 4px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid transparent; /* Bordi per i badge, questi restano 1px per essere meno invasivi */
+        }
+        .wcag-pass {
+            background-color: #d4edda; /* Verde chiaro */
+            color: #155724; /* Verde scuro */
+            border-color: #c3e6cb;
+        }
+        .wcag-fail {
+            background-color: #f8d7da; /* Rosso chiaro */
+            color: #721c24; /* Rosso scuro */
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+  <!-- Elementi Header/Menu dal tuo sito, con percorsi corretti -->
+  <div id="scroll-progress-bar"></div>
+
+  <div id="preloader">
+    <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+    <div class="loader-bar-container">
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <div class="custom-cursor" id="cursor"></div>
+
+  <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg"  id="logo" alt=""></a>
+  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
+  <a href="../portfolio.html" class="corner-button cursor-target" id="btnBottomLeft">portfolio</a>
+  <a href="../contact.html" class="corner-button cursor-target" id="btnBottomRight">contacts</a>
+
+  <div id="dropdownMenu">
+    <div class="menu-columns">
+      <div class="menu-column left">
+        <a href="../about/about.html" class="menu-link">about me</a>
+        <a href="../contact.html" class="menu-link">contacts</a>
+        <a href="../ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
+  
+        <div id="search-bar-container">
+          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <div id="search-overlay" class="hidden">
+            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
+          </div>
+          <div id="search-bar" class="hidden">
+            <input type="text" id="search-input" placeholder="browse projects..." />
+            <div id="filters" class="filters">
+              <button id="category-select" onclick="toggleDropdown()">
+                <span>Filters</span>
+                <span class="arrow">▼</span>
+              </button>
+              <div id="category-select-options">
+                <a href="#" data-filter="all" class="filter-option">All</a>
+                <a href="#" data-filter="branding" class="filter-option">branding</a>
+                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
+              </div>
+            </div>
+            <ul id="search-suggestions" class="suggestions-list"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="menu-column right">
+        <a href="../portfolio.html" class="menu-link">portfolio</a>
+        <a href="../publications/publications.html" class="menu-link">publications</a>
+        <a href="#" class="menu-link">clients</a>
+      </div>
+    </div>
+
+    <div class="menu-bottom">
+      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
+      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+    </div>
+  </div>
+  <!-- Fine elementi Header/Menu -->
+
+
+  <!-- Contenuto Principale (Il tuo Tool) -->
+  <main class="tool-main-content">
+    <div class="main-container">
+        
+        <h1>Palette Contrast Checker</h1>
+        
+        <div class="input-section">
+            <div class="input-header">
+                <label for="colorCount">How many colors to analyze?</label>
+                <select id="colorCount" class="custom-select">
+                    <option value="2">2 Colors</option>
+                    <option value="3">3 Colors</option>
+                    <option value="4" selected>4 Colors</option>
+                    <option value="5">5 Colors</option>
+                    <option value="6">6 Colors</option>
+                    <option value="7">7 Colors</option>
+                    <option value="8">8 Colors</option>
+                </select>
+            </div>
+            
+            <hr>
+            
+            <div id="colorInputsContainer">
+                
+            </div>
+        </div>
+        
+        <button id="checkContrastButton">
+            Analyze Contrast
+        </button>
+        
+        <div id="resultsContainer">
+            
+        </div>
+
+    </div>
+  </main>
+  <!-- Fine Contenuto Principale -->
+
+
+  <!-- Footer dal tuo sito, con percorsi corretti -->
+  <footer>
+    <div class="cookie-banner" id="cookieBanner">
+      <span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span>
+      <span class="close-btn cursor-target" id="closeCookie">✕</span>
+    </div>
+    <div class="footer-content">
+      <a href="../index.html" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+      <div class="footer-text">
+        <p>&copy; 2025 zinco</p>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script del Tool -->
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          // DOM Elements
+          const colorCountSelect = document.getElementById('colorCount');
+          const colorInputsContainer = document.getElementById('colorInputsContainer');
+          const checkContrastButton = document.getElementById('checkContrastButton');
+          const resultsContainer = document.getElementById('resultsContainer');
+
+          // Default colors for quick start
+          const defaultColors = [
+              { hex: '#FFFFFF', format: 'hex' },
+              { hex: '#1a1a1a', format: 'hex' },
+              { hex: '#007bff', format: 'hex' }, // Primary Blue
+              { hex: '#28a745', format: 'hex' }, // Success Green
+              { hex: '#ffc107', format: 'hex' }, // Warning Yellow
+              { hex: '#dc3545', format: 'hex' }, // Error Red
+              { hex: '#6f42c1', format: 'hex' }, // Purple
+              { hex: '#fd7e14', format: 'hex' }, // Orange
+          ];
+          
+          // --- MAIN FUNCTIONS ---
+
+          /**
+           * Updates the number of color input rows based on the selection
+           */
+          function updateColorInputs() {
+              const count = parseInt(colorCountSelect.value, 10);
+              colorInputsContainer.innerHTML = ''; // Clear old inputs
+
+              for (let i = 0; i < count; i++) {
+                  const colorData = defaultColors[i] || { hex: '#000000', format: 'hex' };
+                  let initialValue = colorData.hex;
+                  
+                  const inputRow = document.createElement('div');
+                  inputRow.className = 'color-input-row';
+                  inputRow.innerHTML = `
+                      <input type="color" id="color-picker-${i}" value="${colorData.hex}" class="color-picker">
+                      
+                      <div style="flex-grow: 1; min-width: 100px;">
+                          <label for="color-text-${i}">Value</label>
+                          <input type="text" id="color-text-${i}" value="${initialValue}" data-index="${i}" class="color-text-input">
+                      </div>
+                      
+                      <div style="flex-grow: 1; min-width: 100px;">
+                          <label for="color-format-${i}">Format</label>
+                          <select id="color-format-${i}" data-index="${i}" class="custom-select color-format-select">
+                              <option value="hex" ${colorData.format === 'hex' ? 'selected' : ''}>HEX</option>
+                              <option value="rgb" ${colorData.format === 'rgb' ? 'selected' : ''}>RGB</option>
+                              <option value="cmyk" ${colorData.format === 'cmyk' ? 'selected' : ''}>CMYK</option>
+                          </select>
+                      </div>
+                  `;
+                  colorInputsContainer.appendChild(inputRow);
+              }
+              // Update text values to reflect the correct format
+              for (let i = 0; i < count; i++) {
+                  updateTextInput(i);
+              }
+          }
+
+          /**
+           * Calculates and displays all contrast ratios
+           */
+          function calculateAllContrasts() {
+              resultsContainer.innerHTML = '';
+              const colors = []; // Array to store color objects {hex, rgb, id}
+
+              // 1. Collect all valid colors
+              const rows = colorInputsContainer.querySelectorAll('.color-input-row');
+              let allInputsValid = true;
+
+              rows.forEach((row, i) => {
+                  const textInput = row.querySelector(`#color-text-${i}`);
+                  const picker = row.querySelector(`#color-picker-${i}`);
+                  
+                  if (!textInput || !picker) return;
+                  
+                  const rgb = hexToRgb(picker.value);
+
+                  if (rgb) {
+                      colors.push({
+                          hex: picker.value,
+                          rgb: rgb,
+                          id: i
+                      });
+                      textInput.classList.remove('invalid-input');
+                  } else {
+                      allInputsValid = false;
+                      textInput.classList.add('invalid-input');
+                  }
+              });
+
+              if (!allInputsValid) {
+                  resultsContainer.innerHTML = `<p style="color: #dc3545; text-align: center; margin-top: 1rem;">Some color values are not valid. Please correct them and try again.</p>`;
+                  return;
+              }
+
+              if (colors.length < 2) {
+                  resultsContainer.innerHTML = `<p style="color: #ffc107; text-align: center; margin-top: 1rem;">Please add at least two colors to compare pairs.</p>`;
+                  return;
+              }
+              
+              resultsContainer.innerHTML = getLegendHTML();
+
+              // 2. Generate a container for all pairs
+              const pairsContainer = document.createElement('div');
+              pairsContainer.id = 'color-pairs-grid';
+              resultsContainer.appendChild(pairsContainer);
+
+              // 3. For each unique pair, create the card
+              for (let i = 0; i < colors.length; i++) {
+                  for (let j = i + 1; j < colors.length; j++) {
+                      const color1 = colors[i];
+                      const color2 = colors[j];
+                      
+                      const pairCard = document.createElement('div');
+                      pairCard.className = 'pair-card';
+                      pairCard.dataset.color1 = color1.hex;
+                      pairCard.dataset.color2 = color2.hex;
+                      pairCard.dataset.inverted = 'false';
+                      
+                      pairCard.innerHTML = getPairCardContent(color1, color2);
+                      pairsContainer.appendChild(pairCard);
+                  }
+              }
+          }
+          
+          /**
+           * Generates the HTML for a single color pair card's content
+           * @param {object} textColorObj - The color object for the text ({hex, rgb})
+           * @param {object} bgColorObj - The color object for the background ({hex, rgb})
+           */
+          function getPairCardContent(textColorObj, bgColorObj) {
+              const ratio = getContrastRatio(textColorObj.rgb, bgColorObj.rgb);
+              const wcagTags = getWcagPassTags(ratio);
+
+              return `
+                  <div class="pair-info">
+                      <div class="color-label-group">
+                          <span class="color-label">Text:</span>
+                          <div class="color-value-display">
+                              ${getColorSwatch(textColorObj.hex)}
+                              <span class="color-hex-value">${textColorObj.hex.toUpperCase()}</span>
+                          </div>
+                      </div>
+                      <button class="invert-button" title="Invert Text/Background">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" transform="rotate(90 10 10)" />
+                          </svg>
+                      </button>
+                      <div class="color-label-group right-align">
+                          <span class="color-label">Background:</span>
+                          <div class="color-value-display">
+                              ${getColorSwatch(bgColorObj.hex)}
+                              <span class="color-hex-value">${bgColorObj.hex.toUpperCase()}</span>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="color-pair-preview" style="background-color: ${bgColorObj.hex}; color: ${textColorObj.hex};">
+                      Text on Background
+                  </div>
+
+                  <div class="contrast-score">
+                      <span>${ratio.toFixed(2)}:1</span>
+                      <div style="text-align: right;">${wcagTags}</div>
+                  </div>
+              `;
+          }
+
+          /**
+           * Inverts a pair of colors and updates only its card
+           */
+          function invertColorPair(button) {
+              const pairCard = button.closest('.pair-card');
+              if (!pairCard) return;
+
+              const color1_hex = pairCard.dataset.color1;
+              const color2_hex = pairCard.dataset.color2;
+              let isInverted = pairCard.dataset.inverted === 'true';
+
+              // Invert the state
+              isInverted = !isInverted;
+              pairCard.dataset.inverted = isInverted.toString();
+
+              let textColorObj, bgColorObj;
+
+              if (isInverted) {
+                  // If inverted, color2 is text, color1 is background
+                  textColorObj = { hex: color2_hex, rgb: hexToRgb(color2_hex) };
+                  bgColorObj = { hex: color1_hex, rgb: hexToRgb(color1_hex) };
+              } else {
+                  // Otherwise, color1 is text, color2 is background (initial order)
+                  textColorObj = { hex: color1_hex, rgb: hexToRgb(color1_hex) };
+                  bgColorObj = { hex: color2_hex, rgb: hexToRgb(color2_hex) };
+              }
+              
+              pairCard.innerHTML = getPairCardContent(textColorObj, bgColorObj);
+          }
+
+
+          // --- EVENT HANDLERS ---
+
+          /**
+           * Handles changes to any input in a row (picker, text, format)
+           */
+          function handleInputChange(e) {
+              const target = e.target;
+              if (!target) return;
+
+              const row = target.closest('.color-input-row');
+              if (!row) return;
+
+              const index = row.querySelector('.color-text-input').dataset.index;
+              const textInput = row.querySelector(`#color-text-${index}`);
+              const picker = row.querySelector(`#color-picker-${index}`);
+              const formatSelect = row.querySelector(`#color-format-${index}`);
+
+              if (target.type === 'color') {
+                  // Picker is the source of truth
+                  updateTextInput(index, target.value);
+              
+              } else if (target.type === 'text') {
+                  // Text is the source of truth
+                  const rgb = parseColorString(target.value, formatSelect.value);
+                  if (rgb) {
+                      picker.value = rgbToHex(rgb.r, rgb.g, rgb.b);
+                      textInput.classList.remove('invalid-input');
+                  } else {
+                      textInput.classList.add('invalid-input');
+                  }
+              } else if (target.classList.contains('color-format-select')) {
+                  // Format changed
+                  updateTextInput(index, picker.value);
+              }
+          }
+          
+          /**
+           * Updates the text input field based on the picker value and selected format
+           */
+          function updateTextInput(index, hexValue = null) {
+              const textInput = document.getElementById(`color-text-${index}`);
+              const picker = document.getElementById(`color-picker-${index}`);
+              const formatSelect = document.getElementById(`color-format-${index}`);
+
+              const hex = hexValue || picker.value;
+              const format = formatSelect.value;
+              const rgb = hexToRgb(hex);
+
+              if (!rgb) {
+                  textInput.classList.add('invalid-input');
+                  return;
+              }
+              textInput.classList.remove('invalid-input');
+
+              if (format === 'hex') {
+                  textInput.value = hex;
+              } else if (format === 'rgb') {
+                  textInput.value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+              } else if (format === 'cmyk') {
+                  const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+                  textInput.value = `cmyk(${cmyk.c.toFixed(0)}, ${cmyk.m.toFixed(0)}, ${cmyk.y.toFixed(0)}, ${cmyk.k.toFixed(0)})`;
+              }
+          }
+
+
+          // --- LOGIC HELPERS ---
+          
+          function getLegendHTML() {
+              return `
+                  <div class="legend-box">
+                      <h4>WCAG Results Legend</h4>
+                      <p><span class="wcag-badge wcag-pass">AAA</span> Pass (7:1) for normal text (enhanced level).</p>
+                      <p><span class="wcag-badge wcag-pass">AA</span> Pass (4.5:1) for normal text.</p>
+                      <p><span class="wcag-badge wcag-pass">AA Large</span> Pass (3:1) for large text (18pt+ or 14pt+ bold).</p>
+                      <p><span class="wcag-badge wcag-fail">FAIL</span> Fails all basic standards (below 3:1).</p>
+                  </div>
+              `;
+          }
+
+          function getColorSwatch(hex) {
+              return `<span class="color-swatch" style="background-color: ${hex};"></span>`;
+          }
+
+          function getWcagPassTags(ratio) {
+              let tags = [];
+              if (ratio >= 7) {
+                  tags.push('<span class="wcag-badge wcag-pass">AAA</span>');
+              } else if (ratio >= 4.5) {
+                  tags.push('<span class="wcag-badge wcag-pass">AA</span>');
+              }
+              
+              if (ratio >= 4.5) { /* If it passes AA, it also passes AA Large, and if it passes AAA, it also passes AAA Large */
+                  tags.push('<span class="wcag-badge wcag-pass">AAA Large</span>');
+              } else if (ratio >= 3) {
+                  tags.push('<span class="wcag-badge wcag-pass">AA Large</span>');
+              }
+
+              if (tags.length === 0) {
+                  tags.push('<span class="wcag-badge wcag-fail">FAIL</span>');
+              }
+              return tags.join(' ');
+          }
+          
+
+          // --- COLOR CALCULATION FUNCTIONS ---
+
+          /**
+           * Converts a color string (HEX, RGB, CMYK) to an {r, g, b} object
+           */
+          function parseColorString(value, format) {
+              if (format === 'hex') {
+                  return hexToRgb(value);
+              }
+              if (format === 'rgb') {
+                  const match = value.match(/(\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+                  if (match) {
+                      return { r: parseInt(match[1]), g: parseInt(match[2]), b: parseInt(match[3]) };
+                  }
+              }
+              if (format === 'cmyk') {
+                  const match = value.match(/(\d+)%?[,\s]*(\d+)%?[,\s]*(\d+)%?[,\s]*(\d+)%?/);
+                  if (match) {
+                      return cmykToRgb(parseFloat(match[1]), parseFloat(match[2]), parseFloat(match[3]), parseFloat(match[4]));
+                  }
+              }
+              return null;
+          }
+
+          function hexToRgb(hex) {
+              if (!hex || typeof hex !== 'string') return null;
+              hex = hex.startsWith('#') ? hex.substring(1) : hex;
+              if (hex.length === 3) {
+                  hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+              }
+              if (hex.length !== 6) {
+                  return null;
+              }
+              const r = parseInt(hex.substring(0, 2), 16);
+              const g = parseInt(hex.substring(2, 4), 16);
+              const b = parseInt(hex.substring(4, 6), 16);
+              if (isNaN(r) || isNaN(g) || isNaN(b)) return null;
+              return { r, g, b };
+          }
+
+          function rgbToHex(r, g, b) {
+              const toHex = (c) => ('0' + Math.max(0, Math.min(255, c)).toString(16)).slice(-2);
+              return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+          }
+
+          function cmykToRgb(c, m, y, k) {
+              c = c / 100; m = m / 100; y = y / 100; k = k / 100;
+              
+              const r = Math.round(255 * (1 - c) * (1 - k));
+              const g = Math.round(255 * (1 - m) * (1 - k));
+              const b = Math.round(255 * (1 - y) * (1 - k));
+              
+              return { r, g, b };
+          }
+
+          function rgbToCmyk(r, g, b) {
+              if (r === 0 && g === 0 && b === 0) {
+                  return { c: 0, m: 0, y: 0, k: 100 };
+              }
+
+              let c = 1 - (r / 255);
+              let m = 1 - (g / 255);
+              let y = 1 - (b / 255);
+              
+              let k = Math.min(c, m, y);
+
+              c = (c - k) / (1 - k);
+              m = (m - k) / (1 - k);
+              y = (y - k) / (1 - k);
+
+              return { 
+                  c: Math.round(c * 100), 
+                  m: Math.round(m * 100), 
+                  y: Math.round(y * 100), 
+                  k: Math.round(k * 100)
+              };
+          }
+
+          /**
+           * Calculates the relative luminance of an RGB color
+           */
+          function getLuminance(r, g, b) {
+              const a = [r, g, b].map((v) => {
+                  v /= 255;
+                  return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+              });
+              return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+          }
+
+          /**
+           * Calculates the contrast ratio between two RGB colors
+           */
+          function getContrastRatio(rgb1, rgb2) {
+              if (!rgb1 || !rgb2) return 1; // Return a neutral value for invalid RGB
+              const lum1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+              const lum2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+              const lighter = Math.max(lum1, lum2);
+              const darker = Math.min(lum1, lum2);
+              return (lighter + 0.05) / (darker + 0.05);
+          }
+
+          // --- INITIALIZATION ---
+          
+          updateColorInputs();
+
+          // Main listeners
+          colorCountSelect.addEventListener('change', updateColorInputs);
+          checkContrastButton.addEventListener('click', calculateAllContrasts);
+          
+          // Listeners for dynamic inputs
+          colorInputsContainer.addEventListener('change', handleInputChange);
+          colorInputsContainer.addEventListener('input', (e) => {
+               // Trigger only for text inputs or pickers for immediate reactivity
+               if (e.target.type === 'text' || e.target.type === 'color') {
+                  handleInputChange(e);
+               }
+          });
+
+          // Listeners for dynamic results
+          resultsContainer.addEventListener('click', (e) => {
+              if (e.target.closest('.invert-button')) {
+                  invertColorPair(e.target.closest('.invert-button'));
+              }
+          });
+          
+      });
+  </script>
+
+  <!-- Script del tuo sito, con percorsi corretti -->
+  <script src="../index.js"></script>
+  <div id="overlay" class="hidden"></div>
+  <script src="../grid.js"></script>
+
+</body>
+</html>
