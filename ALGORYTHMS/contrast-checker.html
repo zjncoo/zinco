@@ -128,8 +128,8 @@
         .column-action-btn:hover {
             transform: scale(1.1);
             background-color: white;
-            color: #3b82f6;
-            border-color: #3b82f6;
+            color: #000000;
+            border-color: #000000;
         }
         .shades-btn {
             font-size: 1.5rem; /* Icona più grande */
@@ -183,7 +183,7 @@
         .column-rgb-input:focus,
         .column-cmyk-input:focus {
             background-color: rgba(255,255,255,0.2);
-            border-color: #3b82f6;
+            border-color: #000000;
         }
 
         /* Pulsante Aggiungi Colore (sulla colonna) */
@@ -217,8 +217,8 @@
             display: none; /* Nasconde il + sull'ultima colonna */
         }
          .add-color-btn-on-column:hover {
-            background-color: #3b82f6;
-            border-color: #3b82f6;
+            background-color: #000000;
+            border-color: #000000;
             color: white;
             transform: translateY(-50%) scale(1.1);
          }
@@ -235,7 +235,7 @@
             cursor: grabbing;
         }
         .color-column.drag-over {
-            box-shadow: inset 0 0 0 4px #3b82f6;
+            box-shadow: inset 0 0 0 4px #000000;
         }
         
         /* --- Shades Panel (Coolors style) --- */
@@ -556,8 +556,8 @@
             justify-content: center;
         }
         .invert-button:hover {
-            color: #2563eb;
-            border-color: #3b82f6;
+            color: #000000;
+            border-color: #000000;
         }
         .invert-button svg {
             height: 1.25rem;
@@ -576,51 +576,64 @@
             font-size: 1.1rem;
         }
 
+        /* ... (codice CSS precedente) ... */
+
         .contrast-score {
             display: flex;
-            align-items: baseline;
+            align-items: center; /* Allinea gli elementi verticalmente al centro */
             justify-content: space-between;
             gap: 1rem;
+            min-height: 40px; /* Assicura un'altezza minima per i badge */
         }
         .contrast-score span {
-            font-size: 1.75rem; /* Dimensione score più grande */
+            font-size: 1.5rem; /* Dimensione score leggermente ridotta */
             font-weight: 700;
             color: #1a1a1a;
+            line-height: 1; /* Rimuove spazi extra sopra/sotto */
         }
 
         /* === STILI PER I BADGE === */
         .wcag-badge {
-            display: inline-block;
-            padding: 4px 10px; /* Padding leggermente aumentato */
-            font-size: 0.8rem; /* Dimensione del font leggermente aumentata */
-            font-weight: 700; /* Bold per risaltare */
-            margin-right: 4px;
-            line-height: 1.2;
+            display: inline-flex; /* Usa inline-flex per centrare il contenuto */
+            align-items: center;
+            justify-content: center;
+            padding: 2px 6px; /* Padding interno molto ridotto */
+            font-size: 0.7rem; /* Dimensione del font ridotta */
+            font-weight: 700;
+            margin-left: 4px; /* Spazio tra i badge se multipli */
+            line-height: 1; /* Compatta la linea */
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 2px solid black; /* Bordo nero 2px per tutti i badge */
-            border-radius: 0; /* Squadrato */
-            transition: all 0.15s ease-in-out; /* Animazione all'hover */
-            cursor: default; /* Non è cliccabile */
+            letter-spacing: 0.2px; /* Spaziatura lettere ridotta */
+            border: 1px solid black; /* Bordo nero 1px */
+            border-radius: 0; 
+            transition: all 0.15s ease-in-out;
+            cursor: default;
+            height: 24px; /* Altezza fissa per i badge */
+            box-sizing: border-box; /* Include padding e border nell'altezza */
         }
+        /* Rimuovi margini a destra per l'ultimo badge se non ce ne sono altri */
+        .wcag-badge:last-child {
+            margin-right: 0;
+        }
+
         .wcag-pass {
-            background-color: #e0e0e0; /* Grigio chiaro per i pass */
-            color: #1a1a1a; /* Testo nero */
+            background-color: #f0f0f0; /* Grigio più chiaro */
+            color: #1a1a1a;
         }
         .wcag-fail {
-            background-color: #f2c7c7; /* Rosso molto tenue per i fail */
-            color: #721c24; /* Testo rosso scuro, come prima, perché il fail è importante */
+            background-color: #fcebeb; /* Rosso ancora più tenue */
+            color: #721c24; 
         }
 
         /* Effetti all'hover per i badge (opzionale, ma aggiunge interattività) */
         .wcag-badge:hover {
-            transform: scale(1.03); /* Leggero ingrandimento */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombra discreta */
+            transform: scale(1.01); /* Ingrandimento più discreto */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* Ombra più leggera */
         }
 
-        /* Specifico per il badge FAIL all'hover per renderlo più "allarmante" */
+        /* Specifico per il badge FAIL all'hover */
         .wcag-fail:hover {
-            border-color: #dc3545; /* Bordo rosso più evidente all'hover */
+            border-color: #dc3545; 
         }
 
         /* Utilities */
@@ -656,7 +669,7 @@
         <a href="../ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
   
         <div id="search-bar-container">
-          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <button id="search-button" class="search-icon cursor-target">search</button>
           <div id="search-overlay" class="hidden">
             <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>

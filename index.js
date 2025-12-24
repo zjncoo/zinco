@@ -45,7 +45,7 @@ const lenis = new Lenis();
 function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 // Aggiungi questa riga per rendere lenis accessibile a tutti gli altri script
-window.lenis = lenis; 
+window.lenis = lenis;
 
 // --- NUOVA FUNZIONE PER LA PROTEZIONE DEI CONTENUTI ---
 const setupContentProtection = () => {
@@ -110,9 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
       moreButton.classList.toggle("open");
     };
     const handleClickOutside = (e) => {
-        if (dropdownMenu.classList.contains("open") && !dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
-            toggleMenu(e);
-        }
+      if (dropdownMenu.classList.contains("open") && !dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
+        toggleMenu(e);
+      }
     };
     moreButton.addEventListener("click", toggleMenu);
     document.addEventListener("click", handleClickOutside);
@@ -158,10 +158,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalResults = query ? filteredByCategory.filter(p => tolerantSearch(query, p.title)) : filteredByCategory;
     suggestionsList.innerHTML = '';
     if (finalResults.length > 0) {
+
+      // Determine path prefix based on logo href (robust way to handle depth)
+      const logo = document.getElementById('logo');
+      let pathPrefix = '';
+      if (logo) {
+        const logoHref = logo.getAttribute('href');
+        if (logoHref.startsWith('../../')) pathPrefix = '../../';
+        else if (logoHref.startsWith('../')) pathPrefix = '../';
+      }
+
       finalResults.forEach(p => {
         const li = document.createElement('li');
         const a = document.createElement('a');
-        a.href = p.link; a.textContent = p.title; a.classList.add('search-result-link');
+        // Handle external links vs local links
+        if (p.link.startsWith('http')) {
+          a.href = p.link;
+          a.target = "_blank"; // Good practice for external links
+        } else {
+          a.href = pathPrefix + p.link;
+        }
+        a.textContent = p.title; a.classList.add('search-result-link');
         li.appendChild(a); suggestionsList.appendChild(li);
       });
     } else {
@@ -196,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         currentFilter = e.target.dataset.filter;
         if (filterSelectBtn.querySelector('span')) {
-            filterSelectBtn.querySelector('span').textContent = e.target.textContent;
+          filterSelectBtn.querySelector('span').textContent = e.target.textContent;
         }
         displayFilteredProjects();
       });
@@ -222,10 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateProgressBar = () => {
       // Calcola l'altezza totale che si può scorrere
       const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      
+
       // Calcola la percentuale di scorrimento attuale
       const scrollPercentage = (window.scrollY / scrollTotal) * 100;
-      
+
       // Applica la percentuale alla larghezza della barra
       progressBar.style.width = scrollPercentage + '%';
     };

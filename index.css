@@ -24,9 +24,12 @@
 
 /* Impedisce la selezione del testo e delle immagini */
 body {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none;     /* Internet Explorer/Edge */
-  user-select: none;         /* Standard syntax */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Standard syntax */
 }
 
 /* --- Reset e Stili di Base --- */
@@ -34,7 +37,8 @@ body {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
@@ -48,7 +52,12 @@ body {
 }
 
 /* --- Impostazioni dei Font --- */
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .corner-button,
 .menu-link {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -76,16 +85,21 @@ h2 {
 
 #scroll-progress-bar {
   position: fixed;
-  bottom: 0; /* Come richiesto, "in basso a tutto" */
+  bottom: 0;
+  /* Come richiesto, "in basso a tutto" */
   left: 0;
-  width: 0%; /* Inizia da 0 e cresce con lo scroll */
-  height: 5px; /* Puoi cambiare lo spessore se vuoi */
-  
+  width: 0%;
+  /* Inizia da 0 e cresce con lo scroll */
+  height: 5px;
+  /* Puoi cambiare lo spessore se vuoi */
+
   /* Usa il giallo esatto del tuo logo! */
-  background-color: #FFD600; 
-  
-  z-index: 9998; /* Sotto il preloader/menu ma sopra il contenuto */
-  transition: width 0.1s linear; /* Rende il movimento più fluido */
+  background-color: #FFD600;
+
+  z-index: 9998;
+  /* Sotto il preloader/menu ma sopra il contenuto */
+  transition: width 0.1s linear;
+  /* Rende il movimento più fluido */
 }
 
 
@@ -137,8 +151,13 @@ h2 {
 }
 
 @keyframes loading-animation {
-  from { width: 0%; }
-  to { width: 100%; }
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 
@@ -147,7 +166,9 @@ h2 {
  * 3. CURSORE PERSONALIZZATO
  * ===================================================================
 */
-body, a, button {
+body,
+a,
+button {
   cursor: none;
 }
 
@@ -334,6 +355,7 @@ footer {
   color: #fff;
   border-color: #000;
 }
+
 .btn--solid-dark:hover {
   background-color: #fff;
   color: #000;
@@ -349,6 +371,7 @@ footer {
   backdrop-filter: blur(5px);
   mix-blend-mode: difference;
 }
+
 .btn--outline-light:hover {
   background-color: white;
   color: black;
@@ -361,6 +384,7 @@ footer {
   text-transform: none;
   padding: 8px 16px;
 }
+
 .btn--outline-dark:hover {
   background-color: black;
   color: white;
@@ -400,9 +424,12 @@ footer {
 
 /* --- Titoli delle sezioni della griglia --- */
 .projects-section h2 {
-  text-align: left;     /* Allinea il testo a sinistra */
-  padding-left: 40px;   /* Aggiunge un rientro per allinearsi con il footer e la griglia */
-  width: 100%;          /* Assicura che l'elemento occupi tutto lo spazio per un allineamento corretto */
+  text-align: left;
+  /* Allinea il testo a sinistra */
+  padding-left: 40px;
+  /* Aggiunge un rientro per allinearsi con il footer e la griglia */
+  width: 100%;
+  /* Assicura che l'elemento occupi tutto lo spazio per un allineamento corretto */
 }
 
 /* --- STRUTTURA GRIGLIA GENERICA (Vecchia) --- */
@@ -444,8 +471,13 @@ footer {
   transition: filter 0.2s ease;
 }
 
-.project-item:nth-child(4n + 1) { padding-left: 40px; }
-.project-item:nth-child(4n) { padding-right: 40px; }
+.project-item:nth-child(4n + 1) {
+  padding-left: 40px;
+}
+
+.project-item:nth-child(4n) {
+  padding-right: 40px;
+}
 
 
 /*
@@ -468,6 +500,7 @@ footer {
   text-align: center;
   margin-bottom: 2rem;
 }
+
 #project-title-mobile {
   font-size: 1.5rem;
   margin: 0 0 1rem 0;
@@ -486,7 +519,8 @@ footer {
 .grid-item {
   perspective: 1500px;
   aspect-ratio: 1 / 1;
-  background-color: transparent; /* Rimosso lo sfondo grigio dal contenitore */
+  background-color: transparent;
+  /* Rimosso lo sfondo grigio dal contenitore */
 }
 
 /* --- Stili per l'animazione Flip 3D --- */
@@ -497,10 +531,13 @@ footer {
   transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
   transform-style: preserve-3d;
 }
+
 .grid-item:hover .card-flipper {
   transform: rotateY(180deg);
 }
-.card-front, .card-back {
+
+.card-front,
+.card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -509,12 +546,15 @@ footer {
   border: 2px solid black;
   overflow: hidden;
 }
+
 .card-front img,
 .card-front video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Importantissimo per non deformare il video */
+  object-fit: cover;
+  /* Importantissimo per non deformare il video */
 }
+
 .card-back {
   transform: rotateY(180deg);
   display: flex;
@@ -522,9 +562,14 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 25px;
-  background-color: white; /* FIX: Aggiunto sfondo bianco per coprire il retro durante la rotazione */
+  background-color: white;
+  /* FIX: Aggiunto sfondo bianco per coprire il retro durante la rotazione */
 }
-.card-back h3 { font-size: 1.8rem; margin: 0 0 25px 0; }
+
+.card-back h3 {
+  font-size: 1.8rem;
+  margin: 0 0 25px 0;
+}
 
 /* FIX: Stile unificato per i bottoni */
 .card-btn {
@@ -540,15 +585,27 @@ footer {
   text-decoration: none;
   transition: all 0.2s ease;
 }
+
 .card-btn:hover {
   background-color: black;
   color: white;
 }
 
 /* Classi per le dimensioni delle tessere */
-.tile-wide { grid-column: span 2; }
-.tile-tall { grid-row: span 2; aspect-ratio: auto; }
-.tile-large { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+.tile-wide {
+  grid-column: span 2;
+}
+
+.tile-tall {
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+.tile-large {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
 
 
 /*--- MENU ---*/
@@ -570,8 +627,8 @@ footer {
 
 .menu-columns {
   display: flex;
-  justify-content: space-between; 
-  padding: 2rem 40px; 
+  justify-content: space-between;
+  padding: 2rem 40px;
   margin-top: 10%;
 }
 
@@ -604,7 +661,7 @@ footer {
   justify-content: left;
   gap: 2rem;
   align-items: center;
-  padding: 0 40px 2rem; 
+  padding: 0 40px 2rem;
 }
 
 .menu-email {
@@ -669,9 +726,11 @@ footer {
   list-style: none;
   margin: 1rem 0 0 0;
   padding: 0;
-  max-height: 25vh; /* Altezza massima, per evitare liste troppo lunghe */
+  max-height: 25vh;
+  /* Altezza massima, per evitare liste troppo lunghe */
   overflow-y: auto;
-  border-top: 1px solid #333; /* Linea di separazione */
+  border-top: 1px solid #333;
+  /* Linea di separazione */
 }
 
 /* Stile per ogni elemento della lista (<li>) */
@@ -682,20 +741,23 @@ footer {
 
 /* Stile per i link dei risultati (<a>) */
 .suggestions-list li a {
-  display: block; /* Occupa tutto lo spazio per essere facilmente cliccabile */
+  display: block;
+  /* Occupa tutto lo spazio per essere facilmente cliccabile */
   padding: 1rem 0.5rem;
   color: white;
   text-decoration: none;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
-  border-bottom: 1px solid #222; /* Separatore tra i risultati */
+  border-bottom: 1px solid #222;
+  /* Separatore tra i risultati */
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Stile per il messaggio "Nessun progetto trovato" */
 .suggestions-list li:not(:has(a)) {
   padding: 1rem 0.5rem;
-  color: #777; /* Colore più spento */
+  color: #777;
+  /* Colore più spento */
   font-style: italic;
 }
 
@@ -707,11 +769,22 @@ footer {
 }
 
 .search-icon {
-  font-size: 2.2rem;
+  font-size: 2rem;
   background: none;
   border: none;
   color: white;
   z-index: 1100;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  line-height: 0.8;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.search-icon:hover {
+  opacity: 0.6;
+  font-weight: 800;
 }
 
 /* Stile Pulsante "Chiudi" della Ricerca (Modificato) */
@@ -728,14 +801,16 @@ footer {
   font-size: 30px;
   cursor: pointer;
   text-transform: lowercase;
-  padding: 8px; /* <-- Allinea il padding agli altri bottoni */
+  padding: 8px;
+  /* <-- Allinea il padding agli altri bottoni */
 }
 
 
 /* Stile Pulsante Filtri (Modificato) */
-#filters { 
-  position: relative; 
+#filters {
+  position: relative;
 }
+
 #category-select {
   background: none;
   border: 2px solid white;
@@ -747,13 +822,16 @@ footer {
   text-transform: uppercase;
   font-size: 1rem;
   width: 100%;
-  text-align: center; /* Centra il testo */
+  text-align: center;
+  /* Centra il testo */
   transition: all 0.2s ease;
 }
+
 #category-select:hover {
   background-color: white;
   color: black;
 }
+
 #category-select .arrow {
   display: inline-block;
   margin-left: 10px;
@@ -769,9 +847,11 @@ footer {
   z-index: 1200;
   width: 100%;
 }
+
 #category-select-options.show {
   display: block;
 }
+
 .filter-option {
   color: white;
   padding: 12px 16px;
@@ -779,6 +859,7 @@ footer {
   display: block;
   text-align: left;
 }
+
 .filter-option:hover {
   background-color: #333;
 }
@@ -795,7 +876,7 @@ footer {
   bottom: 0;
   width: 2px;
   background-color: black;
-  z-index: 500; 
+  z-index: 500;
 }
 
 /* Aggiungi alla fine del tuo CSS, prima delle Media Queries */
@@ -819,7 +900,8 @@ footer {
 
   /* Aggiungi questo dentro @media (max-width: 1024px) */
   .photo-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne su tablet */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colonne su tablet */
     gap: 15px;
   }
 
@@ -835,13 +917,17 @@ footer {
   #button-logo {
     left: 22px;
   }
-  #btnTopLeft, #btnBottomLeft {
+
+  #btnTopLeft,
+  #btnBottomLeft {
     left: 22px;
   }
-  #btnTopRight, #btnBottomRight {
+
+  #btnTopRight,
+  #btnBottomRight {
     right: 22px;
   }
-  
+
   #logo {
     width: 200px;
     left: 0;
@@ -852,10 +938,19 @@ footer {
   .content-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
-  .project-item:nth-child(4n + 1), .project-item:nth-child(4n) { padding: 30px; }
-  .project-item:nth-child(3n + 1) { padding-left: 30px; }
-  .project-item:nth-child(3n) { padding-right: 30px; }
+
+  .project-item:nth-child(4n + 1),
+  .project-item:nth-child(4n) {
+    padding: 30px;
+  }
+
+  .project-item:nth-child(3n + 1) {
+    padding-left: 30px;
+  }
+
+  .project-item:nth-child(3n) {
+    padding-right: 30px;
+  }
 }
 
 
@@ -865,10 +960,12 @@ footer {
   /* In: index.css (dentro @media (max-width: 767px) { ... } ) */
 
   #scroll-progress-bar {
-    top: 0;       /* La sposta in alto */
-    bottom: auto; /* Rimuove l'impostazione 'bottom: 0' del desktop */  
+    top: 0;
+    /* La sposta in alto */
+    bottom: auto;
+    /* Rimuove l'impostazione 'bottom: 0' del desktop */
   }
-    
+
   /* Reset del layout dinamico su colonna singola */
   .grid-item:nth-child(n) {
     grid-column: auto;
@@ -876,13 +973,16 @@ footer {
   }
 
   .grid-item-overlay h3 {
-    font-size: 1.2rem; /* Riduciamo la dimensione del font per il titolo */
+    font-size: 1.2rem;
+    /* Riduciamo la dimensione del font per il titolo */
   }
 
   .grid-item-overlay .visit-btn {
-    font-size: 0.8rem; /* E per il bottone */
+    font-size: 0.8rem;
+    /* E per il bottone */
     padding: 6px 16px;
   }
+
   #preloader-logo {
     top: 20px;
     left: 20px;
@@ -898,7 +998,7 @@ footer {
   }
 
   /* --- MODIFICHE PER ALLINEAMENTO E SPAZIO --- */
-  
+
   /* Sposta logo e 'more' più in alto */
   #button-logo,
   #btnTopRight {
@@ -925,8 +1025,9 @@ footer {
   #btnBottomRight {
     display: none;
   }
+
   /* --- FINE MODIFICHE ALLINEAMENTO --- */
-  
+
   #logo {
     width: 150px;
   }
@@ -939,7 +1040,7 @@ footer {
   .project-item:nth-child(n) {
     padding: 20px !important;
   }
-  
+
   footer {
     margin: 40px 0 150px 0;
   }
@@ -948,31 +1049,41 @@ footer {
   .menu-columns {
     flex-direction: column;
     gap: 2rem;
-    margin-top: 15vh; /* Ridotto il margine superiore */
+    margin-top: 15vh;
+    /* Ridotto il margine superiore */
   }
+
   .menu-bottom {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
     padding-top: 2rem;
-    margin-top: 4rem; /* Ridotto il margine superiore */
+    margin-top: 4rem;
+    /* Ridotto il margine superiore */
   }
 
   /* Fix per menu tagliato */
   #dropdownMenu.open {
-    height: 100vh; /* Occupa tutto lo schermo */
-    overflow-y: auto; /* Aggiunge scroll se serve */
+    height: 100vh;
+    /* Occupa tutto lo schermo */
+    overflow-y: auto;
+    /* Aggiunge scroll se serve */
   }
+
   /* --- FINE MODIFICHE MENU --- */
 
   /* --- Trasformazione in Carosello su Mobile --- */
   .portfolio-grid-container {
-    padding: 0; /* Rimuove il padding laterale per il layout a filo */
+    padding: 0;
+    /* Rimuove il padding laterale per il layout a filo */
   }
+
   .carousel-info-mobile {
     display: block;
-    padding: 0 20px; /* Aggiunge un po' di spazio interno per il testo */
+    padding: 0 20px;
+    /* Aggiunge un po' di spazio interno per il testo */
   }
+
   .photo-grid {
     display: flex;
     overflow-x: auto;
@@ -983,7 +1094,11 @@ footer {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  .photo-grid::-webkit-scrollbar { display: none; }
+
+  .photo-grid::-webkit-scrollbar {
+    display: none;
+  }
+
   .grid-item,
   .tile-wide,
   .tile-tall,
@@ -996,9 +1111,11 @@ footer {
     grid-column: auto;
     grid-row: auto;
   }
+
   .grid-item:hover .card-flipper {
     transform: none;
   }
+
   .card-back {
     display: none;
   }

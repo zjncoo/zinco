@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,12 +8,14 @@
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="contact.css" />
   <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script> <!--scrolling!-->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <!--scrolling!-->
   <!-- FONT AGGIORNATO: Importa 'Inter' da Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div id="scroll-progress-bar"></div>
 
@@ -25,7 +28,7 @@
 
   <div class="custom-cursor" id="cursor"></div>
 
-  <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg"  id="logo" alt=""></a>
+  <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt=""></a>
   <!-- Bottoni angolari -->
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="portfolio.html" class="corner-button cursor-target" id="btnBottomLeft">portfolio</a>
@@ -37,9 +40,9 @@
         <a href="about/about.html" class="menu-link">about me</a>
         <a href="contact.html" class="menu-link">contacts</a>
         <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
-  
+
         <div id="search-bar-container">
-          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <button id="search-button" class="search-icon cursor-target">search</button>
           <div id="search-overlay" class="hidden">
             <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
@@ -76,18 +79,21 @@
 
   <div id="tabella">
     <h1>Contact Me</h1>
-    
+
     <p class="contact-sublink">
       discover more <a href="about/about.html">about me</a>.
     </p>
-    <iframe id="form" data-tally-src="https://tally.so/embed/3EWYBN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="453" frameborder="0" marginheight="0" marginwidth="0" title="Contact Me"></iframe>
-    <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+    <iframe id="form"
+      data-tally-src="https://tally.so/embed/3EWYBN?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+      loading="lazy" width="100%" height="453" frameborder="0" marginheight="0" marginwidth="0"
+      title="Contact Me"></iframe>
+    <script>var d = document, w = "https://tally.so/widgets/embed.js", v = function () { "undefined" != typeof Tally ? Tally.loadEmbeds() : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function (e) { e.src = e.dataset.tallySrc })) }; if ("undefined" != typeof Tally) v(); else if (d.querySelector('script[src="' + w + '"]') == null) { var s = d.createElement("script"); s.src = w, s.onload = v, s.onerror = v, d.body.appendChild(s); }</script>
   </div>
 
-  
 
-  
-    
+
+
+
 
   <footer>
     <div class="cookie-banner" id="cookieBanner">
@@ -98,12 +104,14 @@
       <a href="#" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
       <div class="footer-text">
         <p>&copy; 2025 zinco</p>
-        <a href="zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
       </div>
     </div>
   </footer>
 
+  <script src="projects-data.js?v=21"></script>
   <script src="index.js"></script>
   <div id="overlay" class="hidden"></div>
 </body>
+
 </html>

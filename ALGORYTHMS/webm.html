@@ -1,79 +1,253 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convertitore Video in WebM</title>
-    <!-- Tailwind CSS per lo stile -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Inter per un look moderno -->
+    <title>Convertitore Video in WebM - zinco</title>
+
+    <!-- Service Worker per abilitare SharedArrayBuffer (richiesto da FFmpeg.wasm) -->
+    <script src="coi-serviceworker.min.js"></script>
+
+    <!-- Stili Globali del Sito -->
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+
+    <!-- Dipendenze Esterne (Lenis, Font, FFmpeg) -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+
+    <!-- Script del Sito -->
+    <script src="../projects-data.js" defer></script>
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        /* Stili Specifici per il Convertitore (in sostituzione di Tailwind) */
+        .converter-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            border: 2px solid black;
+            padding: 40px;
+            text-align: center;
         }
-        /* Stile per la barra di avanzamento */
-        .progress-bar-inner {
-            transition: width 0.3s ease-in-out;
+
+        .upload-area {
+            border: 2px dashed black;
+            padding: 40px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-bottom: 20px;
+            display: block;
+            /* label behaves like block */
+        }
+
+        .upload-area:hover {
+            background-color: #f0f0f0;
+        }
+
+        .upload-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            stroke: black;
+            /* Icona nera */
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .progress-container {
+            width: 100%;
+            border: 2px solid black;
+            height: 30px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            background-color: #FFD600;
+            /* Giallo Zinco */
+            height: 100%;
+            width: 0%;
+            transition: width 0.2s linear;
+        }
+
+        .video-preview {
+            width: 100%;
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+
+        /* Utility helper per spaziature */
+        .mb-2 {
+            margin-bottom: 20px;
+        }
+
+        .text-small {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #ccc;
+            border-color: #ccc;
+            color: #666;
+        }
+
+        button:disabled:hover {
+            background-color: #ccc;
+            color: #666;
         }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-    <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 w-full max-w-lg mx-4">
-        
-        <!-- Intestazione -->
-        <div class="text-center mb-6">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Convertitore Video in WebM</h1>
-            <p class="text-gray-500 mt-2">Converti i tuoi file video in formato WebM direttamente nel browser.</p>
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-bar"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+        <div class="loader-bar-container">
+            <div class="loader-bar"></div>
         </div>
-
-        <!-- Area di Input -->
-        <div id="input-area">
-            <label for="video-upload" class="block w-full cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 hover:bg-gray-50 transition-colors">
-                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <span id="file-name" class="mt-2 block text-sm font-medium text-gray-600">Seleziona un file video</span>
-                <span class="mt-1 block text-xs text-gray-500">MP4, MOV, AVI, ecc.</span>
-            </label>
-            <input id="video-upload" type="file" class="hidden" accept="video/*">
-            <button id="convert-btn" class="mt-6 w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-transform transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none" disabled>
-                Converti in WebM
-            </button>
-        </div>
-
-        <!-- Area di Progresso -->
-        <div id="progress-area" class="hidden text-center">
-            <p id="progress-text" class="text-gray-700 font-medium mb-2">Conversione in corso...</p>
-            <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-                <div id="progress-bar" class="bg-blue-600 h-4 rounded-full progress-bar-inner" style="width: 0%"></div>
-            </div>
-            <p id="progress-ratio" class="text-sm text-gray-500 mt-1">0%</p>
-        </div>
-
-        <!-- Area di Output -->
-        <div id="output-area" class="hidden text-center">
-            <h2 class="text-xl font-semibold text-green-600 mb-4">Conversione Completata!</h2>
-            <video id="video-preview" class="w-full rounded-lg shadow-md mb-4" controls></video>
-            <a id="download-btn" href="#" download="video_convertito.webm" class="w-full block bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-transform transform hover:scale-105">
-                Scarica il video WebM
-            </a>
-            <button id="convert-another-btn" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">
-                Converti un altro video
-            </button>
-        </div>
-
     </div>
-    
-    <!-- Libreria FFmpeg.wasm (versione aggiornata) -->
-    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.6/dist/ffmpeg.min.js"></script>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- Navigazione Fissa -->
+    <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
+    <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
+    <a href="../portfolio.html" class="corner-button cursor-target" id="btnBottomLeft">portfolio</a>
+    <a href="../contact.html" class="corner-button cursor-target" id="btnBottomRight">contacts</a>
+
+    <!-- Menu a Tendina -->
+    <div id="dropdownMenu">
+        <div class="menu-columns">
+            <div class="menu-column left">
+                <a href="../about/about.html" class="menu-link">about me</a>
+                <a href="../contact.html" class="menu-link">contacts</a>
+                <a href="algorythms.html" class="menu-link">algorythms</a> <!-- Link corrente -->
+
+                <div id="search-bar-container">
+                    <button id="search-button" class="search-icon cursor-target">search</button>
+                    <div id="search-overlay" class="hidden">
+                        <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
+                    </div>
+                    <div id="search-bar" class="hidden">
+                        <input type="text" id="search-input" placeholder="browse projects..." />
+                        <div id="filters" class="filters">
+                            <button id="category-select" onclick="toggleDropdown()">
+                                <span>Filters</span>
+                                <span class="arrow">▼</span>
+                            </button>
+                            <div id="category-select-options">
+                                <a href="#" data-filter="all" class="filter-option">All</a>
+                                <a href="#" data-filter="branding" class="filter-option">branding</a>
+                                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
+                            </div>
+                        </div>
+                        <ul id="search-suggestions" class="suggestions-list"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-column right">
+                <a href="../portfolio.html" class="menu-link">portfolio</a>
+                <a href="../publications/publications.html" class="menu-link">publications</a>
+                <a href="#" class="menu-link">clients</a>
+            </div>
+        </div>
+
+        <div class="menu-bottom">
+            <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
+            <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="shapes"></div> <!-- Spaziatore Shapes dall'header -->
+
+        <p class="intro">
+            Convertitore Video in WebM<br>
+            <span style="font-size: 1rem; opacity: 0.6;">Converti i tuoi file per il web direttamente nel
+                browser.</span>
+        </p>
+
+        <div class="converter-container">
+
+            <!-- Area di Input -->
+            <div id="input-area">
+                <label for="video-upload" class="upload-area">
+                    <svg class="upload-icon mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <span id="file-name" class="block" style="font-weight: bold;">Seleziona un file video</span>
+                    <span class="text-small">MP4, MOV, AVI, ecc.</span>
+                </label>
+                <input id="video-upload" type="file" class="hidden" accept="video/*">
+
+                <button id="convert-btn" class="btn btn--solid-dark" style="width: 100%;" disabled>
+                    Converti in WebM
+                </button>
+            </div>
+
+            <!-- Area di Progresso -->
+            <div id="progress-area" class="hidden">
+                <p id="progress-text" style="font-weight: bold; margin-bottom: 10px;">Conversione in corso...</p>
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-fill"></div>
+                </div>
+                <p id="progress-ratio" class="text-small">0%</p>
+            </div>
+
+            <!-- Area di Output -->
+            <div id="output-area" class="hidden">
+                <h2 style="color: black; margin-bottom: 20px;">Conversione Completata!</h2>
+                <video id="video-preview" class="video-preview" controls></video>
+
+                <a id="download-btn" href="#" download="video_convertito.webm" class="btn btn--solid-dark"
+                    style="display: block; margin-bottom: 10px;">
+                    Scarica il video WebM
+                </a>
+                <button id="convert-another-btn" class="btn btn--outline-dark" style="width: 100%;">
+                    Converti un altro video
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="cookie-banner" id="cookieBanner">
+            <span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span>
+            <span class="close-btn cursor-target" id="closeCookie">✕</span>
+        </div>
+        <div class="footer-content">
+            <a href="#" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
+            <div class="footer-text">
+                <p>&copy; 2025 zinco</p>
+                <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Principale del Sito -->
+    <script src="../index.js"></script>
+
+    <!-- Logica del Convertitore -->
     <script>
-        // Funzione per inizializzare il convertitore
         const initializeConverter = () => {
-            // Elementi del DOM
             const videoUpload = document.getElementById('video-upload');
             const fileNameSpan = document.getElementById('file-name');
             const convertBtn = document.getElementById('convert-btn');
@@ -87,24 +261,20 @@
             const downloadBtn = document.getElementById('download-btn');
             const convertAnotherBtn = document.getElementById('convert-another-btn');
 
-            // Variabile per memorizzare il file selezionato
             let selectedFile = null;
 
-            // Controlla se la libreria FFmpeg è stata caricata
             if (typeof FFmpeg === 'undefined') {
                 console.error('La libreria FFmpeg non è stata caricata.');
-                document.querySelector('.container').innerHTML = '<p class="text-red-500 text-center">Errore: Impossibile caricare la libreria di conversione. Ricarica la pagina.</p>';
+                alert('Errore: Impossibile caricare la libreria di conversione.');
                 return;
             }
 
-            // Inizializzazione di FFmpeg
             const { createFFmpeg, fetchFile } = FFmpeg;
             const ffmpeg = createFFmpeg({
-                log: true, // Abilita i log nella console per il debug
-                corePath: 'https://unpkg.com/@ffmpeg/core@0.12.4/dist/ffmpeg-core.js',
+                log: true,
+                corePath: 'https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',
             });
 
-            // Gestione della selezione del file
             videoUpload.addEventListener('change', (event) => {
                 selectedFile = event.target.files[0];
                 if (selectedFile) {
@@ -116,14 +286,13 @@
                 }
             });
 
-            // Gestione del click sul pulsante di conversione
             convertBtn.addEventListener('click', async () => {
                 if (!selectedFile) return;
 
                 inputArea.classList.add('hidden');
                 progressArea.classList.remove('hidden');
                 convertBtn.disabled = true;
-                
+
                 try {
                     if (!ffmpeg.isLoaded()) {
                         progressText.textContent = 'Caricamento della libreria...';
@@ -140,9 +309,9 @@
                         progressRatio.textContent = `${percentage}%`;
                     });
 
-                    progressText.textContent = 'Conversione in corso... (potrebbe richiedere tempo)';
+                    progressText.textContent = 'Conversione in corso...';
                     await ffmpeg.run('-i', selectedFile.name, '-c:v', 'libvpx-vp9', '-b:v', '1M', '-c:a', 'libopus', 'output.webm');
-                    
+
                     progressText.textContent = 'Finalizzazione...';
                     const data = ffmpeg.FS('readFile', 'output.webm');
                     const videoUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/webm' }));
@@ -154,12 +323,12 @@
 
                 } catch (error) {
                     console.error(error);
-                    progressText.textContent = 'Si è verificato un errore durante la conversione.';
-                    setTimeout(resetUI, 3000);
+                    progressText.textContent = 'Errore durante la conversione.';
+                    alert('Si è verificato un errore durante la conversione. Controlla la console per dettagli.');
+                    setTimeout(resetUI, 1000);
                 }
             });
 
-            // Gestione del pulsante "Converti un altro"
             convertAnotherBtn.addEventListener('click', resetUI);
 
             function resetUI() {
@@ -169,16 +338,18 @@
                 convertBtn.disabled = true;
                 outputArea.classList.add('hidden');
                 inputArea.classList.remove('hidden');
+                progressArea.classList.add('hidden');
                 progressBar.style.width = '0%';
                 progressRatio.textContent = '0%';
                 if (videoPreview.src) {
                     URL.revokeObjectURL(videoPreview.src);
+                    videoPreview.src = '';
                 }
             }
         };
 
-        // Esegue lo script di inizializzazione solo dopo che la pagina è completamente caricata
         window.addEventListener('load', initializeConverter);
     </script>
 </body>
+
 </html>

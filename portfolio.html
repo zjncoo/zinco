@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>portfolio - zinco</title>
-  
+
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="NUS/nus.css" />
 
   <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-  
+  <script src="projects-data.js?v=21" defer></script>
+
 
   <style>
     .download-section {
@@ -42,7 +44,7 @@
       <h1 id="hero-title">portfolio</h1>
     </section>
   </div>
-  
+
   <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
   <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
   <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
@@ -54,9 +56,9 @@
         <a href="about/about.html" class="menu-link">about me</a>
         <a href="contact.html" class="menu-link">contacts</a>
         <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
-  
+
         <div id="search-bar-container">
-          <button id="search-button" class="search-icon cursor-target">🔍</button>
+          <button id="search-button" class="search-icon cursor-target">search</button>
           <div id="search-overlay" class="hidden">
             <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
           </div>
@@ -102,7 +104,7 @@
       </div>
       <div id="book-controls">
         <button id="prev-page" class="btn btn--solid-dark cursor-target">←</button>
-        <div class="page-indicator-container"> 
+        <div class="page-indicator-container">
           <span id="pageLabel">Pagina</span>
           <span id="pageNumbers" class="page-num-display">1</span>
           <input type="number" id="pageInput" class="page-num-input" />
@@ -113,28 +115,34 @@
     </div>
 
     <div class="download-section">
-      <a href="Francesco_Zanchetta_portfolio.pdf" class="btn btn--solid-dark cursor-target" download="Francesco_Zanchetta_portfolio.pdf">
+      <a href="Francesco_Zanchetta_portfolio.pdf" class="btn btn--solid-dark cursor-target"
+        download="Francesco_Zanchetta_portfolio.pdf">
         Download Portfolio
       </a>
     </div>
-   
+
   </main>
 
 
 
 
   <footer>
-    <div class="cookie-banner" id="cookieBanner"><span>my website uses <a href="cookies.html" class="cookie-link">cookies</a></span><span class="close-btn cursor-target" id="closeCookie">✕</span></div>
+    <div class="cookie-banner" id="cookieBanner"><span>my website uses <a href="cookies.html"
+          class="cookie-link">cookies</a></span><span class="close-btn cursor-target" id="closeCookie">✕</span></div>
     <div class="footer-content">
       <a href="index.html" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
-      <div class="footer-text"><p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a></div>
+      <div class="footer-text">
+        <p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+      </div>
     </div>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="index.js" defer></script>
+
+  <script src="scripts_components/book_container.js" defer></script>
   
-  <script src="scripts_components/book_container.js" defer></script> <script src="../scripts_components/book_component.js" defer></script>
 
 </body>
+
 </html>

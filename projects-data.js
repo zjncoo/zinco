@@ -23,7 +23,17 @@ const allProjectsData = [
     category: "publications"
   },
   {
-    title: "Fotografie",
+    title: "FOMO",
+    link: "publications/fomo/fomo.html",
+    category: "publications"
+  },
+  {
+    title: "ZOOM",
+    link: "publications/zoom/zoom.html",
+    category: "publications"
+  },
+  {
+    title: "Fotografia",
     link: "publications/fotografie_come_lettere_di_un_alfabeto/fotografia.html",
     category: "publications"
   },
@@ -58,6 +68,11 @@ const allProjectsData = [
     category: "branding"
   },
   {
+    title: "Dranks",
+    link: "dranks/dranks.html",
+    category: "branding"
+  },
+  {
     title: "Gizeta Website",
     link: "https://www.gizeta-zanchetta.it/home",
     category: "websites"
@@ -81,5 +96,25 @@ const allProjectsData = [
     title: "Web Design Exam",
     link: "UNI YEAR 1/web_design/SITO ESAME/index.html",
     category: "uni year 1"
+  },
+  {
+    title: "contrast_checker",
+    link: "ALGORYTHMS/contrast_checker/contrast_checker.html",
+    category: "algorithms"
+  },
+  {
+    title: "WebP Converter",
+    link: "ALGORYTHMS/webp/converter.html",
+    category: "algorithms"
+  },
+  {
+    title: "Card Generator",
+    link: "ALGORYTHMS/cardgenerator.html",
+    category: "algorithms"
+  },
+  {
+    title: "WebM Converter",
+    link: "ALGORYTHMS/webm.html",
+    category: "algorithms"
   }
 ];
