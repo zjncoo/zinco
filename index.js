@@ -4,7 +4,7 @@
 const setupPageTransitions = () => {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
-  const links = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"]):not(.search-result-link)');
+  const links = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([download]):not([href^="mailto:"]):not([href^="tel:"]):not(.search-result-link)');
   links.forEach(link => {
     link.addEventListener('click', (e) => {
       const destination = link.getAttribute('href');
@@ -118,6 +118,50 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("click", handleClickOutside);
   }
 
+  // --- GESTIONE SMOOTH SCROLL ANCORE ---
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (!targetId || !targetId.startsWith('#') || targetId === '#') return;
+
+      try {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+
+          // Chiudi il menu a tendina se aperto
+          if (dropdownMenu && dropdownMenu.classList.contains("open")) {
+            dropdownMenu.classList.remove("open");
+            if (moreButton) {
+              moreButton.textContent = "more";
+              moreButton.classList.remove("open");
+            }
+          }
+
+          // // Fallback/Delay: Attendiamo chiusura menu
+          setTimeout(() => {
+            if (targetId === '#contact-footer') {
+              // Seleziona tutto il footer. Visto che in desktop è fixed, l'offset è strano, quindi scrolliamo al document bottom
+              if (window.lenis) {
+                window.lenis.scrollTo('bottom', { duration: 1.2, force: true });
+              } else {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+              }
+            } else {
+              if (window.lenis) {
+                window.lenis.scrollTo(targetElement, { offset: 0, duration: 1.2, force: true });
+              } else {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          }, 150);
+        }
+      } catch (err) {
+        // Ignora errori di selettore se targetId non è valido
+      }
+    });
+  });
+
   // --- GESTIONE COOKIE BANNER ---
   const closeCookieButton = document.getElementById('closeCookie');
   const cookieBanner = document.getElementById('cookieBanner');
@@ -127,10 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- LOGICA COMPLETA PER RICERCA, FILTRI E SURPRISE ME ---
   const allProjects = typeof allProjectsData !== 'undefined' ? allProjectsData : [];
-  const searchButton = document.getElementById('search-button');
-  const searchOverlay = document.getElementById('search-overlay');
-  const searchBar = document.getElementById('search-bar');
-  const closeSearchButton = document.getElementById('closeSearch');
+  const searchBarContainer = document.getElementById('search-bar-container');
   const searchInput = document.getElementById('search-input');
   const suggestionsList = document.getElementById('search-suggestions');
   const filterSelectBtn = document.getElementById('category-select');
@@ -189,35 +230,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  if (searchButton && searchOverlay && searchBar) {
-    const openSearch = () => {
-      displayFilteredProjects();
-      searchOverlay.classList.remove('hidden');
-      searchBar.classList.remove('hidden');
-      document.body.classList.add('search-is-active');
-      searchInput.focus();
-    };
+  if (searchBarContainer && searchInput) {
+    const dropdownMenu = document.getElementById('dropdownMenu'); // get dropdown to add class
+
     const closeSearch = () => {
-      searchOverlay.classList.add('hidden');
-      searchBar.classList.add('hidden');
-      document.body.classList.remove('search-is-active');
+      suggestionsList.innerHTML = '';
+      suggestionsList.classList.remove('active');
+      if (dropdownMenu) dropdownMenu.classList.remove('search-is-active');
     };
-    searchButton.addEventListener('click', openSearch);
-    closeSearchButton.addEventListener('click', closeSearch);
-    searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
-    searchInput.addEventListener('input', displayFilteredProjects);
-    filterSelectBtn.addEventListener('click', (e) => { e.stopPropagation(); filterOptionsContainer.classList.toggle('show'); });
-    document.addEventListener('click', () => { filterOptionsContainer.classList.remove('show'); });
-    filterOptions.forEach(option => {
-      option.addEventListener('click', (e) => {
-        e.preventDefault();
-        currentFilter = e.target.dataset.filter;
-        if (filterSelectBtn.querySelector('span')) {
-          filterSelectBtn.querySelector('span').textContent = e.target.textContent;
-        }
-        displayFilteredProjects();
-      });
+
+    searchInput.addEventListener('input', () => {
+      displayFilteredProjects();
+      if (searchInput.value.trim() !== '') {
+        suggestionsList.classList.add('active');
+        if (dropdownMenu) dropdownMenu.classList.add('search-is-active');
+      } else {
+        closeSearch();
+      }
     });
+
+    // Close suggestions if clicked outside the search bar container
+    document.addEventListener('click', (e) => {
+      if (!searchBarContainer.contains(e.target)) {
+        closeSearch();
+      }
+    });
+
+    if (filterSelectBtn && filterOptionsContainer) {
+      filterSelectBtn.addEventListener('click', (e) => { e.stopPropagation(); filterOptionsContainer.classList.toggle('show'); });
+      document.addEventListener('click', () => { filterOptionsContainer.classList.remove('show'); });
+      filterOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentFilter = e.target.dataset.filter;
+          if (filterSelectBtn.querySelector('span')) {
+            filterSelectBtn.querySelector('span').textContent = e.target.textContent;
+          }
+          displayFilteredProjects();
+        });
+      });
+    }
   }
 
   const randomProjectButton = document.getElementById('randomProjectButton');
@@ -268,5 +320,100 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { root: photoGrid, threshold: 0.7 });
       items.forEach(item => { observer.observe(item); });
     }
+  }
+
+  // --- REVEAL FOOTER LOGIC ---
+  const siteMain = document.querySelector('.site-main-content');
+  const revealFooter = document.querySelector('.reveal-footer');
+
+  if (siteMain && revealFooter) {
+    const updateFooterMargin = () => {
+      // Get the height of the footer
+      const footerHeight = revealFooter.offsetHeight;
+      // Set the margin-bottom of the main content so the scroll goes far enough
+      siteMain.style.marginBottom = `${footerHeight}px`;
+    };
+
+    // Calculate on load
+    updateFooterMargin();
+
+    // Recalculate on window resize
+    window.addEventListener('resize', updateFooterMargin);
+
+    // Fallback recalculation after a short delay (for dynamic image loading)
+    setTimeout(updateFooterMargin, 500);
+    setTimeout(updateFooterMargin, 1500);
+
+    // Sometimes images load later and change footer height, so observe footer resizes
+    if (window.ResizeObserver) {
+      new ResizeObserver(updateFooterMargin).observe(revealFooter);
+
+      // Also observe changes in siteMain to adjust if dynamic content is loaded (e.g. from JS)
+      new ResizeObserver(updateFooterMargin).observe(siteMain);
+    }
+
+    // Hide fixed elements when footer is visible
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.classList.add('footer-visible');
+        } else {
+          document.body.classList.remove('footer-visible');
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1 // Trigger when at least 10% of footer is visible
+    });
+
+    footerObserver.observe(revealFooter);
+  }
+
+  // --- GESTIONE INVIO FORM CONTATTI (FETCH) ---
+  const contactForm = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const successMessage = document.getElementById('successMessage');
+  const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+  const btnLoader = submitBtn ? submitBtn.querySelector('.btn-loader') : null;
+
+  if (contactForm && submitBtn) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Mostra loader
+      if (btnText) btnText.style.display = 'none';
+      if (btnLoader) btnLoader.style.display = 'inline-block';
+      submitBtn.disabled = true;
+      successMessage.style.display = 'none';
+
+      const formData = new FormData(contactForm);
+      const googleFormUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdosHY4D0PIyXIjul20uFgBnjrAHutvH6bL4CPC4MuIQFfwbQ/formResponse";
+
+      fetch(googleFormUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      })
+        .then(() => {
+          // Successo
+          contactForm.reset();
+          successMessage.style.display = 'block';
+        })
+        .catch((error) => {
+          console.error("Error submitting form", error);
+          alert("There was an error sending your message. Please try again or email directly.");
+        })
+        .finally(() => {
+          // Ripristina bottone
+          if (btnText) btnText.style.display = 'inline-block';
+          if (btnLoader) btnLoader.style.display = 'none';
+          submitBtn.disabled = false;
+
+          // Nascondi messaggio dopo 5 secondi
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 5000);
+        });
+    });
   }
 });

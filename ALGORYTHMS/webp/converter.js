@@ -3,8 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     const previewContainer = document.getElementById('preview-container');
 
-    // Apre la finestra di dialogo per la selezione dei file
-    uploadArea.addEventListener('click', () => fileInput.click());
+    // Apre la finestra di dialogo per la selezione dei file evitando loop
+    uploadArea.addEventListener('click', (e) => {
+        if (e.target !== fileInput) {
+            fileInput.click();
+        }
+    });
 
     // Gestione del drag & drop
     uploadArea.addEventListener('dragover', (e) => {
@@ -27,21 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInput.addEventListener('change', () => {
         const files = fileInput.files;
         handleFiles(files);
+        fileInput.value = ''; // Resetta per permettere di caricare lo stesso file
     });
 
     const handleFiles = (files) => {
         // Ora la funzione non svuota più i risultati precedenti
-        
+
         // Controlla se ci sono file
         if (!files || files.length === 0) {
-            alert("Nessun file selezionato.");
+            alert("No file selected.");
             return;
         }
 
         // Processa ogni file
         Array.from(files).forEach(file => {
             if (!file.type.startsWith('image/')) {
-                console.warn(`${file.name} non è un'immagine e sarà ignorato.`);
+                console.warn(`${file.name} is not an image and will be ignored.`);
                 return;
             }
             convertImageToWebP(file);
@@ -69,18 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Crea l'elemento di anteprima e download
                     const previewItem = document.createElement('div');
                     previewItem.classList.add('preview-item');
-                    
+
                     const newFileName = file.name.replace(/\.[^/.]+$/, "") + ".webp";
 
                     previewItem.innerHTML = `
-                        <img src="${webpUrl}" alt="Anteprima di ${newFileName}">
+                        <img src="${webpUrl}" alt="Preview of ${newFileName}">
                         <div class="info">
                             <strong>${newFileName}</strong><br>
                             (${originalSize} KB → ${newSize} KB)
                         </div>
                         <a href="${webpUrl}" download="${newFileName}" class="download-btn cursor-target">Download</a>
                     `;
-                    
+
                     previewContainer.appendChild(previewItem);
 
                 }, 'image/webp', 0.9); // 0.9 è la qualità (da 0 a 1)

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- DATABASE DEI PROGETTI ---
     // Aggiungi qui i tuoi nuovi progetti
     const progetti = [
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             projectCard.innerHTML = `
                 <div class="card-image-container">
-                    <img src="${progetto.imageUrl}" alt="Anteprima di ${progetto.title}" loading="lazy">
+                    <img src="${progetto.imageUrl}" alt="Preview of ${progetto.title}" loading="lazy">
                 </div>
                 <div class="card-content">
                     <h3>${progetto.title}</h3>
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="card-category">${progetto.category}</span>
                 </div>
             `;
-            
+
             gridContainer.appendChild(projectCard);
         });
     }

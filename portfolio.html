@@ -2,14 +2,23 @@
 <html lang="it">
 
 <head>
+  <title>portfolio - zinco</title>
+  <meta name="description" content="Zinco is a multidisciplinary communication design studio specializing in branding, visual design, editorial content, and web experiences. We craft bold and effective design solutions." />
+  <meta property="og:title" content="portfolio - zinco" />
+  <meta property="og:description" content="Zinco is a multidisciplinary communication design studio specializing in branding, visual design, editorial content, and web experiences. We craft bold and effective design solutions." />
+  <meta property="og:image" content="https://zjncoo.github.io/zinco/imghome/logo_zinco.svg" />
+  <meta property="og:url" content="https://zjncoo.github.io/zinco/portfolio.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>portfolio - zinco</title>
+  
 
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="NUS/nus.css" />
 
-  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
+  
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,112 +36,176 @@
 </head>
 
 <body>
-  <div id="scroll-progress-bar"></div>
-  <div id="preloader">
-    <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
-    <div class="loader-bar-container">
-      <div class="loader-bar"></div>
+  <div class="site-main-content">
+    <div id="scroll-progress-bar"></div>
+    <div id="preloader">
+      <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="vertical-line left"></div>
-  <div class="vertical-line right"></div>
-  <div class="custom-cursor" id="cursor"></div>
+    <div class="vertical-line left"></div>
+    <div class="vertical-line right"></div>
+    <div class="custom-cursor" id="cursor"></div>
 
-  <div id="hero-wrapper">
-    <section id="project-hero">
-      <h1 id="hero-title">portfolio</h1>
-    </section>
-  </div>
+    <div id="hero-wrapper">
+      <section id="project-hero">
+        <h1 id="hero-title">portfolio</h1>
+      </section>
+    </div>
 
-  <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
-  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
-  <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
-  <a href="contact.html" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+    <a href="index.html" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+    <a href="#" class="corner-button cursor-target" id="btnTopRight">menu</a>
+    <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
+    <a href="#contact-footer" class="corner-button cursor-target" id="btnBottomRight">contact</a>
 
-  <div id="dropdownMenu">
-    <div class="menu-columns">
-      <div class="menu-column left">
-        <a href="about/about.html" class="menu-link">about me</a>
-        <a href="contact.html" class="menu-link">contacts</a>
-        <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
+    <div id="dropdownMenu">
+      <div class="menu-columns">
+        <div class="menu-column left">
+          <a href="about/about.html" class="menu-link">about me</a>
+          <a href="#contact-footer" class="menu-link">contacts</a>
+          <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorithms</a>
 
-        <div id="search-bar-container">
-          <button id="search-button" class="search-icon cursor-target">search</button>
-          <div id="search-overlay" class="hidden">
-            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
-          </div>
-          <div id="search-bar" class="hidden">
-            <input type="text" id="search-input" placeholder="browse projects..." />
-            <div id="filters" class="filters">
-              <button id="category-select" onclick="toggleDropdown()">
-                <span>Filters</span>
-                <span class="arrow">▼</span>
-              </button>
-              <div id="category-select-options">
-                <a href="#" data-filter="all" class="filter-option">All</a>
-                <a href="#" data-filter="branding" class="filter-option">branding</a>
-                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
-              </div>
-            </div>
+          <div id="search-bar-container">
+            <input type="text" id="search-input" class="search-input-line" placeholder="browse projects..."
+              autocomplete="off" />
             <ul id="search-suggestions" class="suggestions-list"></ul>
           </div>
         </div>
-      </div>
-      <div class="menu-column right">
-        <a href="portfolio.html" class="menu-link">portfolio</a>
-        <a href="publications/publications.html" class="menu-link">publications</a>
-        <a href="#" class="menu-link">clients</a>
-      </div>
-    </div>
-
-    <div class="menu-bottom">
-      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
-      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
-    </div>
-  </div>
-
-  <main>
-    <div class="book-container" data-pdf-src="Francesco_Zanchetta_portfolio.pdf" data-layout="spread">
-      <div id="viewer-header">
-        <h2>portfolio</h2>
-        <p>personal portfolio of Francesco Zanchetta</p>
-      </div>
-      <div id="book-viewer">
-        <canvas id="canvas-left" class="page-canvas"></canvas>
-        <canvas id="canvas-right" class="page-canvas"></canvas>
-      </div>
-      <div id="book-controls">
-        <button id="prev-page" class="btn btn--solid-dark cursor-target">←</button>
-        <div class="page-indicator-container">
-          <span id="pageLabel">Pagina</span>
-          <span id="pageNumbers" class="page-num-display">1</span>
-          <input type="number" id="pageInput" class="page-num-input" />
-          <span id="pageTotal">/ </span>
+        <div class="menu-column right">
+          <a href="portfolio.html" class="menu-link">portfolio</a>
+          <a href="publications/publications.html" class="menu-link">publications</a>
+          <a href="#" class="menu-link">clients</a>
         </div>
-        <button id="next-page" class="btn btn--solid-dark cursor-target">→</button>
+      </div>
+
+      <div class="menu-bottom">
+        <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
+        <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       </div>
     </div>
 
-    <div class="download-section">
-      <a href="Francesco_Zanchetta_portfolio.pdf" class="btn btn--solid-dark cursor-target"
-        download="Francesco_Zanchetta_portfolio.pdf">
-        Download Portfolio
-      </a>
+    <main>
+      <div class="book-container" data-pdf-src="Francesco_Zanchetta_portfolio.pdf" data-layout="spread">
+        <div id="viewer-header">
+          <h2>portfolio</h2>
+          <p>personal portfolio of Francesco Zanchetta</p>
+        </div>
+        <div id="book-viewer">
+          <canvas id="canvas-left" class="page-canvas"></canvas>
+          <canvas id="canvas-right" class="page-canvas"></canvas>
+        </div>
+        <div id="book-controls">
+          <button id="prev-page" class="btn btn--solid-dark cursor-target">←</button>
+          <div class="page-indicator-container">
+            <span id="pageLabel">Page</span>
+            <span id="pageNumbers" class="page-num-display">1</span>
+            <input type="number" id="pageInput" class="page-num-input" />
+            <span id="pageTotal">/ </span>
+          </div>
+          <button id="next-page" class="btn btn--solid-dark cursor-target">→</button>
+        </div>
+      </div>
+
+      <div class="download-section">
+        <a href="Francesco_Zanchetta_portfolio.pdf" class="btn btn--solid-dark cursor-target"
+          download="Francesco_Zanchetta_portfolio.pdf">
+          Download Portfolio
+        </a>
+      </div>
+
+    </main>
+
+
+
+
+  </div><!-- /site-main-content -->
+  <footer id="contact-footer" class="reveal-footer">
+    <div class="footer-top">
+      <div class="footer-contact-info">
+        <h2>Keep moving, keep exploring.</h2>
+        <br>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email"
+          style="color: black; text-decoration: underline;">zinco.work@gmail.com</a>
+        <div class="footer-socials">
+          <p class="social-links-text">
+            <a href="https://www.instagram.com/zjncoo/" target="_blank">INSTAGRAM</a> /
+            <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank">LINKEDIN</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-form-wrapper">
+        <script>var submitted = false;</script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+          onload="if(submitted) { document.getElementById('successMessage').style.display='block'; document.getElementById('placeholder-form').reset(); submitted=false; }"></iframe>
+
+        <form class="custom-contact-form"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdosHY4D0PIyXIjul20uFgBnjrAHutvH6bL4CPC4MuIQFfwbQ/formResponse"
+          method="POST" target="hidden_iframe" id="placeholder-form" onsubmit="submitted=true;">
+          <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem;">Let's talk</h4>
+
+          <div class="input-group">
+            <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name" required>
+          </div>
+          <div class="input-group">
+            <input type="email" id="entry.422215982" name="entry.422215982" placeholder="Your Email" required>
+          </div>
+          <div class="input-group">
+            <textarea id="entry.1922030234" name="entry.1922030234" placeholder="Your Message" rows="3"
+              required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" style="margin-bottom: 1rem;">Send Message</button>
+          <div id="successMessage" style="display:none; color: black; font-weight: 500; font-size: 0.9rem;">Thank you!
+            Your message has been sent.</div>
+        </form>
+      </div>
     </div>
 
-  </main>
+    <!-- The Infinite Marquee -->
+    <div class="footer-marquee-container">
+      <div class="footer-marquee">
+        <!-- We duplicate the content to make the scroll seamless -->
+        <div class="marquee-content">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+      </div>
+    </div>
 
-
-
-
-  <footer>
-    <div class="cookie-banner" id="cookieBanner"><span>my website uses <a href="cookies.html"
-          class="cookie-link">cookies</a></span><span class="close-btn cursor-target" id="closeCookie">✕</span></div>
-    <div class="footer-content">
-      <a href="index.html" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
-      <div class="footer-text">
-        <p>&copy; 2025 zinco</p><a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-bottom-copyright">
+        &copy; 2026 ZINCO STUDIO
       </div>
     </div>
   </footer>
@@ -141,7 +214,7 @@
   <script src="index.js" defer></script>
 
   <script src="scripts_components/book_container.js" defer></script>
-  
+
 
 </body>
 

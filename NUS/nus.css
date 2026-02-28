@@ -27,60 +27,68 @@
 
 /* Abbassa il livello dei bottoni globali solo in questa pagina */
 .corner-button {
-    z-index: 40;
+  z-index: 40;
 }
 
 #btnTopRight {
-    z-index: 1000;
+  z-index: 1000;
 }
 
 #hero-wrapper {
-  height: 100vh;
-  min-height: 600px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: white;
   position: relative;
-  z-index: 50; /* << Aggiungi questa riga */
+  z-index: 50;
+  /* << Aggiungi questa riga */
 }
 
 #project-hero {
-  flex-grow: 1; 
+  flex-grow: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: 40px;
+  padding: 40px 40px 40px calc(27px + 0.88vw);
   border-bottom: 2px solid black;
 }
 
 /* Contenitore per posizionare titolo e freccia insieme */
 .hero-title-container {
   position: relative;
-  padding-top: 80px; /* Spazio sopra al titolo per la freccia */
+  padding-top: 80px;
+  /* Spazio sopra al titolo per la freccia */
 }
 
 /* Stile per la freccia di scorrimento */
 .scroll-down-arrow {
   position: absolute;
   top: 0;
-  left: 2px;
+  left: 0;
   text-decoration: none;
   color: black;
-  font-size: 3rem; 
+  font-size: 3rem;
   line-height: 1;
   animation: bounce 2.5s ease-in-out infinite;
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-20px);
   }
+
   60% {
     transform: translateY(-10px);
   }
@@ -92,7 +100,8 @@
   /* Clamp() per un font-size fluido e controllato */
   font-size: clamp(3.5rem, 8vw, 7rem);
   margin: 0;
-  max-width: 60%; /* Forza l'andata a capo su schermi larghi */
+  max-width: 60%;
+  /* Forza l'andata a capo su schermi larghi */
   line-height: 0.9;
   letter-spacing: -0.02em;
 }
@@ -103,7 +112,8 @@
   border-bottom: 2px solid black;
   box-sizing: border-box;
   background-color: black;
-  z-index: 2; /* Abbassato per non sovrapporsi a menu di navigazione futuri */
+  z-index: 2;
+  /* Abbassato per non sovrapporsi a menu di navigazione futuri */
 }
 
 #glance-grid {
@@ -124,16 +134,17 @@
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.glance-item:hover { 
-  background-color: black; 
+.glance-item:hover {
+  background-color: black;
   transform: scale(1.05);
 }
-.glance-item:hover img { 
-  opacity: 0.7; 
+
+.glance-item:hover img {
+  opacity: 0.7;
 }
 
 .glance-item img {
-  width: 75%; 
+  width: 75%;
   height: 75%;
   object-fit: contain;
   transition: opacity 0.2s ease;
@@ -142,7 +153,8 @@
 .video-container {
   position: relative;
   width: 100%;
-  line-height: 0; /* Rimuove spazi indesiderati sotto il video */
+  line-height: 0;
+  /* Rimuove spazi indesiderati sotto il video */
 }
 
 #myVideo {
@@ -154,7 +166,7 @@
 .video-controls {
   position: absolute;
   bottom: 12%;
-  left: 40px; 
+  left: 40px;
   display: flex;
   gap: 10px;
   z-index: 10;
@@ -166,8 +178,9 @@
  * ============================================================= */
 .branding-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colonne su desktop */
-  gap: 0px; 
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 colonne su desktop */
+  gap: 0px;
   background-color: white;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -176,7 +189,8 @@
 }
 
 .branding-header {
-  grid-column: 1 / -1; /* Si estende su tutte le colonne */
+  grid-column: 1 / -1;
+  /* Si estende su tutte le colonne */
   background-color: black;
   color: white;
   padding: 20px 40px;
@@ -186,12 +200,13 @@
 .branding-header h2 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  font-size: 1.5rem; /* 24px */
+  font-size: 1.5rem;
+  /* 24px */
   margin: 0;
 }
 
 .branding-item {
-  aspect-ratio: 1 / 1; 
+  aspect-ratio: 1 / 1;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -201,10 +216,11 @@
   position: relative;
   transition: background-color 0.2s ease, color 0.2s ease;
   color: black;
-  outline: 2px solid black; 
+  outline: 2px solid black;
   padding: 30px;
   text-align: center;
-  box-sizing: border-box; /* Assicura che il padding sia incluso nelle dimensioni */
+  box-sizing: border-box;
+  /* Assicura che il padding sia incluso nelle dimensioni */
 }
 
 .branding-item:hover {
@@ -222,13 +238,15 @@
 .branding-item h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
-  font-size: 1rem; /* 16px */
+  font-size: 1rem;
+  /* 16px */
   margin: 0 0 15px 0;
 }
 
 .branding-item p {
   font-family: 'Inter', sans-serif;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   max-width: 35ch;
   text-align: center;
   line-height: 1.5;
@@ -237,10 +255,11 @@
 /* Elemento a tutta larghezza (es. immagine app) */
 .branding-item.full-width-app {
   grid-column: 1 / -1;
-  aspect-ratio: unset; /* Rimuove il rapporto 1:1 */
+  aspect-ratio: unset;
+  /* Rimuove il rapporto 1:1 */
   height: auto;
   padding: 0;
-  width: 100%; 
+  width: 100%;
   outline: none;
 }
 
@@ -251,7 +270,8 @@
   max-height: none;
   object-fit: cover;
   margin: 0;
-  display: block; /* Rimuove eventuali spazi sotto l'immagine */
+  display: block;
+  /* Rimuove eventuali spazi sotto l'immagine */
 }
 
 .branding-item.full-width-app h3,
@@ -260,7 +280,8 @@
 }
 
 .branding-item.full-width-app:hover {
-  background-color: transparent; /* Nessun cambio di colore al hover */
+  background-color: transparent;
+  /* Nessun cambio di colore al hover */
 }
 
 /* * ===================================
@@ -295,18 +316,21 @@
 .back-to-link {
   display: block;
   font-family: 'Inter', sans-serif;
-  font-weight: 400; /* Corpo normale */
-  font-size: 1rem;  /* 16px */
+  font-weight: 400;
+  /* Corpo normale */
+  font-size: 1rem;
+  /* 16px */
   color: black;
   text-decoration: underline;
   text-underline-offset: 4px;
-  
+
   /* Spazio tra il link e il titolo h1 sotto di lui */
-  margin-bottom: 1.5rem; 
+  margin-bottom: 1.5rem;
 }
 
 .back-to-link:hover {
-  opacity: 0.6; /* Un leggero effetto al passaggio */
+  opacity: 0.6;
+  /* Un leggero effetto al passaggio */
 }
 
 .page-num-display {
@@ -314,16 +338,20 @@
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   cursor: pointer;
-  padding: 0 3px; /* Aggiunge un po' di spazio */
+  padding: 0 3px;
+  /* Aggiunge un po' di spazio */
 }
+
 .page-num-display:hover {
-  color: #555; /* Leggero cambio colore al passaggio del mouse */
+  color: #555;
+  /* Leggero cambio colore al passaggio del mouse */
 }
 
 /* Stile per l'input, nascosto di default */
 .page-num-input {
   display: none;
-  width: 50px; /* Larghezza per 3-4 cifre */
+  width: 50px;
+  /* Larghezza per 3-4 cifre */
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   text-align: center;
@@ -336,6 +364,7 @@
 .page-num-input {
   -moz-appearance: textfield;
 }
+
 .page-num-input::-webkit-outer-spin-button,
 .page-num-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -383,16 +412,25 @@
 }
 
 .page-canvas {
+  max-width: 90vw;
   max-height: 80vh;
-  max-width: 50%;
   width: auto;
   height: auto;
   border: 2px solid black;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+[data-layout="single"] .page-canvas {
+  max-width: 90vw;
+}
+
+[data-layout="spread"] .page-canvas {
+  max-width: 50%;
 }
 
 .page-canvas.hidden {
-  border: none;
-  visibility: hidden;
+  display: none;
 }
 
 #book-controls {
@@ -411,99 +449,61 @@
 
 
 /* ================================================================ */
-/* === CODICE FINALE: PANNELLO ALLINEATO IN BASSO + 2 COLONNE   === */
+/* === CODICE FINALE: SEZIONE INFO PROGETTO INLINE             === */
 /* ================================================================ */
 
-/* Il pannello a schermo intero */
-.info-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 40;
-    background-color: #f8f9fa;
-    
-    /* Stato iniziale */
-    transform: translateY(100%); /* Nascosto sotto */
-    opacity: 0;                  /* MODIFICA: Completamente trasparente */
-    pointer-events: none;        /* MODIFICA: Non interattivo con il mouse */
-
-    /* Transizione fluida per transform e opacity */
-    transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+.project-info-section {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 80px 40px 80px calc(27px + 0.88vw);
+  box-sizing: border-box;
 }
 
-/* Stato aperto */
-.info-panel.is-open {
-    transform: translateY(0);    /* In posizione */
-    opacity: 1;                  /* MODIFICA: Completamente visibile */
-    pointer-events: auto;        /* MODIFICA: Interattivo con il mouse */
+.project-info-content {
+  max-width: 1200px;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  text-align: left;
+}
+
+.project-info-content h2 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.project-info-content p {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.project-info-text {
+  column-count: 2;
+  column-gap: 4rem;
 }
 
 /* === MODIFICA PER ALLINEARE IN BASSO === */
-.info-panel-content-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    padding: 80px 40px;
-    
-    /* AGGIUNGI QUESTE DUE RIGHE */
-    display: flex;
-    align-items: flex-end;
-}
-
-/* Contenitore del testo a colonne (invariato) */
-.info-panel-text-content {
-    column-count: 1;
-    height: auto; /* L'altezza ora è automatica */
-}
-
-/* Bottone 'Apri/Chiudi Info' (invariato) */
-.info-panel-trigger-button {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 40;
-    background-color: white;
-    color: black;
-    border: 2px solid black;
-    border-radius: 0;
-    padding: 10px 20px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.info-panel-trigger-button:hover {
-    background-color: black;
-    color: white;
-}
-
-
 /* === MEDIA QUERIES === */
 
 /* Per schermi larghi (es. desktop) */
-@media (min-width: 768px) {
-    .info-panel-text-content {
-        column-count: 2;
-        column-gap: 4rem;
-    }
+@media (max-width: 1024px) {
+  .project-info-text {
+    column-count: 1;
+    column-gap: 0;
+  }
 }
 
 /* Per schermi piccoli (es. smartphone) */
 @media (max-width: 767px) {
-    .info-panel-trigger-button {
-        bottom: 80px;
-    }
-    .info-panel-content-wrapper {
-        padding: 80px 20px 40px 20px;
-    }
+  .project-info-section {
+    padding: 60px 20px 60px 27px;
+  }
 }
+
 
 /*
  * ===================================
@@ -522,12 +522,18 @@
 
 /* --- Tablet Orizzontali (fino a 1024px) --- */
 @media (max-width: 1024px) {
-  #project-hero { 
-    padding: 30px; 
+  .project-info-section {
+    padding-left: 29px;
   }
 
-  .branding-grid { 
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne per tablet */
+  #project-hero {
+    padding: 30px;
+    padding-left: 29px;
+  }
+
+  .branding-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colonne per tablet */
   }
 
   .branding-item {
@@ -538,31 +544,35 @@
 
 /* --- Tablet Verticali e Smartphone Grandi (fino a 768px) --- */
 @media (max-width: 768px) {
-  #project-hero { 
-    padding: 20px; 
-    justify-content: center; /* Centra verticalmente il contenuto nell'area rimanente */
+  #project-hero {
+    padding: 20px 20px 20px 27px;
+    justify-content: center;
+    /* Centra verticalmente il contenuto nell'area rimanente */
   }
 
-  .hero-title-container { 
-    padding-top: 60px; 
+  .hero-title-container {
+    padding-top: 60px;
   }
 
-  .scroll-down-arrow { 
-    font-size: 2.5rem; 
+  .scroll-down-arrow {
+    font-size: 2.5rem;
   }
 
   #project-hero h1 {
-    max-width: 100%; /* Occupa tutta la larghezza */
-    font-size: clamp(2.5rem, 12vw, 4.5rem); /* Ricalibra il font per schermi medi */
+    max-width: 100%;
+    /* Occupa tutta la larghezza */
+    font-size: clamp(2.5rem, 12vw, 4.5rem);
+    /* Ricalibra il font per schermi medi */
   }
 
-  .video-controls { 
-    left: 20px; 
+  .video-controls {
+    left: 20px;
     bottom: 8%;
   }
 
-  .branding-grid { 
-    grid-template-columns: repeat(2, 1fr); /* 2 colonne */
+  .branding-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 colonne */
   }
 
   .branding-header {
@@ -580,11 +590,11 @@
   /* ======================================= */
   /* === INIZIO BLOCCO CON LA CORREZIONE === */
   /* ======================================= */
-  
+
   #book-viewer {
     /* Non serve più 'flex-direction: column' perché nascondiamo la seconda pagina */
   }
-  
+
   .page-canvas {
     /*
      * CORREZIONE: Invece di forzare una larghezza fissa (che causa lo "stretch"
@@ -592,14 +602,16 @@
      * larghezza (vw) che in altezza (vh). Il browser manterrà le proporzioni
      * corrette rispettando questi limiti.
      */
-    max-width: 90vw;   /* Limite larghezza: 90% della larghezza della finestra */
-    max-height: 75vh;  /* Limite altezza: 75% dell'altezza della finestra */
+    max-width: 90vw;
+    /* Limite larghezza: 90% della larghezza della finestra */
+    max-height: 75vh;
+    /* Limite altezza: 75% dell'altezza della finestra */
 
     /* Le prossime due regole vengono ereditate, ma le esplicito per chiarezza */
     width: auto;
     height: auto;
   }
-  
+
   #canvas-right.page-canvas {
     /* Corretto, nasconde la seconda pagina su mobile per una visualizzazione singola */
     display: none;
@@ -616,14 +628,16 @@
   #hero-wrapper {
     min-height: 500px;
   }
-  
+
   #project-hero h1 {
-    font-size: clamp(2rem, 15vw, 3rem); /* Ancora più piccolo per schermi stretti */
+    font-size: clamp(2rem, 15vw, 3rem);
+    /* Ancora più piccolo per schermi stretti */
     line-height: 1;
   }
 
-  .branding-grid { 
-    grid-template-columns: 1fr; /* 1 colonna per smartphone */
+  .branding-grid {
+    grid-template-columns: 1fr;
+    /* 1 colonna per smartphone */
   }
 
   #glance-grid {
@@ -632,7 +646,8 @@
   }
 
   .book-container {
-    padding: 40px 15px; /* Padding minimo per schermi molto stretti */
+    padding: 40px 15px;
+    /* Padding minimo per schermi molto stretti */
   }
 
   #viewer-header h2 {
@@ -640,7 +655,8 @@
   }
 
   #book-controls {
-    flex-wrap: wrap; /* Permette ai controlli di andare a capo se non c'è spazio */
+    flex-wrap: wrap;
+    /* Permette ai controlli di andare a capo se non c'è spazio */
     gap: 15px;
   }
 }

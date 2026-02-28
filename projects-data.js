@@ -1,6 +1,6 @@
 // File: projects-data.js
 
-// Questa è la lista centrale di tutti i tuoi progetti.
+// This is the central list of all your projects.
 const allProjectsData = [
   {
     title: "AM Decor",
@@ -13,13 +13,18 @@ const allProjectsData = [
     category: "branding"
   },
   {
+    title: "3M Soluzioni Immobiliari",
+    link: "3M_Soluzioni_Immobiliari/3m.html",
+    category: "branding"
+  },
+  {
     title: "Roxy Brandbook",
     link: "publications/roxy_brandbook/roxy_brandbook.html",
     category: "publications"
   },
   {
     title: "Femsvertising",
-    link: "publications/femsvertising/femsvertising.html",
+    link: "publications/femvertising/femvertising.html",
     category: "publications"
   },
   {
@@ -34,7 +39,7 @@ const allProjectsData = [
   },
   {
     title: "Fotografia",
-    link: "publications/fotografie_come_lettere_di_un_alfabeto/fotografia.html",
+    link: "publications/fotografie_come_lettere_di _un_alfabeto/fotografia.html",
     category: "publications"
   },
   {
@@ -42,11 +47,7 @@ const allProjectsData = [
     link: "UNI YEAR 1/drawing_lab/drawing.html",
     category: "uni year 1"
   },
-  {
-    title: "Design History",
-    link: "UNI YEAR 1/design_history/history.html",
-    category: "uni year 1"
-  },
+
   {
     title: "Mamma Infanzina",
     link: "https://mammainfanzina.framer.website",
@@ -94,12 +95,12 @@ const allProjectsData = [
   },
   {
     title: "Web Design Exam",
-    link: "UNI YEAR 1/web_design/SITO ESAME/index.html",
+    link: "UNI YEAR 1/web_design/SITO ESAME/PAGES/home.html",
     category: "uni year 1"
   },
   {
     title: "contrast_checker",
-    link: "ALGORYTHMS/contrast_checker/contrast_checker.html",
+    link: "ALGORYTHMS/contrast-checker.html",
     category: "algorithms"
   },
   {

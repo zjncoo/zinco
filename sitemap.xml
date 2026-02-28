@@ -1,95 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
-    <loc>https://zjncoo.github.io/zinco/</loc>
-    <priority>1.00</priority>
+    <loc>https://zjncoo.github.io/zinco/3M_Soluzioni_Immobiliari/3m.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/about/about.html</loc>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/portfolio.html</loc>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/publications/publications.html</loc>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/contact.html</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/cookies.html</loc>
-    <priority>0.30</priority>
-  </url>
-
   <url>
     <loc>https://zjncoo.github.io/zinco/ALGORYTHMS/algorythms.html</loc>
-    <priority>0.70</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/ALGORYTHMS/cardgenerator.html</loc>
-    <priority>0.60</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/ALGORYTHMS/contrast-checker.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/ALGORYTHMS/webm.html</loc>
-    <priority>0.60</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zjncoo.github.io/zinco/amdecor/amdecor.html</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/beer/beer.html</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/dranks/dranks.html</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/gizeta/gizeta.html</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/ibiza/ibiza.html</loc>
-    <priority>0.70</priority>
+    <loc>https://zjncoo.github.io/zinco/ALGORYTHMS/webp/converter.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/NUS/nus.html</loc>
-    <priority>0.70</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/ROXY/roxy.html</loc>
-    <priority>0.70</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
-
   <url>
-    <loc>https://zjncoo.github.io/zinco/publications/cos&apos;%C3%A8_un_designer/history.html</loc>
-    <priority>0.60</priority>
+    <loc>https://zjncoo.github.io/zinco/about/about.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/amdecor/amdecor.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/beer/beer.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/cookies.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/dranks/dranks.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/escapes/escapes.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/gizeta/gizeta.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/ibiza/ibiza.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/index.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/portfolio.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/publications/cos'e%CC%80_un_designer/history.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/publications/femvertising/femvertising.html</loc>
-    <priority>0.60</priority>
-  </url>
-  <url>
-    <loc>https://zjncoo.github.io/zinco/publications/fotografie_come_lettere_di_un_alfabeto/fotografia.html</loc>
-    <priority>0.60</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/publications/fomo/fomo.html</loc>
-    <priority>0.60</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/publications/fotografie_come_lettere_di%20_un_alfabeto/fotografia.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zjncoo.github.io/zinco/publications/publications.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/publications/roxy_brandbook/roxy_brandbook.html</loc>
-    <priority>0.60</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://zjncoo.github.io/zinco/publications/zoom/zoom.html</loc>
-    <priority>0.60</priority>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
-
 </urlset>

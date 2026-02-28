@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <title>3M Soluzioni Immobiliari - zinco</title>
+  <meta name="description" content="Explore 3m, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:title" content="3M Soluzioni Immobiliari - zinco" />
+  <meta property="og:description" content="Explore 3m, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:image" content="https://zjncoo.github.io/zinco/imghome/logo_zinco.svg" />
+  <meta property="og:url" content="https://zjncoo.github.io/zinco/3M_Soluzioni_Immobiliari/3m.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+
+  <link rel="stylesheet" href="../index.css" />
+  <link rel="stylesheet" href="../NUS/nus.css" />
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="site-main-content">
+
+    <div id="scroll-progress-bar"></div>
+
+    <div id="preloader">
+      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+
+    <div id="hero-wrapper">
+      <section id="project-hero">
+
+        <div class="hero-title-container">
+
+          <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+
+          <h1 id="hero-title"></h1>
+        </div>
+
+      </section>
+
+      <section id="glance-container">
+        <div id="glance-grid"></div>
+      </section>
+    </div>
+
+    <div class="vertical-line left"></div>
+    <div class="vertical-line right"></div>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
+    <a href="#" class="corner-button cursor-target" id="btnTopRight">menu</a>
+    <a href="../portfolio.html" class="corner-button cursor-target" id="btnBottomLeft">portfolio</a>
+    <a href="#contact-footer" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+
+    <div id="dropdownMenu">
+      <div class="menu-columns">
+        <div class="menu-column left">
+          <a href="../about/about.html" class="menu-link">about me</a>
+          <a href="#contact-footer" class="menu-link">contacts</a>
+          <a href="../ALGORYTHMS/algorythms.html" class="menu-link">algorithms</a>
+
+          <div id="search-bar-container">
+            <input type="text" id="search-input" class="search-input-line" placeholder="browse projects..."
+              autocomplete="off" />
+            <ul id="search-suggestions" class="suggestions-list"></ul>
+          </div>
+        </div>
+        <div class="menu-column right">
+          <a href="../portfolio.html" class="menu-link">portfolio</a>
+          <a href="../publications/publications.html" class="menu-link">publications</a>
+          <a href="#" class="menu-link">clients</a>
+        </div>
+      </div>
+
+      <div class="menu-bottom">
+        <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
+        <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+      </div>
+    </div>
+
+    <main id="sezione-progetto">
+      <!-- Non c'è video per 3M al momento
+    <div class="video-container">
+      <video id="myVideo" autoplay loop muted playsinline>
+        <source src="img/3m_brand_video.webm" type="video/webm">
+        Il tuo browser non supporta il tag video.
+      </video>
+      <div class="video-controls">
+        <button id="playPauseBtn" class="btn btn--outline-light cursor-target"></button>
+        <button id="muteBtn" class="btn btn--outline-light cursor-target"></button>
+      </div>
+    </div>
+    -->
+
+      <section class="project-info-section">
+        <div class="project-info-content">
+          <img src="img/3M_LOGO_ESTESO_1.svg" alt="3M Logo" style="width: 150px; margin-bottom: 2rem;">
+          <h2>Values</h2>
+          <div class="project-info-text">
+            <p><strong>3M Soluzioni Immobiliari - Brand Identity</strong></p>
+            <p>Real estate brand identity and property management.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="branding-grid" id="brandingGrid"></section>
+
+      <section id="figma-container"></section>
+
+      <div id="pdfViewerContainer">
+        <canvas id="pdfCanvas" data-pdf-source="3m.pdf"></canvas>
+        <div class="pdf-controls">
+          <button id="prevPage" class="btn btn--outline-dark">←</button>
+          <div id="pageIndicator">
+            Page
+            <span id="pageNum" class="page-num-display">1</span>
+            <input type="number" id="pageNumInput" class="page-num-input" />
+            of
+            <span id="pageCount"></span>
+          </div>
+          <button id="nextPage" class="btn btn--outline-dark">→</button>
+        </div>
+      </div>
+    </main>
+
+  </div><!-- /site-main-content -->
+  <footer id="contact-footer" class="reveal-footer">
+    <div class="footer-top">
+      <div class="footer-contact-info">
+        <h2>Keep moving, keep exploring.</h2>
+        <br>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email"
+          style="color: black; text-decoration: underline;">zinco.work@gmail.com</a>
+        <div class="footer-socials">
+          <p class="social-links-text">
+            <a href="https://www.instagram.com/zjncoo/" target="_blank">INSTAGRAM</a> /
+            <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank">LINKEDIN</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-form-wrapper">
+        <script>var submitted = false;</script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+          onload="if(submitted) { document.getElementById('successMessage').style.display='block'; document.getElementById('placeholder-form').reset(); submitted=false; }"></iframe>
+
+        <form class="custom-contact-form"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdosHY4D0PIyXIjul20uFgBnjrAHutvH6bL4CPC4MuIQFfwbQ/formResponse"
+          method="POST" target="hidden_iframe" id="placeholder-form" onsubmit="submitted=true;">
+          <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem;">Let's talk</h4>
+
+          <div class="input-group">
+            <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name" required>
+          </div>
+          <div class="input-group">
+            <input type="email" id="entry.422215982" name="entry.422215982" placeholder="Your Email" required>
+          </div>
+          <div class="input-group">
+            <textarea id="entry.1922030234" name="entry.1922030234" placeholder="Your Message" rows="3"
+              required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" style="margin-bottom: 1rem;">Send Message</button>
+          <div id="successMessage" style="display:none; color: black; font-weight: 500; font-size: 0.9rem;">Thank you!
+            Your message has been sent.</div>
+        </form>
+      </div>
+    </div>
+
+    <!-- The Infinite Marquee -->
+    <div class="footer-marquee-container">
+      <div class="footer-marquee">
+        <!-- We duplicate the content to make the scroll seamless -->
+        <div class="marquee-content">
+          <span>SITES</span>
+          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span>SITES</span>
+          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <a href="../cookie-policy.html">Cookie Policy</a>
+        <a href="../privacy-policy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-bottom-copyright">
+        &copy; 2026 ZINCO STUDIO
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <script src="../projects-data.js" defer></script>
+  <script src="../index.js" defer></script>
+  <script src="../NUS/branding-project.js" defer></script>
+  <script src="../scripts_components/pdf_viewer.js" defer></script>
+</body>
+
+</html>

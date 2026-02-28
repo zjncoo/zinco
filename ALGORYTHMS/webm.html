@@ -2,16 +2,25 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
+  <title>Video to WebM Converter - zinco</title>
+  <meta name="description" content="Explore Webm, a comprehensive digital experiments project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:title" content="Video to WebM Converter - zinco" />
+  <meta property="og:description" content="Explore Webm, a comprehensive digital experiments project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:image" content="https://zjncoo.github.io/zinco/imghome/logo_zinco.svg" />
+  <meta property="og:url" content="https://zjncoo.github.io/zinco/ALGORYTHMS/webm.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convertitore Video in WebM - zinco</title>
+    
 
     <!-- Service Worker per abilitare SharedArrayBuffer (richiesto da FFmpeg.wasm) -->
     <script src="coi-serviceworker.min.js"></script>
 
     <!-- Stili Globali del Sito -->
     <link rel="stylesheet" href="../index.css" />
-    <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+    
 
     <!-- Dipendenze Esterne (Lenis, Font, FFmpeg) -->
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
@@ -108,136 +117,201 @@
 </head>
 
 <body>
+    <div class="site-main-content">
 
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress-bar"></div>
+        <!-- Scroll Progress Bar -->
+        <div id="scroll-progress-bar"></div>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
-        <div class="loader-bar-container">
-            <div class="loader-bar"></div>
+        <!-- Preloader -->
+        <div id="preloader">
+            <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
         </div>
-    </div>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="cursor"></div>
+        <!-- Custom Cursor -->
+        <div class="custom-cursor" id="cursor"></div>
 
-    <!-- Navigazione Fissa -->
-    <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
-    <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
-    <a href="../portfolio.html" class="corner-button cursor-target" id="btnBottomLeft">portfolio</a>
-    <a href="../contact.html" class="corner-button cursor-target" id="btnBottomRight">contacts</a>
+        <!-- Navigazione Fissa -->
+        <a href="../index.html" id="button-logo"><img src="../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
+        <a href="#" class="corner-button cursor-target" id="btnTopRight">menu</a>
+        <a href="../portfolio.html" class="corner-button cursor-target" id="btnBottomLeft">portfolio</a>
+        <a href="#contact-footer" class="corner-button cursor-target" id="btnBottomRight">contacts</a>
 
-    <!-- Menu a Tendina -->
-    <div id="dropdownMenu">
-        <div class="menu-columns">
-            <div class="menu-column left">
-                <a href="../about/about.html" class="menu-link">about me</a>
-                <a href="../contact.html" class="menu-link">contacts</a>
-                <a href="algorythms.html" class="menu-link">algorythms</a> <!-- Link corrente -->
+        <!-- Menu a Tendina -->
+        <div id="dropdownMenu">
+            <div class="menu-columns">
+                <div class="menu-column left">
+                    <a href="../about/about.html" class="menu-link">about me</a>
+                    <a href="#contact-footer" class="menu-link">contacts</a>
+                    <a href="algorythms.html" class="menu-link">algorithms</a> <!-- Link corrente -->
 
-                <div id="search-bar-container">
-                    <button id="search-button" class="search-icon cursor-target">search</button>
-                    <div id="search-overlay" class="hidden">
-                        <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
-                    </div>
-                    <div id="search-bar" class="hidden">
-                        <input type="text" id="search-input" placeholder="browse projects..." />
-                        <div id="filters" class="filters">
-                            <button id="category-select" onclick="toggleDropdown()">
-                                <span>Filters</span>
-                                <span class="arrow">▼</span>
-                            </button>
-                            <div id="category-select-options">
-                                <a href="#" data-filter="all" class="filter-option">All</a>
-                                <a href="#" data-filter="branding" class="filter-option">branding</a>
-                                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
-                            </div>
-                        </div>
+                    <div id="search-bar-container">
+                        <input type="text" id="search-input" class="search-input-line" placeholder="browse projects..."
+                            autocomplete="off" />
                         <ul id="search-suggestions" class="suggestions-list"></ul>
                     </div>
                 </div>
-            </div>
-            <div class="menu-column right">
-                <a href="../portfolio.html" class="menu-link">portfolio</a>
-                <a href="../publications/publications.html" class="menu-link">publications</a>
-                <a href="#" class="menu-link">clients</a>
-            </div>
-        </div>
-
-        <div class="menu-bottom">
-            <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
-            <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
-        </div>
-    </div>
-
-    <main>
-        <div class="shapes"></div> <!-- Spaziatore Shapes dall'header -->
-
-        <p class="intro">
-            Convertitore Video in WebM<br>
-            <span style="font-size: 1rem; opacity: 0.6;">Converti i tuoi file per il web direttamente nel
-                browser.</span>
-        </p>
-
-        <div class="converter-container">
-
-            <!-- Area di Input -->
-            <div id="input-area">
-                <label for="video-upload" class="upload-area">
-                    <svg class="upload-icon mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    <span id="file-name" class="block" style="font-weight: bold;">Seleziona un file video</span>
-                    <span class="text-small">MP4, MOV, AVI, ecc.</span>
-                </label>
-                <input id="video-upload" type="file" class="hidden" accept="video/*">
-
-                <button id="convert-btn" class="btn btn--solid-dark" style="width: 100%;" disabled>
-                    Converti in WebM
-                </button>
-            </div>
-
-            <!-- Area di Progresso -->
-            <div id="progress-area" class="hidden">
-                <p id="progress-text" style="font-weight: bold; margin-bottom: 10px;">Conversione in corso...</p>
-                <div class="progress-container">
-                    <div id="progress-bar" class="progress-fill"></div>
+                <div class="menu-column right">
+                    <a href="../portfolio.html" class="menu-link">portfolio</a>
+                    <a href="../publications/publications.html" class="menu-link">publications</a>
+                    <a href="#" class="menu-link">clients</a>
                 </div>
-                <p id="progress-ratio" class="text-small">0%</p>
             </div>
 
-            <!-- Area di Output -->
-            <div id="output-area" class="hidden">
-                <h2 style="color: black; margin-bottom: 20px;">Conversione Completata!</h2>
-                <video id="video-preview" class="video-preview" controls></video>
+            <div class="menu-bottom">
+                <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
+                <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+            </div>
+        </div>
 
-                <a id="download-btn" href="#" download="video_convertito.webm" class="btn btn--solid-dark"
-                    style="display: block; margin-bottom: 10px;">
-                    Scarica il video WebM
-                </a>
-                <button id="convert-another-btn" class="btn btn--outline-dark" style="width: 100%;">
-                    Converti un altro video
-                </button>
+        <main>
+            <div class="shapes"></div> <!-- Spaziatore Shapes dall'header -->
+
+            <p class="intro">
+                Video to WebM Converter<br>
+                <span style="font-size: 1rem; opacity: 0.6;">Convert your media files for the web directly in the
+                    browser.</span>
+            </p>
+
+            <div class="converter-container">
+
+                <!-- Area di Input -->
+                <div id="input-area">
+                    <label for="video-upload" class="upload-area">
+                        <svg class="upload-icon mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <span id="file-name" class="block" style="font-weight: bold;">Select a video file</span>
+                        <span class="text-small">MP4, MOV, AVI, etc.</span>
+                    </label>
+                    <input id="video-upload" type="file" class="hidden" accept="video/*">
+
+                    <button id="convert-btn" class="btn btn--solid-dark" style="width: 100%;" disabled>
+                        Convert to WebM
+                    </button>
+                </div>
+
+                <!-- Area di Progresso -->
+                <div id="progress-area" class="hidden">
+                    <p id="progress-text" style="font-weight: bold; margin-bottom: 10px;">Conversion in progress...</p>
+                    <div class="progress-container">
+                        <div id="progress-bar" class="progress-fill"></div>
+                    </div>
+                    <p id="progress-ratio" class="text-small">0%</p>
+                </div>
+
+                <!-- Area di Output -->
+                <div id="output-area" class="hidden">
+                    <h2 style="color: black; margin-bottom: 20px;">Conversion Complete!</h2>
+                    <video id="video-preview" class="video-preview" controls></video>
+
+                    <a id="download-btn" href="#" download="video_convertito.webm" class="btn btn--solid-dark"
+                        style="display: block; margin-bottom: 10px;">
+                        Download WebM video
+                    </a>
+                    <button id="convert-another-btn" class="btn btn--outline-dark" style="width: 100%;">
+                        Convert another video
+                    </button>
+                </div>
+
             </div>
 
+        </main>
+
+    </div><!-- /site-main-content -->
+
+    <footer id="contact-footer" class="reveal-footer">
+        <div class="footer-top">
+            <div class="footer-contact-info">
+                <h2>Keep moving, keep exploring.</h2>
+                <br>
+                <a href="mailto:zinco.work@gmail.com" class="footer-email"
+                    style="color: black; text-decoration: underline;">zinco.work@gmail.com</a>
+                <div class="footer-socials">
+                    <p class="social-links-text">
+                        <a href="https://www.instagram.com/zjncoo/" target="_blank">INSTAGRAM</a> /
+                        <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank">LINKEDIN</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-form-wrapper">
+                <script>var submitted = false;</script>
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+                    onload="if(submitted) { document.getElementById('successMessage').style.display='block'; document.getElementById('placeholder-form').reset(); submitted=false; }"></iframe>
+
+                <form class="custom-contact-form"
+                    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdosHY4D0PIyXIjul20uFgBnjrAHutvH6bL4CPC4MuIQFfwbQ/formResponse"
+                    method="POST" target="hidden_iframe" id="placeholder-form" onsubmit="submitted=true;">
+                    <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem;">Let's talk</h4>
+
+                    <div class="input-group">
+                        <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name"
+                            required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="entry.422215982" name="entry.422215982" placeholder="Your Email"
+                            required>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="entry.1922030234" name="entry.1922030234" placeholder="Your Message" rows="3"
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" style="margin-bottom: 1rem;">Send Message</button>
+                    <div id="successMessage" style="display:none; color: black; font-weight: 500; font-size: 0.9rem;">
+                        Thank you!
+                        Your message has been sent.</div>
+                </form>
+            </div>
         </div>
 
-    </main>
-
-    <footer>
-        <div class="cookie-banner" id="cookieBanner">
-            <span>my website uses <a href="../cookies.html" class="cookie-link">cookies</a></span>
-            <span class="close-btn cursor-target" id="closeCookie">✕</span>
+        <!-- The Infinite Marquee -->
+        <div class="footer-marquee-container">
+            <div class="footer-marquee">
+                <!-- We duplicate the content to make the scroll seamless -->
+                <div class="marquee-content">
+                    <span>SITES</span>
+                    <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+                    <span>BRANDING</span>
+                    <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+                    <span>GRAPHICS</span>
+                    <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+                    <span>SITES</span>
+                    <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+                    <span>BRANDING</span>
+                    <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+                    <span>GRAPHICS</span>
+                    <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    <span>SITES</span>
+                    <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+                    <span>BRANDING</span>
+                    <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+                    <span>GRAPHICS</span>
+                    <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+                    <span>SITES</span>
+                    <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1">
+                    <span>BRANDING</span>
+                    <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+                    <span>GRAPHICS</span>
+                    <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+                </div>
+            </div>
         </div>
-        <div class="footer-content">
-            <a href="#" class="footer-logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
-            <div class="footer-text">
-                <p>&copy; 2025 zinco</p>
-                <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-links">
+                <a href="../cookie-policy.html">Cookie Policy</a>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-bottom-copyright">
+                &copy; 2026 ZINCO STUDIO
             </div>
         </div>
     </footer>
@@ -264,8 +338,8 @@
             let selectedFile = null;
 
             if (typeof FFmpeg === 'undefined') {
-                console.error('La libreria FFmpeg non è stata caricata.');
-                alert('Errore: Impossibile caricare la libreria di conversione.');
+                console.error('FFmpeg library was not loaded.');
+                alert('Error: Cannot load conversion library.');
                 return;
             }
 
@@ -281,7 +355,7 @@
                     fileNameSpan.textContent = selectedFile.name;
                     convertBtn.disabled = false;
                 } else {
-                    fileNameSpan.textContent = 'Seleziona un file video';
+                    fileNameSpan.textContent = 'Select a video file';
                     convertBtn.disabled = true;
                 }
             });
@@ -289,17 +363,22 @@
             convertBtn.addEventListener('click', async () => {
                 if (!selectedFile) return;
 
+                if (typeof SharedArrayBuffer === 'undefined') {
+                    alert('Warning: Your browser does not support SharedArrayBuffer on this page. To use the WebM converter, you must view the site via an HTTPS server (or localhost) and not from a local file (file:///).');
+                    return;
+                }
+
                 inputArea.classList.add('hidden');
                 progressArea.classList.remove('hidden');
                 convertBtn.disabled = true;
 
                 try {
                     if (!ffmpeg.isLoaded()) {
-                        progressText.textContent = 'Caricamento della libreria...';
+                        progressText.textContent = 'Loading library...';
                         await ffmpeg.load();
                     }
 
-                    progressText.textContent = 'Preparazione del file...';
+                    progressText.textContent = 'Preparing file...';
                     ffmpeg.FS('writeFile', selectedFile.name, await fetchFile(selectedFile));
 
                     ffmpeg.setProgress(({ ratio }) => {
@@ -309,10 +388,10 @@
                         progressRatio.textContent = `${percentage}%`;
                     });
 
-                    progressText.textContent = 'Conversione in corso...';
+                    progressText.textContent = 'Conversion in progress...';
                     await ffmpeg.run('-i', selectedFile.name, '-c:v', 'libvpx-vp9', '-b:v', '1M', '-c:a', 'libopus', 'output.webm');
 
-                    progressText.textContent = 'Finalizzazione...';
+                    progressText.textContent = 'Finalizing...';
                     const data = ffmpeg.FS('readFile', 'output.webm');
                     const videoUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/webm' }));
 
@@ -323,8 +402,8 @@
 
                 } catch (error) {
                     console.error(error);
-                    progressText.textContent = 'Errore durante la conversione.';
-                    alert('Si è verificato un errore durante la conversione. Controlla la console per dettagli.');
+                    progressText.textContent = 'Error during conversion.';
+                    alert('An error occurred during conversion. Check the console for details.');
                     setTimeout(resetUI, 1000);
                 }
             });
@@ -334,7 +413,7 @@
             function resetUI() {
                 selectedFile = null;
                 videoUpload.value = '';
-                fileNameSpan.textContent = 'Seleziona un file video';
+                fileNameSpan.textContent = 'Select a video file';
                 convertBtn.disabled = true;
                 outputArea.classList.add('hidden');
                 inputArea.classList.remove('hidden');

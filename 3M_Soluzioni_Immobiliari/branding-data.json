@@ -1,0 +1,34 @@
+[
+  {
+    "type": "image",
+    "subtype": "logo",
+    "label": "logo",
+    "src": "img/3M_LOGO_ESTESO_1.svg"
+  },
+  {
+    "type": "text",
+    "label": "description",
+    "content": "Brand identity for 3M Soluzioni Immobiliari."
+  },
+  {
+    "type": "text",
+    "label": "naming",
+    "content": "3M Soluzioni Immobiliari"
+  },
+  {
+    "type": "header",
+    "label": "brand items"
+  },
+  {
+    "type": "image",
+    "subtype": "marchio",
+    "label": "marchio",
+    "src": "img/3M_MARCHIO.png"
+  },
+  {
+    "type": "image",
+    "subtype": "marchio",
+    "label": "logo esteso",
+    "src": "img/3M_LOGO_ESTESO.png"
+  }
+]

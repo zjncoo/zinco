@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
+  <title>SERVIZI - il Francescone</title>
+  <meta name="description" content="Explore Services, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:title" content="SERVIZI - il Francescone" />
+  <meta property="og:description" content="Explore Services, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:image" content="https://zjncoo.github.io/zinco/imghome/logo_zinco.svg" />
+  <meta property="og:url" content="https://zjncoo.github.io/zinco/UNI YEAR 1/web_design/SITO ESAME/PAGES/services.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../../../../imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../../../../imghome/logo_zinco.svg" />
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SERVIZI - il Francescone</title>
+    
     <link rel="stylesheet" href="../css/servizi.css">
-    <link rel="icon" type="image/x-icon" href="../img_home/logo.png"> <!--viene specificato il favicon (icona nella barra di ricerca) del sito web-->
+     <!--viene specificato il favicon (icona nella barra di ricerca) del sito web-->
     <script src="../script/services.js"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
 </head>
 <body>
+  <div class="site-main-content">
     <!--MENU NAVIGABILE CON LOGO CENTRALE, I COLLEGAMENTI VARIANO A SECONDA DELLA PAGINA VISITATA (IL COLLEGAMENTO ALLA PAGINA VISUALIZZATA VIENE SOSTITUITO POICHÉ RIDONDANTE)-->
     <div class="topnav">
         <nav>
@@ -115,21 +125,94 @@
     </div>
 
   <!--FOOTER DELLA PAGINA-->
-  <footer>
-    <div class="footer">
-      <a class="logofooter" href="../PAGES/home.html">
-        <img src="../img_servizi/logo.png" id="logofooter"    alt="logo">
-      </a>
+    </div><!-- /site-main-content -->
 
-      <p>Gioielleria - Roncati &copy 2024</p>
-      <p>di Andrea Roncati  via ... Milano  Rea:1960949</p>
-      
-      <a id="emailfooter" href="">info@roncati.it</a>
-      
-      <br><a href="https://zinco.framer.website">
-        <img src="../img_home/deisgned by zinco grey.svg" id="zinco">
-      </a>
+  <footer id="contact-footer" class="reveal-footer">
+    <div class="footer-top">
+      <div class="footer-contact-info">
+        <h2>Keep moving, keep exploring.</h2>
+        <br>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email"
+          style="color: black; text-decoration: underline;">zinco.work@gmail.com</a>
+        <div class="footer-socials">
+          <p class="social-links-text">
+            <a href="https://www.instagram.com/zjncoo/" target="_blank">INSTAGRAM</a> /
+            <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank">LINKEDIN</a>
+          </p>
+        </div>
+      </div>
 
+      <div class="footer-form-wrapper">
+        <script>var submitted = false;</script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+          onload="if(submitted) { document.getElementById('successMessage').style.display='block'; document.getElementById('placeholder-form').reset(); submitted=false; }"></iframe>
+
+        <form class="custom-contact-form"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdosHY4D0PIyXIjul20uFgBnjrAHutvH6bL4CPC4MuIQFfwbQ/formResponse"
+          method="POST" target="hidden_iframe" id="placeholder-form" onsubmit="submitted=true;">
+          <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem;">Let's talk</h4>
+
+          <div class="input-group">
+            <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name" required>
+          </div>
+          <div class="input-group">
+            <input type="email" id="entry.422215982" name="entry.422215982" placeholder="Your Email" required>
+          </div>
+          <div class="input-group">
+            <textarea id="entry.1922030234" name="entry.1922030234" placeholder="Your Message" rows="3"
+              required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" style="margin-bottom: 1rem;">Send Message</button>
+          <div id="successMessage" style="display:none; color: black; font-weight: 500; font-size: 0.9rem;">Thank you!
+            Your message has been sent.</div>
+        </form>
+      </div>
+    </div>
+
+    <!-- The Infinite Marquee -->
+    <div class="footer-marquee-container">
+      <div class="footer-marquee">
+        <!-- We duplicate the content to make the scroll seamless -->
+        <div class="marquee-content">
+          <span>SITES</span>
+          <img src="../../../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../../../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../../../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="../../../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../../../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../../../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span>SITES</span>
+          <img src="../../../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../../../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../../../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="../../../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="../../../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="../../../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <a href="../../../../cookie-policy.html">Cookie Policy</a>
+        <a href="../../../../privacy-policy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-bottom-copyright">
+        &copy; 2026 ZINCO STUDIO
+      </div>
     </div>
   </footer>
     

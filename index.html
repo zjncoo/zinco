@@ -2,11 +2,18 @@
 <html lang="en">
 
 <head>
+  <title>Zinco | Communication Design Studio</title>
+  <meta name="description" content="Zinco is a multidisciplinary communication design studio specializing in branding, visual design, editorial content, and web experiences. We craft bold and effective design solutions." />
+  <meta property="og:title" content="Zinco | Communication Design Studio" />
+  <meta property="og:description" content="Zinco is a multidisciplinary communication design studio specializing in branding, visual design, editorial content, and web experiences. We craft bold and effective design solutions." />
+  <meta property="og:image" content="https://zjncoo.github.io/zinco/imghome/logo_zinco.svg" />
+  <meta property="og:url" content="https://zjncoo.github.io/zinco/index.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>home - zinco</title>
   <link rel="stylesheet" href="index.css" />
-  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,328 +24,425 @@
 </head>
 
 <body>
+  <div class="site-main-content">
 
-  <div id="scroll-progress-bar"></div>
+    <div id="scroll-progress-bar"></div>
 
-  <div id="preloader">
-    <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
-    <div class="loader-bar-container">
-      <div class="loader-bar"></div>
+    <div id="preloader">
+      <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor" id="cursor"></div>
 
-  <a href="#" id="button-logo"><img src="imghome/logo_zinco.svg" id="logo" alt=""></a>
-  <a href="#" class="corner-button cursor-target" id="btnTopRight">more</a>
-  <a href="portfolio.html" class="corner-button cursor-target" id="btnBottomLeft">portfolio</a>
-  <a href="contact.html" class="corner-button cursor-target" id="btnBottomRight">contacts</a>
+    <a href="#" id="button-logo" aria-label="Torna alla homepage"><img src="imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
+    <a href="#" class="corner-button cursor-target" id="btnTopRight" aria-label="Apri menu principale">menu</a>
+    <a href="portfolio.html" class="corner-button cursor-target" id="btnBottomLeft" aria-label="Vai al portfolio">portfolio</a>
+    <a href="#contact-footer" class="corner-button cursor-target" id="btnBottomRight" aria-label="Vai ai contatti">contacts</a>
 
-  <div id="dropdownMenu">
-    <div class="menu-columns">
-      <div class="menu-column left">
-        <a href="about/about.html" class="menu-link">about me</a>
-        <a href="contact.html" class="menu-link">contacts</a>
-        <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorythms</a>
+    <div id="dropdownMenu">
+      <div class="menu-columns">
+        <div class="menu-column left">
+          <a href="about/about.html" class="menu-link">about me</a>
+          <a href="#contact-footer" class="menu-link">contacts</a>
+          <a href="ALGORYTHMS/algorythms.html" class="menu-link">algorithms</a>
 
-        <div id="search-bar-container">
-          <button id="search-button" class="search-icon cursor-target">search</button>
-          <div id="search-overlay" class="hidden">
-            <button id="closeSearch" class="search-bar-close cursor-target">✕</button>
-          </div>
-          <div id="search-bar" class="hidden">
-            <input type="text" id="search-input" placeholder="browse projects..." />
-            <div id="filters" class="filters">
-              <button id="category-select" onclick="toggleDropdown()">
-                <span>Filters</span>
-                <span class="arrow">▼</span>
-              </button>
-              <div id="category-select-options">
-                <a href="#" data-filter="all" class="filter-option">All</a>
-                <a href="#" data-filter="branding" class="filter-option">branding</a>
-                <a href="#" data-filter="p5" class="filter-option">p5.js</a>
-              </div>
-            </div>
+          <div id="search-bar-container">
+            <input type="text" id="search-input" class="search-input-line" placeholder="browse projects..."
+              autocomplete="off" />
             <ul id="search-suggestions" class="suggestions-list"></ul>
           </div>
         </div>
-      </div>
-      <div class="menu-column right">
-        <a href="portfolio.html" class="menu-link">portfolio</a>
-        <a href="publications/publications.html" class="menu-link">publications</a>
-        <a href="#" class="menu-link">clients</a>
-      </div>
-    </div>
-
-    <div class="menu-bottom">
-      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
-      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
-    </div>
-  </div>
-
-  <main>
-    <div class="shapes"></div>
-    <p class="intro">
-      I am Francesco, <span class="underline"><span class="colorful">Communication Design Student</span></span>.
-    </p>
-
-    <div class="portfolio-grid-container">
-
-      <div class="carousel-info-mobile">
-        <h3 id="project-title-mobile">Project Name</h3>
-        <a href="#" id="project-link-mobile" class="card-btn" target="_blank">discover</a>
+        <div class="menu-column right">
+          <a href="portfolio.html" class="menu-link">portfolio</a>
+          <a href="publications/publications.html" class="menu-link">publications</a>
+          <a href="#" class="menu-link">clients</a>
+        </div>
       </div>
 
-      <div class="photo-grid">
-
-        <div class="grid-item tile-large" data-title="AM Decor" data-link="amdecor/amdecor.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="amdecor/img/van mockup.webp" alt="Progetto AM Decor"></div>
-            <div class="card-back">
-              <h3>AM Decor</h3><a href="amdecor/amdecor.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item" data-title="fomo" data-link="publications/fomo/fomo.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="publications/fomo/img/mockup fomo 1.webp" alt="Progetto dranks"></div>
-            <div class="card-back">
-              <h3>fomo</h3><a href="publications/fomo/fomo.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item" data-title="zoom" data-link="publications/zoom/zoom.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="publications/zoom/img/ayumi_mockup_1.webp" alt="Progetto dranks"></div>
-            <div class="card-back">
-              <h3>zoom</h3><a href="publications/zoom/zoom.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item" data-title="NUS" data-link="NUS/nus.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="NUS/img/brochure.webp" alt="Progetto NUS"></div>
-            <div class="card-back">
-              <h3>NUS</h3><a href="NUS/nus.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item tile-large" data-title="roxy brand video" data-link="ROXY/roxy.html">
-          <div class="card-flipper">
-            <div class="card-front">
-              <video autoplay muted loop playsinline>
-                <source src="ROXY/img/video finito.mp4" type="video/mp4">
-                Il tuo browser non supporta i video.
-              </video>
-            </div>
-            <div class="card-back">
-              <h3>roxy brand video</h3><a href="ROXY/roxy.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item tile-tall" data-title="Roxy Brandbook"
-          data-link="publications/roxy_brandbook/roxy_brandbook.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="publications/roxy_brandbook/img/roxy_mockup_3.png" alt="Roxy Brandbook">
-            </div>
-            <div class="card-back">
-              <h3>Roxy Brandbook</h3><a href="publications/roxy_brandbook/roxy_brandbook.html"
-                class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item tile-large" data-title="nus tote" data-link="NUS/nus.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="NUS/img/tote.webp" alt="nus"></div>
-            <div class="card-back">
-              <h3>NUS - the tote</h3><a href="NUS/nus.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item tile-large" data-title="NUS brand video" data-link="NUS/nus.html">
-          <div class="card-flipper">
-            <div class="card-front">
-              <video autoplay muted loop playsinline>
-                <source src="NUS/img/nus_brand_video.webm" type="video/webm">
-                Il tuo browser non supporta i video.
-              </video>
-            </div>
-            <div class="card-back">
-              <h3>NUS brand video</h3><a href="NUS/nus.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item tile-tall" data-title="dranks" data-link="dranks/dranks.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="dranks/dranks_screenshot.webp" alt="dranks"></div>
-            <div class="card-back">
-              <h3>dranks</h3><a href="dranks/dranks.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item tile-wide" data-title="FemVertising"
-          data-link="publications/femvertising/femvertising.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="publications/femvertising/img/femvertising_mockup_2.webp"
-                alt="Progetto Femsvertising"></div>
-            <div class="card-back">
-              <h3>FemVertising</h3><a href="publications/femvertising/femvertising.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item" data-title="zoom" data-link="publications/zoom/zoom.html">
-          <div class="card-flipper">
-            <div class="card-front">
-              <video autoplay muted loop playsinline>
-                <source src="publications/zoom/img/animazione fumetto.mp4" type="video/mp4">
-                Il tuo browser non supporta i video.
-              </video>
-            </div>
-            <div class="card-back">
-              <h3>zoom</h3><a href="publications/zoom/zoom.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item" data-title="dranks" data-link="dranks/dranks.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="dranks/drankslogo.svg" alt="Progetto dranks"></div>
-            <div class="card-back">
-              <h3>dranks</h3><a href="dranks/dranks.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="grid-item tile-wide" data-title="fotografia"
-          data-link="publications/fotografie_come_lettere_di_un_alfabeto/fotografia.html">
-          <div class="card-flipper">
-            <div class="card-front"><img
-                src="publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp"
-                alt="Progetto Fotografia"></div>
-            <div class="card-back">
-              <h3>fotografia</h3><a href="publications/fotografie_come_lettere_di _un_alfabeto/fotografia.html"
-                class="card-btn">DISCOVER</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item tile-wide" data-title="Rifiuti Spaziali"
-          data-link="https://zjncoo.github.io/RifiutiSpaziali/index.html" target="_blank">
-          <div class="card-flipper">
-            <div class="card-front"><img src="imghome/screenshot_rifiuti.png" alt="Rifiuti Spaziali"></div>
-            <div class="card-back">
-              <h3>Rifiuti Spaziali</h3><a href="https://zjncoo.github.io/RifiutiSpaziali/index.html"
-                class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item" data-title="beer" data-link="beer/beer.html">
-          <div class="card-flipper">
-            <div class="card-front"><img src="beer/beerlogo.svg" alt="Progetto dranks"></div>
-            <div class="card-back">
-              <h3>beer</h3><a href="beer/beer.html" class="card-btn">discover</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-item" data-title="mammainfanzina" data-link="https://mammainfanzina.framer.website">
-          <div class="card-flipper">
-            <div class="card-front">
-              <video autoplay muted loop playsinline>
-                <source src="mammainfanzina/mamma_in_fanzina.webm" type="video/webm">
-                Il tuo browser non supporta i video.
-              </video>
-            </div>
-            <div class="card-back">
-              <h3>mammainfanzina</h3><a href="https://mammainfanzina.framer.website" class="card-btn">visit website</a>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
+      <div class="menu-bottom">
+        <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
+        <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
       </div>
     </div>
 
+    <main>
+      <div class="shapes"></div>
+      <p class="intro">
+        I am Francesco, <span class="underline"><span class="colorful">Communication Design Student</span></span>.
+      </p>
 
-  </main>
+      <div class="portfolio-grid-container">
+
+        <div class="carousel-info-mobile">
+          <h3 id="project-title-mobile">Project Name</h3>
+          <a href="#" id="project-link-mobile" class="card-btn" target="_blank">discover</a>
+        </div>
+
+        <div class="photo-grid">
+
+          <div class="grid-item tile-large" data-title="ALUA" data-link="https://zjncoo.github.io/ALUA.IT/">
+            <div class="card-flipper">
+              <div class="card-front">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="imghome/alua_video.webm" type="video/webm">
+                  Your browser does not support videos.
+                </video>
+
+              </div>
+              <div class="card-back">
+                <h3>ALUA</h3><a href="https://zjncoo.github.io/ALUA.IT/" class="card-btn" target="_blank">visit
+                  website</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-wide" data-title="3M" data-link="3M_Soluzioni_Immobiliari/3m.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="3M_Soluzioni_Immobiliari/img/3M_LOGO_ESTESO_1.svg"
+                  alt="3M Soluzioni Immobiliari"
+                  style="padding: 15%; object-fit: contain; width: 100%; height: 100%; background-color: #ffffff;" loading="lazy">
+              </div>
+              <div class="card-back">
+                <h3>3M Soluzioni Immobiliari</h3><a href="3M_Soluzioni_Immobiliari/3m.html"
+                  class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-large" data-title="AM Decor" data-link="amdecor/amdecor.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="amdecor/img/van mockup.webp" alt="Mockup furgone progetto AM Decor" loading="lazy"></div>
+              <div class="card-back">
+                <h3>AM Decor</h3><a href="amdecor/amdecor.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item" data-title="fomo" data-link="publications/fomo/fomo.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="publications/fomo/img/mockup fomo 1.webp" alt="Mockup progetto fomo libro" loading="lazy"></div>
+              <div class="card-back">
+                <h3>fomo</h3><a href="publications/fomo/fomo.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item" data-title="zoom" data-link="publications/zoom/zoom.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="publications/zoom/img/ayumi_mockup_1.webp" alt="Mockup progetto fumetto zoom" loading="lazy"></div>
+              <div class="card-back">
+                <h3>zoom</h3><a href="publications/zoom/zoom.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item" data-title="NUS" data-link="NUS/nus.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="NUS/img/brochure.webp" alt="Mockup brochure progetto NUS" loading="lazy"></div>
+              <div class="card-back">
+                <h3>NUS</h3><a href="NUS/nus.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-large" data-title="roxy brand video" data-link="ROXY/roxy.html">
+            <div class="card-flipper">
+              <div class="card-front">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="ROXY/img/video finito.mp4" type="video/mp4">
+                  Your browser does not support videos.
+                </video>
+              </div>
+              <div class="card-back">
+                <h3>roxy brand video</h3><a href="ROXY/roxy.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-tall" data-title="Roxy Brandbook"
+            data-link="publications/roxy_brandbook/roxy_brandbook.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="publications/roxy_brandbook/img/roxy_mockup_3.png" alt="Mockup Roxy Brandbook" loading="lazy">
+              </div>
+              <div class="card-back">
+                <h3>Roxy Brandbook</h3><a href="publications/roxy_brandbook/roxy_brandbook.html"
+                  class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-large" data-title="nus tote" data-link="NUS/nus.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="NUS/img/tote.webp" alt="Mockup tote bag progetto NUS" loading="lazy"></div>
+              <div class="card-back">
+                <h3>NUS - the tote</h3><a href="NUS/nus.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-large" data-title="NUS brand video" data-link="NUS/nus.html">
+            <div class="card-flipper">
+              <div class="card-front">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="NUS/img/nus_brand_video.webm" type="video/webm">
+                  Your browser does not support videos.
+                </video>
+              </div>
+              <div class="card-back">
+                <h3>NUS brand video</h3><a href="NUS/nus.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-tall" data-title="dranks" data-link="dranks/dranks.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="dranks/dranks_screenshot.webp" alt="Sito web progetto dranks" loading="lazy"></div>
+              <div class="card-back">
+                <h3>dranks</h3><a href="dranks/dranks.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-wide" data-title="FemVertising"
+            data-link="publications/femvertising/femvertising.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="publications/femvertising/img/femvertising_mockup_2.webp"
+                  alt="Mockup libro progetto FemVertising" loading="lazy"></div>
+              <div class="card-back">
+                <h3>FemVertising</h3><a href="publications/femvertising/femvertising.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item" data-title="zoom" data-link="publications/zoom/zoom.html">
+            <div class="card-flipper">
+              <div class="card-front">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="publications/zoom/img/animazione fumetto.mp4" type="video/mp4">
+                  Your browser does not support videos.
+                </video>
+              </div>
+              <div class="card-back">
+                <h3>zoom</h3><a href="publications/zoom/zoom.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item" data-title="dranks" data-link="dranks/dranks.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="dranks/drankslogo.svg" alt="Logo progetto dranks" loading="lazy"></div>
+              <div class="card-back">
+                <h3>dranks</h3><a href="dranks/dranks.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="grid-item tile-wide" data-title="fotografia"
+            data-link="publications/fotografie_come_lettere_di_un_alfabeto/fotografia.html">
+            <div class="card-flipper">
+              <div class="card-front"><img
+                  src="publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp"
+                  alt="Mockup libro Fotografico" loading="lazy"></div>
+              <div class="card-back">
+                <h3>fotografia</h3><a href="publications/fotografie_come_lettere_di _un_alfabeto/fotografia.html"
+                  class="card-btn">DISCOVER</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item tile-wide" data-title="Rifiuti Spaziali"
+            data-link="https://zjncoo.github.io/RifiutiSpaziali/index.html" target="_blank">
+            <div class="card-flipper">
+              <div class="card-front"><img src="imghome/rifiuti.webp" alt="Grafica progetto Rifiuti Spaziali" loading="lazy"></div>
+              <div class="card-back">
+                <h3>Rifiuti Spaziali</h3><a href="https://zjncoo.github.io/RifiutiSpaziali/index.html"
+                  class="card-btn">visit website</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item" data-title="beer" data-link="beer/beer.html">
+            <div class="card-flipper">
+              <div class="card-front"><img src="beer/beerlogo.svg" alt="Logo progetto beer" loading="lazy"></div>
+              <div class="card-back">
+                <h3>beer</h3><a href="beer/beer.html" class="card-btn">discover</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-item" data-title="mammainfanzina" data-link="https://mammainfanzina.framer.website">
+            <div class="card-flipper">
+              <div class="card-front">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="mammainfanzina/mamma_in_fanzina.webm" type="video/webm">
+                  Your browser does not support videos.
+                </video>
+              </div>
+              <div class="card-back">
+                <h3>mammainfanzina</h3><a href="https://mammainfanzina.framer.website" class="card-btn">visit
+                  website</a>
+              </div>
+            </div>
+          </div>
 
 
 
 
-  </div>
-  <section class="projects-section">
-    <h2>uni year 1</h2>
-    <div class="content-grid">
-      <a href="UNI YEAR 1/drawing_lab/drawing.html" class="project-item">
-        <img src="imghome/folder.png" alt="Drawing Lab" class="cursor-target" />
-      </a>
-      <a href="UNI YEAR 1/design_history/history.html" class="project-item">
-        <img src="imghome/folder.png" alt="Design History" class="cursor-target" />
-      </a>
-      <a href="https://mammainfanzina.framer.website" class="project-item">
-        <img src="imghome/folder.png" alt="Mamma Infanzina" class="cursor-target" />
-      </a>
-      <a href="https://mammainfanzina.framer.website" class="project-item">
-        <img src="imghome/folder.png" alt="Placeholder" class="cursor-target" />
-      </a>
+
+
+
+
+        </div>
+      </div>
+
+
+    </main>
+
+
+
+
+    <section class="projects-section">
+      <h2>uni year 1</h2>
+      <div class="content-grid">
+        <a href="UNI YEAR 1/drawing_lab/drawing.html" class="project-item">
+          <img src="imghome/folder.png" alt="Drawing Lab" class="cursor-target" />
+        </a>
+        <a href="UNI YEAR 1/design_history/history.html" class="project-item">
+          <img src="imghome/folder.png" alt="Design History" class="cursor-target" />
+        </a>
+        <a href="https://mammainfanzina.framer.website" class="project-item">
+          <img src="imghome/folder.png" alt="Mamma Infanzina" class="cursor-target" />
+        </a>
+        <a href="https://mammainfanzina.framer.website" class="project-item">
+          <img src="imghome/folder.png" alt="Placeholder" class="cursor-target" />
+        </a>
+      </div>
+
+      <h2>branding</h2>
+      <div class="content-grid">
+        <a href="https://zjncoo.github.io/ALUA.IT/" target="_blank" class="project-item" style="padding: 10%;"><img
+            src="imghome/logo_alua.svg" alt="ALUA" class="cursor-target" style="object-fit: contain;" /></a>
+        <a href="3M_Soluzioni_Immobiliari/3m.html" class="project-item" style="padding: 10%;"><img
+            src="3M_Soluzioni_Immobiliari/img/3M_LOGO_ESTESO_1.svg" alt="3M Soluzioni Immobiliari" class="cursor-target"
+            style="object-fit: contain;" /></a>
+        <a href="amdecor/amdecor.html" class="project-item"><img src="amdecor/img/amlogo.svg" alt="AM Decor"
+            class="cursor-target" /></a>
+        <a href="NUS/nus.html" class="project-item"><img src="NUS/img/logo_nus.svg" alt="NUS"
+            class="cursor-target" /></a>
+        <a href="escapes/escapes.html" class="project-item"><img src="escapes/img/logo_escapes.svg" alt="escapes"
+            class="cursor-target" /></a>
+        <a href="ROXY/roxy.html" class="project-item"><img src="ROXY/img/scritta.png" alt="ROXY"
+            class="cursor-target" /></a>
+        <a href="gizeta/gizeta.html" class="project-item"><img src="imghome/gizeta.png" alt="gizeta"
+            class="cursor-target" /></a>
+      </div>
+
+      <h2>websites</h2>
+      <div class="content-grid">
+        <a href="https://zjncoo.github.io/ALUA.IT/" target="_blank" class="project-item" style="padding: 10%;"><img
+            src="imghome/logo_alua.svg" alt="ALUA Website" class="cursor-target" style="object-fit: contain;" /></a>
+        <a href="https://mammainfanzina.framer.website" target="_blank" class="project-item"><img
+            src="mammainfanzina/logo mamma.svg" alt="Mamma Infanzina Website" class="cursor-target" /></a>
+        <a href="https://www.gizeta-zanchetta.it/home" target="_blank" class="project-item"><img
+            src="imghome/gizeta.png" alt="Gizeta Website" class="cursor-target" /></a>
+        <a href="https://amdecorsrl.com" target="_blank" class="project-item"><img src="amdecor/img/amlogo.svg"
+            alt="AM Decor Website" class="cursor-target" /></a>
+        <a href="https://escapeslakecomo.com" target="_blank" class="project-item"><img
+            src="escapes/img/logo_escapes.svg" alt="Escapes Website" class="cursor-target" /></a>
+        <a href="https://zjncoo.github.io/RifiutiSpaziali/" target="_blank" class="project-item"><img
+            src="imghome/razzino.png" alt="Rifiuti Spaziali" class="cursor-target" /></a>
+        <a href="UNI YEAR 1/web_design/SITO ESAME/img_home/" target="_blank" class="project-item"><img
+            src="UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png" alt="Web Design Exam" class="cursor-target" /></a>
+      </div>
+    </section>
+  </div><!-- /site-main-content -->
+
+  <footer id="contact-footer" class="reveal-footer">
+    <div class="footer-top">
+      <div class="footer-contact-info">
+        <h2>Keep moving, keep exploring.</h2>
+        <br>
+        <a href="mailto:zinco.work@gmail.com" class="footer-email"
+          style="color: black; text-decoration: underline;">zinco.work@gmail.com</a>
+        <div class="footer-socials">
+          <p class="social-links-text">
+            <a href="https://www.instagram.com/zjncoo/" target="_blank">INSTAGRAM</a> /
+            <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank">LINKEDIN</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-form-wrapper">
+        <form class="custom-contact-form" id="contactForm">
+          <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem;">Let's talk</h4>
+
+          <div class="input-group">
+            <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name" required>
+          </div>
+          <div class="input-group">
+            <input type="email" id="entry.422215982" name="entry.422215982" placeholder="Your Email" required>
+          </div>
+          <div class="input-group">
+            <textarea id="entry.1922030234" name="entry.1922030234" placeholder="Your Message" rows="3"
+              required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn" style="margin-bottom: 1rem;">
+            <span class="btn-text">Send Message</span>
+            <span class="btn-loader" style="display: none;">Sending...</span>
+          </button>
+          <div id="successMessage" style="display:none; color: black; font-weight: 500; font-size: 0.9rem; margin-top: 1rem;">Thank you!
+            Your message has been sent.</div>
+        </form>
+      </div>
     </div>
 
-    <h2>branding</h2>
-    <div class="content-grid">
-      <a href="amdecor/amdecor.html" class="project-item"><img src="amdecor/img/amlogo.svg" alt="AM Decor"
-          class="cursor-target" /></a>
-      <a href="NUS/nus.html" class="project-item"><img src="NUS/img/logo_nus.svg" alt="NUS" class="cursor-target" /></a>
-      <a href="escapes/escapes.html" class="project-item"><img src="escapes/img/logo_escapes.svg" alt="escapes"
-          class="cursor-target" /></a>
-      <a href="ROXY/roxy.html" class="project-item"><img src="ROXY/img/scritta.png" alt="ROXY"
-          class="cursor-target" /></a>
-      <a href="gizeta/gizeta.html" class="project-item"><img src="imghome/gizeta.png" alt="gizeta"
-          class="cursor-target" /></a>
+    <!-- The Infinite Marquee -->
+    <div class="footer-marquee-container">
+      <div class="footer-marquee">
+        <!-- We duplicate the content to make the scroll seamless -->
+        <div class="marquee-content">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <span>SITES</span>
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <span>BRANDING</span>
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <span>GRAPHICS</span>
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+        </div>
+      </div>
     </div>
 
-    <h2>websites</h2>
-    <div class="content-grid">
-      <a href="https://mammainfanzina.framer.website" target="_blank" class="project-item"><img
-          src="mammainfanzina/logo mamma.svg" alt="Mamma Infanzina Website" class="cursor-target" /></a>
-      <a href="https://www.gizeta-zanchetta.it/home" target="_blank" class="project-item"><img src="imghome/gizeta.png"
-          alt="Gizeta Website" class="cursor-target" /></a>
-      <a href="https://amdecorsrl.com" target="_blank" class="project-item"><img src="amdecor/img/amlogo.svg"
-          alt="AM Decor Website" class="cursor-target" /></a>
-      <a href="https://escapeslakecomo.com" target="_blank" class="project-item"><img src="escapes/img/logo_escapes.svg"
-          alt="Escapes Website" class="cursor-target" /></a>
-      <a href="https://zjncoo.github.io/RifiutiSpaziali/" target="_blank" class="project-item"><img
-          src="imghome/razzino.png" alt="Rifiuti Spaziali" class="cursor-target" /></a>
-      <a href="UNI YEAR 1/web_design/SITO ESAME/img_home/" target="_blank" class="project-item"><img
-          src="UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png" alt="Web Design Exam" class="cursor-target" /></a>
-    </div>
-  </section>
-
-  <footer>
-    <div class="cookie-banner" id="cookieBanner">
-      <span>my website uses <a href="cookies.html" class="cookie-link">cookies</a></span>
-      <span class="close-btn cursor-target" id="closeCookie">✕</span>
-    </div>
-    <div class="footer-content">
-      <a href="#" class="footer-logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" id="footer-logo"></a>
-      <div class="footer-text">
-        <p>&copy; 2025 zinco</p>
-        <a href="mailto:zinco.work@gmail.com" class="footer-email">zinco.work@gmail.com</a>
+    <div class="footer-bottom">
+      <div class="footer-bottom-links">
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+      <div class="footer-bottom-copyright">
+        &copy; 2026 ZINCO STUDIO
       </div>
     </div>
   </footer>

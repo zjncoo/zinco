@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainItem.href = item.embedUrl;
             mainItem.target = '_blank'; // Per aprire in una nuova scheda
             mainItem.rel = 'noopener noreferrer';
-            mainItem.innerHTML = `<h3>${item.label}</h3><p>Apri prototipo →</p>`;
+            mainItem.innerHTML = `<h3>${item.label}</h3><p>Open prototype →</p>`;
           }
           // Altrimenti, per immagini, colori, etc., creiamo un <div> come prima
           else {
