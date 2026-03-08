@@ -198,9 +198,10 @@
 }
 
 .branding-header h2 {
-  font-family: 'changa', sans-serif; font-weight: 200;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
+  letter-spacing: normal;
   /* 24px */
   margin: 0;
 }
@@ -236,9 +237,10 @@
 }
 
 .branding-item h3 {
-  font-family: 'changa', sans-serif; font-weight: 200;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 1rem;
+  letter-spacing: normal;
   /* 16px */
   margin: 0 0 15px 0;
 }
