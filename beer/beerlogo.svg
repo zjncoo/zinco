@@ -8,7 +8,7 @@
 
       .cls-2 {
         fill: #fff;
-        font-family: HelveticaNeue-Bold, 'Helvetica Neue';
+        font-family: 'changa', sans-serif;
         font-size: 79.62px;
         font-weight: 700;
       }

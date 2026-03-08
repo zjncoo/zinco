@@ -57,15 +57,21 @@ h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+  font-family: 'changa', sans-serif;
+  font-weight: 200;
+  letter-spacing: -0.05em;
+}
+
 .corner-button {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
+  font-family: 'changa', sans-serif;
+  font-weight: 200;
+  letter-spacing: -0.05em;
 }
 
 .menu-link {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: normal;
+  font-family: 'changa', sans-serif;
+  font-weight: 300;
 }
 
 h2 {
@@ -212,6 +218,7 @@ main {
 }
 
 .intro {
+  font-family: 'Inter', sans-serif;
   font-size: 28px;
   max-width: 800px;
   line-height: 1.4;
@@ -385,8 +392,10 @@ main {
 }
 
 .marquee-content span {
+  font-family: 'changa', sans-serif;
   font-size: 5vw;
-  font-weight: 700;
+  font-weight: 200;
+  letter-spacing: -0.05em;
   text-transform: uppercase;
   color: black;
   line-height: 1;
@@ -567,7 +576,7 @@ main {
 .btn {
   border: 2px solid black;
   padding: 10px 25px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 1rem;
   text-transform: uppercase;
@@ -820,7 +829,7 @@ main {
   color: black;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'changa', sans-serif; font-weight: 200;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -959,7 +968,7 @@ main {
   border: none;
   border-bottom: 2px solid white;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'changa', sans-serif; font-weight: 200;
   transition: border-color 0.4s ease, font-size 0.4s ease;
 }
 
@@ -1023,7 +1032,7 @@ main {
   margin: 1rem 0;
   color: white;
   text-decoration: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
   /* Separatore tra i risultati (rimosso) */
@@ -1054,7 +1063,7 @@ main {
   background: none;
   border: none;
   color: white;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 30px;
   cursor: pointer;
@@ -1075,7 +1084,7 @@ main {
   color: white;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -1440,7 +1449,7 @@ body.footer-visible .custom-cursor {
 }
 
 .pdf-grid-header h2 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'changa', sans-serif; font-weight: 200;
   font-weight: bold;
   font-size: 2rem;
   margin: 0;
@@ -1450,7 +1459,7 @@ body.footer-visible .custom-cursor {
 #closePdfGrid {
   background: none;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
   cursor: pointer;
@@ -1498,7 +1507,7 @@ body.footer-visible .custom-cursor {
   background-color: transparent;
   border: none;
   padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
   color: white;

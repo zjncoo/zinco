@@ -95,15 +95,15 @@
 }
 
 #project-hero h1 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
+  font-family: 'changa', sans-serif;
+  font-weight: 200;
   /* Clamp() per un font-size fluido e controllato */
   font-size: clamp(3.5rem, 8vw, 7rem);
   margin: 0;
   max-width: 60%;
   /* Forza l'andata a capo su schermi larghi */
   line-height: 0.9;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.05em;
 }
 
 #glance-container {
@@ -198,7 +198,7 @@
 }
 
 .branding-header h2 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'changa', sans-serif; font-weight: 200;
   font-weight: bold;
   font-size: 1.5rem;
   /* 24px */
@@ -236,7 +236,7 @@
 }
 
 .branding-item h3 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'changa', sans-serif; font-weight: 200;
   font-weight: bold;
   font-size: 1rem;
   /* 16px */
@@ -468,7 +468,7 @@
 }
 
 .project-info-content h2 {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'changa', sans-serif; font-weight: 200;
   font-weight: bold;
   font-size: 2rem;
   margin-top: 0;
