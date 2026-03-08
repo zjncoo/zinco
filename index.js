@@ -277,7 +277,20 @@ document.addEventListener('DOMContentLoaded', () => {
     randomProjectButton.addEventListener('click', () => {
       if (allProjects.length > 0) {
         const randomIndex = Math.floor(Math.random() * allProjects.length);
-        const randomUrl = allProjects[randomIndex].link;
+        let randomUrl = allProjects[randomIndex].link;
+        
+        // Handle path prefix for internal links
+        if (!randomUrl.startsWith('http')) {
+          const logo = document.getElementById('logo');
+          let pathPrefix = '';
+          if (logo) {
+            const logoHref = logo.getAttribute('href');
+            if (logoHref && logoHref.startsWith('../../')) pathPrefix = '../../';
+            else if (logoHref && logoHref.startsWith('../')) pathPrefix = '../';
+          }
+          randomUrl = pathPrefix + randomUrl;
+        }
+
         const preloader = document.getElementById('preloader');
         if (preloader) preloader.classList.remove('loaded');
         setTimeout(() => { window.location.href = randomUrl; }, 800);
