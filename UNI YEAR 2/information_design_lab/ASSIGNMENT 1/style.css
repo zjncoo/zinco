@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+div {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
+    backdrop-filter: blur(8px); /* Blurring effect */
+  position: absolute;
+  bottom: 3%;
+  left: 2%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  width: 30%;
+  height: fit-content;
+  padding: 1%;
+  border-radius: 10px;
+  box-shadow: 1px 1px 7px grey;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-family: Inter;
+  font-weight: bold;
+  font-size: 90%;
+}
+
+a:hover {
+  color: darkgrey;
+}
+
+p {
+  font-size: 70%;
+  text-decoration: none;
+  color: black;
+  font-family: Inter;
+  font-weight: bold;
+}

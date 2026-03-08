@@ -7,6 +7,11 @@
   },
   {
     "type": "text",
+    "label": "collaborators",
+    "content": "francesco z., sofia, r., gaia b., silvia a., matteo b. "
+  },
+  {
+    "type": "text",
     "label": "description",
     "content": "this project is part of the metaproject design course, it was developed with other 4 students. thee objective of the project was to operate an ipothetical rebrand of our chosen brand: roxy, which was a famous european cigarettes brand in the '80s"
   },
@@ -24,46 +29,41 @@
   {
     "type": "text",
     "label": "payoff",
-    "content": "il tuo futuro comincia qui"
+    "content": "your future starts here"
   },
   {
     "type": "text",
     "label": "values",
-    "content": "sostenibilità, innovazione, trasparenza"
+    "content": "sustainability, innovation, transparency"
   },
   {
     "type": "text",
     "label": "mission",
-    "content": "rendere la bellezza accessibile a tutti"
+    "content": "making beauty accessible to everyone"
   },
   {
     "type": "text",
     "label": "vision",
-    "content": "diventare il punto di riferimento nel settore estetico"
+    "content": "become the point of reference in the aesthetic sector"
   },
   {
     "type": "text",
     "label": "brand essence",
-    "content": "armonia e cura"
+    "content": "harmony and care"
   },
   {
     "type": "text",
     "label": "brand architecture",
-    "content": "master brand con sub-brand regionali"
+    "content": "master brand with regional sub-brands"
   },
   {
     "type": "text",
     "label": "target",
-    "content": "il target di roxygen è l’individuo ambizioso, che desidera essere il migliore, ma che allo stesso tempo riesce a prendere la vita con leggerezza ed ironia e riconosce quando ha bisogno di un momento di svago."
-  },
-  {
-    "type": "text",
-    "label": "creators",
-    "content": "francesco z., sofia, r., gaia b., silvia a., matteo b. "
+    "content": "the target of roxygen is the ambitious individual, who wants to be the best, but at the same time can take life with lightness and irony and recognizes when they need a moment of leisure."
   },
   {
     "type": "header",
-    "label": "prototipi interattivi"
+    "label": "interactive prototypes"
   },
   {
     "type": "figma",
@@ -77,7 +77,7 @@
   },
   {
     "type": "header",
-    "label": "palette colori"
+    "label": "color palette"
   },
   {
     "type": "color",

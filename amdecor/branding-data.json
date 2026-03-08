@@ -14,7 +14,7 @@
   {
     "type": "text",
     "label": "description",
-    "content": "progetto di identità visiva e branding per una s.r.l. specializzata in costruzioni e ristrutturazioni di alta qualità."
+    "content": "visual identity and branding project for a company specializing in high-quality construction and renovations."
   },
   {
     "type": "text",
@@ -30,32 +30,32 @@
   {
     "type": "text",
     "label": "payoff",
-    "content": "costruiamo valore, edificio dopo edificio."
+    "content": "we build value, building by building."
   },
   {
     "type": "text",
     "label": "values",
-    "content": "solidità, qualità, innovazione, trasparenza"
+    "content": "solidity, quality, innovation, transparency"
   },
   {
     "type": "text",
     "label": "mission",
-    "content": "realizzare opere edili che uniscono funzionalità, estetica e sicurezza, garantendo la massima soddisfazione del cliente attraverso l'uso di materiali eccellenti e processi efficienti."
+    "content": "to deliver construction works that combine functionality, aesthetics, and safety, ensuring maximum client satisfaction through the use of excellent materials and efficient processes."
   },
   {
     "type": "text",
     "label": "vision",
-    "content": "diventare un punto di riferimento nel settore per la capacità di integrare soluzioni costruttive tradizionali con l'innovazione tecnologica e la sostenibilità ambientale."
+    "content": "to become a point of reference in the sector for the ability to integrate traditional construction solutions with technological innovation and environmental sustainability."
   },
   {
     "type": "text",
     "label": "brand essence",
-    "content": "solidità e design"
+    "content": "solidity and design"
   },
   {
     "type": "text",
     "label": "brand architecture",
-    "content": "brand monolitico"
+    "content": "monolithic brand"
   },
   {
     "type": "header",
@@ -78,7 +78,7 @@
   },
   {
     "type": "header",
-    "label": "applicazioni"
+    "label": "applications"
   },
   {
     "type": "image",

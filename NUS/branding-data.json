@@ -7,6 +7,11 @@
   },
   {
     "type": "text",
+    "label": "collaborators",
+    "content": "francesco z., lucrezia s., gaia b., aurelia la c., martina s. "
+  },
+  {
+    "type": "text",
     "label": "description",
     "content": "this project is part of the corporate identity course and was developed in collaboration with four other students, however these graphic elements, in particular were created by me."
   },
@@ -23,7 +28,7 @@
   {
     "type": "text",
     "label": "values",
-    "content": "sostenibilità, innovazione, trasparenza"
+    "content": "sustainability, innovation, transparency"
   },
   {
     "type": "text",
@@ -43,22 +48,17 @@
   {
     "type": "text",
     "label": "target",
-    "content": "studenti e ricercatori urbani"
+    "content": "students and urban researchers"
   },
   {
     "type": "text",
     "label": "positioning",
-    "content": "istituto di alta formazione specializzato"
+    "content": "specialized higher education institute"
   },
   {
     "type": "text",
     "label": "brand architecture",
-    "content": "master brand con sub-brand regionali"
-  },
-  {
-    "type": "text",
-    "label": "creators",
-    "content": "francesco z., lucrezia s., gaia b., aurelia la c., martina s. "
+    "content": "master brand with regional sub-brands"
   },
   {
     "type": "header",
@@ -67,7 +67,7 @@
   {
     "type": "image",
     "subtype": "marchio",
-    "label": "costruzione",
+    "label": "construction",
     "src": "img/brand/marchio_costruttivo.png"
   },
   {
@@ -79,13 +79,13 @@
   {
     "type": "image",
     "subtype": "marchio",
-    "label": "colore",
+    "label": "color",
     "src": "img/brand/marchio_colore.png"
   },
   {
     "type": "image",
     "subtype": "marchio",
-    "label": "negativo",
+    "label": "negative",
     "src": "img/brand/marchio_negativo.png"
   },
   {
@@ -95,7 +95,7 @@
   {
     "type": "image",
     "subtype": "identita",
-    "label": "tipografia",
+    "label": "typography",
     "src": "img/brand/tipografia.png"
   },
   {
@@ -160,12 +160,12 @@
   },
   {
     "type": "figma",
-    "label": "websitebsite - prototype",
+    "label": "website - prototype",
     "embedUrl": "https://embed.figma.com/proto/wF1HPUS18DSGwC0eHSEUV5/SITO-NUS--Copy-?page-id=0%3A1&node-id=166-147&p=f&viewport=485%2C-22%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=166%3A147&embed-host=share"
   },
   {
     "type": "header",
-    "label": "power aplications"
+    "label": "power applications"
   },
   {
     "type": "image",
@@ -182,7 +182,7 @@
   {
     "type": "image",
     "subtype": "app-screenshot",
-    "label": "semi",
+    "label": "seeds",
     "src": "img/semi insieme.png"
   },
   {
@@ -194,7 +194,7 @@
   {
     "type": "image",
     "subtype": "app-screenshot",
-    "label": "portachiavi",
+    "label": "keychain",
     "src": "img/portachiavi-2.png"
   }
 ]

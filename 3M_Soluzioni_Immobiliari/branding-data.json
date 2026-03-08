@@ -22,13 +22,13 @@
   {
     "type": "image",
     "subtype": "marchio",
-    "label": "marchio",
+    "label": "brand mark",
     "src": "img/3M_MARCHIO.png"
   },
   {
     "type": "image",
     "subtype": "marchio",
-    "label": "logo esteso",
+    "label": "extended logo",
     "src": "img/3M_LOGO_ESTESO.png"
   }
 ]

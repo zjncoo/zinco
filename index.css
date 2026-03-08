@@ -214,7 +214,7 @@ main {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0% 0 80px;
+  padding: 50px 0 80px;
 }
 
 .intro {
@@ -275,20 +275,20 @@ main {
   margin-bottom: 2rem;
 }
 
-.footer-info {
+.footer-contact-info {
   flex: 1;
   min-width: 300px;
 }
 
-.footer-info h3 {
-  font-size: 2.5rem;
+.footer-contact-info h2 {
+  font-size: 2rem;
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1;
 }
 
-.footer-info p {
+.footer-contact-info p {
   font-size: 1rem;
   margin-bottom: 0.5rem;
   opacity: 0.8;
@@ -315,7 +315,9 @@ main {
 .footer-form-wrapper {
   flex: 1;
   min-width: 300px;
-  max-width: 500px;
+  max-width: 450px;
+  margin-left: auto; /* Push to the right */
+  margin-right: -40px; /* Stretch to the right edge */
 }
 
 .custom-contact-form {
@@ -351,21 +353,24 @@ main {
 }
 
 .submit-btn {
-  align-self: flex-start;
-  padding: 1rem 2rem;
-  background-color: black;
-  color: white;
+  width: 100%;
+  padding: 1.5rem 0;
+  background-color: transparent;
+  color: black;
   border: none;
-  border-radius: 50px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  text-align: left;
   font-weight: 500;
   font-size: 1rem;
+  font-family: inherit;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .submit-btn:hover {
-  transform: translateY(-2px);
-  background-color: #333;
+  background-color: black;
+  color: white;
 }
 
 /* Infinite Marquee */
@@ -504,65 +509,75 @@ main {
 
 /*
  * ===================================================================
- * 5. ELEMENTI UI FISSI E DI NAVIGAZIONE
+ * 5. ELEMENTI UI FISSI E DI NAVIGAZIONE (Nav Bars)
  * ===================================================================
 */
-.fixed-link {
+
+/* --- Horizontal Nav Bars --- */
+.nav-bar {
   position: fixed;
-  font-weight: bold;
-  font-size: 20px;
-  text-decoration: none;
-  color: black;
-  z-index: 10;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 40px;
+  background-color: white;
 }
 
-#logo {
-  width: 20vw;
-  padding: 0px;
-  top: 20px;
-  left: 27px;
-  position: fixed;
+.nav-bar--top {
+  top: 0;
+  border-bottom: 2px solid black;
+}
+
+.nav-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Open state for top nav bar when menu is active */
+.nav-bar.open {
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.nav-bar.open .nav-bar-link {
+  color: white;
 }
 
 #button-logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
+  display: flex;
+  align-items: center;
   z-index: 1000;
   width: fit-content;
 }
 
-.corner-button {
-  position: fixed;
+#logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.nav-bar-link {
+  font-family: 'changa', sans-serif;
+  font-weight: 200;
+  letter-spacing: -0.05em;
   color: black;
   text-decoration: none;
-  font-size: 30px;
-  z-index: 1000;
-  padding: 8px;
+  font-size: 1.3rem;
+  padding: 2px 0;
+  transition: opacity 0.3s ease;
 }
 
-#btnTopLeft {
-  top: 20px;
-  left: 32px;
-}
-
-#btnTopRight {
-  top: 20px;
-  right: 32px;
-}
-
-#btnBottomLeft {
-  bottom: 20px;
-  left: 32px;
-}
-
-#btnBottomRight {
-  bottom: 20px;
-  right: 32px;
+.nav-bar-link:hover {
+  opacity: 0.5;
 }
 
 #btnTopRight.open {
   color: white;
+  z-index: 1001;
 }
 
 
@@ -728,6 +743,86 @@ main {
 
 .project-item:nth-child(4n) {
   padding-right: 40px;
+}
+
+/* --- Variante Cover per foto a tutta larghezza (es. Publications) --- */
+.project-item--cover {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.project-item--cover img {
+  width: 80%;
+  height: 80%;
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: cover;
+}
+
+.project-item--cover:hover img {
+  filter: none;
+  opacity: 0.7;
+}
+
+/* --- PROJECT LINE ITEMS (Branding, Publications, Websites) --- */
+.project-lines {
+  border-top: 2px solid black;
+}
+
+.project-line {
+  display: flex;
+  align-items: center;
+  padding: 4px 40px;
+  border-bottom: 2px solid black;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.2s ease;
+  cursor: none;
+}
+
+.project-line:hover {
+  background-color: #f5f5f5;
+}
+
+.project-line-title {
+  font-family: 'changa', sans-serif;
+  font-weight: 200;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.project-line-thumb {
+  height: 1.2em;
+  width: auto;
+  max-width: 80px;
+  margin-left: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Hover preview popup — replaces cursor */
+.project-line-preview {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  border: 2px solid black;
+  background: white;
+  overflow: hidden;
+}
+
+.project-line-preview.visible {
+  opacity: 1;
+}
+
+.project-line-preview img {
+  display: block;
+  width: 220px;
+  height: auto;
+  object-fit: cover;
 }
 
 
@@ -1032,9 +1127,9 @@ main {
   margin: 1rem 0;
   color: white;
   text-decoration: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'changa', sans-serif;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 200;
   /* Separatore tra i risultati (rimosso) */
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -1181,25 +1276,12 @@ main {
     padding-right: 30px;
   }
 
-  #button-logo {
-    left: 22px;
-  }
-
-  #btnTopLeft,
-  #btnBottomLeft {
-    left: 22px;
-  }
-
-  #btnTopRight,
-  #btnBottomRight {
-    right: 22px;
+  .nav-bar {
+    padding: 2px 30px;
   }
 
   #logo {
-    width: 200px;
-    left: 0;
-    position: relative;
-    padding: 0;
+    height: 24px;
   }
 
   .content-grid {
@@ -1264,22 +1346,14 @@ main {
     padding-right: 20px;
   }
 
-  /* --- MODIFICHE PER ALLINEAMENTO E SPAZIO --- */
-
-  /* Sposta logo e 'more' più in alto */
-  #button-logo,
-  #btnTopRight {
-    top: 12px;
+  /* --- NAV BAR MOBILE ADJUSTMENTS --- */
+  .nav-bar {
+    padding: 2px 20px;
   }
 
-  /* Allinea i bottoni d'angolo e il logo al padding generale di 20px */
-  #button-logo,
-  #btnTopLeft {
-    left: 20px;
-  }
-
-  #btnTopRight {
-    right: 20px;
+  /* Hide desktop-only nav links on mobile */
+  .nav-bar-link--desktop {
+    display: none;
   }
 
   /* Allinea i titoli H2 (es. "uni year 1") al padding di 20px */
@@ -1287,16 +1361,8 @@ main {
     padding-left: 20px;
   }
 
-  /* Nasconde i link "portfolio" e "contacts" in basso */
-  #btnBottomLeft,
-  #btnBottomRight {
-    display: none;
-  }
-
-  /* --- FINE MODIFICHE ALLINEAMENTO --- */
-
   #logo {
-    width: 150px;
+    height: 22px;
   }
 
   .content-grid {
@@ -1310,6 +1376,33 @@ main {
 
   footer {
     margin: 40px 0 150px 0;
+  }
+
+  /* Stretch footer form on mobile */
+  .footer-top {
+    padding: 0 20px; /* Keep padding for the info section */
+    display: block; /* Stack elements instead of flex */
+  }
+  
+  .footer-form-wrapper {
+    margin-left: -20px; /* Pull left by container padding */
+    margin-right: -20px; /* Pull right by container padding */
+    width: 100vw;
+    max-width: 100vw;
+  }
+  
+  .footer-form-wrapper form {
+    padding: 0 20px; /* Add padding back inside the form so text isn't flush with edge, only lines */
+  }
+
+  .footer-form-wrapper .input-group input,
+  .footer-form-wrapper .input-group textarea,
+  .footer-form-wrapper .submit-btn {
+    width: 100vw;
+    margin-left: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
   }
 
   /* --- MODIFICHE MENU A TENDINA --- */
@@ -1386,6 +1479,24 @@ main {
   .card-back {
     display: none;
   }
+
+  /* Project line mobile adjustments */
+  .project-line {
+    padding: 12px 20px;
+    padding-left: 20px;
+  }
+
+  .projects-section h2 + .project-lines {
+    margin-left: 0;
+  }
+
+  .project-line-title {
+    font-size: 1.1rem;
+  }
+
+  .project-line-preview {
+    display: none !important;
+  }
 }
 
 /* Force cursor to be black over the white footer */
@@ -1394,6 +1505,7 @@ body.footer-visible .custom-cursor {
   border-color: black !important;
   background-color: transparent !important;
 }
+
 
 /* On mobile, standard flow for long footers to avoid cutoff */
 @media (max-width: 768px) {

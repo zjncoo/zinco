@@ -8,7 +8,7 @@
   {
     "type": "text",
     "label": "description",
-    "content": "Gizeta SAS è un'impresa di costruzioni specializzata in edilizia residenziale, ristrutturazioni e manutenzioni. Operiamo con precisione e materiali di qualità per garantire risultati solidi e duraturi nel tempo."
+    "content": "Gizeta SAS is a construction company specializing in residential building, renovations, and maintenance. We operate with precision and quality materials to ensure solid and lasting results over time."
   },
   {
     "type": "text",
@@ -18,57 +18,57 @@
   {
     "type": "text",
     "label": "payoff",
-    "content": "Costruiamo valore, mattone dopo mattone."
+    "content": "We build value, brick by brick."
   },
   {
     "type": "text",
     "label": "values",
-    "content": "Solidità, Qualità, Affidabilità, Sicurezza"
+    "content": "solidity, quality, reliability, safety"
   },
   {
     "type": "text",
     "label": "mission",
-    "content": "Realizzare opere edili che superino le aspettative dei clienti, garantendo sicurezza, durabilità e rispetto dei tempi e dei budget concordati."
+    "content": "To deliver construction works that exceed client expectations, ensuring safety, durability, and respect for agreed timelines and budgets."
   },
   {
     "type": "text",
     "label": "vision",
-    "content": "Diventare un punto di riferimento nel settore delle costruzioni locali per l'eccellenza esecutiva, la trasparenza e l'integrità professionale."
+    "content": "To become a point of reference in the local construction sector for execution excellence, transparency, and professional integrity."
   },
   {
     "type": "text",
     "label": "brand essence",
-    "content": "Costruire per durare."
+    "content": "Built to last."
   },
   {
     "type": "text",
     "label": "brand architecture",
-    "content": "Brand Monolitico"
+    "content": "monolithic brand"
   },
   {
     "type": "text",
     "label": "target",
-    "content": "Clienti privati, architetti e piccole-medie imprese che cercano un partner affidabile per la realizzazione o la ristrutturazione di immobili."
+    "content": "Private clients, architects, and small-to-medium enterprises seeking a reliable partner for building or renovating properties."
   },
   {
     "type": "header",
-    "label": "Applicazioni del Marchio"
+    "label": "brand mark applications"
   },
   {
     "type": "image",
     "subtype": "mockup",
-    "label": "Biglietto da Visita",
+    "label": "business card",
     "src": "img/gizeta_biglietto.png"
   },
   {
     "type": "image",
     "subtype": "mockup",
-    "label": "Automezzo Aziendale",
+    "label": "company vehicle",
     "src": "img/gizeta_furgone.png"
   },
   {
     "type": "header",
-    "label": "palette colori"
+    "label": "color palette"
   },
   {
     "type": "color",

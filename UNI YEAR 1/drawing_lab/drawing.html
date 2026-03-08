@@ -24,10 +24,14 @@
   <div class="site-main-content">
   <div class="custom-cursor" id="cursor"></div>
 
-  <a href="../../index.html" id="button-logo"><img src="../../imghome/logo_zinco.svg" id="logo" alt="Logo"></a>
-  <a href="#" class="corner-button cursor-target" id="btnTopRight">menu</a>
-  <a href="#" class="corner-button cursor-target" id="btnBottomLeft">studio</a>
-  <a href="#contact-footer" class="corner-button cursor-target" id="btnBottomRight">contact</a>
+  <nav class="nav-bar nav-bar--top" id="navTop">
+      <a href="../../index.html" id="button-logo" aria-label="Torna alla homepage"><img src="../../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo" loading="lazy" decoding="async"></a>
+      <div class="nav-bar-right">
+        <a href="../../portfolio.html" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomLeft" aria-label="Vai al portfolio">portfolio</a>
+        <a href="#contact-footer" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomRight" aria-label="Vai ai contatti">contacts</a>
+        <a href="#" class="nav-bar-link cursor-target" id="btnTopRight" aria-label="Apri menu principale">menu</a>
+      </div>
+    </nav>
 
   <div id="dropdownMenu">
     <div class="menu-columns">
@@ -51,21 +55,18 @@
     </div>
   </div>
 
-  <video id="myVideo" autoplay loop src="img/Screen Recording 2025-04-18 at 00.21.13.mov"></video>
-  
-
-  <div id="pdfThumbContainer" class="branding-grid"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
-  <script src="pdf-thumbs.js"></script>
-
-  <div id="pdfViewerContainer">
-    <button id="prevPage" class="pdf-nav left">←</button>
-    <canvas id="pdfCanvas"></canvas>
-    <button id="nextPage" class="pdf-nav right">→</button>
-    <div id="pageIndicator">Page <span id="pageNum"></span> of <span id="pageCount"></span></div>
-  </div>
+  <div id="pdf-container" style="width: 100vw; margin: 0; padding: 0; overflow-x: hidden; background: #000;"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="pdf-viewer.js" defer></script>
+  <script>
+    window.PDF_URLS = [
+      'img/honky chateau/booklet.pdf',
+      'img/honky chateau/cover vinile.pdf',
+      'img/honky chateau/1-Vinyl Record Mockup.png',
+      'img/honky chateau/HONKY CHA\u0302TEAU presentazione.pdf',
+      'libretto_francesco_zanchetta.pdf'
+    ];
+  </script>
+  <script src="../free-rolling-pdf.js"></script>
 
     </div><!-- /site-main-content -->
 
@@ -118,31 +119,31 @@
         <!-- We duplicate the content to make the scroll seamless -->
         <div class="marquee-content">
           <span>SITES</span>
-          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
           <span>SITES</span>
-          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
         </div>
         <div class="marquee-content" aria-hidden="true">
           <span>SITES</span>
-          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
           <span>SITES</span>
-          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="../../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="../../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="../../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
         </div>
       </div>
     </div>

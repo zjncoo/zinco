@@ -549,6 +549,7 @@
   #project-hero {
     padding: 20px 20px 20px 27px;
     justify-content: center;
+    min-height: 80vh;
     /* Centra verticalmente il contenuto nell'area rimanente */
   }
 
@@ -628,7 +629,7 @@
 /* --- Smartphone Piccoli (fino a 480px) --- */
 @media (max-width: 480px) {
   #hero-wrapper {
-    min-height: 500px;
+    min-height: 80vh;
   }
 
   #project-hero h1 {

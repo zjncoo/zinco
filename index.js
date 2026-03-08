@@ -106,8 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleMenu = (e) => {
       e.preventDefault();
       const isOpen = dropdownMenu.classList.toggle("open");
-      moreButton.textContent = isOpen ? "close" : "more";
-      moreButton.classList.toggle("open");
+      const navTop = document.getElementById("navTop");
+      if (navTop) navTop.classList.toggle("open", isOpen);
+      moreButton.textContent = isOpen ? "close" : "menu";
+      moreButton.classList.toggle("open", isOpen);
     };
     const handleClickOutside = (e) => {
       if (dropdownMenu.classList.contains("open") && !dropdownMenu.contains(e.target) && !moreButton.contains(e.target)) {
@@ -132,8 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
           // Chiudi il menu a tendina se aperto
           if (dropdownMenu && dropdownMenu.classList.contains("open")) {
             dropdownMenu.classList.remove("open");
+            const navTop = document.getElementById("navTop");
+            if (navTop) navTop.classList.remove("open");
             if (moreButton) {
-              moreButton.textContent = "more";
+              moreButton.textContent = "menu";
               moreButton.classList.remove("open");
             }
           }
@@ -427,6 +431,53 @@ document.addEventListener('DOMContentLoaded', () => {
             successMessage.style.display = 'none';
           }, 5000);
         });
+    });
+  }
+
+  // --- PROJECT LINE HOVER PREVIEW (replaces cursor) ---
+  const projectLines = document.querySelectorAll('.project-line[data-hover-images]');
+  if (projectLines.length > 0) {
+    // Create the preview element once
+    const preview = document.createElement('div');
+    preview.classList.add('project-line-preview');
+    const previewImg = document.createElement('img');
+    preview.appendChild(previewImg);
+    document.body.appendChild(preview);
+
+    projectLines.forEach(line => {
+      let images;
+      try { images = JSON.parse(line.dataset.hoverImages); } catch (e) { images = []; }
+      if (!images.length) return;
+
+      line.addEventListener('mouseenter', () => {
+        // Usa sempre la prima immagine fornita
+        const src = images[0];
+        previewImg.src = src;
+        preview.classList.add('visible');
+        // Hide the custom cursor while hovering
+        if (cursor) cursor.style.display = 'none';
+      });
+
+      line.addEventListener('mousemove', (e) => {
+        // Position preview centered on cursor (replacing it)
+        const x = e.clientX;
+        const y = e.clientY;
+        const pw = preview.offsetWidth || 220;
+        const ph = preview.offsetHeight || 160;
+        let left = x - pw / 2;
+        let top = y - ph / 2;
+        // Keep within viewport
+        left = Math.max(4, Math.min(left, window.innerWidth - pw - 4));
+        top = Math.max(4, Math.min(top, window.innerHeight - ph - 4));
+        preview.style.left = left + 'px';
+        preview.style.top = top + 'px';
+      });
+
+      line.addEventListener('mouseleave', () => {
+        preview.classList.remove('visible');
+        // Restore the custom cursor
+        if (cursor) cursor.style.display = '';
+      });
     });
   }
 });

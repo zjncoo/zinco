@@ -1,0 +1,32 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+div {
+  background: rgba(255, 255, 255, 0.09); /* Semi-transparent background */
+    backdrop-filter: blur(8px); /* Blurring effect */
+  position: absolute;
+  bottom: 3%;
+  left: 2%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  width: fit-content;
+  height: fit-content;
+  padding: 1%;
+  border-radius: 10px;
+  box-shadow: 1px 1px 7px rgb(0, 0, 0);
+}
+
+p {
+  font-size: 90%;
+  text-decoration: none;
+  color: rgb(255, 208, 0);
+  font-family: Inter;
+  font-weight: bold;
+}

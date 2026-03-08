@@ -30,7 +30,7 @@
     <div id="scroll-progress-bar"></div>
 
     <div id="preloader">
-      <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo" loading="lazy" decoding="async"></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -38,10 +38,14 @@
 
     <div class="custom-cursor" id="cursor"></div>
 
-    <a href="#" id="button-logo" aria-label="Torna alla homepage"><img src="imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
-    <a href="#" class="corner-button cursor-target" id="btnTopRight" aria-label="Apri menu principale">menu</a>
-    <a href="portfolio.html" class="corner-button cursor-target" id="btnBottomLeft" aria-label="Vai al portfolio">portfolio</a>
-    <a href="#contact-footer" class="corner-button cursor-target" id="btnBottomRight" aria-label="Vai ai contatti">contacts</a>
+    <nav class="nav-bar nav-bar--top" id="navTop">
+      <a href="#" id="button-logo" aria-label="Torna alla homepage"><img src="imghome/logo_zinco.svg" id="logo" alt="Zinco Logo" loading="lazy" decoding="async"></a>
+      <div class="nav-bar-right">
+        <a href="portfolio.html" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomLeft" aria-label="Vai al portfolio">portfolio</a>
+        <a href="#contact-footer" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomRight" aria-label="Vai ai contatti">contacts</a>
+        <a href="#" class="nav-bar-link cursor-target" id="btnTopRight" aria-label="Apri menu principale">menu</a>
+      </div>
+    </nav>
 
     <div id="dropdownMenu">
       <div class="menu-columns">
@@ -307,57 +311,139 @@
 
 
     <section class="projects-section">
-      <h2>uni year 1</h2>
-      <div class="content-grid">
-        <a href="UNI YEAR 1/drawing_lab/drawing.html" class="project-item">
-          <img src="imghome/folder.png" alt="Drawing Lab" class="cursor-target" />
+      <h2 style="margin-bottom: 2rem;">uni year 1</h2>
+      <div class="project-lines">
+        <a href="UNI YEAR 1/uni_year_1.html" class="project-line"
+           data-hover-images='["UNI YEAR 1/drawing_lab/img/honky chateau/1-Vinyl Record Mockup.png", "UNI YEAR 1/visual_elements_lab/thumb.png", "UNI YEAR 1/projects_basics_lab/thumb.png", "UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png"]'>
+          <span class="project-line-title">UNI YEAR 1 Courses</span>
+          <img src="UNI YEAR 1/drawing_lab/img/honky chateau/1-Vinyl Record Mockup.png" alt="UNI YEAR 1" class="project-line-thumb" loading="lazy" decoding="async">
         </a>
-        <a href="UNI YEAR 1/design_history/history.html" class="project-item">
-          <img src="imghome/folder.png" alt="Design History" class="cursor-target" />
-        </a>
-        <a href="https://mammainfanzina.framer.website" class="project-item">
-          <img src="imghome/folder.png" alt="Mamma Infanzina" class="cursor-target" />
-        </a>
-        <a href="https://mammainfanzina.framer.website" class="project-item">
-          <img src="imghome/folder.png" alt="Placeholder" class="cursor-target" />
+      </div>
+
+      <h2 style="margin-bottom: 2rem; margin-top: 4rem;">uni year 2</h2>
+      <div class="project-lines">
+        <a href="UNI YEAR 2/uni_year_2.html" class="project-line"
+           data-hover-images='["UNI YEAR 2/brand_identity_lab/thumb.png", "UNI YEAR 2/information_design_lab/ASSIGNMENT 1/thumb.png", "UNI YEAR 2/information_design_lab/ASSIGNMENT 2/thumb.png", "UNI YEAR 2/information_design_lab/ASSIGNMENT 3/thumb.png"]'>
+          <span class="project-line-title">UNI YEAR 2 Courses</span>
+          <img src="UNI YEAR 2/brand_identity_lab/thumb.png" alt="UNI YEAR 2" class="project-line-thumb" loading="lazy" decoding="async">
         </a>
       </div>
 
       <h2>branding</h2>
-      <div class="content-grid">
-        <a href="https://zjncoo.github.io/ALUA.IT/" target="_blank" class="project-item" style="padding: 10%;"><img
-            src="imghome/logo_alua.svg" alt="ALUA" class="cursor-target" style="object-fit: contain;" /></a>
-        <a href="3M_Soluzioni_Immobiliari/3m.html" class="project-item" style="padding: 10%;"><img
-            src="3M_Soluzioni_Immobiliari/img/3M_LOGO_ESTESO_1.svg" alt="3M Soluzioni Immobiliari" class="cursor-target"
-            style="object-fit: contain;" /></a>
-        <a href="amdecor/amdecor.html" class="project-item"><img src="amdecor/img/amlogo.svg" alt="AM Decor"
-            class="cursor-target" /></a>
-        <a href="NUS/nus.html" class="project-item"><img src="NUS/img/logo_nus.svg" alt="NUS"
-            class="cursor-target" /></a>
-        <a href="escapes/escapes.html" class="project-item"><img src="escapes/img/logo_escapes.svg" alt="escapes"
-            class="cursor-target" /></a>
-        <a href="ROXY/roxy.html" class="project-item"><img src="ROXY/img/scritta.png" alt="ROXY"
-            class="cursor-target" /></a>
-        <a href="gizeta/gizeta.html" class="project-item"><img src="imghome/gizeta.png" alt="gizeta"
-            class="cursor-target" /></a>
+      <div class="project-lines">
+        <a href="https://zjncoo.github.io/ALUA.IT/" target="_blank" class="project-line"
+           data-hover-images='["imghome/logo_alua.svg"]'>
+          <span class="project-line-title">ALUA</span>
+          <img src="imghome/logo_alua.svg" alt="ALUA" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="3M_Soluzioni_Immobiliari/3m.html" class="project-line"
+           data-hover-images='["3M_Soluzioni_Immobiliari/img/3M_LOGO_ESTESO_1.svg","3M_Soluzioni_Immobiliari/img/3M_MARCHIO.png"]'>
+          <span class="project-line-title">3M Soluzioni Immobiliari</span>
+          <img src="3M_Soluzioni_Immobiliari/img/3M_LOGO_ESTESO_1.svg" alt="3M" class="project-line-thumb" style="object-fit: contain;" loading="lazy" decoding="async">
+        </a>
+        <a href="amdecor/amdecor.html" class="project-line"
+           data-hover-images='["amdecor/img/van mockup.webp","amdecor/img/tag mockup.webp","amdecor/img/logo shoadow.webp","amdecor/img/insegne amdecor-02.webp"]'>
+          <span class="project-line-title">AM Decor</span>
+          <img src="amdecor/img/amlogo.svg" alt="AM Decor" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="NUS/nus.html" class="project-line"
+           data-hover-images='["NUS/img/brochure.webp","NUS/img/tote.webp","NUS/img/badge.webp","NUS/img/semi insieme.webp","NUS/img/portachiavi-2.webp"]'>
+          <span class="project-line-title">NUS</span>
+          <img src="NUS/img/logo_nus.svg" alt="NUS" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="escapes/escapes.html" class="project-line"
+           data-hover-images='["imghome/escapes.webp"]'>
+          <span class="project-line-title">Escapes</span>
+          <img src="escapes/img/logo_escapes.svg" alt="Escapes" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="ROXY/roxy.html" class="project-line"
+           data-hover-images='["ROXY/img/scritta.png"]'>
+          <span class="project-line-title">ROXY</span>
+          <img src="ROXY/img/scritta.png" alt="ROXY" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="gizeta/gizeta.html" class="project-line"
+           data-hover-images='["gizeta/img/gizeta.webp","imghome/gizeta.png"]'>
+          <span class="project-line-title">Gizeta</span>
+          <img src="imghome/gizeta.png" alt="Gizeta" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="dranks/dranks.html" class="project-line"
+           data-hover-images='["dranks/dranks_screenshot.webp"]'>
+          <span class="project-line-title">Dranks</span>
+          <img src="dranks/drankslogo.svg" alt="Dranks" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+      </div>
+
+      <h2>publications</h2>
+      <div class="project-lines">
+        <a href="publications/fomo/fomo.html" class="project-line"
+           data-hover-images='["publications/fomo/img/mockup fomo 1.webp","publications/fomo/img/mockup fomo 2.webp","publications/fomo/img/mockup fomo 3.webp"]'>
+          <span class="project-line-title">FOMO</span>
+          <img src="publications/fomo/img/mockup fomo 1.webp" alt="fomo" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="publications/zoom/zoom.html" class="project-line"
+           data-hover-images='["publications/zoom/img/ayumi_mockup_1.webp","publications/zoom/img/ayumi_mockup_2.webp","publications/zoom/img/ayumi_mockup_3.webp","publications/zoom/img/ayumi_mockup_4.webp","publications/zoom/img/ayumi_mockup_5.webp"]'>
+          <span class="project-line-title">ZOOM</span>
+          <img src="publications/zoom/img/ayumi_mockup_1.webp" alt="zoom" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="publications/femvertising/femvertising.html" class="project-line"
+           data-hover-images='["publications/femvertising/img/femvertising_mockup_1.webp","publications/femvertising/img/femvertising_mockup_2.webp","publications/femvertising/img/femvertising_mockuP_3.webp","publications/femvertising/img/femvertising_mockup_4.webp","publications/femvertising/img/femvertising_mockup_5.webp"]'>
+          <span class="project-line-title">FemVertising</span>
+          <img src="publications/femvertising/img/femvertising_mockup_1.webp" alt="FemVertising" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="publications/roxy_brandbook/roxy_brandbook.html" class="project-line"
+           data-hover-images='["publications/roxy_brandbook/img/roxy_mockup_1.png","publications/roxy_brandbook/img/roxy_mockup_2.png","publications/roxy_brandbook/img/roxy_mockup_3.png","publications/roxy_brandbook/img/roxy_mockup_4.png","publications/roxy_brandbook/img/roxy_mockup_5.png"]'>
+          <span class="project-line-title">Roxy Brandbook</span>
+          <img src="publications/roxy_brandbook/img/roxy_mockup_3.png" alt="Roxy Brandbook" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="publications/fotografie_come_lettere_di _un_alfabeto/fotografia.html" class="project-line"
+           data-hover-images='["publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp","publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 2.webp","publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 3.webp"]'>
+          <span class="project-line-title">Fotografie come lettere di un alfabeto</span>
+          <img src="publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp" alt="Fotografia" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="publications/cos'è_un_designer/history.html" class="project-line"
+           data-hover-images='["imghome/folder.png"]'>
+          <span class="project-line-title">Cos'è un designer</span>
+          <img src="imghome/folder.png" alt="Cos'è un designer" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
       </div>
 
       <h2>websites</h2>
-      <div class="content-grid">
-        <a href="https://zjncoo.github.io/ALUA.IT/" target="_blank" class="project-item" style="padding: 10%;"><img
-            src="imghome/logo_alua.svg" alt="ALUA Website" class="cursor-target" style="object-fit: contain;" /></a>
-        <a href="https://mammainfanzina.framer.website" target="_blank" class="project-item"><img
-            src="mammainfanzina/logo mamma.svg" alt="Mamma Infanzina Website" class="cursor-target" /></a>
-        <a href="https://www.gizeta-zanchetta.it/home" target="_blank" class="project-item"><img
-            src="imghome/gizeta.png" alt="Gizeta Website" class="cursor-target" /></a>
-        <a href="https://amdecorsrl.com" target="_blank" class="project-item"><img src="amdecor/img/amlogo.svg"
-            alt="AM Decor Website" class="cursor-target" /></a>
-        <a href="https://escapeslakecomo.com" target="_blank" class="project-item"><img
-            src="escapes/img/logo_escapes.svg" alt="Escapes Website" class="cursor-target" /></a>
-        <a href="https://zjncoo.github.io/RifiutiSpaziali/" target="_blank" class="project-item"><img
-            src="imghome/razzino.png" alt="Rifiuti Spaziali" class="cursor-target" /></a>
-        <a href="UNI YEAR 1/web_design/SITO ESAME/img_home/" target="_blank" class="project-item"><img
-            src="UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png" alt="Web Design Exam" class="cursor-target" /></a>
+      <div class="project-lines">
+        <a href="https://zjncoo.github.io/ALUA.IT/" target="_blank" class="project-line"
+           data-hover-images='["imghome/logo_alua.svg"]'>
+          <span class="project-line-title">ALUA</span>
+          <img src="imghome/logo_alua.svg" alt="ALUA Website" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="https://mammainfanzina.framer.website" target="_blank" class="project-line"
+           data-hover-images='["mammainfanzina/logo mamma.svg"]'>
+          <span class="project-line-title">Mamma Infanzina</span>
+          <img src="mammainfanzina/logo mamma.svg" alt="Mamma Infanzina" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="https://www.gizeta-zanchetta.it/home" target="_blank" class="project-line"
+           data-hover-images='["imghome/gizeta.png"]'>
+          <span class="project-line-title">Gizeta</span>
+          <img src="imghome/gizeta.png" alt="Gizeta Website" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="https://amdecorsrl.com" target="_blank" class="project-line"
+           data-hover-images='["amdecor/img/amlogo.svg"]'>
+          <span class="project-line-title">AM Decor</span>
+          <img src="amdecor/img/amlogo.svg" alt="AM Decor Website" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="https://escapeslakecomo.com" target="_blank" class="project-line"
+           data-hover-images='["escapes/img/logo_escapes.svg"]'>
+          <span class="project-line-title">Escapes</span>
+          <img src="escapes/img/logo_escapes.svg" alt="Escapes Website" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="https://zjncoo.github.io/RifiutiSpaziali/" target="_blank" class="project-line"
+           data-hover-images='["imghome/rifiuti.webp","imghome/razzino.png"]'>
+          <span class="project-line-title">Rifiuti Spaziali</span>
+          <img src="imghome/razzino.png" alt="Rifiuti Spaziali" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
+        <a href="UNI YEAR 1/web_design/SITO ESAME/img_home/" target="_blank" class="project-line"
+           data-hover-images='["UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png"]'>
+          <span class="project-line-title">Web Design Exam</span>
+          <img src="UNI YEAR 1/web_design/SITO ESAME/img_home/mode.png" alt="Web Design Exam" class="project-line-thumb" loading="lazy" decoding="async">
+        </a>
       </div>
     </section>
   </div><!-- /site-main-content -->
@@ -379,7 +465,7 @@
 
       <div class="footer-form-wrapper">
         <form class="custom-contact-form" id="contactForm">
-          <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem;">Let's talk</h4>
+          <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem; line-height: 1; font-weight: 500;">Let's talk</h4>
 
           <div class="input-group">
             <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name" required>
@@ -408,31 +494,31 @@
         <!-- We duplicate the content to make the scroll seamless -->
         <div class="marquee-content">
           <span>SITES</span>
-          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
           <span>SITES</span>
-          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
         </div>
         <div class="marquee-content" aria-hidden="true">
           <span>SITES</span>
-          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
           <span>SITES</span>
-          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1">
+          <img src="imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
-          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2">
+          <img src="NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3">
+          <img src="escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
