@@ -117,5 +117,10 @@ const allProjectsData = [
     title: "WebM Converter",
     link: "ALGORYTHMS/webm.html",
     category: "algorithms"
+  },
+  {
+    title: "Video Compressor",
+    link: "ALGORYTHMS/compressor.html",
+    category: "algorithms"
   }
 ];
