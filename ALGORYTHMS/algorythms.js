@@ -7,31 +7,26 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'webp converter',
             description: 'converts images into webp images.',
             link: 'webp/converter.html',
-            imageUrl: 'imghome/webp-preview.png', // Sostituisci con un'immagine di anteprima
             category: 'tool'
         },
         {
             title: 'card generator',
-            description: 'fedelity card generator.',
+            description: 'fidelity card generator.',
             link: 'cardgenerator.html',
-            imageUrl: 'imghome/card-preview.png', // Sostituisci con un'immagine di anteprima
             category: 'generator'
         },
         {
             title: 'webm converter',
-            description: 'fedelity card generator.',
+            description: 'convert videos to webm.',
             link: 'webm.html',
-            imageUrl: 'imghome/card-preview.png', // Sostituisci con un'immagine di anteprima
+            category: 'tool'
+        },
+        {
+            title: 'video compressor',
+            description: 'compresses video files directly in browser.',
+            link: 'compressor.html',
             category: 'tool'
         }
-        // Esempio di un altro progetto
-        // {
-        //     title: 'Nuovo Progetto',
-        //     description: 'Descrizione del nuovo progetto.',
-        //     link: 'path/to/project.html',
-        //     imageUrl: 'path/to/image.png',
-        //     category: 'Categoria'
-        // }
     ];
 
     const gridContainer = document.getElementById('project-grid-container');
@@ -43,9 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             projectCard.classList.add('project-card', 'cursor-target');
 
             projectCard.innerHTML = `
-                <div class="card-image-container">
-                    <img src="${progetto.imageUrl}" alt="Preview of ${progetto.title}" loading="lazy">
-                </div>
                 <div class="card-content">
                     <h3>${progetto.title}</h3>
                     <p>${progetto.description}</p>
