@@ -258,14 +258,13 @@
 }
 
 .branding-item.full-width-app img {
-  width: 100%;
+  width: 100vw;
   height: auto;
-  max-width: 100%;
+  max-width: 100vw;
   max-height: none;
   object-fit: cover;
   margin: 0;
   display: block;
-  /* Rimuove eventuali spazi sotto l'immagine */
 }
 
 .branding-item.full-width-app h3,

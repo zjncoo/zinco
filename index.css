@@ -81,14 +81,14 @@ h6 {
 }
 
 .corner-button {
-  font-family: 'changa', sans-serif;
-  font-weight: 200;
+  font-family: 'Neuzeit', sans-serif;
+  font-weight: bold;
   letter-spacing: -0.05em;
 }
 
 .menu-link {
-  font-family: 'changa', sans-serif;
-  font-weight: 300;
+  font-family: 'Neuzeit', sans-serif;
+  font-weight: bold;
 }
 
 h2 {
@@ -337,7 +337,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .social-links-text a:hover {
-  opacity: 0.5;
+  text-decoration: underline;
 }
 
 /* Custom Contact Form */
@@ -398,8 +398,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .submit-btn:hover {
-  background-color: black;
-  color: white;
+  text-decoration: underline;
 }
 
 /* Infinite Marquee */
@@ -476,7 +475,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .footer-bottom-links a:hover {
-  color: black;
+  text-decoration: underline;
 }
 
 .footer-bottom-logo img {
@@ -590,8 +589,8 @@ main > #figma-container { order: 5 !important; }
 }
 
 .nav-bar-link {
-  font-family: 'changa', sans-serif;
-  font-weight: 200;
+  font-family: 'Neuzeit', sans-serif;
+  font-weight: bold;
   letter-spacing: -0.05em;
   color: black;
   text-decoration: none;
@@ -601,7 +600,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .nav-bar-link:hover {
-  opacity: 0.5;
+  text-decoration: underline;
 }
 
 #btnTopRight.open {
@@ -637,8 +636,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .btn--solid-dark:hover {
-  background-color: #fff;
-  color: #000;
+  text-decoration: underline;
 }
 
 .btn--outline-light {
@@ -653,8 +651,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .btn--outline-light:hover {
-  background-color: white;
-  color: black;
+  text-decoration: underline;
 }
 
 .btn-loader {
@@ -681,8 +678,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .btn--outline-dark:hover {
-  background-color: black;
-  color: white;
+  text-decoration: underline;
 }
 
 /* --- Cookie Banner --- */
@@ -794,32 +790,29 @@ main > #figma-container { order: 5 !important; }
 }
 
 /* --- PROJECT LINE ITEMS (Branding, Publications, Websites) --- */
-.project-lines {
-  border-top: 2px solid black;
-}
 
 .project-line {
   display: flex;
   align-items: center;
-  padding: 4px 40px;
-  border-bottom: 2px solid black;
+  padding: 4px 40px; /* Reduced vertical padding, kept horizontal for text alignment */
+  margin: 0;         /* Removed margin so border extends edge-to-edge */
+  border-bottom: 2px solid black; /* 2px thick border */
   text-decoration: none;
   color: black;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   cursor: none;
 }
 
 .project-line:hover {
-  background-color: #f5f5f5;
+  background-color: transparent;
 }
 
 .project-line-title {
-  font-family: 'changa', sans-serif;
-  font-weight: 200;
+  font-family: 'Neuzeit', sans-serif;
+  font-weight: bold;
   font-size: 1.4rem;
   letter-spacing: -0.03em;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
 
 .project-line-thumb {
@@ -882,7 +875,14 @@ main > #figma-container { order: 5 !important; }
 }
 
 
-/* --- STILI DI DEFAULT (PER DESKTOP): Griglia 3D --- */
+.featured-title {
+  font-family: 'Neuzeit', sans-serif;
+  font-weight: normal;
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
 .photo-grid {
   display: grid;
   /* FIX: Modificato per creare tessere più piccole e più numerose */
@@ -953,7 +953,7 @@ main > #figma-container { order: 5 !important; }
   color: black;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'changa', sans-serif; font-weight: 200;
+  font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -962,8 +962,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .card-btn:hover {
-  background-color: black;
-  color: white;
+  text-decoration: underline;
 }
 
 /* Classi per le dimensioni delle tessere */
@@ -1033,7 +1032,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .menu-link:hover {
-  opacity: 0.6;
+  text-decoration: underline;
 }
 
 .menu-bottom {
@@ -1053,8 +1052,20 @@ main > #figma-container { order: 5 !important; }
 
 .menu-email {
   color: white;
-  text-decoration: underline;
+  text-decoration: none;
   font-size: 1rem;
+}
+
+.menu-email:hover {
+  text-decoration: underline;
+}
+
+.footer-email {
+  text-decoration: none !important;
+}
+
+.footer-email:hover {
+  text-decoration: underline !important;
 }
 
 
@@ -1174,8 +1185,7 @@ main > #figma-container { order: 5 !important; }
 
 /* Effetto al passaggio del mouse */
 .suggestions-list li a:hover {
-  background-color: transparent;
-  color: #ccc;
+  text-decoration: underline;
 }
 
 /* Stile Pulsante "Chiudi" della Ricerca (Modificato) */
@@ -1219,8 +1229,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 #category-select:hover {
-  background-color: white;
-  color: black;
+  text-decoration: underline;
 }
 
 #category-select .arrow {
@@ -1252,7 +1261,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .filter-option:hover {
-  background-color: #333;
+  text-decoration: underline;
 }
 
 
@@ -1471,6 +1480,11 @@ main > #figma-container { order: 5 !important; }
     display: block;
     padding: 0 20px;
     /* Aggiunge un po' di spazio interno per il testo */
+  }
+
+  .featured-title {
+    text-align: center;
+    margin-bottom: 2rem;
   }
 
   .photo-grid {
