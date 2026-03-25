@@ -32,6 +32,23 @@ body {
   /* Standard syntax */
 }
 
+/* --- Font Neuzeit --- */
+@font-face {
+  font-family: 'Neuzeit';
+  src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neuzeit';
+  src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book Heavy.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* --- Reset e Stili di Base --- */
 * {
   box-sizing: border-box;
@@ -48,7 +65,7 @@ body {
   color: black;
   overflow-y: auto;
   counter-reset: grid-counter;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neuzeit', sans-serif;
 }
 
 /* --- Impostazioni dei Font --- */
@@ -145,6 +162,11 @@ h2 {
   z-index: 10000;
 }
 
+#preloader #logo img {
+  height: 40px;
+  width: auto;
+}
+
 .loader-bar-container {
   width: 100%;
   height: 2px;
@@ -217,8 +239,15 @@ main {
   padding: 50px 0 80px;
 }
 
+/* Explicit ordering to ensure PDF Viewer precedes Branding Grid */
+main > .video-container { order: 1 !important; }
+main > .project-info-section { order: 2 !important; }
+main > #pdfViewerContainer { order: 3 !important; }
+main > #brandingGrid { order: 4 !important; }
+main > #figma-container { order: 5 !important; }
+
 .intro {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neuzeit', sans-serif;
   font-size: 28px;
   max-width: 800px;
   line-height: 1.4;
@@ -591,7 +620,7 @@ main {
 .btn {
   border: 2px solid black;
   padding: 10px 25px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
   font-size: 1rem;
   text-transform: uppercase;
@@ -1158,7 +1187,7 @@ main {
   background: none;
   border: none;
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
   font-size: 30px;
   cursor: pointer;
@@ -1179,7 +1208,7 @@ main {
   color: white;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -1571,7 +1600,7 @@ body.footer-visible .custom-cursor {
 #closePdfGrid {
   background: none;
   border: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
   cursor: pointer;
@@ -1619,7 +1648,7 @@ body.footer-visible .custom-cursor {
   background-color: transparent;
   border: none;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neuzeit', sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
   color: white;

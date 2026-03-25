@@ -118,29 +118,3 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error("Errore nel caricamento del progetto:", error);
     });
 });
-
-
-// --- CONTROLLI VIDEO PERSONALIZZATI ---
-const video = document.getElementById('myVideo');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const muteBtn = document.getElementById('muteBtn');
-
-if (video && playPauseBtn && muteBtn) {
-  playPauseBtn.addEventListener('click', () => {
-    if (video.paused) {
-      video.play();
-      playPauseBtn.textContent = 'Pause';
-    } else {
-      video.pause();
-      playPauseBtn.textContent = 'Play';
-    }
-  });
-
-  muteBtn.addEventListener('click', () => {
-    video.muted = !video.muted;
-    muteBtn.textContent = video.muted ? 'Unmute' : 'Mute';
-  });
-
-  playPauseBtn.textContent = 'Pause';
-  muteBtn.textContent = 'Unmute';
-}

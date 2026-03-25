@@ -23,7 +23,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
 </head>
 
@@ -31,7 +30,7 @@
   <div class="site-main-content">
     <div id="scroll-progress-bar"></div>
     <div id="preloader">
-      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo" loading="lazy" decoding="async"></a>
+      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -56,7 +55,7 @@
     <div class="custom-cursor" id="cursor"></div>
 
     <nav class="nav-bar nav-bar--top" id="navTop">
-      <a href="../index.html" id="button-logo" aria-label="Torna alla homepage"><img src="../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo" loading="lazy" decoding="async"></a>
+      <a href="../index.html" id="button-logo" aria-label="Torna alla homepage"><img src="../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
       <div class="nav-bar-right">
         <a href="../portfolio.html" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomLeft" aria-label="Vai al portfolio">portfolio</a>
         <a href="#contact-footer" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomRight" aria-label="Vai ai contatti">contacts</a>
@@ -92,11 +91,7 @@
 
     <main id="sezione-progetto">
       <div class="video-container">
-        <video id="myVideo" autoplay loop muted playsinline src="img/video finito.mp4"></video>
-        <div class="video-controls">
-          <button id="playPauseBtn" class="btn btn--outline-light cursor-target"></button>
-          <button id="muteBtn" class="btn btn--outline-light cursor-target"></button>
-        </div>
+        <video id="myVideo" autoplay loop muted playsinline controls src="img/video finito.mp4"></video>
       </div>
 
       <section class="project-info-section">
@@ -152,10 +147,6 @@
         </div>
       </section>
 
-      <section class="branding-grid" id="brandingGrid"></section>
-
-      <section id="figma-container"></section>
-
       <div id="pdfViewerContainer">
         <canvas id="pdfCanvas" data-pdf-source="roxy.pdf"></canvas>
         <div class="pdf-controls">
@@ -170,6 +161,10 @@
           <button id="nextPage" class="btn btn--outline-dark">→</button>
         </div>
       </div>
+
+      <section class="branding-grid" id="brandingGrid"></section>
+
+      <section id="figma-container"></section>
     </main>
 
   </div><!-- /site-main-content -->
@@ -269,6 +264,27 @@
   <script src="../scripts_components/pdf_viewer.js" defer></script>
 
   <script src="../projects-data.js?v=21"></script>
+  <script>
+    // Enforce PDF viewer before branding grid
+    (function() {
+      function enforceOrder() {
+        var bg = document.getElementById('brandingGrid');
+        var pdf = document.getElementById('pdfViewerContainer');
+        if (bg && pdf && bg.parentNode) {
+          bg.parentNode.insertBefore(pdf, bg);
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', enforceOrder);
+      } else {
+        enforceOrder();
+      }
+      window.addEventListener('load', enforceOrder);
+      setTimeout(enforceOrder, 500);
+      setTimeout(enforceOrder, 2000);
+      setTimeout(enforceOrder, 5000);
+    })();
+  </script>
 </body>
 
 </html>

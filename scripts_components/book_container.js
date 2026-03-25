@@ -48,15 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const pixelRatio = window.devicePixelRatio || 1;
       const viewport = page.getViewport({ scale: 1 });
 
-      // Instead of forcing the canvas style to match the exact drawn size (which CSS then distorts),
-      // Set the CSS style to 100% of the viewport dimension, allowing max-height/max-width to contain it properly without squishing
-
       const maxHeight = bookViewer.clientHeight;
-      // If layout is single, or we are on mobile, use full width. Otherwise use half width.
       const isSinglePageView = window.innerWidth <= 767 || layoutMode === 'single';
       const maxWidth = bookViewer.clientWidth / (isSinglePageView ? 1 : 2);
 
-      const scale = Math.min(maxWidth / viewport.width, maxHeight / viewport.height);
+      // On mobile, use width-only scaling so the PDF fills the screen width
+      // On desktop, use Math.min to fit both dimensions within the viewer
+      const scale = isSinglePageView
+        ? maxWidth / viewport.width
+        : Math.min(maxWidth / viewport.width, maxHeight / viewport.height);
       const scaledViewport = page.getViewport({ scale: scale * pixelRatio });
 
       canvas.height = scaledViewport.height;

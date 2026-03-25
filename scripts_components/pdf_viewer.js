@@ -124,10 +124,65 @@ document.addEventListener('DOMContentLoaded', () => {
   pageNumInput.addEventListener('blur', handlePageInput); // <-- Usa la nuova funzione
   
   // Carica il documento
-  pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+  pdfjsLib.getDocument(url).promise.then(async pdfDoc_ => {
     pdfDoc = pdfDoc_;
-    pageCountSpan.textContent = pdfDoc.numPages;
-    renderPage(pageNum);
+    
+    if (window.innerWidth <= 768) {
+      // Mobile: Continuous scroll
+      canvas.style.display = 'none';
+      const controls = document.querySelector('.pdf-controls');
+      if (controls) controls.style.display = 'none';
+      
+      const container = document.getElementById('pdfViewerContainer');
+      if (container) {
+        container.style.maxWidth = '100%';
+        container.style.padding = '0';
+        container.style.gap = '0';
+        container.style.width = '100%';
+      }
+
+      for (let i = 1; i <= pdfDoc.numPages; i++) {
+        const page = await pdfDoc.getPage(i);
+        
+        const unscaledViewport = page.getViewport({ scale: 1.0 });
+        const targetWidth = window.innerWidth * (window.devicePixelRatio || 1);
+        const renderScale = targetWidth / unscaledViewport.width;
+        const finalScale = Math.max(1.0, Math.min(renderScale, 3.0)); 
+        const viewport = page.getViewport({ scale: finalScale });
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "pdf-page-wrapper";
+        wrapper.style.width = "100%";
+        wrapper.style.display = "block";
+        wrapper.style.margin = "0";
+        wrapper.style.padding = "0";
+        wrapper.style.lineHeight = "0"; // Previene spazi extra sotto il canvas
+
+        const pageCanvas = document.createElement("canvas");
+        const pageCtx = pageCanvas.getContext("2d");
+        pageCanvas.height = viewport.height;
+        pageCanvas.width = viewport.width;
+
+        pageCanvas.style.width = "100vw";
+        pageCanvas.style.height = "auto";
+        pageCanvas.style.display = "block";
+        pageCanvas.style.maxWidth = "100%";
+
+        const renderContext = {
+          canvasContext: pageCtx,
+          viewport: viewport,
+        };
+
+        wrapper.appendChild(pageCanvas);
+        container.appendChild(wrapper);
+
+        await page.render(renderContext).promise;
+      }
+    } else {
+      // Desktop: Paginated view
+      pageCountSpan.textContent = pdfDoc.numPages;
+      renderPage(pageNum);
+    }
   }).catch(error => {
     console.error(`Errore nel caricamento del PDF da "${url}":`, error);
   });
