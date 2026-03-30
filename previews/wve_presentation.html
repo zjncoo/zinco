@@ -3,9 +3,11 @@
 
 <head>
   <title>WildVillaExperience - zinco</title>
-  <meta name="description" content="Explore Wve presentation, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta name="description"
+    content="Explore Wve presentation, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
   <meta property="og:title" content="WildVillaExperience - zinco" />
-  <meta property="og:description" content="Explore Wve presentation, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:description"
+    content="Explore Wve presentation, a comprehensive branding and visual design project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
   <meta property="og:image" content="https://zjncoo.github.io/zinco/imghome/logo_zinco.svg" />
   <meta property="og:url" content="https://zjncoo.github.io/zinco/previews/wve_presentation.html" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -13,12 +15,12 @@
   <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
 
   <link rel="stylesheet" href="../index.css" />
   <link rel="stylesheet" href="../NUS/nus.css" />
 
-  
+
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,10 +58,13 @@
     </div>
 
     <nav class="nav-bar nav-bar--top" id="navTop">
-      <a href="../index.html" id="button-logo" aria-label="Torna alla homepage"><img src="../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
+      <a href="../index.html" id="button-logo" aria-label="Torna alla homepage"><img src="../imghome/logo_zinco.svg"
+          id="logo" alt="Zinco Logo"></a>
       <div class="nav-bar-right">
-        <a href="../portfolio.html" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomLeft" aria-label="Vai al portfolio">portfolio</a>
-        <a href="#contact-footer" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomRight" aria-label="Vai ai contatti">contacts</a>
+        <a href="../portfolio.html" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomLeft"
+          aria-label="Vai al portfolio">portfolio</a>
+        <a href="#contact-footer" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomRight"
+          aria-label="Vai ai contatti">contacts</a>
         <a href="#" class="nav-bar-link cursor-target" id="btnTopRight" aria-label="Apri menu principale">menu</a>
       </div>
     </nav>
@@ -90,35 +95,42 @@
       </div>
     </div>
 
-    <main>
-      <div class="book-container" data-pdf-src="wildvillaexperience.pdf" data-layout="single">
-        <div id="viewer-header">
-          <h2>wildvillaexperience - preview</h2>
-          <p>wildvillaexperience.pdf</p>
-        </div>
-        <div id="book-viewer">
-          <canvas id="canvas-left" class="page-canvas"></canvas>
-          <canvas id="canvas-right" class="page-canvas"></canvas>
-        </div>
-        <div id="book-controls">
-          <button id="prev-page" class="btn btn--solid-dark cursor-target">←</button>
-          <div class="page-indicator-container">
-            <span id="pageLabel">Page</span>
-            <span id="pageNumbers" class="page-num-display">1</span>
-            <input type="number" id="pageInput" class="page-num-input" />
-            <span id="pageTotal">/ </span>
+    <main id="sezione-progetto">
+      <section class="project-info-section" style="background-color: white;">
+        <div class="project-info-content">
+          <h2 style="font-family: 'Neuzeit', sans-serif; font-weight: bold; font-size: 1rem; margin-bottom: 1rem;">
+            Concept</h2>
+          <div class="project-info-text">
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 2rem;">
+              <em>Disclaimer: this is a mere dimostrative potential rebranding, none of the present elements are final
+                and are intended as a student’s pratice exercise.</em>
+            </p>
+            <p>
+              wildvillaexperience is a blend between the finest, most exclusive experience and a family-like atmosphere,
+              in complete harmony with the territory that comprehends both Lake Como and the forest. the rebrand of the
+              logo itself accentuates the both worlds that collide in this experience. elegant and refined typography is
+              accompanied by warm and organic graphics.
+            </p>
           </div>
-          <button id="next-page" class="btn btn--solid-dark cursor-target">→</button>
         </div>
-      </div>
-
-      <div class="download-section">
-        <a href="wildvillaexperience.pdf" class="btn btn--solid-dark cursor-target" download="wildvillaexperience.pdf">
-          download vildvilla experience pdf
-        </a>
-      </div>
-
+      </section>
     </main>
+
+    <!-- Continuous PDF Viewer -->
+    <div id="pdf-container" style="width: 100vw; margin: 0; padding: 0; overflow-x: hidden; background: #000;"></div>
+    <div style="padding: 40px 0 80px; text-align: center; background: white; border-top: 2px solid black;">
+      <a href="wildvillaexperience.pdf" class="btn btn--outline-dark cursor-target" download="wildvillaexperience.pdf"
+        style="font-size: 0.9rem; padding: 10px 25px; border-radius: 0; display: inline-block;">
+        download pdf
+      </a>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+      window.PDF_URLS = [
+        'wildvillaexperience_small.pdf'
+      ];
+    </script>
+    <script src="../UNI YEAR 1/free-rolling-pdf.js"></script>
 
 
 
@@ -178,13 +190,15 @@
           <span>BRANDING</span>
           <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy"
+            decoding="async">
           <span>SITES</span>
           <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
           <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy"
+            decoding="async">
         </div>
         <div class="marquee-content" aria-hidden="true">
           <span>SITES</span>
@@ -192,13 +206,15 @@
           <span>BRANDING</span>
           <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy"
+            decoding="async">
           <span>SITES</span>
           <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
           <span>BRANDING</span>
           <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
           <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
+          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy"
+            decoding="async">
         </div>
       </div>
     </div>
@@ -214,10 +230,7 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="../index.js" defer></script>
-
-  <script src="../scripts_components/book_container.js" defer></script>
 
   <script src="../projects-data.js?v=21"></script>
 </body>

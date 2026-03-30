@@ -182,12 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!document.getElementById('pdfGridModal')) {
       const modalHtml = `
-        <div id="pdfGridModal">
+        <div id="pdfGridModal" data-lenis-prevent>
           <div class="pdf-grid-header">
             <h2>Pages overview</h2>
             <button id="closePdfGrid" class="cursor-target">Close</button>
           </div>
-          <div id="pdfThumbnailsContainer"></div>
+          <div id="pdfThumbnailsContainer" data-lenis-prevent></div>
         </div>
       `;
       document.body.insertAdjacentHTML('beforeend', modalHtml);
@@ -260,11 +260,13 @@ document.addEventListener('DOMContentLoaded', () => {
       gridModal.classList.add('open');
       renderThumbnails().then(updateActiveThumbnail);
       document.body.style.overflow = 'hidden'; // Blocca lo scroll della pagina principale
+      if (window.lenis) window.lenis.stop(); // Ferma Lenis
     };
 
     const closeGridModal = () => {
       gridModal.classList.remove('open');
       document.body.style.overflow = ''; // Ripristina lo scroll
+      if (window.lenis) window.lenis.start(); // Ripristina Lenis
     };
 
     if (gridViewBtn) gridViewBtn.addEventListener('click', openGridModal);

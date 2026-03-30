@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
+const initFreeRollingPdf = async () => {
   const container = document.getElementById("pdf-container");
   if (!container) return;
 
@@ -16,6 +16,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (window.pdfjsLib && !window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
+
+  const loadPdfWithRetry = async (url, retries = 3, delay = 500) => {
+    for (let i = 0; i < retries; i++) {
+      try {
+        return await pdfjsLib.getDocument(url).promise;
+      } catch (error) {
+        console.warn(`Tentativo ${i + 1} fallito per il caricamento del PDF:`, error);
+        if (i === retries - 1) throw error;
+        await new Promise(res => setTimeout(res, delay));
+      }
+    }
+  };
 
   for (const url of urls) {
     const isImage = /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(url);
@@ -38,6 +50,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       img.style.maxWidth = "100%";
       img.loading = "lazy";
       img.decoding = "async";
+
+      wrapper.appendChild(img);
+      container.appendChild(wrapper);
 
     } else if (isVideo) {
       // Handle video files
@@ -68,8 +83,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       // Handle PDFs
       try {
-        const pdf = await pdfjsLib.getDocument(url).promise;
+        const pdf = await loadPdfWithRetry(url);
         const numPages = pdf.numPages;
+        const renderTasks = [];
 
         for (let pageNum = 1; pageNum <= numPages; pageNum++) {
           const page = await pdf.getPage(pageNum);
@@ -86,6 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           wrapper.style.display = "block";
           wrapper.style.margin = "0";
           wrapper.style.padding = "0";
+          wrapper.style.aspectRatio = `${viewport.width} / ${viewport.height}`; // Prevent layout shifts
 
           const canvas = document.createElement("canvas");
           const ctx = canvas.getContext("2d");
@@ -105,12 +122,22 @@ document.addEventListener("DOMContentLoaded", async () => {
           wrapper.appendChild(canvas);
           container.appendChild(wrapper);
 
-          // Await rendering before continuing to ensure correct sequential order
-          await page.render(renderContext).promise;
+          renderTasks.push(() => page.render(renderContext).promise);
+        }
+
+        // Render sequentially AFTER DOM layout is established to eliminate jitter
+        for (const task of renderTasks) {
+          await task();
         }
       } catch (error) {
         console.error("Error loading PDF:", url, error);
       }
     }
   }
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFreeRollingPdf);
+} else {
+  initFreeRollingPdf();
+}

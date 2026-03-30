@@ -1574,69 +1574,88 @@ body.footer-visible .custom-cursor {
   left: 0;
   right: 0;
   bottom: 0;
+  height: 100vh; /* Ensure full viewport height */
+  height: 100dvh; /* Use dynamic viewport height for mobile browsers */
   background-color: black;
   z-index: 10000;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
-  overflow-y: scroll;
-  /* Force scroll context */
-  -webkit-overflow-scrolling: touch;
-  /* iOS momentum scrolling */
+  transform: translateY(20px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  /* Layout: header is fixed at top, scroll only the grid below */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 #pdfGridModal.open {
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
 
 .pdf-grid-header {
-  position: sticky;
-  top: 0;
+  flex-shrink: 0;
   width: 100%;
-  padding: 40px;
+  padding: 28px 40px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: black;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
   z-index: 10;
 }
 
 .pdf-grid-header h2 {
-  font-family: 'changa', sans-serif; font-weight: 200;
+  font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
   margin: 0;
   color: white;
+  text-transform: lowercase;
 }
 
 #closePdfGrid {
   background: none;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.35);
   font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
-  padding: 10px;
+  padding: 6px 16px;
   text-transform: lowercase;
   color: white;
+  letter-spacing: -0.02em;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
+#closePdfGrid:hover {
+  border-color: white;
+  background-color: rgba(255,255,255,0.08);
+}
+
+/* Scrollable area below the header */
 #pdfThumbnailsContainer {
+  flex: 1;
+  min-height: 0; /* Crucial for flex child to scroll */
   width: 100%;
-  padding: 0 40px 40px 40px;
+  padding: 32px 40px 48px;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* Prevent scroll chaining to the body */
+  -webkit-overflow-scrolling: touch;
 }
 
 .pdf-thumbnail-wrapper {
   position: relative;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
   background-color: transparent;
   display: flex;
   flex-direction: column;
@@ -1647,7 +1666,8 @@ body.footer-visible .custom-cursor {
 }
 
 .pdf-thumbnail-wrapper:hover {
-  border-color: white;
+  border-color: rgba(255,255,255,0.6);
+  opacity: 0.88;
 }
 
 .pdf-thumbnail {
@@ -1658,15 +1678,20 @@ body.footer-visible .custom-cursor {
 }
 
 .pdf-thumbnail-number {
-  margin-top: 10px;
+  margin-top: 8px;
   background-color: transparent;
   border: none;
   padding: 0;
   font-family: 'Neuzeit', sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   font-weight: bold;
-  color: white;
+  color: rgba(255,255,255,0.6);
   text-align: left;
+  letter-spacing: -0.02em;
+}
+
+.pdf-thumbnail-wrapper.active .pdf-thumbnail-number {
+  color: white;
 }
 
 #grid-view-btn {
@@ -1681,12 +1706,13 @@ body.footer-visible .custom-cursor {
 }
 
 @media (max-width: 768px) {
-  #pdfGridModal {
-    padding: 20px;
+  .pdf-grid-header {
+    padding: 20px 20px;
   }
 
   #pdfThumbnailsContainer {
+    padding: 20px 20px 40px;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 15px;
+    gap: 12px;
   }
 }

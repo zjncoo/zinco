@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Optimizer - Fix Immagini Scomparse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Librerie per gestire i PDF nel browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .drop-zone {
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone--over {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .loader {
+            border-top-color: #3b82f6;
+            animation: spinner 1.5s linear infinite;
+        }
+
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Ottimizzatore PDF</h1>
+            <p class="text-gray-500">Risolve il bug delle immagini PNG che spariscono durante la compressione.</p>
+        </div>
+
+        <!-- Sezione Caricamento -->
+        <div id="dropZone"
+            class="drop-zone border-2 border-dashed border-gray-300 rounded-xl p-10 text-center cursor-pointer mb-6 hover:border-blue-400">
+            <input type="file" id="fileInput" class="hidden" accept="application/pdf">
+            <div id="uploadUI">
+                <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                    </path>
+                </svg>
+                <p class="text-lg text-gray-700 font-medium">Trascina qui il tuo PDF di Sigma</p>
+                <p class="text-sm text-gray-400 mt-1">Oppure clicca per selezionarlo dal computer</p>
+            </div>
+
+            <!-- UI di Elaborazione -->
+            <div id="processingUI" class="hidden text-center">
+                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 mx-auto">
+                </div>
+                <p class="text-lg font-semibold text-blue-600" id="statusMessage">Elaborazione pagine...</p>
+                <p class="text-sm text-gray-500 mt-2" id="progressDetail">Pagina 0 di 0</p>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mt-4">
+                    <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impostazioni -->
+        <div class="space-y-4 mb-8">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Qualità Immagini (Compressione)</label>
+                <input type="range" id="qualitySlider" min="0.1" max="1.0" step="0.1" value="0.7"
+                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>File Leggero</span>
+                    <span>Alta Qualità (Consigliato 0.7)</span>
+                    <span>Massima</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messaggi Informativi -->
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded r-lg">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-xs text-blue-700">
+                        <strong>Nota Tecnica:</strong> Questo tool effettua il "flattening" del PDF. Le immagini PNG
+                        verranno fuse con lo sfondo. Il testo non sarà più selezionabile, ma il file sarà compatibile al
+                        100% con ogni lettore senza perdite grafiche.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-gray-400 text-xs mt-8">
+            Elaborazione locale sicura: i tuoi file non lasciano mai il computer.
+        </p>
+    </div>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const uploadUI = document.getElementById('uploadUI');
+        const processingUI = document.getElementById('processingUI');
+        const statusMessage = document.getElementById('statusMessage');
+        const progressDetail = document.getElementById('progressDetail');
+        const progressBar = document.getElementById('progressBar');
+        const qualitySlider = document.getElementById('qualitySlider');
+
+        // Drag & Drop events
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drop-zone--over'); });
+        ['dragleave', 'dragend'].forEach(type => {
+            dropZone.addEventListener(type, () => dropZone.classList.remove('drop-zone--over'));
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drop-zone--over');
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) handleFile(e.target.files[0]);
+        });
+
+        async function handleFile(file) {
+            if (file.type !== 'application/pdf') {
+                alert("Per favore, carica un file PDF valido.");
+                return;
+            }
+
+            uploadUI.classList.add('hidden');
+            processingUI.classList.remove('hidden');
+            dropZone.style.pointerEvents = 'none';
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const numPages = pdf.numPages;
+                const quality = parseFloat(qualitySlider.value);
+
+                const outputPdf = new jsPDF({
+                    orientation: 'landscape', // Sigma di solito è orizzontale
+                    unit: 'px',
+                    compress: true
+                });
+
+                for (let i = 1; i <= numPages; i++) {
+                    statusMessage.innerText = `Elaborazione pagina ${i}...`;
+                    progressDetail.innerText = `Pagina ${i} di ${numPages}`;
+                    progressBar.style.width = `${(i / numPages) * 100}%`;
+
+                    const page = await pdf.getPage(i);
+                    const viewport = page.getViewport({ scale: 2.0 }); // Alta risoluzione per evitare sfocature
+
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+                    // Convertiamo la pagina in un'unica immagine JPG (che Adobe non può rompere)
+                    const imgData = canvas.toDataURL('image/jpeg', quality);
+
+                    if (i > 1) outputPdf.addPage([viewport.width, viewport.height], viewport.width > viewport.height ? 'l' : 'p');
+                    else {
+                        // Ridimensiona la prima pagina del documento finale
+                        outputPdf.deletePage(1);
+                        outputPdf.addPage([viewport.width, viewport.height], viewport.width > viewport.height ? 'l' : 'p');
+                    }
+
+                    outputPdf.addImage(imgData, 'JPEG', 0, 0, viewport.width, viewport.height);
+                }
+
+                outputPdf.save(file.name.replace('.pdf', '_ottimizzato.pdf'));
+
+                // Reset UI
+                statusMessage.innerText = "Completato!";
+                setTimeout(() => {
+                    uploadUI.classList.remove('hidden');
+                    processingUI.classList.add('hidden');
+                    dropZone.style.pointerEvents = 'auto';
+                    progressBar.style.width = '0%';
+                }, 2000);
+
+            } catch (error) {
+                console.error(error);
+                alert("Si è verificato un errore durante l'elaborazione del PDF.");
+                location.reload();
+            }
+        }
+    </script>
+</body>
+
+</html>
