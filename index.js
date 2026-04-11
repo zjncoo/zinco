@@ -47,6 +47,40 @@ requestAnimationFrame(raf);
 // Aggiungi questa riga per rendere lenis accessibile a tutti gli altri script
 window.lenis = lenis;
 
+// --- SCROLL TO HASH ALL'ARRIVO SULLA PAGINA ---
+// Gestisce URL tipo: index.html#branding, index.html#contact-footer, ecc.
+const scrollToHashOnLoad = () => {
+  const hash = window.location.hash;
+  if (!hash || hash === '#') return;
+  // Aspetta che il preloader finisca (max ~1.2s) poi scrolla
+  const doScroll = () => {
+    try {
+      if (hash === '#contact-footer') {
+        // Il footer è position:fixed, non ha offsetTop utile.
+        // Scrolliamo al massimo valore possibile, che rivela il footer dall'inizio.
+        const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (window.lenis) {
+          window.lenis.scrollTo(maxScroll, { duration: 1.2, force: true });
+        } else {
+          window.scrollTo({ top: maxScroll, behavior: 'smooth' });
+        }
+      } else {
+        const target = document.querySelector(hash);
+        if (target) {
+          if (window.lenis) {
+            window.lenis.scrollTo(target, { offset: 0, duration: 1.2, force: true });
+          } else {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
+    } catch (err) { /* selettore non valido, ignora */ }
+  };
+  // Prima cerca di scrollare dopo il preloader (~300ms), poi un secondo tentativo di sicurezza
+  setTimeout(doScroll, 350);
+  setTimeout(doScroll, 900);
+};
+
 // --- NUOVA FUNZIONE PER LA PROTEZIONE DEI CONTENUTI ---
 const setupContentProtection = () => {
   // 1. Disabilita il menu del click destro
@@ -81,6 +115,7 @@ const setupContentProtection = () => {
 document.addEventListener('DOMContentLoaded', () => {
   setupPageTransitions();
   setupContentProtection();
+  scrollToHashOnLoad();
 
   // --- CURSORE PERSONALIZZATO ---
   const cursor = document.getElementById('cursor');
@@ -145,11 +180,13 @@ document.addEventListener('DOMContentLoaded', () => {
           // // Fallback/Delay: Attendiamo chiusura menu
           setTimeout(() => {
             if (targetId === '#contact-footer') {
-              // Seleziona tutto il footer. Visto che in desktop è fixed, l'offset è strano, quindi scrolliamo al document bottom
+              // Il footer è position:fixed — scrolliamo al massimo scroll possibile,
+              // che corrisponde esattamente alla cima del footer rivelato.
+              const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
               if (window.lenis) {
-                window.lenis.scrollTo('bottom', { duration: 1.2, force: true });
+                window.lenis.scrollTo(maxScroll, { duration: 1.2, force: true });
               } else {
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                window.scrollTo({ top: maxScroll, behavior: 'smooth' });
               }
             } else {
               if (window.lenis) {

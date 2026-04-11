@@ -3,6 +3,13 @@
 // This is the central list of all your projects.
 const allProjectsData = [
   {
+    title: "ALUA",
+    link: "https://zjncoo.github.io/ALUA.IT/",
+    category: "branding",
+    video: "imghome/alua_video.webm",
+    videoSlug: "alua"
+  },
+  {
     title: "AM Decor",
     link: "amdecor/amdecor.html",
     category: "branding"
@@ -10,7 +17,16 @@ const allProjectsData = [
   {
     title: "NUS",
     link: "NUS/nus.html",
-    category: "branding"
+    category: "branding",
+    video: "NUS/img/nus_brand_video.webm",
+    videoSlug: "nus"
+  },
+  {
+    title: "Piedibus Mozzate",
+    link: "piedibus_mozzate/piedibus_mozzate.html",
+    category: "branding",
+    video: "piedibus_mozzate/piedibus_mozzate_video.mov",
+    videoSlug: "piedibus"
   },
   {
     title: "3M Soluzioni Immobiliari",
@@ -35,7 +51,9 @@ const allProjectsData = [
   {
     title: "ZOOM",
     link: "publications/zoom/zoom.html",
-    category: "publications"
+    category: "publications",
+    video: "publications/zoom/img/animazione fumetto.mp4",
+    videoSlug: "zoom"
   },
   {
     title: "Fotografia",
@@ -61,7 +79,9 @@ const allProjectsData = [
   {
     title: "ROXY",
     link: "ROXY/roxy.html",
-    category: "branding"
+    category: "branding",
+    video: "ROXY/img/video finito.mp4",
+    videoSlug: "roxy"
   },
   {
     title: "Gizeta",

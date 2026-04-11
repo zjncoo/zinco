@@ -1,0 +1,98 @@
+[
+  {
+    "type": "image",
+    "subtype": "logo",
+    "label": "logo",
+    "src": "piedibus_mozzate_logo.svg"
+  },
+  {
+    "type": "text",
+    "label": "naming",
+    "content": "Piedibus Mozzate"
+  },
+  {
+    "type": "text",
+    "label": "description",
+    "content": "Piedibus Mozzate è un progetto di branding per il servizio di piedibus del comune di Mozzate. L'identità visiva è pensata per essere riconoscibile, friendly e adatta a un pubblico di famiglie e bambini."
+  },
+  {
+    "type": "text",
+    "label": "values",
+    "content": "sicurezza, comunità, sostenibilità"
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "famiglie, bambini, scuole primarie"
+  },
+  {
+    "type": "text",
+    "label": "payoff",
+    "content": "Insieme, passo dopo passo."
+  },
+  {
+    "type": "text",
+    "label": "mission",
+    "content": "Promuovere la mobilità sostenibile e sicura per i bambini nel tragitto casa-scuola, rafforzando il senso di comunità."
+  },
+  {
+    "type": "header",
+    "label": "mockup"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "poster mockup",
+    "src": "img/poster mockup.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "sign mockup",
+    "src": "img/sign_mockup.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "tessera socio",
+    "src": "img/tessera_socio.webp"
+  },
+  {
+    "type": "header",
+    "label": "brand mark"
+  },
+  {
+    "type": "image",
+    "subtype": "marchio",
+    "label": "logo principale",
+    "src": "piedibus_mozzate_logo.svg"
+  },
+  {
+    "type": "header",
+    "label": "color palette"
+  },
+  {
+    "type": "color",
+    "label": "#1b75bb",
+    "class": "color1",
+    "hex": "#1b75bb"
+  },
+  {
+    "type": "color",
+    "label": "#267cc0",
+    "class": "color2",
+    "hex": "#267cc0"
+  },
+  {
+    "type": "color",
+    "label": "#ffffff",
+    "class": "color3",
+    "hex": "#ffffff"
+  },
+  {
+    "type": "color",
+    "label": "#000000",
+    "class": "color4",
+    "hex": "#000000"
+  }
+]

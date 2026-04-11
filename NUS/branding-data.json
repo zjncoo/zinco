@@ -62,31 +62,47 @@
   },
   {
     "type": "header",
+    "label": "power applications"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/brochure.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "badge",
+    "src": "img/badge.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "seeds",
+    "src": "img/semi insieme.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "tote",
+    "src": "img/tote.jpg"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "keychain",
+    "src": "img/portachiavi-2.png"
+  },
+  {
+    "type": "header",
     "label": "brand mark"
   },
   {
     "type": "image",
-    "subtype": "marchio",
-    "label": "construction",
-    "src": "img/brand/marchio_costruttivo.png"
-  },
-  {
-    "type": "image",
-    "subtype": "marchio",
-    "label": "b/n",
-    "src": "img/brand/marchio_bn.png"
-  },
-  {
-    "type": "image",
-    "subtype": "marchio",
-    "label": "color",
-    "src": "img/brand/marchio_colore.png"
-  },
-  {
-    "type": "image",
-    "subtype": "marchio",
-    "label": "negative",
-    "src": "img/brand/marchio_negativo.png"
+    "subtype": "mark",
+    "label": "brandmark contruction",
+    "src": "img/costruttivo.webp"
   },
   {
     "type": "header",
@@ -96,7 +112,7 @@
     "type": "image",
     "subtype": "identita",
     "label": "typography",
-    "src": "img/brand/tipografia.png"
+    "src": "img/tipografia.webp"
   },
   {
     "type": "header",
@@ -164,37 +180,9 @@
     "embedUrl": "https://embed.figma.com/proto/wF1HPUS18DSGwC0eHSEUV5/SITO-NUS--Copy-?page-id=0%3A1&node-id=166-147&p=f&viewport=485%2C-22%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=166%3A147&embed-host=share"
   },
   {
-    "type": "header",
-    "label": "power applications"
-  },
-  {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "brochure",
-    "src": "img/brochure.png"
-  },
-  {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "badge",
-    "src": "img/badge.png"
-  },
-  {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "seeds",
-    "src": "img/semi insieme.png"
-  },
-  {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "tote",
-    "src": "img/tote.jpg"
-  },
-  {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "keychain",
-    "src": "img/portachiavi-2.png"
+    "type": "figma",
+    "label": "NUS brandbook",
+    "description": "view the full brand manual — logo construction, typography, color palette, and all brand applications.",
+    "href": "../publications/nus_brandbook/nus_brandbook.html"
   }
 ]

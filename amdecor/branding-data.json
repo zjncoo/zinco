@@ -59,22 +59,37 @@
   },
   {
     "type": "header",
-    "label": "color palette"
+    "label": "windows"
   },
   {
-    "type": "color",
-    "label": "#941c21",
-    "hex": "#941c21"
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "vetrina",
+    "src": "img/vetrina1.webp"
   },
   {
-    "type": "color",
-    "label": "#ffffff",
-    "hex": "#ffffff"
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "vetrina",
+    "src": "img/vetrina2.webp"
   },
   {
-    "type": "color",
-    "label": "#3f3e3e",
-    "hex": "#3f3e3e"
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "vetrina",
+    "src": "img/vetrina3.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "vetrina",
+    "src": "img/vetrina4.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "vetrina",
+    "src": "img/vetrina5.webp"
   },
   {
     "type": "header",
@@ -93,27 +108,22 @@
     "src": "img/van mockup.png"
   },
   {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "brochure",
-    "src": "img/insegne amdecor-02.png"
+    "type": "header",
+    "label": "color palette"
   },
   {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "brochure",
-    "src": "img/insegne amdecor-03.png"
+    "type": "color",
+    "label": "#941c21",
+    "hex": "#941c21"
   },
   {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "brochure",
-    "src": "img/insegne amdecor-04.png"
+    "type": "color",
+    "label": "#ffffff",
+    "hex": "#ffffff"
   },
   {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "brochure",
-    "src": "img/insegne amdecor-05.png"
+    "type": "color",
+    "label": "#3f3e3e",
+    "hex": "#3f3e3e"
   }
 ]

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Project Video — Zinco</title>
+  <meta name="description" content="Watch the project video." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --black: #0a0a0a;
+      --accent: #e8e8e8;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'changa', 'Helvetica Neue', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── Full-screen video bg ── */
+    #video-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    #video-bg.ready { opacity: 1; }
+
+    /* ── Gradient overlay ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.05) 60%,
+        rgba(0,0,0,0.75) 100%
+      );
+      z-index: 1;
+    }
+
+    /* ── UI Layer ── */
+    .ui {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(1.5rem, 5vw, 2.5rem);
+      pointer-events: none;
+    }
+
+    /* Top: logo + project title */
+    .ui-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-link {
+      pointer-events: all;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
+    }
+    .logo-link.visible { opacity: 1; transform: translateY(0); }
+    .logo-link img { height: 32px; width: auto; filter: invert(1); }
+
+    .project-label {
+      font-size: clamp(0.65rem, 2vw, 0.8rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s;
+      text-align: right;
+    }
+    .project-label.visible { opacity: 1; transform: translateY(0); }
+
+    /* Center: big title */
+    .ui-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+      padding: 0 clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    #project-title {
+      font-size: clamp(3rem, 14vw, 9rem);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.4);
+    }
+    #project-title.visible { opacity: 1; transform: translateY(0); }
+
+    /* Bottom: CTA button */
+    .ui-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s ease 0.8s, transform 0.8s ease 0.8s;
+    }
+    .cta-group.visible { opacity: 1; transform: translateY(0); }
+
+    .btn-discover {
+      pointer-events: all;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      padding: 0.75rem 1.75rem;
+      font-family: 'changa', sans-serif;
+      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-discover:hover {
+      background: var(--accent);
+      transform: translateX(4px);
+    }
+    .btn-discover .arrow { font-size: 1.1em; }
+
+    .hint-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* Mute button */
+    .btn-mute {
+      pointer-events: all;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-end;
+      opacity: 0;
+      transition: opacity 0.8s ease 1s, background 0.2s, transform 0.2s;
+    }
+    .btn-mute.visible { opacity: 1; }
+    .btn-mute:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+
+    /* Error / Not found state */
+    #error-state {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 10;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    #error-state h1 {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 200;
+      letter-spacing: -0.03em;
+    }
+    #error-state p { color: rgba(255,255,255,0.5); font-size: 1rem; }
+    #error-state a { color: var(--white); text-decoration: underline; }
+
+    /* Loading spinner */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; pointer-events: none; }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 2px solid rgba(255,255,255,0.15);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body>
+
+  <!-- Loader -->
+  <div id="loader"><div class="spinner"></div></div>
+
+  <!-- Error state -->
+  <div id="error-state">
+    <img src="imghome/logo_zinco.svg" style="height:36px; filter:invert(1); margin-bottom:1rem;" alt="Zinco">
+    <h1>Project not found</h1>
+    <p>The video you're looking for doesn't exist or has been moved.</p>
+    <a href="index.html">← Back to portfolio</a>
+  </div>
+
+  <!-- Video background -->
+  <video id="video-bg" autoplay muted playsinline loop preload="auto"></video>
+
+  <!-- Dark overlay -->
+  <div class="overlay"></div>
+
+  <!-- UI -->
+  <div class="ui">
+    <div class="ui-top">
+      <a href="index.html" class="logo-link" id="logo-link">
+        <img src="imghome/logo_zinco.svg" alt="Zinco">
+      </a>
+      <div class="project-label" id="project-label">project video</div>
+    </div>
+
+    <div class="ui-center">
+      <h1 id="project-title"></h1>
+    </div>
+
+    <div class="ui-bottom">
+      <div class="cta-group" id="cta-group">
+        <a href="#" id="discover-link" class="btn-discover">
+          <span>Discover the project</span>
+          <span class="arrow">→</span>
+        </a>
+        <span class="hint-text">scan to explore more</span>
+      </div>
+      <button class="btn-mute" id="btn-mute" title="Toggle sound" aria-label="Toggle mute">🔇</button>
+    </div>
+  </div>
+
+  <script>
+    // ── Project database (same as projects-data.js) ──
+    // We read it inline here so this page is standalone & fast
+    const projectsDB = {
+      alua: {
+        title: "ALUA",
+        video: "imghome/alua_video.webm",
+        link: "https://zjncoo.github.io/ALUA.IT/",
+        external: true
+      },
+      roxy: {
+        title: "ROXY",
+        video: "ROXY/img/video finito.mp4",
+        link: "ROXY/roxy.html",
+        external: false
+      },
+      nus: {
+        title: "NUS",
+        video: "NUS/img/nus_brand_video.webm",
+        link: "NUS/nus.html",
+        external: false
+      },
+      zoom: {
+        title: "ZOOM",
+        video: "publications/zoom/img/animazione fumetto.mp4",
+        link: "publications/zoom/zoom.html",
+        external: false
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const slug   = (params.get('project') || '').toLowerCase().trim();
+    const project = projectsDB[slug];
+
+    const loader      = document.getElementById('loader');
+    const errorState  = document.getElementById('error-state');
+    const video       = document.getElementById('video-bg');
+    const titleEl     = document.getElementById('project-title');
+    const labelEl     = document.getElementById('project-label');
+    const logoLink    = document.getElementById('logo-link');
+    const ctaGroup    = document.getElementById('cta-group');
+    const discoverLink= document.getElementById('discover-link');
+    const muteBtn     = document.getElementById('btn-mute');
+    let   isMuted     = true;
+
+    function showError() {
+      loader.classList.add('hidden');
+      errorState.style.display = 'flex';
+    }
+
+    if (!project) {
+      showError();
+    } else {
+      // Set meta title
+      document.title = `${project.title} — Zinco`;
+
+      // Set content
+      titleEl.textContent = project.title;
+      discoverLink.href   = project.external ? project.link : project.link;
+      if (project.external) discoverLink.target = '_blank';
+
+      // Detect video type and set source
+      const sourceEl = document.createElement('source');
+      sourceEl.src  = project.video;
+      sourceEl.type = project.video.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+      video.appendChild(sourceEl);
+
+      // Load & play
+      video.load();
+
+      video.addEventListener('canplay', () => {
+        video.play().catch(() => {});
+        // Hide loader, show UI
+        loader.classList.add('hidden');
+        video.classList.add('ready');
+        // Animate in UI elements
+        requestAnimationFrame(() => {
+          titleEl.classList.add('visible');
+          logoLink.classList.add('visible');
+          labelEl.classList.add('visible');
+          ctaGroup.classList.add('visible');
+          muteBtn.classList.add('visible');
+        });
+      }, { once: true });
+
+      // Fallback: if video doesn't fire canplay quickly, still show UI
+      setTimeout(() => {
+        if (!video.classList.contains('ready')) {
+          loader.classList.add('hidden');
+          titleEl.classList.add('visible');
+          logoLink.classList.add('visible');
+          labelEl.classList.add('visible');
+          ctaGroup.classList.add('visible');
+          muteBtn.classList.add('visible');
+        }
+      }, 3000);
+
+      video.addEventListener('error', showError);
+
+      // Mute toggle
+      muteBtn.addEventListener('click', () => {
+        isMuted = !isMuted;
+        video.muted = isMuted;
+        muteBtn.textContent = isMuted ? '🔇' : '🔊';
+      });
+    }
+  </script>
+
+</body>
+</html>

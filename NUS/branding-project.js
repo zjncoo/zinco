@@ -46,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
             mainItem.rel = 'noopener noreferrer';
             mainItem.innerHTML = `<h3>${item.label}</h3><p>Open prototype →</p>`;
           }
+          // Se è un link esterno generico
+          else if (item.type === 'link') {
+            mainItem = document.createElement('a');
+            mainItem.href = item.href;
+            mainItem.target = '_blank';
+            mainItem.rel = 'noopener noreferrer';
+            mainItem.innerHTML = `<h3>${item.label}</h3>${item.description ? `<p>${item.description}</p>` : ''}<p class="link-cta">View publication →</p>`;
+          }
           // Altrimenti, per immagini, colori, etc., creiamo un <div> come prima
           else {
             mainItem = document.createElement('div');
