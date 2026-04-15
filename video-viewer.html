@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-  <title>Project Video — Zinco</title>
+  <title>Project Video — zinco.cc</title>
   <meta name="description" content="Watch the project video." />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://zinco.cc/video-viewer.html" />
   <meta name="robots" content="noindex" />
   <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
@@ -13,10 +14,16 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    @font-face {
+      font-family: 'NeuzeitHeavy';
+      src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book Heavy.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     :root {
       --white: #ffffff;
       --black: #0a0a0a;
-      --accent: #e8e8e8;
     }
 
     html, body {
@@ -65,7 +72,7 @@
       pointer-events: none;
     }
 
-    /* Top: logo + project title */
+    /* Top: logo + label */
     .ui-top {
       display: flex;
       align-items: flex-start;
@@ -106,7 +113,6 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      gap: 0.5rem;
       text-align: center;
       padding: 0 clamp(1.5rem, 5vw, 2.5rem);
     }
@@ -124,10 +130,10 @@
     }
     #project-title.visible { opacity: 1; transform: translateY(0); }
 
-    /* Bottom: CTA button */
+    /* Bottom: buttons + mute */
     .ui-bottom {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
@@ -135,68 +141,71 @@
 
     .cta-group {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 0.75rem;
+      flex-wrap: wrap;
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 0.8s ease 0.8s, transform 0.8s ease 0.8s;
     }
     .cta-group.visible { opacity: 1; transform: translateY(0); }
 
-    .btn-discover {
+    /* Buttons — Neuzeit Heavy */
+    .btn-cta {
       pointer-events: all;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--white);
-      color: var(--black);
       border: none;
       padding: 0.75rem 1.75rem;
-      font-family: 'changa', sans-serif;
+      font-family: 'NeuzeitHeavy', 'Helvetica Neue', Arial, sans-serif;
       font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.25s, color 0.25s, transform 0.2s;
+      transition: opacity 0.25s, transform 0.2s;
     }
-    .btn-discover:hover {
-      background: var(--accent);
-      transform: translateX(4px);
-    }
-    .btn-discover .arrow { font-size: 1.1em; }
+    .btn-cta:hover { transform: translateX(4px); opacity: 0.85; }
+    .btn-cta .arrow { font-size: 1.1em; }
 
-    .hint-text {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+    /* Primary — white bg */
+    .btn-cta--primary {
+      background: var(--white);
+      color: var(--black);
     }
 
-    /* Mute button */
+    /* Secondary — ghost */
+    .btn-cta--secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.45);
+      backdrop-filter: blur(6px);
+    }
+    .btn-cta--secondary:hover { background: rgba(255,255,255,0.16); }
+
+    /* Mute button — solid black square */
     .btn-mute {
       pointer-events: all;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
+      background: #000000;
+      border: none;
       color: var(--white);
-      width: 44px; height: 44px;
-      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       font-size: 1.1rem;
-      backdrop-filter: blur(6px);
-      transition: background 0.2s, transform 0.2s;
-      align-self: flex-end;
+      flex-shrink: 0;
       opacity: 0;
-      transition: opacity 0.8s ease 1s, background 0.2s, transform 0.2s;
+      transition: opacity 0.8s ease 1s, background 0.2s;
     }
     .btn-mute.visible { opacity: 1; }
-    .btn-mute:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+    .btn-mute:hover { background: #222222; }
 
-    /* Error / Not found state */
+    /* Error state */
     #error-state {
       display: none;
       position: fixed;
@@ -248,7 +257,7 @@
 
   <!-- Error state -->
   <div id="error-state">
-    <img src="imghome/logo_zinco.svg" style="height:36px; filter:invert(1); margin-bottom:1rem;" alt="Zinco">
+    <img src="imghome/logo_zinco.svg" style="height:36px; filter:invert(1); margin-bottom:1rem;" alt="zinco.cc">
     <h1>Project not found</h1>
     <p>The video you're looking for doesn't exist or has been moved.</p>
     <a href="index.html">← Back to portfolio</a>
@@ -264,7 +273,7 @@
   <div class="ui">
     <div class="ui-top">
       <a href="index.html" class="logo-link" id="logo-link">
-        <img src="imghome/logo_zinco.svg" alt="Zinco">
+        <img src="imghome/logo_zinco.svg" alt="zinco.cc">
       </a>
       <div class="project-label" id="project-label">project video</div>
     </div>
@@ -275,19 +284,20 @@
 
     <div class="ui-bottom">
       <div class="cta-group" id="cta-group">
-        <a href="#" id="discover-link" class="btn-discover">
+        <a href="#" id="discover-link" class="btn-cta btn-cta--primary">
           <span>Discover the project</span>
           <span class="arrow">→</span>
         </a>
-        <span class="hint-text">scan to explore more</span>
+        <a href="#" id="watch-link" class="btn-cta btn-cta--secondary" target="_blank">
+          <span>Watch video</span>
+          <span class="arrow">↗</span>
+        </a>
       </div>
       <button class="btn-mute" id="btn-mute" title="Toggle sound" aria-label="Toggle mute">🔇</button>
     </div>
   </div>
 
   <script>
-    // ── Project database (same as projects-data.js) ──
-    // We read it inline here so this page is standalone & fast
     const projectsDB = {
       alua: {
         title: "ALUA",
@@ -315,8 +325,8 @@
       }
     };
 
-    const params = new URLSearchParams(window.location.search);
-    const slug   = (params.get('project') || '').toLowerCase().trim();
+    const params  = new URLSearchParams(window.location.search);
+    const slug    = (params.get('project') || '').toLowerCase().trim();
     const project = projectsDB[slug];
 
     const loader      = document.getElementById('loader');
@@ -327,6 +337,7 @@
     const logoLink    = document.getElementById('logo-link');
     const ctaGroup    = document.getElementById('cta-group');
     const discoverLink= document.getElementById('discover-link');
+    const watchLink   = document.getElementById('watch-link');
     const muteBtn     = document.getElementById('btn-mute');
     let   isMuted     = true;
 
@@ -335,51 +346,48 @@
       errorState.style.display = 'flex';
     }
 
+    function showUI() {
+      loader.classList.add('hidden');
+      video.classList.add('ready');
+      requestAnimationFrame(() => {
+        titleEl.classList.add('visible');
+        logoLink.classList.add('visible');
+        labelEl.classList.add('visible');
+        ctaGroup.classList.add('visible');
+        muteBtn.classList.add('visible');
+      });
+    }
+
     if (!project) {
       showError();
     } else {
-      // Set meta title
-      document.title = `${project.title} — Zinco`;
+      document.title = `${project.title} — zinco.cc`;
 
-      // Set content
       titleEl.textContent = project.title;
-      discoverLink.href   = project.external ? project.link : project.link;
+
+      // Discover button
+      discoverLink.href = project.link;
       if (project.external) discoverLink.target = '_blank';
 
-      // Detect video type and set source
+      // Watch video button — opens video file directly in browser native player
+      watchLink.href = project.video;
+
+      // Set video source
       const sourceEl = document.createElement('source');
       sourceEl.src  = project.video;
       sourceEl.type = project.video.endsWith('.webm') ? 'video/webm' : 'video/mp4';
       video.appendChild(sourceEl);
 
-      // Load & play
       video.load();
 
       video.addEventListener('canplay', () => {
         video.play().catch(() => {});
-        // Hide loader, show UI
-        loader.classList.add('hidden');
-        video.classList.add('ready');
-        // Animate in UI elements
-        requestAnimationFrame(() => {
-          titleEl.classList.add('visible');
-          logoLink.classList.add('visible');
-          labelEl.classList.add('visible');
-          ctaGroup.classList.add('visible');
-          muteBtn.classList.add('visible');
-        });
+        showUI();
       }, { once: true });
 
-      // Fallback: if video doesn't fire canplay quickly, still show UI
+      // Fallback
       setTimeout(() => {
-        if (!video.classList.contains('ready')) {
-          loader.classList.add('hidden');
-          titleEl.classList.add('visible');
-          logoLink.classList.add('visible');
-          labelEl.classList.add('visible');
-          ctaGroup.classList.add('visible');
-          muteBtn.classList.add('visible');
-        }
+        if (!video.classList.contains('ready')) showUI();
       }, 3000);
 
       video.addEventListener('error', showError);
