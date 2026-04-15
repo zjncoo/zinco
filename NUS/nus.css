@@ -150,6 +150,11 @@
   transition: opacity 0.2s ease;
 }
 
+/* Rimuove il padding superiore del main globale: il video si attacca alla glance grid */
+main#sezione-progetto {
+  padding-top: 0;
+}
+
 .video-container {
   position: relative;
   width: 100%;

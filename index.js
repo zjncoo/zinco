@@ -117,21 +117,38 @@ document.addEventListener('DOMContentLoaded', () => {
   setupContentProtection();
   scrollToHashOnLoad();
 
-  // --- CURSORE PERSONALIZZATO ---
+  // --- CURSORE PERSONALIZZATO (ottimizzato: RAF si ferma quando il mouse è fermo) ---
   const cursor = document.getElementById('cursor');
   if (cursor) {
     let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+    let cursorRAF = null;
+    let cursorDirty = false;
     const speed = 0.3;
-    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
     const animateCursor = () => {
-      const distX = mouseX - cursorX; const distY = mouseY - cursorY;
-      cursorX += distX * speed; cursorY += distY * speed;
+      const distX = mouseX - cursorX;
+      const distY = mouseY - cursorY;
+      cursorX += distX * speed;
+      cursorY += distY * speed;
       cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
-      requestAnimationFrame(animateCursor);
+      // Continua il loop solo se c'è ancora movimento percettibile
+      if (Math.abs(distX) > 0.1 || Math.abs(distY) > 0.1) {
+        cursorRAF = requestAnimationFrame(animateCursor);
+      } else {
+        cursorRAF = null; // Ferma il loop
+        cursorDirty = false;
+      }
     };
-    requestAnimationFrame(animateCursor);
-    document.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, .cursor-target')) cursor.classList.add('cursor-hover'); });
-    document.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, .cursor-target')) cursor.classList.remove('cursor-hover'); });
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      // Riavvia il loop RAF solo se non è già in esecuzione
+      if (!cursorDirty) {
+        cursorDirty = true;
+        cursorRAF = requestAnimationFrame(animateCursor);
+      }
+    }, { passive: true });
+    document.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, .cursor-target')) cursor.classList.add('cursor-hover'); }, { passive: true });
+    document.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, .cursor-target')) cursor.classList.remove('cursor-hover'); }, { passive: true });
   }
 
   // --- GESTIONE MENU A TENDINA ---
@@ -339,22 +356,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- GESTIONE BARRA AVANZAMENTO LETTURA ---
+  // --- GESTIONE BARRA AVANZAMENTO LETTURA (ottimizzata: RAF throttle) ---
   const progressBar = document.getElementById('scroll-progress-bar');
   if (progressBar) {
+    let progressRAF = null;
     const updateProgressBar = () => {
-      // Calcola l'altezza totale che si può scorrere
+      progressRAF = null; // Reset flag
       const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-      // Calcola la percentuale di scorrimento attuale
-      const scrollPercentage = (window.scrollY / scrollTotal) * 100;
-
-      // Applica la percentuale alla larghezza della barra
+      const scrollPercentage = scrollTotal > 0 ? (window.scrollY / scrollTotal) * 100 : 0;
       progressBar.style.width = scrollPercentage + '%';
     };
-
-    // Ascolta l'evento di scroll e aggiorna la barra
-    window.addEventListener('scroll', updateProgressBar);
+    // passive: true permette al browser di ottimizzare lo scroll senza aspettare il listener
+    window.addEventListener('scroll', () => {
+      if (!progressRAF) {
+        progressRAF = requestAnimationFrame(updateProgressBar);
+      }
+    }, { passive: true });
   }
 
   // --- GESTIONE TITOLO CAROSELLO MOBILE ---

@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // --- SECONDO CICLO: COSTRUZIONE GRIGLIA "AT A GLANCE" ---
       data.forEach((item, index) => {
-        const isGraphical = item.type === 'image' || item.type === 'color' || item.type === 'figma';
+        const isGraphical = item.type === 'image' || item.type === 'color' || item.type === 'figma' || item.type === 'link';
         if (isGraphical) {
           const uniqueId = `content-item-${index}`;
           const glanceLink = document.createElement('a');
@@ -105,6 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
           } else if (item.type === 'figma') {
             glanceLink.classList.add('glance-figma');
             glanceLink.innerHTML = '<span>Figma</span>';
+          } else if (item.type === 'link') {
+            glanceLink.classList.add('glance-figma');
+            glanceLink.innerHTML = `<span>${item.label}</span>`;
           }
           glanceGrid.appendChild(glanceLink);
         }

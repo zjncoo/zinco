@@ -156,33 +156,21 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      border: none;
+      border: 2px solid #000000;
+      background: #ffffff;
+      color: #000000;
       padding: 0.75rem 1.75rem;
+      height: 48px;
       font-family: 'NeuzeitHeavy', 'Helvetica Neue', Arial, sans-serif;
       font-size: clamp(0.8rem, 2.5vw, 0.95rem);
       letter-spacing: 0.06em;
-      text-transform: uppercase;
+      text-transform: lowercase;
       text-decoration: none;
       cursor: pointer;
       transition: opacity 0.25s, transform 0.2s;
     }
     .btn-cta:hover { transform: translateX(4px); opacity: 0.85; }
     .btn-cta .arrow { font-size: 1.1em; }
-
-    /* Primary — white bg */
-    .btn-cta--primary {
-      background: var(--white);
-      color: var(--black);
-    }
-
-    /* Secondary — ghost */
-    .btn-cta--secondary {
-      background: rgba(255,255,255,0.08);
-      color: var(--white);
-      border: 1px solid rgba(255,255,255,0.45);
-      backdrop-filter: blur(6px);
-    }
-    .btn-cta--secondary:hover { background: rgba(255,255,255,0.16); }
 
     /* Mute button — solid black square */
     .btn-mute {
@@ -275,7 +263,7 @@
       <a href="index.html" class="logo-link" id="logo-link">
         <img src="imghome/logo_zinco.svg" alt="zinco.cc">
       </a>
-      <div class="project-label" id="project-label">project video</div>
+      <div class="project-label" id="project-label">project tab</div>
     </div>
 
     <div class="ui-center">
@@ -284,13 +272,13 @@
 
     <div class="ui-bottom">
       <div class="cta-group" id="cta-group">
-        <a href="#" id="discover-link" class="btn-cta btn-cta--primary">
-          <span>Discover the project</span>
+        <a href="#" id="discover-link" class="btn-cta">
+          <span>discover the project</span>
           <span class="arrow">→</span>
         </a>
-        <a href="#" id="watch-link" class="btn-cta btn-cta--secondary" target="_blank">
-          <span>Watch video</span>
-          <span class="arrow">↗</span>
+        <a href="#" id="watch-link" class="btn-cta" target="_blank">
+          <span>watch video</span>
+          <span class="arrow">→</span>
         </a>
       </div>
       <button class="btn-mute" id="btn-mute" title="Toggle sound" aria-label="Toggle mute">🔇</button>
