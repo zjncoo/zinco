@@ -58,6 +58,18 @@
     "src": "img/tessera_socio.webp"
   },
   {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "spray",
+    "src": "img/piedibus_spray.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "sede",
+    "src": "img/sede.webp"
+  },
+  {
     "type": "header",
     "label": "brand mark"
   },

@@ -16,6 +16,11 @@
     "content": "3M Soluzioni Immobiliari"
   },
   {
+    "type": "figma",
+    "label": "visit website",
+    "embedUrl": "https://3mimmobiliare.casa"
+  },
+  {
     "type": "header",
     "label": "brand items"
   },
@@ -23,12 +28,28 @@
     "type": "image",
     "subtype": "marchio",
     "label": "brand mark",
-    "src": "img/3M_MARCHIO.png"
+    "src": "img/3M_LOGO_ESTESO_1.svg"
+  },
+  {
+    "type": "header",
+    "label": "applications"
   },
   {
     "type": "image",
-    "subtype": "marchio",
-    "label": "extended logo",
-    "src": "img/3M_LOGO_ESTESO.png"
+    "subtype": "app-screenshot",
+    "label": "open house",
+    "src": "img/mockup_openhouse.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "window branding",
+    "src": "img/3M_window.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "website mockup",
+    "src": "img/3m_website_mockup.webp"
   }
 ]

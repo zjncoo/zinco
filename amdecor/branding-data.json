@@ -17,10 +17,9 @@
     "content": "visual identity and branding project for a company specializing in high-quality construction and renovations."
   },
   {
-    "type": "text",
+    "type": "figma",
     "label": "visit website",
-    "content": "<a href='https://amdecorsrl.com' target='_blank' rel='noopener noreferrer' style='text-decoration: underline;'>visit website ↗</a>",
-    "linkUrl": "https://amdecorsrl.com"
+    "embedUrl": "https://amdecorsrl.com"
   },
   {
     "type": "text",
