@@ -44,7 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mainItem.href = item.embedUrl;
             mainItem.target = '_blank'; // Per aprire in una nuova scheda
             mainItem.rel = 'noopener noreferrer';
-            mainItem.innerHTML = `<h3>${item.label}</h3><p>Open prototype →</p>`;
+            const isFigmaUrl = item.embedUrl && item.embedUrl.includes('figma.com');
+            const ctaText = isFigmaUrl ? 'Open prototype →' : 'Visit website →';
+            mainItem.innerHTML = `<h3>${item.label}</h3><p>${ctaText}</p>`;
           }
           // Se è un link esterno generico
           else if (item.type === 'link') {
@@ -104,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             glanceLink.appendChild(thumbImg);
           } else if (item.type === 'figma') {
             glanceLink.classList.add('glance-figma');
-            glanceLink.innerHTML = '<span>Figma</span>';
+            const isFigmaUrl = item.embedUrl && item.embedUrl.includes('figma.com');
+            glanceLink.innerHTML = `<span>${isFigmaUrl ? 'Figma' : 'Website'}</span>`;
           } else if (item.type === 'link') {
             glanceLink.classList.add('glance-figma');
             glanceLink.innerHTML = `<span>${item.label}</span>`;
@@ -124,6 +127,33 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
+
+      // --- DESCRIZIONE COLLASSABILE ---
+      const descriptionText = document.querySelector('.project-info-text');
+      if (descriptionText) {
+        const paragraphs = Array.from(descriptionText.querySelectorAll('p'));
+        // Nascondi tutti i paragrafi eccetto il primo
+        const extraParagraphs = paragraphs.slice(1);
+        if (extraParagraphs.length > 0) {
+          extraParagraphs.forEach(p => p.classList.add('description-hidden'));
+
+          // Crea il bottone "more"
+          const moreBtn = document.createElement('button');
+          moreBtn.classList.add('description-more-btn', 'cursor-target');
+          moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
+
+          // Inserisce il bottone dopo il primo paragrafo
+          paragraphs[0].after(moreBtn);
+
+          moreBtn.addEventListener('click', () => {
+            const isExpanded = descriptionText.classList.toggle('expanded');
+            moreBtn.classList.toggle('open', isExpanded);
+            moreBtn.innerHTML = isExpanded
+              ? 'less <span class="btn-arrow">↓</span>'
+              : 'more <span class="btn-arrow">↓</span>';
+          });
+        }
+      }
     })
     .catch(error => {
       console.error("Errore nel caricamento del progetto:", error);

@@ -456,59 +456,129 @@ main#sezione-progetto {
 
 
 /* ================================================================ */
-/* === CODICE FINALE: SEZIONE INFO PROGETTO INLINE             === */
+/* === SEZIONE INFO PROGETTO — STILE EDITORIALE                 === */
 /* ================================================================ */
 
 .project-info-section {
   width: 100%;
-  background-color: #f8f9fa;
-  padding: 80px 40px 80px calc(27px + 0.88vw);
+  background-color: white;
+  border-bottom: 2px solid black;
+  padding: 60px 40px 60px calc(27px + 0.88vw);
   box-sizing: border-box;
 }
 
 .project-info-content {
-  max-width: 1200px;
+  width: 100%;
   margin: 0;
-  font-family: 'Neuzeit', sans-serif;
-  color: #333;
+  color: black;
   text-align: left;
 }
 
+/* Label editoriale in alto: es. "DESCRIPTION / 3M" */
 .project-info-content h2 {
-  font-family: 'changa', sans-serif;
-  font-weight: 200;
+  font-family: 'Neuzeit', sans-serif;
   font-weight: bold;
-  font-size: 2rem;
-  margin-top: 0;
-  margin-bottom: 20px;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 2.5rem 0;
+  color: black;
+  opacity: 0.5;
+}
+
+/* Testo principale grande e giustificato */
+.project-info-text {
+  column-count: 1;
+  column-gap: 0;
+}
+
+.project-info-text p {
+  font-family: 'ABCMonumentGrotesk', sans-serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.5vw, 5rem);
+  line-height: 0.93;
+  letter-spacing: -0.02em;
+  text-align: justify;
+  text-justify: inter-word;
+  /* Sillabazione automatica */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  margin: 0;
   color: black;
 }
 
-.project-info-content p {
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+.project-info-text p strong {
+  font-weight: 500;
 }
 
-.project-info-text {
-  column-count: 2;
-  column-gap: 4rem;
+/* Paragrafi nascosti di default (collassati) */
+.project-info-text p.description-hidden {
+  display: none;
+  margin-top: 0.6em;
 }
 
-/* === MODIFICA PER ALLINEARE IN BASSO === */
+/* Quando espanso, tutti visibili con transizione */
+.project-info-text.expanded p.description-hidden {
+  display: block;
+}
+
+/* === BOTTONE "MORE / LESS" === */
+.description-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-top: 1.2em;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'Neuzeit', sans-serif;
+  font-weight: bold;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: black;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+}
+
+.description-more-btn:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.description-more-btn .btn-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.description-more-btn.open .btn-arrow {
+  transform: rotate(180deg);
+}
+
 /* === MEDIA QUERIES === */
 
 /* Per schermi larghi (es. desktop) */
 @media (max-width: 1024px) {
-  .project-info-text {
-    column-count: 1;
-    column-gap: 0;
+  .project-info-text p {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
   }
 }
 
 /* Per schermi piccoli (es. smartphone) */
 @media (max-width: 767px) {
   .project-info-section {
-    padding: 60px 20px 60px 27px;
+    padding: 40px 20px 40px 27px;
+  }
+
+  .project-info-text p {
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 }
 

@@ -49,6 +49,14 @@ body {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'ABCMonumentGrotesk';
+  src: url('fonts/ABCMonumentGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* --- Reset e Stili di Base --- */
 * {
   box-sizing: border-box;
