@@ -195,7 +195,7 @@ main#sezione-progetto {
 }
 
 .branding-header h2 {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
   letter-spacing: normal;
@@ -234,7 +234,7 @@ main#sezione-progetto {
 }
 
 .branding-item h3 {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 1rem;
   letter-spacing: normal;
@@ -243,7 +243,7 @@ main#sezione-progetto {
 }
 
 .branding-item p {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 0.875rem;
   /* 14px */
   max-width: 35ch;
@@ -322,7 +322,7 @@ main#sezione-progetto {
 /* Stile per il link "Back" nelle pagine progetto */
 .back-to-link {
   display: block;
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: 400;
   /* Corpo normale */
   font-size: 1rem;
@@ -359,7 +359,7 @@ main#sezione-progetto {
   display: none;
   width: 50px;
   /* Larghezza per 3-4 cifre */
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 16px;
   text-align: center;
   border: 1px solid black;
@@ -395,7 +395,7 @@ main#sezione-progetto {
 }
 
 #viewer-header p {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   line-height: 1.6;
   color: #333;
   margin-bottom: 30px;
@@ -449,7 +449,7 @@ main#sezione-progetto {
 }
 
 #page-indicator {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 16px;
   min-width: 120px;
 }
@@ -476,7 +476,7 @@ main#sezione-progetto {
 
 /* Label editoriale in alto: es. "DESCRIPTION / 3M" */
 .project-info-content h2 {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
@@ -493,10 +493,10 @@ main#sezione-progetto {
 }
 
 .project-info-text p {
-  font-family: 'ABCMonumentGrotesk', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: 500;
   font-size: clamp(2rem, 4.5vw, 5rem);
-  line-height: 0.93;
+  line-height: 0.98;
   letter-spacing: -0.02em;
   text-align: justify;
   text-justify: inter-word;
@@ -532,7 +532,7 @@ main#sezione-progetto {
   background: none;
   border: none;
   padding: 0;
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 0.75rem;
   letter-spacing: 0.1em;

@@ -43,7 +43,7 @@
 
 .font-tester-label,
 .font-tester-name {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -99,7 +99,7 @@
 }
 
 .font-tester-control-label {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -109,7 +109,7 @@
 }
 
 .font-tester-control-value {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   color: rgba(0, 0, 0, 0.5);

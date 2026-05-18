@@ -32,27 +32,14 @@ body {
   /* Standard syntax */
 }
 
-/* --- Font Neuzeit --- */
-@font-face {
-  font-family: 'Neuzeit';
-  src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+/* --- Font Adobe Fonts (Typekit: rra4uka) --- */
+/* aktiv-grotesk weight 400 e 500, caricati via Adobe Fonts (Typekit: rra4uka) */
 
+/* --- Font locale: Neuzeit Heavy (bold/700) --- */
 @font-face {
-  font-family: 'Neuzeit';
+  font-family: 'NeuzeitHeavy';
   src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book Heavy.otf') format('opentype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ABCMonumentGrotesk';
-  src: url('fonts/ABCMonumentGrotesk-Medium.woff') format('woff');
-  font-weight: 500;
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -73,7 +60,8 @@ body {
   color: black;
   overflow-y: auto;
   counter-reset: grid-counter;
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: 400;
 }
 
 /* --- Impostazioni dei Font --- */
@@ -89,14 +77,14 @@ h6 {
 }
 
 .corner-button {
-  font-family: 'Neuzeit', sans-serif;
-  font-weight: bold;
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
   letter-spacing: -0.05em;
 }
 
 .menu-link {
-  font-family: 'Neuzeit', sans-serif;
-  font-weight: bold;
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
 }
 
 h2 {
@@ -255,7 +243,7 @@ main > #brandingGrid { order: 4 !important; }
 main > #figma-container { order: 5 !important; }
 
 .intro {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 28px;
   max-width: 800px;
   line-height: 1.4;
@@ -597,8 +585,8 @@ main > #figma-container { order: 5 !important; }
 }
 
 .nav-bar-link {
-  font-family: 'Neuzeit', sans-serif;
-  font-weight: bold;
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
   letter-spacing: -0.05em;
   color: black;
   text-decoration: none;
@@ -627,8 +615,8 @@ main > #figma-container { order: 5 !important; }
 .btn {
   border: 2px solid black;
   padding: 10px 25px;
-  font-family: 'Neuzeit', sans-serif;
-  font-weight: bold;
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
   font-size: 1rem;
   text-transform: uppercase;
   transition: all .2s ease;
@@ -816,7 +804,7 @@ main > #figma-container { order: 5 !important; }
 }
 
 .project-line-title {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 1.4rem;
   letter-spacing: -0.03em;
@@ -884,7 +872,7 @@ main > #figma-container { order: 5 !important; }
 
 
 .featured-title {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: normal;
   font-size: 1rem;
   text-align: left;
@@ -961,7 +949,7 @@ main > #figma-container { order: 5 !important; }
   color: black;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -1205,7 +1193,7 @@ main > #figma-container { order: 5 !important; }
   background: none;
   border: none;
   color: white;
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 30px;
   cursor: pointer;
@@ -1226,7 +1214,7 @@ main > #figma-container { order: 5 !important; }
   color: white;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -1616,7 +1604,7 @@ body.footer-visible .custom-cursor {
 }
 
 .pdf-grid-header h2 {
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 1.6rem;
   letter-spacing: -0.03em;
@@ -1628,7 +1616,7 @@ body.footer-visible .custom-cursor {
 #closePdfGrid {
   background: none;
   border: 1px solid rgba(255,255,255,0.35);
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
@@ -1690,7 +1678,7 @@ body.footer-visible .custom-cursor {
   background-color: transparent;
   border: none;
   padding: 0;
-  font-family: 'Neuzeit', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 0.95rem;
   font-weight: bold;
   color: rgba(255,255,255,0.6);
