@@ -13,27 +13,27 @@
   {
     "type": "text",
     "label": "description",
-    "content": "Piedibus Mozzate è un progetto di branding per il servizio di piedibus del comune di Mozzate. L'identità visiva è pensata per essere riconoscibile, friendly e adatta a un pubblico di famiglie e bambini."
+    "content": "Piedibus Mozzate is a branding project for the piedibus service of the municipality of Mozzate. The visual identity is designed to be recognisable, friendly, and suited to an audience of families and children."
   },
   {
     "type": "text",
     "label": "values",
-    "content": "sicurezza, comunità, sostenibilità"
+    "content": "safety, community, sustainability"
   },
   {
     "type": "text",
     "label": "target",
-    "content": "famiglie, bambini, scuole primarie"
+    "content": "families, children, primary schools"
   },
   {
     "type": "text",
     "label": "payoff",
-    "content": "Insieme, passo dopo passo."
+    "content": "Together, step by step."
   },
   {
     "type": "text",
     "label": "mission",
-    "content": "Promuovere la mobilità sostenibile e sicura per i bambini nel tragitto casa-scuola, rafforzando il senso di comunità."
+    "content": "To promote safe and sustainable mobility for children on their way to school, strengthening the sense of community."
   },
   {
     "type": "header",
@@ -54,7 +54,7 @@
   {
     "type": "image",
     "subtype": "app-screenshot",
-    "label": "tessera socio",
+    "label": "membership card",
     "src": "img/tessera_socio.webp"
   },
   {
@@ -66,7 +66,7 @@
   {
     "type": "image",
     "subtype": "app-screenshot",
-    "label": "sede",
+    "label": "headquarters",
     "src": "img/sede.webp"
   },
   {
@@ -75,8 +75,8 @@
   },
   {
     "type": "image",
-    "subtype": "marchio",
-    "label": "logo principale",
+    "subtype": "brand mark",
+    "label": "primary logo",
     "src": "piedibus_mozzate_logo.svg"
   },
   {
