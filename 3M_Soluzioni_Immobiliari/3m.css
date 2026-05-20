@@ -1,0 +1,14 @@
+/*
+ * ===================================
+ * STILI SPECIFICI PER LA PAGINA 3M
+ * Usa nus.css come base condivisa
+ * ===================================
+ */
+
+/* 3M brand color — blu scuro della palette */
+.project-info-text p {
+  color: #232055;
+}
+.project-info-text p strong {
+  color: #232055;
+}

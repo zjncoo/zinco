@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🎬 Comprimi Video con FFmpeg",
+            "type": "shell",
+            "command": "ffmpeg -i \"${file}\" -vcodec libx264 -crf 26 \"${fileDirname}/${fileBasenameNoExtension}_compressed.mp4\"",
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        }
+    ]
+}

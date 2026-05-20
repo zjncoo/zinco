@@ -20,6 +20,14 @@
   --piedibus-blue-light: #267cc0;
 }
 
+/* Piedibus brand color — blu della palette */
+.project-info-text p {
+  color: var(--piedibus-blue);
+}
+.project-info-text p strong {
+  color: var(--piedibus-blue);
+}
+
 /* ===================================
  * FONT TESTER SECTION
  * =================================== */

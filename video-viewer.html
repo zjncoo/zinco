@@ -12,7 +12,13 @@
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     @font-face {
       font-family: 'NeuzeitHeavy';
@@ -26,8 +32,10 @@
       --black: #0a0a0a;
     }
 
-    html, body {
-      width: 100%; height: 100%;
+    html,
+    body {
+      width: 100%;
+      height: 100%;
       background: var(--black);
       color: var(--white);
       font-family: 'changa', 'Helvetica Neue', Arial, sans-serif;
@@ -38,25 +46,27 @@
     #video-bg {
       position: fixed;
       inset: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: 0;
       opacity: 0;
       transition: opacity 1.2s ease;
     }
-    #video-bg.ready { opacity: 1; }
+
+    #video-bg.ready {
+      opacity: 1;
+    }
 
     /* ── Gradient overlay ── */
     .overlay {
       position: fixed;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.55) 0%,
-        rgba(0,0,0,0.05) 40%,
-        rgba(0,0,0,0.05) 60%,
-        rgba(0,0,0,0.75) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(0, 0, 0, 0.55) 0%,
+          rgba(0, 0, 0, 0.05) 40%,
+          rgba(0, 0, 0, 0.05) 60%,
+          rgba(0, 0, 0, 0.75) 100%);
       z-index: 1;
     }
 
@@ -89,21 +99,34 @@
       transform: translateY(-12px);
       transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
     }
-    .logo-link.visible { opacity: 1; transform: translateY(0); }
-    .logo-link img { height: 32px; width: auto; filter: invert(1); }
+
+    .logo-link.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .logo-link img {
+      height: 32px;
+      width: auto;
+      filter: invert(1);
+    }
 
     .project-label {
       font-size: clamp(0.65rem, 2vw, 0.8rem);
       font-weight: 400;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.55);
       opacity: 0;
       transform: translateY(-12px);
       transition: opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s;
       text-align: right;
     }
-    .project-label.visible { opacity: 1; transform: translateY(0); }
+
+    .project-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Center: big title */
     .ui-center {
@@ -126,9 +149,13 @@
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
-      text-shadow: 0 2px 40px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
     }
-    #project-title.visible { opacity: 1; transform: translateY(0); }
+
+    #project-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Bottom: buttons + mute */
     .ui-bottom {
@@ -148,7 +175,11 @@
       transform: translateY(16px);
       transition: opacity 0.8s ease 0.8s, transform 0.8s ease 0.8s;
     }
-    .cta-group.visible { opacity: 1; transform: translateY(0); }
+
+    .cta-group.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Buttons — Neuzeit Heavy */
     .btn-cta {
@@ -170,8 +201,15 @@
       cursor: pointer;
       transition: opacity 0.25s, transform 0.2s;
     }
-    .btn-cta:hover { transform: translateX(4px); opacity: 0.85; }
-    .btn-cta .arrow { font-size: 1.1em; }
+
+    .btn-cta:hover {
+      transform: translateX(4px);
+      opacity: 0.85;
+    }
+
+    .btn-cta .arrow {
+      font-size: 1.1em;
+    }
 
     /* Mute button — solid black square */
     .btn-mute {
@@ -191,8 +229,14 @@
       opacity: 0;
       transition: opacity 0.8s ease 1s, background 0.2s;
     }
-    .btn-mute.visible { opacity: 1; }
-    .btn-mute:hover { background: #222222; }
+
+    .btn-mute.visible {
+      opacity: 1;
+    }
+
+    .btn-mute:hover {
+      background: #222222;
+    }
 
     /* Error state */
     #error-state {
@@ -208,13 +252,22 @@
       text-align: center;
       padding: 2rem;
     }
+
     #error-state h1 {
       font-size: clamp(2rem, 8vw, 4rem);
       font-weight: 200;
       letter-spacing: -0.03em;
     }
-    #error-state p { color: rgba(255,255,255,0.5); font-size: 1rem; }
-    #error-state a { color: var(--white); text-decoration: underline; }
+
+    #error-state p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1rem;
+    }
+
+    #error-state a {
+      color: var(--white);
+      text-decoration: underline;
+    }
 
     /* Loading spinner */
     #loader {
@@ -227,22 +280,35 @@
       justify-content: center;
       transition: opacity 0.6s ease;
     }
-    #loader.hidden { opacity: 0; pointer-events: none; }
+
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .spinner {
-      width: 40px; height: 40px;
-      border: 2px solid rgba(255,255,255,0.15);
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
       border-top-color: var(--white);
       border-radius: 50%;
       animation: spin 0.9s linear infinite;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <!-- Loader -->
-  <div id="loader"><div class="spinner"></div></div>
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
 
   <!-- Error state -->
   <div id="error-state">
@@ -306,6 +372,17 @@
         link: "NUS/nus.html",
         external: false
       },
+      piedibus: {
+        title: "Piedibus Mozzate",
+        video: "piedibus_mozzate/piedibus_mozzate_video_compressed.mp4",
+        link: "piedibus_mozzate/piedibus_mozzate.html",
+        external: false
+      },
+      amdecor: {
+        title: "Am Decor",
+        link: "amdecor/amdecor.html",
+        external: false
+      },
       zoom: {
         title: "ZOOM",
         video: "publications/zoom/img/animazione fumetto.mp4",
@@ -338,21 +415,21 @@
       }
     };
 
-    const params  = new URLSearchParams(window.location.search);
-    const slug    = (params.get('project') || '').toLowerCase().trim();
+    const params = new URLSearchParams(window.location.search);
+    const slug = (params.get('project') || '').toLowerCase().trim();
     const project = projectsDB[slug];
 
-    const loader      = document.getElementById('loader');
-    const errorState  = document.getElementById('error-state');
-    const video       = document.getElementById('video-bg');
-    const titleEl     = document.getElementById('project-title');
-    const labelEl     = document.getElementById('project-label');
-    const logoLink    = document.getElementById('logo-link');
-    const ctaGroup    = document.getElementById('cta-group');
-    const discoverLink= document.getElementById('discover-link');
-    const watchLink   = document.getElementById('watch-link');
-    const muteBtn     = document.getElementById('btn-mute');
-    let   isMuted     = true;
+    const loader = document.getElementById('loader');
+    const errorState = document.getElementById('error-state');
+    const video = document.getElementById('video-bg');
+    const titleEl = document.getElementById('project-title');
+    const labelEl = document.getElementById('project-label');
+    const logoLink = document.getElementById('logo-link');
+    const ctaGroup = document.getElementById('cta-group');
+    const discoverLink = document.getElementById('discover-link');
+    const watchLink = document.getElementById('watch-link');
+    const muteBtn = document.getElementById('btn-mute');
+    let isMuted = true;
 
     function showError() {
       loader.classList.add('hidden');
@@ -387,14 +464,14 @@
 
       // Set video source
       const sourceEl = document.createElement('source');
-      sourceEl.src  = project.video;
+      sourceEl.src = project.video;
       sourceEl.type = project.video.endsWith('.webm') ? 'video/webm' : 'video/mp4';
       video.appendChild(sourceEl);
 
       video.load();
 
       video.addEventListener('canplay', () => {
-        video.play().catch(() => {});
+        video.play().catch(() => { });
         showUI();
       }, { once: true });
 
@@ -415,4 +492,5 @@
   </script>
 
 </body>
+
 </html>
