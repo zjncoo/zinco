@@ -71,8 +71,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'changa', sans-serif;
-  font-weight: 200;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: 600;
   letter-spacing: -0.05em;
 }
 
@@ -437,9 +437,9 @@ main>#figma-container {
 }
 
 .marquee-content span {
-  font-family: 'changa', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 5vw;
-  font-weight: 200;
+  font-weight: 600;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   color: black;
@@ -1123,8 +1123,8 @@ main>#figma-container {
   border: none;
   border-bottom: 2px solid white;
   outline: none;
-  font-family: 'changa', sans-serif;
-  font-weight: 200;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: 600;
   transition: border-color 0.4s ease, font-size 0.4s ease;
 }
 
@@ -1188,9 +1188,9 @@ main>#figma-container {
   margin: 1rem 0;
   color: white;
   text-decoration: none;
-  font-family: 'changa', sans-serif;
+  font-family: 'aktiv-grotesk', sans-serif;
   font-size: 1.5rem;
-  font-weight: 200;
+  font-weight: 600;
   /* Separatore tra i risultati (rimosso) */
   transition: background-color 0.2s ease, color 0.2s ease;
 }

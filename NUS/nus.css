@@ -95,8 +95,8 @@
 }
 
 #project-hero h1 {
-  font-family: 'changa', sans-serif;
-  font-weight: 200;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: 600;
   /* Clamp() per un font-size fluido e controllato */
   font-size: clamp(3.5rem, 8vw, 7rem);
   margin: 0;
