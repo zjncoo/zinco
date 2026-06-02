@@ -419,31 +419,19 @@
       },
       zoom: {
         title: "ZOOM",
-        video: "publications/zoom/img/animazione fumetto.mp4",
-        link: "publications/zoom/zoom.html",
-        external: false
-      },
-      "zoom-anim1": {
-        title: "ZOOM — animazione 1",
-        video: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE1 - GRUPPO3.mp4",
-        link: "publications/zoom/zoom.html",
-        external: false
-      },
-      "zoom-anim3": {
-        title: "ZOOM — animazione 3",
-        video: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE3-GRUPPO3.mp4",
-        link: "publications/zoom/zoom.html",
-        external: false
-      },
-      "zoom-anim4": {
-        title: "ZOOM — animazione 4",
-        video: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE4-GRUPPO3.mp4",
+        // Array di video: il primo viene usato come sfondo, tutti ottengono un bottone
+        videos: [
+          { label: "animation 1", src: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE1 - GRUPPO3.mp4" },
+          { label: "animation 2", src: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE2-GRUPPO3.mp4" },
+          { label: "animation 3", src: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE3-GRUPPO3.mp4" },
+          { label: "animation 4", src: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE4-GRUPPO3.mp4" }
+        ],
         link: "publications/zoom/zoom.html",
         external: false
       },
       "zoom-fumetto": {
         title: "ZOOM — fumetto",
-        video: "UNI YEAR 1/projects_basics_lab/img/animations/animazione fumetto.mp4",
+        video: "publications/zoom/img/animazione fumetto.mp4",
         link: "publications/zoom/zoom.html",
         external: false
       }
@@ -504,8 +492,49 @@
       titleEl.textContent = project.title;
 
       const hasVideo = !!project.video;
+      const hasVideos = !!(project.videos && project.videos.length > 0);
 
-      if (hasVideo) {
+      if (hasVideos) {
+        // ── Multi-video mode ──
+        // Use the first video as the looping background
+        const firstSrc = project.videos[0].src;
+        discoverLink.style.display = project.link ? '' : 'none';
+        if (project.link) {
+          discoverLink.href = project.link;
+          if (project.external) discoverLink.target = '_blank';
+        }
+
+        // Hide the generic single watch-link; generate one per video instead
+        watchLink.style.display = 'none';
+        project.videos.forEach(v => {
+          addSiteButton('watch ' + v.label, v.src, false);
+        });
+
+        // Set background video to first entry
+        const sourceEl = document.createElement('source');
+        sourceEl.src = firstSrc;
+        sourceEl.type = firstSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+        video.appendChild(sourceEl);
+        video.load();
+
+        video.addEventListener('canplay', () => {
+          video.play().catch(() => { });
+          showUI(true);
+        }, { once: true });
+
+        setTimeout(() => {
+          if (!video.classList.contains('ready')) showUI(true);
+        }, 3000);
+
+        video.addEventListener('error', () => showUI(true));
+
+        muteBtn.addEventListener('click', () => {
+          isMuted = !isMuted;
+          video.muted = isMuted;
+          muteBtn.textContent = isMuted ? '🔇' : '🔊';
+        });
+
+      } else if (hasVideo) {
         // ── Video mode ──
         discoverLink.style.display = project.link ? '' : 'none';
         if (project.link) {
