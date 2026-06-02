@@ -59,6 +59,23 @@
       opacity: 1;
     }
 
+    /* ── Full-screen image bg (for projects without video) ── */
+    #image-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      display: none;
+    }
+
+    #image-bg.ready {
+      opacity: 1;
+    }
+
     /* ── Gradient overlay ── */
     .overlay {
       position: fixed;
@@ -322,6 +339,9 @@
   <!-- Video background -->
   <video id="video-bg" autoplay muted playsinline loop preload="auto"></video>
 
+  <!-- Image background (for projects without video) -->
+  <img id="image-bg" alt="project background">
+
   <!-- Dark overlay -->
   <div class="overlay"></div>
 
@@ -348,6 +368,7 @@
           <span>watch video</span>
           <span class="arrow">→</span>
         </a>
+        <!-- site buttons injected dynamically by JS -->
       </div>
       <button class="btn-mute" id="btn-mute" title="Toggle sound" aria-label="Toggle mute">🔇</button>
     </div>
@@ -385,10 +406,16 @@
         link: "piedibus_mozzate/piedibus_mozzate.html",
         external: false
       },
-      amdecor: {
-        title: "Am Decor",
-        link: "amdecor/amdecor.html",
-        external: false
+      am_group: {
+        title: "AM Group (AM Decor + 3M)",
+        // Nessun video — usa immagine di sfondo
+        image: "3M_Soluzioni_Immobiliari/img/3M_window.webp",
+        sites: [
+          { label: "discover AM Decor", url: "amdecor/amdecor.html", external: false },
+          { label: "discover 3M", url: "3M_Soluzioni_Immobiliari/3M_soluzioni_immobiliari.html", external: false },
+          { label: "visit AM Decor", url: "https://www.amdecor.it", external: true },
+          { label: "visit 3M", url: "https://www.3m.com", external: true }
+        ]
       },
       zoom: {
         title: "ZOOM",
@@ -429,6 +456,7 @@
     const loader = document.getElementById('loader');
     const errorState = document.getElementById('error-state');
     const video = document.getElementById('video-bg');
+    const imageBg = document.getElementById('image-bg');
     const titleEl = document.getElementById('project-title');
     const labelEl = document.getElementById('project-label');
     const logoLink = document.getElementById('logo-link');
@@ -438,20 +466,34 @@
     const muteBtn = document.getElementById('btn-mute');
     let isMuted = true;
 
+    // Generates a .btn-cta anchor and appends it to ctaGroup
+    function addSiteButton(label, url, external) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.className = 'btn-cta';
+      if (external) a.target = '_blank';
+      a.innerHTML = `<span>${label}</span><span class="arrow">→</span>`;
+      ctaGroup.appendChild(a);
+    }
+
     function showError() {
       loader.classList.add('hidden');
       errorState.style.display = 'flex';
     }
 
-    function showUI() {
+    function showUI(hasVideo) {
       loader.classList.add('hidden');
-      video.classList.add('ready');
+      if (hasVideo) {
+        video.classList.add('ready');
+      } else {
+        imageBg.classList.add('ready');
+      }
       requestAnimationFrame(() => {
         titleEl.classList.add('visible');
         logoLink.classList.add('visible');
         labelEl.classList.add('visible');
         ctaGroup.classList.add('visible');
-        muteBtn.classList.add('visible');
+        if (hasVideo) muteBtn.classList.add('visible');
       });
     }
 
@@ -459,42 +501,81 @@
       showError();
     } else {
       document.title = `${project.title} — zinco.cc`;
-
       titleEl.textContent = project.title;
 
-      // Discover button
-      discoverLink.href = project.link;
-      if (project.external) discoverLink.target = '_blank';
+      const hasVideo = !!project.video;
 
-      // Watch video button — opens video file directly in browser native player
-      watchLink.href = project.video;
+      if (hasVideo) {
+        // ── Video mode ──
+        discoverLink.style.display = project.link ? '' : 'none';
+        if (project.link) {
+          discoverLink.href = project.link;
+          if (project.external) discoverLink.target = '_blank';
+        }
 
-      // Set video source
-      const sourceEl = document.createElement('source');
-      sourceEl.src = project.video;
-      sourceEl.type = project.video.endsWith('.webm') ? 'video/webm' : 'video/mp4';
-      video.appendChild(sourceEl);
+        // Watch video button — opens video file directly in browser native player
+        watchLink.href = project.video;
+        watchLink.style.display = '';
 
-      video.load();
+        // Set video source
+        const sourceEl = document.createElement('source');
+        sourceEl.src = project.video;
+        sourceEl.type = project.video.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+        video.appendChild(sourceEl);
+        video.load();
 
-      video.addEventListener('canplay', () => {
-        video.play().catch(() => { });
-        showUI();
-      }, { once: true });
+        video.addEventListener('canplay', () => {
+          video.play().catch(() => { });
+          showUI(true);
+        }, { once: true });
 
-      // Fallback
-      setTimeout(() => {
-        if (!video.classList.contains('ready')) showUI();
-      }, 3000);
+        // Fallback
+        setTimeout(() => {
+          if (!video.classList.contains('ready')) showUI(true);
+        }, 3000);
 
-      video.addEventListener('error', showError);
+        video.addEventListener('error', showError);
 
-      // Mute toggle
-      muteBtn.addEventListener('click', () => {
-        isMuted = !isMuted;
-        video.muted = isMuted;
-        muteBtn.textContent = isMuted ? '🔇' : '🔊';
-      });
+        // Mute toggle
+        muteBtn.addEventListener('click', () => {
+          isMuted = !isMuted;
+          video.muted = isMuted;
+          muteBtn.textContent = isMuted ? '🔇' : '🔊';
+        });
+
+      } else {
+        // ── Image / no-video mode ──
+        muteBtn.style.display = 'none';
+        watchLink.style.display = 'none';
+
+        // Background image
+        if (project.image) {
+          imageBg.style.display = 'block';
+          imageBg.src = project.image;
+          imageBg.onload = () => showUI(false);
+          imageBg.onerror = () => showUI(false); // show UI even if image fails
+        } else {
+          // No image either — just show the dark background
+          showUI(false);
+        }
+
+        // Single discover link (legacy `link` field)
+        if (project.link) {
+          discoverLink.href = project.link;
+          if (project.external) discoverLink.target = '_blank';
+          discoverLink.style.display = '';
+        } else {
+          discoverLink.style.display = 'none';
+        }
+
+        // Multi-site buttons (dynamic — any number supported)
+        if (project.sites && project.sites.length > 0) {
+          discoverLink.style.display = 'none'; // hide generic button when using custom ones
+          project.sites.forEach(site => {
+            addSiteButton(site.label || 'visita sito', site.url, !!site.external);
+          });
+        }
+      }
     }
   </script>
 
