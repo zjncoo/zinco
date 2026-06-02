@@ -229,6 +229,100 @@
       font-size: 1.1em;
     }
 
+    /* ── Dropdown (overflow of CTA buttons) ── */
+    .btn-dropdown {
+      position: relative;
+      pointer-events: all;
+    }
+
+    .btn-dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 2px solid #000000;
+      background: #ffffff;
+      color: #000000;
+      padding: 0.75rem 1.75rem;
+      height: 48px;
+      font-family: 'NeuzeitHeavy', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: normal;
+      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
+      cursor: pointer;
+      transition: opacity 0.25s, transform 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-dropdown-trigger:hover {
+      transform: translateX(4px);
+      opacity: 0.85;
+    }
+
+    .btn-dropdown-trigger .chevron {
+      font-style: normal;
+      font-size: 0.75em;
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+
+    .btn-dropdown.open .btn-dropdown-trigger .chevron {
+      transform: rotate(180deg);
+    }
+
+    .btn-dropdown-menu {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      background: #ffffff;
+      border: 2px solid #000000;
+      min-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 20;
+    }
+
+    .btn-dropdown.open .btn-dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .btn-dropdown-menu a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 0.7rem 1.25rem;
+      font-family: 'NeuzeitHeavy', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(0.75rem, 2vw, 0.85rem);
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
+      text-decoration: none;
+      color: #000000;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .btn-dropdown-menu a:hover {
+      background: rgba(0,0,0,0.06);
+    }
+
+    .btn-dropdown-menu a .arrow {
+      font-size: 1em;
+      opacity: 0.4;
+    }
+
     /* Mute button — solid black square */
     .btn-mute {
       pointer-events: all;
@@ -454,14 +548,58 @@
     const muteBtn = document.getElementById('btn-mute');
     let isMuted = true;
 
-    // Generates a .btn-cta anchor and appends it to ctaGroup
+    // Button collector — call addSiteButton() for each item,
+    // then renderButtons() once. If >2 items they go into a dropdown.
+    const _pendingButtons = [];
+
     function addSiteButton(label, url, external) {
-      const a = document.createElement('a');
-      a.href = url;
-      a.className = 'btn-cta';
-      if (external) a.target = '_blank';
-      a.innerHTML = `<span>${label}</span><span class="arrow">→</span>`;
-      ctaGroup.appendChild(a);
+      _pendingButtons.push({ label, url, external });
+    }
+
+    function renderButtons() {
+      const items = _pendingButtons;
+      if (items.length === 0) return;
+
+      if (items.length <= 2) {
+        // Inline — same as before
+        items.forEach(({ label, url, external }) => {
+          const a = document.createElement('a');
+          a.href = url;
+          a.className = 'btn-cta';
+          if (external) a.target = '_blank';
+          a.innerHTML = `<span>${label}</span><span class="arrow">→</span>`;
+          ctaGroup.appendChild(a);
+        });
+      } else {
+        // Dropdown
+        const wrapper = document.createElement('div');
+        wrapper.className = 'btn-dropdown';
+
+        const trigger = document.createElement('button');
+        trigger.className = 'btn-dropdown-trigger';
+        trigger.innerHTML = `<span>more links</span><span class="chevron">▼</span>`;
+        trigger.addEventListener('click', e => {
+          e.stopPropagation();
+          wrapper.classList.toggle('open');
+        });
+
+        const menu = document.createElement('div');
+        menu.className = 'btn-dropdown-menu';
+        items.forEach(({ label, url, external }) => {
+          const a = document.createElement('a');
+          a.href = url;
+          if (external) a.target = '_blank';
+          a.innerHTML = `<span>${label}</span><span class="arrow">→</span>`;
+          menu.appendChild(a);
+        });
+
+        wrapper.appendChild(trigger);
+        wrapper.appendChild(menu);
+        ctaGroup.appendChild(wrapper);
+
+        // Close on outside click
+        document.addEventListener('click', () => wrapper.classList.remove('open'));
+      }
     }
 
     function showError() {
@@ -509,6 +647,7 @@
         project.videos.forEach(v => {
           addSiteButton('watch ' + v.label, v.src, false);
         });
+        renderButtons();
 
         // Set background video to first entry
         const sourceEl = document.createElement('source');
@@ -603,6 +742,7 @@
           project.sites.forEach(site => {
             addSiteButton(site.label || 'visita sito', site.url, !!site.external);
           });
+          renderButtons();
         }
       }
     }
