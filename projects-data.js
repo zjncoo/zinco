@@ -89,6 +89,20 @@ const allProjectsData = [
     category: "branding"
   },
   {
+    title: "BAAS IS BACK IN TOWN",
+    link: "baas_is_back_in_town/baas.html",
+    category: "branding",
+    video: "baas_is_back_in_town/img/Woman_walks,_tram_stops_202605281117.webm",
+    videoSlug: "baas"
+  },
+  {
+    title: "Poldi Pezzoli",
+    link: "poldi_pezzoli/poldi_pezzoli.html",
+    category: "branding",
+    video: "poldi_pezzoli/teaser.webm",
+    videoSlug: "poldi_pezzoli"
+  },
+  {
     title: "Dranks",
     link: "dranks/dranks.html",
     category: "branding"

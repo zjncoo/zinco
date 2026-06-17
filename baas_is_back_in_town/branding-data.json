@@ -1,0 +1,179 @@
+[
+  {
+    "type": "image",
+    "subtype": "logo",
+    "label": "logo",
+    "src": "img/logo_baas.svg"
+  },
+  {
+    "type": "text",
+    "label": "naming",
+    "content": "BAAS IS BACK IN TOWN"
+  },
+  {
+    "type": "text",
+    "label": "typology",
+    "content": "fictional exhibition — Milan Design Week 2027"
+  },
+  {
+    "type": "text",
+    "label": "venue",
+    "content": "Triennale di Milano"
+  },
+  {
+    "type": "text",
+    "label": "year",
+    "content": "2027"
+  },
+  {
+    "type": "text",
+    "label": "reference",
+    "content": "Maarten Baas — 2014 critique against hyper-documentation"
+  },
+  {
+    "type": "text",
+    "label": "concept",
+    "content": "spectators become the actual exhibits — exposing the semantic vacuum of social media documentation during Fuorisalone"
+  },
+  {
+    "type": "header",
+    "label": "exhibition path"
+  },
+  {
+    "type": "text",
+    "label": "act I",
+    "content": "carousel"
+  },
+  {
+    "type": "text",
+    "label": "act II",
+    "content": "chandeliers' hallway"
+  },
+  {
+    "type": "text",
+    "label": "act III",
+    "content": "hidden cameras"
+  },
+  {
+    "type": "text",
+    "label": "act IV",
+    "content": "mocking actors"
+  },
+  {
+    "type": "header",
+    "label": "visual identity"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "manifesto",
+    "src": "img/manofesto 4.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/brochure.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "colophon",
+    "src": "img/colophon.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "render — exhibition space",
+    "src": "img/erender 11.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "render — entrance",
+    "src": "img/render 16 redone.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Triennale signage",
+    "src": "img/scrittte triennal.webp"
+  },
+  {
+    "type": "header",
+    "label": "documentation"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "backstage",
+    "src": "img/backstage 04.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "documentation 1",
+    "src": "img/2.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "documentation 2",
+    "src": "img/3.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "documentation 3",
+    "src": "img/4.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "detail 1",
+    "src": "img/WhatsApp Image 2026-06-04 at 11.57.30 AM.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "detail 2",
+    "src": "img/WhatsApp Image 2026-06-04 at 11.58.28 AM.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "QR code",
+    "src": "img/QR CODE 1.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "visual 1",
+    "src": "img/Gemini_Generated_Image_c8kaujc8kaujc8ka.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "visual 2",
+    "src": "img/Gemini_Generated_Image_ybblbmybblbmybbl.webp"
+  },
+  {
+    "type": "header",
+    "label": "color palette"
+  },
+  {
+    "type": "color",
+    "label": "#ffffff",
+    "hex": "#ffffff"
+  },
+  {
+    "type": "color",
+    "label": "#1a1a1a",
+    "hex": "#1a1a1a"
+  },
+  {
+    "type": "color",
+    "label": "#ba2026",
+    "hex": "#ba2026"
+  }
+]
