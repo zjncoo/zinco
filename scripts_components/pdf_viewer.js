@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
       scale = 1.5,
       ctx = canvas.getContext('2d');
 
-  const pageNumSpan  = document.getElementById('pageNum');
-  const pageNumInput = document.getElementById('pageNumInput');
+  const pageNumSpan   = document.getElementById('pageNum');
+  const pageNumInput  = document.getElementById('pageNumInput');
   const pageCountSpan = document.getElementById('pageCount');
 
   // ── Desktop: render singola pagina su canvas ──────────────────────────────
@@ -75,6 +75,104 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Caricamento documento ─────────────────────────────────────────────────
   pdfjsLib.getDocument(url).promise.then(async pdfDoc_ => {
     pdfDoc = pdfDoc_;
+
+    // ── Inject grid-view button + modal ──────────────────────────────────────
+    const pdfControls = document.querySelector('.pdf-controls');
+    if (pdfControls && !document.getElementById('grid-view-btn')) {
+      const gridBtn = document.createElement('button');
+      gridBtn.id = 'grid-view-btn';
+      gridBtn.className = 'btn btn--outline-dark cursor-target';
+      gridBtn.style.padding = '10px 16px';
+      gridBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      `;
+      pdfControls.appendChild(gridBtn);
+    }
+
+    if (!document.getElementById('pdfGridModal')) {
+      document.body.insertAdjacentHTML('beforeend', `
+        <div id="pdfGridModal" data-lenis-prevent>
+          <div class="pdf-grid-header">
+            <h2>pages overview</h2>
+            <button id="closePdfGrid" class="cursor-target">close</button>
+          </div>
+          <div id="pdfThumbnailsContainer" data-lenis-prevent></div>
+        </div>
+      `);
+    }
+
+    const gridModal           = document.getElementById('pdfGridModal');
+    const closeGridBtn        = document.getElementById('closePdfGrid');
+    const thumbnailsContainer = document.getElementById('pdfThumbnailsContainer');
+    const gridViewBtn         = document.getElementById('grid-view-btn');
+    let thumbnailsRendered    = false;
+
+    const renderThumbnails = async () => {
+      if (!pdfDoc || thumbnailsRendered) return;
+      thumbnailsContainer.innerHTML = '';
+      const total = pdfDoc.numPages;
+      for (let i = 1; i <= total; i++) {
+        const wrapper = document.createElement('div');
+        wrapper.className = `pdf-thumbnail-wrapper ${i === pageNum ? 'active' : ''}`;
+        wrapper.dataset.page = i;
+
+        const thumbCanvas = document.createElement('canvas');
+        thumbCanvas.className = 'pdf-thumbnail';
+
+        const numberSpan = document.createElement('span');
+        numberSpan.className = 'pdf-thumbnail-number';
+        numberSpan.textContent = i;
+
+        wrapper.appendChild(thumbCanvas);
+        wrapper.appendChild(numberSpan);
+        thumbnailsContainer.appendChild(wrapper);
+
+        pdfDoc.getPage(i).then(page => {
+          const vp = page.getViewport({ scale: 0.6 });
+          thumbCanvas.height = vp.height;
+          thumbCanvas.width  = vp.width;
+          page.render({ canvasContext: thumbCanvas.getContext('2d'), viewport: vp });
+        });
+
+        wrapper.addEventListener('click', () => {
+          pageNum = i;
+          queueRenderPage(pageNum);
+          closeGridModal();
+        });
+      }
+      thumbnailsRendered = true;
+    };
+
+    const updateActiveThumbnail = () => {
+      if (!thumbnailsRendered) return;
+      document.querySelectorAll('.pdf-thumbnail-wrapper').forEach(w => {
+        const active = parseInt(w.dataset.page) === pageNum;
+        w.classList.toggle('active', active);
+        if (active) w.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    };
+
+    const openGridModal = () => {
+      gridModal.classList.add('open');
+      renderThumbnails().then(updateActiveThumbnail);
+      document.body.style.overflow = 'hidden';
+      if (window.lenis) window.lenis.stop();
+    };
+
+    const closeGridModal = () => {
+      gridModal.classList.remove('open');
+      document.body.style.overflow = '';
+      if (window.lenis) window.lenis.start();
+    };
+
+    if (gridViewBtn) gridViewBtn.addEventListener('click', openGridModal);
+    if (closeGridBtn) closeGridBtn.addEventListener('click', closeGridModal);
+    // ── Fine inject ───────────────────────────────────────────────────────────
 
     if (window.innerWidth <= 768) {
       // ══════════════════════════════════════════════════════════════════════

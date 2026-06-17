@@ -130,18 +130,6 @@
   {
     "type": "image",
     "subtype": "app-screenshot",
-    "label": "detail 1",
-    "src": "img/WhatsApp Image 2026-06-04 at 11.57.30 AM.webp"
-  },
-  {
-    "type": "image",
-    "subtype": "app-screenshot",
-    "label": "detail 2",
-    "src": "img/WhatsApp Image 2026-06-04 at 11.58.28 AM.webp"
-  },
-  {
-    "type": "image",
-    "subtype": "app-screenshot",
     "label": "QR code",
     "src": "img/QR CODE 1.webp"
   },

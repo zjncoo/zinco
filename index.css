@@ -256,6 +256,21 @@ main>#figma-container {
   order: 5 !important;
 }
 
+/* On mobile: PDF goes after the branding grid */
+@media (max-width: 768px) {
+  main>#pdfViewerContainer {
+    order: 5 !important;
+  }
+
+  main>#brandingGrid {
+    order: 3 !important;
+  }
+
+  main>#figma-container {
+    order: 4 !important;
+  }
+}
+
 .intro {
   font-family: 'aktiv-grotesk', sans-serif;
   font-size: 28px;

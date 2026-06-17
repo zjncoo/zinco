@@ -152,9 +152,9 @@
       inset: 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       flex-direction: column;
-      text-align: center;
+      text-align: left;
       padding: 0 clamp(1.5rem, 5vw, 2.5rem);
     }
 
@@ -168,6 +168,8 @@
       transform: translateY(20px);
       transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
       text-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
+      text-align: left;
+      width: 100%;
     }
 
     #project-title.visible {
@@ -651,14 +653,14 @@
         // ── Multi-video mode ──
         // Use the first video as the looping background
         const firstSrc = project.videos[0].src;
-        discoverLink.style.display = project.link ? '' : 'none';
-        if (project.link) {
-          discoverLink.href = project.link;
-          if (project.external) discoverLink.target = '_blank';
-        }
-
-        // Hide the generic single watch-link; generate one per video instead
+        // In multi-video mode route all buttons (discover + videos) through the
+        // dropdown system so they're always collected in the "more links" menu
+        discoverLink.style.display = 'none';
         watchLink.style.display = 'none';
+
+        if (project.link) {
+          addSiteButton('discover the project', project.link, !!project.external);
+        }
         project.videos.forEach(v => {
           addSiteButton('watch ' + v.label, v.src, false);
         });
