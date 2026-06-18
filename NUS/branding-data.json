@@ -1,0 +1,188 @@
+[
+  {
+    "type": "image",
+    "subtype": "logo",
+    "label": "logo",
+    "src": "img/logo_nus.svg"
+  },
+  {
+    "type": "text",
+    "label": "collaborators",
+    "content": "francesco z., lucrezia s., gaia b., aurelia la c., martina s. "
+  },
+  {
+    "type": "text",
+    "label": "description",
+    "content": "this project is part of the corporate identity course and was developed in collaboration with four other students, however these graphic elements, in particular were created by me."
+  },
+  {
+    "type": "text",
+    "label": "naming",
+    "content": "Neighbourhood Urban Studies Institute - Nus"
+  },
+  {
+    "type": "text",
+    "label": "payoff",
+    "content": "Make Future a shared Place"
+  },
+  {
+    "type": "text",
+    "label": "values",
+    "content": "sustainability, innovation, transparency"
+  },
+  {
+    "type": "text",
+    "label": "brand essence",
+    "content": "We shape shared futures by grounding knowledge in place, people, and purpose."
+  },
+  {
+    "type": "text",
+    "label": "mission",
+    "content": "To make practical and theoretical tools available to people, enabling them to understand and value the communities in which they will operate."
+  },
+  {
+    "type": "text",
+    "label": "vision",
+    "content": "We believe in a society that cooperates in a synergic way, in which everyone collaborates actively for common well-being."
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "students and urban researchers"
+  },
+  {
+    "type": "text",
+    "label": "positioning",
+    "content": "specialized higher education institute"
+  },
+  {
+    "type": "text",
+    "label": "brand architecture",
+    "content": "master brand with regional sub-brands"
+  },
+  {
+    "type": "header",
+    "label": "power applications"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "brochure",
+    "src": "img/brochure.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "badge",
+    "src": "img/badge.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "seeds",
+    "src": "img/semi insieme.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "tote",
+    "src": "img/tote.jpg"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "keychain",
+    "src": "img/portachiavi-2.png"
+  },
+  {
+    "type": "header",
+    "label": "brand mark"
+  },
+  {
+    "type": "image",
+    "subtype": "mark",
+    "label": "brandmark contruction",
+    "src": "img/costruttivo.webp"
+  },
+  {
+    "type": "header",
+    "label": "typography"
+  },
+  {
+    "type": "image",
+    "subtype": "identita",
+    "label": "typography",
+    "src": "img/tipografia.webp"
+  },
+  {
+    "type": "header",
+    "label": "graphic elements"
+  },
+  {
+    "type": "image",
+    "subtype": "identita",
+    "label": "graphic elements",
+    "src": "img/brand/elementi_grafici.png"
+  },
+  {
+    "type": "header",
+    "label": "color palette"
+  },
+  {
+    "type": "color",
+    "label": "#df5a10",
+    "class": "color1",
+    "hex": "#DF5A10"
+  },
+  {
+    "type": "color",
+    "label": "#1e3237",
+    "class": "color2",
+    "hex": "#1E3237"
+  },
+  {
+    "type": "color",
+    "label": "#cfdfea",
+    "class": "color3",
+    "hex": "#CFDFEA"
+  },
+  {
+    "type": "color",
+    "label": "#cabd3c",
+    "class": "color4",
+    "hex": "#CABD3C"
+  },
+  {
+    "type": "color",
+    "label": "#eaeaf0",
+    "class": "color5",
+    "hex": "#EAEAF0"
+  },
+  {
+    "type": "color",
+    "label": "#ffffff",
+    "class": "color5",
+    "hex": "#ffffff"
+  },
+  {
+    "type": "color",
+    "label": "#000000",
+    "class": "color5",
+    "hex": "#000000"
+  },
+  {
+    "type": "header",
+    "label": "prototype"
+  },
+  {
+    "type": "figma",
+    "label": "website - prototype",
+    "embedUrl": "https://embed.figma.com/proto/wF1HPUS18DSGwC0eHSEUV5/SITO-NUS--Copy-?page-id=0%3A1&node-id=166-147&p=f&viewport=485%2C-22%2C0.07&scaling=scale-down&content-scaling=fixed&starting-point-node-id=166%3A147&embed-host=share"
+  },
+  {
+    "type": "link",
+    "label": "book",
+    "description": "view the full brand manual — logo construction, typography, color palette, and all brand applications.",
+    "href": "../publications/nus_brandbook/nus_brandbook.html"
+  }
+]
