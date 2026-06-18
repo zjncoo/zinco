@@ -146,13 +146,13 @@
       transform: translateY(0);
     }
 
-    /* Center: big title */
+    /* Center: big title — vertically centered */
     .ui-center {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       flex-direction: column;
       text-align: left;
       padding: 0 clamp(1.5rem, 5vw, 2.5rem);
@@ -525,12 +525,6 @@
         link: "publications/zoom/zoom.html",
         external: false
       },
-      "zoom-fumetto": {
-        title: "ZOOM — fumetto",
-        video: "publications/zoom/img/animazione fumetto.mp4",
-        link: "publications/zoom/zoom.html",
-        external: false
-      },
       baas: {
         title: "BAAS IS BACK IN TOWN",
         video: "baas_is_back_in_town/img/Woman_walks,_tram_stops_202605281117.webm",
@@ -539,12 +533,13 @@
       },
       poldi_pezzoli: {
         title: "CPP casa poldi pezzoli",
-        videos: [
-          { label: "campaign — full cut", src: "poldi_pezzoli/video_CPP.webm" },
-          { label: "teaser", src: "poldi_pezzoli/teaser.webm" }
-        ],
+        video: "poldi_pezzoli/video_CPP.webm",
         link: "poldi_pezzoli/poldi_pezzoli.html",
-        external: false
+        external: false,
+        sites: [
+          { label: "watch teaser", url: "poldi_pezzoli/teaser.webm", external: false }
+        ],
+        forceDropdown: true
       }
     };
 
@@ -727,6 +722,29 @@
           video.muted = isMuted;
           muteBtn.textContent = isMuted ? '🔇' : '🔊';
         });
+
+        // Extra sites for this project (e.g. teaser) — go into dropdown
+        if (project.sites && project.sites.length > 0) {
+          project.sites.forEach(s => {
+            addSiteButton(s.label || 'link', s.url, !!s.external);
+          });
+          if (project.forceDropdown) {
+            // Force dropdown even with < 3 items by injecting a sentinel
+            // then rendering, then removing the sentinel entry from the DOM
+            const sentinel = { label: '__sentinel__', url: '#', external: false };
+            const sentinel2 = { label: '__sentinel2__', url: '#', external: false };
+            _pendingButtons.push(sentinel, sentinel2);
+            renderButtons();
+            // Remove the sentinel anchor elements from the dropdown menu
+            ctaGroup.querySelectorAll('.btn-dropdown-menu a').forEach(a => {
+              if (a.querySelector('span') && a.querySelector('span').textContent.startsWith('__sentinel')) {
+                a.remove();
+              }
+            });
+          } else {
+            renderButtons();
+          }
+        }
 
       } else {
         // ── Image / no-video mode ──

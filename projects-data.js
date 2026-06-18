@@ -39,7 +39,7 @@ const allProjectsData = [
     category: "publications"
   },
   {
-    title: "Femsvertising",
+    title: "FemVertising",
     link: "publications/femvertising/femvertising.html",
     category: "publications"
   },
@@ -96,7 +96,7 @@ const allProjectsData = [
     videoSlug: "baas"
   },
   {
-    title: "Poldi Pezzoli",
+    title: "CPP casa poldi pezzoli",
     link: "poldi_pezzoli/poldi_pezzoli.html",
     category: "branding",
     video: "poldi_pezzoli/teaser.webm",

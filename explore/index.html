@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <title>explore | zinco</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="All zinco projects — short links hub." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --border: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.85);
+      --muted: rgba(255,255,255,0.35);
+      --accent: #FFD600;
+      --font: 'aktiv-grotesk', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      height: 28px;
+      width: auto;
+      filter: invert(1);
+    }
+
+    header a { text-decoration: none; }
+
+    .back {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem 6rem;
+    }
+
+    .page-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4rem;
+    }
+
+    /* ── Sections ── */
+    .section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    /* ── Link rows ── */
+    .link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.15s;
+    }
+
+    .link-row:hover {
+      background: rgba(255,255,255,0.03);
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      margin: 0 -0.5rem;
+    }
+
+    .link-row:hover .arrow { transform: translateX(4px); }
+
+    .link-name {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .link-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .link-url {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+    }
+
+    .arrow {
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .link-row:hover .arrow { color: var(--accent); }
+
+    /* ── Copy toast ── */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: white;
+      color: black;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* copy icon on each row */
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 4px;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .copy-btn:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      header { padding: 1.25rem 1.25rem; }
+      main { padding: 2.5rem 1.25rem 5rem; }
+      .link-url { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html"><img src="../imghome/logo_zinco.svg" class="logo" alt="zinco"></a>
+  <a href="../index.html" class="back">← home</a>
+</header>
+
+<main>
+  <h1 class="page-title">explore</h1>
+  <p class="page-subtitle">all projects — short links</p>
+
+  <!-- VIDEO -->
+  <div class="section">
+    <div class="section-label">video</div>
+    <a class="link-row" href="../video-viewer.html?project=baas" data-url="zinco.cc/explore/baas/">
+      <span class="link-name">BAAS IS BACK IN TOWN</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/baas/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/baas/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../video-viewer.html?project=poldi_pezzoli" data-url="zinco.cc/explore/cpp/">
+      <span class="link-name">CPP casa poldi pezzoli</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/cpp/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/cpp/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../video-viewer.html?project=nus" data-url="zinco.cc/explore/nus/">
+      <span class="link-name">NUS — brand video</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/nus/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/nus/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../video-viewer.html?project=roxy" data-url="zinco.cc/explore/roxy/">
+      <span class="link-name">ROXY — brand video</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/roxy/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/roxy/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../video-viewer.html?project=zoom" data-url="zinco.cc/explore/zoom/">
+      <span class="link-name">ZOOM — animations</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/zoom/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/zoom/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+
+
+    <a class="link-row" href="../video-viewer.html?project=piedibus" data-url="zinco.cc/explore/piedibus/">
+      <span class="link-name">Piedibus Mozzate</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/piedibus/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/piedibus/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../video-viewer.html?project=alua" data-url="zinco.cc/explore/alua/">
+      <span class="link-name">ALUA</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/alua/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/alua/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../video-viewer.html?project=rifiuti_spaziali" data-url="zinco.cc/explore/rifiuti/">
+      <span class="link-name">Rifiuti Spaziali</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/explore/rifiuti/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/explore/rifiuti/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+  </div>
+
+  <!-- BRANDING -->
+  <div class="section">
+    <div class="section-label">branding</div>
+    <a class="link-row" href="../baas_is_back_in_town/baas.html" data-url="zinco.cc/baas/">
+      <span class="link-name">BAAS IS BACK IN TOWN</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/baas/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/baas/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../poldi_pezzoli/poldi_pezzoli.html" data-url="zinco.cc/cpp/">
+      <span class="link-name">CPP casa poldi pezzoli</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/cpp/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/cpp/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../NUS/nus.html" data-url="zinco.cc/nus/">
+      <span class="link-name">NUS</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/nus/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/nus/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../ROXY/roxy.html" data-url="zinco.cc/roxy/">
+      <span class="link-name">ROXY</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/roxy/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/roxy/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../escapes/escapes.html" data-url="zinco.cc/escapes/">
+      <span class="link-name">Escapes</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/escapes/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/escapes/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../amdecor/amdecor.html" data-url="zinco.cc/amdecor/">
+      <span class="link-name">AM Decor</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/amdecor/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/amdecor/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../3M_Soluzioni_Immobiliari/3m.html" data-url="zinco.cc/3m/">
+      <span class="link-name">3M Soluzioni Immobiliari</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/3m/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/3m/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../gizeta/gizeta.html" data-url="zinco.cc/gizeta/">
+      <span class="link-name">Gizeta</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/gizeta/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/gizeta/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../dranks/dranks.html" data-url="zinco.cc/dranks/">
+      <span class="link-name">Dranks</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/dranks/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/dranks/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../piedibus_mozzate/piedibus_mozzate.html" data-url="zinco.cc/piedibus/">
+      <span class="link-name">Piedibus Mozzate</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/piedibus/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/piedibus/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="section">
+    <div class="section-label">publications</div>
+    <a class="link-row" href="../publications/fomo/fomo.html" data-url="zinco.cc/fomo/">
+      <span class="link-name">FOMO</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/fomo/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/fomo/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../publications/zoom/zoom.html" data-url="zinco.cc/zoom/">
+      <span class="link-name">ZOOM</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/zoom/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/zoom/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../publications/femvertising/femvertising.html" data-url="zinco.cc/femvertising/">
+      <span class="link-name">FemVertising</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/femvertising/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/femvertising/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../publications/roxy_brandbook/roxy_brandbook.html" data-url="zinco.cc/roxy-book/">
+      <span class="link-name">Roxy Brandbook</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/roxy-book/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/roxy-book/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+    <a class="link-row" href="../publications/fotografie_come_lettere_di _un_alfabeto/fotografia.html" data-url="zinco.cc/fotografia/">
+      <span class="link-name">Fotografie come lettere di un alfabeto</span>
+      <span class="link-right">
+        <span class="link-url">zinco.cc/fotografia/</span>
+        <button class="copy-btn" title="copia link" onclick="copyLink(event,'https://zinco.cc/fotografia/')">⎘</button>
+        <span class="arrow">→</span>
+      </span>
+    </a>
+  </div>
+
+</main>
+
+<div id="toast">link copiato ✓</div>
+
+<script>
+  function copyLink(e, url) {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(url).then(() => {
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    });
+  }
+</script>
+</body>
+</html>
