@@ -18,5 +18,65 @@
     "type": "text",
     "label": "year",
     "content": "2026"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Overview",
+    "src": "img/portrait_covered.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Head Sculpture",
+    "src": "img/sculpture_head.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Crown Detail",
+    "src": "img/sculpture_crown.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Madonna and Child",
+    "src": "img/madonna_agnello.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Small Frame",
+    "src": "img/small_painting_madonna.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Armor Breastplate",
+    "src": "img/armor_breastplate.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Abstract Sculpture",
+    "src": "img/red_abstract_sculpture.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Historic Passport",
+    "src": "img/historic_passport.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Objects Grid",
+    "src": "img/objects_grid.webp"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Objects Sequence",
+    "src": "img/objects_grid_2.webp"
   }
 ]

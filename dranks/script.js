@@ -185,6 +185,15 @@ async function main() {
     populateMainFilters();
     displayDrinks(drinks.sort((a,b) => a.name.localeCompare(b.name)), drinkListContainer);
     console.log("App pronta.");
+
+    // --- PRELOADER ANIMATION ---
+    setTimeout(() => {
+        const preloader = document.getElementById('dranks-preloader');
+        if (preloader) {
+            preloader.classList.add('slide-up');
+            setTimeout(() => preloader.remove(), 1200); // 1.2s delay for cubic-bezier transition
+        }
+    }, 800); // wait briefly before sliding up
 }
 
 document.addEventListener('DOMContentLoaded', main);

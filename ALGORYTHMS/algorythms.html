@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="../projects-data.js?v=21" defer></script>
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
+  <script src="../components.js" defer></script>
 </head>
 
 <body>
@@ -42,43 +43,9 @@
 
   <div class="custom-cursor" id="cursor"></div>
 
-  <nav class="nav-bar nav-bar--top" id="navTop">
-      <a href="../index.html" id="button-logo" aria-label="Torna alla homepage"><img src="../imghome/logo_zinco.svg" id="logo" alt="Zinco Logo"></a>
-      <div class="nav-bar-right">
-        <a href="../portfolio.html" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomLeft" aria-label="Vai al portfolio">portfolio</a>
-        <a href="#contact-footer" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomRight" aria-label="Vai ai contatti">contacts</a>
-        <a href="#" class="nav-bar-link cursor-target" id="btnTopRight" aria-label="Apri menu principale">menu</a>
-      </div>
-    </nav>
+  <zinco-header base-path="../"></zinco-header>
 
-  <div id="dropdownMenu">
-    <div class="menu-columns">
-      <div class="menu-column left">
-        <a href="../about/about.html" class="menu-link">about me</a>
-        <a href="#contact-footer" class="menu-link">contacts</a>
-        <a href="../ALGORYTHMS/algorythms.html" class="menu-link">algorithms</a>
-
-        <div id="search-bar-container">
-          <input type="text" id="search-input" class="search-input-line" placeholder="browse projects..." autocomplete="off" />
-          <ul id="search-suggestions" class="suggestions-list"></ul>
-        </div>
-      </div>
-      <div class="menu-column right">
-        <a href="../portfolio.html" class="menu-link">portfolio</a>
-        <a href="../publications/publications.html" class="menu-link">publications</a>
-        <a href="#" class="menu-link">clients</a>
-      </div>
-    </div>
-
-    <div class="menu-bottom">
-      <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
-      <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
-    </div>
-  </div>
-
-
-
-  <header id="page-header">
+    <header id="page-header">
     <h1>algorythms & tools</h1>
     <p>a collection</p>
   </header>
@@ -88,94 +55,7 @@
 
 
   </div><!-- /site-main-content -->
-<footer id="contact-footer" class="reveal-footer">
-    <div class="footer-top">
-      <div class="footer-contact-info">
-        <h2>i'm always here</h2>
-        <br>
-        <a href="mailto:zinco.work@gmail.com" class="footer-email"
-          style="color: black; text-decoration: underline;">zinco.work@gmail.com</a>
-        <div class="footer-socials">
-          <p class="social-links-text">
-            <a href="https://www.instagram.com/zjncoo/" target="_blank">INSTAGRAM</a> /
-            <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank">LINKEDIN</a>
-          </p>
-        </div>
-      </div>
-
-      <div class="footer-form-wrapper">
-        <script>var submitted = false;</script>
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
-          onload="if(submitted) { document.getElementById('successMessage').style.display='block'; document.getElementById('placeholder-form').reset(); submitted=false; }"></iframe>
-
-        <form class="custom-contact-form"
-          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdosHY4D0PIyXIjul20uFgBnjrAHutvH6bL4CPC4MuIQFfwbQ/formResponse"
-          method="POST" target="hidden_iframe" id="placeholder-form" onsubmit="submitted=true;">
-          <h4 style="margin-top:0; margin-bottom: 2rem; font-size: 2rem;">get in touch</h4>
-
-          <div class="input-group">
-            <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name" required>
-          </div>
-          <div class="input-group">
-            <input type="email" id="entry.422215982" name="entry.422215982" placeholder="Your Email" required>
-          </div>
-          <div class="input-group">
-            <textarea id="entry.1922030234" name="entry.1922030234" placeholder="Your Message" rows="3"
-              required></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn" style="margin-bottom: 1rem;">Send Message</button>
-          <div id="successMessage" style="display:none; color: black; font-weight: 500; font-size: 0.9rem;">Thank you!
-            Your message has been sent.</div>
-        </form>
-      </div>
-    </div>
-
-    <!-- The Infinite Marquee -->
-    <div class="footer-marquee-container">
-      <div class="footer-marquee">
-        <!-- We duplicate the content to make the scroll seamless -->
-        <div class="marquee-content">
-          <span>SITES</span>
-          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
-          <span>BRANDING</span>
-          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
-          <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
-          <span>SITES</span>
-          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
-          <span>BRANDING</span>
-          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
-          <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
-        </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span>SITES</span>
-          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
-          <span>BRANDING</span>
-          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
-          <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
-          <span>SITES</span>
-          <img src="../imghome/razzino.png" alt="star" class="marquee-img img-1" loading="lazy" decoding="async">
-          <span>BRANDING</span>
-          <img src="../NUS/img/logo_nus.svg" alt="star" class="marquee-img img-2" loading="lazy" decoding="async">
-          <span>GRAPHICS</span>
-          <img src="../escapes/img/logo_escapes.svg" alt="star" class="marquee-img img-3" loading="lazy" decoding="async">
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-links">
-        <a href="../cookie-policy.html">Cookie Policy</a>
-        <a href="../privacy-policy.html">Privacy Policy</a>
-      </div>
-      <div class="footer-bottom-copyright">
-        &copy; 2026 zinco.cc
-      </div>
-    </div>
-  </footer>
+<zinco-footer base-path="../"></zinco-footer>
 
   <script src="../index.js" defer></script>
   <script src="algorythms.js" defer></script>

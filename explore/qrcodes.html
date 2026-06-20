@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <title>qr codes | zinco</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="QR codes per tutti i progetti zinco — stile barcode." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" href="../imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --border: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.85);
+      --muted: rgba(255,255,255,0.35);
+      --accent: #FFD600;
+      --font: 'aktiv-grotesk', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      height: 28px;
+      width: auto;
+      filter: invert(1);
+    }
+
+    header a { text-decoration: none; }
+
+    .back {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem 8rem;
+    }
+
+    .page-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--text);
+      color: var(--text);
+    }
+    .filter-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .print-all-btn {
+      margin-left: auto;
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--font);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .print-all-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── Section label ── */
+    .section {
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Grid ── */
+    .codes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ── Barcode-style QR card ── */
+    .bc-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      padding: 0;
+      cursor: pointer;
+      transition: transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .bc-card:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Top guard bar strip */
+    .bc-card .guard-top {
+      width: 100%;
+      height: 6px;
+      background: #000;
+    }
+
+    /* QR container with barcode-like vertical stripes background */
+    .bc-card .qr-wrap {
+      width: 100%;
+      background: #fff;
+      padding: 10px 10px 6px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Faux barcode strips above QR */
+    .bc-card .strips-top {
+      width: 100%;
+      height: 18px;
+      background: #fff;
+      padding: 0 10px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    /* Faux barcode strips below QR */
+    .bc-card .strips-bottom {
+      width: 100%;
+      height: 18px;
+      background: #fff;
+      padding: 0 10px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .bc-card canvas,
+    .bc-card img {
+      display: block !important;
+    }
+
+    /* Bottom info zone */
+    .bc-card .bc-info {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      padding: 8px 10px 10px;
+      text-align: center;
+    }
+
+    .bc-card .bc-title {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.3;
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bc-card .bc-url {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Download tooltip on hover */
+    .bc-card::after {
+      content: '↓ scarica';
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.85);
+      color: var(--accent);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .bc-card:hover::after {
+      opacity: 1;
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      header, .controls, .page-subtitle { display: none; }
+      .page-title { font-size: 1.5rem; margin-bottom: 1rem; }
+      body { background: #fff; color: #000; }
+      main { padding: 1rem; max-width: 100%; }
+      .bc-card { break-inside: avoid; }
+      .section-label { color: #666; }
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 1.25rem 1.25rem; }
+      main { padding: 2.5rem 1.25rem 5rem; }
+      .codes-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+      .print-all-btn { margin-left: 0; }
+    }
+  </style>
+  <script src="../components.js" defer></script>
+</head>
+<body>
+
+<header>
+  <a href="../index.html"><img src="../imghome/logo_zinco.svg" class="logo" alt="zinco"></a>
+  <a href="index.html" class="back">← explore</a>
+</header>
+
+<main>
+  <h1 class="page-title">qr codes</h1>
+  <p class="page-subtitle">tutti i progetti — scan &amp; go</p>
+
+  <div class="controls" id="controls">
+    <button class="filter-btn active" data-filter="all">tutti</button>
+    <button class="filter-btn" data-filter="video">video</button>
+    <button class="filter-btn" data-filter="branding">branding</button>
+    <button class="filter-btn" data-filter="publications">publications</button>
+    <button class="print-all-btn" onclick="window.print()">⎙ stampa</button>
+  </div>
+
+  <div id="sections-container"></div>
+</main>
+
+<script>
+  // ─── Data ───────────────────────────────────────────────────────
+  const projects = [
+    // VIDEO
+    { title: "BAAS IS BACK IN TOWN", url: "https://zinco.cc/explore/baas/",      shortUrl: "zinco.cc/explore/baas/",      category: "video" },
+    { title: "CPP casa poldi pezzoli", url: "https://zinco.cc/explore/cpp/",      shortUrl: "zinco.cc/explore/cpp/",       category: "video" },
+    { title: "NUS — brand video",      url: "https://zinco.cc/explore/nus/",      shortUrl: "zinco.cc/explore/nus/",       category: "video" },
+    { title: "ROXY — brand video",     url: "https://zinco.cc/explore/roxy/",     shortUrl: "zinco.cc/explore/roxy/",      category: "video" },
+    { title: "ZOOM — animations",      url: "https://zinco.cc/explore/zoom/",     shortUrl: "zinco.cc/explore/zoom/",      category: "video" },
+    { title: "Piedibus Mozzate",       url: "https://zinco.cc/explore/piedibus/", shortUrl: "zinco.cc/explore/piedibus/",  category: "video" },
+    { title: "ALUA",                   url: "https://zinco.cc/explore/alua/",     shortUrl: "zinco.cc/explore/alua/",      category: "video" },
+    // BRANDING
+    { title: "BAAS IS BACK IN TOWN",   url: "https://zinco.cc/baas/",            shortUrl: "zinco.cc/baas/",              category: "branding" },
+    { title: "CPP casa poldi pezzoli", url: "https://zinco.cc/cpp/",             shortUrl: "zinco.cc/cpp/",               category: "branding" },
+    { title: "NUS",                    url: "https://zinco.cc/nus/",             shortUrl: "zinco.cc/nus/",               category: "branding" },
+    { title: "ROXY",                   url: "https://zinco.cc/roxy/",            shortUrl: "zinco.cc/roxy/",              category: "branding" },
+    { title: "Escapes",                url: "https://zinco.cc/escapes/",         shortUrl: "zinco.cc/escapes/",           category: "branding" },
+    { title: "AM Decor",               url: "https://zinco.cc/amdecor/",         shortUrl: "zinco.cc/amdecor/",           category: "branding" },
+    { title: "3M Soluzioni Immob.",    url: "https://zinco.cc/3m/",              shortUrl: "zinco.cc/3m/",                category: "branding" },
+    { title: "Gizeta",                 url: "https://zinco.cc/gizeta/",          shortUrl: "zinco.cc/gizeta/",            category: "branding" },
+    { title: "Dranks",                 url: "https://zinco.cc/dranks/",          shortUrl: "zinco.cc/dranks/",            category: "branding" },
+    { title: "Piedibus Mozzate",       url: "https://zinco.cc/piedibus/",        shortUrl: "zinco.cc/piedibus/",          category: "branding" },
+    // PUBLICATIONS
+    { title: "FOMO",                   url: "https://zinco.cc/fomo/",            shortUrl: "zinco.cc/fomo/",              category: "publications" },
+    { title: "ZOOM",                   url: "https://zinco.cc/zoom/",            shortUrl: "zinco.cc/zoom/",              category: "publications" },
+    { title: "FemVertising",           url: "https://zinco.cc/femvertising/",    shortUrl: "zinco.cc/femvertising/",      category: "publications" },
+    { title: "Roxy Brandbook",         url: "https://zinco.cc/roxy-book/",       shortUrl: "zinco.cc/roxy-book/",         category: "publications" },
+    { title: "Fotografia",             url: "https://zinco.cc/fotografia/",      shortUrl: "zinco.cc/fotografia/",        category: "publications" },
+  ];
+
+  // ─── Barcode-style strip pattern generator ───────────────────────
+  function makeBarcodeStrips(containerId, widthPx) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const totalW = widthPx - 20; // subtract padding
+    let html = '';
+    let x = 0;
+    const seed = Array.from(containerId).reduce((a, c) => a + c.charCodeAt(0), 0);
+    let rng = seed;
+    function next() {
+      rng = (rng * 1664525 + 1013904223) & 0xFFFFFFFF;
+      return (rng >>> 0) / 0xFFFFFFFF;
+    }
+    while (x < totalW) {
+      const isBlack = next() > 0.45;
+      const w = Math.floor(next() * 4) + 1;
+      html += `<div style="flex: 0 0 ${w}px; background: ${isBlack ? '#000' : '#fff'};"></div>`;
+      x += w;
+    }
+    el.innerHTML = html;
+  }
+
+  // ─── SVG barcode strip (deterministic from string) ──────────────
+  function barcodeStripsSVG(seed, width, height) {
+    let rng = Array.from(seed).reduce((a, c) => a + c.charCodeAt(0), 0);
+    function next() {
+      rng = (rng * 1664525 + 1013904223) & 0xFFFFFFFF;
+      return (rng >>> 0) / 0xFFFFFFFF;
+    }
+    let x = 0;
+    let rects = '';
+    while (x < width) {
+      const isBlack = next() > 0.42;
+      const w = Math.floor(next() * 4) + 1;
+      if (isBlack) {
+        rects += `<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000"/>`;
+      }
+      x += w;
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="display:block">${rects}</svg>`;
+  }
+
+  // ─── Render ──────────────────────────────────────────────────────
+  function renderSections(filter) {
+    const container = document.getElementById('sections-container');
+    container.innerHTML = '';
+
+    const categories = ['video', 'branding', 'publications'];
+    const catLabels  = { video: 'video', branding: 'branding', publications: 'publications' };
+
+    categories.forEach(cat => {
+      if (filter !== 'all' && filter !== cat) return;
+
+      const items = projects.filter(p => p.category === cat);
+      if (!items.length) return;
+
+      const section = document.createElement('div');
+      section.className = 'section';
+      section.setAttribute('data-cat', cat);
+
+      section.innerHTML = `<div class="section-label">${catLabels[cat]}</div><div class="codes-grid" id="grid-${cat}"></div>`;
+      container.appendChild(section);
+
+      const grid = section.querySelector('.codes-grid');
+
+      items.forEach((proj, idx) => {
+        const cardId = `bc-${cat}-${idx}`;
+        const stripsTopId = `st-${cat}-${idx}`;
+        const stripsBotId = `sb-${cat}-${idx}`;
+
+        const card = document.createElement('div');
+        card.className = 'bc-card';
+        card.id = cardId;
+        card.title = `Download QR – ${proj.title}`;
+
+        const CARD_W = 180;
+        const STRIP_H = 18;
+
+        card.innerHTML = `
+          <div class="guard-top"></div>
+          <div class="strips-top" id="${stripsTopId}" style="height:${STRIP_H}px;padding:0 10px;display:flex;align-items:stretch;"></div>
+          <div class="qr-wrap" id="qr-${cardId}"></div>
+          <div class="strips-bottom" id="${stripsBotId}" style="height:${STRIP_H}px;padding:0 10px;display:flex;align-items:stretch;"></div>
+          <div class="bc-info">
+            <div class="bc-title">${proj.title}</div>
+            <div class="bc-url">${proj.shortUrl}</div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+
+        // Generate QR
+        const qrWrap = card.querySelector(`#qr-${cardId}`);
+        new QRCode(qrWrap, {
+          text: proj.url,
+          width: 144,
+          height: 144,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+
+        // Barcode strips (SVG, deterministic)
+        const stripsTop = card.querySelector(`#${stripsTopId}`);
+        const stripsBot = card.querySelector(`#${stripsBotId}`);
+        stripsTop.innerHTML = barcodeStripsSVG(proj.url + 'top', CARD_W - 20, STRIP_H);
+        stripsBot.innerHTML = barcodeStripsSVG(proj.url + 'bot', CARD_W - 20, STRIP_H);
+
+        // Download on click
+        card.addEventListener('click', () => downloadQR(card, proj));
+      });
+    });
+  }
+
+  // ─── Download ────────────────────────────────────────────────────
+  function downloadQR(card, proj) {
+    // Find the canvas or img inside the qr-wrap
+    const qrWrap = card.querySelector('[id^="qr-"]');
+    const canvas = qrWrap ? qrWrap.querySelector('canvas') : null;
+    const img    = qrWrap ? qrWrap.querySelector('img')    : null;
+
+    // Build a composite canvas: guard + strips-top + qr + strips-bot + info bar
+    const CARD_W = 200;
+    const QR_SIZE = 144;
+    const GUARD_H = 6;
+    const STRIP_H = 18;
+    const INFO_H  = 36;
+    const TOTAL_H = GUARD_H + STRIP_H + QR_SIZE + STRIP_H + INFO_H;
+
+    const out = document.createElement('canvas');
+    out.width  = CARD_W;
+    out.height = TOTAL_H;
+    const ctx = out.getContext('2d');
+
+    // White background
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, CARD_W, TOTAL_H);
+
+    // Guard top (black bar)
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, CARD_W, GUARD_H);
+
+    // Barcode strips top
+    drawBarcodeStripCtx(ctx, proj.url + 'top', 10, GUARD_H, CARD_W - 20, STRIP_H);
+
+    // QR code
+    let y = GUARD_H + STRIP_H;
+    const PAD = (CARD_W - QR_SIZE) / 2;
+    if (canvas) {
+      ctx.drawImage(canvas, PAD, y, QR_SIZE, QR_SIZE);
+    } else if (img) {
+      ctx.drawImage(img, PAD, y, QR_SIZE, QR_SIZE);
+    }
+
+    // Barcode strips bottom
+    drawBarcodeStripCtx(ctx, proj.url + 'bot', 10, y + QR_SIZE, CARD_W - 20, STRIP_H);
+
+    // Info bar
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, y + QR_SIZE + STRIP_H, CARD_W, INFO_H);
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 8px "Courier New", Courier, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(proj.title.toUpperCase().substring(0, 22), CARD_W / 2, y + QR_SIZE + STRIP_H + 14);
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '6px "Courier New", Courier, monospace';
+    ctx.fillText(proj.shortUrl, CARD_W / 2, y + QR_SIZE + STRIP_H + 26);
+
+    // Trigger download
+    const a = document.createElement('a');
+    const slug = proj.shortUrl.replace(/[^a-z0-9]/gi, '_');
+    a.download = `qr_${slug}.png`;
+    a.href = out.toDataURL('image/png');
+    a.click();
+  }
+
+  function drawBarcodeStripCtx(ctx, seed, x0, y0, width, height) {
+    let rng = Array.from(seed).reduce((a, c) => a + c.charCodeAt(0), 0);
+    function next() {
+      rng = (rng * 1664525 + 1013904223) & 0xFFFFFFFF;
+      return (rng >>> 0) / 0xFFFFFFFF;
+    }
+    let x = x0;
+    const maxX = x0 + width;
+    while (x < maxX) {
+      const isBlack = next() > 0.42;
+      const w = Math.floor(next() * 4) + 1;
+      if (isBlack) {
+        ctx.fillStyle = '#000';
+        ctx.fillRect(x, y0, Math.min(w, maxX - x), height);
+      }
+      x += w;
+    }
+  }
+
+  // ─── Filters ─────────────────────────────────────────────────────
+  document.getElementById('controls').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderSections(btn.dataset.filter);
+  });
+
+  // ─── Init ────────────────────────────────────────────────────────
+  renderSections('all');
+</script>
+</body>
+</html>

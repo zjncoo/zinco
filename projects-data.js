@@ -125,7 +125,9 @@ const allProjectsData = [
   {
     title: "Rifiuti Spaziali",
     link: "https://zjncoo.github.io/RifiutiSpaziali/",
-    category: "websites"
+    category: "websites",
+    video: "imghome/rifiuti_spaziali_test.webm",
+    videoSlug: "rifiuti_spaziali"
   },
   {
     title: "Web Design Exam",
