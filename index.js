@@ -46,6 +46,31 @@ function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 // Aggiungi questa riga per rendere lenis accessibile a tutti gli altri script
 window.lenis = lenis;
+// --- CONTROLLO VIDEO GRIGLIA (play solo se visibile) ---
+// Evita che 6 video girino in loop contemporaneamente causando lag.
+// Ogni video parte solo quando entra nel viewport e si ferma quando esce.
+const setupGridVideos = () => {
+  const gridVideos = document.querySelectorAll('video.grid-video');
+  if (!gridVideos.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  gridVideos.forEach(video => observer.observe(video));
+};
+
+setupGridVideos();
+
+
+
 
 // --- SCROLL TO HASH ALL'ARRIVO SULLA PAGINA ---
 // Gestisce URL tipo: index.html#branding, index.html#contact-footer, ecc.
