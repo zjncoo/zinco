@@ -6,8 +6,18 @@
   },
   {
     "type": "text",
-    "label": "typology",
-    "content": "museum campaign — video production"
+    "label": "category",
+    "content": "video making"
+  },
+  {
+    "type": "text",
+    "label": "context",
+    "content": "academic project — Politecnico di Milano, Design Workshop 2026"
+  },
+  {
+    "type": "text",
+    "label": "year",
+    "content": "2026"
   },
   {
     "type": "text",
@@ -16,8 +26,28 @@
   },
   {
     "type": "text",
-    "label": "year",
-    "content": "2026"
+    "label": "role",
+    "content": "video editor, mockup designer, solo items' photo collector"
+  },
+  {
+    "type": "text",
+    "label": "deliverables",
+    "content": "final video project, social media reel, 4:5 reel format"
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "all generations of social media audience interested in discovering the CPP collection"
+  },
+  {
+    "type": "text",
+    "label": "concept",
+    "content": "elaborated archive-like aesthetic giving off the uniqueness and vastity of the CPP collection"
+  },
+  {
+    "type": "text",
+    "label": "team",
+    "content": "davide benetton, sofia raimondo, camilla vicario, francesco zanchetta"
   },
   {
     "type": "image",

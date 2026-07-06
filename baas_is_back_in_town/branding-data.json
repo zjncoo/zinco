@@ -23,7 +23,37 @@
   {
     "type": "text",
     "label": "year",
-    "content": "2027"
+    "content": "2026"
+  },
+  {
+    "type": "text",
+    "label": "context",
+    "content": "academic project — Politecnico di Milano, temporary exhibition design course"
+  },
+  {
+    "type": "text",
+    "label": "category",
+    "content": "exhibition design"
+  },
+  {
+    "type": "text",
+    "label": "role",
+    "content": "solo OOH communication designer, pitch slides graphics ideator"
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "visitors of MDW venues"
+  },
+  {
+    "type": "text",
+    "label": "deliverables",
+    "content": "exhibition renders, OOH communication, exhibits catalogue, pitch slides"
+  },
+  {
+    "type": "text",
+    "label": "team",
+    "content": "camilla costato, roni gold, hila shaki, camilla vicario, francesco zanchetta"
   },
   {
     "type": "text",

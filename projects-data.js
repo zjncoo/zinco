@@ -100,7 +100,13 @@ const allProjectsData = [
     link: "poldi_pezzoli/poldi_pezzoli.html",
     category: "branding",
     video: "poldi_pezzoli/teaser.webm",
-    videoSlug: "poldi_pezzoli"
+    videoSlug: "cpp"
+  },
+  {
+    title: "Fioreria del Lago",
+    link: "fioreria_del_lago/fioreria_del_lago.html",
+    category: "branding",
+    videoSlug: "fdl"
   },
   {
     title: "Dranks",

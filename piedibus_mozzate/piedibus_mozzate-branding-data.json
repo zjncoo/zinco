@@ -12,8 +12,28 @@
   },
   {
     "type": "text",
+    "label": "category",
+    "content": "service & social identity"
+  },
+  {
+    "type": "text",
+    "label": "context",
+    "content": "social / territory — Mozzate (Como)"
+  },
+  {
+    "type": "text",
+    "label": "year",
+    "content": "2025"
+  },
+  {
+    "type": "text",
+    "label": "role",
+    "content": "brand identity design, custom font design, communication strategy"
+  },
+  {
+    "type": "text",
     "label": "description",
-    "content": "Piedibus Mozzate is a branding project for the piedibus service of the municipality of Mozzate. The visual identity is designed to be recognisable, friendly, and suited to an audience of families and children."
+    "content": "service design and social identity project developed for Piedibus Mozzate, the service that accompanies children to elementary school in the municipality of Mozzate (Como), every morning."
   },
   {
     "type": "text",

@@ -7,13 +7,63 @@
   },
   {
     "type": "text",
-    "label": "collaborators",
-    "content": "francesco z., sofia, r., gaia b., silvia a., matteo b. "
+    "label": "naming",
+    "content": "ROXY — ROXYGEN"
   },
   {
     "type": "text",
-    "label": "description",
-    "content": "this project is part of the metaproject design course, it was developed with other 4 students. thee objective of the project was to operate an ipothetical rebrand of our chosen brand: roxy, which was a famous european cigarettes brand in the '80s"
+    "label": "category",
+    "content": "strategic design"
+  },
+  {
+    "type": "text",
+    "label": "context",
+    "content": "academic project — Politecnico di Milano, meta-project course"
+  },
+  {
+    "type": "text",
+    "label": "year",
+    "content": "2024"
+  },
+  {
+    "type": "text",
+    "label": "role",
+    "content": "brandbook editor, concept ideator"
+  },
+  {
+    "type": "text",
+    "label": "concept",
+    "content": "fierce, audacious and irreverent rebranding as an exclusive event platform"
+  },
+  {
+    "type": "text",
+    "label": "values",
+    "content": "irreverence, audacity, exclusivity"
+  },
+  {
+    "type": "text",
+    "label": "brand essence",
+    "content": "F. Zanchetta"
+  },
+  {
+    "type": "text",
+    "label": "tone of voice",
+    "content": "irreverent, direct, snob at times"
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "exclusive clientele who seeks unique experiences"
+  },
+  {
+    "type": "text",
+    "label": "deliverables",
+    "content": "brand book, brand video, communication campaign (digital & physical), event activation plan & organisation, pitch slides"
+  },
+  {
+    "type": "text",
+    "label": "team",
+    "content": "silvia andreoletti, gaia becchi, matteo brinzo, sofia raimondo, francesco zanchetta"
   },
   {
     "type": "text",
@@ -23,43 +73,8 @@
   },
   {
     "type": "text",
-    "label": "naming",
-    "content": "ROXY"
-  },
-  {
-    "type": "text",
     "label": "payoff",
     "content": "your future starts here"
-  },
-  {
-    "type": "text",
-    "label": "values",
-    "content": "sustainability, innovation, transparency"
-  },
-  {
-    "type": "text",
-    "label": "mission",
-    "content": "making beauty accessible to everyone"
-  },
-  {
-    "type": "text",
-    "label": "vision",
-    "content": "become the point of reference in the aesthetic sector"
-  },
-  {
-    "type": "text",
-    "label": "brand essence",
-    "content": "harmony and care"
-  },
-  {
-    "type": "text",
-    "label": "brand architecture",
-    "content": "master brand with regional sub-brands"
-  },
-  {
-    "type": "text",
-    "label": "target",
-    "content": "the target of roxygen is the ambitious individual, who wants to be the best, but at the same time can take life with lightness and irony and recognizes when they need a moment of leisure."
   },
   {
     "type": "header",

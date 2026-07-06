@@ -1,0 +1,50 @@
+[
+  {
+    "type": "image",
+    "subtype": "logo",
+    "label": "logo",
+    "src": "img/Fioreria_del_Lago.svg"
+  },
+  {
+    "type": "text",
+    "label": "naming",
+    "content": "Fioreria del Lago"
+  },
+  {
+    "type": "text",
+    "label": "category",
+    "content": "brand identity"
+  },
+  {
+    "type": "text",
+    "label": "context",
+    "content": "academic project — Politecnico di Milano"
+  },
+  {
+    "type": "text",
+    "label": "year",
+    "content": "2025"
+  },
+  {
+    "type": "text",
+    "label": "role",
+    "content": "brandmark design, website, sticker and tote bag design and realization, mockup photographer"
+  },
+  {
+    "type": "text",
+    "label": "team",
+    "content": "gaia becchi, aurelia la carrubba, martina santolini, lucrezia stella, francesco zanchetta"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Flower Cart",
+    "src": "img/CART.png"
+  },
+  {
+    "type": "image",
+    "subtype": "app-screenshot",
+    "label": "Label",
+    "src": "img/label fioreria del lago.png"
+  }
+]
