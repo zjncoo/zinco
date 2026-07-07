@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>404 — page not found | zinco</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="page not found — zinco.cc" />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" href="imghome/logo_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="imghome/logo_zinco.svg" />
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css" />
+
+  <style>
+    @font-face {
+      font-family: 'NeuzeitHeavy';
+      src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book Heavy.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: 'aktiv-grotesk', sans-serif;
+      font-weight: 400;
+      cursor: crosshair;
+    }
+
+    /* ---- Full viewport shell ---- */
+    .shell {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      border-left: 2px solid #000;
+      border-right: 2px solid #000;
+    }
+
+    /* ---- Top bar ---- */
+    .top-bar {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 28px;
+      border-bottom: 2px solid #000;
+    }
+
+    .top-bar a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .top-bar img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .top-bar-label {
+      font-family: 'aktiv-grotesk', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.35;
+    }
+
+    /* ---- Middle: grows to fill space and centers content ---- */
+    .middle {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 28px;
+      padding-bottom: 100px; /* optical correction — label above 404 creates asymmetry */
+    }
+
+    /* ---- Content block ---- */
+    .error-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 1.2rem;
+    }
+
+    .error-number {
+      font-family: 'aktiv-grotesk', sans-serif;
+      font-weight: 400;
+      font-size: clamp(5rem, 15vw, 12rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: #000;
+      user-select: none;
+    }
+
+
+
+    .divider {
+      border: none;
+      border-top: 2px solid #000;
+      margin: 28px 0;
+    }
+
+    .message-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .message-text {
+      font-weight: 500;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .message-text em {
+      font-style: normal;
+      opacity: 0.4;
+      display: block;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'NeuzeitHeavy', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #000;
+      text-decoration: none;
+      padding: 14px 22px;
+      border: 2px solid #000;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .cta:hover {
+      background: #FFD600;
+      color: #000;
+    }
+
+    .cta-arrow {
+      transition: transform 0.15s;
+    }
+
+    .cta:hover .cta-arrow {
+      transform: translateX(4px);
+    }
+
+    /* ---- Bottom bar ---- */
+    .bottom-bar {
+      flex: 0 0 auto;
+      border-top: 2px solid #000;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.35;
+    }
+
+    /* ---- Yellow progress bar ---- */
+    #progress-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: #FFD600;
+      z-index: 9999;
+      animation: fill-bar 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes fill-bar {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 600px) {
+      .top-bar  { padding: 14px 16px; }
+      .middle   { padding: 0 16px; }
+      .bottom-bar { padding: 12px 16px; }
+      .message-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="progress-bar"></div>
+
+  <div class="shell">
+
+    <div class="top-bar">
+      <a href="/"><img src="imghome/logo_zinco.svg" alt="zinco logo" /></a>
+      <span class="top-bar-label">zinco.cc</span>
+    </div>
+
+    <div class="middle">
+      <p class="error-label">error / page not found</p>
+      <h1 class="error-number">404</h1>
+      <hr class="divider" />
+      <div class="message-row">
+        <p class="message-text">
+          this page doesn't exist.
+          <em>or maybe it did, and now it's gone.</em>
+        </p>
+        <a href="/" class="cta">
+          back to home <span class="cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <span>zinco — Francesco Zanchetta</span>
+      <span>communication design</span>
+    </div>
+
+  </div>
+</body>
+
+</html>
