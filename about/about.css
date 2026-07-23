@@ -137,3 +137,16 @@ main {
   text-decoration: underline;
   text-underline-offset: 4px; /* Distanza della sottolineatura dal testo */
 }
+
+/* Link inline nel personal-info */
+.inline-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.inline-link:hover {
+  opacity: 0.55;
+}
