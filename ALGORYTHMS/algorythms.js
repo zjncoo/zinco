@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
             category: 'tool'
         },
         {
+            title: 'img resizer',
+            description: 'resizes & compresses images to preset dimensions in jpg zip.',
+            link: 'imgresizer.html',
+            category: 'tool'
+        },
+        {
             title: 'video compressor',
             description: 'compresses video files directly in browser.',
             link: 'compressor.html',

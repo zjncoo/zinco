@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>img resizer | zinco</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="resize and compress images in multiple presets — a zinco tool." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" href="../imghome/favicon_zinco.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f3;
+      --border: #2a2a2a;
+      --radius: 2px;
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'aktiv-grotesk', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .shell {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 32px 120px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #777;
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--white); }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .page-subtitle {
+      color: #777;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      margin-bottom: 64px;
+    }
+
+    /* ── Section ── */
+    .preset-section {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .preset-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: #111;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .preset-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .preset-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--border);
+      color: var(--white);
+      padding: 3px 10px;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .tag.crop { background: #1a1a2e; color: #7b8cde; }
+
+    /* ── Quality slider inside section ── */
+    .quality-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      background: #0d0d0d;
+      flex-wrap: wrap;
+    }
+    .quality-label {
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .quality-label strong { color: var(--white); font-size: 12px; margin-left: 6px; }
+    input[type=range] {
+      -webkit-appearance: none;
+      flex: 1;
+      min-width: 100px;
+      height: 2px;
+      background: var(--border);
+      border-radius: 1px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: var(--white);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.25); }
+    .quality-note { font-size: 11px; color: #444; }
+
+    /* ── Drop zone ── */
+    .drop-zone {
+      border: 1px dashed #1e1e1e;
+      margin: 16px 24px;
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .drop-zone.drag-over { border-color: var(--white); background: #111; }
+    .drop-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .drop-icon { font-size: 1.5rem; opacity: 0.35; margin-bottom: 8px; }
+    .drop-label { font-size: 12px; color: #555; }
+    .drop-label strong { color: var(--white); font-weight: 500; }
+
+    /* ── File list ── */
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin: 0 24px 16px;
+    }
+
+    .file-row {
+      display: grid;
+      grid-template-columns: 44px 1fr 90px 110px 26px;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #111;
+      border-radius: var(--radius);
+      font-size: 12px;
+    }
+
+    .file-thumb {
+      width: 44px;
+      height: 32px;
+      object-fit: cover;
+      border-radius: 1px;
+      background: var(--border);
+    }
+
+    .file-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .file-name span { display: block; color: #555; font-size: 11px; margin-top: 1px; }
+
+    .file-size-out { font-size: 11px; color: #555; text-align: right; }
+
+    .file-status { font-size: 11px; text-align: right; font-weight: 500; letter-spacing: 0.04em; }
+    .file-status.pending { color: #444; }
+    .file-status.working { color: #f0a500; }
+    .file-status.done    { color: #4caf50; }
+    .file-status.error   { color: #e53935; }
+
+    .file-remove {
+      background: none;
+      border: none;
+      color: #333;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .file-remove:hover { color: #e53935; }
+
+    /* ── Progress ── */
+    .progress-bar-wrap {
+      height: 2px;
+      background: var(--border);
+      margin: 0 24px 16px;
+      overflow: hidden;
+      display: none;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--white);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* ── Section footer ── */
+    .section-footer {
+      display: flex;
+      gap: 10px;
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: #0d0d0d;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-family: 'aktiv-grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn:disabled { opacity: 0.25; cursor: not-allowed; }
+    .btn:not(:disabled):hover { opacity: 0.8; }
+    .btn:not(:disabled):active { transform: scale(0.97); }
+    .btn-primary { background: var(--white); color: var(--black); }
+    .btn-secondary { background: transparent; color: #555; border: 1px solid var(--border); }
+
+    .empty-note { color: #333; font-size: 11px; text-align: center; padding: 20px 0; letter-spacing: 0.04em; }
+
+    canvas { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="shell">
+
+  <a href="algorythms.html" class="back-link">&#8592; algorythms</a>
+
+  <h1>img resizer</h1>
+  <p class="page-subtitle">compress to &le;1&thinsp;MB &middot; export as JPG &middot; download zip per section</p>
+
+  <!-- ══ SECTION 1: 818px width ══ -->
+  <div class="preset-section" id="sec0">
+    <div class="preset-header">
+      <span class="preset-title">section 01 &mdash; portrait / card</span>
+      <div class="preset-tags">
+        <span class="tag">818 px wide</span>
+        <span class="tag">height proportional</span>
+        <span class="tag">JPG</span>
+        <span class="tag">&le;1 MB</span>
+      </div>
+    </div>
+    <div class="quality-row">
+      <span class="quality-label">target quality<strong class="qlabel">85%</strong></span>
+      <input type="range" class="qslider" min="50" max="95" value="85" step="1">
+      <span class="quality-note">1&thinsp;MB limit always enforced</span>
+    </div>
+    <div class="drop-zone" data-sec="0">
+      <input type="file" class="file-input" accept="image/*" multiple>
+      <div class="drop-icon">&#8853;</div>
+      <p class="drop-label"><strong>drop images</strong> or click to browse</p>
+    </div>
+    <div class="file-list"></div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill"></div></div>
+    <div class="section-footer">
+      <button class="btn btn-primary process-btn" disabled>process &amp; download zip</button>
+      <button class="btn btn-secondary clear-btn" disabled>clear</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: 1800×900px ══ -->
+  <div class="preset-section" id="sec1">
+    <div class="preset-header">
+      <span class="preset-title">section 02 &mdash; banner / cover</span>
+      <div class="preset-tags">
+        <span class="tag">1800 &times; 900 px</span>
+        <span class="tag crop">center crop</span>
+        <span class="tag">JPG</span>
+        <span class="tag">&le;1 MB</span>
+      </div>
+    </div>
+    <div class="quality-row">
+      <span class="quality-label">target quality<strong class="qlabel">85%</strong></span>
+      <input type="range" class="qslider" min="50" max="95" value="85" step="1">
+      <span class="quality-note">1&thinsp;MB limit always enforced</span>
+    </div>
+    <div class="drop-zone" data-sec="1">
+      <input type="file" class="file-input" accept="image/*" multiple>
+      <div class="drop-icon">&#8853;</div>
+      <p class="drop-label"><strong>drop images</strong> or click to browse</p>
+    </div>
+    <div class="file-list"></div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill"></div></div>
+    <div class="section-footer">
+      <button class="btn btn-primary process-btn" disabled>process &amp; download zip</button>
+      <button class="btn btn-secondary clear-btn" disabled>clear</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: 700×560px ══ -->
+  <div class="preset-section" id="sec2">
+    <div class="preset-header">
+      <span class="preset-title">section 03 &mdash; square / grid</span>
+      <div class="preset-tags">
+        <span class="tag">700 &times; 560 px</span>
+        <span class="tag crop">center crop</span>
+        <span class="tag">JPG</span>
+        <span class="tag">&le;1 MB</span>
+      </div>
+    </div>
+    <div class="quality-row">
+      <span class="quality-label">target quality<strong class="qlabel">85%</strong></span>
+      <input type="range" class="qslider" min="50" max="95" value="85" step="1">
+      <span class="quality-note">1&thinsp;MB limit always enforced</span>
+    </div>
+    <div class="drop-zone" data-sec="2">
+      <input type="file" class="file-input" accept="image/*" multiple>
+      <div class="drop-icon">&#8853;</div>
+      <p class="drop-label"><strong>drop images</strong> or click to browse</p>
+    </div>
+    <div class="file-list"></div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill"></div></div>
+    <div class="section-footer">
+      <button class="btn btn-primary process-btn" disabled>process &amp; download zip</button>
+      <button class="btn btn-secondary clear-btn" disabled>clear</button>
+    </div>
+  </div>
+
+</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+  // ── Presets ──────────────────────────────────────────────────
+  const PRESETS = [
+    { w: 818,  h: null, crop: false, label: 'sec01_818w'   },
+    { w: 1800, h: 900,  crop: true,  label: 'sec02_1800x900' },
+    { w: 700,  h: 560,  crop: true,  label: 'sec03_700x560'  },
+  ];
+
+  const MAX_BYTES = 1 * 1024 * 1024;
+  const canvas   = document.getElementById('canvas');
+  const ctx      = canvas.getContext('2d');
+
+  // ── Per-section state ─────────────────────────────────────────
+  const sections = document.querySelectorAll('.preset-section');
+
+  sections.forEach((sec, idx) => {
+    const preset     = PRESETS[idx];
+    const dropZone   = sec.querySelector('.drop-zone');
+    const fileInput  = sec.querySelector('.file-input');
+    const fileList   = sec.querySelector('.file-list');
+    const processBtn = sec.querySelector('.process-btn');
+    const clearBtn   = sec.querySelector('.clear-btn');
+    const progWrap   = sec.querySelector('.progress-bar-wrap');
+    const progFill   = sec.querySelector('.progress-bar-fill');
+    const qslider    = sec.querySelector('.qslider');
+    const qlabel     = sec.querySelector('.qlabel');
+
+    let files = [];
+
+    // Quality slider
+    qslider.addEventListener('input', () => {
+      qlabel.textContent = qslider.value + '%';
+    });
+
+    function getMaxQ() { return parseInt(qslider.value) / 100; }
+
+    // Drag & drop
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      addFiles([...e.dataTransfer.files]);
+    });
+    fileInput.addEventListener('change', () => {
+      addFiles([...fileInput.files]);
+      fileInput.value = '';
+    });
+
+    function addFiles(newFiles) {
+      newFiles.filter(f => f.type.startsWith('image/')).forEach(f => {
+        files.push({ file: f, id: Math.random().toString(36).slice(2), status: 'pending' });
+      });
+      render();
+      syncButtons();
+    }
+
+    function render() {
+      if (!files.length) {
+        fileList.innerHTML = '<p class="empty-note">no images yet.</p>';
+        return;
+      }
+      fileList.innerHTML = files.map(item => `
+        <div class="file-row">
+          <img class="file-thumb" id="th-${item.id}" src="" alt="">
+          <div class="file-name">
+            ${esc(item.file.name)}
+            <span>${fmt(item.file.size)}</span>
+          </div>
+          <div class="file-size-out" id="ns-${item.id}">&mdash;</div>
+          <div class="file-status ${item.status}" id="st-${item.id}">${lbl(item.status)}</div>
+          <button class="file-remove" data-id="${item.id}">&times;</button>
+        </div>
+      `).join('');
+
+      files.forEach(item => {
+        const th = document.getElementById('th-' + item.id);
+        if (!th) return;
+        const r = new FileReader();
+        r.onload = e => { th.src = e.target.result; };
+        r.readAsDataURL(item.file);
+      });
+
+      fileList.querySelectorAll('.file-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+          files = files.filter(f => f.id !== btn.dataset.id);
+          render();
+          syncButtons();
+        });
+      });
+    }
+
+    function syncButtons() {
+      const has = files.length > 0;
+      processBtn.disabled = !has;
+      clearBtn.disabled   = !has;
+    }
+
+    clearBtn.addEventListener('click', () => {
+      files = [];
+      render();
+      syncButtons();
+      progWrap.style.display = 'none';
+      progFill.style.width = '0%';
+    });
+
+    processBtn.addEventListener('click', async () => {
+      if (!files.length) return;
+      processBtn.disabled = true;
+      clearBtn.disabled   = true;
+      progWrap.style.display = 'block';
+      progFill.style.width = '0%';
+
+      const zip = new JSZip();
+      let done = 0;
+
+      for (const item of files) {
+        setSt(item.id, 'working');
+        try {
+          const blob = await processImage(item.file, preset, getMaxQ());
+          const name = item.file.name.replace(/\.[^.]+$/, '') + '.jpg';
+          zip.file(name, blob);
+          setSt(item.id, 'done');
+          const el = document.getElementById('ns-' + item.id);
+          if (el) el.textContent = fmt(blob.size);
+        } catch(e) {
+          setSt(item.id, 'error');
+          console.error(e);
+        }
+        done++;
+        progFill.style.width = (done / files.length * 100) + '%';
+      }
+
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      saveAs(zipBlob, preset.label + '_' + Date.now() + '.zip');
+
+      processBtn.disabled = false;
+      clearBtn.disabled   = false;
+    });
+
+    function setSt(id, status) {
+      const el = document.getElementById('st-' + id);
+      if (el) { el.className = 'file-status ' + status; el.textContent = lbl(status); }
+    }
+
+    render();
+  });
+
+  // ── Image processing ──────────────────────────────────────────
+  function processImage(file, preset, maxQ) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+
+        const tw = preset.w;
+        const th = preset.h;
+
+        if (preset.crop && th) {
+          // Exact W×H: cover crop centered
+          const scale = Math.max(tw / img.naturalWidth, th / img.naturalHeight);
+          const dw = img.naturalWidth  * scale;
+          const dh = img.naturalHeight * scale;
+          const ox = (tw - dw) / 2;
+          const oy = (th - dh) / 2;
+          canvas.width  = tw;
+          canvas.height = th;
+          ctx.clearRect(0, 0, tw, th);
+          ctx.drawImage(img, ox, oy, dw, dh);
+        } else {
+          // Width only: proportional height
+          const ratio = tw / img.naturalWidth;
+          canvas.width  = tw;
+          canvas.height = Math.round(img.naturalHeight * ratio);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
+
+        bsq(0.3, maxQ, 0).then(resolve).catch(reject);
+      };
+      img.onerror = reject;
+      img.src = url;
+    });
+  }
+
+  // Binary-search JPEG quality — 1MB always enforced
+  function bsq(lo, hi, attempts) {
+    return new Promise((resolve, reject) => {
+      if (attempts > 14) {
+        canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/jpeg', lo);
+        return;
+      }
+      const mid = (lo + hi) / 2;
+      canvas.toBlob(blob => {
+        if (!blob) { reject(new Error('toBlob failed')); return; }
+        if (blob.size <= MAX_BYTES) {
+          if (hi - mid < 0.015) { resolve(blob); return; }
+          bsq(mid, hi, attempts + 1).then(resolve).catch(reject);
+        } else {
+          bsq(lo, mid, attempts + 1).then(resolve).catch(reject);
+        }
+      }, 'image/jpeg', mid);
+    });
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function lbl(s) {
+    return { pending:'ready', working:'processing...', done:'done \u2713', error:'error \u2717' }[s] || s;
+  }
+  function fmt(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(0) + ' KB';
+    return (b/(1024*1024)).toFixed(2) + ' MB';
+  }
+</script>
+
+</body>
+</html>
