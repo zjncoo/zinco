@@ -36,7 +36,7 @@ class ZincoHeader extends HTMLElement {
 
       <div class="menu-bottom">
         <button id="randomProjectButton" class="btn btn--outline-light cursor-target">surprise me</button>
-        <a href="mailto:zinco.work@gmail.com" class="menu-email">zinco.work@gmail.com</a>
+        <a href="mailto:work@zinco.cc" class="menu-email">work@zinco.cc</a>
       </div>
     </div>
     `;
@@ -52,8 +52,8 @@ class ZincoFooter extends HTMLElement {
       <div class="footer-contact-info">
         <h2>i'm always here</h2>
         <br>
-        <a href="mailto:zinco.work@gmail.com" class="footer-email"
-          style="color: black; text-decoration: underline;">zinco.work@gmail.com</a>
+        <a href="mailto:work@zinco.cc" class="footer-email"
+          style="color: black; text-decoration: underline;">work@zinco.cc</a>
         <div class="footer-socials">
           <p class="social-links-text">
             <a href="https://www.instagram.com/zjncoo/" target="_blank">INSTAGRAM</a> /

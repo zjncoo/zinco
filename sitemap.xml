@@ -179,10 +179,16 @@
 
   <!-- ── Legal ── -->
   <url>
-    <loc>https://zinco.cc/cookies.html</loc>
-    <lastmod>2026-06-18</lastmod>
+    <loc>https://zinco.cc/cookie-policy.html</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://zinco.cc/privacy-policy.html</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>
