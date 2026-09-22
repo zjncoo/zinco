@@ -136,6 +136,21 @@ const allProjectsData = [
     videoSlug: "rifiuti_spaziali"
   },
   {
+    title: "clotho",
+    link: "https://clotho.zinco.cc",
+    category: "websites"
+  },
+  {
+    title: "uni",
+    link: "https://uni.zinco.cc",
+    category: "websites"
+  },
+  {
+    title: "mastro",
+    link: "https://zjncoo.github.io/mastro/",
+    category: "websites"
+  },
+  {
     title: "Web Design Exam",
     link: "UNI YEAR 1/web_design/SITO ESAME/PAGES/home.html",
     category: "uni year 1"
