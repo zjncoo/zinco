@@ -101,6 +101,20 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- ── Applications ── -->
+  <url>
+    <loc>https://zinco.cc/uni/uni.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zinco.cc/clotho/clotho.html</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- ── Publications ── -->
   <url>
     <loc>https://zinco.cc/publications/publications.html</loc>

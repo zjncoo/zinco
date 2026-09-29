@@ -3,6 +3,16 @@
 // This is the central list of all your projects.
 const allProjectsData = [
   {
+    title: "uni",
+    link: "uni/uni.html",
+    category: "websites"
+  },
+  {
+    title: "clotho",
+    link: "clotho/clotho.html",
+    category: "websites"
+  },
+  {
     title: "ALUA",
     link: "https://zjncoo.github.io/ALUA.IT/",
     category: "branding",
@@ -135,16 +145,7 @@ const allProjectsData = [
     video: "imghome/rifiuti_spaziali_test.webm",
     videoSlug: "rifiuti_spaziali"
   },
-  {
-    title: "clotho",
-    link: "https://clotho.zinco.cc",
-    category: "websites"
-  },
-  {
-    title: "uni",
-    link: "https://uni.zinco.cc",
-    category: "websites"
-  },
+
   {
     title: "mastro",
     link: "https://zjncoo.github.io/mastro/",

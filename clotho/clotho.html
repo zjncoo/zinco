@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <title>clotho | zinco</title>
+  <meta name="description" content="clotho — digital wardrobe & on-device AI outfit studio. Scontorna i tuoi capi in 0.2s, crea look sul manichino interattivo e tieni traccia del tuo stile con il calendario fotografico. 100% offline e privato." />
+  <meta property="og:title" content="clotho | zinco" />
+  <meta property="og:description" content="clotho — digital wardrobe & on-device AI outfit studio. Scontorna i tuoi capi in 0.2s, crea look sul manichino interattivo e tieni traccia del tuo stile con il calendario fotografico. 100% offline e privato." />
+  <meta property="og:image" content="https://zinco.cc/clotho/img/clotho_preview.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="zinco.cc" />
+  <meta property="og:url" content="https://zinco.cc/clotho/clotho.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../imghome/favicon_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://zinco.cc/clotho/clotho.html" />
+
+  <link rel="stylesheet" href="../index.css" />
+  <link rel="stylesheet" href="app.css" />
+
+  <style>
+    /* clotho brand color override — terracotta fashion palette */
+    .project-info-text p,
+    .project-info-text p strong {
+      color: #D9531E;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
+  <script src="../components.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "clotho",
+    "applicationCategory": "LifestyleApplication",
+    "description": "Digital wardrobe & on-device AI outfit studio. Interactive 7-slot mannequin layering and visual outfit calendar.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Francesco Zanchetta",
+      "url": "https://zinco.cc"
+    },
+    "url": "https://info.clotho.zinco.cc"
+  }
+  </script>
+</head>
+
+<body>
+  <div class="site-main-content">
+
+    <div id="scroll-progress-bar"></div>
+
+    <div id="preloader">
+      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+
+    <div id="hero-wrapper">
+      <section id="project-hero">
+
+        <div class="hero-title-container">
+          <a href="#sezione-progetto" class="scroll-down-arrow cursor-target" aria-label="Scroll down">↓</a>
+          <h1 id="hero-title">clotho</h1>
+          
+          <div class="hero-app-cta-container">
+            <a href="https://info.clotho.zinco.cc" target="_blank" rel="noopener noreferrer" class="hero-app-big-link cursor-target" id="heroWebAppLink" aria-label="Visit official web app for clotho">
+              <div class="hero-link-badge">
+                <span class="pulse-dot"></span>
+                <span>OFFICIAL WEB APP</span>
+              </div>
+              <div class="hero-link-main">
+                <span class="hero-link-domain">info.clotho.zinco.cc</span>
+                <span class="hero-link-action">launch studio <span class="arrow">↗</span></span>
+              </div>
+            </a>
+            <a href="https://github.com/zjncoo/clotho" target="_blank" rel="noopener noreferrer" class="hero-app-download-btn cursor-target" id="heroDownloadLink">
+              <svg class="download-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+              <span>view source ↗</span>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="glance-container">
+        <div id="glance-grid"></div>
+      </section>
+    </div>
+
+    <div class="vertical-line left"></div>
+    <div class="vertical-line right"></div>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <zinco-header base-path="../"></zinco-header>
+
+    <main id="sezione-progetto">
+      <!-- Sezione Info Progetto con Descrizione Colorata (prima degli screenshot) -->
+      <section class="project-info-section">
+        <div class="project-info-content">
+          <img src="img/icon.svg" alt="clotho Logo" style="width: 100px; height: 100px; margin-bottom: 2rem;" loading="lazy" decoding="async">
+          <h2>Values</h2>
+          <div class="project-info-text">
+            <p>clotho is a <strong>private, local-first digital wardrobe</strong> and interactive outfit studio designed to turn daily dressing into a mindful, creative ritual without uploading a single photo to the cloud.</p>
+            <p>featuring <strong>instant on-device AI background removal in 0.2s</strong>, a <strong>7-slot interactive mannequin canvas</strong>, and a <strong>visual outfit calendar with style streaks</strong>, clotho gives you complete data sovereignty with zero trackers and zero cloud dependencies.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Anteprima media DOPO la descrizione -->
+      <div id="hero-media-container"></div>
+
+      <!-- Griglia Screenshot e Risorse -->
+      <section class="app-grid" id="appGrid"></section>
+    </main>
+
+  </div><!-- /site-main-content -->
+
+  <zinco-footer base-path="../"></zinco-footer>
+
+  <script src="../projects-data.js" defer></script>
+  <script src="../index.js" defer></script>
+  <script src="app-project.js" defer></script>
+</body>
+
+</html>

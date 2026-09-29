@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <title>uni | zinco</title>
+  <meta name="description" content="uni — l'applicazione accademica nativa per macOS. Organizza i tuoi corsi, orari 24h da iCal, scadenze, esami e la posta di Outlook. 100% nativa, privata e senza distrazioni." />
+  <meta property="og:title" content="uni | zinco" />
+  <meta property="og:description" content="uni — l'applicazione accademica nativa per macOS. Organizza i tuoi corsi, orari 24h da iCal, scadenze, esami e la posta di Outlook. 100% nativa, privata e senza distrazioni." />
+  <meta property="og:image" content="https://zinco.cc/uni/img/dashboard.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="zinco.cc" />
+  <meta property="og:url" content="https://zinco.cc/uni/uni.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../imghome/favicon_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://zinco.cc/uni/uni.html" />
+
+  <link rel="stylesheet" href="../index.css" />
+  <link rel="stylesheet" href="app.css" />
+
+  <style>
+    /* uni brand color override — blu accademico Apple */
+    .project-info-text p,
+    .project-info-text p strong {
+      color: #0071E3;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
+  <script src="../components.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "uni",
+    "operatingSystem": "macOS 14.0+",
+    "applicationCategory": "ProductivityApplication",
+    "description": "L'applicazione accademica nativa per macOS. Organizza corsi, orari 24h da iCal, scadenze, esami e la posta di Outlook.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Francesco Zanchetta",
+      "url": "https://zinco.cc"
+    },
+    "url": "https://uni.zinco.cc"
+  }
+  </script>
+</head>
+
+<body>
+  <div class="site-main-content">
+
+    <div id="scroll-progress-bar"></div>
+
+    <div id="preloader">
+      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+
+    <div id="hero-wrapper">
+      <section id="project-hero">
+
+        <div class="hero-title-container">
+          <a href="#sezione-progetto" class="scroll-down-arrow cursor-target" aria-label="Scroll down">↓</a>
+          <h1 id="hero-title">uni</h1>
+          
+          <div class="hero-app-cta-container">
+            <a href="https://uni.zinco.cc" target="_blank" rel="noopener noreferrer" class="hero-app-big-link cursor-target" id="heroWebAppLink" aria-label="Visit official web app for uni">
+              <div class="hero-link-badge">
+                <span class="pulse-dot"></span>
+                <span>OFFICIAL WEB APP</span>
+              </div>
+              <div class="hero-link-main">
+                <span class="hero-link-domain">uni.zinco.cc</span>
+                <span class="hero-link-action">visit website <span class="arrow">↗</span></span>
+              </div>
+            </a>
+            <a href="https://github.com/zjncoo/uni/releases/latest/download/uni.dmg" target="_blank" rel="noopener noreferrer" class="hero-app-download-btn cursor-target" id="heroDownloadLink">
+              <svg class="download-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>download DMG ↓</span>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="glance-container">
+        <div id="glance-grid"></div>
+      </section>
+    </div>
+
+    <div class="vertical-line left"></div>
+    <div class="vertical-line right"></div>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <zinco-header base-path="../"></zinco-header>
+
+    <main id="sezione-progetto">
+      <!-- Sezione Info Progetto con Descrizione Colorata (prima degli screenshot) -->
+      <section class="project-info-section">
+        <div class="project-info-content">
+          <img src="img/icon.png" alt="uni Logo" style="width: 100px; height: 100px; border-radius: 22px; margin-bottom: 2rem; box-shadow: 0 8px 24px rgba(0,0,0,0.12);" loading="lazy" decoding="async">
+          <h2>Values</h2>
+          <div class="project-info-text">
+            <p>uni is the <strong>native academic workspace for macOS</strong>, engineered to solve the chronic fragmentation of higher education portals by unifying class timetables, faculty notices, deadlines, and GPA projections into a <strong>single fast, distraction-free command center</strong>.</p>
+            <p>built on an uncompromising <strong>local-first and zero-cloud architecture</strong>, all data stays strictly on your device: featuring <strong>intelligent 24h iCal timetable normalization</strong> that parses messy university feeds, a low-overhead <strong>AppleScript bridge for Microsoft Outlook</strong>, and <strong>zero-copy Finder links</strong> so your study materials remain untouched in their original folders.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Anteprima media DOPO la descrizione -->
+      <div id="hero-media-container"></div>
+
+      <!-- Griglia Screenshot e Risorse -->
+      <section class="app-grid" id="appGrid"></section>
+    </main>
+
+  </div><!-- /site-main-content -->
+
+  <zinco-footer base-path="../"></zinco-footer>
+
+  <script src="../projects-data.js" defer></script>
+  <script src="../index.js" defer></script>
+  <script src="app-project.js" defer></script>
+</body>
+
+</html>
