@@ -76,6 +76,11 @@ class ZincoFooter extends HTMLElement {
           <div class="input-group">
             <textarea id="entry.1922030234" name="entry.1922030234" placeholder="Your Message" rows="3"
               required></textarea>
+          <div class="input-group" style="display: flex; align-items: flex-start; gap: 8px; margin: 1rem 0; font-size: 0.8rem; text-align: left;">
+            <input type="checkbox" id="contactPrivacyConsent" required style="margin-top: 3px; cursor: pointer;">
+            <label for="contactPrivacyConsent" style="cursor: pointer; color: #444; line-height: 1.4;">
+              Ho letto la <a href="${base}privacy-policy.html" target="_blank" style="text-decoration: underline; color: black; font-weight: 500;">Privacy Policy</a> e acconsento al trattamento dei miei dati per essere ricontattato.
+            </label>
           </div>
 
           <button type="submit" class="submit-btn" id="submitBtn" style="margin-bottom: 1rem;">
