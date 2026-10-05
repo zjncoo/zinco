@@ -98,7 +98,6 @@ function renderAppShowcase(data) {
         websiteLink.setAttribute('aria-label', `Visit official web app for ${heroItem.title || 'the app'}`);
 
         const domainText = heroItem.websiteDomain || websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
-        const labelText = heroItem.websiteLabel || 'visit website';
 
         websiteLink.innerHTML = `
           <div class="hero-link-badge">
@@ -107,7 +106,10 @@ function renderAppShowcase(data) {
           </div>
           <div class="hero-link-main">
             <span class="hero-link-domain">${domainText}</span>
-            <span class="hero-link-action">${labelText} <span class="arrow">↗</span></span>
+            <svg class="hero-link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 7"></polyline>
+            </svg>
           </div>
         `;
         heroActionBox.appendChild(websiteLink);
@@ -120,12 +122,18 @@ function renderAppShowcase(data) {
         downloadLink.rel = 'noopener noreferrer';
         downloadLink.className = 'hero-app-download-btn cursor-target';
         downloadLink.id = 'heroDownloadLink';
-        const downloadLabel = heroItem.downloadLabel || 'download DMG ↓';
+        const rawDownloadLabel = heroItem.downloadLabel || (downloadUrl.endsWith('.dmg') ? 'download DMG' : 'view source');
+        const downloadLabel = rawDownloadLabel.replace(/[↓↗→←↑↔]/g, '').trim();
+        const isDmg = downloadUrl.toLowerCase().endsWith('.dmg') || downloadLabel.toLowerCase().includes('dmg');
         downloadLink.innerHTML = `
           <svg class="download-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            ${isDmg ? `
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            ` : `
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            `}
           </svg>
           <span>${downloadLabel}</span>
         `;
@@ -140,7 +148,9 @@ function renderAppShowcase(data) {
       <div class="hero-media-wrapper cursor-target" id="heroMediaPreview" data-full-src="${heroMediaItem.src}" data-caption="${heroMediaItem.alt || ''}">
         <img src="${heroMediaItem.src}" alt="${heroMediaItem.alt || 'App preview'}" loading="eager" decoding="async">
         <div class="hero-media-overlay">
-          <span class="zoom-pill">Click to expand preview ⊕</span>
+          <span class="zoom-pill">
+            <svg class="zoom-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 6px; vertical-align: middle;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>Click to expand preview
+          </span>
         </div>
       </div>
     `;
@@ -208,15 +218,16 @@ function renderAppShowcase(data) {
         if (!moreBtn) {
           moreBtn = document.createElement('button');
           moreBtn.classList.add('description-more-btn', 'cursor-target');
-          moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
+          const chevronDownSvg = `<svg class="btn-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+          moreBtn.innerHTML = `more ${chevronDownSvg}`;
           paragraphs[0].after(moreBtn);
 
           moreBtn.addEventListener('click', () => {
             const isExpanded = descriptionText.classList.toggle('expanded');
             moreBtn.classList.toggle('open', isExpanded);
             moreBtn.innerHTML = isExpanded
-              ? 'less <span class="btn-arrow">↓</span>'
-              : 'more <span class="btn-arrow">↓</span>';
+              ? `less ${chevronDownSvg}`
+              : `more ${chevronDownSvg}`;
           });
         }
       }
@@ -276,7 +287,7 @@ function renderAppShowcase(data) {
 
       const zoomHint = document.createElement('div');
       zoomHint.className = 'screenshot-zoom-hint';
-      zoomHint.innerHTML = '<span>Expand view ⊕</span>';
+      zoomHint.innerHTML = `<span><svg class="zoom-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 5px; vertical-align: middle;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>Expand view</span>`;
 
       imgWrapper.append(img, zoomHint);
 
@@ -333,6 +344,9 @@ function renderAppShowcase(data) {
       linkCard.className = `app-link-card cursor-target ${item.primary ? 'primary' : ''}`;
       linkCard.id = uniqueId;
 
+      const rawCta = item.cta || 'Open link';
+      const cleanCta = rawCta.replace(/[→↗↓←↑↔]/g, '').trim();
+
       linkCard.innerHTML = `
         <div class="link-card-body">
           <span class="link-card-tag">${item.primary ? 'FEATURED' : 'RESOURCE'}</span>
@@ -340,7 +354,11 @@ function renderAppShowcase(data) {
           ${item.description ? `<p>${item.description}</p>` : ''}
         </div>
         <div class="link-card-cta">
-          <span>${item.cta || 'Open link →'}</span>
+          <span>${cleanCta}</span>
+          <svg class="cta-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </div>
       `;
 
@@ -407,7 +425,12 @@ function initLightbox() {
     modal.innerHTML = `
       <div class="lightbox-backdrop"></div>
       <div class="lightbox-dialog" role="dialog" aria-modal="true">
-        <button class="lightbox-close cursor-target" aria-label="Close dialog">✕</button>
+        <button class="lightbox-close cursor-target" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
         <div class="lightbox-content">
           <img src="" alt="" id="lightboxImg">
           <div class="lightbox-caption-bar">

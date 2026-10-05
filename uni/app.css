@@ -51,9 +51,16 @@
   left: 0;
   text-decoration: none;
   color: black;
-  font-size: 3rem;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   animation: bounceArrow 2.5s ease-in-out infinite;
+}
+
+.scroll-down-arrow svg {
+  width: 32px;
+  height: 32px;
+  stroke: currentColor;
 }
 
 @keyframes bounceArrow {
@@ -101,7 +108,8 @@
   color: white;
   border: 2px solid black;
   text-decoration: none;
-  min-width: 280px;
+  min-width: 260px;
+  max-width: 100%;
   box-sizing: border-box;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
@@ -150,33 +158,27 @@
 .hero-link-main {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 16px;
 }
 
 .hero-link-domain {
   font-family: 'aktiv-grotesk', sans-serif;
   font-weight: 700;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-size: clamp(1.15rem, 2vw, 1.75rem);
   letter-spacing: -0.02em;
   line-height: 1;
+  word-break: break-word;
 }
 
-.hero-link-action {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.hero-link-action .arrow {
+.hero-link-arrow {
   display: inline-block;
+  flex-shrink: 0;
+  stroke: currentColor;
   transition: transform 0.2s ease;
 }
 
-.hero-app-big-link:hover .hero-link-action .arrow {
+.hero-app-big-link:hover .hero-link-arrow {
   transform: translate(3px, -3px);
 }
 
@@ -313,7 +315,9 @@ main#sezione-progetto {
 }
 
 .zoom-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background-color: rgba(0, 0, 0, 0.85);
   color: white;
   font-family: 'aktiv-grotesk', sans-serif;
@@ -325,6 +329,10 @@ main#sezione-progetto {
   border-radius: 20px;
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.zoom-pill .zoom-icon {
+  stroke: currentColor;
 }
 
 /* ================================================================ */
@@ -551,7 +559,9 @@ main#sezione-progetto {
 }
 
 .screenshot-zoom-hint span {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background-color: rgba(0, 0, 0, 0.85);
   color: white;
   font-family: 'aktiv-grotesk', sans-serif;
@@ -561,6 +571,10 @@ main#sezione-progetto {
   letter-spacing: 0.08em;
   padding: 6px 12px;
   border-radius: 14px;
+}
+
+.screenshot-zoom-hint .zoom-icon {
+  stroke: currentColor;
 }
 
 .app-screenshot-card:hover .screenshot-zoom-hint {
@@ -654,12 +668,24 @@ main#sezione-progetto {
 }
 
 .link-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: 'aktiv-grotesk', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-top: auto;
+}
+
+.link-card-cta .cta-arrow {
+  stroke: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.app-link-card:hover .link-card-cta .cta-arrow {
+  transform: translateX(4px);
 }
 
 .app-link-card.primary {
@@ -839,8 +865,10 @@ main#sezione-progetto {
   }
 
   .hero-app-big-link {
-    min-width: 100%;
+    min-width: 0;
     width: 100%;
+    max-width: 100%;
+    padding: 16px 20px;
   }
 
   .hero-app-download-btn {
