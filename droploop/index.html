@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DropLoop — Calibration Matrix</title>
+  <meta name="description" content="Companion reference sheet and calibration matrix for DropLoop: an analog bead-keychain water tracking probe. Innovation Studio | MSc PSSD • Politecnico di Milano." />
+
+  <!-- Google Fonts: Inter (300, 400, 500, 600) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons via unpkg -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      background-color: #FAFAFA;
+      color: #111111;
+      -webkit-font-smoothing: antialiased;
+    }
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+    @media print {
+      body {
+        background-color: #ffffff;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#FAFAFA] text-zinc-900 min-h-screen font-light selection:bg-zinc-200">
+
+  <!-- Top Right Navigation (Just Text) -->
+  <header class="max-w-3xl mx-auto w-full px-5 sm:px-8 pt-6 sm:pt-8 flex justify-end">
+    <a href="about.html" class="text-xs uppercase tracking-wider text-zinc-400 hover:text-zinc-950 font-normal transition-colors">
+      What is DropLoop? →
+    </a>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-5 sm:px-8 py-6 sm:py-10 space-y-14">
+
+    <!-- ================= HEADER / SCOPE DECLARATION ================= -->
+    <header class="space-y-6 border-b border-zinc-200 pb-10">
+      
+      <!-- Title & Metric -->
+      <div class="flex flex-wrap items-baseline gap-3 sm:gap-4">
+        <h1 class="text-3xl sm:text-4xl font-normal tracking-tight text-zinc-950">
+          DropLoop
+        </h1>
+        <span class="text-xs sm:text-sm text-zinc-500 font-light border-l border-zinc-300 pl-3 sm:pl-4 tabular">
+          1 Bead = 2 Liters
+        </span>
+      </div>
+
+      <!-- Fractional Bead Counter (Partial Bead Buffer) -->
+      <div class="bg-white border border-zinc-200 rounded-sm p-3.5 sm:p-4 space-y-2.5">
+        <div class="flex items-center justify-between text-[11px] uppercase tracking-wider text-zinc-400">
+          <span>Fractional Bead Tracker</span>
+          <span class="text-zinc-500 font-normal">Track partial beads before shifting</span>
+        </div>
+
+        <div class="flex items-center justify-between gap-3">
+          <!-- Minus Button -->
+          <button 
+            type="button" 
+            id="btnFractionMinus" 
+            onclick="adjustFraction(-0.25)" 
+            class="w-11 h-11 flex items-center justify-center border border-zinc-200 rounded-sm text-zinc-800 hover:bg-zinc-100 active:scale-95 disabled:opacity-25 disabled:pointer-events-none transition-all text-xl font-light"
+            aria-label="Subtract quarter bead"
+            disabled
+          >
+            –
+          </button>
+
+          <!-- Middle Count Display -->
+          <div class="text-center flex-1">
+            <div class="text-2xl sm:text-3xl font-normal text-zinc-950 tabular" id="fractionDisplay">
+              0 <span class="text-xs font-light text-zinc-400">Beads</span>
+            </div>
+            <div class="text-[11px] text-zinc-500 tabular" id="fractionLiters">
+              0.0 L <span class="text-zinc-400">• tap + / – for ¼ bead (0.5L)</span>
+            </div>
+          </div>
+
+          <!-- Plus Button -->
+          <button 
+            type="button" 
+            id="btnFractionPlus" 
+            onclick="adjustFraction(0.25)" 
+            class="w-11 h-11 flex items-center justify-center border border-zinc-200 rounded-sm text-zinc-800 hover:bg-zinc-100 active:scale-95 transition-all text-xl font-light"
+            aria-label="Add quarter bead"
+          >
+            +
+          </button>
+        </div>
+
+        <!-- Shift Prompt Alert -->
+        <div id="fractionShiftNotice" class="hidden text-center text-[11px] py-1.5 px-3 rounded-sm bg-sky-50 border border-sky-200 text-sky-800 flex items-center justify-between">
+          <span id="fractionShiftText">1 full bead accumulated — shift on DropLoop cord!</span>
+          <button type="button" onclick="resetFraction()" class="font-normal underline hover:text-sky-950 ml-2">Clear</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= 01 / DAILY CONSUMPTION BASELINES (DROPDOWN) ================= -->
+    <details class="group text-xs border border-zinc-200 rounded-sm bg-white overflow-hidden transition-all">
+      <summary class="flex items-center justify-between p-4 cursor-pointer font-normal text-zinc-800 hover:text-zinc-950 hover:bg-zinc-50/80 transition-colors list-none select-none">
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-zinc-900"></span>
+          <span class="text-xs uppercase tracking-widest text-zinc-700 font-normal">01 / Daily Consumption Baselines</span>
+          <span class="hidden sm:inline text-[11px] text-zinc-400 font-light">• Reference Profiles</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] text-zinc-400 font-light">View Table</span>
+          <span class="text-zinc-400 group-open:rotate-180 transition-transform duration-200">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </div>
+      </summary>
+
+      <div class="p-4 sm:p-5 border-t border-zinc-100 bg-zinc-50/30 space-y-2">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-zinc-200 text-zinc-400 text-[10px] uppercase tracking-wider font-normal">
+                <th class="py-2.5 pr-4 font-normal">Benchmark Profile</th>
+                <th class="py-2.5 px-3 text-right font-normal">Daily Volume</th>
+                <th class="py-2.5 px-3 text-right font-normal">Bead Quota</th>
+                <th class="py-2.5 pl-4 font-normal">Behavioral Context</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-100 font-light">
+              <!-- WHO Daily Average Baseline (50L) -->
+              <tr class="hover:bg-zinc-100/50">
+                <td class="py-3 pr-4 font-normal text-zinc-900">
+                  WHO Daily Average Baseline
+                  <span class="block text-[10px] text-amber-700 font-light">Humanitarian Standard Floor</span>
+                </td>
+                <td class="py-3 px-3 text-right tabular text-amber-800 font-normal">~50 L</td>
+                <td class="py-3 px-3 text-right tabular text-amber-800 font-normal">25 b</td>
+                <td class="py-3 pl-4 text-zinc-500 leading-snug">
+                  World Health Organization baseline standard for health and domestic hygiene; Cape Town reference.
+                </td>
+              </tr>
+              <!-- Eco Target (80L) -->
+              <tr class="hover:bg-zinc-100/50 bg-white">
+                <td class="py-3 pr-4 font-normal text-zinc-950">
+                  Sustainable Eco Target
+                  <span class="block text-[10px] text-sky-700 font-light">DropLoop Primary Calibration</span>
+                </td>
+                <td class="py-3 px-3 text-right tabular text-sky-800 font-normal">~80 L</td>
+                <td class="py-3 px-3 text-right tabular text-sky-800 font-normal">40 b</td>
+                <td class="py-3 pl-4 text-zinc-600 leading-snug">
+                  Low-impact urban target; aerated taps, short showers ≤ 4 min, tap closed while lathering.
+                </td>
+              </tr>
+              <!-- Italian Average (214-236L) -->
+              <tr class="hover:bg-zinc-100/50">
+                <td class="py-3 pr-4 font-normal text-zinc-900">
+                  Italian Urban Average
+                  <span class="block text-[10px] text-zinc-400 font-light">ISTAT National Baseline</span>
+                </td>
+                <td class="py-3 px-3 text-right tabular text-zinc-900">~214 – 236 L</td>
+                <td class="py-3 px-3 text-right tabular text-zinc-700 font-normal">107 – 118 b</td>
+                <td class="py-3 pl-4 text-zinc-500 leading-snug">
+                  One of the highest in Europe; unmetered domestic habits, long showers, continuous open taps.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <!-- ================= CALIBRATION MATRIX TABLE ================= -->
+    <section class="space-y-3">
+      <div class="flex items-baseline justify-between border-b border-zinc-200 pb-2">
+        <h2 class="text-xs uppercase tracking-widest text-zinc-500 font-normal">02 / Domestic Calibration Matrix</h2>
+        <span class="text-[11px] text-zinc-400 font-normal">Ratio: 1 Bead = 2 Liters</span>
+      </div>
+
+      <p class="text-xs text-zinc-600 font-normal">
+        Use this table to gauge your daily consumption and fill your DropLoop.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-zinc-200 text-zinc-400 text-[10px] uppercase tracking-wider font-normal">
+              <th class="py-2.5 pr-4 font-normal">Domestic Routine</th>
+              <th class="py-2.5 px-3 font-normal">Flow / Duration Condition</th>
+              <th class="py-2.5 px-3 text-right font-normal">Volume</th>
+              <th class="py-2.5 pl-4 text-right font-normal">Haptic Beads</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-100 font-light">
+
+            <!-- Teeth Brushing (Conscious) (~0.5L / 0 beads) -->
+            <tr class="hover:bg-zinc-100/50 bg-white">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Teeth Brushing (Conscious)</td>
+              <td class="py-3 px-3 text-zinc-500">2 min scrub with tap closed, cup rinse</td>
+              <td class="py-3 px-3 text-right tabular text-emerald-700">~0.5 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-emerald-700">0 Beads <span class="text-[10px] text-zinc-400 block font-light">(negligible)</span></td>
+            </tr>
+
+            <!-- Hydration (0.5L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Hydration</td>
+              <td class="py-3 px-3 text-zinc-500">1 Reusable bottle (500 ml) refill</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">0.5 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">¼ Bead <span class="text-[10px] text-zinc-400 block font-light">(1 per 4 refills)</span></td>
+            </tr>
+
+            <!-- Quick Handwash (2L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Quick Handwash</td>
+              <td class="py-3 px-3 text-zinc-500">15–20 sec running tap with aerator</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">2.0 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">1 Bead</td>
+            </tr>
+
+            <!-- Toilet Flush (Eco / Dual) (3L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Toilet Flush (Eco / Dual)</td>
+              <td class="py-3 px-3 text-zinc-500">Short button dual-flush cistern</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">~3.0 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">1.5 Beads</td>
+            </tr>
+
+            <!-- Kitchen Tap Rinse (6-8L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Kitchen Tap Rinse</td>
+              <td class="py-3 px-3 text-zinc-500">1 min continuous stream for dishware</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">~6.0 – 8.0 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">3 to 4 Beads</td>
+            </tr>
+
+            <!-- Toilet Flush (Full Single Tank) (6-9L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Toilet Flush (Full Single Tank)</td>
+              <td class="py-3 px-3 text-zinc-500">Standard single cistern discharge</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">~6.0 – 9.0 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">3 to 4.5 Beads</td>
+            </tr>
+
+            <!-- Teeth Brushing (Careless) (12L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Teeth Brushing (Careless)</td>
+              <td class="py-3 px-3 text-zinc-500">2 min continuous running tap</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">~12.0 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">6 Beads</td>
+            </tr>
+
+            <!-- Gym / Pool Metered Shower (18L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Gym / Pool Metered Shower</td>
+              <td class="py-3 px-3 text-zinc-500">2 min push-button metered rinse cycle</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">~18.0 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">9 Beads</td>
+            </tr>
+
+            <!-- Standard Domestic Shower (45L) -->
+            <tr class="hover:bg-zinc-100/50">
+              <td class="py-3 pr-4 font-normal text-zinc-900">Standard Domestic Shower</td>
+              <td class="py-3 px-3 text-zinc-500">5 min continuous flow standard head</td>
+              <td class="py-3 px-3 text-right tabular text-zinc-800">~45.0 L</td>
+              <td class="py-3 pl-4 text-right tabular font-normal text-zinc-900">22.5 Beads</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- ================= ACADEMIC & INSTITUTIONAL COLOPHON ================= -->
+    <footer class="border-t border-zinc-200 pt-8 space-y-8 text-xs text-zinc-600">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="space-y-1">
+          <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-normal">Academic Framework</span>
+          <div class="font-normal text-zinc-900">Innovation Studio (PS1 &amp; PS2)</div>
+          <div class="text-zinc-500">Academic Year 2026–2027</div>
+          <div class="text-zinc-700 pt-1">
+            Politecnico di Milano<br />
+            School of Design
+          </div>
+          <div class="text-zinc-400 text-[11px]">MSc Product-Service System Design</div>
+        </div>
+
+        <div class="space-y-1">
+          <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-normal">Studio Brief &amp; Author</span>
+          <div class="italic text-zinc-800">“Uncertain Times: Water Scarcity in Northern Italy”</div>
+          <div class="pt-2 text-zinc-900 font-normal">
+            Francesco Zanchetta
+          </div>
+          <div class="text-zinc-500 text-[11px]">Design Research &amp; Analog Probing</div>
+        </div>
+
+        <div class="space-y-1">
+          <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-normal">Teaching Team</span>
+          <div class="text-zinc-700 leading-snug">
+            <span class="text-zinc-400 text-[10px] block">Professors</span>
+            Valentina Auricchio, Stefana Broadbent, Marta Corubolo, Fabio Di Liberto, Mario Crippa
+          </div>
+          <div class="text-zinc-700 pt-1">
+            <span class="text-zinc-400 text-[10px] block">Tutors</span>
+            Dorotea Anfossi, Chenfan Zhang
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Sources -->
+      <div class="pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[11px] text-zinc-400">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span class="text-zinc-500">Verified Sources:</span>
+          <a href="https://www.istat.it/comunicato-stampa/ambiente-urbano-anno-2024/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 underline underline-offset-2">
+            ISTAT Ambiente Urbano (2024)
+          </a>
+          <a href="https://www.who.int/publications/i/item/9789240015241" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-900 underline underline-offset-2">
+            WHO Domestic Water Quantity Guidelines
+          </a>
+        </div>
+        <div class="tabular text-zinc-400">
+          DropLoop • A.Y. 2026–2027
+        </div>
+      </div>
+
+    </footer>
+
+  </main>
+
+  <script>
+    let fractionalBeads = 0;
+
+    function adjustFraction(delta) {
+      fractionalBeads = Math.max(0, Math.round((fractionalBeads + delta) * 100) / 100);
+      renderFractionTracker();
+    }
+
+    function resetFraction() {
+      fractionalBeads = 0;
+      renderFractionTracker();
+    }
+
+    function renderFractionTracker() {
+      const display = document.getElementById('fractionDisplay');
+      const liters = document.getElementById('fractionLiters');
+      const btnMinus = document.getElementById('btnFractionMinus');
+      const notice = document.getElementById('fractionShiftNotice');
+      const noticeText = document.getElementById('fractionShiftText');
+
+      if (!display || !liters || !btnMinus) return;
+
+      // Fraction formatting
+      let displayStr = fractionalBeads.toString();
+      if (fractionalBeads === 0.25) displayStr = "¼";
+      else if (fractionalBeads === 0.5) displayStr = "½";
+      else if (fractionalBeads === 0.75) displayStr = "¾";
+      else if (fractionalBeads === 1.25) displayStr = "1 ¼";
+      else if (fractionalBeads === 1.5) displayStr = "1 ½";
+      else if (fractionalBeads === 1.75) displayStr = "1 ¾";
+
+      display.innerHTML = `${displayStr} <span class="text-xs font-light text-zinc-400">Bead${fractionalBeads === 1 || fractionalBeads === 0.25 ? '' : 's'}</span>`;
+      liters.innerHTML = `${(fractionalBeads * 2).toFixed(1)} L <span class="text-zinc-400">• tap + / – for ¼ bead (0.5L)</span>`;
+
+      btnMinus.disabled = fractionalBeads <= 0;
+
+      if (fractionalBeads >= 1) {
+        const fullBeads = Math.floor(fractionalBeads);
+        notice.classList.remove('hidden');
+        noticeText.textContent = `${fullBeads} full bead${fullBeads > 1 ? 's' : ''} reached — shift on DropLoop cord!`;
+      } else {
+        notice.classList.add('hidden');
+      }
+    }
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

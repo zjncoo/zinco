@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What is DropLoop? — Analog Water Budget Tracker</title>
+  <meta name="description" content="What is DropLoop: Design probe specifications, project premise, and analog rationing mechanics. Innovation Studio | MSc PSSD • Politecnico di Milano." />
+
+  <!-- Google Fonts: Inter (300, 400, 500, 600) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      background-color: #FAFAFA;
+      color: #111111;
+      -webkit-font-smoothing: antialiased;
+    }
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="bg-[#FAFAFA] text-zinc-900 min-h-screen font-light selection:bg-zinc-200">
+
+  <!-- Top Navigation Bar -->
+  <nav class="max-w-3xl mx-auto px-5 sm:px-8 pt-6 sm:pt-8 flex items-center justify-between">
+    <a href="index.html" class="text-xs uppercase tracking-wider text-zinc-400 hover:text-zinc-900 transition-colors font-normal flex items-center gap-1.5">
+      <span>←</span>
+      <span>Calibration Matrix</span>
+    </a>
+    <span class="text-[11px] text-zinc-400 uppercase tracking-widest hidden sm:inline">Project Probe Spec</span>
+  </nav>
+
+  <main class="max-w-3xl mx-auto px-5 sm:px-8 py-8 sm:py-12 space-y-10">
+
+    <!-- Hero Product Render (Transparent background) -->
+    <div class="w-full flex justify-center">
+      <img 
+        src="droploop_render.png" 
+        alt="DropLoop Analog Keychain Probe" 
+        class="w-full max-w-md h-auto"
+      />
+    </div>
+
+    <!-- Header Section -->
+    <header class="space-y-4 border-b border-zinc-200 pb-8">
+      <div class="text-[11px] uppercase tracking-wider text-zinc-400 font-normal">
+        About The Probe
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-normal tracking-tight text-zinc-950">
+        What is DropLoop?
+      </h1>
+      <p class="text-base sm:text-lg text-zinc-600 font-light tracking-tight">
+        Analog Water Budget Tracker &amp; Haptic Calibration Probe
+      </p>
+    </header>
+
+    <!-- Premise Statement -->
+    <section class="space-y-6">
+      <blockquote class="text-lg sm:text-xl text-zinc-900 font-light leading-relaxed border-l-2 border-zinc-900 pl-4 sm:pl-6 italic">
+        “Bridging the gap between invisible municipal fluid flow and tangible daily resource rationing through an analog haptic keychain.”
+      </blockquote>
+
+      <div class="space-y-4 text-sm sm:text-base text-zinc-600 leading-relaxed font-light">
+        <p>
+          DropLoop is an analog design probe developed to address structural water scarcity in Northern Italy. In modern domestic infrastructure, water arrives under constant municipal pressure—unseen, continuous, and frictionless. Because meters are concealed in basement utility closets and bills arrive months after consumption, citizens lack real-time sensory feedback on the speed of resource depletion.
+        </p>
+        <p>
+          DropLoop translates continuous, unmetered domestic fluid flow into discreet, physical increments. By shifting beads along a high-friction cord across a tactile split marker, users maintain eyes-free somatic awareness of daily water rationing without digital surveillance, batteries, or mobile screen tethering.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mechanical Architecture & Calibration Ratio -->
+    <section class="space-y-6 border-t border-zinc-200 pt-8">
+      <h2 class="text-xs uppercase tracking-widest text-zinc-500 font-normal">
+        Tactile Architecture &amp; Ratios
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 bg-white border border-zinc-200 rounded-sm space-y-2">
+          <div class="text-[10px] uppercase tracking-widest text-zinc-400">Calibration Metric</div>
+          <div class="text-base font-normal text-zinc-900 tabular">1 Bead = 2.0 Liters</div>
+          <p class="text-zinc-500 leading-relaxed font-light">
+            One physical bead equals exactly two liters of water, corresponding directly to standard domestic hygiene gestures (e.g. 1 quick 15-second handwash = 1 bead).
+          </p>
+        </div>
+
+        <div class="p-4 bg-white border border-zinc-200 rounded-sm space-y-2">
+          <div class="text-[10px] uppercase tracking-widest text-zinc-400">Haptic Split Marker</div>
+          <div class="text-base font-normal text-zinc-900">Tactile Quota Index</div>
+          <p class="text-zinc-500 leading-relaxed font-light">
+            A knurled metal or wood split divider cleanly segregates “spent volume” from “remaining budget”. Users can check remaining allowance in a dark bathroom or during busy work routines with a simple thumb slide.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-2">
+        <div class="p-4 bg-white border border-zinc-200 rounded-sm space-y-2">
+          <div class="text-[10px] uppercase tracking-widest text-zinc-400">80L Eco Loop</div>
+          <div class="text-base font-normal text-sky-800 tabular">40 Beads Total</div>
+          <p class="text-zinc-500 leading-relaxed font-light">
+            Calibrated for everyday sustainable urban living in Milan and Lombardy, promoting proactive self-rationing (short showers ≤ 4 min, closed taps when lathering).
+          </p>
+        </div>
+
+        <div class="p-4 bg-white border border-zinc-200 rounded-sm space-y-2">
+          <div class="text-[10px] uppercase tracking-widest text-zinc-400">50L Crisis Loop</div>
+          <div class="text-base font-normal text-amber-800 tabular">25 Beads Total</div>
+          <p class="text-zinc-500 leading-relaxed font-light">
+            World Health Organization minimum humanitarian baseline required for health, domestic hydration, and survival during severe municipal drought emergencies.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Analog Over Digital -->
+    <section class="space-y-4 border-t border-zinc-200 pt-8 text-xs">
+      <h2 class="text-xs uppercase tracking-widest text-zinc-500 font-normal">
+        Why Analog?
+      </h2>
+      <div class="space-y-3 text-zinc-600 font-light text-sm leading-relaxed">
+        <p>
+          Unlike smart digital meters and connected mobile apps that generate notification fatigue, require battery maintenance, and collect private behavioral data, DropLoop relies on pure physical friction. Moving a physical bead requires deliberate tactile engagement, creating a direct physical memory of consumption.
+        </p>
+      </div>
+    </section>
+
+    <!-- Academic Framework Footer -->
+    <footer class="border-t border-zinc-200 pt-8 space-y-6 text-xs text-zinc-600">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="space-y-1">
+          <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-normal">Course</span>
+          <div class="font-normal text-zinc-900">Innovation Studio (PS1 &amp; PS2)</div>
+          <div class="text-zinc-500">A.Y. 2026–2027</div>
+          <div class="text-zinc-700 pt-1">
+            Politecnico di Milano • School of Design<br />
+            MSc Product-Service System Design
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-normal">Studio Brief &amp; Author</span>
+          <div class="italic text-zinc-800">“Uncertain Times: Water Scarcity in Northern Italy”</div>
+          <div class="pt-2 text-zinc-900 font-normal">Francesco Zanchetta</div>
+        </div>
+
+        <div class="space-y-1">
+          <span class="text-[10px] uppercase tracking-wider text-zinc-400 block font-normal">Teaching Team</span>
+          <div class="text-zinc-700 leading-snug">
+            <span class="text-zinc-400 text-[10px] block">Professors</span>
+            Valentina Auricchio, Stefana Broadbent, Marta Corubolo, Fabio Di Liberto, Mario Crippa
+          </div>
+          <div class="text-zinc-700 pt-1">
+            <span class="text-zinc-400 text-[10px] block">Tutors</span>
+            Dorotea Anfossi, Chenfan Zhang
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-400">
+        <a href="index.html" class="text-zinc-700 hover:text-black underline underline-offset-2 font-normal">
+          ← Return to Calibration Matrix
+        </a>
+        <div class="tabular">
+          DropLoop • A.Y. 2026–2027
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>
