@@ -1,4 +1,83 @@
+# robots.txt for zinco.cc - Portfolio of Francesco Zanchetta
+# Strategy: Allow AI search discovery & citations, BLOCK generative model training & scraping
+
 User-agent: *
 Allow: /
 
+# ── 1. Allow AI Search & Real-Time Assistant Discovery ──
+# Enables ChatGPT, Claude, and Perplexity users to find, cite, and browse your portfolio
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# ── 2. BLOCK AI Model Training, Image Scraping & Ingestion ──
+# Prohibits crawling for foundation model training & image generation datasets
+
+# OpenAI Model Training Crawler
+User-agent: GPTBot
+Disallow: /
+
+# Anthropic Model Training Crawler
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Google Generative AI / Gemini Training Crawler
+User-agent: Google-Extended
+Disallow: /
+
+# Apple Foundation Model / Intelligence Training Crawler
+User-agent: Applebot-Extended
+Disallow: /
+
+# Common Crawl (widely scraped by Midjourney, Stability AI, LAION)
+User-agent: CCBot
+Disallow: /
+
+# ByteDance AI Training Crawler
+User-agent: Bytespider
+Disallow: /
+
+# Meta AI Training Crawler
+User-agent: meta-externalagent
+Disallow: /
+
+# Cohere AI Training Crawler
+User-agent: cohere-ai
+Disallow: /
+
+# Amazon AI Training Crawler
+User-agent: Amazonbot
+Disallow: /
+
+# Diffbot AI Knowledge Scraper
+User-agent: Diffbot
+Disallow: /
+
+# Omgili / Webz.io AI Training Scraper
+User-agent: Omgilibot
+Disallow: /
+
+# ── Sitemap & Machine-Readable Profile ──
 Sitemap: https://zinco.cc/sitemap.xml
+# llms.txt provides structured text citations without consenting to image training
+# https://zinco.cc/llms.txt

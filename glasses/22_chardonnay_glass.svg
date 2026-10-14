@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Oaked Chardonnay Glass Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #B88A35; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 190.0,200.0
+      C 192.8,272.0 162.5,317.0 162.5,380.0
+      C 162.5,444.8 295.5,500.2 295.5,565.0
+      L 295.5,665.0
+      C 295.5,692.5 238.2,715.0 200.0,715.0
+      L 400.0,715.0
+      C 361.8,715.0 304.5,692.5 304.5,665.0
+      L 304.5,565.0
+      C 304.5,500.2 437.5,444.8 437.5,380.0
+      C 437.5,317.0 412.8,272.0 410.0,200.0
+      Z"/>
+</svg>

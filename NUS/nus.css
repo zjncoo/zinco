@@ -70,9 +70,18 @@
   left: 0;
   text-decoration: none;
   color: black;
-  font-size: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
   animation: bounce 2.5s ease-in-out infinite;
+}
+
+.scroll-down-arrow svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  display: block;
 }
 
 @keyframes bounce {
@@ -95,8 +104,8 @@
 }
 
 #project-hero h1 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: 600;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   /* Clamp() per un font-size fluido e controllato */
   font-size: clamp(3.5rem, 8vw, 7rem);
   margin: 0;
@@ -106,6 +115,10 @@
   letter-spacing: -0.05em;
 }
 
+#hero-wrapper #glance-container {
+  display: none;
+}
+
 #glance-container {
   width: 100%;
   position: relative;
@@ -113,12 +126,10 @@
   box-sizing: border-box;
   background-color: black;
   z-index: 2;
-  /* Abbassato per non sovrapporsi a menu di navigazione futuri */
 }
 
 #glance-grid {
   display: grid;
-  /* Già responsivo, ottimo per icone/loghi */
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 2px;
 }
@@ -150,7 +161,7 @@
   transition: opacity 0.2s ease;
 }
 
-/* Rimuove il padding superiore del main globale: il video si attacca alla glance grid */
+/* Rimuove il padding superiore del main globale */
 main#sezione-progetto {
   padding-top: 0;
 }
@@ -159,13 +170,507 @@ main#sezione-progetto {
   position: relative;
   width: 100%;
   line-height: 0;
-  /* Rimuove spazi indesiderati sotto il video */
 }
 
 #myVideo {
   width: 100%;
   height: auto;
   object-fit: cover;
+  display: block;
+}
+
+/* =============================================================
+ * Sezione 2: Layout Editoriale a 2 Colonne (Stile Ispirazione)
+ * ============================================================= */
+
+.project-editorial-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 60px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 60px 40px 80px calc(27px + 0.88vw);
+  border-bottom: 2px solid black;
+  background-color: white;
+}
+
+/* --- Colonna Sinistra (Sticky / Fissa — Tutto Allineato a Sinistra) --- */
+.project-sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  text-align: left;
+}
+
+.project-sticky-col::-webkit-scrollbar {
+  display: none;
+}
+
+/* Foto Rappresentativa Editoriale */
+.editorial-photo-box {
+  width: 100%;
+  border: 1px solid black;
+  background-color: #f7f7f7;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.editorial-photo-box img.editorial-rep-img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.editorial-photo-box:hover img.editorial-rep-img {
+  transform: scale(1.02);
+}
+
+/* Tabella Specs / Metadati (Allineata a Sinistra) */
+.editorial-specs-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid black;
+  text-align: left;
+}
+
+.specs-row {
+  display: grid;
+  grid-template-columns: 95px 1fr;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.specs-label {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  color: black;
+  opacity: 0.55;
+  text-align: left;
+}
+
+.specs-value {
+  font-weight: 400;
+  color: black;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Gruppo Bottoni Azione (Sito Web / Descrizione) */
+.editorial-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.editorial-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: transparent;
+  border: 1.5px solid black;
+  color: black;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.editorial-action-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.editorial-action-btn .btn-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.editorial-site-btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+.editorial-desc-btn:hover .btn-arrow {
+  transform: translateY(2px);
+}
+
+/* --- Colonna Destra (Scroll Multimediale Flush — Senza Spazi Bianchi) --- */
+.project-media-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+  border-top: 1px solid black;
+}
+
+.project-media-stream .video-container {
+  border: none;
+  border-bottom: 1px solid black;
+  line-height: 0;
+  width: 100%;
+  background-color: black;
+  margin: 0;
+}
+
+.project-media-stream video,
+.project-media-stream .video-container video,
+.project-media-item video {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  box-sizing: border-box;
+}
+
+/* Presentazione PDF Scrollabile & Apribile */
+.editorial-pdf-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: white;
+  margin: 0;
+}
+
+.editorial-pdf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid black;
+  background-color: #fafafa;
+}
+
+.editorial-pdf-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+}
+
+.pdf-badge {
+  background-color: black;
+  color: white;
+  padding: 2px 7px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.editorial-pdf-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid black;
+  background: white;
+  color: black;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.editorial-pdf-open-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.editorial-presentation-cover-link {
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #fafafa;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.editorial-presentation-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.editorial-presentation-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  color: #ffffff;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.editorial-presentation-cover-link:hover .editorial-presentation-hover-overlay {
+  opacity: 1;
+}
+
+.editorial-presentation-cover-link iframe {
+  width: 100% !important;
+  height: 520px !important;
+  border: none !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  user-select: none;
+}
+
+.editorial-pdf-frame-wrapper {
+  width: 100%;
+  height: auto;
+  background: #f4f4f4;
+  position: relative;
+  overflow: hidden !important;
+}
+
+.editorial-pdf-frame {
+  width: 100%;
+  height: 520px;
+  border: none;
+  display: block;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+/* Stream Header (SENZA sfondo nero, testo allineato a sinistra) */
+.editorial-stream-header {
+  background-color: transparent;
+  color: black;
+  padding: 24px 0 12px 0;
+  border-bottom: 1px solid black;
+  margin: 0;
+  text-align: left;
+}
+
+.editorial-stream-header h2 {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: black;
+  margin: 0;
+  text-align: left;
+}
+
+/* Color Palette a Destra: Quadrati con Codice HEX sopra */
+.editorial-colors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 24px 0;
+  border-bottom: 1px solid black;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.editorial-color-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.color-hex-header {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: black;
+  text-align: left;
+}
+
+.color-square-swatch {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid black;
+  box-sizing: border-box;
+  transition: transform 0.2s ease;
+}
+
+.color-square-swatch:hover {
+  transform: scale(1.02);
+}
+
+/* Immagini e Mockups a Tutta Larghezza (Flush, senza gap) */
+.editorial-stream-full-item {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: white;
+  line-height: 0;
+  position: relative;
+  margin: 0;
+}
+
+.editorial-stream-full-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.stream-item-caption {
+  line-height: 1.4;
+  padding: 10px 16px;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fafafa;
+  color: #333;
+  text-align: left;
+}
+
+/* Sub-griglia Media (Flush, 2 Colonne, nessun gap bianco) */
+.editorial-media-subgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  width: 100%;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+}
+
+.editorial-subgrid-item {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  position: relative;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.editorial-subgrid-item:nth-child(2n) {
+  border-right: none;
+}
+
+.editorial-subgrid-item:nth-last-child(1):nth-child(odd) {
+  grid-column: span 2;
+  border-right: none;
+}
+
+.editorial-subgrid-item:hover {
+  background-color: #fcfcfc;
+}
+
+.editorial-subgrid-item img {
+  max-width: 85%;
+  max-height: 260px;
+  object-fit: contain;
+}
+
+.subgrid-caption {
+  margin-top: 14px;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #666;
+  text-align: left;
+  width: 100%;
+}
+
+/* Card Link Figma / Pubblicazioni */
+.editorial-link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.editorial-link-card:hover {
+  background-color: #f7f7f7;
+}
+
+.editorial-link-card .link-tag {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.editorial-link-card h3 {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0;
+  text-align: left;
+}
+
+.editorial-link-card .link-arrow {
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 
@@ -195,8 +700,8 @@ main#sezione-progetto {
 }
 
 .branding-header h2 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1.5rem;
   letter-spacing: normal;
   /* 24px */
@@ -234,8 +739,8 @@ main#sezione-progetto {
 }
 
 .branding-item h3 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1rem;
   letter-spacing: normal;
   /* 16px */
@@ -243,7 +748,7 @@ main#sezione-progetto {
 }
 
 .branding-item p {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.875rem;
   /* 14px */
   max-width: 35ch;
@@ -252,7 +757,7 @@ main#sezione-progetto {
 }
 
 .branding-item .link-cta {
-  font-weight: bold;
+  font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-size: 0.75rem;
@@ -322,7 +827,7 @@ main#sezione-progetto {
 /* Stile per il link "Back" nelle pagine progetto */
 .back-to-link {
   display: block;
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-weight: 400;
   /* Corpo normale */
   font-size: 1rem;
@@ -359,7 +864,7 @@ main#sezione-progetto {
   display: none;
   width: 50px;
   /* Larghezza per 3-4 cifre */
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 16px;
   text-align: center;
   border: 1px solid black;
@@ -395,7 +900,7 @@ main#sezione-progetto {
 }
 
 #viewer-header p {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   line-height: 1.6;
   color: #333;
   margin-bottom: 30px;
@@ -409,20 +914,80 @@ main#sezione-progetto {
   }
 }
 
+/* ================================================================ */
+/* === PUBBLICAZIONI: SEZIONE READER E STILI FLIPBOOK           === */
+/* ================================================================ */
+
+.publication-editorial-layout {
+  border-bottom: 2px solid black;
+}
+
+.editorial-reader-btn:hover .btn-arrow {
+  transform: translateY(2px);
+}
+
+.publication-reader-section {
+  width: 100%;
+  background-color: #fafafa;
+  border-bottom: 2px solid black;
+  padding: 60px 40px 80px calc(27px + 0.88vw);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.publication-reader-header {
+  width: 100%;
+  max-width: 1480px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.publication-reader-badge {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  color: black;
+  text-align: left;
+}
+
+.publication-reader-title {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: black;
+  margin: 0;
+  text-align: left;
+}
+
 #book-viewer {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0;
   width: 100%;
+  max-width: 1480px;
+  min-height: 75vh;
+  margin: 0 auto;
 }
 
 .page-canvas {
   max-width: 95vw;
-  max-height: 90vh;
+  max-height: 86vh;
   width: auto;
   height: auto;
-  border: 2px solid black;
+  border: 1.5px solid black;
+  background-color: white;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -435,12 +1000,20 @@ main#sezione-progetto {
   max-width: 50%;
 }
 
+[data-layout="spread"] #canvas-left.page-canvas {
+  border-right: 1px solid #d5d5d5;
+}
+
+[data-layout="spread"] #canvas-right.page-canvas {
+  border-left: none;
+}
+
 .page-canvas.hidden {
   display: none;
 }
 
 #book-controls {
-  margin-top: 20px;
+  margin-top: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -448,7 +1021,7 @@ main#sezione-progetto {
 }
 
 #page-indicator {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 16px;
   min-width: 120px;
 }
@@ -475,8 +1048,8 @@ main#sezione-progetto {
 
 /* Label editoriale in alto: es. "DESCRIPTION / 3M" */
 .project-info-content h2 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -492,7 +1065,7 @@ main#sezione-progetto {
 }
 
 .project-info-text p {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-weight: 500;
   font-size: clamp(2rem, 4.5vw, 5rem);
   line-height: 0.98;
@@ -531,8 +1104,8 @@ main#sezione-progetto {
   background: none;
   border: none;
   padding: 0;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -599,6 +1172,16 @@ main#sezione-progetto {
 
 /* --- Tablet Orizzontali (fino a 1024px) --- */
 @media (max-width: 1024px) {
+  .project-editorial-layout {
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    padding: 40px 30px 60px calc(27px + 0.88vw);
+  }
+
+  .editorial-pdf-frame-wrapper {
+    height: 540px;
+  }
+
   .project-info-section {
     padding-left: 29px;
   }
@@ -621,6 +1204,124 @@ main#sezione-progetto {
 
 /* --- Tablet Verticali e Smartphone Grandi (fino a 768px) --- */
 @media (max-width: 768px) {
+  .project-editorial-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 30px 0 50px 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .project-sticky-col {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    padding: 0 20px 0 27px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* MEDIA STREAM: 100 VW FULL BLEED ON MOBILE */
+  .project-media-stream {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .project-media-stream video,
+  .project-media-stream .video-container,
+  .project-media-stream .video-container video,
+  .project-media-item,
+  .project-media-item video,
+  .project-media-item img,
+  .editorial-stream-full-item,
+  .editorial-stream-full-item img,
+  .editorial-pdf-section,
+  .editorial-presentation-cover-link,
+  .editorial-presentation-canvas,
+  .editorial-pdf-frame-wrapper,
+  .editorial-pdf-frame,
+  .editorial-presentation-cover-link iframe {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+    display: block !important;
+  }
+
+  .editorial-media-subgrid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+  }
+
+  .editorial-subgrid-item {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    border-right: none !important;
+    border-bottom: 1px solid black;
+    padding: 24px 0 !important;
+    box-sizing: border-box;
+  }
+
+  .editorial-subgrid-item img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    max-height: none !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
+
+  .editorial-stream-header {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+  }
+
+  .stream-item-caption {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+  }
+
+  .editorial-pdf-header {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+  }
+
+  .editorial-colors-grid {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+  }
+
+  .editorial-link-card {
+    margin-left: 27px !important;
+    margin-right: 20px !important;
+    width: calc(100vw - 47px) !important;
+    box-sizing: border-box;
+  }
+
+  .editorial-pdf-frame-wrapper {
+    height: 420px;
+  }
+
   #project-hero {
     padding: 20px 20px 20px 27px;
     justify-content: center;
@@ -632,8 +1333,9 @@ main#sezione-progetto {
     padding-top: 60px;
   }
 
-  .scroll-down-arrow {
-    font-size: 2.5rem;
+  .scroll-down-arrow svg {
+    width: 24px;
+    height: 24px;
   }
 
   #project-hero h1 {
@@ -664,23 +1366,36 @@ main#sezione-progetto {
   /* === INIZIO BLOCCO CON LA CORREZIONE === */
   /* ======================================= */
 
+  .publication-reader-section {
+    padding: 40px 0 60px 0 !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+  }
+
+  .publication-reader-header {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box;
+  }
+
   #book-viewer {
     min-height: auto;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
   }
 
   .page-canvas {
-    max-width: 90vw;
+    max-width: 100vw !important;
     max-height: none;
-    width: auto;
+    width: 100vw !important;
     height: auto;
   }
 
   /* Override spread layout 50% max-width on mobile */
   [data-layout="spread"] .page-canvas {
-    max-width: 90vw;
+    max-width: 100vw !important;
+    width: 100vw !important;
   }
 
   #canvas-right.page-canvas {

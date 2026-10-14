@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Provence Rose Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #DE7C70; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 280,70 L 320,70 L 320,170
+  C 320,230 380,270 385,340
+  C 390,400 345,450 345,490
+  C 345,530 395,580 395,650
+  L 395,725 L 205,725 L 205,650
+  C 205,580 255,530 255,490
+  C 255,450 210,400 215,340
+  C 220,270 280,230 280,170 Z"/>
+</svg>

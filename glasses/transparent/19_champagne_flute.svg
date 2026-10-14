@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Modern Sexy Champagne Flute Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #C9A74A; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 245.0,140.0
+  C 242.0,260.0 238.0,380.0 252.0,460.0
+  C 260.0,500.0 295.5,505.0 295.5,515.0
+  L 295.5,665.0
+  C 295.5,692.5 235.2,715.0 195.0,715.0
+  L 405.0,715.0
+  C 364.8,715.0 304.5,692.5 304.5,665.0
+  L 304.5,515.0
+  C 304.5,505.0 340.0,500.0 348.0,460.0
+  C 362.0,380.0 358.0,260.0 355.0,140.0
+  Z"/>
+</svg>

@@ -16,59 +16,76 @@
   <link rel="apple-touch-icon" href="imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
   <link rel="canonical" href="https://zinco.cc/portfolio.html" />
-  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://zinco.cc/portfolio.html#webpage",
+        "url": "https://zinco.cc/portfolio.html",
+        "name": "portfolio | zinco",
+        "description": "Comprehensive design portfolio archive of Francesco Zanchetta, spanning branding identities, editorial publications, web development, and digital tools.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://zinco.cc/#website",
+          "name": "zinco",
+          "url": "https://zinco.cc/"
+        },
+        "about": {
+          "@type": "Person",
+          "@id": "https://zinco.cc/#person",
+          "name": "Francesco Zanchetta"
+        }
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="NUS/nus.css" />
 
-  
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="projects-data.js?v=22" defer></script>
 
-
   <style>
-    .download-section {
-      margin: 30px 0 50px;
-      text-align: center;
+    .portfolio-editorial-intro {
+      margin-bottom: 24px;
     }
 
-    #portfolioGrid {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      border-top: 2px solid black;
-      border-bottom: 2px solid black;
-      padding: 0;
+    .portfolio-editorial-intro p {
+      font-family: 'neue-haas-unica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: #111;
       margin: 0;
-      gap: 0;
     }
 
-    .portfolio-page-wrapper {
-      width: 100vw;
-      max-width: 100vw;
-      display: block;
-      margin: 0;
-      padding: 0;
-      line-height: 0;
-      position: relative;
-      background-color: #fafafa;
-      outline: none;
-      border: none;
-      box-sizing: border-box;
+    .editorial-action-btn.editorial-reader-btn {
+      background: black;
+      color: white;
     }
 
-    .portfolio-page-wrapper canvas {
-      width: 100vw;
-      max-width: 100vw;
-      height: auto;
-      display: block;
-      margin: 0;
-      padding: 0;
-      vertical-align: bottom;
+    .editorial-action-btn.editorial-reader-btn:hover {
+      background: #222;
+      color: white;
+    }
+
+    .editorial-action-btn.editorial-desc-btn {
+      background: white;
+      color: black;
+    }
+
+    .editorial-action-btn.editorial-desc-btn:hover {
+      background: black;
+      color: white;
     }
   </style>
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
@@ -80,7 +97,7 @@
   <div class="site-main-content">
     <div id="scroll-progress-bar"></div>
     <div id="preloader">
-      <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -92,35 +109,123 @@
 
     <div id="hero-wrapper">
       <section id="project-hero">
-        <h1 id="hero-title">portfolio</h1>
+        <div class="hero-title-container">
+          <a href="#portfolio-content" class="scroll-down-arrow cursor-target" aria-label="Scroll down">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <h1 id="hero-title">portfolio</h1>
+        </div>
       </section>
     </div>
 
     <zinco-header base-path=""></zinco-header>
 
-    <main>
-      <div class="download-section">
-        <a href="about/zinco_portfolio.pdf" class="btn btn--solid-dark cursor-target"
-          target="_blank" rel="noopener">
-          Download Portfolio
-        </a>
+    <main id="portfolio-content">
+      <div class="project-editorial-layout">
+        <!-- Colonna Sinistra Sticky -->
+        <aside class="project-sticky-col">
+          <div class="portfolio-editorial-intro">
+            <p>a comprehensive retrospective of visual identities, design systems, editorial publications, and digital products created by Francesco Zanchetta.</p>
+          </div>
+
+          <div class="editorial-specs-table">
+            <div class="specs-row">
+              <span class="specs-label">PROJECT</span>
+              <span class="specs-value">Francesco Zanchetta — Portfolio</span>
+            </div>
+            <div class="specs-row">
+              <span class="specs-label">TIMEFRAME</span>
+              <span class="specs-value">2021 — 2025</span>
+            </div>
+            <div class="specs-row">
+              <span class="specs-label">DISCIPLINE</span>
+              <span class="specs-value">Identity, Editorial &amp; Digital</span>
+            </div>
+            <div class="specs-row">
+              <span class="specs-label">FORMAT</span>
+              <span class="specs-value">Interactive PDF (Landscape)</span>
+            </div>
+            <div class="specs-row">
+              <span class="specs-label">DOCUMENT</span>
+              <span class="specs-value">Web Optimized (~28 MB)</span>
+            </div>
+          </div>
+
+          <div class="editorial-cta-group">
+            <a href="about/zinco_portfolio-compressed.pdf" target="_blank" rel="noopener noreferrer" class="editorial-action-btn editorial-reader-btn cursor-target" id="openPortfolioBtn">
+              <span>Open Portfolio in Browser</span>
+              <span class="btn-arrow">↗</span>
+            </a>
+            <a href="about/zinco_portfolio.pdf" download="zinco_portfolio.pdf" target="_blank" rel="noopener noreferrer" class="editorial-action-btn editorial-desc-btn cursor-target" id="downloadPortfolioBtn">
+              <span>Download Original (62 MB)</span>
+              <span class="btn-arrow">↓</span>
+            </a>
+          </div>
+        </aside>
+
+        <!-- Colonna Destra Media Stream -->
+        <div class="project-media-stream">
+          <section class="editorial-presentation-section">
+            <div class="editorial-presentation-header">
+              <div class="presentation-header-left">
+                <span class="editorial-presentation-tag">PORTFOLIO // BROWSER PREVIEW</span>
+                <span class="pdf-name">zinco_portfolio.pdf</span>
+              </div>
+              <a href="about/zinco_portfolio-compressed.pdf" target="_blank" rel="noopener noreferrer" class="editorial-pdf-open-btn cursor-target">
+                Open in browser ↗
+              </a>
+            </div>
+            <a href="about/zinco_portfolio-compressed.pdf" target="_blank" rel="noopener noreferrer" class="editorial-presentation-cover-link cursor-target" title="Open full portfolio PDF in browser tab">
+              <canvas id="portfolioCoverCanvas" class="editorial-presentation-canvas"></canvas>
+              <div class="editorial-presentation-hover-overlay">
+                <span>Open Portfolio in Browser ↗</span>
+              </div>
+            </a>
+          </section>
+        </div>
       </div>
-
-      <section class="branding-grid" id="portfolioGrid" data-pdf-src="about/zinco_portfolio-compressed.pdf">
-      </section>
     </main>
-
-
-
 
   </div><!-- /site-main-content -->
   <zinco-footer base-path=""></zinco-footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="index.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('portfolioCoverCanvas');
+      if (!canvas || !window.pdfjsLib) return;
 
-  <script src="scripts_components/portfolio_scroll.js" defer></script>
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+      window.pdfjsLib.getDocument('about/zinco_portfolio-compressed.pdf').promise.then(pdf => {
+        return pdf.getPage(1);
+      }).then(page => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const container = canvas.parentElement;
+        const containerWidth = container.clientWidth || 800;
+        const unscaledViewport = page.getViewport({ scale: 1 });
+        const scale = (containerWidth / unscaledViewport.width) * dpr;
+        const viewport = page.getViewport({ scale });
+
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        canvas.style.width = '100%';
+        canvas.style.height = `${Math.floor(viewport.height / dpr)}px`;
+        canvas.style.display = 'block';
+
+        const ctx = canvas.getContext('2d');
+        page.render({ canvasContext: ctx, viewport }).promise.catch(err => {
+          console.warn('[portfolio] Render error:', err);
+        });
+      }).catch(err => {
+        console.warn('[portfolio] Could not load PDF preview:', err);
+      });
+    });
+  </script>
 
 </body>
 

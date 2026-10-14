@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
+  <title>Minimalist 2D Wine &amp; Bar Glassware Collection (Transparent)</title>
+  <style>
+    :root {
+      --bg: #121217;
+      --card-bg: #1B1B24;
+      --border: #2A2A38;
+      --text: #F3F1EC;
+      --subtext: #9E9EA8;
+      --accent: #F45A2A;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      max-width: 1200px;
+      margin: 0 auto 36px auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.3rem;
+      letter-spacing: -0.03em;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+    p.subtitle {
+      color: var(--subtext);
+      font-size: 1.05rem;
+      margin: 0 0 20px 0;
+    }
+    .toggle-container {
+      display: inline-flex;
+      background: #232330;
+      border-radius: 30px;
+      padding: 4px;
+      gap: 4px;
+      border: 1px solid var(--border);
+    }
+    .toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--subtext);
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .toggle-btn.active {
+      background: var(--accent);
+      color: #FFF;
+    }
+    .stats {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--subtext);
+    }
+    .grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 26px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+    .preview-box {
+      width: 100%;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      overflow: hidden;
+      background-image: linear-gradient(45deg, #242430 25%, transparent 25%), 
+                        linear-gradient(-45deg, #242430 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #242430 75%), 
+                        linear-gradient(-45deg, transparent 75%, #242430 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+      background-color: #1A1A22;
+      transition: background-color 0.2s ease;
+    }
+    .preview-box.light-mode {
+      background-image: linear-gradient(45deg, #E6E6EC 25%, transparent 25%), 
+                        linear-gradient(-45deg, #E6E6EC 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #E6E6EC 75%), 
+                        linear-gradient(-45deg, transparent 75%, #E6E6EC 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+      background-color: #FFFFFF;
+    }
+    .preview-box img {
+      max-width: 86%;
+      max-height: 86%;
+      object-fit: contain;
+    }
+    .info {
+      width: 100%;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .tag {
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+    }
+    .filename {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: var(--subtext);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Minimalist 2D Wine &amp; Bar Glassware Collection</h1>
+    <p class="subtitle">29 pure transparent vector silhouettes — 100% full solid shapes, zero backgrounds</p>
+    <div class="toggle-container">
+      <button class="toggle-btn active" id="btn-dark" onclick="setBg('dark')">Dark Checkerboard</button>
+      <button class="toggle-btn" id="btn-light" onclick="setBg('light')">Light Checkerboard</button>
+    </div>
+    <div class="stats">Tutti i 29 file sono ora completamente trasparenti senza sfondo in <code>Desktop/wine_svg_collection/</code></div>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const items = [
+      { f: '01_bordeaux_bottle.svg', t: 'Bordeaux Bottle', c: 'Bottle' },
+      { f: '02_burgundy_bottle.svg', t: 'Burgundy Bottle', c: 'Bottle' },
+      { f: '03_champagne_bottle.svg', t: 'Champagne Bottle', c: 'Bottle' },
+      { f: '04_alsace_riesling_flute.svg', t: 'Alsace Riesling Flute', c: 'Bottle' },
+      { f: '05_rhone_syrah_bottle.svg', t: 'Rhone Syrah Bottle', c: 'Bottle' },
+      { f: '06_natural_pet_nat_bottle.svg', t: 'Natural Pet Nat Bottle', c: 'Bottle' },
+      { f: '07_provence_rose_bottle.svg', t: 'Provence Rose Bottle', c: 'Bottle' },
+      { f: '08_chianti_fiasco_bottle.svg', t: 'Chianti Fiasco Bottle', c: 'Bottle' },
+      { f: '09_vintage_port_bottle.svg', t: 'Vintage Port Bottle', c: 'Bottle' },
+      { f: '10_ice_wine_bottle.svg', t: 'Ice Wine Bottle', c: 'Bottle' },
+      { f: '11_magnum_bottle.svg', t: 'Magnum Bottle', c: 'Bottle' },
+      { f: '12_bistro_carafe.svg', t: 'Bistro Carafe', c: 'Decanter' },
+      { f: '13_modern_angular_glass.svg', t: 'Modern Angular Glass', c: 'Cocktail / Spritz' },
+      { f: '14_coupe_cocktail_glass.svg', t: 'Retro Coupe Cocktail Glass', c: 'Cocktail' },
+      { f: '15_rounded_coupe_saucer.svg', t: 'Rounded Coupe Saucer', c: 'Coupe' },
+      { f: '16_bordeaux_glass.svg', t: 'Bordeaux Grand Cru Glass', c: 'Wine Glass' },
+      { f: '17_burgundy_pinot_glass.svg', t: 'Burgundy Balloon Glass', c: 'Wine Glass' },
+      { f: '18_martini_glass.svg', t: 'Martini Glass', c: 'Cocktail' },
+      { f: '19_champagne_flute.svg', t: 'Sexy Champagne Flute', c: 'Sparkling' },
+      { f: '20_champagne_tulip.svg', t: 'Sexy Champagne Tulip', c: 'Sparkling' },
+      { f: '21_margarita_glass.svg', t: 'Margarita Glass', c: 'Cocktail' },
+      { f: '22_chardonnay_glass.svg', t: 'Chardonnay Glass', c: 'Wine Glass' },
+      { f: '23_dessert_port_glass.svg', t: 'Dessert Port Glass', c: 'Wine Glass' },
+      { f: '24_stemless_wine_tumbler.svg', t: 'Stemless Wine Tumbler', c: 'Tumbler' },
+      { f: '25_swan_neck_decanter.svg', t: 'Swan Neck Decanter', c: 'Decanter' },
+      { f: '26_cosmopolitan_glass.svg', t: 'Cosmopolitan Glass', c: 'Cocktail' },
+      { f: '27_hurricane_glass.svg', t: 'Hurricane Glass', c: 'Specialty Glass' },
+      { f: '28_grappa_chimney_glass.svg', t: 'Grappa Chimney Glass', c: 'Specialty Glass' },
+      { f: '29_brandy_snifter_glass.svg', t: 'Brandy Snifter Glass', c: 'Specialty Glass' }
+    ];
+
+    const grid = document.getElementById('grid');
+    items.forEach(it => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="preview-box">
+          <img src="${it.f}" alt="${it.t}" />
+        </div>
+        <div class="info">
+          <div class="title-row">
+            <span class="name">${it.t}</span>
+            <span class="tag">${it.c}</span>
+          </div>
+          <span class="filename">${it.f}</span>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    function setBg(mode) {
+      const isLight = mode === 'light';
+      document.getElementById('btn-dark').classList.toggle('active', !isLight);
+      document.getElementById('btn-light').classList.toggle('active', isLight);
+      document.querySelectorAll('.preview-box').forEach(box => {
+        box.classList.toggle('light-mode', isLight);
+      });
+    }
+  </script>
+</body>
+</html>

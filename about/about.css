@@ -1,152 +1,342 @@
-/* ================================================ */
-/* STILI PER LA PAGINA ABOUT (VERSIONE FINALE)      */
-/* ================================================ */
+/* ===================================================================
+ * EDITORIAL ABOUT STYLESHEET - zinco.cc
+ * 2-Column High-End Editorial Architecture
+ * =================================================================== */
 
-/* Allinea a sinistra il testo introduttivo per coerenza */
+:root {
+  --line-1px: 1px solid #000000;
+  --line-2px: 2px solid #000000;
+  --color-border: #000000;
+  --color-bg-subtle: #f8f8f8;
+}
+
+body {
+  font-family: 'neue-haas-unica', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
 main {
   align-items: flex-start;
   text-align: left;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: clamp(20px, 3.5vw, 40px);
+  padding-right: clamp(20px, 3.5vw, 40px);
 }
 
-/* --- Sezione principale --- */
-/* Questo contenitore ora impila (titolo e blocco contenuto) e li allinea a sinistra */
-.cookie-policy-section {
-  padding: 5% 10%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column; /* Impila gli elementi figli verticalmente */
-  align-items: flex-start; /* Allinea tutto a sinistra */
-  justify-content: center;
-}
-
-/* --- Titolo "About Me" --- */
-/* Ora è un elemento separato, quindi lo stilizziamo direttamente */
-.cookie-policy-section h2 {
-  margin-bottom: 2em;   /* Spazio tra il titolo e il blocco foto/testo sottostante */
-  text-align: left;     /* Assicura l'allineamento a sinistra */
-  font-size: 2rem;
-}
-
-/* --- Contenitore del contenuto (immagine + testi) --- */
-/* Mette l'immagine e i testi uno accanto all'altro */
-.cookie-policy-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 4em;
+/* --- Section & Grid Layout --- */
+.about-editorial-section {
   width: 100%;
-  max-width: 1300px;
+  background: #ffffff;
+  position: relative;
+  box-sizing: border-box;
 }
 
-/* --- Immagine del profilo --- */
-.cookie-policy-content img {
-  width: auto;
-  height: 100vh;
-  object-fit: cover;
+.about-editorial-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 32px clamp(20px, 3.5vw, 40px) 120px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: clamp(36px, 5vw, 72px);
+  align-items: start;
+  box-sizing: border-box;
 }
 
-/* --- Blocco dei testi a destra --- */
-.text-content-wrapper {
-  flex: 1;
+/* --- Left Column (Sticky Sidebar) --- */
+.about-col-left {
+  position: relative;
+  width: 100%;
+}
+
+.about-sticky-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 72px; /* 48px header + 24px margin */
   display: flex;
   flex-direction: column;
-  gap: 2.5em;
+  gap: 20px;
 }
 
-/* Stili generici per i paragrafi nel blocco di testo */
-.cookie-policy-content p,
-.cookie-policy-content h3 {
-  margin: 0 0 0.75em 0;
-  line-height: 1.6;
+/* Photo Frame */
+.about-photo-frame {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: var(--line-2px);
+  overflow: hidden;
+  background-color: #f4f4f5;
+}
+
+.about-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Specs Table */
+.about-specs-table {
+  border-top: var(--line-2px);
+  display: flex;
+  flex-direction: column;
+}
+
+.about-spec-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  padding: 8px 0;
+  border-bottom: var(--line-1px);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
   text-align: left;
 }
 
-/* ================================================ */
-/* REGOLE PER IL MOBILE (RESPONSIVE)      */
-/* ================================================ */
-@media (max-width: 768px) {
-
-  main {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-
-  .cookie-policy-section {
-    padding: 15% 5%;
-    min-height: auto;
-  }
-  
-  .cookie-policy-section h2 {
-    margin-bottom: 2em;
-  }
-
-  /* Il contenuto (foto e testi) va in colonna */
-  .cookie-policy-content {
-    flex-direction: column;
-    align-items: center;
-    gap: 2em;
-  }
-
-  /* L'immagine diventa a larghezza piena */
-  .cookie-policy-content img {
-    width: 100vw;
-    height: auto;
-    margin-bottom: 1em;
-  }
-  
-  .text-content-wrapper {
-    width: 100%;
-  }
+.about-spec-label {
+  text-transform: uppercase;
+  color: #71717a;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  font-size: 10px;
 }
 
-/* ================================================ */
-/* STILI PER I LINK SOCIAL (AGGIUNTO)     */
-/* ================================================ */
-
-.social-links {
-  /* Aggiunge uno spazio sopra per separarlo dalla descrizione */
-  margin-top: 1.5em; 
-  border-top: 2px solid #f0f0f0; /* Linea separatrice leggera */
-  padding-top: 2.5em;
+.about-spec-value {
+  color: #000000;
+  font-weight: 500;
+  text-align: left;
 }
 
-.social-link-item {
+/* CTAs & Social Links */
+.about-action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.about-cta-btn {
   display: flex;
   align-items: center;
-  gap: 15px; /* Spazio tra logo e testo */
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: #ffffff;
+  color: #000000;
+  border: var(--line-2px);
   text-decoration: none;
-  color: black;
-  margin-bottom: 1em; /* Spazio tra un link e l'altro */
-  transition: opacity 0.2s ease;
-  width: fit-content; /* Fa sì che l'area cliccabile non sia a tutta larghezza */
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  box-sizing: border-box;
 }
 
-.social-link-item:hover {
-  opacity: 0.6; /* Semplice effetto al passaggio del mouse */
+.about-cta-btn:hover {
+  background: #000000;
+  color: #ffffff;
 }
 
-.social-link-item img {
-  width: 28px; /* Dimensione del logo */
-  height: 28px;
+.about-cta-arrow {
+  font-size: 11px;
+  opacity: 0.85;
 }
 
-.social-link-item span {
-  font-size: 1rem;
-  font-weight: 500; /* Puoi cambiarlo in 'bold' se preferisci */
-  text-decoration: underline;
-  text-underline-offset: 4px; /* Distanza della sottolineatura dal testo */
+/* --- Right Column (Editorial Content Stream) --- */
+.about-col-right {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
-/* Link inline nel personal-info */
+.about-right-header {
+  border-bottom: var(--line-2px);
+  padding-bottom: 24px;
+}
+
+.about-eyebrow {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #71717a;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.about-heading {
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  margin: 0;
+  text-transform: lowercase;
+}
+
+.about-article-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-section-hdr {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: var(--line-1px);
+  padding-bottom: 12px;
+}
+
+.about-section-num {
+  font-size: 12px;
+  color: #71717a;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.about-section-title {
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  margin: 0;
+  text-transform: lowercase;
+  color: #000000;
+}
+
+.about-prose {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #1a1a1a;
+  text-align: left;
+}
+
+.about-prose p {
+  margin: 0 0 1.25em 0;
+}
+
+.about-prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Highlight Card for Award */
+.about-highlight-card {
+  background: var(--color-bg-subtle);
+  border: var(--line-2px);
+  padding: 24px 28px;
+  margin-top: 8px;
+}
+
+.about-card-badge {
+  display: inline-block;
+  background: #000000;
+  color: #ffffff;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  padding: 4px 8px;
+  margin-bottom: 12px;
+}
+
+.about-card-title {
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  color: #000000;
+}
+
+.about-card-sub {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+  color: #333333;
+}
+
+.about-card-repo {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0;
+}
+
+/* Disciplines Grid */
+.about-disciplines-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.about-discipline-item {
+  border: var(--line-1px);
+  padding: 20px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.discipline-tag {
+  font-size: 10px;
+  font-weight: 500;
+  color: #71717a;
+  margin-bottom: 8px;
+}
+
+.about-discipline-item h4 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
+  color: #000000;
+}
+
+.about-discipline-item p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #666666;
+  margin: 0;
+}
+
+/* Inline Link */
 .inline-link {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 3px;
-  font-weight: 600;
+  font-weight: 500;
   transition: opacity 0.2s ease;
 }
 
 .inline-link:hover {
-  opacity: 0.55;
+  opacity: 0.6;
+}
+
+/* ===================================================================
+ * MOBILE RESPONSIVE (SMARTPHONE & TABLET)
+ * =================================================================== */
+@media (max-width: 900px) {
+  .about-editorial-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 24px 16px 80px;
+  }
+
+  .about-sticky-wrapper {
+    position: static;
+  }
+
+  .about-photo-frame {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .about-specs-table {
+    margin-top: 12px;
+  }
+
+  .about-disciplines-grid {
+    grid-template-columns: 1fr;
+  }
 }

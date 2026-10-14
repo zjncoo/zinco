@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Dessert Port Copita Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #5E1B26; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 240.0,250.0
+      C 241.8,306.0 222.5,341.0 222.5,390.0
+      C 222.5,442.5 296.0,487.5 296.0,540.0
+      L 296.0,665.0
+      C 296.0,692.5 247.4,715.0 215.0,715.0
+      L 385.0,715.0
+      C 352.6,715.0 304.0,692.5 304.0,665.0
+      L 304.0,540.0
+      C 304.0,487.5 377.5,442.5 377.5,390.0
+      C 377.5,341.0 361.8,306.0 360.0,250.0
+      Z"/>
+</svg>

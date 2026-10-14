@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Magnum Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #241926; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 264,55 L 336,55 L 340,210
+  C 340,270 445,300 445,390
+  L 445,730 L 155,730 L 155,390
+  C 155,300 260,270 260,210 Z"/>
+</svg>

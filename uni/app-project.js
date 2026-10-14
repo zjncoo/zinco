@@ -2,6 +2,7 @@
  * app-project.js
  * Standardized Showcase Engine for Application Projects (zinco.cc)
  * Powered by JSONL (JSON Lines) data format.
+ * Standardized 2-Column Editorial Layout
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,6 +56,8 @@ function renderAppShowcase(data) {
   const glanceGrid = document.getElementById('glance-grid');
   const appGrid = document.getElementById('appGrid');
   const heroMediaContainer = document.getElementById('hero-media-container');
+  const mainSection = document.getElementById('sezione-progetto') || document.querySelector('main');
+  let projectInfoSection = document.querySelector('.project-info-section');
   const projectInfoContent = document.querySelector('.project-info-content');
 
   const metaItem = data.find(item => item.type === 'meta') || {};
@@ -62,6 +65,12 @@ function renderAppShowcase(data) {
   const heroMediaItem = data.find(item => item.type === 'hero_media');
   const descItem = data.find(item => item.type === 'description');
   const specsItem = data.find(item => item.type === 'specs');
+
+  // Hide the glance bar in hero-wrapper if present so hero stays pure white
+  const heroGlance = document.querySelector('#hero-wrapper #glance-container, main > #glance-container');
+  if (heroGlance) {
+    heroGlance.style.display = 'none';
+  }
 
   // 1. Hero Title
   if (heroTitle) {
@@ -93,24 +102,19 @@ function renderAppShowcase(data) {
         websiteLink.href = websiteUrl;
         websiteLink.target = '_blank';
         websiteLink.rel = 'noopener noreferrer';
-        websiteLink.className = 'hero-app-big-link cursor-target';
+        websiteLink.className = 'hero-editorial-link cursor-target';
         websiteLink.id = 'heroWebAppLink';
         websiteLink.setAttribute('aria-label', `Visit official web app for ${heroItem.title || 'the app'}`);
 
         const domainText = heroItem.websiteDomain || websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
         websiteLink.innerHTML = `
-          <div class="hero-link-badge">
-            <span class="pulse-dot"></span>
-            <span>${heroItem.badge || 'OFFICIAL WEB APP'}</span>
-          </div>
-          <div class="hero-link-main">
-            <span class="hero-link-domain">${domainText}</span>
-            <svg class="hero-link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 7"></polyline>
-            </svg>
-          </div>
+          <span class="pulse-dot"></span>
+          <span class="hero-link-text">${domainText}</span>
+          <svg class="hero-link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 7"></polyline>
+          </svg>
         `;
         heroActionBox.appendChild(websiteLink);
       }
@@ -120,7 +124,7 @@ function renderAppShowcase(data) {
         downloadLink.href = downloadUrl;
         downloadLink.target = '_blank';
         downloadLink.rel = 'noopener noreferrer';
-        downloadLink.className = 'hero-app-download-btn cursor-target';
+        downloadLink.className = 'hero-editorial-link cursor-target';
         downloadLink.id = 'heroDownloadLink';
         const rawDownloadLabel = heroItem.downloadLabel || (downloadUrl.endsWith('.dmg') ? 'download DMG' : 'view source');
         const downloadLabel = rawDownloadLabel.replace(/[↓↗→←↑↔]/g, '').trim();
@@ -135,14 +139,22 @@ function renderAppShowcase(data) {
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             `}
           </svg>
-          <span>${downloadLabel}</span>
+          <span class="hero-link-text">${downloadLabel}</span>
+          ${isDmg ? `
+            <span class="hero-link-arrow-text">↓</span>
+          ` : `
+            <svg class="hero-link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 7"></polyline>
+            </svg>
+          `}
         `;
         heroActionBox.appendChild(downloadLink);
       }
     }
   }
 
-  // 3. Hero Media Banner (optional full preview)
+  // 3. Hero Media Preview
   if (heroMediaContainer && heroMediaItem && heroMediaItem.src) {
     heroMediaContainer.innerHTML = `
       <div class="hero-media-wrapper cursor-target" id="heroMediaPreview" data-full-src="${heroMediaItem.src}" data-caption="${heroMediaItem.alt || ''}">
@@ -162,101 +174,10 @@ function renderAppShowcase(data) {
     }
   }
 
-  // 4. Project Info / Editorial Description (Signature Zinco Colored Style as in NUS)
-  if (projectInfoContent) {
-    // If description is provided in JSONL and not already rendered statically
-    if (descItem && descItem.paragraphs) {
-      projectInfoContent.innerHTML = '';
-
-      if (metaItem.icon) {
-        const iconImg = document.createElement('img');
-        iconImg.src = metaItem.icon;
-        iconImg.alt = `${metaItem.name || 'App'} Logo`;
-        iconImg.style.width = '100px';
-        iconImg.style.height = '100px';
-        iconImg.style.marginBottom = '2rem';
-        iconImg.style.borderRadius = metaItem.icon.endsWith('.svg') ? '0' : '22px';
-        iconImg.loading = 'lazy';
-        iconImg.decoding = 'async';
-        projectInfoContent.appendChild(iconImg);
-      }
-
-      const h2 = document.createElement('h2');
-      h2.textContent = descItem.label || 'Values';
-      projectInfoContent.appendChild(h2);
-
-      const textDiv = document.createElement('div');
-      textDiv.className = 'project-info-text';
-
-      descItem.paragraphs.forEach(pContent => {
-        const p = document.createElement('p');
-        p.innerHTML = pContent;
-        textDiv.appendChild(p);
-      });
-
-      projectInfoContent.appendChild(textDiv);
-    }
-
-    // Apply brand color override dynamically if provided
-    const brandColor = metaItem.brandColor;
-    if (brandColor) {
-      const colorTargets = projectInfoContent.querySelectorAll('.project-info-text p, .project-info-text p strong');
-      colorTargets.forEach(el => {
-        el.style.color = brandColor;
-      });
-    }
-
-    // --- DESCRIZIONE COLLASSABILE (ESATTAMENTE COME IN NUS) ---
-    const descriptionText = projectInfoContent.querySelector('.project-info-text');
-    if (descriptionText) {
-      const paragraphs = Array.from(descriptionText.querySelectorAll('p'));
-      const extraParagraphs = paragraphs.slice(1);
-      if (extraParagraphs.length > 0) {
-        extraParagraphs.forEach(p => p.classList.add('description-hidden'));
-
-        let moreBtn = projectInfoContent.querySelector('.description-more-btn');
-        if (!moreBtn) {
-          moreBtn = document.createElement('button');
-          moreBtn.classList.add('description-more-btn', 'cursor-target');
-          const chevronDownSvg = `<svg class="btn-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
-          moreBtn.innerHTML = `more ${chevronDownSvg}`;
-          paragraphs[0].after(moreBtn);
-
-          moreBtn.addEventListener('click', () => {
-            const isExpanded = descriptionText.classList.toggle('expanded');
-            moreBtn.classList.toggle('open', isExpanded);
-            moreBtn.innerHTML = isExpanded
-              ? `less ${chevronDownSvg}`
-              : `more ${chevronDownSvg}`;
-          });
-        }
-      }
-    }
-
-    // Append Technical Specifications Strip below description
-    if (specsItem && Array.isArray(specsItem.items) && !projectInfoContent.querySelector('.app-specs-strip')) {
-      const specsGrid = document.createElement('div');
-      specsGrid.className = 'app-specs-strip';
-
-      specsItem.items.forEach(spec => {
-        const specCell = document.createElement('div');
-        specCell.className = 'app-spec-cell';
-        specCell.innerHTML = `
-          <span class="spec-label">${spec.label}</span>
-          <span class="spec-value">${spec.value}</span>
-        `;
-        specsGrid.appendChild(specCell);
-      });
-
-      projectInfoContent.appendChild(specsGrid);
-    }
-  }
-
-  // 5. Main Grid (Screenshots, Headers, Links) & Glance Navigation
+  // 4. Populate App Grid (Screenshots, Headers, Links)
   if (appGrid) appGrid.innerHTML = '';
-  if (glanceGrid) glanceGrid.innerHTML = '';
-
   let screenshotIndex = 0;
+  const screenshotsForGlance = [];
 
   data.forEach((item, index) => {
     const uniqueId = `app-item-${index}`;
@@ -272,6 +193,7 @@ function renderAppShowcase(data) {
 
     if (item.type === 'screenshot' || item.type === 'image') {
       screenshotIndex++;
+      screenshotsForGlance.push({ item, uniqueId });
       const card = document.createElement('article');
       card.className = 'app-screenshot-card cursor-target';
       card.id = uniqueId;
@@ -318,21 +240,6 @@ function renderAppShowcase(data) {
       });
 
       if (appGrid) appGrid.appendChild(card);
-
-      if (glanceGrid) {
-        const glanceLink = document.createElement('a');
-        glanceLink.href = `#${uniqueId}`;
-        glanceLink.className = 'glance-item cursor-target';
-        glanceLink.setAttribute('aria-label', `Jump to ${item.label}`);
-
-        const thumbImg = document.createElement('img');
-        thumbImg.src = item.src;
-        thumbImg.alt = `Thumbnail ${item.label}`;
-        thumbImg.loading = 'lazy';
-
-        glanceLink.appendChild(thumbImg);
-        glanceGrid.appendChild(glanceLink);
-      }
       return;
     }
 
@@ -363,53 +270,180 @@ function renderAppShowcase(data) {
       `;
 
       if (appGrid) appGrid.appendChild(linkCard);
-
-      if (glanceGrid) {
-        const glanceLink = document.createElement('a');
-        glanceLink.href = `#${uniqueId}`;
-        glanceLink.className = 'glance-item glance-text cursor-target';
-        glanceLink.setAttribute('aria-label', `Jump to ${item.label}`);
-        glanceLink.innerHTML = `<span>${item.label}</span>`;
-        glanceGrid.appendChild(glanceLink);
-      }
-      return;
-    }
-
-    if (item.type === 'color') {
-      const colorItem = document.createElement('div');
-      colorItem.className = 'app-color-item';
-      colorItem.id = uniqueId;
-      colorItem.style.backgroundColor = item.hex;
-      colorItem.innerHTML = `<span class="color-label">${item.label || item.hex}</span>`;
-      if (appGrid) appGrid.appendChild(colorItem);
-
-      if (glanceGrid) {
-        const glanceLink = document.createElement('a');
-        glanceLink.href = `#${uniqueId}`;
-        glanceLink.className = 'glance-item glance-color cursor-target';
-        glanceLink.style.backgroundColor = item.hex;
-        glanceGrid.appendChild(glanceLink);
-      }
       return;
     }
   });
+
+  // 5. Build Editorial 2-Column Structure
+  if (mainSection && !document.querySelector('.project-editorial-layout')) {
+    const editorialLayout = document.createElement('div');
+    editorialLayout.className = 'project-editorial-layout';
+
+    // --- Colonna Sinistra (Sticky / Fissa) ---
+    const stickyCol = document.createElement('aside');
+    stickyCol.className = 'project-sticky-col';
+
+    // 5A. Representative image / App icon
+    const repImgSrc = metaItem.heroImage || (heroMediaItem && heroMediaItem.src) || (data.find(d => d.type === 'screenshot' && d.src) || {}).src;
+    if (repImgSrc) {
+      const photoBox = document.createElement('div');
+      photoBox.className = 'editorial-photo-box';
+      photoBox.innerHTML = `<img src="${repImgSrc}" alt="${metaItem.name || 'App preview'}" class="editorial-rep-img" loading="eager">`;
+      stickyCol.appendChild(photoBox);
+    }
+
+    // 5B. Specs Table
+    if (specsItem && Array.isArray(specsItem.items) && specsItem.items.length > 0) {
+      const specsTable = document.createElement('div');
+      specsTable.className = 'editorial-specs-table';
+      specsItem.items.forEach(spec => {
+        const row = document.createElement('div');
+        row.className = 'specs-row';
+        row.innerHTML = `
+          <span class="specs-label">${spec.label}</span>
+          <span class="specs-value">${spec.value}</span>
+        `;
+        specsTable.appendChild(row);
+      });
+      stickyCol.appendChild(specsTable);
+    }
+
+    // 5C. Glance Thumbnails
+    if (screenshotsForGlance.length > 0) {
+      const glanceWrap = document.createElement('div');
+      glanceWrap.className = 'editorial-glance-wrap';
+      const thumbsGrid = document.createElement('div');
+      thumbsGrid.className = 'editorial-glance-grid';
+      screenshotsForGlance.slice(0, 10).forEach(({ item, uniqueId }) => {
+        const thumbLink = document.createElement('a');
+        thumbLink.href = `#${uniqueId}`;
+        thumbLink.className = 'editorial-glance-thumb cursor-target';
+        thumbLink.title = item.label || 'View feature';
+        thumbLink.innerHTML = `<img src="${item.src}" alt="${item.label || 'Thumbnail'}" loading="lazy">`;
+        thumbsGrid.appendChild(thumbLink);
+      });
+      glanceWrap.appendChild(thumbsGrid);
+      stickyCol.appendChild(glanceWrap);
+    }
+
+    // 5D. Action CTA Group (Website button on left + Description button)
+    const ctaGroup = document.createElement('div');
+    ctaGroup.className = 'editorial-cta-group';
+
+    const websiteUrl = heroItem.websiteUrl || metaItem.websiteUrl;
+    if (websiteUrl) {
+      const siteBtn = document.createElement('a');
+      siteBtn.href = websiteUrl;
+      siteBtn.target = '_blank';
+      siteBtn.rel = 'noopener noreferrer';
+      siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
+      siteBtn.innerHTML = `
+        <span>Open Web App</span>
+        <span class="btn-arrow">↗</span>
+      `;
+      ctaGroup.appendChild(siteBtn);
+    }
+
+    const descBtn = document.createElement('a');
+    descBtn.href = '#project-description-section';
+    descBtn.className = 'editorial-action-btn editorial-desc-btn cursor-target';
+    descBtn.id = 'editorialDescBtn';
+    descBtn.innerHTML = `
+      <span>Project Description</span>
+      <span class="btn-arrow">↓</span>
+    `;
+    ctaGroup.appendChild(descBtn);
+
+    stickyCol.appendChild(ctaGroup);
+    editorialLayout.appendChild(stickyCol);
+
+    // --- Colonna Destra (Scroll Multimediale) ---
+    const mediaStream = document.createElement('div');
+    mediaStream.className = 'project-media-stream';
+
+    if (heroMediaContainer) {
+      mediaStream.appendChild(heroMediaContainer);
+    }
+    if (appGrid) {
+      mediaStream.appendChild(appGrid);
+    }
+
+    editorialLayout.appendChild(mediaStream);
+
+    // Inserisci il layout a 2 colonne in cima al main
+    mainSection.prepend(editorialLayout);
+  }
+
+  // 6. Project Info / Description at the bottom of the page
+  if (projectInfoSection) {
+    projectInfoSection.id = 'project-description-section';
+    // Move to bottom of mainSection
+    mainSection.appendChild(projectInfoSection);
+
+    // Apply brand color override dynamically if provided
+    const brandColor = metaItem.brandColor;
+    if (brandColor && projectInfoContent) {
+      const colorTargets = projectInfoContent.querySelectorAll('.project-info-text p, .project-info-text p strong');
+      colorTargets.forEach(el => {
+        el.style.color = brandColor;
+      });
+    }
+
+    // Collapsible description (more / less)
+    const descriptionText = projectInfoSection.querySelector('.project-info-text');
+    if (descriptionText) {
+      const paragraphs = Array.from(descriptionText.querySelectorAll('p'));
+      const extraParagraphs = paragraphs.slice(1);
+      if (extraParagraphs.length > 0 && !projectInfoSection.querySelector('.description-more-btn')) {
+        extraParagraphs.forEach(p => p.classList.add('description-hidden'));
+
+        let moreBtn = document.createElement('button');
+        moreBtn.className = 'description-more-btn cursor-target';
+        moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
+        paragraphs[0].after(moreBtn);
+
+        moreBtn.addEventListener('click', () => {
+          const isExpanded = descriptionText.classList.toggle('expanded');
+          moreBtn.classList.toggle('open', isExpanded);
+          moreBtn.innerHTML = isExpanded
+            ? 'less <span class="btn-arrow">↓</span>'
+            : 'more <span class="btn-arrow">↓</span>';
+        });
+      }
+    }
+  }
+
+  // 7. Click interactions
+  const descClickBtn = document.getElementById('editorialDescBtn');
+  if (descClickBtn && projectInfoSection) {
+    descClickBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof window.lenis !== 'undefined' && window.lenis) {
+        window.lenis.scrollTo(projectInfoSection, { duration: 1.5, offset: -40 });
+      } else {
+        projectInfoSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
 
   setupSmoothScroll();
   initLightbox();
 }
 
 function setupSmoothScroll() {
-  const anchors = document.querySelectorAll('#glance-grid a, .scroll-down-arrow');
+  const anchors = document.querySelectorAll('.editorial-glance-thumb, #glance-grid a, .scroll-down-arrow');
   anchors.forEach(link => {
     link.addEventListener('click', e => {
       const targetId = link.getAttribute('href');
       if (targetId && targetId.startsWith('#')) {
         e.preventDefault();
-        if (typeof window.lenis !== 'undefined') {
-          window.lenis.scrollTo(targetId, { duration: 1.6, offset: -40 });
-        } else {
-          const targetEl = document.querySelector(targetId);
-          if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          if (typeof window.lenis !== 'undefined') {
+            window.lenis.scrollTo(targetEl, { duration: 1.4, offset: -70 });
+          } else {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       }
     });

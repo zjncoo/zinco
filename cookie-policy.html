@@ -16,6 +16,8 @@
   <link rel="apple-touch-icon" href="imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
   <link rel="canonical" href="https://zinco.cc/cookie-policy.html" />
 
   <link rel="stylesheet" href="index.css" />
@@ -32,7 +34,7 @@
     <div id="scroll-progress-bar"></div>
 
     <div id="preloader">
-      <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -51,37 +53,64 @@
 
     <!-- Cookie Policy Document Section -->
     <section class="policy-container">
-      <header class="policy-header">
-        <div class="policy-badge-row">
-          <span class="policy-badge">Cookie Policy</span>
-          <span class="policy-badge policy-badge--outline">Italian Privacy Guidelines 10/06/2021</span>
-          <span class="policy-badge policy-badge--outline">Art. 122 Italian Privacy Code</span>
-          <a href="privacy-policy.html" class="policy-badge-switch">Go to Privacy Policy &rarr;</a>
-        </div>
-        <h1 class="policy-title">cookie policy</h1>
-        <p class="policy-subtitle">
-          This Cookie Policy explains clearly and transparently the types and operational methods of cookies and similar technologies (such as Web Storage) used on the website <strong>zinco.cc</strong>, as well as providing instructions on how to manage, block, or delete them in compliance with the <em>Guidelines on cookies and other tracking tools</em> issued by the Italian Data Protection Authority on June 10, 2021 and Article 122 of Legislative Decree 196/2003 (&ldquo;Italian Privacy Code&rdquo;).
-        </p>
-        <div class="policy-meta">
-          <div class="policy-meta-item"><strong>Data Controller:</strong> Francesco Zanchetta</div>
-          <div class="policy-meta-item"><strong>Website:</strong> zinco.cc</div>
-          <div class="policy-meta-item"><strong>Contact Email:</strong> <a href="mailto:work@zinco.cc">work@zinco.cc</a></div>
-          <div class="policy-meta-item"><strong>Last Updated:</strong> October 2026</div>
-        </div>
-      </header>
+      <div class="policy-editorial-layout">
 
-      <!-- Table of Contents -->
-      <nav class="policy-toc" aria-label="Cookie Policy Table of Contents">
-        <div class="policy-toc-title">Table of Contents</div>
-        <ul class="policy-toc-list">
-          <li><a href="#what-are-cookies" class="policy-toc-link">01. What Cookies Are and Why They Are Used</a></li>
-          <li><a href="#types-used" class="policy-toc-link">02. Types of Cookies Used on This Website</a></li>
-          <li><a href="#table-details" class="policy-toc-link">03. Detailed Cookie & Storage Table</a></li>
-          <li><a href="#third-parties" class="policy-toc-link">04. Third-Party Services and External Resources</a></li>
-          <li><a href="#browser-management" class="policy-toc-link">05. How to Manage and Disable Cookies in Your Browser</a></li>
-          <li><a href="#rights-contacts" class="policy-toc-link">06. User Rights and Contact Details</a></li>
-        </ul>
-      </nav>
+        <!-- Left Column: Sticky Metadata & TOC -->
+        <aside class="policy-col-sidebar">
+          <div class="policy-sticky-wrapper">
+            <div class="policy-badge-row">
+              <span class="policy-badge">Cookie Policy</span>
+              <span class="policy-badge policy-badge--outline">Guidelines 10/06/2021</span>
+              <span class="policy-badge policy-badge--outline">Art. 122 Privacy Code</span>
+            </div>
+
+            <div class="policy-meta-table">
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">controller</span>
+                <span class="policy-meta-val">francesco zanchetta</span>
+              </div>
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">website</span>
+                <span class="policy-meta-val">zinco.cc</span>
+              </div>
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">contact</span>
+                <span class="policy-meta-val"><a href="mailto:work@zinco.cc">work@zinco.cc</a></span>
+              </div>
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">updated</span>
+                <span class="policy-meta-val">october 2026</span>
+              </div>
+            </div>
+
+            <a href="privacy-policy.html" class="policy-switch-btn">
+              <span>view privacy policy</span>
+              <span class="policy-switch-arrow">↗</span>
+            </a>
+
+            <!-- Table of Contents -->
+            <nav class="policy-toc" aria-label="Cookie Policy Table of Contents">
+              <div class="policy-toc-title">table of contents</div>
+              <ul class="policy-toc-list">
+                <li><a href="#what-are-cookies" class="policy-toc-link">01. What Cookies Are</a></li>
+                <li><a href="#types-used" class="policy-toc-link">02. Types of Cookies Used</a></li>
+                <li><a href="#table-details" class="policy-toc-link">03. Cookie &amp; Storage Table</a></li>
+                <li><a href="#third-parties" class="policy-toc-link">04. External Resources</a></li>
+                <li><a href="#browser-management" class="policy-toc-link">05. Browser Management</a></li>
+                <li><a href="#rights-contacts" class="policy-toc-link">06. Rights &amp; Contacts</a></li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Right Column: Main Content -->
+        <div class="policy-col-main">
+          <header class="policy-main-header">
+            <h1 class="policy-title">cookie policy</h1>
+            <p class="policy-subtitle">
+              This Cookie Policy explains clearly and transparently the types and operational methods of cookies and similar technologies (such as Web Storage) used on the website <strong>zinco.cc</strong>, as well as providing instructions on how to manage, block, or delete them in compliance with the <em>Guidelines on cookies and other tracking tools</em> issued by the Italian Data Protection Authority on June 10, 2021 and Article 122 of Legislative Decree 196/2003 (&ldquo;Italian Privacy Code&rdquo;).
+            </p>
+          </header>
 
       <!-- 01. What Are Cookies -->
       <article id="what-are-cookies" class="policy-section">
@@ -308,6 +337,9 @@
         <a href="privacy-policy.html" class="policy-btn">View Privacy Policy &rarr;</a>
         <a href="#" class="policy-btn policy-btn--secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Back to top &uarr;</a>
       </div>
+
+        </div><!-- /policy-col-main -->
+      </div><!-- /policy-editorial-layout -->
     </section>
 
   </div><!-- /site-main-content -->

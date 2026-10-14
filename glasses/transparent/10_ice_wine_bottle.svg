@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Ice Wine Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #2E4554; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 285,45 L 315,45 L 315,220
+  C 315,280 345,360 345,550
+  L 345,750 L 255,750 L 255,550
+  C 255,360 285,280 285,220 Z"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Rhone Syrah Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #3D1D28; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 272,70 L 328,70 L 326,92 L 324,200
+  C 324,260 410,320 410,430
+  L 410,725 L 190,725 L 190,430
+  C 190,320 276,260 276,200
+  L 274,92 Z"/>
+</svg>

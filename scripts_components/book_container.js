@@ -12,6 +12,208 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // --- 1. COSTRUZIONE DEL LAYOUT EDITORIALE A 2 COLONNE PER LE PUBBLICAZIONI ---
+  const buildPublicationEditorialLayout = () => {
+    if (document.querySelector('.project-editorial-layout')) return;
+
+    const heroTitleEl = document.getElementById('hero-title');
+    const projectTitle = heroTitleEl ? heroTitleEl.textContent.trim() : 'Publication';
+
+    const viewerHeader = document.getElementById('viewer-header');
+    let descriptionText = '';
+    if (viewerHeader) {
+      const p = viewerHeader.querySelector('p');
+      if (p) descriptionText = p.textContent.trim();
+    }
+
+    const brandingGrid = document.querySelector('.branding-grid');
+    const mockupImgs = brandingGrid ? Array.from(brandingGrid.querySelectorAll('img')) : [];
+    const videos = Array.from(document.querySelectorAll('.video-container, video'));
+
+    // Prima foto mockup per la colonna sinistra sticky
+    const firstImg = mockupImgs.length > 0 ? mockupImgs[0] : null;
+    const repImgSrc = firstImg ? firstImg.src : '';
+    const repImgAlt = firstImg ? (firstImg.alt || projectTitle) : projectTitle;
+
+    // Contenitore Layout Editoriale a 2 Colonne
+    const editorialLayout = document.createElement('div');
+    editorialLayout.className = 'project-editorial-layout publication-editorial-layout';
+
+    // Colonna Sinistra Sticky (Allineata a Sinistra)
+    const stickyCol = document.createElement('div');
+    stickyCol.className = 'project-sticky-col';
+
+    // Box Foto Rappresentativa
+    if (repImgSrc) {
+      const photoBox = document.createElement('div');
+      photoBox.className = 'editorial-photo-box';
+      const repImg = document.createElement('img');
+      repImg.src = repImgSrc;
+      repImg.alt = repImgAlt;
+      repImg.className = 'editorial-rep-img';
+      photoBox.appendChild(repImg);
+      stickyCol.appendChild(photoBox);
+    }
+
+    // Tabella Specifiche / Metadati
+    const specsTable = document.createElement('div');
+    specsTable.className = 'editorial-specs-table';
+    specsTable.innerHTML = `
+      <div class="specs-row">
+        <span class="specs-label">PROJECT</span>
+        <span class="specs-value">${projectTitle}</span>
+      </div>
+      <div class="specs-row">
+        <span class="specs-label">DISCIPLINE</span>
+        <span class="specs-value">Publication &amp; Editorial</span>
+      </div>
+      <div class="specs-row">
+        <span class="specs-label">FORMAT</span>
+        <span class="specs-value">${layoutMode === 'single' ? 'Single Page' : 'Spread Flipbook'}</span>
+      </div>
+      <div class="specs-row">
+        <span class="specs-label">ARCHIVE</span>
+        <span class="specs-value">Print Book &amp; Digital Archive</span>
+      </div>
+    `;
+    stickyCol.appendChild(specsTable);
+
+    // Gruppo Bottoni Azione
+    const ctaGroup = document.createElement('div');
+    ctaGroup.className = 'editorial-cta-group';
+    ctaGroup.innerHTML = `
+      <button class="editorial-action-btn editorial-reader-btn cursor-target" id="editorialScrollReaderBtn" type="button">
+        <span>Read Publication</span>
+        <span class="btn-arrow">↓</span>
+      </button>
+      <button class="editorial-action-btn editorial-desc-btn cursor-target" id="editorialScrollDescBtn" type="button">
+        <span>Project Description</span>
+        <span class="btn-arrow">↓</span>
+      </button>
+    `;
+    stickyCol.appendChild(ctaGroup);
+    editorialLayout.appendChild(stickyCol);
+
+    // Colonna Destra Media Stream (Flush, senza spazi bianchi)
+    const mediaStream = document.createElement('div');
+    mediaStream.className = 'project-media-stream';
+
+    // Aggiungi video se presente (es. zoom)
+    videos.forEach(v => {
+      const mediaItem = document.createElement('div');
+      mediaItem.className = 'project-media-item';
+      mediaItem.style.lineHeight = '0';
+      mediaItem.style.width = '100%';
+      mediaItem.style.borderBottom = '1px solid black';
+
+      const vid = v.tagName === 'VIDEO' ? v : (v.querySelector('video') || v);
+      vid.style.width = '100%';
+      vid.style.maxWidth = '100%';
+      vid.style.height = 'auto';
+      vid.style.display = 'block';
+
+      mediaItem.appendChild(vid);
+      mediaStream.appendChild(mediaItem);
+    });
+
+    // Aggiungi mockups a tutta larghezza flush
+    mockupImgs.forEach(img => {
+      const mediaItem = document.createElement('div');
+      mediaItem.className = 'project-media-item';
+      mediaItem.style.lineHeight = '0';
+      mediaItem.style.width = '100%';
+      mediaItem.style.borderBottom = '1px solid black';
+
+      const clone = img.cloneNode(true);
+      clone.style.width = '100%';
+      clone.style.height = 'auto';
+      clone.style.display = 'block';
+      clone.style.maxHeight = 'none';
+      clone.style.maxWidth = 'none';
+      clone.removeAttribute('width');
+      clone.removeAttribute('height');
+
+      mediaItem.appendChild(clone);
+      mediaStream.appendChild(mediaItem);
+    });
+    editorialLayout.appendChild(mediaStream);
+
+    // Sezione Descrizione Progetto in basso
+    const descSection = document.createElement('section');
+    descSection.id = 'project-description-section';
+    descSection.className = 'project-info-section';
+    descSection.innerHTML = `
+      <div class="project-info-content">
+        <h2>DESCRIPTION / ${projectTitle.toUpperCase()}</h2>
+        <div class="project-info-text">
+          <p>${descriptionText || 'Editorial publication exploring typography, pacing, and visual layout.'}</p>
+        </div>
+      </div>
+    `;
+
+    // Sezione Flipbook Reader in fondo
+    const readerSection = document.createElement('section');
+    readerSection.id = 'project-publication-reader';
+    readerSection.className = 'publication-reader-section';
+    readerSection.innerHTML = `
+      <div class="publication-reader-header">
+        <div class="publication-reader-badge">ARCHIVE // INTERACTIVE FLIPBOOK</div>
+        <h2 class="publication-reader-title">${projectTitle} — Complete Publication</h2>
+      </div>
+    `;
+
+    // Sposta bookContainer dentro readerSection
+    readerSection.appendChild(bookContainer);
+
+    // Rimuovi vecchio viewer-header e branding-grid
+    if (viewerHeader) viewerHeader.remove();
+    if (brandingGrid) brandingGrid.remove();
+
+    // Inserisci ordinatamente all'interno di <main>
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+      mainEl.innerHTML = '';
+      mainEl.appendChild(editorialLayout);
+      mainEl.appendChild(descSection);
+      mainEl.appendChild(readerSection);
+    } else {
+      const siteMain = document.querySelector('.site-main-content') || document.body;
+      const footer = document.querySelector('zinco-footer') || siteMain.lastElementChild;
+      siteMain.insertBefore(editorialLayout, footer);
+      siteMain.insertBefore(descSection, footer);
+      siteMain.insertBefore(readerSection, footer);
+    }
+
+    // Handlers per scroll fluido ai bottoni
+    const scrollReaderBtn = document.getElementById('editorialScrollReaderBtn');
+    if (scrollReaderBtn) {
+      scrollReaderBtn.addEventListener('click', () => {
+        const target = document.getElementById('project-publication-reader');
+        if (!target) return;
+        if (window.lenis) {
+          window.lenis.scrollTo(target, { offset: -60 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    const scrollDescBtn = document.getElementById('editorialScrollDescBtn');
+    if (scrollDescBtn) {
+      scrollDescBtn.addEventListener('click', () => {
+        const target = document.getElementById('project-description-section');
+        if (!target) return;
+        if (window.lenis) {
+          window.lenis.scrollTo(target, { offset: -60 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  };
+
+  buildPublicationEditorialLayout();
+
   const { pdfjsLib } = window;
   pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
@@ -48,22 +250,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const pixelRatio = window.devicePixelRatio || 1;
       const viewport = page.getViewport({ scale: 1 });
 
-      const maxHeight = bookViewer.clientHeight;
-      const isSinglePageView = window.innerWidth <= 767 || layoutMode === 'single';
-      const maxWidth = bookViewer.clientWidth / (isSinglePageView ? 1 : 2);
+      const isMobile = window.innerWidth <= 767;
+      const isSinglePageView = isMobile || layoutMode === 'single';
 
-      // On mobile, use width-only scaling so the PDF fills the screen width
-      // On desktop, use Math.min to fit both dimensions within the viewer
-      const scale = isSinglePageView
-        ? maxWidth / viewport.width
+      // Dimensioni ampie ed editoriali per riempire lo schermo
+      const viewerWidth = bookViewer.clientWidth || (window.innerWidth - 60);
+      const availableWidth = Math.min(viewerWidth > 100 ? viewerWidth : (window.innerWidth - 60), 1480);
+      const maxHeight = Math.max(window.innerHeight * 0.85, 680);
+      const maxWidth = isSinglePageView ? availableWidth : availableWidth / 2;
+
+      // Su mobile scala a larghezza schermo intera (100vw), su desktop sfrutta l'altezza generosa dell'85vh
+      const scale = isMobile
+        ? window.innerWidth / viewport.width
         : Math.min(maxWidth / viewport.width, maxHeight / viewport.height);
       const scaledViewport = page.getViewport({ scale: scale * pixelRatio });
 
       canvas.height = scaledViewport.height;
       canvas.width = scaledViewport.width;
 
-      // Crucial fix: The inline styles should define the *logical* size of the element on screen,
-      // which CSS max-width/max-height will then bound. Dividing by pixelRatio gives the 1x CSS pixels.
       canvas.style.height = `${scaledViewport.height / pixelRatio}px`;
       canvas.style.width = `${scaledViewport.width / pixelRatio}px`;
 

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Cosmopolitan Cocktail Glass Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #8E2038; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 180.0,230.0
+  C 180.0,300.0 185.0,345.0 205.0,380.0
+  C 225.0,415.0 265.0,435.0 295.5,445.0
+  L 295.5,665.0
+  C 295.5,692.5 235.2,715.0 195.0,715.0
+  L 405.0,715.0
+  C 364.8,715.0 304.5,692.5 304.5,665.0
+  L 304.5,445.0
+  C 335.0,435.0 375.0,415.0 395.0,380.0
+  C 415.0,345.0 420.0,300.0 420.0,230.0
+  Z"/>
+</svg>

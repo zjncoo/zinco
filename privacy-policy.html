@@ -16,6 +16,8 @@
   <link rel="apple-touch-icon" href="imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
   <link rel="canonical" href="https://zinco.cc/privacy-policy.html" />
 
   <link rel="stylesheet" href="index.css" />
@@ -32,7 +34,7 @@
     <div id="scroll-progress-bar"></div>
 
     <div id="preloader">
-      <a href="index.html" id="logo"><img src="imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -51,40 +53,68 @@
 
     <!-- Privacy Policy Document Section -->
     <section class="policy-container">
-      <header class="policy-header">
-        <div class="policy-badge-row">
-          <span class="policy-badge">Privacy Notice</span>
-          <span class="policy-badge policy-badge--outline">EU Regulation 2016/679 (GDPR)</span>
-          <span class="policy-badge policy-badge--outline">Italian Legislative Decree 196/2003</span>
-          <a href="cookie-policy.html" class="policy-badge-switch">Go to Cookie Policy &rarr;</a>
-        </div>
-        <h1 class="policy-title">privacy policy</h1>
-        <p class="policy-subtitle">
-          This privacy policy describes how personal data of users visiting and interacting with the website <strong>zinco.cc</strong> is collected and processed, pursuant to Article 13 of the General Data Protection Regulation (EU) 2016/679 (&ldquo;GDPR&rdquo;) and the Italian Personal Data Protection Code (Legislative Decree 196/2003 as amended by Legislative Decree 101/2018).
-        </p>
-        <div class="policy-meta">
-          <div class="policy-meta-item"><strong>Data Controller:</strong> Francesco Zanchetta</div>
-          <div class="policy-meta-item"><strong>Location:</strong> Lombardy, Italy</div>
-          <div class="policy-meta-item"><strong>Contact Email:</strong> <a href="mailto:work@zinco.cc">work@zinco.cc</a></div>
-          <div class="policy-meta-item"><strong>Last Updated:</strong> October 2026</div>
-        </div>
-      </header>
+      <div class="policy-editorial-layout">
 
-      <!-- Table of Contents -->
-      <nav class="policy-toc" aria-label="Privacy Policy Table of Contents">
-        <div class="policy-toc-title">Table of Contents</div>
-        <ul class="policy-toc-list">
-          <li><a href="#controller" class="policy-toc-link">01. Data Controller</a></li>
-          <li><a href="#data-processed" class="policy-toc-link">02. Categories of Personal Data Processed</a></li>
-          <li><a href="#purposes-bases" class="policy-toc-link">03. Purposes and Legal Bases for Processing</a></li>
-          <li><a href="#security-methods" class="policy-toc-link">04. Methods of Processing and Security Measures</a></li>
-          <li><a href="#retention" class="policy-toc-link">05. Data Retention Period</a></li>
-          <li><a href="#recipients" class="policy-toc-link">06. Data Recipients and International Transfers</a></li>
-          <li><a href="#rights" class="policy-toc-link">07. Data Subject Rights (Articles 15–22 GDPR)</a></li>
-          <li><a href="#complaints" class="policy-toc-link">08. Right to Lodge a Complaint with a Supervisory Authority</a></li>
-          <li><a href="#updates" class="policy-toc-link">09. Policy Updates and Amendments</a></li>
-        </ul>
-      </nav>
+        <!-- Left Column: Sticky Metadata & TOC -->
+        <aside class="policy-col-sidebar">
+          <div class="policy-sticky-wrapper">
+            <div class="policy-badge-row">
+              <span class="policy-badge">Privacy Notice</span>
+              <span class="policy-badge policy-badge--outline">EU GDPR 2016/679</span>
+              <span class="policy-badge policy-badge--outline">D.Lgs. 196/2003</span>
+            </div>
+
+            <div class="policy-meta-table">
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">controller</span>
+                <span class="policy-meta-val">francesco zanchetta</span>
+              </div>
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">location</span>
+                <span class="policy-meta-val">lombardy, italy</span>
+              </div>
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">contact</span>
+                <span class="policy-meta-val"><a href="mailto:work@zinco.cc">work@zinco.cc</a></span>
+              </div>
+              <div class="policy-meta-row">
+                <span class="policy-meta-lbl">updated</span>
+                <span class="policy-meta-val">october 2026</span>
+              </div>
+            </div>
+
+            <a href="cookie-policy.html" class="policy-switch-btn">
+              <span>view cookie policy</span>
+              <span class="policy-switch-arrow">↗</span>
+            </a>
+
+            <!-- Table of Contents -->
+            <nav class="policy-toc" aria-label="Privacy Policy Table of Contents">
+              <div class="policy-toc-title">table of contents</div>
+              <ul class="policy-toc-list">
+                <li><a href="#controller" class="policy-toc-link">01. Data Controller</a></li>
+                <li><a href="#data-processed" class="policy-toc-link">02. Data Categories</a></li>
+                <li><a href="#purposes-bases" class="policy-toc-link">03. Purposes &amp; Legal Bases</a></li>
+                <li><a href="#security-methods" class="policy-toc-link">04. Security &amp; Methods</a></li>
+                <li><a href="#retention" class="policy-toc-link">05. Retention Period</a></li>
+                <li><a href="#recipients" class="policy-toc-link">06. Recipients &amp; Transfers</a></li>
+                <li><a href="#rights" class="policy-toc-link">07. Data Subject Rights</a></li>
+                <li><a href="#complaints" class="policy-toc-link">08. Supervisory Authority</a></li>
+                <li><a href="#updates" class="policy-toc-link">09. Amendments</a></li>
+                <li><a href="#ai-tdm" class="policy-toc-link">10. AI &amp; TDM Opt-Out</a></li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Right Column: Main Content -->
+        <div class="policy-col-main">
+          <header class="policy-main-header">
+            <h1 class="policy-title">privacy policy</h1>
+            <p class="policy-subtitle">
+              This privacy policy describes how personal data of users visiting and interacting with the website <strong>zinco.cc</strong> is collected and processed, pursuant to Article 13 of the General Data Protection Regulation (EU) 2016/679 (&ldquo;GDPR&rdquo;) and the Italian Personal Data Protection Code (Legislative Decree 196/2003 as amended by Legislative Decree 101/2018).
+            </p>
+          </header>
 
       <!-- 01. Data Controller -->
       <article id="controller" class="policy-section">
@@ -312,11 +342,30 @@
         </div>
       </article>
 
+      <!-- 10. AI Training & Text and Data Mining (TDM) Reservation -->
+      <article id="ai-tdm" class="policy-section">
+        <div class="policy-section-header">
+          <span class="policy-section-number">10</span>
+          <h2 class="policy-section-title">ai training and text &amp; data mining (tdm) reservation</h2>
+        </div>
+        <div class="policy-body">
+          <p>
+            In accordance with <strong>Article 4(3) of Directive (EU) 2019/790</strong> on copyright and related rights in the Digital Single Market, the reproduction, scraping, extraction, and ingestion of all creative works, graphic assets, typography, images, publications, and texts available on this website for the purposes of <strong>Text and Data Mining (TDM), machine learning model training, or generative artificial intelligence synthesis</strong> are expressly reserved and strictly prohibited without prior written license.
+          </p>
+          <p>
+            This reservation is declared in a machine-readable format across this domain via <code>robots.txt</code>, <code>&lt;meta name="robots" content="noai, noimageai"&gt;</code>, and <code>&lt;meta name="tdm-reservation" content="1"&gt;</code> tags. AI search engine discovery and real-time user-initiated indexing (e.g. conversational search references) remain permitted, while automated harvesting for foundational model weights or generative image imitation is expressly forbidden.
+          </p>
+        </div>
+      </article>
+
       <!-- Footer action links -->
       <div class="policy-footer-actions">
         <a href="cookie-policy.html" class="policy-btn">View Cookie Policy &rarr;</a>
         <a href="#" class="policy-btn policy-btn--secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Back to top &uarr;</a>
       </div>
+
+        </div><!-- /policy-col-main -->
+      </div><!-- /policy-editorial-layout -->
     </section>
 
   </div><!-- /site-main-content -->

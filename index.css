@@ -32,36 +32,34 @@ body {
   /* Standard syntax */
 }
 
-/* --- Font Adobe Fonts (Typekit: rra4uka) --- */
-/* aktiv-grotesk weight 400 e 500, caricati via Adobe Fonts (Typekit: rra4uka) */
-
-/* --- Font locale: Neuzeit Heavy (bold/700) --- */
-@font-face {
-  font-family: 'NeuzeitHeavy';
-  src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book Heavy.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
+/* --- Font Adobe Fonts (Typekit: rra4uka): Neue Haas Unica --- */
 /* --- Reset e Stili di Base --- */
 * {
   box-sizing: border-box;
 }
 
-html,
-body {
-  overflow-x: hidden;
+html {
+  overflow-x: clip;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 body {
   margin: 0;
   background-color: white;
   color: black;
-  overflow-y: auto;
   counter-reset: grid-counter;
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-weight: 400;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* --- Impostazioni dei Font --- */
@@ -71,20 +69,20 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: 600;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   letter-spacing: -0.05em;
 }
 
 .corner-button {
-  font-family: 'NeuzeitHeavy', sans-serif;
-  font-weight: normal;
-  letter-spacing: -0.05em;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.04em;
 }
 
 .menu-link {
-  font-family: 'NeuzeitHeavy', sans-serif;
-  font-weight: normal;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
 }
 
 h2 {
@@ -105,25 +103,55 @@ h2 {
   -webkit-text-fill-color: unset;
 }
 
-/* In: index.css (fuori da @media) */
-
+/* Barra di avanzamento verticale sul lato destro (da su verso giù) */
 #scroll-progress-bar {
   position: fixed;
-  bottom: 0;
-  /* Come richiesto, "in basso a tutto" */
-  left: 0;
-  width: 0%;
-  /* Inizia da 0 e cresce con lo scroll */
-  height: 5px;
-  /* Puoi cambiare lo spessore se vuoi */
-
-  /* Usa il giallo esatto del tuo logo! */
-  background-color: #FFD600;
-
+  top: 0;
+  right: 0;
+  left: auto;
+  bottom: auto;
+  width: 3px;
+  height: 0%;
+  background-color: black;
   z-index: 9998;
-  /* Sotto il preloader/menu ma sopra il contenuto */
-  transition: width 0.1s linear;
-  /* Rende il movimento più fluido */
+  pointer-events: none;
+  transition: height 0.05s linear;
+}
+
+/* Indicatore numerico percentuale piccolo (solo desktop/tablet, scompare a fine scroll) */
+#scroll-progress-percentage {
+  position: fixed;
+  right: 9px;
+  top: 18px;
+  font-family: 'neue-haas-unica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: black;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  padding: 2px 4px;
+  line-height: 1;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 0.25s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+#scroll-progress-percentage.is-scrolling {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  #scroll-progress-percentage {
+    display: none !important;
+  }
 }
 
 
@@ -158,9 +186,29 @@ h2 {
   z-index: 10000;
 }
 
+#preloader #logo {
+  height: auto;
+  width: auto;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
 #preloader #logo img {
   height: 40px;
   width: auto;
+}
+
+#preloader .preloader-brand-text {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 400; /* Regular, identical to nav */
+  font-size: 2.2rem;
+  letter-spacing: -0.03em;
+  color: #000000;
+  text-decoration: none;
+  line-height: 1;
 }
 
 .loader-bar-container {
@@ -196,14 +244,26 @@ h2 {
  * ===================================================================
 */
 body,
+body *,
 a,
-button {
+button,
+.cursor-target {
   cursor: none;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body *,
+  a,
+  button,
+  .cursor-target {
+    cursor: none !important;
+  }
+}
+
 .custom-cursor {
-  width: 25px;
-  height: 25px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   pointer-events: none;
   position: fixed;
@@ -213,12 +273,16 @@ button {
   background-color: transparent;
   backdrop-filter: invert(1);
   -webkit-backdrop-filter: invert(1);
-  transition: width 0.3s ease, height 0.3s ease;
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.15s ease;
+  margin-top: -6.5px;
+  margin-left: -6.5px;
 }
 
 .custom-cursor.cursor-hover {
-  width: 45px;
-  height: 45px;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  margin-left: -11px;
 }
 
 
@@ -272,7 +336,7 @@ main>#figma-container {
 }
 
 .intro {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 28px;
   max-width: 800px;
   line-height: 1.4;
@@ -315,7 +379,7 @@ main>#figma-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 2rem;
+  padding-top: 1.2rem;
   overflow: hidden;
 }
 
@@ -325,8 +389,8 @@ main>#figma-container {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 40px;
-  gap: 40px;
-  margin-bottom: 2rem;
+  gap: 30px;
+  margin-bottom: 1rem;
 }
 
 .footer-contact-info {
@@ -335,9 +399,9 @@ main>#figma-container {
 }
 
 .footer-contact-info h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-top: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
   font-weight: 500;
   line-height: 1;
 }
@@ -349,7 +413,7 @@ main>#figma-container {
 }
 
 .social-links-text {
-  margin-top: 2rem !important;
+  margin-top: 1rem !important;
 }
 
 .social-links-text a {
@@ -379,13 +443,13 @@ main>#figma-container {
 .custom-contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.8rem;
 }
 
 .input-group input,
 .input-group textarea {
   width: 100%;
-  padding: 1rem 0;
+  padding: 0.6rem 0;
   background: transparent;
   border: none;
   border-bottom: 2px solid black;
@@ -410,7 +474,7 @@ main>#figma-container {
 
 .submit-btn {
   width: 100%;
-  padding: 1.5rem 0;
+  padding: 0.8rem 0;
   background-color: transparent;
   color: black;
   border: none;
@@ -432,7 +496,7 @@ main>#figma-container {
 .footer-marquee-container {
   width: 100%;
   overflow: hidden;
-  padding: 2rem 0;
+  padding: 1.2rem 0;
   background: white;
 }
 
@@ -452,9 +516,9 @@ main>#figma-container {
 }
 
 .marquee-content span {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 5vw;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   color: black;
@@ -489,7 +553,7 @@ main>#figma-container {
   justify-content: center;
   align-items: center;
   gap: 4vw;
-  padding: 32px 20px;
+  padding: 16px 20px;
   font-size: 0.85rem;
   color: rgba(0, 0, 0, 0.5);
   background-color: white;
@@ -507,6 +571,56 @@ main>#figma-container {
 
 .footer-bottom-logo img {
   height: 24px;
+}
+
+/* Bottom Bottles & Glasses Shelf (Resting directly on the bottom line of the page) */
+.footer-bottles-shelf {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(8px, 1.2vw, 18px);
+  width: 100%;
+  padding: 16px 28px 0 28px;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 2px solid black; /* Linea di fine pagina */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  line-height: 0;
+}
+
+.footer-bottles-shelf::-webkit-scrollbar {
+  display: none;
+}
+
+.footer-glass-link {
+  display: inline-flex;
+  align-items: flex-end;
+  height: clamp(65px, 7.5vw, 105px);
+  flex-shrink: 0;
+  text-decoration: none;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.footer-glass-link:hover {
+  transform: translateY(-6px) scale(1.04);
+  opacity: 0.8;
+}
+
+.footer-glass-svg {
+  height: 100%;
+  width: auto;
+  display: block;
+  vertical-align: bottom;
+  margin: 0;
+  padding: 0;
 }
 
 /* Mobile styles for Reveal Footer */
@@ -559,6 +673,16 @@ main>#figma-container {
   .footer-bottom-links a {
     margin-right: 0;
   }
+
+  .footer-bottles-shelf {
+    justify-content: flex-start;
+    padding: 20px 16px 0 16px;
+    gap: 12px;
+  }
+
+  .footer-glass-link {
+    height: clamp(65px, 16vw, 95px);
+  }
 }
 
 
@@ -583,6 +707,8 @@ main>#figma-container {
 
 .nav-bar--top {
   top: 0;
+  height: 48px;
+  box-sizing: border-box;
   border-bottom: 2px solid black;
 }
 
@@ -606,12 +732,30 @@ main>#figma-container {
   filter: invert(1);
 }
 
+
 #button-logo {
   display: flex;
   align-items: center;
   z-index: 1000;
   width: fit-content;
+  text-decoration: none;
 }
+
+.nav-brand-text {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 400; /* Unica regular */
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
+  color: black;
+  text-decoration: none;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.nav-bar.open .nav-brand-text {
+  color: white;
+}
+
 
 #logo {
   height: 28px;
@@ -621,9 +765,9 @@ main>#figma-container {
 }
 
 .nav-bar-link {
-  font-family: 'NeuzeitHeavy', sans-serif;
-  font-weight: normal;
-  letter-spacing: -0.05em;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.04em;
   color: black;
   text-decoration: none;
   font-size: 1.3rem;
@@ -651,8 +795,8 @@ main>#figma-container {
 .btn {
   border: 2px solid black;
   padding: 10px 25px;
-  font-family: 'NeuzeitHeavy', sans-serif;
-  font-weight: normal;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1rem;
   text-transform: uppercase;
   transition: all .2s ease;
@@ -843,8 +987,8 @@ main>#figma-container {
 }
 
 .project-line-title {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1.4rem;
   letter-spacing: -0.03em;
   text-decoration: none;
@@ -911,7 +1055,7 @@ main>#figma-container {
 
 
 .featured-title {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-weight: normal;
   font-size: 1rem;
   text-align: left;
@@ -1017,8 +1161,8 @@ main>#figma-container {
   color: black;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   text-transform: uppercase;
   font-size: 1rem;
   text-decoration: none;
@@ -1060,11 +1204,13 @@ main>#figma-container {
 }
 
 #dropdownMenu.open {
-  height: 60vh;
+  height: 100vh;
+  height: 100dvh;
 }
 
 #dropdownMenu.open.search-is-active {
   height: 100vh;
+  height: 100dvh;
 }
 
 .menu-columns {
@@ -1081,6 +1227,8 @@ main>#figma-container {
 }
 
 .menu-link {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   color: white;
   text-decoration: none;
   font-size: 2rem;
@@ -1167,8 +1315,8 @@ main>#figma-container {
   border: none;
   border-bottom: 2px solid white;
   outline: none;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: 600;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   transition: border-color 0.4s ease, font-size 0.4s ease;
 }
 
@@ -1232,9 +1380,9 @@ main>#figma-container {
   margin: 1rem 0;
   color: white;
   text-decoration: none;
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   /* Separatore tra i risultati (rimosso) */
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -1262,8 +1410,8 @@ main>#figma-container {
   background: none;
   border: none;
   color: white;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 30px;
   cursor: pointer;
   text-transform: lowercase;
@@ -1283,8 +1431,8 @@ main>#figma-container {
   color: white;
   padding: 10px 25px;
   cursor: pointer;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   text-transform: uppercase;
   font-size: 1rem;
   width: 100%;
@@ -1342,6 +1490,14 @@ main>#figma-container {
   width: 2px;
   background-color: black;
   z-index: 500;
+}
+
+.vertical-line.left {
+  left: 0;
+}
+
+.vertical-line.right {
+  right: 0;
 }
 
 /* Aggiungi alla fine del tuo CSS, prima delle Media Queries */
@@ -1409,14 +1565,7 @@ main>#figma-container {
 /* --- Per Telefoni (fino a 767px) --- */
 @media (max-width: 767px) {
 
-  /* In: index.css (dentro @media (max-width: 767px) { ... } ) */
 
-  #scroll-progress-bar {
-    top: 0;
-    /* La sposta in alto */
-    bottom: auto;
-    /* Rimuove l'impostazione 'bottom: 0' del desktop */
-  }
 
   /* Reset del layout dinamico su colonna singola */
   .grid-item:nth-child(n) {
@@ -1478,7 +1627,7 @@ main>#figma-container {
   }
 
   footer {
-    margin: 40px 0 150px 0;
+    margin: 40px 0 0 0;
   }
 
   /* Stretch footer form on mobile */
@@ -1533,6 +1682,7 @@ main>#figma-container {
   /* Fix per menu tagliato */
   #dropdownMenu.open {
     height: 100vh;
+    height: 100dvh;
     /* Occupa tutto lo schermo */
     overflow-y: auto;
     /* Aggiunge scroll se serve */
@@ -1628,8 +1778,10 @@ body.footer-visible .custom-cursor {
 
   .reveal-footer {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     margin-top: 40px;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
 
@@ -1680,8 +1832,8 @@ body.footer-visible .custom-cursor {
 }
 
 .pdf-grid-header h2 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1.6rem;
   letter-spacing: -0.03em;
   margin: 0;
@@ -1692,8 +1844,8 @@ body.footer-visible .custom-cursor {
 #closePdfGrid {
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
   padding: 6px 16px;
@@ -1756,9 +1908,9 @@ body.footer-visible .custom-cursor {
   background-color: transparent;
   border: none;
   padding: 0;
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.95rem;
-  font-weight: bold;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.6);
   text-align: left;
   letter-spacing: -0.02em;

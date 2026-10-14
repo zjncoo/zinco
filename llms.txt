@@ -1,0 +1,62 @@
+# Francesco Zanchetta (zinco)
+
+> Francesco Zanchetta (alias **zinco**) is an award-winning Italian communication designer based in Lombardia / Milano, specialising in brand identities, visual systems, editorial publications, digital products, and local-first software design.
+
+Winner of the **3rd Prize at the DBEW Award 2026** (Kookmin University Seoul & ADI) with the project **ALUA**, archived in the [Politecnico di Milano Research Repository](https://hdl.handle.net/11311/1315326). Student / alumnus of Politecnico di Milano.
+
+- Website: https://zinco.cc/
+- Portfolio: https://zinco.cc/portfolio.html
+- About: https://zinco.cc/about/about.html
+- Publications: https://zinco.cc/publications/publications.html
+- Algorithms: https://zinco.cc/ALGORYTHMS/algorythms.html
+- Email: work@zinco.cc
+- GitHub: https://github.com/zjncoo
+- LinkedIn: https://www.linkedin.com/in/francesco-zanchetta/
+- Instagram: https://www.instagram.com/zjncoo/
+
+## Core Competencies & Disciplines
+- **Visual & Brand Identity**: Comprehensive brand guidelines, custom typography, logomarks, signage, vector systems.
+- **Editorial & Print Design**: Hardcover & softcover books, brandbooks, zines, bilingual typography, grid systems.
+- **Digital Product & App Design**: Native macOS applications (SwiftUI), Progressive Web Apps (Next.js, TailwindCSS), local-first & zero-cloud architecture.
+- **Web Design & Frontend Development**: Clean edges, hard grids, performance-first, custom interactions, modern CSS/JS.
+- **Algorithms & Utilities**: In-browser media converters (WebP, WebM), WCAG contrast checkers, video compressors.
+
+## Key Projects
+
+### Applications & Digital Products
+- [clotho](https://info.clotho.zinco.cc): Private, local-first digital wardrobe & on-device AI outfit studio (PWA • iOS • macOS • Web). Instant on-device background removal (0.2s), 7-slot mannequin layering canvas, style calendar. Zero cloud trackers. [Details](https://zinco.cc/clotho/clotho.html) | [Source](https://github.com/zjncoo/clotho)
+- [uni](https://uni.zinco.cc): Native macOS academic workspace (SwiftUI, AppKit). Unifies timetables, iCal 24h feeds, deadlines, GPA score projections, and Outlook bridge in a distraction-free command center. Universal binary for Apple Silicon & Intel. [Details](https://zinco.cc/uni/uni.html) | [Source](https://github.com/zjncoo/uni)
+- [mastro](https://zjncoo.github.io/mastro/): Local-first macOS & web construction management dashboard with project cards, workforce allocations, and site documentation.
+- [Rifiuti Spaziali](https://zjncoo.github.io/RifiutiSpaziali/): Interactive 3D educational web experience on orbital space debris and satellite tracking.
+
+### Brand Identity & Strategy
+- [ALUA](https://zjncoo.github.io/ALUA.IT/): 3rd Prize DBEW Award 2026. Acoustic spatial panel design and full communication strategy developed at Politecnico di Milano.
+- [BAAS IS BACK IN TOWN](https://zinco.cc/baas_is_back_in_town/baas.html): Visual identity and graphic manifesto campaign for the contemporary Dutch design icon Maarten Baas.
+- [CPP Casa Poldi Pezzoli](https://zinco.cc/poldi_pezzoli/poldi_pezzoli.html): Complete museum rebrand, signage, and visual identity for Museo Poldi Pezzoli in Milan.
+- [AM Decor](https://zinco.cc/amdecor/amdecor.html): Visual identity, architectural window branding, and corporate identity for AM Decor S.r.l. (interior and architectural finishes).
+- [NUS](https://zinco.cc/NUS/nus.html): Neighbourhood Urban Studies Institute — research brand identity, typography, and visual system.
+- [Piedibus Mozzate](https://zinco.cc/piedibus_mozzate/piedibus_mozzate.html): Public civic branding, wayfinding footprints, and illustrated character system for the school walking bus initiative in Mozzate.
+- [3M Soluzioni Immobiliari](https://zinco.cc/3M_Soluzioni_Immobiliari/3m.html): Contemporary real estate visual identity, storefront, and marketing collateral system.
+- [ROXY](https://zinco.cc/ROXY/roxy.html): Bold typographic identity, event visual language, and brand manual.
+- [Fioreria del Lago](https://zinco.cc/fioreria_del_lago/fioreria_del_lago.html): Artisanal botanical identity, packaging, and vintage floral labeling system.
+- [Escapes Lake Como](https://zinco.cc/escapes/escapes.html): Hospitality identity and digital platform for exclusive Lake Como private retreats.
+- [Gizeta](https://zinco.cc/gizeta/gizeta.html): Corporate visual identity and industrial packaging systems for Gizeta S.r.l.
+- [Dranks](https://zinco.cc/dranks/dranks.html): Mixology digital experience and visual branding.
+- [BEER](https://zinco.cc/beer/beer.html): Contemporary craft brewing brand identity and packaging concept.
+
+### Editorial & Publications
+- [Publications Archive](https://zinco.cc/publications/publications.html): Dedicated index of editorial design, print systems, and publications.
+- [FOMO](https://zinco.cc/publications/fomo/fomo.html): Critical editorial essay and book design investigating the psychology of Fear Of Missing Out.
+- [FemVertising](https://zinco.cc/publications/femvertising/femvertising.html): Critical editorial investigation and visual publication analyzing feminist rhetoric in corporate advertising.
+- [ZOOM](https://zinco.cc/publications/zoom/zoom.html): Comic publication featuring dynamic graphic pacing, expressive typography, and illustrations.
+- [Fotografie come lettere di un alfabeto](https://zinco.cc/publications/fotografie_come_lettere_di%20_un_alfabeto/fotografia.html): Photographic book exploring semiotics and visual language through sequential imagery.
+- [Roxy Brandbook](https://zinco.cc/publications/roxy_brandbook/roxy_brandbook.html): Comprehensive corporate manual detailing typographic hierarchies, color palettes, and visual execution.
+- [NUS Brandbook](https://zinco.cc/publications/nus_brandbook/nus_brandbook.html): Visual identity manual for the Neighbourhood Urban Studies Institute.
+- [Cos'è un designer](https://zinco.cc/publications/cos%27e%CC%80_un_designer/history.html): Critical editorial translation and typographic layout of Norman Potter's seminal text *What is a Designer*.
+
+### In-Browser Algorithms & Design Utilities
+- [Contrast Checker](https://zinco.cc/ALGORYTHMS/contrast-checker.html): WCAG 2.1 AA/AAA compliance validator for foreground and background colors.
+- [WebP Converter](https://zinco.cc/ALGORYTHMS/webp/converter.html): Client-side image converter to WebP format.
+- [WebM Converter](https://zinco.cc/ALGORYTHMS/webm.html): In-browser video transcoding utility.
+- [Card Generator](https://zinco.cc/ALGORYTHMS/cardgenerator.html): Dynamic layout generator for structured data cards.
+- [Video Compressor](https://zinco.cc/ALGORYTHMS/compressor.html): WebAssembly-powered browser video compression.

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Swan Neck Decanter Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #3B1720; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 210,130
+  C 225,180 230,280 220,380
+  C 200,470 120,550 120,640
+  C 120,725 200,745 280,745
+  C 420,745 500,665 500,530
+  C 500,410 430,300 420,240
+  L 390,245
+  C 405,300 470,400 470,525
+  C 470,635 405,715 280,715
+  C 180,715 150,650 150,600
+  C 150,520 220,450 245,370
+  C 255,270 250,180 235,130
+  Z"/>
+</svg>

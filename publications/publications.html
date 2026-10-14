@@ -15,98 +15,466 @@
   <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
   <link rel="canonical" href="https://zinco.cc/publications/publications.html" />
-  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://zinco.cc/publications/publications.html#webpage",
+        "url": "https://zinco.cc/publications/publications.html",
+        "name": "publications | zinco",
+        "description": "Editorial design archive: books, zines, and brand identity manuals created by Francesco Zanchetta.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://zinco.cc/#website",
+          "name": "zinco",
+          "url": "https://zinco.cc/"
+        },
+        "about": {
+          "@type": "Person",
+          "@id": "https://zinco.cc/#person",
+          "name": "Francesco Zanchetta"
+        }
+      }
+    ]
+  }
+  </script>
 
   <link rel="stylesheet" href="../index.css" />
-  
+  <link rel="stylesheet" href="../NUS/nus.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
   <script src="../projects-data.js?v=21" defer></script>
+  <script src="../components.js" defer></script>
 
   <style>
-    .project-item {
-      background-color: white;
-      aspect-ratio: 1 / 1;
-      display: flex;
-      outline: 2px solid black;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      position: relative;
-      transition: background-color 0.2s ease;
-      padding: 0px;
-      padding-left: 0;
+    /* ================================================================ */
+    /* PUBLICATIONS EDITORIAL ARCHIVE STYLES                            */
+    /* ================================================================ */
+    .publications-archive-section {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 60px clamp(20px, 3.5vw, 40px) 120px calc(27px + 0.88vw);
+      box-sizing: border-box;
+      text-align: left;
     }
 
-    .project-item img {
+    .publications-intro-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2px solid black;
+      padding-bottom: 16px;
+      margin-bottom: 60px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .publications-intro-text {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #71717a;
+      max-width: 620px;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .publications-counter-badge {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1.5px solid black;
+      color: black;
+      white-space: nowrap;
+    }
+
+    .publication-year-group {
+      margin-bottom: 70px;
+    }
+
+    .publication-year-header {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      border-bottom: 2px solid black;
+      padding-bottom: 12px;
+      margin-bottom: 30px;
+    }
+
+    .publication-year-title {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      color: black;
+      margin: 0;
+    }
+
+    .publication-year-sub {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #71717a;
+    }
+
+    .publications-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
       width: 100%;
-      height: auto;
-      max-width: 100%;
-      padding-left: 0;
+      box-sizing: border-box;
+    }
+
+    .publication-card {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 2px solid black;
+      text-decoration: none;
+      color: black;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .publication-card:hover {
+      background: #fcfcfc;
+      transform: translateY(-2px);
+    }
+
+    .publication-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-bottom: 1.5px solid black;
+      background: #ffffff;
+    }
+
+    .publication-num {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #71717a;
+    }
+
+    .publication-tag {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: black;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      padding: 2px 6px;
+      border-radius: 0;
+    }
+
+    .publication-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #f4f4f5;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1.5px solid black;
+      position: relative;
+    }
+
+    .publication-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .publication-card:hover .publication-thumb-wrap img {
+      transform: scale(1.03);
+    }
+
+    .publication-card-footer {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      gap: 12px;
+    }
+
+    .publication-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .publication-card-title {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: black;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .publication-card-sub {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: #71717a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .publication-card-arrow {
+      font-size: 1.15rem;
+      line-height: 1;
+      color: black;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .publication-card:hover .publication-card-arrow {
+      transform: translate(2px, -2px);
+    }
+
+    @media (max-width: 1024px) {
+      .publications-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .publications-archive-section {
+        padding: 40px 20px 80px 27px;
+      }
+
+      .publications-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .publication-thumb-wrap {
+        aspect-ratio: 16 / 10;
+      }
     }
   </style>
-  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
-  <script src="../components.js" defer></script>
 </head>
 
 <body>
   <div class="site-main-content">
     <div id="scroll-progress-bar"></div>
     <div id="preloader">
-      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="../index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
     </div>
 
+    <div class="vertical-line left"></div>
+    <div class="vertical-line right"></div>
     <div class="custom-cursor" id="cursor"></div>
+
+    <div id="hero-wrapper">
+      <section id="project-hero">
+        <div class="hero-title-container">
+          <a href="#publications-archive" class="scroll-down-arrow cursor-target" aria-label="Scroll to archive">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <h1 id="hero-title">publications</h1>
+        </div>
+      </section>
+    </div>
 
     <zinco-header base-path="../"></zinco-header>
 
-    <section class="projects-section">
-      <div style="height: 10vh; width: 100vw;"></div>
-      <h2>2025</h2>
-      <div class="content-grid">
-        <a href="fomo/fomo.html" class="project-item">
-          <img src="fomo/img/mockup fomo 1.webp" alt="FOMO Project" class="cursor-target" / loading="lazy" decoding="async">
-        </a>
-        <a href="femvertising/femvertising.html" class="project-item">
-          <img src="femvertising/img/femvertising_mockup_1.webp" alt="Femvertising Project" class="cursor-target" / loading="lazy" decoding="async">
-        </a>
-        <a href="fotografie_come_lettere_di _un_alfabeto/fotografia.html" class="project-item">
-          <img src="fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp" alt="Photography Project"
-            class="cursor-target" / loading="lazy" decoding="async">
-        </a>
-      </div>
+    <main id="publications-archive">
+      <section class="publications-archive-section">
+        
+        <div class="publications-intro-bar">
+          <p class="publications-intro-text">
+            Print as a design medium taken seriously — books, zines, brandbooks &amp; editorial research investigating pacing, typography, and materiality.
+          </p>
+          <span class="publications-counter-badge">7 Works Archived</span>
+        </div>
 
-      <h2>2024</h2>
-      <div class="content-grid">
+        <!-- 2025 Group -->
+        <div class="publication-year-group">
+          <div class="publication-year-header">
+            <h2 class="publication-year-title">2025</h2>
+            <span class="publication-year-sub">// Recent Releases</span>
+          </div>
 
-        <a href="zoom/zoom.html" class="project-item">
-          <img src="zoom/img/ayumi_mockup_1.webp" alt="Zoom Project" class="cursor-target" / loading="lazy" decoding="async">
-        </a>
-        <a href="roxy_brandbook/roxy_brandbook.html" class="project-item">
-          <img src="roxy_brandbook/img/roxy_mockup_1.png" alt="Roxy Project" class="cursor-target" / loading="lazy" decoding="async">
-        </a>
-        <a href="nus_brandbook/nus_brandbook.html" class="project-item">
-          <img src="nus_brandbook/img/nus_mockup_1.webp" alt="NUS Brandbook" class="cursor-target" / loading="lazy" decoding="async">
-        </a>
-        <a href="cos'è_un_designer/history.html" class="project-item">
-          <img src="cos'è_un_designer/img/" alt="What is a designer Project" class="cursor-target" / loading="lazy" decoding="async">
-        </a>
+          <div class="publications-grid">
+            <a href="fomo/fomo.html" class="publication-card cursor-target" aria-label="FOMO publication">
+              <div class="publication-card-header">
+                <span class="publication-num">No.011</span>
+                <span class="publication-tag">MAGAZINE</span>
+              </div>
+              <div class="publication-thumb-wrap">
+                <img src="fomo/img/mockup fomo 1.webp" alt="FOMO Project" loading="lazy" decoding="async">
+              </div>
+              <div class="publication-card-footer">
+                <div class="publication-title-box">
+                  <h3 class="publication-card-title">FOMO</h3>
+                  <span class="publication-card-sub">Social Anxiety &amp; Contemporary Pacing</span>
+                </div>
+                <span class="publication-card-arrow">↗</span>
+              </div>
+            </a>
 
-      </div>
-    </section>
+            <a href="femvertising/femvertising.html" class="publication-card cursor-target" aria-label="Femvertising publication">
+              <div class="publication-card-header">
+                <span class="publication-num">No.010</span>
+                <span class="publication-tag">THESIS</span>
+              </div>
+              <div class="publication-thumb-wrap">
+                <img src="femvertising/img/femvertising_mockup_1.webp" alt="Femvertising Project" loading="lazy" decoding="async">
+              </div>
+              <div class="publication-card-footer">
+                <div class="publication-title-box">
+                  <h3 class="publication-card-title">Femvertising</h3>
+                  <span class="publication-card-sub">Critical Discourse in Modern Advertising</span>
+                </div>
+                <span class="publication-card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="fotografie_come_lettere_di _un_alfabeto/fotografia.html" class="publication-card cursor-target" aria-label="Fotografie come lettere di un alfabeto publication">
+              <div class="publication-card-header">
+                <span class="publication-num">No.013</span>
+                <span class="publication-tag">PHOTO BOOK</span>
+              </div>
+              <div class="publication-thumb-wrap">
+                <img src="fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp" alt="Photography Project" loading="lazy" decoding="async">
+              </div>
+              <div class="publication-card-footer">
+                <div class="publication-title-box">
+                  <h3 class="publication-card-title">Fotografie come lettere</h3>
+                  <span class="publication-card-sub">Visual Lexicon &amp; Typographic Pacing</span>
+                </div>
+                <span class="publication-card-arrow">↗</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2024 Group -->
+        <div class="publication-year-group">
+          <div class="publication-year-header">
+            <h2 class="publication-year-title">2024</h2>
+            <span class="publication-year-sub">// Archive Archive</span>
+          </div>
+
+          <div class="publications-grid">
+            <a href="zoom/zoom.html" class="publication-card cursor-target" aria-label="ZOOM Ayumi publication">
+              <div class="publication-card-header">
+                <span class="publication-num">No.012</span>
+                <span class="publication-tag">VISUAL STORY</span>
+              </div>
+              <div class="publication-thumb-wrap">
+                <img src="zoom/img/ayumi_mockup_1.webp" alt="Zoom Ayumi Project" loading="lazy" decoding="async">
+              </div>
+              <div class="publication-card-footer">
+                <div class="publication-title-box">
+                  <h3 class="publication-card-title">ZOOM — Ayumi</h3>
+                  <span class="publication-card-sub">Graphic Narrative &amp; Sequential Design</span>
+                </div>
+                <span class="publication-card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="roxy_brandbook/roxy_brandbook.html" class="publication-card cursor-target" aria-label="Roxy Brandbook publication">
+              <div class="publication-card-header">
+                <span class="publication-num">No.009</span>
+                <span class="publication-tag">BRANDBOOK</span>
+              </div>
+              <div class="publication-thumb-wrap">
+                <img src="roxy_brandbook/img/roxy_mockup_1.png" alt="Roxy Brandbook Project" loading="lazy" decoding="async">
+              </div>
+              <div class="publication-card-footer">
+                <div class="publication-title-box">
+                  <h3 class="publication-card-title">Roxy Brandbook</h3>
+                  <span class="publication-card-sub">Visual Identity &amp; Relaunch Guidelines</span>
+                </div>
+                <span class="publication-card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="nus_brandbook/nus_brandbook.html" class="publication-card cursor-target" aria-label="NUS Brandbook publication">
+              <div class="publication-card-header">
+                <span class="publication-num">No.008</span>
+                <span class="publication-tag">MANUAL</span>
+              </div>
+              <div class="publication-thumb-wrap">
+                <img src="nus_brandbook/img/nus_mockup_1.webp" alt="NUS Brandbook" loading="lazy" decoding="async">
+              </div>
+              <div class="publication-card-footer">
+                <div class="publication-title-box">
+                  <h3 class="publication-card-title">NUS Brandbook</h3>
+                  <span class="publication-card-sub">Urban Studies Institute Identity Manual</span>
+                </div>
+                <span class="publication-card-arrow">↗</span>
+              </div>
+            </a>
+
+            <a href="cos'è_un_designer/history.html" class="publication-card cursor-target" aria-label="Cos'è un designer publication">
+              <div class="publication-card-header">
+                <span class="publication-num">No.026</span>
+                <span class="publication-tag">RESEARCH</span>
+              </div>
+              <div class="publication-thumb-wrap">
+                <img src="cos'è_un_designer/img/potter_preview.png" alt="Cos'è un designer publication cover — Norman Potter Italian translation booklet" loading="lazy" decoding="async">
+              </div>
+              <div class="publication-card-footer">
+                <div class="publication-title-box">
+                  <h3 class="publication-card-title">Cos'è un designer</h3>
+                  <span class="publication-card-sub">Norman Potter Research Booklet</span>
+                </div>
+                <span class="publication-card-arrow">↗</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </section>
+    </main>
 
   </div><!-- /site-main-content -->
   <zinco-footer base-path="../"></zinco-footer>
 
-  <script src="../index.js"></script>
-  <div id="overlay" class="hidden"></div>
-
+  <script src="../index.js" defer></script>
 </body>
 
 </html>

@@ -15,6 +15,8 @@
   <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
   <link rel="canonical" href="https://zinco.cc/ROXY/roxy.html" />
   
 
@@ -66,7 +68,7 @@
   <div class="site-main-content">
     <div id="scroll-progress-bar"></div>
     <div id="preloader">
-      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="../index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -75,7 +77,12 @@
     <div id="hero-wrapper">
       <section id="project-hero">
         <div class="hero-title-container">
-          <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+          <a href="#sezione-progetto" class="scroll-down-arrow cursor-target" aria-label="Scroll down">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
           <h1 id="hero-title"></h1>
         </div>
       </section>
@@ -113,20 +120,7 @@
         </div>
       </section>
 
-      <div id="pdfViewerContainer">
-        <canvas id="pdfCanvas" data-pdf-source="roxy.pdf"></canvas>
-        <div class="pdf-controls">
-          <button id="prevPage" class="btn btn--outline-dark">←</button>
-          <div id="pageIndicator">
-            Page
-            <span id="pageNum" class="page-num-display">1</span>
-            <input type="number" id="pageNumInput" class="page-num-input" />
-            of
-            <span id="pageCount"></span>
-          </div>
-          <button id="nextPage" class="btn btn--outline-dark">→</button>
-        </div>
-      </div>
+      <canvas id="pdfCanvas" data-pdf-source="roxy.pdf" style="display: none;"></canvas>
 
       <section class="branding-grid" id="brandingGrid"></section>
 
@@ -140,30 +134,8 @@
 
   <script src="../index.js" defer></script>
   <script src="../NUS/branding-project.js" defer></script>
-  <script src="../scripts_components/pdf_viewer.js" defer></script>
 
   <script src="../projects-data.js?v=21"></script>
-  <script>
-    // Enforce PDF viewer before branding grid
-    (function() {
-      function enforceOrder() {
-        var bg = document.getElementById('brandingGrid');
-        var pdf = document.getElementById('pdfViewerContainer');
-        if (bg && pdf && bg.parentNode) {
-          bg.parentNode.insertBefore(pdf, bg);
-        }
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', enforceOrder);
-      } else {
-        enforceOrder();
-      }
-      window.addEventListener('load', enforceOrder);
-      setTimeout(enforceOrder, 500);
-      setTimeout(enforceOrder, 2000);
-      setTimeout(enforceOrder, 5000);
-    })();
-  </script>
 </body>
 
 </html>

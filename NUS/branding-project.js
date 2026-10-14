@@ -1,161 +1,511 @@
-
+/**
+ * branding-project.js
+ * Master Editorial Project Engine for zinco.cc branding showcases
+ * Standardized 2-Column Editorial Layout
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Funzione per convertire i percorsi delle immagini in .webp
+  // Funzione per convertire i percorsi delle immagini in .webp (salvaguardando svg)
   const toWebp = (url) => {
     if (typeof url !== 'string') return '';
-    // Sostituisce .jpg, .jpeg, o .png (case-insensitive) con .webp
+    if (url.endsWith('.svg')) return url;
     return url.replace(/\.(jpe?g|png)$/i, '.webp');
   };
 
-  fetch('branding-data.json')
-    .then(response => {
-      if (!response.ok) throw new Error(`Errore nel caricamento: ${response.status}`);
-      return response.json();
-    })
-    .then(data => {
-      const heroTitle = document.getElementById('hero-title');
-      const mainGrid = document.getElementById('brandingGrid');
-      const glanceGrid = document.getElementById('glance-grid');
+  // Determina la cartella del progetto corrente
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const currentFolder = pathParts.length > 1 ? pathParts[pathParts.length - 2] : '';
+  const currentFileName = pathParts.length > 0 ? pathParts[pathParts.length - 1] : '';
 
+  // 1. Carica i dati del progetto
+  const dataPromise = fetch('branding-data.json')
+    .then(response => {
+      if (!response.ok) {
+        return fetch('piedibus_mozzate-branding-data.json').then(r => {
+          if (!r.ok) throw new Error(`HTTP error ${response.status}`);
+          return r.json();
+        });
+      }
+      return response.json();
+    });
+
+  // 2. Carica ordered-projects.json per recuperare foto rappresentativa e metadati
+  const orderedPromise = fetch('../ordered-projects.json')
+    .then(res => res.ok ? res.json() : [])
+    .catch(() => []);
+
+  Promise.all([dataPromise, orderedPromise])
+    .then(([data, orderedProjects]) => {
+      // Progetto corrispondente in ordered-projects.json
+      const matchedProject = Array.isArray(orderedProjects)
+        ? orderedProjects.find(p => {
+            if (!p.link) return false;
+            return (currentFolder && p.link.includes(currentFolder)) ||
+                   (currentFileName && p.link.includes(currentFileName));
+          })
+        : null;
+
+      // Imposta il titolo nella Hero
+      const heroTitle = document.getElementById('hero-title');
       const namingItem = data.find(item => item.label === 'naming');
-      if (heroTitle && namingItem) {
-        heroTitle.textContent = namingItem.content;
+      if (heroTitle) {
+        if (namingItem && namingItem.content) {
+          heroTitle.textContent = namingItem.content;
+        } else if (matchedProject && matchedProject.title) {
+          heroTitle.textContent = matchedProject.title;
+        }
       }
 
-      // --- PRIMO CICLO: COSTRUZIONE GRIGLIA PRINCIPALE (MODIFICATO) ---
-      data.forEach((item, index) => {
-        const uniqueId = `content-item-${index}`;
+      // Hero pulita: nascondi l'eventuale glance-container dentro hero-wrapper
+      const heroGlance = document.querySelector('#hero-wrapper #glance-container');
+      if (heroGlance) {
+        heroGlance.style.display = 'none';
+      }
 
-        // Se l'elemento è di tipo 'header', lo gestiamo separatamente
-        if (item.type === 'header') {
-          const headerItem = document.createElement('div');
-          headerItem.classList.add('branding-header');
-          headerItem.innerHTML = `<h2>${item.label}</h2>`;
-          mainGrid.appendChild(headerItem);
+      // Sezione principale del progetto
+      const mainContainer = document.getElementById('sezione-progetto') || document.querySelector('main');
+      if (!mainContainer) return;
+
+      // Elementi esistenti nell'HTML
+      const videoContainer = mainContainer.querySelector('.video-container');
+      let projectInfoSection = mainContainer.querySelector('.project-info-section');
+      const legacyPdfContainer = document.getElementById('pdfViewerContainer');
+      const legacyBrandingGrid = document.getElementById('brandingGrid');
+      const legacyFigmaContainer = document.getElementById('figma-container');
+
+      // Trova eventuale PDF di presentazione
+      let pdfSource = null;
+      const pdfCanvas = document.getElementById('pdfCanvas');
+      if (pdfCanvas && pdfCanvas.dataset.pdfSource) {
+        pdfSource = pdfCanvas.dataset.pdfSource;
+      } else {
+        const pdfItem = data.find(item => item.type === 'pdf' || (item.src && item.src.endsWith('.pdf')));
+        if (pdfItem) pdfSource = pdfItem.src;
+      }
+
+      // Rimuovi completamente i vecchi contenitori legacy dal DOM per evitare conflitti o scroll residui
+      if (pdfCanvas) pdfCanvas.remove();
+      if (legacyPdfContainer) legacyPdfContainer.remove();
+      if (legacyBrandingGrid) legacyBrandingGrid.remove();
+      if (legacyFigmaContainer) legacyFigmaContainer.remove();
+
+      // ============================================================
+      // COSTRUZIONE LAYOUT EDITORIALE A 2 COLONNE
+      // ============================================================
+      const editorialLayout = document.createElement('div');
+      editorialLayout.className = 'project-editorial-layout';
+
+      // ── COLONNA SINISTRA: FISSA / STICKY ──────────────────────────
+      const stickyCol = document.createElement('aside');
+      stickyCol.className = 'project-sticky-col';
+
+      // 1. Foto Rappresentativa (formato editoriale variabile)
+      let repImageSrc = '';
+      if (matchedProject && matchedProject.image) {
+        let rawImg = matchedProject.image;
+        if (currentFolder && rawImg.startsWith(currentFolder + '/')) {
+          rawImg = rawImg.substring(currentFolder.length + 1);
+        } else if (!rawImg.startsWith('../') && !rawImg.startsWith('http') && !rawImg.startsWith('img/')) {
+          rawImg = '../' + rawImg;
         }
-        // Per tutti gli altri elementi, creiamo un riquadro nella griglia
-        else {
-          let mainItem; // Dichiariamo la variabile qui
+        repImageSrc = rawImg;
+      }
+      if (!repImageSrc) {
+        const firstVisual = data.find(i => i.type === 'image' && i.subtype !== 'logo' && i.src);
+        if (firstVisual) repImageSrc = toWebp(firstVisual.src);
+      }
 
-          // Se è il link a Figma, creiamo un tag <a>
-          if (item.type === 'figma') {
-            mainItem = document.createElement('a'); // <-- Elemento <a> cliccabile
-            mainItem.href = item.embedUrl;
-            mainItem.target = '_blank'; // Per aprire in una nuova scheda
-            mainItem.rel = 'noopener noreferrer';
-            const isFigmaUrl = item.embedUrl && item.embedUrl.includes('figma.com');
-            const ctaText = isFigmaUrl ? 'Open prototype →' : 'Visit website →';
-            mainItem.innerHTML = `<h3>${item.label}</h3><p>${ctaText}</p>`;
+      if (repImageSrc) {
+        const photoBox = document.createElement('div');
+        photoBox.className = 'editorial-photo-box';
+        const repImg = document.createElement('img');
+        repImg.src = repImageSrc;
+        repImg.alt = namingItem ? namingItem.content : 'Representative visual';
+        repImg.className = 'editorial-rep-img';
+        repImg.loading = 'eager';
+        repImg.decoding = 'async';
+        photoBox.appendChild(repImg);
+        stickyCol.appendChild(photoBox);
+      }
+
+      // 2. Tabella Info / Specs (allineata a sinistra con linee sottili)
+      const specsTable = document.createElement('div');
+      specsTable.className = 'editorial-specs-table';
+
+      const specsKeys = [
+        { label: 'Category', keys: ['category', 'discipline', 'services'] },
+        { label: 'Year', keys: ['year', 'date'] },
+        { label: 'Context', keys: ['context', 'course', 'client'] },
+        { label: 'Role', keys: ['role', 'deliverables'] },
+        { label: 'Team', keys: ['team', 'collaborators'] },
+        { label: 'Payoff', keys: ['payoff', 'tagline'] },
+        { label: 'Essence', keys: ['brand essence', 'mission', 'positioning'] }
+      ];
+
+      let specsCount = 0;
+      specsKeys.forEach(spec => {
+        const item = data.find(d => d.type === 'text' && spec.keys.includes((d.label || '').toLowerCase().trim()));
+        if (item && item.content) {
+          specsCount++;
+          const row = document.createElement('div');
+          row.className = 'specs-row';
+          row.innerHTML = `
+            <span class="specs-label">${spec.label}</span>
+            <span class="specs-value">${item.content}</span>
+          `;
+          specsTable.appendChild(row);
+        }
+      });
+
+      if (specsCount > 0) {
+        stickyCol.appendChild(specsTable);
+      }
+
+      // 3. Rilevamento Sito Web per bottone "Apri il sito" sulla colonna di sinistra
+      let websiteUrl = null;
+      let websiteLabel = 'Open Website';
+
+      const websiteItem = data.find(i => {
+        if (i.type === 'figma' && i.embedUrl && !i.embedUrl.includes('figma.com')) return true;
+        if (i.type === 'link' && i.href && i.href.startsWith('http') && !i.href.includes('github.com')) return true;
+        if (i.label && (i.label.toLowerCase().includes('website') || i.label.toLowerCase().includes('sito')) && (i.embedUrl || i.href)) return true;
+        return false;
+      });
+
+      if (websiteItem) {
+        websiteUrl = websiteItem.embedUrl || websiteItem.href;
+        websiteLabel = (websiteItem.label && !websiteItem.label.toLowerCase().includes('visit'))
+          ? `Visit ${websiteItem.label}`
+          : 'Visit Website';
+      } else if (matchedProject) {
+        if (matchedProject.category === 'websites' || (matchedProject.link && matchedProject.link.startsWith('http'))) {
+          websiteUrl = matchedProject.link;
+          websiteLabel = 'Open Website';
+        }
+      }
+
+      // Se il progetto ha un prototipo Figma alternativo
+      const figmaProtoItem = data.find(i => i.type === 'figma' && i.embedUrl && i.embedUrl.includes('figma.com'));
+
+      // Container per i bottoni d'azione della colonna sinistra
+      const ctaGroup = document.createElement('div');
+      ctaGroup.className = 'editorial-cta-group';
+
+      if (websiteUrl) {
+        const siteBtn = document.createElement('a');
+        siteBtn.href = websiteUrl;
+        siteBtn.target = '_blank';
+        siteBtn.rel = 'noopener noreferrer';
+        siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
+        siteBtn.innerHTML = `
+          <span>${websiteLabel}</span>
+          <span class="btn-arrow">↗</span>
+        `;
+        ctaGroup.appendChild(siteBtn);
+      } else if (figmaProtoItem) {
+        const figmaBtn = document.createElement('a');
+        figmaBtn.href = figmaProtoItem.embedUrl;
+        figmaBtn.target = '_blank';
+        figmaBtn.rel = 'noopener noreferrer';
+        figmaBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
+        figmaBtn.innerHTML = `
+          <span>Open Prototype</span>
+          <span class="btn-arrow">↗</span>
+        `;
+        ctaGroup.appendChild(figmaBtn);
+      }
+
+      // 4. Bottone Descrizione che scrolla in fondo alla pagina
+      const descBtn = document.createElement('a');
+      descBtn.href = '#project-description-section';
+      descBtn.className = 'editorial-action-btn editorial-desc-btn cursor-target';
+      descBtn.id = 'editorialDescBtn';
+      descBtn.innerHTML = `
+        <span>Project Description</span>
+        <span class="btn-arrow">↓</span>
+      `;
+      ctaGroup.appendChild(descBtn);
+
+      stickyCol.appendChild(ctaGroup);
+      editorialLayout.appendChild(stickyCol);
+
+      // ── COLONNA DESTRA: SCROLL MULTIMEDIALE FLUSH (SENZA SPAZI BIANCHI) ────
+      const mediaStream = document.createElement('div');
+      mediaStream.className = 'project-media-stream';
+
+      // 1. Video (se presente nel progetto)
+      if (videoContainer) {
+        mediaStream.appendChild(videoContainer);
+      }
+
+      // 2. Presentazione PDF: Solo Prima Pagina / Cover Preview Non Scrollabile + Open in Browser
+      if (pdfSource) {
+        const pdfSection = document.createElement('div');
+        pdfSection.className = 'editorial-pdf-section';
+        pdfSection.id = 'editorialPdfSection';
+        pdfSection.innerHTML = `
+          <div class="editorial-pdf-header">
+            <div class="editorial-pdf-title">
+              <span class="pdf-badge">PDF</span>
+              <span class="pdf-name">Presentation &amp; Guidelines</span>
+            </div>
+            <a href="${pdfSource}" target="_blank" rel="noopener noreferrer" class="editorial-pdf-open-btn cursor-target">
+              Open presentation ↗
+            </a>
+          </div>
+          <a href="${pdfSource}" target="_blank" rel="noopener noreferrer" class="editorial-presentation-cover-link cursor-target" title="Open presentation in browser">
+            <canvas class="editorial-presentation-canvas"></canvas>
+            <div class="editorial-presentation-hover-overlay">
+              <span>Open presentation in browser ↗</span>
+            </div>
+          </a>
+        `;
+        mediaStream.appendChild(pdfSection);
+
+        // Renderizza strictly la prima pagina su canvas
+        const canvas = pdfSection.querySelector('.editorial-presentation-canvas');
+        if (canvas && window.pdfjsLib) {
+          if (!window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
           }
-          // Se è un link esterno generico
-          else if (item.type === 'link') {
-            mainItem = document.createElement('a');
-            mainItem.href = item.href;
-            mainItem.target = '_blank';
-            mainItem.rel = 'noopener noreferrer';
-            mainItem.innerHTML = `<h3>${item.label}</h3>${item.description ? `<p>${item.description}</p>` : ''}<p class="link-cta">View publication →</p>`;
-          }
-          // Altrimenti, per immagini, colori, etc., creiamo un <div> come prima
-          else {
-            mainItem = document.createElement('div');
-            if (item.type === 'color') {
-              mainItem.style.backgroundColor = item.hex;
-              mainItem.innerHTML = `<h3>${item.label || ''}</h3>`;
-            } else if (item.type === 'image') {
-              const title = document.createElement('h3');
-              title.textContent = item.label;
-              const img = document.createElement('img');
-              img.src = toWebp(item.src);
-              img.alt = item.label;
-              img.loading = 'lazy';
-              img.decoding = 'async';
-              mainItem.append(title, img);
-            } else if (item.type === 'text') {
-              mainItem.innerHTML = `<h3>${item.label}</h3><p>${item.content}</p>`;
+          window.pdfjsLib.getDocument(pdfSource).promise.then(pdf => {
+            return pdf.getPage(1);
+          }).then(page => {
+            const pixelRatio = window.devicePixelRatio || 1;
+            const viewport = page.getViewport({ scale: 1 });
+            const containerWidth = mediaStream.clientWidth || 800;
+            const scale = (containerWidth / viewport.width) * pixelRatio;
+            const scaledViewport = page.getViewport({ scale: scale });
+
+            canvas.height = scaledViewport.height;
+            canvas.width = scaledViewport.width;
+            canvas.style.height = `${scaledViewport.height / pixelRatio}px`;
+            canvas.style.width = '100%';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.display = 'block';
+
+            const ctx = canvas.getContext('2d');
+            page.render({ canvasContext: ctx, viewport: scaledViewport });
+          }).catch(err => {
+            console.warn('[branding-project] Could not render page 1 canvas, fallback to locked frame:', err);
+            const link = pdfSection.querySelector('.editorial-presentation-cover-link');
+            if (link) {
+              link.innerHTML = `<iframe src="${pdfSource}#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit" style="width:100%; height:480px; border:none; pointer-events:none; overflow:hidden;" tabindex="-1" scrolling="no"></iframe>`;
             }
-          }
+          });
+        }
+      }
 
-          // Aggiungiamo le classi comuni e l'ID a tutti i riquadri
-          mainItem.id = uniqueId;
-          mainItem.classList.add('branding-item', 'cursor-target');
-          if (item.subtype === 'app-screenshot') {
-            mainItem.classList.add('full-width-app');
-          }
+      // 3. Contenuti Multimediali (immagini, mockups, color palette in quadrati con hex)
+      let currentSubgrid = null;
+      let currentColorsGrid = null;
+      let graphicIndex = 0;
 
-          mainGrid.appendChild(mainItem);
+      data.forEach((item) => {
+        // Ignora i campi di testo già gestiti nella tabella specs
+        if (item.type === 'text') return;
+
+        // Gestione Color Palette: quadrati a destra con il codice HEX sopra
+        if (item.type === 'color') {
+          currentSubgrid = null;
+          if (!currentColorsGrid) {
+            currentColorsGrid = document.createElement('div');
+            currentColorsGrid.className = 'editorial-colors-grid';
+            mediaStream.appendChild(currentColorsGrid);
+          }
+          const colorCard = document.createElement('div');
+          colorCard.className = 'editorial-color-card';
+          const hexCode = item.hex || item.label || '';
+          colorCard.innerHTML = `
+            <span class="color-hex-header">${hexCode}</span>
+            <div class="color-square-swatch cursor-target" style="background-color: ${hexCode};" title="${item.label || hexCode}"></div>
+          `;
+          currentColorsGrid.appendChild(colorCard);
+          return;
+        }
+
+        // Se l'elemento non è un colore, chiudi l'eventuale griglia colori aperta
+        currentColorsGrid = null;
+
+        // Header di sezione (SENZA sfondo nero, testo allineato a sinistra)
+        if (item.type === 'header') {
+          currentSubgrid = null;
+          const headerEl = document.createElement('div');
+          headerEl.className = 'editorial-stream-header';
+          headerEl.innerHTML = `<h2>${item.label}</h2>`;
+          mediaStream.appendChild(headerEl);
+          return;
+        }
+
+        const uniqueId = `stream-item-${graphicIndex++}`;
+
+        // Link Figma
+        if (item.type === 'figma') {
+          currentSubgrid = null;
+          const figmaCard = document.createElement('a');
+          figmaCard.id = uniqueId;
+          figmaCard.href = item.embedUrl;
+          figmaCard.target = '_blank';
+          figmaCard.rel = 'noopener noreferrer';
+          figmaCard.className = 'editorial-link-card cursor-target';
+          const isFigmaUrl = item.embedUrl && item.embedUrl.includes('figma.com');
+          figmaCard.innerHTML = `
+            <div class="link-card-body">
+              <span class="link-tag">${isFigmaUrl ? 'FIGMA PROTOTYPE' : 'LIVE WEBSITE'}</span>
+              <h3>${item.label}</h3>
+            </div>
+            <span class="link-arrow">↗</span>
+          `;
+          mediaStream.appendChild(figmaCard);
+          return;
+        }
+
+        // Link generico (es. pubblicazioni)
+        if (item.type === 'link') {
+          currentSubgrid = null;
+          const linkCard = document.createElement('a');
+          linkCard.id = uniqueId;
+          linkCard.href = item.href;
+          linkCard.target = '_blank';
+          linkCard.rel = 'noopener noreferrer';
+          linkCard.className = 'editorial-link-card cursor-target';
+          linkCard.innerHTML = `
+            <div class="link-card-body">
+              <span class="link-tag">PUBLICATION</span>
+              <h3>${item.label}</h3>
+              ${item.description ? `<p>${item.description}</p>` : ''}
+            </div>
+            <span class="link-arrow">↗</span>
+          `;
+          mediaStream.appendChild(linkCard);
+          return;
+        }
+
+        // Immagini e Screenshot
+        if (item.type === 'image') {
+          const isAppScreenshot = item.subtype === 'app-screenshot';
+          const isFullWidth = isAppScreenshot || (item.label && (
+            item.label.toLowerCase().includes('brochure') ||
+            item.label.toLowerCase().includes('mockup') ||
+            item.label.toLowerCase().includes('vetrina') ||
+            item.label.toLowerCase().includes('tote') ||
+            item.label.toLowerCase().includes('cart')
+          ));
+
+          if (isFullWidth) {
+            currentSubgrid = null;
+            const fullItem = document.createElement('div');
+            fullItem.id = uniqueId;
+            fullItem.className = 'editorial-stream-full-item';
+            const img = document.createElement('img');
+            img.src = item.src.endsWith('.svg') ? item.src : toWebp(item.src);
+            img.alt = item.label;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            fullItem.appendChild(img);
+            if (item.label && !isAppScreenshot) {
+              const cap = document.createElement('div');
+              cap.className = 'stream-item-caption';
+              cap.textContent = item.label;
+              fullItem.appendChild(cap);
+            }
+            mediaStream.appendChild(fullItem);
+          } else {
+            if (!currentSubgrid) {
+              currentSubgrid = document.createElement('div');
+              currentSubgrid.className = 'editorial-media-subgrid';
+              mediaStream.appendChild(currentSubgrid);
+            }
+            const gridItem = document.createElement('div');
+            gridItem.id = uniqueId;
+            gridItem.className = 'editorial-subgrid-item cursor-target';
+            const img = document.createElement('img');
+            img.src = item.src.endsWith('.svg') ? item.src : toWebp(item.src);
+            img.alt = item.label;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            gridItem.appendChild(img);
+            if (item.label) {
+              const cap = document.createElement('span');
+              cap.className = 'subgrid-caption';
+              cap.textContent = item.label;
+              gridItem.appendChild(cap);
+            }
+            currentSubgrid.appendChild(gridItem);
+          }
         }
       });
 
-      // --- SECONDO CICLO: COSTRUZIONE GRIGLIA "AT A GLANCE" ---
-      data.forEach((item, index) => {
-        const isGraphical = item.type === 'image' || item.type === 'color' || item.type === 'figma' || item.type === 'link';
-        if (isGraphical) {
-          const uniqueId = `content-item-${index}`;
-          const glanceLink = document.createElement('a');
-          glanceLink.href = `#${uniqueId}`;
-          glanceLink.classList.add('glance-item', 'cursor-target');
-          if (item.type === 'color') {
-            glanceLink.style.backgroundColor = item.hex;
-          } else if (item.type === 'image') {
-            const thumbImg = document.createElement('img');
-            thumbImg.src = toWebp(item.src);
-            thumbImg.alt = `Anteprima di ${item.label}`;
-            thumbImg.loading = 'lazy';
-            thumbImg.decoding = 'async';
-            glanceLink.appendChild(thumbImg);
-          } else if (item.type === 'figma') {
-            glanceLink.classList.add('glance-figma');
-            const isFigmaUrl = item.embedUrl && item.embedUrl.includes('figma.com');
-            glanceLink.innerHTML = `<span>${isFigmaUrl ? 'Figma' : 'Website'}</span>`;
-          } else if (item.type === 'link') {
-            glanceLink.classList.add('glance-figma');
-            glanceLink.innerHTML = `<span>${item.label}</span>`;
-          }
-          glanceGrid.appendChild(glanceLink);
-        }
-      });
+      editorialLayout.appendChild(mediaStream);
 
-      // Gestione scroll con Lenis
-      const allLinks = document.querySelectorAll('#glance-grid a, .scroll-down-arrow');
-      allLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+      // ── SEZIONE DESCRIZIONE: IN FONDO ALLA PAGINA ─────────────────
+      if (!projectInfoSection) {
+        const descTextItem = data.find(d => d.type === 'text' && (d.label === 'description' || d.label === 'values' || d.label === 'mission'));
+        if (descTextItem) {
+          projectInfoSection = document.createElement('section');
+          projectInfoSection.className = 'project-info-section';
+          const logoItem = data.find(d => d.type === 'image' && d.subtype === 'logo');
+          projectInfoSection.innerHTML = `
+            <div class="project-info-content">
+              ${logoItem ? `<img src="${logoItem.src}" alt="${namingItem ? namingItem.content : 'Logo'}" style="width: 100px; margin-bottom: 2rem;" loading="lazy">` : ''}
+              <h2>Values</h2>
+              <div class="project-info-text">
+                <p>${descTextItem.content}</p>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      if (projectInfoSection) {
+        projectInfoSection.id = 'project-description-section';
+      }
+
+      // Inserimento ordinato nel DOM: layout 2 colonne prima, poi descrizione in fondo
+      mainContainer.prepend(editorialLayout);
+      if (projectInfoSection) {
+        mainContainer.appendChild(projectInfoSection);
+      }
+
+      // ── GESTIONE SCROLL INTERATTIVO (LENIS) ────────────────────────
+      const descScrollBtn = document.getElementById('editorialDescBtn');
+      if (descScrollBtn && projectInfoSection) {
+        descScrollBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          const targetId = link.getAttribute('href');
-          if (targetId && typeof window.lenis !== 'undefined') {
-            window.lenis.scrollTo(targetId, { duration: 2, offset: -20 });
+          if (typeof window.lenis !== 'undefined' && window.lenis) {
+            window.lenis.scrollTo(projectInfoSection, { duration: 1.5, offset: -40 });
+          } else {
+            projectInfoSection.scrollIntoView({ behavior: 'smooth' });
           }
         });
-      });
+      }
 
-      // --- DESCRIZIONE COLLASSABILE ---
-      const descriptionText = document.querySelector('.project-info-text');
-      if (descriptionText) {
-        const paragraphs = Array.from(descriptionText.querySelectorAll('p'));
-        // Nascondi tutti i paragrafi eccetto il primo
-        const extraParagraphs = paragraphs.slice(1);
-        if (extraParagraphs.length > 0) {
-          extraParagraphs.forEach(p => p.classList.add('description-hidden'));
+      // ── DESCRIZIONE COLLASSABILE (MORE / LESS) ─────────────────────
+      if (projectInfoSection) {
+        const descriptionText = projectInfoSection.querySelector('.project-info-text');
+        if (descriptionText) {
+          const paragraphs = Array.from(descriptionText.querySelectorAll('p'));
+          const extraParagraphs = paragraphs.slice(1);
+          if (extraParagraphs.length > 0 && !projectInfoSection.querySelector('.description-more-btn')) {
+            extraParagraphs.forEach(p => p.classList.add('description-hidden'));
 
-          // Crea il bottone "more"
-          const moreBtn = document.createElement('button');
-          moreBtn.classList.add('description-more-btn', 'cursor-target');
-          moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
+            const moreBtn = document.createElement('button');
+            moreBtn.classList.add('description-more-btn', 'cursor-target');
+            moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
+            paragraphs[0].after(moreBtn);
 
-          // Inserisce il bottone dopo il primo paragrafo
-          paragraphs[0].after(moreBtn);
-
-          moreBtn.addEventListener('click', () => {
-            const isExpanded = descriptionText.classList.toggle('expanded');
-            moreBtn.classList.toggle('open', isExpanded);
-            moreBtn.innerHTML = isExpanded
-              ? 'less <span class="btn-arrow">↓</span>'
-              : 'more <span class="btn-arrow">↓</span>';
-          });
+            moreBtn.addEventListener('click', () => {
+              const isExpanded = descriptionText.classList.toggle('expanded');
+              moreBtn.classList.toggle('open', isExpanded);
+              moreBtn.innerHTML = isExpanded
+                ? 'less <span class="btn-arrow">↓</span>'
+                : 'more <span class="btn-arrow">↓</span>';
+            });
+          }
         }
       }
     })
     .catch(error => {
-      console.error("Errore nel caricamento del progetto:", error);
+      console.error('Errore nel caricamento del progetto editoriale:', error);
     });
 });

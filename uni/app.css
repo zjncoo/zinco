@@ -76,8 +76,8 @@
 }
 
 #project-hero h1 {
-  font-family: 'aktiv-grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-weight: 600;
+  font-family: 'neue-haas-unica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 500;
   font-size: clamp(4rem, 10vw, 8.5rem);
   margin: 0;
   max-width: 80%;
@@ -87,52 +87,57 @@
 }
 
 /* ================================================================ */
-/* 2. Grand Hero App Link (The Prominent Hero Web App Link)         */
+/* 2. Grand Hero App Link (Editorial Underlined Links)              */
 /* ================================================================ */
 
 .hero-app-cta-container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
-  margin-top: 36px;
+  gap: 24px;
+  margin-top: 32px;
   max-width: 100%;
 }
 
-.hero-app-big-link {
+.hero-editorial-link,
+.hero-app-big-link,
+.hero-app-download-btn {
   display: inline-flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 18px 24px;
-  background-color: black;
-  color: white;
-  border: 2px solid black;
-  text-decoration: none;
-  min-width: 260px;
-  max-width: 100%;
-  box-sizing: border-box;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
-}
-
-.hero-app-big-link:hover {
-  background-color: white;
-  color: black;
-  transform: translate(-3px, -3px);
-  box-shadow: 10px 10px 0px black;
-}
-
-.hero-link-badge {
-  display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-weight: 600;
-  opacity: 0.75;
-  margin-bottom: 12px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px 0 !important;
+  color: black !important;
+  text-decoration: none !important;
+  font-family: 'neue-haas-unica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  transition: opacity 0.2s ease;
+  min-width: 0 !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-editorial-link:hover,
+.hero-app-big-link:hover,
+.hero-app-download-btn:hover {
+  opacity: 0.6;
+  background: transparent !important;
+  color: black !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.hero-link-text,
+.hero-link-domain {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1.5px;
+  color: black;
 }
 
 .pulse-dot {
@@ -140,8 +145,10 @@
   height: 7px;
   border-radius: 50%;
   background-color: #00d26a;
-  box-shadow: 0 0 8px #00d26a;
+  box-shadow: 0 0 6px #00d26a;
   animation: pulseDot 2s infinite ease-in-out;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 @keyframes pulseDot {
@@ -155,22 +162,6 @@
   }
 }
 
-.hero-link-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
-
-.hero-link-domain {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.15rem, 2vw, 1.75rem);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  word-break: break-word;
-}
-
 .hero-link-arrow {
   display: inline-block;
   flex-shrink: 0;
@@ -178,35 +169,31 @@
   transition: transform 0.2s ease;
 }
 
+.hero-link-arrow-text {
+  font-size: 1.1rem;
+  line-height: 1;
+  display: inline-block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.hero-editorial-link:hover .hero-link-arrow,
 .hero-app-big-link:hover .hero-link-arrow {
-  transform: translate(3px, -3px);
+  transform: translate(2px, -2px);
 }
 
-.hero-app-download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 24px;
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-  text-decoration: none;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
+.hero-editorial-link:hover .hero-link-arrow-text,
+.hero-app-download-btn:hover .hero-link-arrow-text {
+  transform: translateY(2px);
 }
 
-.hero-app-download-btn:hover {
-  background-color: black;
-  color: white;
-}
-
-.hero-app-download-btn .download-icon {
+.download-icon,
+.hero-editorial-icon {
+  width: 17px;
+  height: 17px;
   stroke: currentColor;
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 /* ================================================================ */
@@ -257,9 +244,9 @@
 }
 
 .glance-item.glance-text {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-align: center;
@@ -272,8 +259,13 @@
 }
 
 /* ================================================================ */
-/* 4. Main Section: Hero Media Preview                             */
+/* 4. Main Section: 2-Column Editorial Layout                      */
 /* ================================================================ */
+
+#hero-wrapper #glance-container,
+main > #glance-container {
+  display: none;
+}
 
 main#sezione-progetto {
   padding-top: 0;
@@ -281,9 +273,194 @@ main#sezione-progetto {
   background-color: white;
 }
 
+.project-editorial-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 60px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 60px 40px 80px calc(27px + 0.88vw);
+  border-bottom: 2px solid black;
+  background-color: white;
+}
+
+/* --- Colonna Sinistra (Sticky / Fissa — Tutto Allineato a Sinistra) --- */
+.project-sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  text-align: left;
+}
+
+.project-sticky-col::-webkit-scrollbar {
+  display: none;
+}
+
+.editorial-photo-box {
+  width: 100%;
+  border: 1px solid black;
+  background-color: #f7f7f7;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.editorial-photo-box img.editorial-rep-img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.editorial-photo-box:hover img.editorial-rep-img {
+  transform: scale(1.02);
+}
+
+.editorial-specs-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid black;
+  text-align: left;
+}
+
+.specs-row {
+  display: grid;
+  grid-template-columns: 95px 1fr;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.specs-label {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  color: black;
+  opacity: 0.55;
+  text-align: left;
+}
+
+.specs-value {
+  font-weight: 400;
+  color: black;
+  word-break: break-word;
+  text-align: left;
+}
+
+.editorial-glance-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.editorial-glance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+  gap: 6px;
+}
+
+.editorial-glance-thumb {
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.editorial-glance-thumb:hover {
+  border-color: black;
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+.editorial-glance-thumb img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+}
+
+/* Gruppo Bottoni Azione (Sito Web / Descrizione) */
+.editorial-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.editorial-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: transparent;
+  border: 1.5px solid black;
+  color: black;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.editorial-action-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.editorial-action-btn .btn-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.editorial-site-btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+.editorial-desc-btn:hover .btn-arrow {
+  transform: translateY(2px);
+}
+
+/* --- Colonna Destra (Scroll Multimediale Flush — Senza Spazi Bianchi) --- */
+.project-media-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+  border-top: 1px solid black;
+}
+  min-width: 0;
+}
+
 #hero-media-container {
   width: 100%;
-  border-bottom: 2px solid black;
+  border: 1px solid black;
   line-height: 0;
   background-color: #f7f7f8;
 }
@@ -320,9 +497,9 @@ main#sezione-progetto {
   gap: 6px;
   background-color: rgba(0, 0, 0, 0.85);
   color: white;
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 8px 16px;
@@ -355,8 +532,8 @@ main#sezione-progetto {
 }
 
 .project-info-content h2 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -372,7 +549,7 @@ main#sezione-progetto {
 }
 
 .project-info-text p {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-weight: 500;
   font-size: clamp(2rem, 4.5vw, 5rem);
   line-height: 0.98;
@@ -410,8 +587,8 @@ main#sezione-progetto {
   background: none;
   border: none;
   padding: 0;
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -457,18 +634,18 @@ main#sezione-progetto {
 }
 
 .spec-label {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.68rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.5;
 }
 
 .spec-value {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 500;
   color: black;
   line-height: 1.3;
 }
@@ -489,19 +666,22 @@ main#sezione-progetto {
 
 .app-grid-header {
   grid-column: 1 / -1;
-  background-color: black;
-  color: white;
-  padding: 20px 40px;
+  background-color: transparent;
+  color: black;
+  padding: 24px 0 12px 0;
+  border-bottom: 1px solid black;
   text-align: left;
 }
 
 .app-grid-header h2 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
-  font-size: 1.35rem;
-  letter-spacing: 0.05em;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  color: black;
   margin: 0;
+  text-align: left;
 }
 
 /* Screenshot Cards */
@@ -564,9 +744,9 @@ main#sezione-progetto {
   gap: 6px;
   background-color: rgba(0, 0, 0, 0.85);
   color: white;
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 6px 12px;
@@ -591,8 +771,8 @@ main#sezione-progetto {
 }
 
 .screenshot-meta h3 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: 700;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1.25rem;
   letter-spacing: -0.01em;
   margin: 0 0 6px 0;
@@ -600,9 +780,9 @@ main#sezione-progetto {
 }
 
 .screenshot-subtitle {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: black;
@@ -612,7 +792,7 @@ main#sezione-progetto {
 }
 
 .screenshot-meta p {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.95rem;
   line-height: 1.5;
   color: #333333;
@@ -641,9 +821,9 @@ main#sezione-progetto {
 }
 
 .link-card-tag {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.68rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.5;
@@ -652,15 +832,15 @@ main#sezione-progetto {
 }
 
 .app-link-card h3 {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: 700;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 1.4rem;
   letter-spacing: -0.02em;
   margin: 0 0 10px 0;
 }
 
 .app-link-card p {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.95rem;
   line-height: 1.45;
   opacity: 0.8;
@@ -671,9 +851,9 @@ main#sezione-progetto {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-top: auto;
@@ -703,8 +883,8 @@ main#sezione-progetto {
 }
 
 .color-label {
-  font-family: 'aktiv-grotesk', sans-serif;
-  font-weight: bold;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
   font-size: 0.85rem;
   text-transform: uppercase;
   background-color: rgba(255, 255, 255, 0.9);
@@ -799,13 +979,13 @@ main#sezione-progetto {
 }
 
 .lightbox-caption-bar h4 {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 1.1rem;
   margin: 0 0 4px 0;
 }
 
 .lightbox-caption-bar p {
-  font-family: 'aktiv-grotesk', sans-serif;
+  font-family: 'neue-haas-unica', sans-serif;
   font-size: 0.85rem;
   opacity: 0.75;
   margin: 0;
@@ -822,6 +1002,12 @@ main#sezione-progetto {
 }
 
 @media (max-width: 1024px) {
+  .project-editorial-layout {
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    padding: 40px 30px 60px calc(27px + 0.88vw);
+  }
+
   .project-info-section {
     padding: 60px 30px;
     padding-left: 29px;
@@ -838,6 +1024,66 @@ main#sezione-progetto {
 }
 
 @media (max-width: 768px) {
+  .project-editorial-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 30px 0 50px 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .project-sticky-col {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    padding: 0 20px 0 27px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* MEDIA STREAM: 100 VW FULL BLEED ON MOBILE */
+  .project-media-stream {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .project-media-stream video,
+  .project-media-stream .video-container,
+  .project-media-stream .video-container video,
+  .project-media-item,
+  .project-media-item video,
+  .project-media-item img,
+  .editorial-stream-full-item,
+  .editorial-stream-full-item img,
+  .app-screenshot-item,
+  .app-screenshot-item img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+    display: block !important;
+  }
+
+  .editorial-stream-header {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+  }
+
+  .stream-item-caption {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    width: 100vw !important;
+    box-sizing: border-box;
+  }
   #project-hero {
     padding: 24px 20px 30px 24px;
     min-height: 80vh;
@@ -859,21 +1105,19 @@ main#sezione-progetto {
 
   .hero-app-cta-container {
     flex-direction: column;
-    align-items: stretch;
-    margin-top: 28px;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 24px;
     width: 100%;
   }
 
-  .hero-app-big-link {
-    min-width: 0;
-    width: 100%;
-    max-width: 100%;
-    padding: 16px 20px;
-  }
-
+  .hero-editorial-link,
+  .hero-app-big-link,
   .hero-app-download-btn {
-    width: 100%;
-    justify-content: center;
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: 100%;
+    padding: 2px 0 !important;
   }
 
   .project-info-section {

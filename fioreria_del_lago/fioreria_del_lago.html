@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Fioreria del Lago — brand identity for a lakeside flower shop. Soft palettes, botanical textures and a timeless visual language by zinco." />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
   <meta name="author" content="zinco — Francesco Zanchetta" />
   <meta property="og:title" content="Fioreria del Lago | zinco" />
   <meta property="og:description"
@@ -53,7 +54,7 @@
     <div id="scroll-progress-bar"></div>
 
     <div id="preloader">
-      <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="../index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -62,7 +63,12 @@
     <div id="hero-wrapper">
       <section id="project-hero">
         <div class="hero-title-container">
-          <a href="#sezione-progetto" class="scroll-down-arrow cursor-target">↓</a>
+          <a href="#sezione-progetto" class="scroll-down-arrow cursor-target" aria-label="Scroll down">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
           <h1 id="hero-title"></h1>
         </div>
       </section>

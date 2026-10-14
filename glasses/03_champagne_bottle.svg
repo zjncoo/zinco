@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Champagne Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #1E3326; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 270,75 C 270,68 275,65 285,65 L 315,65
+  C 325,65 330,68 330,75 L 332,88
+  C 332,94 326,98 326,104 L 326,220
+  C 326,300 415,360 415,460
+  L 415,728 L 185,728 L 185,460
+  C 185,360 274,300 274,220
+  L 274,104 C 274,98 268,94 268,88 Z"/>
+</svg>

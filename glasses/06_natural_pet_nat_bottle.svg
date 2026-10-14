@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Natural Wine Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #C26D38; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 274,70 L 326,70 L 328,82 L 320,85 L 318,220
+  C 318,300 405,340 405,440
+  L 405,725 L 195,725 L 195,440
+  C 195,340 282,300 282,220
+  L 280,85 L 272,82 Z"/>
+</svg>

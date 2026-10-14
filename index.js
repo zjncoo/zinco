@@ -4,14 +4,14 @@
 const setupPageTransitions = () => {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
-  const links = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([download]):not([href^="mailto:"]):not([href^="tel:"]):not(.search-result-link)');
+  const links = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([download]):not([href^="mailto:"]):not([href^="tel:"]):not(.search-result-link):not(.index-row):not(.preview-cta-btn)');
   links.forEach(link => {
     link.addEventListener('click', (e) => {
       const destination = link.getAttribute('href');
-      if (destination) {
+      if (destination && !destination.startsWith('#')) {
         e.preventDefault();
         preloader.classList.remove('loaded');
-        setTimeout(() => { window.location.href = destination; }, 800);
+        setTimeout(() => { window.location.href = destination; }, 220);
       }
     });
   });
@@ -41,11 +41,19 @@ window.addEventListener('pageshow', (event) => {
 });
 
 // --- INIZIALIZZAZIONE DELLO SCROLL FLUIDO (Lenis) ---
-const lenis = new Lenis();
-function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-requestAnimationFrame(raf);
-// Aggiungi questa riga per rendere lenis accessibile a tutti gli altri script
-window.lenis = lenis;
+let lenis = null;
+const isTouchOrMobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1080);
+if (!isTouchOrMobile && typeof Lenis !== 'undefined') {
+  lenis = new Lenis();
+  function raf(time) {
+    if (lenis) lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+  window.lenis = lenis;
+} else {
+  window.lenis = null;
+}
 // --- CONTROLLO VIDEO GRIGLIA (play solo se visibile) ---
 // Evita che 6 video girino in loop contemporaneamente causando lag.
 // Ogni video parte solo quando entra nel viewport e si ferma quando esce.
@@ -172,8 +180,16 @@ document.addEventListener('DOMContentLoaded', () => {
         cursorRAF = requestAnimationFrame(animateCursor);
       }
     }, { passive: true });
-    document.addEventListener('mouseover', (e) => { if (e.target.closest('a, button, .cursor-target')) cursor.classList.add('cursor-hover'); }, { passive: true });
-    document.addEventListener('mouseout', (e) => { if (e.target.closest('a, button, .cursor-target')) cursor.classList.remove('cursor-hover'); }, { passive: true });
+    document.addEventListener('mouseover', (e) => {
+      if (e.target && e.target.closest && e.target.closest('a, button, .cursor-target')) {
+        cursor.classList.add('cursor-hover');
+      }
+    }, { passive: true });
+    document.addEventListener('mouseout', (e) => {
+      if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('a, button, .cursor-target')) {
+        cursor.classList.remove('cursor-hover');
+      }
+    }, { passive: true });
   }
 
   // --- GESTIONE MENU A TENDINA ---
@@ -381,18 +397,96 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- GESTIONE BARRA AVANZAMENTO LETTURA (ottimizzata: RAF throttle) ---
+  // --- GESTIONE BARRA AVANZAMENTO LETTURA VERTICALE E PERCENTUALE (da su verso giù) ---
   const progressBar = document.getElementById('scroll-progress-bar');
   if (progressBar) {
     let progressRAF = null;
-    const updateProgressBar = () => {
-      progressRAF = null; // Reset flag
-      const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrollPercentage = scrollTotal > 0 ? (window.scrollY / scrollTotal) * 100 : 0;
-      progressBar.style.width = scrollPercentage + '%';
+    let scrollTimeout = null;
+    progressBar.style.width = '';
+
+    // Inietta dinamicamente il badge percentuale se non presente nel DOM
+    let percentBadge = document.getElementById('scroll-progress-percentage');
+    if (!percentBadge && window.innerWidth > 768) {
+      percentBadge = document.createElement('div');
+      percentBadge.id = 'scroll-progress-percentage';
+      percentBadge.setAttribute('aria-hidden', 'true');
+      progressBar.parentNode.insertBefore(percentBadge, progressBar.nextSibling);
+    }
+
+    const applyProgress = (ratio, showBadge = true) => {
+      const clampedRatio = Math.min(1, Math.max(0, ratio));
+      const percentVal = Math.round(clampedRatio * 100);
+
+      progressBar.style.height = `${clampedRatio * 100}%`;
+
+      if (percentBadge && window.innerWidth > 768) {
+        percentBadge.textContent = `${percentVal}%`;
+        const minTop = 18;
+        const maxTop = window.innerHeight - 18;
+        const targetTop = minTop + clampedRatio * (maxTop - minTop);
+        percentBadge.style.top = `${targetTop}px`;
+
+        if (showBadge) {
+          percentBadge.classList.add('is-scrolling');
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            percentBadge.classList.remove('is-scrolling');
+          }, 650);
+        }
+      }
     };
-    // passive: true permette al browser di ottimizzare lo scroll senza aspettare il listener
+
+    window.setCustomScrollProgress = (ratio, showBadge = true) => {
+      applyProgress(ratio, showBadge);
+    };
+
+    let cachedScrollTotal = Math.max(
+      1,
+      (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight
+    );
+
+    const recalculateScrollTotal = () => {
+      cachedScrollTotal = Math.max(
+        1,
+        (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight
+      );
+    };
+
+    window.recalculateScrollProgress = recalculateScrollTotal;
+
+    const updateProgressBar = () => {
+      progressRAF = null;
+
+      // Se siamo sulla homepage e siamo nella visualizzazione dei bicchieri (locked o in cima al sito),
+      // usa il progresso orizzontale dello showcase dei bicchieri
+      const isLocked = document.body.classList.contains('homepage-locked') || document.documentElement.classList.contains('homepage-locked');
+      if ((isLocked || window.scrollY <= 10) && typeof window.getGlassShowcaseProgress === 'function') {
+        const gp = window.getGlassShowcaseProgress();
+        if (gp !== null && gp !== undefined) {
+          applyProgress(gp, false);
+          return;
+        }
+      }
+
+      const currentScroll = window.scrollY || document.documentElement.scrollTop || 0;
+      const ratio = currentScroll / cachedScrollTotal;
+      applyProgress(ratio, true);
+    };
+
+    updateProgressBar();
     window.addEventListener('scroll', () => {
+      if (!progressRAF) {
+        progressRAF = requestAnimationFrame(updateProgressBar);
+      }
+    }, { passive: true });
+    window.addEventListener('resize', () => {
+      recalculateScrollTotal();
+      if (!percentBadge && window.innerWidth > 768) {
+        percentBadge = document.createElement('div');
+        percentBadge.id = 'scroll-progress-percentage';
+        percentBadge.setAttribute('aria-hidden', 'true');
+        progressBar.parentNode.insertBefore(percentBadge, progressBar.nextSibling);
+      }
       if (!progressRAF) {
         progressRAF = requestAnimationFrame(updateProgressBar);
       }
@@ -424,10 +518,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (siteMain && revealFooter) {
     const updateFooterMargin = () => {
-      // Get the height of the footer
+      if (document.body.classList.contains('homepage-locked')) {
+        siteMain.style.marginBottom = '0px';
+        return;
+      }
       const footerHeight = revealFooter.offsetHeight;
-      // Set the margin-bottom of the main content so the scroll goes far enough
-      siteMain.style.marginBottom = `${footerHeight}px`;
+      const windowHeight = window.innerHeight;
+
+      // Se il footer è più alto dell'altezza del viewport (es. schermi portatili)
+      // oppure siamo su schermi piccoli (<= 768px), usiamo il flusso normale (position: relative)
+      // in modo che l'utente possa scorrere naturalmente e vedere tutto il footer dal titolo ai bicchieri
+      // senza che la parte in alto venga tagliata fuori dallo schermo.
+      if (footerHeight >= windowHeight - 20 || window.innerWidth <= 768) {
+        revealFooter.style.position = 'relative';
+        revealFooter.style.bottom = 'auto';
+        revealFooter.style.zIndex = '2';
+        siteMain.style.marginBottom = '0px';
+      } else {
+        revealFooter.style.position = 'fixed';
+        revealFooter.style.bottom = '0';
+        revealFooter.style.zIndex = '1';
+        siteMain.style.marginBottom = `${footerHeight}px`;
+      }
+      if (typeof window.recalculateScrollProgress === 'function') {
+        window.recalculateScrollProgress();
+      }
     };
 
     // Calculate on load
@@ -440,12 +555,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(updateFooterMargin, 500);
     setTimeout(updateFooterMargin, 1500);
 
-    // Sometimes images load later and change footer height, so observe footer resizes
+    // Observe footer resizes when fonts/images finish loading
     if (window.ResizeObserver) {
       new ResizeObserver(updateFooterMargin).observe(revealFooter);
-
-      // Also observe changes in siteMain to adjust if dynamic content is loaded (e.g. from JS)
-      new ResizeObserver(updateFooterMargin).observe(siteMain);
     }
 
     // Hide fixed elements when footer is visible

@@ -1,0 +1,1792 @@
+/*
+ * ===================================================================
+ * FOGLIO DI STILE PRINCIPALE
+ * ===================================================================
+ * INDICE:
+ * 1. IMPOSTAZIONI GLOBALI E TIPOGRAFIA
+ * 2. PRELOADER DI PAGINA
+ * 3. CURSORE PERSONALIZZATO
+ * 4. LAYOUT E STRUTTURA PRINCIPALE (Main, Footer)
+ * 5. ELEMENTI UI FISSI E DI NAVIGAZIONE (Logo, Bottoni Angolari)
+ * 6. COMPONENTI RIUTILIZZABILI (Bottoni, Cookie Banner)
+ * 7. COMPONENTI PRINCIPALI DELLA PAGINA (Griglia Contenuti, Menu, Search)
+ * 8. ELEMENTI DECORATIVI
+ * 9. MEDIA QUERIES (Design Responsive)
+ * ===================================================================
+*/
+
+
+/*
+ * ===================================================================
+ * 1. IMPOSTAZIONI GLOBALI E TIPOGRAFIA
+ * ===================================================================
+*/
+
+/* Impedisce la selezione del testo e delle immagini */
+body {
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Standard syntax */
+}
+
+/* --- Font Adobe Fonts (Typekit: rra4uka) --- */
+/* aktiv-grotesk weight 400 e 500, caricati via Adobe Fonts (Typekit: rra4uka) */
+
+/* --- Font locale: Neuzeit Heavy (bold/700) --- */
+@font-face {
+  font-family: 'NeuzeitHeavy';
+  src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book Heavy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Reset e Stili di Base --- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background-color: white;
+  color: black;
+  overflow-y: auto;
+  counter-reset: grid-counter;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: 400;
+}
+
+/* --- Impostazioni dei Font --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+.corner-button {
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
+  letter-spacing: -0.05em;
+}
+
+.menu-link {
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+/* --- Classi Utilità per Testo --- */
+.underline {
+  text-decoration: underline;
+}
+
+.colorful {
+  font-weight: normal;
+  color: black;
+  background: none;
+  background-clip: unset;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
+/* In: index.css (fuori da @media) */
+
+#scroll-progress-bar {
+  position: fixed;
+  bottom: 0;
+  /* Come richiesto, "in basso a tutto" */
+  left: 0;
+  width: 0%;
+  /* Inizia da 0 e cresce con lo scroll */
+  height: 5px;
+  /* Puoi cambiare lo spessore se vuoi */
+
+  /* Usa il giallo esatto del tuo logo! */
+  background-color: #FFD600;
+
+  z-index: 9998;
+  /* Sotto il preloader/menu ma sopra il contenuto */
+  transition: width 0.1s linear;
+  /* Rende il movimento più fluido */
+}
+
+
+/*
+ * ===================================================================
+ * 2. PRELOADER DI PAGINA
+ * ===================================================================
+*/
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#preloader.loaded {
+  transform: translateY(-100%);
+}
+
+#preloader-logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 45px;
+  z-index: 10000;
+}
+
+#preloader #logo img {
+  height: 40px;
+  width: auto;
+}
+
+.loader-bar-container {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.loader-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #000000;
+  animation: loading-animation 1.5s ease-out forwards;
+}
+
+@keyframes loading-animation {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+
+/*
+ * ===================================================================
+ * 3. CURSORE PERSONALIZZATO
+ * ===================================================================
+*/
+body,
+a,
+button {
+  cursor: none;
+}
+
+.custom-cursor {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  pointer-events: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  backdrop-filter: invert(1);
+  -webkit-backdrop-filter: invert(1);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.custom-cursor.cursor-hover {
+  width: 45px;
+  height: 45px;
+}
+
+
+/*
+ * ===================================================================
+ * 4. LAYOUT E STRUTTURA PRINCIPALE
+ * ===================================================================
+*/
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 50px 0 80px;
+}
+
+/* Explicit ordering to ensure PDF Viewer precedes Branding Grid */
+main>.video-container {
+  order: 1 !important;
+}
+
+main>.project-info-section {
+  order: 2 !important;
+}
+
+main>#pdfViewerContainer {
+  order: 3 !important;
+}
+
+main>#brandingGrid {
+  order: 4 !important;
+}
+
+main>#figma-container {
+  order: 5 !important;
+}
+
+/* On mobile: PDF goes after the branding grid */
+@media (max-width: 768px) {
+  main>#pdfViewerContainer {
+    order: 5 !important;
+  }
+
+  main>#brandingGrid {
+    order: 3 !important;
+  }
+
+  main>#figma-container {
+    order: 4 !important;
+  }
+}
+
+.intro {
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-size: 28px;
+  max-width: 800px;
+  line-height: 1.4;
+  padding: 0 40px;
+}
+
+.shapes {
+  width: 100%;
+  height: 200px;
+  background: url('your-shapes-image.svg') center/contain no-repeat;
+  margin-bottom: 40px;
+}
+
+/*
+ * ===================================================================
+ * 4. REVEAL FOOTER
+ * ===================================================================
+*/
+.site-main-content {
+  position: relative;
+  z-index: 2;
+  /* Sits on top of the footer */
+  background-color: white;
+  min-height: 100vh;
+  /* Aggiunto per evitare footer visible su schermi grandi */
+  /* Must match body background so footer is hidden */
+  /* margin-bottom will be added via JS */
+}
+
+/* Base Footer Style */
+.reveal-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  /* Sits behind main content */
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 2rem;
+  overflow: hidden;
+}
+
+/* Top Section: Info & Form */
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 40px;
+  gap: 40px;
+  margin-bottom: 2rem;
+}
+
+.footer-contact-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.footer-contact-info h2 {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.footer-contact-info p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.social-links-text {
+  margin-top: 2rem !important;
+}
+
+.social-links-text a {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s ease;
+}
+
+.social-links-text a:hover {
+  text-decoration: underline;
+}
+
+/* Custom Contact Form */
+.footer-form-wrapper {
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  margin-left: auto;
+  /* Push to the right */
+  margin-right: -40px;
+  /* Stretch to the right edge */
+}
+
+.custom-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 1rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  /* Updated to match site style 2px black */
+  color: black;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-bottom-color: black;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1.5rem 0;
+  background-color: transparent;
+  color: black;
+  border: none;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  text-align: left;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.submit-btn:hover {
+  text-decoration: underline;
+}
+
+/* Infinite Marquee */
+.footer-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+  background: white;
+}
+
+.footer-marquee {
+  display: flex;
+  white-space: nowrap;
+  /* Width is double to allow seamless loop */
+  width: fit-content;
+  animation: scrollMarquee 30s linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  padding-right: 2rem;
+  /* space before next loop */
+}
+
+.marquee-content span {
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-size: 5vw;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: black;
+  line-height: 1;
+  padding: 0 1.5rem;
+}
+
+.marquee-img {
+  height: 4vw;
+  width: auto;
+  object-fit: contain;
+  margin: 0 1rem;
+  flex-shrink: 0;
+}
+
+/* Photos changing logic in marquee: 
+   We will keep it simple for now, but we can animate the images if needed */
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Bottom Bar */
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4vw;
+  padding: 32px 20px;
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: white;
+}
+
+.footer-bottom-links a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom-logo img {
+  height: 24px;
+}
+
+/* Mobile styles for Reveal Footer */
+@media (max-width: 768px) {
+  .reveal-footer {
+    padding-top: 100px;
+    /* Extra padding so text doesn't overlap the fixed logo */
+  }
+
+  .footer-top {
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 30px;
+  }
+
+  .footer-form-wrapper {
+    max-width: none;
+    width: 100%;
+  }
+
+  .footer-info h3 {
+    font-size: 2rem;
+  }
+
+  /* Make marquee slightly larger on mobile relative to viewport */
+  .marquee-content span {
+    font-size: 10vw;
+    padding: 0 1rem;
+  }
+
+  .marquee-img {
+    height: 7vw;
+    width: 12vw;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer-bottom-links a {
+    margin-right: 0;
+  }
+}
+
+
+/*
+ * ===================================================================
+ * 5. ELEMENTI UI FISSI E DI NAVIGAZIONE (Nav Bars)
+ * ===================================================================
+*/
+
+/* --- Horizontal Nav Bars --- */
+.nav-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 40px;
+  background-color: white;
+}
+
+.nav-bar--top {
+  top: 0;
+  border-bottom: 2px solid black;
+}
+
+.nav-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Open state for top nav bar when menu is active */
+.nav-bar.open {
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.nav-bar.open .nav-bar-link {
+  color: white;
+}
+
+.nav-bar.open #logo {
+  filter: invert(1);
+}
+
+#button-logo {
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  width: fit-content;
+}
+
+#logo {
+  height: 28px;
+  width: auto;
+  display: block;
+  transition: filter 0.3s ease;
+}
+
+.nav-bar-link {
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
+  letter-spacing: -0.05em;
+  color: black;
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 2px 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-bar-link:hover {
+  text-decoration: underline;
+}
+
+#btnTopRight.open {
+  color: white;
+  z-index: 1001;
+}
+
+
+/*
+ * ===================================================================
+ * 6. COMPONENTI RIUTILIZZABILI
+ * ===================================================================
+*/
+
+/* --- Sistema di Bottoni Generico --- */
+.btn {
+  border: 2px solid black;
+  padding: 10px 25px;
+  font-family: 'NeuzeitHeavy', sans-serif;
+  font-weight: normal;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: all .2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn--solid-dark {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.btn--solid-dark:hover {
+  text-decoration: underline;
+}
+
+.btn--outline-light {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  text-transform: none;
+  font-size: 14px;
+  padding: 0.4rem 0.8rem;
+  backdrop-filter: blur(5px);
+  mix-blend-mode: difference;
+}
+
+.btn--outline-light:hover {
+  text-decoration: underline;
+}
+
+.btn-loader {
+  display: inline-block;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.btn--outline-dark {
+  background-color: transparent;
+  color: black;
+  border-color: black;
+  text-transform: none;
+  padding: 8px 16px;
+}
+
+.btn--outline-dark:hover {
+  text-decoration: underline;
+}
+
+/* --- Cookie Banner --- */
+.cookie-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 20px;
+  background-color: #eee;
+  font-size: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cookie-link {
+  text-decoration: underline;
+}
+
+.close-btn {
+  font-size: 20px;
+  position: relative;
+  color: white;
+  background: none;
+  border: none;
+}
+
+
+/*
+ * ===================================================================
+ * 7. COMPONENTI PRINCIPALI DELLA PAGINA
+ * ===================================================================
+*/
+
+/* --- Titoli delle sezioni della griglia --- */
+.projects-section h2 {
+  text-align: left;
+  /* Allinea il testo a sinistra */
+  padding-left: 40px;
+  /* Aggiunge un rientro per allinearsi con il footer e la griglia */
+  width: 100%;
+  /* Assicura che l'elemento occupi tutto lo spazio per un allineamento corretto */
+}
+
+/* --- STRUTTURA GRIGLIA GENERICA (Vecchia) --- */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+/* --- STILE ELEMENTI GRIGLIA: TIPO 1 (Homepage) --- */
+.project-item {
+  background-color: white;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  outline: 2px solid black;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  transition: background-color 0.2s ease;
+  padding: 30px;
+}
+
+.project-item:hover {
+  background-color: black;
+}
+
+.project-item:hover img {
+  filter: grayscale(1) invert(1);
+}
+
+.project-item img {
+  width: auto;
+  max-width: 60%;
+  max-height: 60%;
+  object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+.project-item:nth-child(4n + 1) {
+  padding-left: 40px;
+}
+
+.project-item:nth-child(4n) {
+  padding-right: 40px;
+}
+
+/* --- Variante Cover per foto a tutta larghezza (es. Publications) --- */
+.project-item--cover {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.project-item--cover img {
+  width: 80%;
+  height: 80%;
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: cover;
+}
+
+.project-item--cover:hover img {
+  filter: none;
+  opacity: 0.7;
+}
+
+/* --- PROJECT LINE ITEMS (Branding, Publications, Websites) --- */
+
+.project-line {
+  display: flex;
+  align-items: center;
+  padding: 4px 40px;
+  /* Reduced vertical padding, kept horizontal for text alignment */
+  margin: 0;
+  /* Removed margin so border extends edge-to-edge */
+  border-bottom: 2px solid black;
+  /* 2px thick border */
+  text-decoration: none;
+  color: black;
+  transition: all 0.2s ease;
+  cursor: none;
+}
+
+.project-line:hover {
+  background-color: transparent;
+}
+
+.project-line-title {
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: bold;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.project-line-thumb {
+  height: 1.2em;
+  width: auto;
+  max-width: 80px;
+  margin-left: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Hover preview popup — replaces cursor */
+.project-line-preview {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  border: 2px solid black;
+  background: white;
+  overflow: hidden;
+}
+
+.project-line-preview.visible {
+  opacity: 1;
+}
+
+.project-line-preview img {
+  display: block;
+  width: 220px;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/*
+ * ===================================================================
+ * 7. MAIN COMPONENTS (Responsive Grid & Carousel - Final Version)
+ * ===================================================================
+*/
+
+/* --- Contenitore Principale --- */
+.portfolio-grid-container {
+  width: 100%;
+  max-width: 1800px;
+  padding: 40px;
+  margin: 5rem auto;
+}
+
+/* --- Area Titolo Dinamico (nascosta di default) --- */
+.carousel-info-mobile {
+  display: none;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#project-title-mobile {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+}
+
+
+.featured-title {
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: normal;
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.photo-grid {
+  display: grid;
+  /* FIX: Modificato per creare tessere più piccole e più numerose */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: minmax(220px, auto);
+  gap: 25px;
+}
+
+.grid-item {
+  perspective: 1500px;
+  aspect-ratio: 1 / 1;
+  background-color: transparent;
+  /* Rimosso lo sfondo grigio dal contenitore */
+}
+
+/* --- Stili per l'animazione Flip 3D --- */
+.card-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-style: preserve-3d;
+}
+
+.grid-item:hover .card-flipper {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.card-front img,
+.card-front video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Importantissimo per non deformare il video */
+}
+
+/* Badge icona app per le tessere dell'home grid */
+.grid-corner-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.grid-corner-badge img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  border-radius: 8px;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  background-color: white;
+  /* FIX: Aggiunto sfondo bianco per coprire il retro durante la rotazione */
+}
+
+.card-back h3 {
+  font-size: 1.8rem;
+  margin: 0 0 25px 0;
+}
+
+/* FIX: Stile unificato per i bottoni */
+.card-btn {
+  background: none;
+  border: 2px solid black;
+  color: black;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.card-btn:hover {
+  text-decoration: underline;
+}
+
+/* Classi per le dimensioni delle tessere */
+.tile-wide {
+  grid-column: span 2;
+}
+
+.tile-tall {
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+.tile-large {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+
+/*--- MENU ---*/
+#dropdownMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 100vw;
+  background-color: black;
+  overflow: hidden;
+  z-index: 999;
+  transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#dropdownMenu.open {
+  height: 60vh;
+}
+
+#dropdownMenu.open.search-is-active {
+  height: 100vh;
+}
+
+.menu-columns {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 40px;
+  margin-top: 10%;
+}
+
+.menu-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.menu-link {
+  color: white;
+  text-decoration: none;
+  font-size: 2rem;
+  line-height: 0.8;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+/* Hide other menu links when search is active */
+.search-is-active .menu-link {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.menu-link:hover {
+  text-decoration: underline;
+}
+
+.menu-bottom {
+  display: flex;
+  justify-content: left;
+  gap: 2rem;
+  align-items: center;
+  padding: 0 40px 2rem;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.search-is-active .menu-bottom {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.menu-email {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.menu-email:hover {
+  text-decoration: underline;
+}
+
+.footer-email {
+  text-decoration: none !important;
+}
+
+.footer-email:hover {
+  text-decoration: underline !important;
+}
+
+
+/* --- SEARCH BAR --- */
+#search-bar-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  /* Push to the top of the menu visually or keep its flex order */
+  order: -1;
+  margin-bottom: 2rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* On desktop, allow search line to grow. Assuming .menu-columns allows overflow or is flex */
+@media (min-width: 768px) {
+  .search-is-active #search-bar-container {
+    /* Break out of the left column and span the full width of the menu container */
+    position: absolute;
+    width: calc(100% - 80px);
+    /* accounting for padding */
+    top: 6rem;
+    left: 40px;
+    z-index: 10;
+  }
+}
+
+.search-input-line {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 1.5rem;
+  background: transparent;
+  color: white;
+  border: none;
+  border-bottom: 2px solid white;
+  outline: none;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: 600;
+  transition: border-color 0.4s ease, font-size 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  .search-is-active .search-input-line {
+    font-size: 3rem;
+    padding: 1rem 0;
+  }
+}
+
+.search-input-line::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input-line:focus {
+  border-bottom-color: #FFD600;
+  /* Zinco Yellow */
+}
+
+/* File: index.css */
+
+/* --- Stili per i Suggerimenti della Ricerca --- */
+
+/* Contenitore della lista dei risultati */
+.suggestions-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 60vh;
+  /* Altezza massima aumentata per menu 100vh */
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  /* better for fading in over the black menu */
+  z-index: 1010;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.suggestions-list.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Stile per ogni elemento della lista (<li>) */
+.suggestions-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.suggestions-list li a {
+  display: block;
+  /* Occupa tutto lo spazio per essere facilmente cliccabile */
+  padding: 0;
+  margin: 1rem 0;
+  color: white;
+  text-decoration: none;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  /* Separatore tra i risultati (rimosso) */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Stile per il messaggio "Nessun progetto trovato" */
+.suggestions-list li:not(:has(a)) {
+  padding: 1rem 0.5rem;
+  color: #777;
+  /* Colore più spento */
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+/* Effetto al passaggio del mouse */
+.suggestions-list li a:hover {
+  text-decoration: underline;
+}
+
+/* Stile Pulsante "Chiudi" della Ricerca (Modificato) */
+#closeSearch {
+  position: fixed;
+  top: 20px;
+  right: 32px;
+  z-index: 1101;
+  background: none;
+  border: none;
+  color: white;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  cursor: pointer;
+  text-transform: lowercase;
+  padding: 8px;
+  /* <-- Allinea il padding agli altri bottoni */
+}
+
+
+/* Stile Pulsante Filtri (Modificato) */
+#filters {
+  position: relative;
+}
+
+#category-select {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+  width: 100%;
+  text-align: center;
+  /* Centra il testo */
+  transition: all 0.2s ease;
+}
+
+#category-select:hover {
+  text-decoration: underline;
+}
+
+#category-select .arrow {
+  display: inline-block;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Stile Menu a Tendina dei Filtri (Modificato) */
+#category-select-options {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  border: 1px solid #444;
+  z-index: 1200;
+  width: 100%;
+}
+
+#category-select-options.show {
+  display: block;
+}
+
+.filter-option {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.filter-option:hover {
+  text-decoration: underline;
+}
+
+
+/*
+ * ===================================================================
+ * 8. ELEMENTI DECORATIVI
+ * ===================================================================
+*/
+.vertical-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: black;
+  z-index: 500;
+}
+
+/* Aggiungi alla fine del tuo CSS, prima delle Media Queries */
+.search-is-active #btnTopRight {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/*
+ * ===================================================================
+ * 9. MEDIA QUERIES (Design Responsive)
+ * ===================================================================
+*/
+
+/* --- Per Tablet e dispositivi simili (fino a 1024px) --- */
+@media (max-width: 1024px) {
+  .custom-cursor {
+    display: none !important;
+  }
+
+  /* Aggiungi questo dentro @media (max-width: 1024px) */
+  .photo-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colonne su tablet */
+    gap: 15px;
+  }
+
+  .intro,
+  footer,
+  .menu-columns,
+  .menu-bottom,
+  .portfolio-container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .nav-bar {
+    padding: 2px 30px;
+  }
+
+  #logo {
+    height: 24px;
+  }
+
+  .content-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .project-item:nth-child(4n + 1),
+  .project-item:nth-child(4n) {
+    padding: 30px;
+  }
+
+  .project-item:nth-child(3n + 1) {
+    padding-left: 30px;
+  }
+
+  .project-item:nth-child(3n) {
+    padding-right: 30px;
+  }
+}
+
+
+/* --- Per Telefoni (fino a 767px) --- */
+@media (max-width: 767px) {
+
+  /* In: index.css (dentro @media (max-width: 767px) { ... } ) */
+
+  #scroll-progress-bar {
+    top: 0;
+    /* La sposta in alto */
+    bottom: auto;
+    /* Rimuove l'impostazione 'bottom: 0' del desktop */
+  }
+
+  /* Reset del layout dinamico su colonna singola */
+  .grid-item:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .grid-item-overlay h3 {
+    font-size: 1.2rem;
+    /* Riduciamo la dimensione del font per il titolo */
+  }
+
+  .grid-item-overlay .visit-btn {
+    font-size: 0.8rem;
+    /* E per il bottone */
+    padding: 6px 16px;
+  }
+
+  #preloader-logo {
+    top: 20px;
+    left: 20px;
+  }
+
+  .intro,
+  footer,
+  .menu-columns,
+  .menu-bottom,
+  .portfolio-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* --- NAV BAR MOBILE ADJUSTMENTS --- */
+  .nav-bar {
+    padding: 2px 20px;
+  }
+
+  /* Hide desktop-only nav links on mobile */
+  .nav-bar-link--desktop {
+    display: none;
+  }
+
+  /* Allinea i titoli H2 (es. "uni year 1") al padding di 20px */
+  .projects-section h2 {
+    padding-left: 20px;
+  }
+
+  #logo {
+    height: 22px;
+  }
+
+  .content-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-item,
+  .project-item:nth-child(n) {
+    padding: 20px !important;
+  }
+
+  footer {
+    margin: 40px 0 150px 0;
+  }
+
+  /* Stretch footer form on mobile */
+  .footer-top {
+    padding: 0 20px;
+    /* Keep padding for the info section */
+    display: block;
+    /* Stack elements instead of flex */
+  }
+
+  .footer-form-wrapper {
+    margin-left: -20px;
+    /* Pull left by container padding */
+    margin-right: -20px;
+    /* Pull right by container padding */
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .footer-form-wrapper form {
+    padding: 0 20px;
+    /* Add padding back inside the form so text isn't flush with edge, only lines */
+  }
+
+  .footer-form-wrapper .input-group input,
+  .footer-form-wrapper .input-group textarea,
+  .footer-form-wrapper .submit-btn {
+    width: 100vw;
+    margin-left: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  /* --- MODIFICHE MENU A TENDINA --- */
+  .menu-columns {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 15vh;
+    /* Ridotto il margine superiore */
+  }
+
+  .menu-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-top: 2rem;
+    margin-top: 4rem;
+    /* Ridotto il margine superiore */
+  }
+
+  /* Fix per menu tagliato */
+  #dropdownMenu.open {
+    height: 100vh;
+    /* Occupa tutto lo schermo */
+    overflow-y: auto;
+    /* Aggiunge scroll se serve */
+  }
+
+  /* --- FINE MODIFICHE MENU --- */
+
+  /* --- Trasformazione in Carosello su Mobile --- */
+  .portfolio-grid-container {
+    padding: 0;
+    /* Rimuove il padding laterale per il layout a filo */
+  }
+
+  .carousel-info-mobile {
+    display: block;
+    padding: 0 20px;
+    /* Aggiunge un po' di spazio interno per il testo */
+  }
+
+  .featured-title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .photo-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 0 20px;
+    clip-path: inset(0 0 0 0);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .photo-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grid-item,
+  .tile-wide,
+  .tile-tall,
+  .tile-large {
+    flex: 0 0 80%;
+    width: 80%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    scroll-snap-align: center;
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .grid-item:hover .card-flipper {
+    transform: none;
+  }
+
+  .card-back {
+    display: none;
+  }
+
+  /* Project line mobile adjustments */
+  .project-line {
+    padding: 12px 20px;
+    padding-left: 20px;
+  }
+
+  .projects-section h2+.project-lines {
+    margin-left: 0;
+  }
+
+  .project-line-title {
+    font-size: 1.1rem;
+  }
+
+  .project-line-preview {
+    display: none !important;
+  }
+}
+
+/* Force cursor to be black over the white footer */
+body.footer-visible .custom-cursor {
+  mix-blend-mode: normal !important;
+  border-color: black !important;
+  background-color: transparent !important;
+}
+
+
+/* On mobile, standard flow for long footers to avoid cutoff */
+@media (max-width: 768px) {
+  .site-main-content {
+    margin-bottom: 0 !important;
+  }
+
+  .reveal-footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 40px;
+  }
+}
+
+/*
+ * ===================================================================
+ * 10. PDF THUMBNAIL GRID MODAL
+ * ===================================================================
+*/
+#pdfGridModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  /* Ensure full viewport height */
+  height: 100dvh;
+  /* Use dynamic viewport height for mobile browsers */
+  background-color: black;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  /* Layout: header is fixed at top, scroll only the grid below */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#pdfGridModal.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.pdf-grid-header {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 28px 40px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 10;
+}
+
+.pdf-grid-header h2 {
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: bold;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: white;
+  text-transform: lowercase;
+}
+
+#closePdfGrid {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px 16px;
+  text-transform: lowercase;
+  color: white;
+  letter-spacing: -0.02em;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#closePdfGrid:hover {
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Scrollable area below the header */
+#pdfThumbnailsContainer {
+  flex: 1;
+  min-height: 0;
+  /* Crucial for flex child to scroll */
+  width: 100%;
+  padding: 32px 40px 48px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Prevent scroll chaining to the body */
+  -webkit-overflow-scrolling: touch;
+}
+
+.pdf-thumbnail-wrapper {
+  position: relative;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-thumbnail-wrapper.active {
+  border-color: white;
+}
+
+.pdf-thumbnail-wrapper:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  opacity: 0.88;
+}
+
+.pdf-thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+}
+
+.pdf-thumbnail-number {
+  margin-top: 8px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-family: 'aktiv-grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: left;
+  letter-spacing: -0.02em;
+}
+
+.pdf-thumbnail-wrapper.active .pdf-thumbnail-number {
+  color: white;
+}
+
+#grid-view-btn {
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#grid-view-btn svg {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .pdf-grid-header {
+    padding: 20px 20px;
+  }
+
+  #pdfThumbnailsContainer {
+    padding: 20px 20px 40px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
+}

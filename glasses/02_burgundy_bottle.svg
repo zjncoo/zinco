@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Burgundy Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #98E48F; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 272,70 C 272,65 276,62 284,62 L 316,62
+  C 324,62 328,65 328,70 C 328,80 322,86 322,92
+  L 322,145
+  C 322,235 410,335 410,455
+  L 410,728 L 190,728 L 190,455
+  C 190,335 278,235 278,145
+  L 278,92 C 278,86 272,80 272,70 Z"/>
+</svg>

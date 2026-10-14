@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Stemless Wine Tumbler Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #7B2538; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 210,220
+  C 180,350 155,470 160,580
+  C 165,665 210,708 250,710
+  L 350,710
+  C 390,708 435,665 440,580
+  C 445,470 420,350 390,220
+  Z"/>
+</svg>

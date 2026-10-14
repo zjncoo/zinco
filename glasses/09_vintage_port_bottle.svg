@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Vintage Port Bottle Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #1E1C24; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 275,75 L 325,75 L 328,125
+  C 342,145 342,165 328,180 L 326,240
+  C 326,280 410,310 410,380
+  L 410,725 L 190,725 L 190,380
+  C 190,310 274,280 274,240
+  L 272,180 C 258,165 258,145 272,125 Z"/>
+</svg>

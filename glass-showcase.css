@@ -1,0 +1,873 @@
+/*
+ * ===================================================================
+ * GLASS SHOWCASE & EDITORIAL INDEX VIEW
+ * Clean Edges, Hard Grids, 2px Width Lines, Rectangular Corners
+ * Fonts: neue-haas-unica (Adobe Fonts)
+ * ===================================================================
+ */
+
+:root {
+  --glass-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --line-2px: 2px solid #000000;
+}
+
+/* Ensure position: sticky works reliably across all browsers */
+html {
+  overflow-x: clip;
+}
+
+/* -------------------------------------------------------------------
+ * TOP NAVBAR HOMEPAGE SEAMLESS TRANSITION
+ * Transparent with no border in hero;
+ * Seamlessly catches black border when scrolling into the editorial grid
+ * ------------------------------------------------------------------- */
+body.home-page .nav-bar--top {
+  background-color: transparent !important;
+  border-bottom: 2px solid transparent !important;
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-bottom-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.home-page .nav-bar--top.nav-scrolled {
+  background-color: #ffffff !important;
+  border-bottom: 2px solid #000000 !important;
+}
+
+body.home-page .nav-bar--top.open {
+  background-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+/* -------------------------------------------------------------------
+ * LOCK & VIEWPORT BEHAVIOR
+ * When locked on initial page load, prevents page from scrolling down
+ * ------------------------------------------------------------------- */
+html.homepage-locked,
+body.homepage-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+body.homepage-locked main#main {
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow: hidden !important;
+}
+
+.site-main-content {
+  margin-bottom: 0;
+  transition: margin-bottom 0.2s ease;
+}
+
+main#main {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+  text-align: left !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+/* -------------------------------------------------------------------
+ * 1. HERO INTRO TEXT (NOT STICKY - LIVES INSIDE SHOWCASE SECTION)
+ * ------------------------------------------------------------------- */
+.glass-top-bar {
+  position: absolute;
+  top: 54px; /* Directly below the 48px top navbar */
+  right: clamp(20px, 3.5vw, 40px);
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  pointer-events: none;
+  background: transparent;
+  border: none !important;
+}
+
+.hero-intro-text {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+  line-height: 1;
+}
+
+.glass-mobile-status {
+  display: none !important;
+}
+
+/* -------------------------------------------------------------------
+ * 2. FLOATING CURSOR LABEL (BECOMES THE CURSOR ON GLASS HOVER)
+ * Follows the cursor centered directly under the pointer
+ * ------------------------------------------------------------------- */
+.glass-cursor-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10001;
+  border: 2px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  padding: 5px 9px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  box-sizing: border-box;
+  border-radius: 0 !important;
+  line-height: 1;
+  will-change: transform;
+  transition: opacity 0.12s ease;
+}
+
+.glass-cursor-label.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* -------------------------------------------------------------------
+ * 3. HORIZONTAL GLASS SHOWCASE (EXACT 100VH, CLOSER TO BOTTOM LINE)
+ * ------------------------------------------------------------------- */
+.glass-showcase-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: var(--line-2px); /* Bottom line */
+  box-sizing: border-box;
+  cursor: none !important;
+  content-visibility: auto;
+  contain-intrinsic-size: 100vw 100vh;
+}
+
+.glass-track-container {
+  width: 100%;
+  height: calc(100% - 48px); /* Max height down to bottom line */
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end; /* Base of bottles sit right on bottom */
+  cursor: none !important;
+  touch-action: pan-x;
+  margin-bottom: 0px;
+}
+
+.glass-track {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px; /* EXACTLY 20px between the SVG silhouettes */
+  padding: 0 40px;
+  height: 100%;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  cursor: none !important;
+}
+
+/* INDIVIDUAL GLASS ITEM:
+ * - Hardware accelerated & content-visibility for fast 120fps scrolling
+ * - Auto width matching precise SVG aspect ratio
+ * - Native cursor hidden: cursor BECOMES the label on hover
+ */
+.glass-item {
+  height: 100%;
+  width: auto;
+  flex-shrink: 0;
+  margin: 0 !important;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  cursor: none !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  user-select: none;
+  pointer-events: none !important; /* Do not detect hover on transparent outer bounding box */
+}
+
+.glass-svg {
+  height: 100%;
+  width: auto;
+  display: block;
+  stroke: none !important;
+  outline: none !important;
+  border: none !important;
+  pointer-events: none !important;
+  shape-rendering: geometricPrecision;
+}
+
+.glass-svg * {
+  stroke: none !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.glass-img {
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none !important;
+}
+
+/* Project main color layer */
+.glass-color-layer {
+  opacity: 0;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: all !important;
+  cursor: none !important;
+}
+
+/* Precise hit layer matching exact SVG geometry */
+.glass-hit-layer {
+  pointer-events: all !important;
+  cursor: none !important;
+}
+
+/* Active center on mobile */
+.glass-item.is-active-center .glass-color-layer {
+  opacity: 1 !important;
+}
+
+.glass-item.is-active-center .glass-img {
+  opacity: 0 !important;
+}
+
+/* Hover triggered ONLY for desktop/mouse pointers (never on mobile touch) */
+@media (hover: hover) and (pointer: fine) {
+  .glass-item.is-hovered .glass-color-layer,
+  .glass-item:focus .glass-color-layer,
+  .glass-item:focus-visible .glass-color-layer {
+    opacity: 1;
+  }
+
+  .glass-item.is-hovered .glass-img,
+  .glass-item:focus .glass-img,
+  .glass-item:focus-visible .glass-img {
+    opacity: 0;
+  }
+
+  @supports selector(:has(*)) {
+    .glass-item:has(.glass-hit-layer:hover) .glass-color-layer,
+    .glass-item:has(.glass-color-layer:hover) .glass-color-layer {
+      opacity: 1;
+    }
+    .glass-item:has(.glass-hit-layer:hover) .glass-img,
+    .glass-item:has(.glass-color-layer:hover) .glass-img {
+      opacity: 0;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------
+ * 4. BOTTOM "MORE PROJECTS" BUTTON (INSIDE 100VH, NO BOX)
+ * ------------------------------------------------------------------- */
+.glass-bottom-bar {
+  position: absolute;
+  bottom: 14px; /* Un pochino più su per entrare perfettamente nei 100vh */
+  left: 0;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  pointer-events: none;
+  cursor: none !important;
+}
+
+.toggle-index-btn {
+  pointer-events: auto;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 4px 12px !important;
+  margin: 0 !important;
+  cursor: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #000000;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+}
+
+.toggle-index-btn:hover {
+  background: transparent !important;
+  color: #000000 !important;
+  opacity: 0.5;
+}
+
+/* -------------------------------------------------------------------
+ * 5. EDITORIAL INDEX SECTION (STICKY UP UP TOP, ONLY CENTER LIST MOVES)
+ * ------------------------------------------------------------------- */
+.editorial-index-section,
+.editorial-index-section *,
+.editorial-index-container,
+.index-col-left,
+.index-col-center,
+.index-col-right,
+.index-table-list,
+.index-row,
+.index-filter-pill,
+.preview-card-frame,
+.preview-cta-btn {
+  cursor: none !important;
+}
+
+.editorial-index-section {
+  width: 100%;
+  background: #ffffff;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+  scroll-margin-top: 48px;
+}
+
+.editorial-index-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px clamp(20px, 3.5vw, 40px) 100px;
+  display: grid;
+  grid-template-columns: 220px 1fr 340px;
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: stretch; /* Stretches columns so sticky inner wrappers have full vertical travel */
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* LEFT COLUMN: Categories & counter column */
+.index-col-left {
+  height: 100%;
+  position: relative;
+  align-self: stretch;
+}
+
+/* INNER STICKY WRAPPER: Glued to upper side of page right under top navbar */
+.index-sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 72px; /* 48px navbar + 24px container padding */
+  display: flex;
+  flex-direction: column;
+}
+
+.index-counter-block {
+  margin-bottom: 24px;
+  border-bottom: var(--line-2px);
+  padding-bottom: 14px;
+}
+
+.index-counter-label {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #71717a;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.index-counter-display {
+  font-size: 56px;
+    font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: #000000;
+}
+
+.index-filters-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.index-filter-pill {
+  background: #ffffff;
+  border: var(--line-2px);
+  border-radius: 0 !important; /* RECTANGULAR */
+  padding: 8px 12px;
+  text-align: left;
+  cursor: none !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #000000;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.index-filter-pill:hover {
+  background: #f4f4f5;
+}
+
+.index-filter-pill.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+.filter-count {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+/* CENTER COLUMN: TABULAR LIST (ONLY THIS COLUMN MOVES) */
+.index-col-center {
+  width: 100%;
+  padding-top: 12px;
+}
+
+.index-list-header {
+  display: grid;
+  grid-template-columns: 65px 1fr 120px 30px;
+  align-items: center;
+  padding: 8px 14px;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #71717a;
+  border-top: var(--line-2px);
+  border-bottom: var(--line-2px);
+}
+
+.index-table-list {
+  display: flex;
+  flex-direction: column;
+  contain: layout;
+}
+
+/* ROW (RECTANGULAR, 2PX BOTTOM BORDER, SOLID BLACK HOVER) */
+.index-row {
+  display: grid;
+  grid-template-columns: 65px 1fr 120px 30px;
+  align-items: center;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: #000000;
+  border-bottom: var(--line-2px);
+  border-radius: 0 !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  cursor: none !important;
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 45px;
+}
+
+.index-cell-num {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: -0.03em;
+  color: #71717a;
+  transition: color 0.15s ease;
+}
+
+.index-cell-title {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  transition: color 0.15s ease;
+}
+
+.index-cell-cat {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #71717a;
+  transition: color 0.15s ease;
+}
+
+.index-cell-arrow {
+  font-size: 13px;
+  color: #000000;
+  text-align: right;
+  transition: color 0.15s ease;
+}
+
+/* HOVER ROW INVERSION (SOLID BLACK BLOCK) */
+.index-row:hover,
+.index-row.active-row {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.index-row:hover .index-cell-num,
+.index-row:hover .index-cell-title,
+.index-row:hover .index-cell-cat,
+.index-row:hover .index-cell-arrow,
+.index-row.active-row .index-cell-num,
+.index-row.active-row .index-cell-title,
+.index-row.active-row .index-cell-cat,
+.index-row.active-row .index-cell-arrow {
+  color: #ffffff;
+}
+
+/* RIGHT COLUMN: PREVIEW CARD column */
+.index-col-right {
+  height: 100%;
+  position: relative;
+  align-self: stretch;
+}
+
+.preview-card-frame {
+  background: #ffffff;
+  border: var(--line-2px);
+  border-radius: 0 !important;
+  padding: 14px;
+}
+
+.preview-image-box {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: var(--line-2px);
+  border-radius: 0 !important;
+  overflow: hidden;
+  background: #f4f4f5;
+  margin-bottom: 12px;
+}
+
+#indexPreviewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0 !important;
+  transition: opacity 0.2s ease;
+}
+
+.preview-card-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-tag-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.preview-num-badge {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #000000;
+}
+
+.preview-cat-badge {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #000000;
+  border: 1px solid #000000;
+  padding: 2px 5px;
+  border-radius: 0 !important;
+}
+
+.preview-project-title {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  color: #000000;
+  margin: 0 0 12px 0;
+}
+
+.preview-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 12px;
+  background: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  border: var(--line-2px);
+  border-radius: 0 !important;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.preview-cta-btn:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+.cta-arrow {
+  font-size: 12px;
+}
+
+/* -------------------------------------------------------------------
+ * 6. RESPONSIVE MOBILE BREAKPOINTS
+ * ------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .editorial-index-container {
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+  }
+  .index-col-right {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-intro-text {
+    display: none !important;
+  }
+
+  .glass-top-bar {
+    top: 48px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 38px;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: var(--line-1px) !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: auto;
+    z-index: 25;
+    box-sizing: border-box;
+  }
+
+  .glass-mobile-status {
+    display: flex !important;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .mobile-project-label {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'neue-haas-unica', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #000000;
+    cursor: none !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: opacity 0.15s ease;
+  }
+
+  .mobile-project-label:active {
+    opacity: 0.5;
+  }
+
+  .mobile-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'neue-haas-unica', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #71717a;
+    transition: opacity 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .mobile-scroll-hint.is-scrolled {
+    opacity: 0.35;
+  }
+
+  .scroll-arrow {
+    font-size: 12px;
+    line-height: 1;
+    display: inline-block;
+    animation: scrollNudge 1.4s ease-in-out infinite;
+  }
+
+  @keyframes scrollNudge {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(4px);
+    }
+  }
+
+  .glass-showcase-section {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 480px;
+    overflow: hidden;
+  }
+
+  .glass-track-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+
+  .glass-track-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .glass-track {
+    padding: 0 calc(50vw - 100px);
+    gap: 24px;
+    transform: none !important;
+    touch-action: pan-x;
+  }
+
+  .glass-item {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+    width: 200px;
+    height: 100%;
+    transform: none !important;
+    -webkit-transform: none !important;
+    backface-visibility: visible !important;
+    content-visibility: auto;
+    contain-intrinsic-size: 200px 500px;
+    touch-action: pan-x;
+  }
+
+  .glass-svg {
+    max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px);
+    width: auto;
+  }
+
+  .glass-cursor-label {
+    display: none !important;
+  }
+
+  .editorial-index-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 16px 60px;
+  }
+
+  .index-col-left {
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
+
+  .index-sticky-col {
+    position: static;
+  }
+
+  .index-counter-block {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .index-counter-display {
+    font-size: 36px;
+  }
+
+  .index-filters-nav {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    scrollbar-width: none;
+    gap: 6px;
+    padding-bottom: 6px;
+  }
+
+  .index-filters-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .index-filter-pill {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+
+  .index-col-center {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .index-list-header {
+    grid-template-columns: 50px 1fr 24px;
+    padding: 8px 10px;
+    font-size: 9px;
+  }
+  .col-cat-hdr {
+    display: none;
+  }
+
+  .index-row {
+    grid-template-columns: 50px 1fr 24px;
+    padding: 10px 10px;
+  }
+  .index-cell-num {
+    font-size: 10px;
+  }
+  .index-cell-title {
+    font-size: 12px;
+  }
+  .index-cell-cat {
+    display: none;
+  }
+
+  .index-col-right {
+    display: none !important;
+  }
+}

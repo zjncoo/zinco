@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <title>Brandy Cognac Snifter Silhouette</title>
+  <defs>
+    <style>
+      .silhouette { fill: #4D2818; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <path class="silhouette" d="M 220.0,230.0
+  C 180.0,320.0 120.0,390.0 120.0,450.0
+  C 120.0,545.0 240.0,590.0 295.5,590.0
+  L 295.5,665.0
+  C 295.5,692.5 226.2,715.0 180.0,715.0
+  L 420.0,715.0
+  C 373.8,715.0 304.5,692.5 304.5,665.0
+  L 304.5,590.0
+  C 360.0,590.0 480.0,545.0 480.0,450.0
+  C 480.0,390.0 420.0,320.0 380.0,230.0
+  Z"/>
+</svg>
