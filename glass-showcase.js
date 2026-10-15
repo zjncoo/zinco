@@ -481,6 +481,10 @@
       const navigate = () => {
         if (isMobile && isTouchScrolling) return;
         if (!isMobile && dragDistance > 8) return;
+        if (isMobile && item !== activeMobileItem) {
+          item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          return;
+        }
         const href = item.dataset.href;
         if (!href) return;
         if (href.startsWith('http')) {
@@ -498,6 +502,13 @@
           e.stopPropagation();
           navigate();
         });
+      });
+
+      // On mobile, tapping anywhere on the item scrolls to or opens it
+      item.addEventListener('click', (e) => {
+        if (!isMobile) return;
+        e.preventDefault();
+        navigate();
       });
 
       // Keyboard navigation
@@ -541,19 +552,23 @@
     const index = Math.max(0, Math.min(cachedGlassItems.length - 1, rawIndex));
     const closestItem = cachedGlassItems[index];
 
-    if (closestItem && closestItem !== activeMobileItem) {
-      if (activeMobileItem) {
-        activeMobileItem.classList.remove('is-active-center');
-      }
-      activeMobileItem = closestItem;
-      activeMobileItem.classList.add('is-active-center');
+    if (closestItem) {
+      if (closestItem !== activeMobileItem) {
+        if (activeMobileItem) {
+          activeMobileItem.classList.remove('is-active-center');
+        }
+        activeMobileItem = closestItem;
+        activeMobileItem.classList.add('is-active-center');
 
-      const title = activeMobileItem.dataset.title || '';
-      const href = activeMobileItem.dataset.href || '';
-      const labelEl = document.getElementById('mobileProjectLabel');
-      if (labelEl) {
-        labelEl.textContent = `${title.toUpperCase()} ↗`;
-        labelEl.dataset.href = href;
+        const title = activeMobileItem.dataset.title || '';
+        const href = activeMobileItem.dataset.href || '';
+        const labelEl = document.getElementById('mobileProjectLabel');
+        if (labelEl) {
+          labelEl.textContent = `${title.toUpperCase()} ↗`;
+          labelEl.dataset.href = href;
+        }
+      } else if (!closestItem.classList.contains('is-active-center')) {
+        closestItem.classList.add('is-active-center');
       }
     }
   };

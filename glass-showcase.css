@@ -239,15 +239,6 @@ main#main {
   cursor: none !important;
 }
 
-/* Active center on mobile */
-.glass-item.is-active-center .glass-color-layer {
-  opacity: 1 !important;
-}
-
-.glass-item.is-active-center .glass-img {
-  opacity: 0 !important;
-}
-
 /* Hover triggered ONLY for desktop/mouse pointers (never on mobile touch) */
 @media (hover: hover) and (pointer: fine) {
   .glass-item.is-hovered .glass-color-layer,
@@ -783,6 +774,27 @@ main#main {
     max-height: calc(100vh - 120px);
     max-height: calc(100dvh - 120px);
     width: auto;
+  }
+
+  /* -----------------------------------------------------------------
+   * Mobile SVG Glass Showcase:
+   * Side SVGs (default) show project brand color.
+   * Centered SVG in focus (.is-active-center) reveals the project photo.
+   * ----------------------------------------------------------------- */
+  .glass-item .glass-color-layer {
+    opacity: 1 !important;
+  }
+
+  .glass-item .glass-img {
+    opacity: 0 !important;
+  }
+
+  .glass-item.is-active-center .glass-color-layer {
+    opacity: 0 !important;
+  }
+
+  .glass-item.is-active-center .glass-img {
+    opacity: 1 !important;
   }
 
   .glass-cursor-label {
