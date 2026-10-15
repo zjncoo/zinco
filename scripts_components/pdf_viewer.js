@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnWrapper.innerHTML = `
           <a href="${url}" target="_blank" rel="noopener noreferrer" class="btn btn--outline-dark pdf-open-browser-btn cursor-target" style="padding: 10px 22px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
             <span>Open presentation in browser</span>
-            <span>↗</span>
+            <span class="btn-arrow"><svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
           </a>
         `;
         container.appendChild(btnWrapper);

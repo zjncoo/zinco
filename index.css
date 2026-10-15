@@ -1942,3 +1942,22 @@ body.footer-visible .custom-cursor {
     gap: 12px;
   }
 }
+
+/* -------------------------------------------------------------------
+ * CUSTOM VECTOR ARROWS (Consistent across desktop & mobile, prevents iOS emoji fallback)
+ * ------------------------------------------------------------------- */
+.custom-arrow-icon {
+  display: inline-block;
+  vertical-align: -0.06em;
+  width: 0.82em;
+  height: 0.82em;
+  stroke: currentColor;
+  stroke-width: 1.25px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  pointer-events: none;
+  font-style: normal;
+}
+

@@ -5,6 +5,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const ARROW_SVG_DIAG = '<svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>';
+  const ARROW_SVG_DOWN = '<svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="1" x2="5" y2="8.5"></line><polyline points="1.5 5 5 8.5 8.5 5"></polyline></svg>';
+
   // Funzione per convertire i percorsi delle immagini in .webp (salvaguardando svg)
   const toWebp = (url) => {
     if (typeof url !== 'string') return '';
@@ -199,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
         siteBtn.innerHTML = `
           <span>${websiteLabel}</span>
-          <span class="btn-arrow">↗</span>
+          <span class="btn-arrow">${ARROW_SVG_DIAG}</span>
         `;
         ctaGroup.appendChild(siteBtn);
       } else if (figmaProtoItem) {
@@ -210,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         figmaBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
         figmaBtn.innerHTML = `
           <span>Open Prototype</span>
-          <span class="btn-arrow">↗</span>
+          <span class="btn-arrow">${ARROW_SVG_DIAG}</span>
         `;
         ctaGroup.appendChild(figmaBtn);
       }
@@ -222,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
       descBtn.id = 'editorialDescBtn';
       descBtn.innerHTML = `
         <span>Project Description</span>
-        <span class="btn-arrow">↓</span>
+        <span class="btn-arrow">${ARROW_SVG_DOWN}</span>
       `;
       ctaGroup.appendChild(descBtn);
 
@@ -250,13 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="pdf-name">Presentation &amp; Guidelines</span>
             </div>
             <a href="${pdfSource}" target="_blank" rel="noopener noreferrer" class="editorial-pdf-open-btn cursor-target">
-              Open presentation ↗
+              Open presentation ${ARROW_SVG_DIAG}
             </a>
           </div>
           <a href="${pdfSource}" target="_blank" rel="noopener noreferrer" class="editorial-presentation-cover-link cursor-target" title="Open presentation in browser">
             <canvas class="editorial-presentation-canvas"></canvas>
             <div class="editorial-presentation-hover-overlay">
-              <span>Open presentation in browser ↗</span>
+              <span>Open presentation in browser ${ARROW_SVG_DIAG}</span>
             </div>
           </a>
         `;
@@ -354,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="link-tag">${isFigmaUrl ? 'FIGMA PROTOTYPE' : 'LIVE WEBSITE'}</span>
               <h3>${item.label}</h3>
             </div>
-            <span class="link-arrow">↗</span>
+            <span class="link-arrow">${ARROW_SVG_DIAG}</span>
           `;
           mediaStream.appendChild(figmaCard);
           return;
@@ -375,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <h3>${item.label}</h3>
               ${item.description ? `<p>${item.description}</p>` : ''}
             </div>
-            <span class="link-arrow">↗</span>
+            <span class="link-arrow">${ARROW_SVG_DIAG}</span>
           `;
           mediaStream.appendChild(linkCard);
           return;
@@ -491,15 +494,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const moreBtn = document.createElement('button');
             moreBtn.classList.add('description-more-btn', 'cursor-target');
-            moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
+            moreBtn.innerHTML = `more <span class="btn-arrow">${ARROW_SVG_DOWN}</span>`;
             paragraphs[0].after(moreBtn);
 
             moreBtn.addEventListener('click', () => {
               const isExpanded = descriptionText.classList.toggle('expanded');
               moreBtn.classList.toggle('open', isExpanded);
               moreBtn.innerHTML = isExpanded
-                ? 'less <span class="btn-arrow">↓</span>'
-                : 'more <span class="btn-arrow">↓</span>';
+                ? `less <span class="btn-arrow">${ARROW_SVG_DOWN}</span>`
+                : `more <span class="btn-arrow">${ARROW_SVG_DOWN}</span>`;
             });
           }
         }

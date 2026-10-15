@@ -27,6 +27,9 @@
   let previewNumBadgeEl = null;
   let previewProjectBtnEl = null;
 
+  // Custom vector arrow SVG (consistent across desktop & mobile, prevents iOS emoji fallback)
+  const ARROW_SVG_DIAG = '<svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>';
+
   // Horizontal translation variables
   let currentX = 0;
   let targetX = 0;
@@ -564,7 +567,7 @@
         const href = activeMobileItem.dataset.href || '';
         const labelEl = document.getElementById('mobileProjectLabel');
         if (labelEl) {
-          labelEl.textContent = `${title.toUpperCase()} ↗`;
+          labelEl.innerHTML = `<span class="mobile-project-name">${title.toUpperCase()}</span> ${ARROW_SVG_DIAG}`;
           labelEl.dataset.href = href;
         }
       } else if (!closestItem.classList.contains('is-active-center')) {
@@ -682,7 +685,7 @@
         <span class="index-cell-num">${row.dataset.num}</span>
         <span class="index-cell-title">${p.title}</span>
         <span class="index-cell-cat">${p.category}</span>
-        <span class="index-cell-arrow">↗</span>
+        <span class="index-cell-arrow">${ARROW_SVG_DIAG}</span>
       `;
 
       row.addEventListener('mouseenter', () => {

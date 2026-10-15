@@ -6,6 +6,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const ARROW_SVG_DIAG = '<svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>';
+  const ARROW_SVG_DOWN = '<svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="1" x2="5" y2="8.5"></line><polyline points="1.5 5 5 8.5 8.5 5"></polyline></svg>';
+
   const dataFile = 'app-data.jsonl';
 
   fetch(dataFile)
@@ -336,7 +339,7 @@ function renderAppShowcase(data) {
       siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
       siteBtn.innerHTML = `
         <span>Open Web App</span>
-        <span class="btn-arrow">↗</span>
+        <span class="btn-arrow">${ARROW_SVG_DIAG}</span>
       `;
       ctaGroup.appendChild(siteBtn);
     }
@@ -347,7 +350,7 @@ function renderAppShowcase(data) {
     descBtn.id = 'editorialDescBtn';
     descBtn.innerHTML = `
       <span>Project Description</span>
-      <span class="btn-arrow">↓</span>
+      <span class="btn-arrow">${ARROW_SVG_DOWN}</span>
     `;
     ctaGroup.appendChild(descBtn);
 

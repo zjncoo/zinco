@@ -507,6 +507,24 @@ main#main {
   color: #000000;
   text-align: right;
   transition: color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.custom-arrow-icon {
+  display: inline-block;
+  vertical-align: -0.06em;
+  width: 0.82em;
+  height: 0.82em;
+  stroke: currentColor;
+  stroke-width: 1.25px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  pointer-events: none;
+  font-style: normal;
 }
 
 /* HOVER ROW INVERSION (SOLID BLACK BLOCK) */
@@ -627,6 +645,8 @@ main#main {
 
 .cta-arrow {
   font-size: 12px;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* -------------------------------------------------------------------
@@ -716,7 +736,9 @@ main#main {
   .scroll-arrow {
     font-size: 12px;
     line-height: 1;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     animation: scrollNudge 1.4s ease-in-out infinite;
   }
 
