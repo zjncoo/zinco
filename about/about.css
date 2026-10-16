@@ -1,6 +1,6 @@
 /* ===================================================================
  * EDITORIAL ABOUT STYLESHEET - zinco.cc
- * Minimalist, Modern 2-Column Architecture
+ * Minimalist, Modern 2-Column Architecture with Project Hero
  * =================================================================== */
 
 :root {
@@ -15,31 +15,113 @@ body {
   background-color: #ffffff;
   color: #000000;
   -webkit-font-smoothing: antialiased;
+  text-align: left;
 }
 
-/* --- Section & Grid Layout (2 Columns matching project & app architecture) --- */
+/* ===================================================================
+ * 1. Project Hero Section (Standard Project Architecture)
+ * =================================================================== */
+#hero-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 50;
+}
+
+#project-hero {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 40px 40px 40px calc(27px + 0.88vw);
+  border-bottom: 2px solid #000000;
+  text-align: left;
+}
+
+.hero-title-container {
+  position: relative;
+  padding-top: 80px;
+  width: 100%;
+  text-align: left;
+}
+
+.scroll-down-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+  color: #000000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  animation: bounceArrow 2.5s ease-in-out infinite;
+}
+
+.scroll-down-arrow svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  display: block;
+}
+
+@keyframes bounceArrow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+#project-hero h1 {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  margin: 0;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  text-align: left;
+  text-transform: lowercase;
+  color: #000000;
+}
+
+/* ===================================================================
+ * 2. Section & Grid Layout (2 Columns matching project & app architecture)
+ * =================================================================== */
 .about-editorial-section {
   width: 100%;
   background: #ffffff;
   position: relative;
   box-sizing: border-box;
+  text-align: left;
 }
 
 .about-editorial-container {
   width: 100%;
   margin: 0 auto;
-  padding: 100px calc(27px + 0.88vw) 120px;
+  padding: 60px calc(27px + 0.88vw) 120px;
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: 60px;
   align-items: start;
   box-sizing: border-box;
+  text-align: left;
 }
 
 /* --- Left Column: Photo & Specs Table (Sticky Sidebar) --- */
 .about-col-left {
   position: relative;
   width: 100%;
+  text-align: left;
 }
 
 .about-sticky-wrapper {
@@ -49,6 +131,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  text-align: left;
 }
 
 /* Photo Frame */
@@ -73,6 +156,7 @@ body {
   border-top: var(--line-2px);
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .about-spec-row {
@@ -92,6 +176,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.05em;
   font-size: 10px;
+  text-align: left;
 }
 
 .about-spec-value {
@@ -105,6 +190,7 @@ body {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 /* Social & Contact Links Side by Side Above Biography */
@@ -115,6 +201,7 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 28px;
+  text-align: left;
 }
 
 .about-social-link {
@@ -145,6 +232,7 @@ body {
   border-bottom: var(--line-2px);
   padding-bottom: 12px;
   margin-bottom: 24px;
+  text-align: left;
 }
 
 .about-heading {
@@ -157,9 +245,10 @@ body {
   line-height: 1.2;
   margin: 0;
   padding: 0;
+  text-align: left;
 }
 
-/* Biography Prose */
+/* Biography Prose (Strictly Left-Aligned) */
 .about-prose {
   font-size: 1.05rem;
   line-height: 1.7;
@@ -170,6 +259,7 @@ body {
 
 .about-prose p {
   margin: 0 0 1.25em 0;
+  text-align: left;
 }
 
 .about-prose p:last-child {
@@ -181,6 +271,7 @@ body {
   background: var(--color-bg-subtle);
   border: var(--line-2px);
   padding: 24px 28px;
+  text-align: left;
 }
 
 .about-card-badge {
@@ -201,6 +292,7 @@ body {
   letter-spacing: -0.02em;
   margin: 0 0 8px 0;
   color: #000000;
+  text-align: left;
 }
 
 .about-card-sub {
@@ -208,6 +300,7 @@ body {
   line-height: 1.5;
   color: #444444;
   margin: 0 0 12px 0;
+  text-align: left;
 }
 
 .about-card-repo {
@@ -216,6 +309,7 @@ body {
   color: #71717a;
   margin: 0;
   word-break: break-all;
+  text-align: left;
 }
 
 .about-card-repo a {
@@ -240,21 +334,30 @@ body {
 }
 
 /* ===================================================================
- * RESPONSIVE BREAKPOINTS (MATCHING APP & PROJECT EDITORIAL STANDARDS)
+ * 3. Responsive Breakpoints (Matching App & Project Editorial Standards)
  * =================================================================== */
 @media (max-width: 1024px) {
+  #project-hero {
+    padding: 40px 30px 40px calc(27px + 0.88vw);
+  }
+
   .about-editorial-container {
     grid-template-columns: 300px 1fr;
     gap: 40px;
-    padding: 80px calc(27px + 0.88vw) 100px;
+    padding: 50px calc(27px + 0.88vw) 100px;
   }
 }
 
 @media (max-width: 768px) {
+  #project-hero {
+    padding: 30px 20px 30px 20px;
+    min-height: 60vh;
+  }
+
   .about-editorial-container {
     grid-template-columns: 1fr;
     gap: 36px;
-    padding: 70px 20px 80px;
+    padding: 40px 20px 80px;
   }
 
   .about-sticky-wrapper {

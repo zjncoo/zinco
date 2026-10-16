@@ -87,6 +87,58 @@
       background: black;
       color: white;
     }
+
+    .editorial-presentation-btn-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.2);
+      transition: background 0.2s ease;
+    }
+
+    .preview-see-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 12px 24px;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .editorial-presentation-cover-link:hover .preview-see-btn {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .editorial-presentation-cover-link:hover .editorial-presentation-btn-overlay {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .editorial-presentation-btn-overlay {
+        position: static;
+        background: transparent;
+        padding-top: 14px;
+      }
+      .preview-see-btn {
+        width: 100%;
+        justify-content: center;
+        box-shadow: none;
+      }
+    }
   </style>
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
   <script src="components.js" defer></script>
@@ -169,19 +221,10 @@
         <!-- Colonna Destra Media Stream -->
         <div class="project-media-stream">
           <section class="editorial-presentation-section">
-            <div class="editorial-presentation-header">
-              <div class="presentation-header-left">
-                <span class="editorial-presentation-tag">PORTFOLIO // BROWSER PREVIEW</span>
-                <span class="pdf-name">zinco_portfolio.pdf</span>
-              </div>
-              <a href="about/zinco_portfolio-compressed.pdf" target="_blank" rel="noopener noreferrer" class="editorial-pdf-open-btn cursor-target">
-                Open in browser <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
-              </a>
-            </div>
             <a href="about/zinco_portfolio-compressed.pdf" target="_blank" rel="noopener noreferrer" class="editorial-presentation-cover-link cursor-target" title="Open full portfolio PDF in browser tab">
               <canvas id="portfolioCoverCanvas" class="editorial-presentation-canvas"></canvas>
-              <div class="editorial-presentation-hover-overlay">
-                <span>Open Portfolio in Browser <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
+              <div class="editorial-presentation-btn-overlay">
+                <span class="preview-see-btn">see in browser <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
               </div>
             </a>
           </section>

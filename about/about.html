@@ -68,7 +68,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="about.css?v=3" />
+  <link rel="stylesheet" href="about.css?v=4" />
   <link rel="stylesheet" href="../index.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
@@ -80,11 +80,27 @@
 
 <body>
   <div class="site-main-content">
+    <div id="scroll-progress-bar"></div>
     <div id="preloader">
       <a href="../index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
+    </div>
+
+    <!-- Project Hero Section (Standard Project Hero Architecture) -->
+    <div id="hero-wrapper">
+      <section id="project-hero">
+        <div class="hero-title-container">
+          <a href="#about-content" class="scroll-down-arrow cursor-target" aria-label="Scroll down">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <h1 id="hero-title">about</h1>
+        </div>
+      </section>
     </div>
 
     <div class="vertical-line left"></div>
@@ -94,8 +110,8 @@
 
     <zinco-header base-path="../"></zinco-header>
 
-    <!-- About Me Editorial Main (2-Column Architecture) -->
-    <main class="about-editorial-section">
+    <!-- About Me Editorial Main (2-Column Architecture, All Texts Left-Aligned) -->
+    <main id="about-content" class="about-editorial-section">
       <div class="about-editorial-container">
 
         <!-- Left Column: Photo & Specs Table (Sticky on Desktop) -->
@@ -105,7 +121,7 @@
               <img src="shot.webp" alt="Francesco Zanchetta — communication designer" loading="lazy" decoding="async">
             </div>
 
-            <!-- Specs Table -->
+            <!-- Specs Table (Left-Aligned) -->
             <div class="about-specs-table">
               <div class="about-spec-row">
                 <span class="about-spec-label">name</span>
@@ -150,9 +166,9 @@
             </a>
           </div>
 
-          <!-- Section Subtitle: Same format as nav buttons -->
+          <!-- Subtitle "about me" — Same format as nav buttons & subtitles -->
           <header class="about-right-header">
-            <h1 class="about-heading">about me</h1>
+            <h2 class="about-heading">about me</h2>
           </header>
 
           <div class="about-prose">
@@ -169,7 +185,7 @@
 
           <div class="about-highlight-card">
             <div class="about-card-badge">Award Winner</div>
-            <h2 class="about-card-title">DBEW Award 2026 — 3rd Prize</h2>
+            <h3 class="about-card-title">DBEW Award 2026 — 3rd Prize</h3>
             <p class="about-card-sub">
               Kookmin University Seoul &amp; ADI — project <a href="https://zjncoo.github.io/ALUA.IT/" target="_blank" rel="noopener" class="inline-link cursor-target">ALUA</a> (group project).
             </p>
