@@ -128,7 +128,7 @@ main#main {
   border-radius: 0 !important;
   line-height: 1;
   will-change: transform;
-  transition: opacity 0.12s ease;
+  transition: none !important;
 }
 
 .glass-cursor-label.visible {
@@ -153,8 +153,11 @@ main#main {
   border-bottom: var(--line-2px); /* Bottom line */
   box-sizing: border-box;
   cursor: none !important;
-  content-visibility: auto;
-  contain-intrinsic-size: 100vw 100vh;
+  contain: layout paint style;
+}
+
+.glass-showcase-section.hero-offscreen .glass-track {
+  visibility: hidden;
 }
 
 .glass-track-container {
@@ -180,7 +183,7 @@ main#main {
 }
 
 /* INDIVIDUAL GLASS ITEM:
- * - Hardware accelerated & content-visibility for fast 120fps scrolling
+ * - Hardware accelerated for fast 120fps scrolling
  * - Auto width matching precise SVG aspect ratio
  * - Native cursor hidden: cursor BECOMES the label on hover
  */
@@ -201,6 +204,7 @@ main#main {
   background: transparent !important;
   user-select: none;
   pointer-events: none !important; /* Do not detect hover on transparent outer bounding box */
+  contain: layout style;
 }
 
 .glass-svg {
@@ -211,7 +215,6 @@ main#main {
   outline: none !important;
   border: none !important;
   pointer-events: none !important;
-  shape-rendering: geometricPrecision;
 }
 
 .glass-svg * {
@@ -221,14 +224,14 @@ main#main {
 }
 
 .glass-img {
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: none !important;
   pointer-events: none !important;
 }
 
 /* Project main color layer */
 .glass-color-layer {
   opacity: 0;
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: none !important;
   pointer-events: all !important;
   cursor: none !important;
 }
@@ -468,11 +471,7 @@ main#main {
   color: #000000;
   border-bottom: var(--line-2px);
   border-radius: 0 !important;
-  transition: background-color 0.15s ease, color 0.15s ease;
   cursor: none !important;
-  contain: layout style;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 45px;
 }
 
 .index-cell-num {
@@ -481,7 +480,6 @@ main#main {
   font-size: 11px;
   letter-spacing: -0.03em;
   color: #71717a;
-  transition: color 0.15s ease;
 }
 
 .index-cell-title {
@@ -490,7 +488,6 @@ main#main {
   font-size: 13px;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  transition: color 0.15s ease;
 }
 
 .index-cell-cat {
@@ -499,14 +496,12 @@ main#main {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #71717a;
-  transition: color 0.15s ease;
 }
 
 .index-cell-arrow {
   font-size: 13px;
   color: #000000;
   text-align: right;
-  transition: color 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -575,7 +570,6 @@ main#main {
   object-fit: cover;
   display: block;
   border-radius: 0 !important;
-  transition: opacity 0.2s ease;
 }
 
 .preview-card-details {
@@ -634,7 +628,6 @@ main#main {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  transition: background-color 0.15s ease, color 0.15s ease;
   box-sizing: border-box;
 }
 
@@ -707,7 +700,6 @@ main#main {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    transition: opacity 0.15s ease;
   }
 
   .mobile-project-label:active {
@@ -787,8 +779,6 @@ main#main {
     transform: none !important;
     -webkit-transform: none !important;
     backface-visibility: visible !important;
-    content-visibility: auto;
-    contain-intrinsic-size: 200px 500px;
     touch-action: pan-x;
   }
 
@@ -799,24 +789,28 @@ main#main {
   }
 
   /* -----------------------------------------------------------------
-   * Mobile SVG Glass Showcase:
+   * Mobile SVG Glass Showcase (Instant switch, NO fading animation):
    * Side SVGs (default) show project brand color.
    * Centered SVG in focus (.is-active-center) reveals the project photo.
    * ----------------------------------------------------------------- */
   .glass-item .glass-color-layer {
     opacity: 1 !important;
+    transition: none !important;
   }
 
   .glass-item .glass-img {
     opacity: 0 !important;
+    transition: none !important;
   }
 
   .glass-item.is-active-center .glass-color-layer {
     opacity: 0 !important;
+    transition: none !important;
   }
 
   .glass-item.is-active-center .glass-img {
     opacity: 1 !important;
+    transition: none !important;
   }
 
   .glass-cursor-label {

@@ -232,15 +232,26 @@
         trackContainerEl.addEventListener('wheel', onTrackLocalWheel, { passive: true });
       }
 
+      // Calculate footer margin immediately so the entire page height is uninhibited
+      if (typeof window.updateFooterMargin === 'function') {
+        window.updateFooterMargin();
+      }
+
       // Resume Lenis smooth scroll
       if (window.lenis && typeof window.lenis.start === 'function') {
         window.lenis.start();
+        if (typeof window.lenis.resize === 'function') {
+          window.lenis.resize();
+        }
       }
 
       // Trigger resize so index.js updates layout & footer margin
       window.dispatchEvent(new Event('resize'));
 
       setTimeout(() => {
+        if (typeof window.updateFooterMargin === 'function') {
+          window.updateFooterMargin();
+        }
         updateNavbarScroll();
         isUnlocking = false;
       }, 150);
@@ -763,15 +774,28 @@
    * As the page scrolls down and the hero bottom line hits the navbar,
    * the navbar seamlessly acquires its black border and solid white background,
    * as if stealing the fixed line from the page.
+   * Also toggles .hero-offscreen when scrolled well past hero to pause SVG compositing.
    */
   const updateNavbarScroll = () => {
     const nav = document.getElementById('navTop');
-    if (!nav) return;
+    const showcaseSection = document.getElementById('glass-showcase');
     const threshold = window.innerHeight - 48;
-    if (window.scrollY >= threshold - 1) {
-      nav.classList.add('nav-scrolled');
-    } else {
-      nav.classList.remove('nav-scrolled');
+    const isPastHero = window.scrollY >= threshold - 1;
+
+    if (nav) {
+      if (isPastHero) {
+        nav.classList.add('nav-scrolled');
+      } else {
+        nav.classList.remove('nav-scrolled');
+      }
+    }
+
+    if (showcaseSection) {
+      if (window.scrollY > window.innerHeight + 30) {
+        showcaseSection.classList.add('hero-offscreen');
+      } else {
+        showcaseSection.classList.remove('hero-offscreen');
+      }
     }
   };
 
@@ -883,10 +907,12 @@
     window.addEventListener('load', () => {
       measure();
       updateNavbarScroll();
-      if (isLocked && window.lenis && typeof window.lenis.stop === 'function') {
-        window.lenis.stop();
-      }
-    });
+    // If arriving directly with a hash anchor like #contact-footer, unlock immediately
+    if (window.location.hash && window.location.hash !== '#' && window.location.hash !== '#main') {
+      setTimeout(() => {
+        unlock({ scrollToGrid: false });
+      }, 50);
+    }
 
     isInitialized = true;
   };

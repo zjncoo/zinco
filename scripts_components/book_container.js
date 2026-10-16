@@ -409,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       for (let i = 1; i <= totalPages; i++) {
         const wrapper = document.createElement('div');
-        wrapper.className = `pdf-thumbnail-wrapper ${i === currentPage ? 'active' : ''}`;
+        wrapper.className = `pdf-thumbnail-wrapper cursor-target ${i === currentPage ? 'active' : ''}`;
         wrapper.dataset.page = i;
 
         const canvas = document.createElement('canvas');

@@ -88,10 +88,18 @@ const scrollToHashOnLoad = () => {
   // Aspetta che il preloader finisca (max ~1.2s) poi scrolla
   const doScroll = () => {
     try {
+      if (document.body.classList.contains('homepage-locked') && window.GlassShowcase) {
+        window.GlassShowcase.unlock({ scrollToGrid: false });
+        if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
+        if (window.lenis && typeof window.lenis.resize === 'function') window.lenis.resize();
+      }
       if (hash === '#contact-footer') {
         // Il footer è position:fixed, non ha offsetTop utile.
         // Scrolliamo al massimo valore possibile, che rivela il footer dall'inizio.
-        const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const maxScroll = Math.max(
+          (document.documentElement.scrollHeight || 0) - document.documentElement.clientHeight,
+          (document.body.scrollHeight || 0) - window.innerHeight
+        );
         if (window.lenis) {
           window.lenis.scrollTo(maxScroll, { duration: 1.2, force: true });
         } else {
@@ -224,6 +232,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (targetElement) {
           e.preventDefault();
 
+          // Se siamo in modalità locked sulla homepage e vogliamo raggiungere un'ancora (es. #contact-footer)
+          if (document.body.classList.contains('homepage-locked') && window.GlassShowcase) {
+            window.GlassShowcase.unlock({ scrollToGrid: false });
+            if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
+            if (window.lenis && typeof window.lenis.resize === 'function') window.lenis.resize();
+          }
+
           // Chiudi il menu a tendina se aperto
           if (dropdownMenu && dropdownMenu.classList.contains("open")) {
             dropdownMenu.classList.remove("open");
@@ -235,12 +250,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
-          // // Fallback/Delay: Attendiamo chiusura menu
+          // Fallback/Delay: Attendiamo chiusura menu
           setTimeout(() => {
             if (targetId === '#contact-footer') {
               // Il footer è position:fixed — scrolliamo al massimo scroll possibile,
               // che corrisponde esattamente alla cima del footer rivelato.
-              const maxScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+              if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
+              const maxScroll = Math.max(
+                (document.documentElement.scrollHeight || 0) - document.documentElement.clientHeight,
+                (document.body.scrollHeight || 0) - window.innerHeight
+              );
               if (window.lenis) {
                 window.lenis.scrollTo(maxScroll, { duration: 1.2, force: true });
               } else {
@@ -544,6 +563,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.recalculateScrollProgress();
       }
     };
+
+    window.updateFooterMargin = updateFooterMargin;
 
     // Calculate on load
     updateFooterMargin();

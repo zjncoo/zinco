@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <title>clients | zinco</title>
+  <meta name="description" content="selected clients and collaborations across brand identity, digital products, spatial communication, and editorial design." />
+  <meta name="keywords" content="clients, design clients, Francesco Zanchetta, zinco, 3M Servizi Immobiliari, AM Decor SRL, Gizeta SAS, Museo Poldi Pezzoli Milano, escapes Lake Como, visual identity, branding" />
+  <meta property="og:title" content="clients | zinco" />
+  <meta property="og:description" content="selected clients and collaborations across brand identity, digital products, spatial communication, and editorial design." />
+  <meta property="og:image" content="https://zinco.cc/imghome/logo_zinco.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="zinco.cc" />
+  <meta property="og:url" content="https://zinco.cc/clients.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="imghome/favicon_zinco.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="imghome/logo_zinco.svg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, noai, noimageai" />
+  <meta name="tdm-reservation" content="1" />
+  <link rel="canonical" href="https://zinco.cc/clients.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://zinco.cc/clients.html#webpage",
+        "url": "https://zinco.cc/clients.html",
+        "name": "clients | zinco",
+        "description": "Selected clients and brand collaborations designed by Francesco Zanchetta (zinco).",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://zinco.cc/#website",
+          "name": "zinco",
+          "url": "https://zinco.cc/"
+        },
+        "about": {
+          "@type": "Person",
+          "@id": "https://zinco.cc/#person",
+          "name": "Francesco Zanchetta"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="NUS/nus.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="projects-data.js?v=23" defer></script>
+
+  <style>
+    .clients-editorial-intro {
+      margin-bottom: 24px;
+    }
+
+    .clients-editorial-intro p {
+      font-family: 'neue-haas-unica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: #111;
+      margin: 0;
+    }
+
+    .clients-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      width: 100%;
+    }
+
+    .client-card {
+      border: 2px solid black;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease;
+    }
+
+    .client-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 2px solid black;
+      background: #fafafa;
+      font-family: 'neue-haas-unica', monospace, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #333;
+    }
+
+    .client-card-index {
+      font-weight: 700;
+      color: black;
+    }
+
+    .client-card-category {
+      color: #666;
+    }
+
+    .client-card-body {
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .client-name {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0;
+      color: black;
+      text-transform: uppercase;
+    }
+
+    .client-description {
+      font-family: 'neue-haas-unica', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: #333;
+      margin: 0;
+    }
+
+    .client-specs-table {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid #e0e0e0;
+      margin-top: 10px;
+      padding-top: 14px;
+      gap: 8px;
+    }
+
+    .client-spec-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .client-spec-label {
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 0.75rem;
+      padding-top: 2px;
+    }
+
+    .client-spec-value {
+      color: black;
+      font-weight: 500;
+    }
+
+    .client-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .client-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 2px solid black;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .client-action-btn.primary {
+      background: black;
+      color: white;
+    }
+
+    .client-action-btn.primary:hover {
+      background: #222;
+      color: white;
+    }
+
+    .client-action-btn.secondary {
+      background: white;
+      color: black;
+    }
+
+    .client-action-btn.secondary:hover {
+      background: black;
+      color: white;
+    }
+
+    .client-media-preview {
+      border-top: 2px solid black;
+      overflow: hidden;
+      background: #f4f4f4;
+      line-height: 0;
+    }
+
+    .client-media-preview img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .client-card:hover .client-media-preview img {
+      transform: scale(1.015);
+    }
+
+    @media (max-width: 768px) {
+      .client-card-header {
+        padding: 10px 14px;
+        font-size: 0.72rem;
+      }
+
+      .client-card-body {
+        padding: 20px 16px;
+        gap: 16px;
+      }
+
+      .client-name {
+        font-size: 1.6rem;
+      }
+
+      .client-spec-row {
+        grid-template-columns: 90px 1fr;
+        font-size: 0.8rem;
+      }
+
+      .client-actions {
+        flex-direction: column;
+      }
+
+      .client-action-btn {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
+  <script src="components.js" defer></script>
+</head>
+
+<body>
+
+  <div class="site-main-content">
+    <div id="scroll-progress-bar"></div>
+    <div id="preloader">
+      <a href="index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+
+    <div class="vertical-line left"></div>
+    <div class="vertical-line right"></div>
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div id="hero-wrapper">
+      <section id="project-hero">
+        <div class="hero-title-container">
+          <a href="#clients-content" class="scroll-down-arrow cursor-target" aria-label="Scroll down">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <h1 id="hero-title">clients</h1>
+        </div>
+      </section>
+    </div>
+
+    <zinco-header base-path=""></zinco-header>
+
+    <main id="clients-content">
+      <div class="project-editorial-layout">
+        <!-- Colonna Sinistra Sticky -->
+        <aside class="project-sticky-col">
+          <div class="clients-editorial-intro">
+            <p>a curated selection of trusted partnerships, direct commissions, and ongoing design collaborations across corporate identity, cultural institutions, real estate, and digital platforms.</p>
+          </div>
+
+          <div class="editorial-specs-table">
+            <div class="specs-row">
+              <span class="specs-label">CLIENTS</span>
+              <span class="specs-value">5 Featured Collaborations</span>
+            </div>
+            <div class="specs-row">
+              <span class="specs-label">DISCIPLINES</span>
+              <span class="specs-value">Identity, Web, Signage &amp; Editorial</span>
+            </div>
+            <div class="specs-row">
+              <span class="specs-label">REACH</span>
+              <span class="specs-value">Milan, Como &amp; International</span>
+            </div>
+            <div class="specs-row">
+              <span class="specs-label">INQUIRIES</span>
+              <span class="specs-value">work@zinco.cc</span>
+            </div>
+          </div>
+
+          <div class="editorial-cta-group">
+            <a href="#contact-footer" class="editorial-action-btn editorial-reader-btn cursor-target">
+              <span>Start a Project</span>
+              <span class="btn-arrow"><svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
+            </a>
+            <a href="portfolio.html" class="editorial-action-btn editorial-desc-btn cursor-target">
+              <span>View Full Archive</span>
+              <span class="btn-arrow"><svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
+            </a>
+          </div>
+        </aside>
+
+        <!-- Colonna Destra Media Stream -->
+        <div class="project-media-stream">
+          <div class="clients-stream">
+
+            <!-- 1. 3M SERVIZI IMMOBILIARI -->
+            <article class="client-card">
+              <div class="client-card-header">
+                <span class="client-card-index">01 // CLIENT</span>
+                <span class="client-card-category">REAL ESTATE &amp; BRANDING</span>
+              </div>
+              <div class="client-card-body">
+                <h2 class="client-name">3M SERVIZI IMMOBILIARI</h2>
+                <p class="client-description">
+                  Full corporate rebrand, signage strategy, and editorial collateral for a premier Italian real estate advisory agency. Developed a structured modular mark, architectural storefront displays, open-house property dossiers, and unified visual guidelines.
+                </p>
+                <div class="client-specs-table">
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">CLIENT</span>
+                    <span class="client-spec-value">3M Servizi Immobiliari / Soluzioni Immobiliari</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SECTOR</span>
+                    <span class="client-spec-value">Real Estate Brokerage &amp; Property Advisory</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SCOPE</span>
+                    <span class="client-spec-value">Visual Identity, Signage System, Print Collateral, Brand Guidelines</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">LOCATION</span>
+                    <span class="client-spec-value">Cantù / Como, Italy</span>
+                  </div>
+                </div>
+                <div class="client-actions">
+                  <a href="3M_Soluzioni_Immobiliari/3m.html" class="client-action-btn primary cursor-target">
+                    <span>View Case Study</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="client-media-preview">
+                <img src="3M_Soluzioni_Immobiliari/img/3m_website_mockup.webp" alt="3M Servizi Immobiliari Brand Collateral Preview" loading="lazy" decoding="async">
+              </div>
+            </article>
+
+            <!-- 2. AM DECOR SRL -->
+            <article class="client-card">
+              <div class="client-card-header">
+                <span class="client-card-index">02 // CLIENT</span>
+                <span class="client-card-category">FINISHES &amp; DIGITAL</span>
+              </div>
+              <div class="client-card-body">
+                <h2 class="client-name">AM DECOR SRL</h2>
+                <p class="client-description">
+                  Visual identity redesign, spatial vehicle fleet graphics, and responsive corporate web development for a specialized interior finishes company. The system conveys technical mastery, architectural precision, and material craftsmanship across physical and digital touchpoints.
+                </p>
+                <div class="client-specs-table">
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">CLIENT</span>
+                    <span class="client-spec-value">AM DECOR SRL</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SECTOR</span>
+                    <span class="client-spec-value">Architectural Finishes, Resins &amp; Interior Decor</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SCOPE</span>
+                    <span class="client-spec-value">Brand Identity, Fleet Signage, Corporate Website, Art Direction</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">LOCATION</span>
+                    <span class="client-spec-value">Monza e Brianza / Lombardy, Italy</span>
+                  </div>
+                </div>
+                <div class="client-actions">
+                  <a href="amdecor/amdecor.html" class="client-action-btn primary cursor-target">
+                    <span>View Case Study</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                  <a href="https://amdecorsrl.com" target="_blank" rel="noopener noreferrer" class="client-action-btn secondary cursor-target">
+                    <span>Live Website</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="client-media-preview">
+                <img src="amdecor/img/van mockup.webp" alt="AM DECOR SRL Fleet Signage Preview" loading="lazy" decoding="async">
+              </div>
+            </article>
+
+            <!-- 3. GIZETA SAS -->
+            <article class="client-card">
+              <div class="client-card-header">
+                <span class="client-card-index">03 // CLIENT</span>
+                <span class="client-card-category">ENGINEERING &amp; WEB</span>
+              </div>
+              <div class="client-card-body">
+                <h2 class="client-name">GIZETA SAS</h2>
+                <p class="client-description">
+                  Corporate identity refinement and digital catalog website for an industrial tooling and mechanical precision engineering firm with over three decades of manufacturing tradition. Created a structured design system highlighting specialized technical services and product portfolios.
+                </p>
+                <div class="client-specs-table">
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">CLIENT</span>
+                    <span class="client-spec-value">GIZETA SAS di Zanchetta</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SECTOR</span>
+                    <span class="client-spec-value">Industrial Tooling, CNC Machining &amp; Sharpening</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SCOPE</span>
+                    <span class="client-spec-value">Visual Identity, Digital Catalog Platform, Technical Iconography</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">LOCATION</span>
+                    <span class="client-spec-value">Mariano Comense / Como, Italy</span>
+                  </div>
+                </div>
+                <div class="client-actions">
+                  <a href="gizeta/gizeta.html" class="client-action-btn primary cursor-target">
+                    <span>View Case Study</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                  <a href="https://www.gizeta-zanchetta.it/home" target="_blank" rel="noopener noreferrer" class="client-action-btn secondary cursor-target">
+                    <span>Live Website</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="client-media-preview">
+                <img src="gizeta/img/gizeta.webp" alt="GIZETA SAS Corporate Identity Preview" loading="lazy" decoding="async">
+              </div>
+            </article>
+
+            <!-- 4. Museo Poldi Pezzoli Milano -->
+            <article class="client-card">
+              <div class="client-card-header">
+                <span class="client-card-index">04 // CLIENT</span>
+                <span class="client-card-category">CULTURE &amp; EXHIBITION</span>
+              </div>
+              <div class="client-card-body">
+                <h2 class="client-name">Museo Poldi Pezzoli Milano</h2>
+                <p class="client-description">
+                  Visual identity system, teaser film direction, and exhibition collateral for Casa Poldi Pezzoli (CPP). Reinterpreting one of Milan's most revered house museums through high-contrast typography, renaissance iconography, and cinematic motion graphics.
+                </p>
+                <div class="client-specs-table">
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">CLIENT</span>
+                    <span class="client-spec-value">Museo Poldi Pezzoli Milano (CPP)</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SECTOR</span>
+                    <span class="client-spec-value">Fine Arts, Historic House Museum &amp; Cultural Heritage</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SCOPE</span>
+                    <span class="client-spec-value">Exhibition Identity, Motion Design, Campaign Teaser, Print Ephemera</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">LOCATION</span>
+                    <span class="client-spec-value">Milan, Italy</span>
+                  </div>
+                </div>
+                <div class="client-actions">
+                  <a href="poldi_pezzoli/poldi_pezzoli.html" class="client-action-btn primary cursor-target">
+                    <span>View Case Study</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="client-media-preview">
+                <img src="poldi_pezzoli/CPP_occhio.webp" alt="Museo Poldi Pezzoli Milano Identity Preview" loading="lazy" decoding="async">
+              </div>
+            </article>
+
+            <!-- 5. escapes Lake Como -->
+            <article class="client-card">
+              <div class="client-card-header">
+                <span class="client-card-index">05 // CLIENT</span>
+                <span class="client-card-category">HOSPITALITY &amp; DIGITAL</span>
+              </div>
+              <div class="client-card-body">
+                <h2 class="client-name">escapes Lake Como</h2>
+                <p class="client-description">
+                  End-to-end brand identity, guest guide editorial system, physical property signage, and custom booking website for luxury holiday properties situated across Lake Como. Designed with clean minimalism that celebrates the surrounding alpine landscape and architectural heritage.
+                </p>
+                <div class="client-specs-table">
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">CLIENT</span>
+                    <span class="client-spec-value">Escapes Lake Como</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SECTOR</span>
+                    <span class="client-spec-value">Hospitality, Luxury Vacation Rentals &amp; Concierge</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">SCOPE</span>
+                    <span class="client-spec-value">Brand Identity, Booking Platform, Spatial Signage, Editorial Guidebooks</span>
+                  </div>
+                  <div class="client-spec-row">
+                    <span class="client-spec-label">LOCATION</span>
+                    <span class="client-spec-value">Lake Como / Lombardy, Italy</span>
+                  </div>
+                </div>
+                <div class="client-actions">
+                  <a href="escapes/escapes.html" class="client-action-btn primary cursor-target">
+                    <span>View Case Study</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                  <a href="https://escapeslakecomo.com" target="_blank" rel="noopener noreferrer" class="client-action-btn secondary cursor-target">
+                    <span>Live Website</span>
+                    <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="client-media-preview">
+                <img src="imghome/glasses/escapes.webp" alt="escapes Lake Como Brand Identity Preview" loading="lazy" decoding="async">
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div><!-- /site-main-content -->
+  <zinco-footer base-path=""></zinco-footer>
+
+  <script src="index.js" defer></script>
+
+</body>
+
+</html>

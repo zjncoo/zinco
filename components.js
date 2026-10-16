@@ -31,7 +31,7 @@ class ZincoHeader extends HTMLElement {
         <div class="menu-column right">
           <a href="${base}portfolio.html" class="menu-link">portfolio</a>
           <a href="${base}publications/publications.html" class="menu-link">publications</a>
-          <a href="#" class="menu-link">clients</a>
+          <a href="${base}clients.html" class="menu-link">clients</a>
         </div>
       </div>
 
@@ -64,8 +64,7 @@ class ZincoFooter extends HTMLElement {
 
       <div class="footer-form-wrapper">
         <form class="custom-contact-form" id="contactForm">
-          <h4 style="margin-top:0; margin-bottom: 1.2rem; font-size: 1.8rem; line-height: 1; font-weight: 500;">get in touch
-          </h4>
+          <h3 style="margin-top:0; margin-bottom: 1.2rem; font-size: 1.8rem; line-height: 1; font-weight: 500;">get in touch</h3>
 
           <div class="input-group">
             <input type="text" id="entry.2076793802" name="entry.2076793802" placeholder="Your Name" required>
@@ -107,11 +106,23 @@ class ZincoFooter extends HTMLElement {
       </div>
     </div>
 
-    <div class="footer-bottles-shelf" aria-label="Projects bottle and glassware archive">
+    <!-- Mobile Footer Status Bar (shows active centered project on mobile swipe) -->
+    <div class="footer-mobile-status" aria-label="Footer current project">
+      <button type="button" class="footer-mobile-project-label cursor-target" id="footerMobileProjectLabel" aria-label="Current centered project">
+        <span class="footer-mobile-project-name">ALUA</span>
+        <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+      </button>
+      <div class="footer-mobile-scroll-hint">
+        <span>scroll</span>
+        <span class="scroll-arrow" aria-hidden="true"><svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="5" x2="8.5" y2="5"></line><polyline points="5 1.5 8.5 5 5 8.5"></polyline></svg></span>
+      </div>
+    </div>
+
+    <div class="footer-bottles-shelf" id="footerBottlesShelf" aria-label="Projects bottle and glassware archive">
       ${FOOTER_PROJECT_GLASSES.map(item => {
         const fullHref = item.href.startsWith("http") ? item.href : (base + item.href);
         const isExt = item.href.startsWith("http");
-        return `<a href="${fullHref}" class="footer-glass-link cursor-target" title="${item.title}" aria-label="${item.title}"${isExt ? " target=\"_blank\" rel=\"noopener noreferrer\"" : ""}>
+        return `<a href="${fullHref}" class="footer-glass-link cursor-target" data-title="${item.title}" data-href="${fullHref}" aria-label="${item.title}"${isExt ? " target=\"_blank\" rel=\"noopener noreferrer\"" : ""}>
           <svg class="footer-glass-svg" viewBox="${item.viewBox}" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
             <path d="${item.path}" fill="${item.color}" />
           </svg>
@@ -120,6 +131,109 @@ class ZincoFooter extends HTMLElement {
     </div>
   </footer>
     `;
+
+    this.setupFooterLabels();
+  }
+
+  setupFooterLabels() {
+    const shelf = this.querySelector('#footerBottlesShelf');
+    if (!shelf) return;
+
+    let cursorLabel = document.getElementById('glassCursorLabel');
+    if (!cursorLabel) {
+      cursorLabel = document.createElement('div');
+      cursorLabel.id = 'glassCursorLabel';
+      cursorLabel.className = 'glass-cursor-label';
+      cursorLabel.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(cursorLabel);
+    }
+
+    const mainCursor = document.getElementById('cursor');
+    const links = shelf.querySelectorAll('.footer-glass-link');
+    const isMobileDevice = window.innerWidth <= 768;
+
+    if (!isMobileDevice) {
+      // Desktop: floating project label follows pointer centered under mouse, circle cursor hides
+      links.forEach(link => {
+        link.addEventListener('pointerenter', (e) => {
+          const title = (link.dataset.title || '').toUpperCase();
+          cursorLabel.textContent = title;
+          cursorLabel.classList.add('visible');
+          if (mainCursor) mainCursor.style.opacity = '0';
+          cursorLabel.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        });
+
+        link.addEventListener('pointermove', (e) => {
+          cursorLabel.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        });
+
+        link.addEventListener('pointerleave', () => {
+          cursorLabel.classList.remove('visible');
+          if (mainCursor) mainCursor.style.opacity = '1';
+        });
+      });
+    } else {
+      // Mobile: centered bottle detection and dynamic title update in footer status bar
+      const mobileLabel = this.querySelector('#footerMobileProjectLabel');
+      const mobileName = mobileLabel ? mobileLabel.querySelector('.footer-mobile-project-name') : null;
+      let activeMobileLink = null;
+      let scrollTimer = null;
+
+      const updateCenterItem = () => {
+        const shelfRect = shelf.getBoundingClientRect();
+        const centerX = shelfRect.left + shelfRect.width / 2;
+        let closest = null;
+        let closestDist = Infinity;
+
+        links.forEach(link => {
+          const r = link.getBoundingClientRect();
+          const itemCenter = r.left + r.width / 2;
+          const dist = Math.abs(itemCenter - centerX);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closest = link;
+          }
+        });
+
+        if (closest && closest !== activeMobileLink) {
+          if (activeMobileLink) activeMobileLink.classList.remove('is-active-center');
+          activeMobileLink = closest;
+          activeMobileLink.classList.add('is-active-center');
+          if (mobileName) {
+            mobileName.textContent = (activeMobileLink.dataset.title || '').toUpperCase();
+          }
+          if (mobileLabel) {
+            mobileLabel.dataset.href = activeMobileLink.dataset.href || '';
+          }
+        }
+      };
+
+      shelf.addEventListener('scroll', () => {
+        if (!scrollTimer) {
+          requestAnimationFrame(() => {
+            updateCenterItem();
+            scrollTimer = null;
+          });
+          scrollTimer = true;
+        }
+      }, { passive: true });
+
+      if (mobileLabel) {
+        mobileLabel.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = mobileLabel.dataset.href;
+          if (href) {
+            if (href.startsWith('http')) {
+              window.open(href, '_blank', 'noopener,noreferrer');
+            } else {
+              window.location.href = href;
+            }
+          }
+        });
+      }
+
+      setTimeout(updateCenterItem, 150);
+    }
   }
 }
 

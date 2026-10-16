@@ -6,14 +6,14 @@ const allProjectsData = [
     title: "uni",
     link: "uni/uni.html",
     category: "websites",
-    image: "uni/img/dashboard.webp",
+    image: "imghome/glasses/uni.webp",
     indexNum: "No.001"
   },
   {
     title: "clotho",
     link: "clotho/clotho.html",
     category: "websites",
-    image: "clotho/img/IMG_4002.webp",
+    image: "imghome/glasses/clotho.webp",
     indexNum: "No.002"
   },
   {
@@ -22,14 +22,14 @@ const allProjectsData = [
     category: "branding",
     video: "imghome/alua_video.webm",
     videoSlug: "alua",
-    image: "imghome/alua.webp",
+    image: "imghome/glasses/alua.webp",
     indexNum: "No.003"
   },
   {
     title: "AM Decor",
     link: "amdecor/amdecor.html",
     category: "branding",
-    image: "amdecor/img/vetrina5.webp",
+    image: "imghome/glasses/amdecor.webp",
     indexNum: "No.004"
   },
   {
@@ -38,7 +38,7 @@ const allProjectsData = [
     category: "branding",
     video: "NUS/img/nus_brand_video.webm",
     videoSlug: "nus",
-    image: "NUS/img/brochure.webp",
+    image: "imghome/glasses/nus_brochure.webp",
     indexNum: "No.005"
   },
   {
@@ -47,35 +47,35 @@ const allProjectsData = [
     category: "branding",
     video: "piedibus_mozzate/piedibus_mozzate_video.mov",
     videoSlug: "piedibus",
-    image: "piedibus_mozzate/img/poster mockup.webp",
+    image: "imghome/glasses/piedibus.webp",
     indexNum: "No.006"
   },
   {
     title: "3M Soluzioni Immobiliari",
     link: "3M_Soluzioni_Immobiliari/3m.html",
     category: "branding",
-    image: "3M_Soluzioni_Immobiliari/img/mockup_openhouse.webp",
+    image: "imghome/glasses/3m.webp",
     indexNum: "No.007"
   },
   {
     title: "Roxy Brandbook",
     link: "publications/roxy_brandbook/roxy_brandbook.html",
     category: "publications",
-    image: "publications/roxy_brandbook/img/roxy_mockup_1.png",
+    image: "imghome/glasses/roxy_mockup.webp",
     indexNum: "No.008"
   },
   {
     title: "FemVertising",
     link: "publications/femvertising/femvertising.html",
     category: "publications",
-    image: "publications/femvertising/img/femvertising_mockup_1.webp",
+    image: "imghome/glasses/femvertising.webp",
     indexNum: "No.009"
   },
   {
     title: "FOMO",
     link: "publications/fomo/fomo.html",
     category: "publications",
-    image: "publications/fomo/img/mockup fomo 1.webp",
+    image: "imghome/glasses/fomo.webp",
     indexNum: "No.010"
   },
   {
@@ -84,35 +84,35 @@ const allProjectsData = [
     category: "publications",
     video: "publications/zoom/img/animazione fumetto.mp4",
     videoSlug: "zoom",
-    image: "publications/zoom/img/ayumi_mockup_1.webp",
+    image: "imghome/glasses/zoom.webp",
     indexNum: "No.011"
   },
   {
     title: "Fotografia",
     link: "publications/fotografie_come_lettere_di _un_alfabeto/fotografia.html",
     category: "publications",
-    image: "publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp",
+    image: "imghome/glasses/fotografia1.webp",
     indexNum: "No.012"
   },
   {
     title: "Drawing Lab",
     link: "UNI YEAR 1/drawing_lab/drawing.html",
     category: "uni year 1",
-    image: "UNI YEAR 1/drawing_lab/img/honky chateau/1-Vinyl Record Mockup.png",
+    image: "imghome/glasses/honky_chateau.webp",
     indexNum: "No.013"
   },
   {
     title: "Mamma Infanzina",
     link: "https://mammainfanzina.framer.website",
     category: "websites",
-    image: "mammainfanzina/preview.webp",
+    image: "imghome/glasses/mamma.webp",
     indexNum: "No.014"
   },
   {
     title: "Escapes",
     link: "escapes/escapes.html",
     category: "branding",
-    image: "imghome/escapes.webp",
+    image: "imghome/glasses/escapes.webp",
     indexNum: "No.015"
   },
   {
@@ -121,7 +121,7 @@ const allProjectsData = [
     category: "branding",
     video: "ROXY/img/video finito.mp4",
     videoSlug: "roxy",
-    image: "ROXY/img/scritta.png",
+    image: "imghome/glasses/roxy_scritta.webp",
     indexNum: "No.016"
   },
   {
@@ -137,7 +137,7 @@ const allProjectsData = [
     category: "branding",
     video: "baas_is_back_in_town/img/Woman_walks,_tram_stops_202605281117.webm",
     videoSlug: "baas",
-    image: "baas_is_back_in_town/img/manofesto 4.webp",
+    image: "imghome/glasses/baas.webp",
     indexNum: "No.018"
   },
   {
@@ -146,7 +146,7 @@ const allProjectsData = [
     category: "branding",
     video: "poldi_pezzoli/teaser.webm",
     videoSlug: "cpp",
-    image: "poldi_pezzoli/img/red_abstract_sculpture.webp",
+    image: "imghome/glasses/poldi.webp",
     indexNum: "No.019"
   },
   {
@@ -154,14 +154,14 @@ const allProjectsData = [
     link: "fioreria_del_lago/fioreria_del_lago.html",
     category: "branding",
     videoSlug: "fdl",
-    image: "fioreria_del_lago/img/CART.webp",
+    image: "imghome/glasses/fioreria_cart.webp",
     indexNum: "No.020"
   },
   {
     title: "Dranks",
     link: "dranks/dranks.html",
     category: "branding",
-    image: "dranks/dranks_screenshot.webp",
+    image: "imghome/glasses/dranks.webp",
     indexNum: "No.021"
   },
   {
@@ -191,56 +191,56 @@ const allProjectsData = [
     category: "websites",
     video: "imghome/rifiuti_spaziali_test.webm",
     videoSlug: "rifiuti_spaziali",
-    image: "imghome/rifiuti.webp",
+    image: "imghome/glasses/rifiuti.webp",
     indexNum: "No.025"
   },
   {
     title: "mastro",
     link: "https://zjncoo.github.io/mastro/",
     category: "websites",
-    image: "imghome/mastro.webp",
+    image: "imghome/glasses/mastro.webp",
     indexNum: "No.026"
   },
   {
     title: "Web Design Exam",
     link: "UNI YEAR 1/web_design/SITO ESAME/PAGES/home.html",
     category: "uni year 1",
-    image: "UNI YEAR 1/web_design/SITO ESAME/img_galleriafoto/fotoorologi1.png",
+    image: "imghome/glasses/fotoorologi1.webp",
     indexNum: "No.027"
   },
   {
     title: "contrast_checker",
     link: "ALGORYTHMS/contrast-checker.html",
     category: "algorithms",
-    image: "imghome/squares.png",
+    image: "imghome/glasses/squares.webp",
     indexNum: "No.028"
   },
   {
     title: "WebP Converter",
     link: "ALGORYTHMS/webp/converter.html",
     category: "algorithms",
-    image: "imghome/folder.png",
+    image: "imghome/glasses/folder.webp",
     indexNum: "No.029"
   },
   {
     title: "Card Generator",
     link: "ALGORYTHMS/cardgenerator.html",
     category: "algorithms",
-    image: "imghome/linee.png",
+    image: "imghome/glasses/linee.webp",
     indexNum: "No.030"
   },
   {
     title: "WebM Converter",
     link: "ALGORYTHMS/webm.html",
     category: "algorithms",
-    image: "imghome/spirali.png",
+    image: "imghome/glasses/spirali.webp",
     indexNum: "No.031"
   },
   {
     title: "Video Compressor",
     link: "ALGORYTHMS/compressor.html",
     category: "algorithms",
-    image: "imghome/razzino.png",
+    image: "imghome/glasses/razzino.webp",
     indexNum: "No.032"
   }
 ];
