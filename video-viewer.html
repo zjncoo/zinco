@@ -60,6 +60,12 @@
       left: -12px;
     }
 
+    @media (pointer: coarse), (hover: none) {
+      .custom-cursor {
+        display: none !important;
+      }
+    }
+
     /* ── Full-screen video bg ── */
     #video-bg {
       position: fixed;
@@ -163,6 +169,11 @@
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.7);
       opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s;
+      text-align: right;
+    }
+
     .project-label.visible {
       opacity: 1;
       transform: translateY(0);
@@ -512,6 +523,7 @@
       alua: {
         title: "ALUA",
         video: "imghome/alua_video.webm",
+        image: "imghome/alua.webp",
         link: "https://zjncoo.github.io/ALUA.IT/",
         external: true
       },
@@ -530,6 +542,7 @@
       nus: {
         title: "NUS",
         video: "NUS/img/nus_brand_video.webm",
+        image: "NUS/img/badge.webp",
         link: "NUS/nus.html",
         external: false
       },
@@ -562,13 +575,13 @@
       },
       baas: {
         title: "BAAS IS BACK IN TOWN",
-        video: "baas_is_back_in_town/img/Woman_walks,_tram_stops_202605281117.webm",
+        video: "baas_is_back_in_town/img/Woman_walks,_tram_stops_202605281117.mp4",
         link: "baas_is_back_in_town/baas.html",
         external: false
       },
       cpp: {
         title: "CPP casa poldi pezzoli",
-        video: "poldi_pezzoli/video_CPP.webm",
+        video: "poldi_pezzoli/video_CPP.mp4",
         link: "poldi_pezzoli/poldi_pezzoli.html",
         external: false,
         sites: [
@@ -616,8 +629,48 @@
         video: "UNI YEAR 2/brand_identity_lab/img/video_sito_gizeta.mp4",
         link: "gizeta/gizeta.html",
         external: false
+      },
+      dranks: {
+        title: "Dranks",
+        image: "dranks/dranks_screenshot.webp",
+        link: "dranks/dranks.html",
+        external: false
+      },
+      fomo: {
+        title: "FOMO",
+        image: "publications/FOMO/img/mockup fomo 1.webp",
+        link: "publications/fomo/fomo.html",
+        external: false
+      },
+      femvertising: {
+        title: "FemVertising",
+        image: "publications/femvertising/img/femvertising_mockup_1.webp",
+        link: "publications/femvertising/femvertising.html",
+        external: false
+      },
+      "roxy-book": {
+        title: "Roxy Brandbook",
+        image: "publications/roxy_brandbook/img/roxy_mockup_1.png",
+        link: "publications/roxy_brandbook/roxy_brandbook.html",
+        external: false
+      },
+      fotografia: {
+        title: "Fotografie come lettere",
+        image: "publications/fotografie_come_lettere_di _un_alfabeto/img/book fotografia mockup 1.webp",
+        link: "publications/fotografie_come_lettere_di _un_alfabeto/fotografia.html",
+        external: false
       }
     };
+
+    // Project Aliases
+    projectsDB.poldi_pezzoli = projectsDB.cpp;
+    projectsDB.rifiuti = projectsDB.rifiuti_spaziali;
+    projectsDB["3m"] = projectsDB.am;
+    projectsDB.amdecor = projectsDB.am;
+    projectsDB.piedibus_mozzate = projectsDB.piedibus;
+    projectsDB.fioreria_del_lago = projectsDB.fdl;
+    projectsDB.roxy_brandbook = projectsDB["roxy-book"];
+    projectsDB.fotografie = projectsDB.fotografia;
 
     const ARROW_SVG = '<svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>';
     const CHEVRON_SVG = '<svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3.5 5 6.5 8 3.5"></polyline></svg>';
@@ -625,8 +678,8 @@
     const UNMUTE_SVG = '<svg class="unmute-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>';
 
     const params = new URLSearchParams(window.location.search);
-    const slug = (params.get('project') || '').toLowerCase().trim();
-    const project = projectsDB[slug];
+    const rawSlug = (params.get('project') || '').toLowerCase().trim().replace(/^\/+|\/+$/g, '');
+    const project = projectsDB[rawSlug];
 
     const loader = document.getElementById('loader');
     const errorState = document.getElementById('error-state');
@@ -728,10 +781,7 @@
 
       if (hasVideos) {
         // ── Multi-video mode ──
-        // Use the first video as the looping background
         const firstSrc = project.videos[0].src;
-        // In multi-video mode route all buttons (discover + videos) through the
-        // dropdown system so they're always collected in the "more links" menu
         discoverLink.style.display = 'none';
         watchLink.style.display = 'none';
 
@@ -743,7 +793,7 @@
         });
         renderButtons();
 
-        // Set background video to first entry
+        video.innerHTML = '';
         const sourceEl = document.createElement('source');
         sourceEl.src = firstSrc;
         sourceEl.type = firstSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4';
@@ -757,7 +807,7 @@
 
         setTimeout(() => {
           if (!video.classList.contains('ready')) showUI(true);
-        }, 3000);
+        }, 1200);
 
         video.addEventListener('error', () => showUI(true));
 
@@ -775,15 +825,28 @@
           if (project.external) discoverLink.target = '_blank';
         }
 
-        // Watch video button — opens video file directly in browser native player
         watchLink.href = project.video;
         watchLink.style.display = '';
 
-        // Set video source
-        const sourceEl = document.createElement('source');
-        sourceEl.src = project.video;
-        sourceEl.type = project.video.endsWith('.webm') ? 'video/webm' : 'video/mp4';
-        video.appendChild(sourceEl);
+        // Add MP4 and WebM sources for cross-device compatibility
+        video.innerHTML = '';
+        const sources = [];
+        if (project.video.endsWith('.mp4')) {
+          sources.push({ src: project.video, type: 'video/mp4' });
+          sources.push({ src: project.video.replace(/\.mp4$/, '.webm'), type: 'video/webm' });
+        } else if (project.video.endsWith('.webm')) {
+          sources.push({ src: project.video.replace(/\.webm$/, '.mp4'), type: 'video/mp4' });
+          sources.push({ src: project.video, type: 'video/webm' });
+        } else {
+          sources.push({ src: project.video, type: 'video/mp4' });
+        }
+
+        sources.forEach(s => {
+          const sourceEl = document.createElement('source');
+          sourceEl.src = s.src;
+          sourceEl.type = s.type;
+          video.appendChild(sourceEl);
+        });
         video.load();
 
         video.addEventListener('canplay', () => {
@@ -791,12 +854,21 @@
           showUI(true);
         }, { once: true });
 
-        // Fallback
+        // Fallback: Always reveal UI within 1200ms
         setTimeout(() => {
           if (!video.classList.contains('ready')) showUI(true);
-        }, 3000);
+        }, 1200);
 
-        video.addEventListener('error', showError);
+        // Never trigger 404 error state on video error
+        video.addEventListener('error', () => {
+          if (project.image) {
+            imageBg.style.display = 'block';
+            imageBg.src = project.image;
+            showUI(false);
+          } else {
+            showUI(true);
+          }
+        });
 
         // Mute toggle
         muteBtn.addEventListener('click', () => {
@@ -811,13 +883,10 @@
             addSiteButton(s.label || 'link', s.url, !!s.external);
           });
           if (project.forceDropdown) {
-            // Force dropdown even with < 3 items by injecting a sentinel
-            // then rendering, then removing the sentinel entry from the DOM
             const sentinel = { label: '__sentinel__', url: '#', external: false };
             const sentinel2 = { label: '__sentinel2__', url: '#', external: false };
             _pendingButtons.push(sentinel, sentinel2);
             renderButtons();
-            // Remove the sentinel anchor elements from the dropdown menu
             ctaGroup.querySelectorAll('.btn-dropdown-menu a').forEach(a => {
               if (a.querySelector('span') && a.querySelector('span').textContent.startsWith('__sentinel')) {
                 a.remove();
