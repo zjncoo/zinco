@@ -265,16 +265,15 @@ document.addEventListener('DOMContentLoaded', () => {
           if (window.lenis && typeof window.lenis.resize === 'function') window.lenis.resize();
 
           if (targetId === '#contact-footer') {
-            const footerTop = targetElement.getBoundingClientRect().top + (window.pageYOffset || window.scrollY || 0);
             const maxScroll = Math.max(
               (document.documentElement.scrollHeight || 0) - document.documentElement.clientHeight,
-              (document.body.scrollHeight || 0) - window.innerHeight
+              (document.body.scrollHeight || 0) - window.innerHeight,
+              0
             );
-            const destScroll = Math.max(footerTop, maxScroll);
             if (window.lenis && typeof window.lenis.scrollTo === 'function') {
-              window.lenis.scrollTo(destScroll, { duration: 1.2, force: true });
+              window.lenis.scrollTo('bottom', { duration: 1.2, force: true });
             } else {
-              window.scrollTo({ top: destScroll, behavior: 'smooth' });
+              window.scrollTo({ top: maxScroll, behavior: 'smooth' });
             }
           } else {
             if (window.lenis && typeof window.lenis.scrollTo === 'function') {

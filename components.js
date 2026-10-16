@@ -3,9 +3,11 @@ const FOOTER_PROJECT_GLASSES = [{"href":"https://zjncoo.github.io/ALUA.IT/","ind
 class ZincoHeader extends HTMLElement {
   connectedCallback() {
     const base = this.getAttribute('base-path') || '';
+    const showAbout = this.hasAttribute('home') || this.getAttribute('show-about') === 'true';
     this.innerHTML = `
     <nav class="nav-bar nav-bar--top" id="navTop">
       <a href="${base}index.html" id="button-logo" class="cursor-target" aria-label="Torna alla homepage"><span class="nav-brand-text">zinco</span></a>
+      ${showAbout ? `<a href="${base}about/about.html" class="nav-bar-link nav-bar-link--desktop nav-bar-about-center cursor-target" aria-label="About me">about me</a>` : ''}
       <div class="nav-bar-right">
         <a href="${base}portfolio.html" class="nav-bar-link nav-bar-link--desktop cursor-target" id="btnBottomLeft"
           aria-label="Vai al portfolio">portfolio</a>

@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
       renderAppShowcase(data);
     })
     .catch(error => {
-      console.error('[app-project] Failed to initialize app showcase:', error);
+      console.warn('[app-project] Failed to fetch data, attempting to use window.EMBEDDED_APP_DATA or existing layout:', error);
+      if (window.EMBEDDED_APP_DATA) {
+        renderAppShowcase(window.EMBEDDED_APP_DATA);
+      }
     });
 });
 

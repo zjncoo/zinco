@@ -89,10 +89,10 @@ main#main {
 
 .hero-intro-text {
   font-family: 'neue-haas-unica', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
   color: #000000;
   margin: 0;
   line-height: 1;

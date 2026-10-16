@@ -805,6 +805,12 @@ main>#figma-container {
   gap: 24px;
 }
 
+.nav-bar-about-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(0);
+}
+
 /* Open state for top nav bar when menu is active */
 .nav-bar.open {
   background-color: transparent;

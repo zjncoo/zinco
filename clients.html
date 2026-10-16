@@ -55,8 +55,31 @@
   <script src="projects-data.js?v=23" defer></script>
 
   <style>
+    /* Strict left alignment for all editorial and card text elements */
+    #clients-content,
+    .project-editorial-layout,
+    .project-sticky-col,
+    .clients-editorial-intro,
+    .clients-editorial-intro p,
+    .editorial-specs-table,
+    .specs-row,
+    .specs-label,
+    .specs-value,
+    .client-card,
+    .client-card-header,
+    .client-card-body,
+    .client-name,
+    .client-description,
+    .client-specs-table,
+    .client-spec-row,
+    .client-spec-label,
+    .client-spec-value {
+      text-align: left;
+    }
+
     .clients-editorial-intro {
       margin-bottom: 24px;
+      text-align: left;
     }
 
     .clients-editorial-intro p {
@@ -66,6 +89,7 @@
       letter-spacing: -0.01em;
       color: #111;
       margin: 0;
+      text-align: left;
     }
 
     .clients-stream {
@@ -561,6 +585,28 @@
   <zinco-footer base-path=""></zinco-footer>
 
   <script src="index.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href="#contact-footer"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
+          if (window.lenis && typeof window.lenis.resize === 'function') window.lenis.resize();
+
+          if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+            window.lenis.scrollTo('bottom', { duration: 1.2, force: true });
+          } else {
+            const maxScroll = Math.max(
+              (document.documentElement.scrollHeight || 0) - document.documentElement.clientHeight,
+              (document.body.scrollHeight || 0) - window.innerHeight,
+              0
+            );
+            window.scrollTo({ top: maxScroll, behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 
