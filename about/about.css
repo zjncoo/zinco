@@ -17,7 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Section & Grid Layout --- */
+/* --- Section & Grid Layout (2 Columns matching project & app architecture) --- */
 .about-editorial-section {
   width: 100%;
   background: #ffffff;
@@ -26,18 +26,17 @@ body {
 }
 
 .about-editorial-container {
-  max-width: 1440px;
-  margin: 0 auto;
   width: 100%;
-  padding: 120px clamp(20px, 3.5vw, 40px) 120px;
+  margin: 0 auto;
+  padding: 100px calc(27px + 0.88vw) 120px;
   display: grid;
   grid-template-columns: 360px 1fr;
-  gap: clamp(36px, 5vw, 72px);
+  gap: 60px;
   align-items: start;
   box-sizing: border-box;
 }
 
-/* --- Left Column (Sticky Sidebar) --- */
+/* --- Left Column: Photo & Specs Table (Sticky Sidebar) --- */
 .about-col-left {
   position: relative;
   width: 100%;
@@ -101,20 +100,28 @@ body {
   text-align: left;
 }
 
-/* CTAs & Social Links */
-.about-action-group {
+/* --- Right Column: Biography Column --- */
+.about-col-right {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
 }
 
-.about-cta-btn {
+/* Social & Contact Links Side by Side Above Biography */
+.about-social-row {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.about-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
   background: #ffffff;
   color: #000000;
   border: var(--line-2px);
@@ -128,43 +135,37 @@ body {
   box-sizing: border-box;
 }
 
-.about-cta-btn:hover {
+.about-social-link:hover {
   background: #000000;
   color: #ffffff;
 }
 
-.about-cta-arrow {
-  font-size: 11px;
-  opacity: 0.85;
-}
-
-/* --- Right Column (Editorial Content Stream) --- */
-.about-col-right {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
-
+/* Subtitle "about me" — Exact same format as nav buttons & hero subtitle */
 .about-right-header {
   border-bottom: var(--line-2px);
-  padding-bottom: 24px;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 .about-heading {
-  font-size: clamp(2.5rem, 5vw, 4.2rem);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 1.3rem;
   font-weight: 500;
-  margin: 0;
+  letter-spacing: -0.04em;
   text-transform: lowercase;
+  color: #000000;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
 }
 
+/* Biography Prose */
 .about-prose {
   font-size: 1.05rem;
   line-height: 1.7;
   color: #1a1a1a;
   text-align: left;
+  margin-bottom: 32px;
 }
 
 .about-prose p {
@@ -180,7 +181,6 @@ body {
   background: var(--color-bg-subtle);
   border: var(--line-2px);
   padding: 24px 28px;
-  margin-top: 8px;
 }
 
 .about-card-badge {
@@ -240,13 +240,21 @@ body {
 }
 
 /* ===================================================================
- * MOBILE RESPONSIVE (SMARTPHONE & TABLET)
+ * RESPONSIVE BREAKPOINTS (MATCHING APP & PROJECT EDITORIAL STANDARDS)
  * =================================================================== */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .about-editorial-container {
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    padding: 80px calc(27px + 0.88vw) 100px;
+  }
+}
+
+@media (max-width: 768px) {
   .about-editorial-container {
     grid-template-columns: 1fr;
     gap: 36px;
-    padding: 80px 16px 80px;
+    padding: 70px 20px 80px;
   }
 
   .about-sticky-wrapper {

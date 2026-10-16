@@ -68,7 +68,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="about.css?v=2" />
+  <link rel="stylesheet" href="about.css?v=3" />
   <link rel="stylesheet" href="../index.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
@@ -87,15 +87,18 @@
       </div>
     </div>
 
+    <div class="vertical-line left"></div>
+    <div class="vertical-line right"></div>
+
     <div class="custom-cursor" id="cursor"></div>
 
     <zinco-header base-path="../"></zinco-header>
 
-    <!-- About Me Editorial Main -->
+    <!-- About Me Editorial Main (2-Column Architecture) -->
     <main class="about-editorial-section">
       <div class="about-editorial-container">
 
-        <!-- Left Column (Sticky Sidebar on Desktop) -->
+        <!-- Left Column: Photo & Specs Table (Sticky on Desktop) -->
         <aside class="about-col-left">
           <div class="about-sticky-wrapper">
             <div class="about-photo-frame">
@@ -125,27 +128,29 @@
                 <span class="about-spec-value">milan / lombardy, italy</span>
               </div>
             </div>
-
-            <!-- Contact & Social CTAs -->
-            <div class="about-action-group">
-              <a href="mailto:work@zinco.cc" class="about-cta-btn cursor-target">
-                <span>email</span>
-                <span class="about-cta-arrow">work@zinco.cc <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
-              </a>
-              <a href="https://www.instagram.com/zjncoo" target="_blank" rel="noopener" class="about-cta-btn cursor-target">
-                <span>instagram</span>
-                <span class="about-cta-arrow">@zjncoo <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
-              </a>
-              <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank" rel="noopener" class="about-cta-btn cursor-target">
-                <span>linkedin</span>
-                <span class="about-cta-arrow">francesco zanchetta <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg></span>
-              </a>
-            </div>
           </div>
         </aside>
 
-        <!-- Right Column (Editorial Content) -->
+        <!-- Right Column: Biography Column with Socials on Top -->
         <div class="about-col-right">
+
+          <!-- Social Links Side by Side Above Biography Column -->
+          <div class="about-social-row">
+            <a href="mailto:work@zinco.cc" class="about-social-link cursor-target" aria-label="Send email">
+              <span>work@zinco.cc</span>
+              <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+            </a>
+            <a href="https://www.instagram.com/zjncoo" target="_blank" rel="noopener" class="about-social-link cursor-target" aria-label="Visit Instagram">
+              <span>instagram</span>
+              <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/francesco-zanchetta/" target="_blank" rel="noopener" class="about-social-link cursor-target" aria-label="Visit LinkedIn">
+              <span>linkedin</span>
+              <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+            </a>
+          </div>
+
+          <!-- Section Subtitle: Same format as nav buttons -->
           <header class="about-right-header">
             <h1 class="about-heading">about me</h1>
           </header>
