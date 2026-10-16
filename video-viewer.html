@@ -21,13 +21,6 @@
       padding: 0;
     }
 
-    @font-face {
-      font-family: 'NeuzeitHeavy';
-      src: url('fonts/Neuzeit_font/Neuzeit S LT W01 Book Heavy.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     :root {
       --white: #ffffff;
       --black: #0a0a0a;
@@ -39,9 +32,32 @@
       height: 100%;
       background: var(--black);
       color: var(--white);
-      font-family: 'aktiv-grotesk', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 600;
+      font-family: 'neue-haas-unica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 500;
       overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Custom Cursor ── */
+    .custom-cursor {
+      position: fixed;
+      top: -5px;
+      left: -5px;
+      width: 10px;
+      height: 10px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transition: transform 0.08s ease-out, width 0.2s ease, height 0.2s ease;
+      mix-blend-mode: difference;
+    }
+
+    .custom-cursor.cursor-hover {
+      width: 24px;
+      height: 24px;
+      top: -12px;
+      left: -12px;
     }
 
     /* ── Full-screen video bg ── */
@@ -82,10 +98,10 @@
       position: fixed;
       inset: 0;
       background: linear-gradient(to bottom,
-          rgba(0, 0, 0, 0.55) 0%,
-          rgba(0, 0, 0, 0.05) 40%,
-          rgba(0, 0, 0, 0.05) 60%,
-          rgba(0, 0, 0, 0.75) 100%);
+          rgba(0, 0, 0, 0.6) 0%,
+          rgba(0, 0, 0, 0.08) 35%,
+          rgba(0, 0, 0, 0.08) 65%,
+          rgba(0, 0, 0, 0.8) 100%);
       z-index: 1;
     }
 
@@ -97,14 +113,14 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(1.5rem, 5vw, 2.5rem);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
       pointer-events: none;
     }
 
     /* Top: logo + label */
     .ui-top {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 1rem;
     }
@@ -124,24 +140,29 @@
       transform: translateY(0);
     }
 
-    .logo-link img {
-      height: 32px;
-      width: auto;
-      filter: invert(1);
+    .nav-brand-text {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-weight: 400;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      text-decoration: none;
+      line-height: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .logo-link:hover .nav-brand-text {
+      opacity: 0.7;
     }
 
     .project-label {
-      font-size: clamp(0.65rem, 2vw, 0.8rem);
-      font-weight: 400;
-      letter-spacing: 0.15em;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: clamp(0.7rem, 2vw, 0.82rem);
+      font-weight: 500;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.55);
+      color: rgba(255, 255, 255, 0.7);
       opacity: 0;
-      transform: translateY(-12px);
-      transition: opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s;
-      text-align: right;
-    }
-
     .project-label.visible {
       opacity: 1;
       transform: translateY(0);
@@ -156,21 +177,23 @@
       justify-content: center;
       flex-direction: column;
       text-align: left;
-      padding: 0 clamp(1.5rem, 5vw, 2.5rem);
+      padding: 0 clamp(1.5rem, 4vw, 2.5rem);
     }
 
     #project-title {
-      font-size: clamp(3rem, 14vw, 9rem);
-      font-weight: 200;
-      letter-spacing: -0.04em;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: clamp(3.2rem, 12vw, 8.5rem);
+      font-weight: 500;
+      letter-spacing: -0.035em;
       line-height: 0.95;
       color: var(--white);
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
-      text-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 2px 40px rgba(0, 0, 0, 0.45);
       text-align: left;
       width: 100%;
+      text-transform: lowercase;
     }
 
     #project-title.visible {
@@ -202,34 +225,46 @@
       transform: translateY(0);
     }
 
-    /* Buttons — Neuzeit Heavy */
+    /* Buttons — Editorial Design System */
     .btn-cta {
       pointer-events: all;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      border: 2px solid #000000;
+      gap: 0.75rem;
+      border: 2px solid #ffffff;
       background: #ffffff;
       color: #000000;
-      padding: 0.75rem 1.75rem;
+      padding: 0 1.6rem;
       height: 48px;
-      font-family: 'NeuzeitHeavy', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: normal;
-      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-      letter-spacing: 0.06em;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-weight: 500;
+      font-size: clamp(0.82rem, 2.2vw, 0.92rem);
+      letter-spacing: -0.01em;
       text-transform: lowercase;
       text-decoration: none;
       cursor: pointer;
-      transition: opacity 0.25s, transform 0.2s;
+      box-sizing: border-box;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
 
     .btn-cta:hover {
-      transform: translateX(4px);
-      opacity: 0.85;
+      background: #000000;
+      color: #ffffff;
+      border-color: #ffffff;
+      transform: translateY(-2px);
     }
 
-    .btn-cta .arrow {
-      font-size: 1.1em;
+    .custom-arrow-icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 10px;
+      height: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-cta:hover .custom-arrow-icon,
+    .btn-dropdown-menu a:hover .custom-arrow-icon {
+      transform: translate(2px, -2px);
     }
 
     /* ── Dropdown (overflow of CTA buttons) ── */
@@ -241,32 +276,34 @@
     .btn-dropdown-trigger {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      border: 2px solid #000000;
+      gap: 0.75rem;
+      border: 2px solid #ffffff;
       background: #ffffff;
       color: #000000;
-      padding: 0.75rem 1.75rem;
+      padding: 0 1.6rem;
       height: 48px;
-      font-family: 'NeuzeitHeavy', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: normal;
-      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-      letter-spacing: 0.06em;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-weight: 500;
+      font-size: clamp(0.82rem, 2.2vw, 0.92rem);
+      letter-spacing: -0.01em;
       text-transform: lowercase;
       cursor: pointer;
-      transition: opacity 0.25s, transform 0.2s;
+      box-sizing: border-box;
       white-space: nowrap;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
 
     .btn-dropdown-trigger:hover {
-      transform: translateX(4px);
-      opacity: 0.85;
+      background: #000000;
+      color: #ffffff;
+      border-color: #ffffff;
+      transform: translateY(-2px);
     }
 
     .btn-dropdown-trigger .chevron {
-      font-style: normal;
-      font-size: 0.75em;
+      display: inline-flex;
+      align-items: center;
       transition: transform 0.25s ease;
-      display: inline-block;
     }
 
     .btn-dropdown.open .btn-dropdown-trigger .chevron {
@@ -301,15 +338,16 @@
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
-      padding: 0.7rem 1.25rem;
-      font-family: 'NeuzeitHeavy', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(0.75rem, 2vw, 0.85rem);
-      letter-spacing: 0.06em;
+      padding: 0.75rem 1.25rem;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: clamp(0.8rem, 2vw, 0.88rem);
+      font-weight: 500;
+      letter-spacing: -0.01em;
       text-transform: lowercase;
       text-decoration: none;
       color: #000000;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      transition: background 0.15s;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      transition: background-color 0.15s;
       white-space: nowrap;
     }
 
@@ -318,31 +356,25 @@
     }
 
     .btn-dropdown-menu a:hover {
-      background: rgba(0, 0, 0, 0.06);
+      background: #f4f4f4;
     }
 
-    .btn-dropdown-menu a .arrow {
-      font-size: 1em;
-      opacity: 0.4;
-    }
-
-    /* Mute button — solid black square */
+    /* Mute button — solid square with subtle border */
     .btn-mute {
       pointer-events: all;
-      background: #000000;
-      border: none;
+      background: rgba(0, 0, 0, 0.65);
+      border: 2px solid rgba(255, 255, 255, 0.35);
       color: var(--white);
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.1rem;
       flex-shrink: 0;
       opacity: 0;
-      transition: opacity 0.8s ease 1s, background 0.2s;
+      transition: opacity 0.8s ease 1s, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
 
     .btn-mute.visible {
@@ -350,7 +382,9 @@
     }
 
     .btn-mute:hover {
-      background: #222222;
+      background: #000000;
+      border-color: #ffffff;
+      transform: translateY(-2px);
     }
 
     /* Error state */
@@ -370,18 +404,14 @@
 
     #error-state h1 {
       font-size: clamp(2rem, 8vw, 4rem);
-      font-weight: 200;
+      font-weight: 500;
       letter-spacing: -0.03em;
+      text-transform: lowercase;
     }
 
     #error-state p {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.6);
       font-size: 1rem;
-    }
-
-    #error-state a {
-      color: var(--white);
-      text-decoration: underline;
     }
 
     /* Loading spinner */
@@ -421,6 +451,8 @@
 
 <body>
 
+  <div class="custom-cursor" id="cursor"></div>
+
   <!-- Loader -->
   <div id="loader">
     <div class="spinner"></div>
@@ -428,10 +460,13 @@
 
   <!-- Error state -->
   <div id="error-state">
-    <img src="imghome/logo_zinco.svg" style="height:36px; filter:invert(1); margin-bottom:1rem;" alt="zinco.cc">
-    <h1>Project not found</h1>
-    <p>The video you're looking for doesn't exist or has been moved.</p>
-    <a href="index.html">← Back to portfolio</a>
+    <a href="index.html" style="text-decoration:none;"><span class="nav-brand-text" style="font-size:2.2rem; color:white; display:block; margin-bottom:1.5rem;">zinco</span></a>
+    <h1>project not found</h1>
+    <p>the video or preview you're looking for doesn't exist or has been moved.</p>
+    <a href="index.html" class="btn-cta cursor-target" style="margin-top: 1rem;">
+      <span>back to portfolio</span>
+      <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+    </a>
   </div>
 
   <!-- Video background -->
@@ -446,8 +481,8 @@
   <!-- UI -->
   <div class="ui">
     <div class="ui-top">
-      <a href="index.html" class="logo-link" id="logo-link">
-        <img src="imghome/logo_zinco.svg" alt="zinco.cc">
+      <a href="index.html" class="logo-link cursor-target" id="logo-link" aria-label="Torna alla homepage">
+        <span class="nav-brand-text">zinco</span>
       </a>
       <div class="project-label" id="project-label">project tab</div>
     </div>
@@ -458,17 +493,17 @@
 
     <div class="ui-bottom">
       <div class="cta-group" id="cta-group">
-        <a href="#" id="discover-link" class="btn-cta">
+        <a href="#" id="discover-link" class="btn-cta cursor-target">
           <span>discover the project</span>
-          <span class="arrow">→</span>
+          <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
         </a>
-        <a href="#" id="watch-link" class="btn-cta" target="_blank">
+        <a href="#" id="watch-link" class="btn-cta cursor-target" target="_blank" rel="noopener">
           <span>watch video</span>
-          <span class="arrow">→</span>
+          <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
         </a>
         <!-- site buttons injected dynamically by JS -->
       </div>
-      <button class="btn-mute" id="btn-mute" title="Toggle sound" aria-label="Toggle mute">🔇</button>
+      <button class="btn-mute cursor-target" id="btn-mute" title="Toggle sound" aria-label="Toggle mute"></button>
     </div>
   </div>
 
@@ -506,18 +541,16 @@
       },
       am: {
         title: "AM Group (AM Decor + 3M)",
-        // Nessun video — usa immagine di sfondo
         image: "3M_Soluzioni_Immobiliari/img/3M_window.webp",
         sites: [
           { label: "discover AM Decor", url: "amdecor/amdecor.html", external: false },
-          { label: "discover 3M", url: "3M_Soluzioni_Immobiliari/3M_soluzioni_immobiliari.html", external: false },
+          { label: "discover 3M", url: "3M_Soluzioni_Immobiliari/3m.html", external: false },
           { label: "visit AM Decor", url: "https://amdecorsrl.com", external: true },
           { label: "visit 3M", url: "https://3mimmobiliare.casa", external: true }
         ]
       },
       zoom: {
         title: "ZOOM",
-        // Array di video: il primo viene usato come sfondo, tutti ottengono un bottone
         videos: [
           { label: "animation 1", src: "UNI YEAR 1/projects_basics_lab/img/animations/ANIMAZIONE1 - GRUPPO3.mp4" },
           { label: "animation 2", src: "UNI YEAR 1/projects_basics_lab/img/animations/animazione fumetto.mp4" },
@@ -548,8 +581,48 @@
         image: "fioreria_del_lago/img/CART.webp",
         link: "fioreria_del_lago/fioreria_del_lago.html",
         external: false
+      },
+      clotho: {
+        title: "clotho",
+        image: "clotho/img/clotho_preview.webp",
+        link: "clotho/clotho.html",
+        external: false,
+        sites: [
+          { label: "open web app", url: "https://info.clotho.zinco.cc", external: true },
+          { label: "view source", url: "https://github.com/zjncoo/clotho", external: true }
+        ]
+      },
+      uni: {
+        title: "uni",
+        image: "uni/img/dashboard.webp",
+        link: "uni/uni.html",
+        external: false,
+        sites: [
+          { label: "visit website", url: "https://uni.zinco.cc", external: true },
+          { label: "download DMG", url: "https://github.com/zjncoo/uni/releases/latest/download/uni.dmg", external: true }
+        ]
+      },
+      escapes: {
+        title: "escapes Lake Como",
+        image: "imghome/glasses/escapes.webp",
+        link: "escapes/escapes.html",
+        external: false,
+        sites: [
+          { label: "live website", url: "https://escapeslakecomo.com", external: true }
+        ]
+      },
+      gizeta: {
+        title: "Gizeta",
+        video: "UNI YEAR 2/brand_identity_lab/img/video_sito_gizeta.mp4",
+        link: "gizeta/gizeta.html",
+        external: false
       }
     };
+
+    const ARROW_SVG = '<svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>';
+    const CHEVRON_SVG = '<svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3.5 5 6.5 8 3.5"></polyline></svg>';
+    const MUTE_SVG = '<svg class="mute-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>';
+    const UNMUTE_SVG = '<svg class="unmute-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>';
 
     const params = new URLSearchParams(window.location.search);
     const slug = (params.get('project') || '').toLowerCase().trim();
@@ -567,6 +640,7 @@
     const watchLink = document.getElementById('watch-link');
     const muteBtn = document.getElementById('btn-mute');
     let isMuted = true;
+    if (muteBtn) muteBtn.innerHTML = MUTE_SVG;
 
     // Button collector — call addSiteButton() for each item,
     // then renderButtons() once. If >2 items they go into a dropdown.
@@ -581,13 +655,12 @@
       if (items.length === 0) return;
 
       if (items.length <= 2) {
-        // Inline — same as before
         items.forEach(({ label, url, external }) => {
           const a = document.createElement('a');
           a.href = url;
-          a.className = 'btn-cta';
+          a.className = 'btn-cta cursor-target';
           if (external) a.target = '_blank';
-          a.innerHTML = `<span>${label}</span><span class="arrow">→</span>`;
+          a.innerHTML = `<span>${label}</span>${ARROW_SVG}`;
           ctaGroup.appendChild(a);
         });
       } else {
@@ -596,8 +669,8 @@
         wrapper.className = 'btn-dropdown';
 
         const trigger = document.createElement('button');
-        trigger.className = 'btn-dropdown-trigger';
-        trigger.innerHTML = `<span>more links</span><span class="chevron">▼</span>`;
+        trigger.className = 'btn-dropdown-trigger cursor-target';
+        trigger.innerHTML = `<span>more links</span>${CHEVRON_SVG}`;
         trigger.addEventListener('click', e => {
           e.stopPropagation();
           wrapper.classList.toggle('open');
@@ -608,8 +681,9 @@
         items.forEach(({ label, url, external }) => {
           const a = document.createElement('a');
           a.href = url;
+          a.className = 'cursor-target';
           if (external) a.target = '_blank';
-          a.innerHTML = `<span>${label}</span><span class="arrow">→</span>`;
+          a.innerHTML = `<span>${label}</span>${ARROW_SVG}`;
           menu.appendChild(a);
         });
 
@@ -690,7 +764,7 @@
         muteBtn.addEventListener('click', () => {
           isMuted = !isMuted;
           video.muted = isMuted;
-          muteBtn.textContent = isMuted ? '🔇' : '🔊';
+          muteBtn.innerHTML = isMuted ? MUTE_SVG : UNMUTE_SVG;
         });
 
       } else if (hasVideo) {
@@ -728,7 +802,7 @@
         muteBtn.addEventListener('click', () => {
           isMuted = !isMuted;
           video.muted = isMuted;
-          muteBtn.textContent = isMuted ? '🔇' : '🔊';
+          muteBtn.innerHTML = isMuted ? MUTE_SVG : UNMUTE_SVG;
         });
 
         // Extra sites for this project (e.g. teaser) — go into dropdown
@@ -788,6 +862,42 @@
           renderButtons();
         }
       }
+    }
+
+    // ── Custom Cursor Motion ──
+    const cursor = document.getElementById('cursor');
+    if (cursor && window.matchMedia('(pointer: fine)').matches) {
+      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+      let cursorX = mouseX, cursorY = mouseY;
+      let cursorRAF = null;
+      const speed = 0.2;
+      const animateCursor = () => {
+        const distX = mouseX - cursorX;
+        const distY = mouseY - cursorY;
+        cursorX += distX * speed;
+        cursorY += distY * speed;
+        cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+        if (Math.abs(distX) > 0.1 || Math.abs(distY) > 0.1) {
+          cursorRAF = requestAnimationFrame(animateCursor);
+        } else {
+          cursorRAF = null;
+        }
+      };
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!cursorRAF) cursorRAF = requestAnimationFrame(animateCursor);
+      }, { passive: true });
+      document.addEventListener('mouseover', (e) => {
+        if (e.target && e.target.closest && e.target.closest('a, button, .cursor-target, .btn-cta, .btn-dropdown-trigger, .btn-mute')) {
+          cursor.classList.add('cursor-hover');
+        }
+      }, { passive: true });
+      document.addEventListener('mouseout', (e) => {
+        if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('a, button, .cursor-target, .btn-cta, .btn-dropdown-trigger, .btn-mute')) {
+          cursor.classList.remove('cursor-hover');
+        }
+      }, { passive: true });
     }
   </script>
 
