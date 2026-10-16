@@ -688,7 +688,7 @@
       row.dataset.category = p.category;
       row.dataset.image = p.image || '';
       row.dataset.title = p.title || '';
-      row.dataset.num = p.indexNum || `No.${String(idx + 1).padStart(3, '0')}`;
+      row.dataset.num = p.indexNum ? p.indexNum.replace(/^no\.?\s*/i, '') : String(idx + 1).padStart(3, '0');
 
       row.innerHTML = `
         <span class="index-cell-num">${row.dataset.num}</span>
@@ -708,7 +708,8 @@
     });
 
     if (!isMobile && window.innerWidth > 1080 && filtered.length > 0) {
-      updatePreview(filtered[0], filtered[0].indexNum || 'No.001');
+      const firstNum = (filtered[0].indexNum || '001').replace(/^no\.?\s*/i, '');
+      updatePreview(filtered[0], firstNum);
     }
   };
 
@@ -737,7 +738,10 @@
         }
         if (previewTitleEl) previewTitleEl.textContent = (curP.title || '').toUpperCase();
         if (previewCatBadgeEl) previewCatBadgeEl.textContent = (curP.category || '').toUpperCase();
-        if (previewNumBadgeEl) previewNumBadgeEl.textContent = curNum || curP.indexNum || 'No.001';
+        if (previewNumBadgeEl) {
+          const rawNum = curNum || curP.indexNum || '001';
+          previewNumBadgeEl.textContent = rawNum.replace(/^no\.?\s*/i, '');
+        }
         if (previewProjectBtnEl) {
           const link = curP.link || '#';
           previewProjectBtnEl.href = link;
@@ -888,7 +892,8 @@
 
     // Sync initial preview card with first project on desktop only
     if (!isMobile && window.innerWidth > 1080 && typeof allProjectsData !== 'undefined' && allProjectsData.length > 0) {
-      updatePreview(allProjectsData[0], allProjectsData[0].indexNum || 'No.001');
+      const initNum = (allProjectsData[0].indexNum || '001').replace(/^no\.?\s*/i, '');
+      updatePreview(allProjectsData[0], initNum);
     }
 
     window.addEventListener('resize', () => {

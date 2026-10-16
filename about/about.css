@@ -1,6 +1,6 @@
 /* ===================================================================
  * EDITORIAL ABOUT STYLESHEET - zinco.cc
- * 2-Column High-End Editorial Architecture
+ * Minimalist, Modern 2-Column Architecture
  * =================================================================== */
 
 :root {
@@ -17,13 +17,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-main {
-  align-items: flex-start;
-  text-align: left;
-  padding-left: clamp(20px, 3.5vw, 40px);
-  padding-right: clamp(20px, 3.5vw, 40px);
-}
-
 /* --- Section & Grid Layout --- */
 .about-editorial-section {
   width: 100%;
@@ -36,7 +29,7 @@ main {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
-  padding: 32px clamp(20px, 3.5vw, 40px) 120px;
+  padding: 120px clamp(20px, 3.5vw, 40px) 120px;
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: clamp(36px, 5vw, 72px);
@@ -150,22 +143,12 @@ main {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 36px;
 }
 
 .about-right-header {
   border-bottom: var(--line-2px);
   padding-bottom: 24px;
-}
-
-.about-eyebrow {
-  display: block;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #71717a;
-  margin-bottom: 8px;
-  font-weight: 500;
 }
 
 .about-heading {
@@ -175,36 +158,6 @@ main {
   font-weight: 500;
   margin: 0;
   text-transform: lowercase;
-}
-
-.about-article-block {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.about-section-hdr {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  border-bottom: var(--line-1px);
-  padding-bottom: 12px;
-}
-
-.about-section-num {
-  font-size: 12px;
-  color: #71717a;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-
-.about-section-title {
-  font-size: 1.4rem;
-  letter-spacing: -0.03em;
-  font-weight: 500;
-  margin: 0;
-  text-transform: lowercase;
-  color: #000000;
 }
 
 .about-prose {
@@ -243,9 +196,9 @@ main {
 }
 
 .about-card-title {
-  font-size: 1.3rem;
-  letter-spacing: -0.03em;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   margin: 0 0 8px 0;
   color: #000000;
 }
@@ -253,52 +206,24 @@ main {
 .about-card-sub {
   font-size: 0.95rem;
   line-height: 1.5;
+  color: #444444;
   margin: 0 0 12px 0;
-  color: #333333;
 }
 
 .about-card-repo {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   line-height: 1.5;
-  color: #666666;
-  margin: 0;
-}
-
-/* Disciplines Grid */
-.about-disciplines-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.about-discipline-item {
-  border: var(--line-1px);
-  padding: 20px;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-}
-
-.discipline-tag {
-  font-size: 10px;
-  font-weight: 500;
   color: #71717a;
-  margin-bottom: 8px;
-}
-
-.about-discipline-item h4 {
-  font-size: 1.05rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin: 0 0 8px 0;
-  color: #000000;
-}
-
-.about-discipline-item p {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: #666666;
   margin: 0;
+  word-break: break-all;
+}
+
+.about-card-repo a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-weight: 600;
 }
 
 /* Inline Link */
@@ -321,7 +246,7 @@ main {
   .about-editorial-container {
     grid-template-columns: 1fr;
     gap: 36px;
-    padding: 24px 16px 80px;
+    padding: 80px 16px 80px;
   }
 
   .about-sticky-wrapper {
@@ -335,9 +260,5 @@ main {
 
   .about-specs-table {
     margin-top: 12px;
-  }
-
-  .about-disciplines-grid {
-    grid-template-columns: 1fr;
   }
 }

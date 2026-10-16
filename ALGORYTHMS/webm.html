@@ -2,10 +2,10 @@
 <html lang="it">
 
 <head>
-  <title>Video to WebM Converter - zinco</title>
-  <meta name="description" content="Explore Webm, a comprehensive digital experiments project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
-  <meta property="og:title" content="Video to WebM Converter - zinco" />
-  <meta property="og:description" content="Explore Webm, a comprehensive digital experiments project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <title>zinco - WebM Converter</title>
+  <meta name="description" content="Convert your video files (MP4, MOV, AVI) to high-performance WebM format directly in your browser. Fast, secure, and client-side processing by Zinco Studio." />
+  <meta property="og:title" content="zinco - WebM Converter" />
+  <meta property="og:description" content="Convert your video files (MP4, MOV, AVI) to high-performance WebM format directly in your browser. Fast, secure, and client-side processing by Zinco Studio." />
   <meta property="og:image" content="https://zinco.cc/imghome/logo_zinco.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="zinco.cc" />
@@ -14,307 +14,717 @@
   <link rel="icon" href="../imghome/favicon_zinco.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../imghome/logo_zinco.svg" />
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow, noai, noimageai" />
   <meta name="tdm-reservation" content="1" />
-    
+  <link rel="canonical" href="https://zinco.cc/ALGORYTHMS/webm.html" />
 
-    <!-- Service Worker per abilitare SharedArrayBuffer (richiesto da FFmpeg.wasm) -->
-    <script src="coi-serviceworker.min.js"></script>
+  <!-- Stili Globali del Sito -->
+  <link rel="stylesheet" href="../index.css" />
 
-    <!-- Stili Globali del Sito -->
-    <link rel="stylesheet" href="../index.css" />
-    
-
-    <!-- Dipendenze Esterne (Lenis, Font, FFmpeg) -->
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
-
-    <!-- Script del Sito -->
-    <script src="../projects-data.js" defer></script>
-
-    <style>
-        /* Stili Specifici per il Convertitore (in sostituzione di Tailwind) */
-        .converter-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 40px auto;
-            border: 2px solid black;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .upload-area {
-            border: 2px dashed black;
-            padding: 40px 20px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            margin-bottom: 20px;
-            display: block;
-            /* label behaves like block */
-        }
-
-        .upload-area:hover {
-            background-color: #f0f0f0;
-        }
-
-        .upload-icon {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-            stroke: black;
-            /* Icona nera */
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .progress-container {
-            width: 100%;
-            border: 2px solid black;
-            height: 30px;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .progress-fill {
-            background-color: #FFD600;
-            /* Giallo Zinco */
-            height: 100%;
-            width: 0%;
-            transition: width 0.2s linear;
-        }
-
-        .video-preview {
-            width: 100%;
-            border: 2px solid black;
-            margin-bottom: 20px;
-        }
-
-        /* Utility helper per spaziature */
-        .mb-2 {
-            margin-bottom: 20px;
-        }
-
-        .text-small {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background-color: #ccc;
-            border-color: #ccc;
-            color: #666;
-        }
-
-        button:disabled:hover {
-            background-color: #ccc;
-            color: #666;
-        }
-    </style>
+  <!-- Dipendenze Esterne -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
+
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'neue-haas-unica', sans-serif;
+      color: #000000;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #converter-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 120px clamp(20px, 4vw, 40px) 100px;
+      box-sizing: border-box;
+    }
+
+    .converter-header {
+      text-align: left;
+      border-bottom: 2px solid #000000;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+
+    .converter-eyebrow {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #71717a;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .converter-header h1 {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-weight: 500;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin: 0 0 16px 0;
+      text-transform: lowercase;
+    }
+
+    .converter-header p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 65ch;
+      margin: 0;
+      color: #333333;
+    }
+
+    /* Toolbar / Settings */
+    .converter-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #71717a;
+      font-weight: 500;
+    }
+
+    .toolbar-select {
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border: 2px solid #000000;
+      background: #ffffff;
+      color: #000000;
+      border-radius: 0;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      padding-right: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpolyline points='2 3.5 5 6.5 8 3.5' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #000000;
+      cursor: pointer;
+    }
+
+    /* Upload Area */
+    .upload-area {
+      border: 2px dashed #000000;
+      padding: 60px 24px;
+      text-align: center;
+      cursor: pointer;
+      background: #fafafa;
+      transition: background-color 0.2s ease, border-style 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .upload-area:hover,
+    .upload-area.dragover {
+      background-color: #f0f0f0;
+      border-style: solid;
+    }
+
+    .upload-icon-box {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000000;
+    }
+
+    .upload-title {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: #000000;
+    }
+
+    .upload-title strong {
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .upload-hint {
+      font-size: 12px;
+      color: #71717a;
+      letter-spacing: 0.02em;
+    }
+
+    /* Selected File Bar */
+    .file-details-bar {
+      border: 2px solid #000000;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      background: #ffffff;
+    }
+
+    .file-details-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .file-details-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .file-details-sub {
+      font-size: 12px;
+      color: #71717a;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 12px 24px;
+      font-family: 'neue-haas-unica', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-action:hover:not(:disabled) {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .btn-action:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .btn-secondary:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    /* Progress Area */
+    .progress-box {
+      border: 2px solid #000000;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .progress-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 18px;
+      border: 2px solid #000000;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #000000;
+      transition: width 0.15s ease-out;
+    }
+
+    /* Output Area */
+    .output-box {
+      border: 2px solid #000000;
+      padding: 28px 24px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid #000000;
+      padding-bottom: 12px;
+    }
+
+    .output-header h3 {
+      font-size: 1.25rem;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .output-savings {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: #000000;
+      color: #ffffff;
+      padding: 4px 8px;
+    }
+
+    .video-preview {
+      width: 100%;
+      max-height: 480px;
+      border: 2px solid #000000;
+      background: #000000;
+    }
+
+    .output-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      #converter-container {
+        padding-top: 80px;
+      }
+      
+      .converter-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .output-actions {
+        flex-direction: column;
+      }
+
+      .output-actions .btn-action {
+        width: 100%;
+      }
+    }
+  </style>
+
   <script src="../components.js" defer></script>
 </head>
 
 <body>
-    <div class="site-main-content">
+  <div class="site-main-content">
+    <div id="preloader">
+      <a href="../index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
 
-        <!-- Scroll Progress Bar -->
-        <div id="scroll-progress-bar"></div>
+    <div class="custom-cursor" id="cursor"></div>
 
-        <!-- Preloader -->
-        <div id="preloader">
-            <a href="../index.html" id="logo"><img src="../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
-            <div class="loader-bar-container">
-                <div class="loader-bar"></div>
-            </div>
+    <zinco-header base-path="../"></zinco-header>
+
+    <main id="converter-container">
+      <div class="converter-header">
+        <span class="converter-eyebrow">tools &amp; algorithms</span>
+        <h1>WebM Converter</h1>
+        <p>Encode videos to optimized .webm for web and UI animations. Hardware-accelerated, client-side encoding with zero server uploads.</p>
+      </div>
+
+      <!-- Settings / Options -->
+      <div class="converter-toolbar">
+        <div class="toolbar-group">
+          <label for="codec-select" class="toolbar-label">Codec &amp; Bitrate:</label>
+          <select id="codec-select" class="toolbar-select cursor-target">
+            <option value="vp9-high">VP9 (High Quality — 2.5 Mbps)</option>
+            <option value="vp9-web" selected>VP9 (Web Optimized — 1.5 Mbps)</option>
+            <option value="vp8-std">VP8 (Universal Legacy — 1.2 Mbps)</option>
+          </select>
         </div>
 
-        <!-- Custom Cursor -->
-        <div class="custom-cursor" id="cursor"></div>
+        <div class="toolbar-group">
+          <label class="checkbox-label cursor-target">
+            <input type="checkbox" id="mute-audio-check" checked>
+            <span>Mute Audio (Optimized for Web Backgrounds)</span>
+          </label>
+        </div>
+      </div>
 
-        <!-- Navigazione Fissa -->
-        <!-- Menu a Tendina -->
-        <zinco-header base-path="../"></zinco-header>
+      <!-- Upload Dropzone -->
+      <div id="upload-area" class="upload-area cursor-target" role="button" tabindex="0" aria-label="Drop video here or click to select a file">
+        <input type="file" id="video-upload" accept="video/*" style="display: none;">
+        <div class="upload-icon-box">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </div>
+        <p class="upload-title">Drop your video here or <strong>browse files</strong></p>
+        <span class="upload-hint">Supports MP4, MOV, WEBM, MKV, AVI</span>
+      </div>
 
-    <main>
-            <div class="shapes"></div> <!-- Spaziatore Shapes dall'header -->
+      <!-- Selected File Details Bar -->
+      <div id="file-details" class="file-details-bar hidden">
+        <div class="file-details-meta">
+          <span id="file-name" class="file-details-name">video.mp4</span>
+          <span id="file-size" class="file-details-sub">0 MB</span>
+        </div>
+        <button id="convert-btn" class="btn-action cursor-target">
+          <span>Start WebM Conversion</span>
+          <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+        </button>
+      </div>
 
-            <p class="intro">
-                Video to WebM Converter<br>
-                <span style="font-size: 1rem; opacity: 0.6;">Convert your media files for the web directly in the
-                    browser.</span>
-            </p>
+      <!-- Progress Area -->
+      <div id="progress-area" class="progress-box hidden">
+        <div class="progress-info-row">
+          <span id="progress-status">Encoding video to WebM...</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <span id="progress-note" style="font-size: 11px; color: #71717a;">Processing client-side in browser memory...</span>
+      </div>
 
-            <div class="converter-container">
+      <!-- Output Area -->
+      <div id="output-area" class="output-box hidden">
+        <div class="output-header">
+          <h3>Conversion Complete</h3>
+          <span id="output-stats" class="output-savings">-0%</span>
+        </div>
 
-                <!-- Area di Input -->
-                <div id="input-area">
-                    <label for="video-upload" class="upload-area">
-                        <svg class="upload-icon mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                        </svg>
-                        <span id="file-name" class="block" style="font-weight: bold;">Select a video file</span>
-                        <span class="text-small">MP4, MOV, AVI, etc.</span>
-                    </label>
-                    <input id="video-upload" type="file" class="hidden" accept="video/*">
+        <video id="video-preview" class="video-preview" controls playsinline></video>
 
-                    <button id="convert-btn" class="btn btn--solid-dark" style="width: 100%;" disabled>
-                        Convert to WebM
-                    </button>
-                </div>
+        <div class="output-actions">
+          <a id="download-btn" href="#" download="converted.webm" class="btn-action cursor-target">
+            <span>Download .webm video</span>
+            <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+          </a>
+          <button type="button" id="btn-convert-another" class="btn-action btn-secondary cursor-target">
+            <span>Convert another video</span>
+          </button>
+        </div>
+      </div>
 
-                <!-- Area di Progresso -->
-                <div id="progress-area" class="hidden">
-                    <p id="progress-text" style="font-weight: bold; margin-bottom: 10px;">Conversion in progress...</p>
-                    <div class="progress-container">
-                        <div id="progress-bar" class="progress-fill"></div>
-                    </div>
-                    <p id="progress-ratio" class="text-small">0%</p>
-                </div>
+      <!-- Hidden Offscreen Video & Canvas for Decoding -->
+      <video id="source-decoder" style="display: none;" playsinline muted></video>
+      <canvas id="transcode-canvas" style="display: none;"></canvas>
+    </main>
 
-                <!-- Area di Output -->
-                <div id="output-area" class="hidden">
-                    <h2 style="color: black; margin-bottom: 20px;">Conversion Complete!</h2>
-                    <video id="video-preview" class="video-preview" controls></video>
+  </div><!-- /site-main-content -->
 
-                    <a id="download-btn" href="#" download="video_convertito.webm" class="btn btn--solid-dark"
-                        style="display: block; margin-bottom: 10px;">
-                        Download WebM video
-                    </a>
-                    <button id="convert-another-btn" class="btn btn--outline-dark" style="width: 100%;">
-                        Convert another video
-                    </button>
-                </div>
+  <zinco-footer base-path="../"></zinco-footer>
 
-            </div>
+  <script src="../projects-data.js?v=21"></script>
+  <script src="../index.js"></script>
 
-        </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const uploadArea = document.getElementById('upload-area');
+      const videoUpload = document.getElementById('video-upload');
+      const fileDetails = document.getElementById('file-details');
+      const fileNameEl = document.getElementById('file-name');
+      const fileSizeEl = document.getElementById('file-size');
+      const convertBtn = document.getElementById('convert-btn');
+      const codecSelect = document.getElementById('codec-select');
+      const muteAudioCheck = document.getElementById('mute-audio-check');
+      const progressArea = document.getElementById('progress-area');
+      const progressStatus = document.getElementById('progress-status');
+      const progressPct = document.getElementById('progress-pct');
+      const progressBar = document.getElementById('progress-bar');
+      const progressNote = document.getElementById('progress-note');
+      const outputArea = document.getElementById('output-area');
+      const outputStats = document.getElementById('output-stats');
+      const videoPreview = document.getElementById('video-preview');
+      const downloadBtn = document.getElementById('download-btn');
+      const btnConvertAnother = document.getElementById('btn-convert-another');
+      const sourceVideo = document.getElementById('source-decoder');
+      const transcodeCanvas = document.getElementById('transcode-canvas');
 
-    </div><!-- /site-main-content -->
+      let selectedFile = null;
+      let convertedUrl = null;
+      let activeRecorder = null;
 
-    <zinco-footer base-path="../"></zinco-footer>
+      // Click to choose file
+      uploadArea.addEventListener('click', (e) => {
+        if (e.target !== videoUpload) videoUpload.click();
+      });
 
-    <!-- Script Principale del Sito -->
-    <script src="../index.js"></script>
+      uploadArea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          videoUpload.click();
+        }
+      });
 
-    <!-- Logica del Convertitore -->
-    <script>
-        const initializeConverter = () => {
-            const videoUpload = document.getElementById('video-upload');
-            const fileNameSpan = document.getElementById('file-name');
-            const convertBtn = document.getElementById('convert-btn');
-            const inputArea = document.getElementById('input-area');
-            const progressArea = document.getElementById('progress-area');
-            const progressText = document.getElementById('progress-text');
-            const progressBar = document.getElementById('progress-bar');
-            const progressRatio = document.getElementById('progress-ratio');
-            const outputArea = document.getElementById('output-area');
-            const videoPreview = document.getElementById('video-preview');
-            const downloadBtn = document.getElementById('download-btn');
-            const convertAnotherBtn = document.getElementById('convert-another-btn');
+      // Drag and drop
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+      });
 
-            let selectedFile = null;
+      uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+      });
 
-            if (typeof FFmpeg === 'undefined') {
-                console.error('FFmpeg library was not loaded.');
-                alert('Error: Cannot load conversion library.');
-                return;
+      uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      videoUpload.addEventListener('change', () => {
+        if (videoUpload.files && videoUpload.files.length > 0) {
+          handleFile(videoUpload.files[0]);
+        }
+      });
+
+      const handleFile = (file) => {
+        if (!file.type.startsWith('video/') && !file.name.match(/\.(mp4|mov|webm|mkv|avi)$/i)) {
+          alert('Please select a valid video file (MP4, MOV, WebM, etc.).');
+          return;
+        }
+        selectedFile = file;
+        fileNameEl.textContent = file.name;
+        const mb = (file.size / (1024 * 1024)).toFixed(2);
+        fileSizeEl.textContent = `${mb} MB`;
+        fileDetails.classList.remove('hidden');
+        outputArea.classList.add('hidden');
+        progressArea.classList.add('hidden');
+      };
+
+      // Native Transcode Engine
+      convertBtn.addEventListener('click', async () => {
+        if (!selectedFile) return;
+
+        fileDetails.classList.add('hidden');
+        uploadArea.classList.add('hidden');
+        progressArea.classList.remove('hidden');
+        outputArea.classList.add('hidden');
+
+        progressBar.style.width = '0%';
+        progressPct.textContent = '0%';
+        progressStatus.textContent = 'Preparing video decoder...';
+
+        try {
+          const fileUrl = URL.createObjectURL(selectedFile);
+          sourceVideo.src = fileUrl;
+          sourceVideo.muted = true; // Required for reliable autoplay in canvas
+
+          await new Promise((resolve, reject) => {
+            sourceVideo.onloadedmetadata = () => resolve();
+            sourceVideo.onerror = (e) => reject(new Error('Failed to parse video metadata'));
+          });
+
+          const duration = sourceVideo.duration;
+          const width = sourceVideo.videoWidth || 1920;
+          const height = sourceVideo.videoHeight || 1080;
+
+          transcodeCanvas.width = width;
+          transcodeCanvas.height = height;
+          const ctx = transcodeCanvas.getContext('2d');
+
+          // Pick supported WebM MIME type
+          let mimeType = 'video/webm;codecs=vp9';
+          if (!MediaRecorder.isTypeSupported(mimeType)) {
+            mimeType = 'video/webm;codecs=vp8';
+          }
+          if (!MediaRecorder.isTypeSupported(mimeType)) {
+            mimeType = 'video/webm';
+          }
+
+          // Bitrate
+          let videoBits = 1500000; // 1.5 Mbps
+          const mode = codecSelect.value;
+          if (mode === 'vp9-high') videoBits = 2500000;
+          if (mode === 'vp8-std') videoBits = 1200000;
+
+          const canvasStream = transcodeCanvas.captureStream(30);
+
+          // Audio handling if requested
+          const muteAudio = muteAudioCheck.checked;
+          let combinedStream = canvasStream;
+
+          if (!muteAudio) {
+            try {
+              if (sourceVideo.captureStream) {
+                const s = sourceVideo.captureStream();
+                const aTracks = s.getAudioTracks();
+                if (aTracks.length > 0) {
+                  combinedStream = new MediaStream([...canvasStream.getVideoTracks(), aTracks[0]]);
+                }
+              }
+            } catch (err) {
+              console.warn('Could not extract audio track:', err);
+            }
+          }
+
+          const recorder = new MediaRecorder(combinedStream, {
+            mimeType,
+            videoBitsPerSecond: videoBits
+          });
+          activeRecorder = recorder;
+
+          const chunks = [];
+          recorder.ondataavailable = (e) => {
+            if (e.data && e.data.size > 0) chunks.push(e.data);
+          };
+
+          const transcodePromise = new Promise((resolve, reject) => {
+            recorder.onstop = () => resolve();
+            recorder.onerror = (e) => reject(e);
+          });
+
+          recorder.start(100);
+          progressStatus.textContent = 'Transcoding video frames...';
+
+          sourceVideo.currentTime = 0;
+          await sourceVideo.play();
+
+          // Render loop
+          let isDone = false;
+          const drawFrame = () => {
+            if (isDone) return;
+            ctx.drawImage(sourceVideo, 0, 0, width, height);
+
+            const cur = sourceVideo.currentTime;
+            const pct = Math.min(99, Math.round((cur / duration) * 100));
+            progressBar.style.width = `${pct}%`;
+            progressPct.textContent = `${pct}%`;
+            progressStatus.textContent = `Transcoding... ${cur.toFixed(1)}s / ${duration.toFixed(1)}s`;
+
+            if (sourceVideo.ended || cur >= duration - 0.05) {
+              isDone = true;
+              if (recorder.state === 'recording') {
+                recorder.stop();
+              }
+              return;
             }
 
-            const { createFFmpeg, fetchFile } = FFmpeg;
-            const ffmpeg = createFFmpeg({
-                log: true,
-                corePath: 'https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',
-            });
-
-            videoUpload.addEventListener('change', (event) => {
-                selectedFile = event.target.files[0];
-                if (selectedFile) {
-                    fileNameSpan.textContent = selectedFile.name;
-                    convertBtn.disabled = false;
-                } else {
-                    fileNameSpan.textContent = 'Select a video file';
-                    convertBtn.disabled = true;
-                }
-            });
-
-            convertBtn.addEventListener('click', async () => {
-                if (!selectedFile) return;
-
-                if (typeof SharedArrayBuffer === 'undefined') {
-                    alert('Warning: Your browser does not support SharedArrayBuffer on this page. To use the WebM converter, you must view the site via an HTTPS server (or localhost) and not from a local file (file:///).');
-                    return;
-                }
-
-                inputArea.classList.add('hidden');
-                progressArea.classList.remove('hidden');
-                convertBtn.disabled = true;
-
-                try {
-                    if (!ffmpeg.isLoaded()) {
-                        progressText.textContent = 'Loading library...';
-                        await ffmpeg.load();
-                    }
-
-                    progressText.textContent = 'Preparing file...';
-                    ffmpeg.FS('writeFile', selectedFile.name, await fetchFile(selectedFile));
-
-                    ffmpeg.setProgress(({ ratio }) => {
-                        const percentage = Math.round(ratio * 100);
-                        if (percentage < 0) return;
-                        progressBar.style.width = `${percentage}%`;
-                        progressRatio.textContent = `${percentage}%`;
-                    });
-
-                    progressText.textContent = 'Conversion in progress...';
-                    await ffmpeg.run('-i', selectedFile.name, '-c:v', 'libvpx-vp9', '-b:v', '1M', '-c:a', 'libopus', 'output.webm');
-
-                    progressText.textContent = 'Finalizing...';
-                    const data = ffmpeg.FS('readFile', 'output.webm');
-                    const videoUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/webm' }));
-
-                    videoPreview.src = videoUrl;
-                    downloadBtn.href = videoUrl;
-                    progressArea.classList.add('hidden');
-                    outputArea.classList.remove('hidden');
-
-                } catch (error) {
-                    console.error(error);
-                    progressText.textContent = 'Error during conversion.';
-                    alert('An error occurred during conversion. Check the console for details.');
-                    setTimeout(resetUI, 1000);
-                }
-            });
-
-            convertAnotherBtn.addEventListener('click', resetUI);
-
-            function resetUI() {
-                selectedFile = null;
-                videoUpload.value = '';
-                fileNameSpan.textContent = 'Select a video file';
-                convertBtn.disabled = true;
-                outputArea.classList.add('hidden');
-                inputArea.classList.remove('hidden');
-                progressArea.classList.add('hidden');
-                progressBar.style.width = '0%';
-                progressRatio.textContent = '0%';
-                if (videoPreview.src) {
-                    URL.revokeObjectURL(videoPreview.src);
-                    videoPreview.src = '';
-                }
+            if ('requestVideoFrameCallback' in sourceVideo) {
+              sourceVideo.requestVideoFrameCallback(drawFrame);
+            } else {
+              requestAnimationFrame(drawFrame);
             }
-        };
+          };
 
-        window.addEventListener('load', initializeConverter);
-    </script>
+          if ('requestVideoFrameCallback' in sourceVideo) {
+            sourceVideo.requestVideoFrameCallback(drawFrame);
+          } else {
+            requestAnimationFrame(drawFrame);
+          }
+
+          await transcodePromise;
+          progressBar.style.width = '100%';
+          progressPct.textContent = '100%';
+          progressStatus.textContent = 'Finalizing .webm package...';
+
+          const finalBlob = new Blob(chunks, { type: 'video/webm' });
+          if (convertedUrl) URL.revokeObjectURL(convertedUrl);
+          convertedUrl = URL.createObjectURL(finalBlob);
+
+          const origMb = (selectedFile.size / (1024 * 1024)).toFixed(2);
+          const newMb = (finalBlob.size / (1024 * 1024)).toFixed(2);
+          const diffPct = Math.round(((selectedFile.size - finalBlob.size) / selectedFile.size) * 100);
+
+          outputStats.textContent = diffPct > 0 ? `-${diffPct}% (${origMb} MB → ${newMb} MB)` : `${newMb} MB`;
+          videoPreview.src = convertedUrl;
+
+          const baseName = selectedFile.name.replace(/\.[^/.]+$/, '');
+          downloadBtn.href = convertedUrl;
+          downloadBtn.download = `${baseName}.webm`;
+
+          progressArea.classList.add('hidden');
+          outputArea.classList.remove('hidden');
+
+          URL.revokeObjectURL(fileUrl);
+
+        } catch (error) {
+          console.error('Conversion failed:', error);
+          alert('An error occurred during video transcoding. Please verify the video format and try again.');
+          resetUI();
+        }
+      });
+
+      btnConvertAnother.addEventListener('click', resetUI);
+
+      function resetUI() {
+        if (activeRecorder && activeRecorder.state === 'recording') {
+          activeRecorder.stop();
+        }
+        if (sourceVideo) {
+          sourceVideo.pause();
+          sourceVideo.removeAttribute('src');
+          sourceVideo.load();
+        }
+        selectedFile = null;
+        videoUpload.value = '';
+        fileDetails.classList.add('hidden');
+        progressArea.classList.add('hidden');
+        outputArea.classList.add('hidden');
+        uploadArea.classList.remove('hidden');
+        progressBar.style.width = '0%';
+        progressPct.textContent = '0%';
+      }
+    });
+  </script>
 </body>
 
 </html>

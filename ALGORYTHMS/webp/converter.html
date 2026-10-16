@@ -3,9 +3,9 @@
 
 <head>
   <title>zinco - WebP Converter</title>
-  <meta name="description" content="Explore Converter, a comprehensive digital experiments project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta name="description" content="Convert your PNG, JPEG, GIF, and other images to modern lightweight WebP format directly in your browser. Fast, private, client-side conversion by Zinco Studio." />
   <meta property="og:title" content="zinco - WebP Converter" />
-  <meta property="og:description" content="Explore Converter, a comprehensive digital experiments project showcasing strategic visual communication, creative direction, and tailored design solutions by Zinco Studio." />
+  <meta property="og:description" content="Convert your PNG, JPEG, GIF, and other images to modern lightweight WebP format directly in your browser. Fast, private, client-side conversion by Zinco Studio." />
   <meta property="og:image" content="https://zinco.cc/imghome/logo_zinco.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="zinco.cc" />
@@ -18,16 +18,13 @@
   <meta name="robots" content="index, follow, noai, noimageai" />
   <meta name="tdm-reservation" content="1" />
   <link rel="canonical" href="https://zinco.cc/ALGORYTHMS/webp/converter.html" />
-  
 
   <link rel="stylesheet" href="../../index.css" />
-  <link rel="stylesheet" href="converter.css" />
+  <link rel="stylesheet" href="converter.css?v=2" />
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link rel="stylesheet" href="https://use.typekit.net/rra4uka.css">
   <script src="../../components.js" defer></script>
 </head>
@@ -35,7 +32,7 @@
 <body>
   <div class="site-main-content">
     <div id="preloader">
-      <a href="../../index.html" id="logo"><img src="../../imghome/logo_zinco.svg" alt="Zinco Logo"></a>
+      <a href="../../index.html" id="logo"><span class="nav-brand-text preloader-brand-text">zinco</span></a>
       <div class="loader-bar-container">
         <div class="loader-bar"></div>
       </div>
@@ -46,19 +43,51 @@
     <zinco-header base-path="../../"></zinco-header>
 
     <main id="converter-container">
-      <div class="shapes"></div>
       <div class="converter-header">
+        <span class="converter-eyebrow">tools &amp; algorithms</span>
         <h1>WebP Converter</h1>
-        <p>Drag your images below or click to select them. They will be automatically converted to .webp format.</p>
+        <p>Convert your image files to high-performance .webp directly in your browser. 100% private, client-side processing with zero server uploads.</p>
       </div>
 
-      <div id="upload-area" class="upload-area">
-        <input type="file" id="file-input" multiple accept="image/png, image/jpeg" style="display: none;">
-        <p>Drag images here or <strong>click to browse</strong></p>
+      <!-- Controls & Settings Bar -->
+      <div class="converter-toolbar">
+        <div class="toolbar-group">
+          <label for="quality-select" class="toolbar-label">Quality:</label>
+          <select id="quality-select" class="toolbar-select cursor-target">
+            <option value="0.92">Maximum (92%)</option>
+            <option value="0.85" selected>High (85% — recommended)</option>
+            <option value="0.75">Balanced (75%)</option>
+            <option value="0.60">Compact (60%)</option>
+          </select>
+        </div>
+
+        <div class="toolbar-actions" id="batch-actions" style="display: none;">
+          <button type="button" id="btn-download-all" class="toolbar-btn cursor-target">
+            <span>Download all (.webp)</span>
+            <svg class="custom-arrow-icon" viewBox="0 0 10 10" width="10" height="10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="1.5" y1="8.5" x2="8.5" y2="1.5"></line><polyline points="3.5 1.5 8.5 1.5 8.5 6.5"></polyline></svg>
+          </button>
+          <button type="button" id="btn-clear-all" class="toolbar-btn toolbar-btn-secondary cursor-target">
+            <span>Clear</span>
+          </button>
+        </div>
       </div>
 
-      <div id="preview-container" class="preview-container">
+      <!-- Dropzone -->
+      <div id="upload-area" class="upload-area cursor-target" role="button" tabindex="0" aria-label="Drop images here or click to select files">
+        <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+        <div class="upload-icon-box">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+        </div>
+        <p class="upload-title">Drop images here or <strong>browse files</strong></p>
+        <span class="upload-hint">Supports PNG, JPG, JPEG, GIF, BMP, AVIF, TIFF, SVG</span>
       </div>
+
+      <!-- Results Grid -->
+      <div id="preview-container" class="preview-container"></div>
     </main>
 
   </div><!-- /site-main-content -->
@@ -67,7 +96,7 @@
 
   <script src="../../projects-data.js?v=21"></script>
   <script src="../../index.js"></script>
-  <script src="converter.js"></script>
+  <script src="converter.js?v=2"></script>
 </body>
 
 </html>
