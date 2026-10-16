@@ -269,23 +269,24 @@
    * When page is locked: wheel glides the glasses horizontally with immediate response.
    * If user scrolls all the way to the end of the glasses track, it automatically
    * and seamlessly unlocks the vertical scroll into the editorial grid!
+   * Otherwise, it strictly preserves the horizontal lock across all projects.
    */
   const onWheel = (e) => {
     if (isMobile || !isLocked) return;
 
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
 
-    // Check if track is already at or near the end
-    const isAtEnd = (targetX <= -maxTranslateX + 2) && (currentX <= -maxTranslateX + 80);
+    // Check if track is truly at the end (last bottle)
+    const isAtEnd = (targetX <= -maxTranslateX + 2) && (currentX <= -maxTranslateX + 25);
 
     if (isAtEnd && delta > 0) {
-      // User is at the end and continues scrolling forward / down
+      // User is at the very end and continues scrolling forward / down
       e.preventDefault();
       endOverscrollDelta += delta;
       clearTimeout(endOverscrollTimer);
-      endOverscrollTimer = setTimeout(() => { endOverscrollDelta = 0; }, 350);
+      endOverscrollTimer = setTimeout(() => { endOverscrollDelta = 0; }, 300);
 
-      if (endOverscrollDelta >= 25) {
+      if (endOverscrollDelta >= 20) {
         unlock({ scrollToGrid: true });
         return;
       }
@@ -295,11 +296,6 @@
     targetX -= delta * 1.1;
     targetX = clamp(targetX, -maxTranslateX, 0);
     startUpdateLoop();
-
-    // Fast flick that pegs the end with high forward momentum
-    if (targetX <= -maxTranslateX && delta > 35 && currentX <= -maxTranslateX + 120) {
-      unlock({ scrollToGrid: true });
-    }
   };
 
   /**
@@ -427,6 +423,8 @@
       const target = e.target;
       if (!target || !target.closest || !target.closest('.glass-item')) {
         deactivateItem();
+      } else {
+        positionLabel(e.clientX, e.clientY);
       }
     }, { passive: true });
 
@@ -907,6 +905,8 @@
     window.addEventListener('load', () => {
       measure();
       updateNavbarScroll();
+    });
+
     // If arriving directly with a hash anchor like #contact-footer, unlock immediately
     if (window.location.hash && window.location.hash !== '#' && window.location.hash !== '#main') {
       setTimeout(() => {
@@ -931,7 +931,7 @@
     isInitialized = false;
   };
 
-  window.GlassShowcase = { init, destroy, measure, unlock };
+  window.GlassShowcase = { init, destroy, measure, unlock, isLocked: () => isLocked };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

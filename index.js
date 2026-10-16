@@ -221,63 +221,78 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("click", handleClickOutside);
   }
 
-  // --- GESTIONE SMOOTH SCROLL ANCORE ---
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (!targetId || !targetId.startsWith('#') || targetId === '#') return;
+  // --- GESTIONE SMOOTH SCROLL ANCORE (Delegata su document) ---
+  document.addEventListener('click', function (e) {
+    const anchor = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!anchor) return;
+    const targetId = anchor.getAttribute('href');
+    if (!targetId || !targetId.startsWith('#') || targetId === '#') return;
 
-      try {
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          e.preventDefault();
+    try {
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
 
-          // Se siamo in modalità locked sulla homepage e vogliamo raggiungere un'ancora (es. #contact-footer)
-          if (document.body.classList.contains('homepage-locked') && window.GlassShowcase) {
+        // Se siamo in modalità locked sulla homepage e vogliamo raggiungere un'ancora (es. #contact-footer)
+        const isCurrentlyLocked = document.body.classList.contains('homepage-locked') || document.documentElement.classList.contains('homepage-locked');
+        if (isCurrentlyLocked) {
+          if (window.GlassShowcase && typeof window.GlassShowcase.unlock === 'function') {
             window.GlassShowcase.unlock({ scrollToGrid: false });
-            if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
-            if (window.lenis && typeof window.lenis.resize === 'function') window.lenis.resize();
+          } else {
+            document.documentElement.classList.remove('homepage-locked');
+            document.body.classList.remove('homepage-locked');
           }
-
-          // Chiudi il menu a tendina se aperto
-          if (dropdownMenu && dropdownMenu.classList.contains("open")) {
-            dropdownMenu.classList.remove("open");
-            const navTop = document.getElementById("navTop");
-            if (navTop) navTop.classList.remove("open");
-            if (moreButton) {
-              moreButton.textContent = "menu";
-              moreButton.classList.remove("open");
-            }
-          }
-
-          // Fallback/Delay: Attendiamo chiusura menu
-          setTimeout(() => {
-            if (targetId === '#contact-footer') {
-              // Il footer è position:fixed — scrolliamo al massimo scroll possibile,
-              // che corrisponde esattamente alla cima del footer rivelato.
-              if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
-              const maxScroll = Math.max(
-                (document.documentElement.scrollHeight || 0) - document.documentElement.clientHeight,
-                (document.body.scrollHeight || 0) - window.innerHeight
-              );
-              if (window.lenis) {
-                window.lenis.scrollTo(maxScroll, { duration: 1.2, force: true });
-              } else {
-                window.scrollTo({ top: maxScroll, behavior: 'smooth' });
-              }
-            } else {
-              if (window.lenis) {
-                window.lenis.scrollTo(targetElement, { offset: 0, duration: 1.2, force: true });
-              } else {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-              }
-            }
-          }, 150);
+          if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
+          if (window.lenis && typeof window.lenis.resize === 'function') window.lenis.resize();
         }
-      } catch (err) {
-        // Ignora errori di selettore se targetId non è valido
+
+        // Chiudi il menu a tendina se aperto
+        const currentDropdown = document.getElementById("dropdownMenu");
+        const currentNavTop = document.getElementById("navTop");
+        const currentMoreBtn = document.getElementById("btnTopRight");
+        if (currentDropdown && currentDropdown.classList.contains("open")) {
+          currentDropdown.classList.remove("open");
+          if (currentNavTop) currentNavTop.classList.remove("open");
+          if (currentMoreBtn) {
+            currentMoreBtn.textContent = "menu";
+            currentMoreBtn.classList.remove("open");
+          }
+        }
+
+        // Calcola target di scroll ed esegui smooth scroll
+        const executeScroll = () => {
+          if (typeof window.updateFooterMargin === 'function') window.updateFooterMargin();
+          if (window.lenis && typeof window.lenis.resize === 'function') window.lenis.resize();
+
+          if (targetId === '#contact-footer') {
+            const footerTop = targetElement.getBoundingClientRect().top + (window.pageYOffset || window.scrollY || 0);
+            const maxScroll = Math.max(
+              (document.documentElement.scrollHeight || 0) - document.documentElement.clientHeight,
+              (document.body.scrollHeight || 0) - window.innerHeight
+            );
+            const destScroll = Math.max(footerTop, maxScroll);
+            if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+              window.lenis.scrollTo(destScroll, { duration: 1.2, force: true });
+            } else {
+              window.scrollTo({ top: destScroll, behavior: 'smooth' });
+            }
+          } else {
+            if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+              window.lenis.scrollTo(targetElement, { offset: 0, duration: 1.2, force: true });
+            } else {
+              targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        };
+
+        // Primo scroll dopo un breve delay per consentire la chiusura menu e il reflow
+        setTimeout(executeScroll, 60);
+        // Secondo tentativo di sicurezza nel caso di layout complesso
+        setTimeout(executeScroll, 220);
       }
-    });
+    } catch (err) {
+      // Ignora errori di selettore
+    }
   });
 
   // --- GESTIONE COOKIE BANNER ---
