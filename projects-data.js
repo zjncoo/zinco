@@ -202,45 +202,38 @@ const allProjectsData = [
     indexNum: "No.026"
   },
   {
-    title: "Web Design Exam",
-    link: "UNI YEAR 1/web_design/SITO ESAME/PAGES/home.html",
-    category: "uni year 1",
-    image: "imghome/glasses/fotoorologi1.webp",
-    indexNum: "No.027"
-  },
-  {
     title: "contrast_checker",
     link: "ALGORYTHMS/contrast-checker.html",
     category: "algorithms",
     image: "imghome/glasses/squares.webp",
-    indexNum: "No.028"
+    indexNum: "No.027"
   },
   {
     title: "WebP Converter",
     link: "ALGORYTHMS/webp/converter.html",
     category: "algorithms",
     image: "imghome/glasses/folder.webp",
-    indexNum: "No.029"
+    indexNum: "No.028"
   },
   {
     title: "Card Generator",
     link: "ALGORYTHMS/cardgenerator.html",
     category: "algorithms",
     image: "imghome/glasses/linee.webp",
-    indexNum: "No.030"
+    indexNum: "No.029"
   },
   {
     title: "WebM Converter",
     link: "ALGORYTHMS/webm.html",
     category: "algorithms",
     image: "imghome/glasses/spirali.webp",
-    indexNum: "No.031"
+    indexNum: "No.030"
   },
   {
     title: "Video Compressor",
     link: "ALGORYTHMS/compressor.html",
     category: "algorithms",
     image: "imghome/glasses/razzino.webp",
-    indexNum: "No.032"
+    indexNum: "No.031"
   }
 ];
