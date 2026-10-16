@@ -17,53 +17,33 @@
   },
   {
     "type": "text",
-    "label": "category",
-    "content": "corporate branding | design strategy | video animation | service design"
-  },
-  {
-    "type": "text",
-    "label": "context",
-    "content": "academic project — Politecnico di Milano, corporate identity course"
-  },
-  {
-    "type": "text",
-    "label": "year",
-    "content": "2025"
-  },
-  {
-    "type": "text",
-    "label": "role",
-    "content": "website, sticker and tote bag design and realization, mockup photographer"
-  },
-  {
-    "type": "text",
-    "label": "tone of voice",
-    "content": "institutional, understanding"
-  },
-  {
-    "type": "text",
-    "label": "target",
-    "content": "post-graduate students in psychology, communication, sanitary professions, urban planning, architecture"
-  },
-  {
-    "type": "text",
     "label": "team",
     "content": "gaia becchi, aurelia la carrubba, martina santolini, lucrezia stella, francesco zanchetta"
   },
   {
     "type": "text",
-    "label": "payoff",
-    "content": "Make Future a shared Place"
+    "label": "date",
+    "content": "II semester, second year, 2025"
   },
   {
     "type": "text",
-    "label": "values",
-    "content": "sustainability, innovation, transparency"
+    "label": "context",
+    "content": "academic project (Politecnico di Milano) course in corporate branding"
   },
   {
     "type": "text",
-    "label": "brand essence",
-    "content": "We shape shared futures by grounding knowledge in place, people, and purpose."
+    "label": "category",
+    "content": "corporate branding | design strategy | video animation | service design"
+  },
+  {
+    "type": "text",
+    "label": "role",
+    "content": "website, sticker, tote bag design and realization, mockup photographer"
+  },
+  {
+    "type": "text",
+    "label": "tools",
+    "content": "adobe illustrator, adobe photoshop, adobe premiere pro, adobe after effects, figma"
   },
   {
     "type": "text",
@@ -77,8 +57,33 @@
   },
   {
     "type": "text",
+    "label": "values",
+    "content": "solidarity, authenticity, belonging, concreteness"
+  },
+  {
+    "type": "text",
+    "label": "brand essence",
+    "content": "We shape shared futures by grounding knowledge in place, people, and purpose."
+  },
+  {
+    "type": "text",
+    "label": "tone of voice",
+    "content": "institutional, understanding"
+  },
+  {
+    "type": "text",
     "label": "target",
-    "content": "students and urban researchers"
+    "content": "post-graduate students in psychology, communication, healthcare professions, urban planning, architecture"
+  },
+  {
+    "type": "text",
+    "label": "deliverables",
+    "content": "brandmark, brand book, brand video, communication touchpoints (digital & physical), website, stickers, keychain, welcome tote bag"
+  },
+  {
+    "type": "text",
+    "label": "payoff",
+    "content": "Make Future a shared Place"
   },
   {
     "type": "text",

@@ -12,48 +12,73 @@
   },
   {
     "type": "text",
-    "label": "category",
-    "content": "service & social identity"
+    "label": "team",
+    "content": "francesco zanchetta"
+  },
+  {
+    "type": "text",
+    "label": "date",
+    "content": "II semester, second year, 2025"
   },
   {
     "type": "text",
     "label": "context",
-    "content": "social / territory — Mozzate (Como)"
+    "content": "professional, social project"
   },
   {
     "type": "text",
-    "label": "year",
-    "content": "2025"
+    "label": "category",
+    "content": "corporate identity | social identity | service design"
   },
   {
     "type": "text",
     "label": "role",
-    "content": "brand identity design, custom font design, communication strategy"
+    "content": "solo designer & executor"
+  },
+  {
+    "type": "text",
+    "label": "tools",
+    "content": "adobe illustrator, adobe photoshop, adobe premiere pro, figma"
+  },
+  {
+    "type": "text",
+    "label": "mission",
+    "content": "to provide a service that accompanies children to elementary school every morning in a healthy and environmentally sustainable way."
+  },
+  {
+    "type": "text",
+    "label": "vision",
+    "content": "to aspire to green mobility and a world where the sense of community keeps people together."
+  },
+  {
+    "type": "text",
+    "label": "values",
+    "content": "community, safety, sustainability"
+  },
+  {
+    "type": "text",
+    "label": "brand essence",
+    "content": "together, at walking pace"
+  },
+  {
+    "type": "text",
+    "label": "tone of voice",
+    "content": "essential and sincere, tuned for a young audience."
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "primary school children, families"
+  },
+  {
+    "type": "text",
+    "label": "deliverables",
+    "content": "brandmark & variations, brand identity & strategy, ooh communication campaign (digital & physical), signage"
   },
   {
     "type": "text",
     "label": "description",
     "content": "service design and social identity project developed for Piedibus Mozzate, the service that accompanies children to the elementary school in the municipality of Mozzate (Como), Italy, every morning. the intervention aimed at creating a distinctive visual system, focused on the essential. characterized by a vibrant color palette and a graphic treatment that recalls drawing, the identity fully reflects its main target: children and local realities. the work stands out for the use of a custom font, Piedibus Mozzate, and for an integrated communication strategy that includes roadside signage and social media campaigns."
-  },
-  {
-    "type": "text",
-    "label": "values",
-    "content": "safety, community, sustainability"
-  },
-  {
-    "type": "text",
-    "label": "target",
-    "content": "families, children, primary schools"
-  },
-  {
-    "type": "text",
-    "label": "payoff",
-    "content": "Together, step by step."
-  },
-  {
-    "type": "text",
-    "label": "mission",
-    "content": "To promote safe and sustainable mobility for children on their way to school, strengthening the sense of community."
   },
   {
     "type": "header",

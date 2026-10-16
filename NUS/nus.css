@@ -241,28 +241,42 @@ main#sezione-progetto {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid black;
+  border-top: 1.5px solid black;
   text-align: left;
+}
+
+.specs-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 6px 0;
+  border-bottom: 1.5px solid black;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: black;
 }
 
 .specs-row {
   display: grid;
-  grid-template-columns: 95px 1fr;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  grid-template-columns: 105px 1fr;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   line-height: 1.35;
   text-align: left;
 }
 
 .specs-label {
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
+  font-size: 0.78rem;
   color: black;
-  opacity: 0.55;
   text-align: left;
 }
 

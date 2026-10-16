@@ -28,33 +28,68 @@
   },
   {
     "type": "text",
+    "label": "team",
+    "content": "francesco zanchetta"
+  },
+  {
+    "type": "text",
+    "label": "date",
+    "content": "february 2025 - march 2026"
+  },
+  {
+    "type": "text",
+    "label": "context",
+    "content": "professional project"
+  },
+  {
+    "type": "text",
+    "label": "category",
+    "content": "corporate branding | web design | strategy"
+  },
+  {
+    "type": "text",
+    "label": "role",
+    "content": "solo designer, strategist & executor"
+  },
+  {
+    "type": "text",
+    "label": "tools",
+    "content": "adobe illustrator, adobe photoshop, figma, wordpress.com"
+  },
+  {
+    "type": "text",
+    "label": "mission",
+    "content": "to deliver construction works that combine functionality, aesthetics and safety."
+  },
+  {
+    "type": "text",
+    "label": "vision",
+    "content": "to become a leader in the sector by combining traditional construction solutions with technological advance and environmental sustainability."
+  },
+  {
+    "type": "text",
+    "label": "values",
+    "content": "solidity, innovation, transparency"
+  },
+  {
+    "type": "text",
+    "label": "target",
+    "content": "clients interested in renovating, building, selling and buying a home."
+  },
+  {
+    "type": "text",
+    "label": "deliverables",
+    "content": "dual-brand identity system, retail signage, fleet livery, 2 corporate websites"
+  },
+  {
+    "type": "text",
     "label": "payoff",
     "content": "we build value, building by building."
   },
   {
     "type": "text",
-    "label": "values",
-    "content": "solidity, quality, innovation, transparency"
-  },
-  {
-    "type": "text",
-    "label": "mission",
-    "content": "to deliver construction works that combine functionality, aesthetics, and safety, ensuring maximum client satisfaction through the use of excellent materials and efficient processes."
-  },
-  {
-    "type": "text",
-    "label": "vision",
-    "content": "to become a point of reference in the sector for the ability to integrate traditional construction solutions with technological innovation and environmental sustainability."
-  },
-  {
-    "type": "text",
     "label": "brand essence",
     "content": "solidity and design"
-  },
-  {
-    "type": "text",
-    "label": "brand architecture",
-    "content": "monolithic brand"
   },
   {
     "type": "header",

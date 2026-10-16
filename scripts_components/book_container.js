@@ -55,27 +55,112 @@ document.addEventListener('DOMContentLoaded', () => {
       stickyCol.appendChild(photoBox);
     }
 
-    // Tabella Specifiche / Metadati
+    // Tabella Specifiche / Metadati (Replica esatta della tabella infogrid del Portfolio PDF)
+    const publicationsMetadata = {
+      zoom: [
+        { label: 'team', value: 'giulia casu, alessandro levi, mina niitsu, sofia raimondo, francesco zanchetta' },
+        { label: 'date', value: 'II semester, first year, 2024' },
+        { label: 'context', value: 'academic project (Politecnico di Milano) project fundamentals lab' },
+        { label: 'category', value: 'editorial design | illustration | branding' },
+        { label: 'role', value: 'index, ad, recipe pages editor' },
+        { label: 'tools', value: 'adobe illustrator, adobe photoshop, adobe premiere pro, adobe after effects, figma' },
+        { label: 'target', value: 'young audience aged 7-12' },
+        { label: 'deliverables', value: 'magazine, 3 drawn - animation videos, book stop-motion video' },
+        { label: 'dimensions', value: '19 × 27 cm' },
+        { label: 'paper stock', value: 'cotton ivory 240gsm / arena ivory rough 120gsm' },
+        { label: 'binding', value: 'saddle stitch' },
+        { label: 'fonts', value: 'Tomarik Introvert' }
+      ],
+      roxy_brandbook: [
+        { label: 'team', value: 'silvia andreoletti, gaia becchi, matteo brinzo, sofia raimondo, francesco zanchetta' },
+        { label: 'date', value: 'II semester, second year, 2025' },
+        { label: 'context', value: 'academic project (Politecnico di Milano) meta-project course' },
+        { label: 'category', value: 'strategic design | editorial design' },
+        { label: 'role', value: 'brandbook editor, concept ideator' },
+        { label: 'tools', value: 'adobe illustrator, adobe photoshop, adobe premiere pro, figma.' },
+        { label: 'concept', value: 'fierce, audacious and irreverent rebranding as an exclusive event platform' },
+        { label: 'values', value: 'irreverence, audacity, exclusivity' },
+        { label: 'brand essence', value: 'irreverent by nature' },
+        { label: 'tone of voice', value: 'irreverent, direct, snob at times' },
+        { label: 'target', value: 'exclusive clientele who seeks unique experiences.' },
+        { label: 'deliverables', value: 'brand book, brand video, communication campaign (digital & physical), event activation plan & organisation, pitch slides' }
+      ],
+      nus_brandbook: [
+        { label: 'team', value: 'gaia becchi, aurelia la carrubba, martina santolini, lucrezia stella, francesco zanchetta' },
+        { label: 'date', value: 'II semester, second year, 2025' },
+        { label: 'context', value: 'academic project (Politecnico di Milano) course in corporate branding' },
+        { label: 'category', value: 'corporate branding | editorial design | design strategy' },
+        { label: 'role', value: 'website, sticker, tote bag design and realization, mockup photographer' },
+        { label: 'tools', value: 'adobe illustrator, adobe photoshop, adobe premiere pro, adobe after effects, figma' },
+        { label: 'mission', value: 'To make practical and theoretical tools available to people, enabling them to understand and value the communities in which they will operate.' },
+        { label: 'vision', value: 'We believe in a society that cooperates in a synergic way, in which everyone collaborates actively for common well-being.' },
+        { label: 'values', value: 'solidarity, authenticity, belonging, concreteness' },
+        { label: 'brand essence', value: 'We shape shared futures by grounding knowledge in place, people, and purpose.' },
+        { label: 'tone of voice', value: 'institutional, understanding' },
+        { label: 'target', value: 'post-graduate students in psychology, communication, healthcare professions, urban planning, architecture' },
+        { label: 'deliverables', value: 'brandmark, brand book, brand video, communication touchpoints (digital & physical), website, stickers, keychain, welcome tote bag' }
+      ],
+      femvertising: [
+        { label: 'date', value: '2024' },
+        { label: 'context', value: 'academic research & editorial project' },
+        { label: 'category', value: 'publication & editorial design' },
+        { label: 'deliverables', value: 'print publication, digital flipbook' }
+      ],
+      fomo: [
+        { label: 'date', value: '2024' },
+        { label: 'context', value: 'academic research project' },
+        { label: 'category', value: 'publication & editorial design' },
+        { label: 'deliverables', value: 'editorial book, digital archive' }
+      ],
+      fotografia: [
+        { label: 'date', value: '2024' },
+        { label: 'context', value: 'visual research & editorial design' },
+        { label: 'category', value: 'publication & photographic essay' },
+        { label: 'deliverables', value: 'photo booklet, visual alphabet book' }
+      ],
+      designer: [
+        { label: 'date', value: '2024' },
+        { label: 'context', value: 'design history & theory' },
+        { label: 'category', value: 'editorial design & essay' },
+        { label: 'deliverables', value: 'editorial publication, essay booklet' }
+      ]
+    };
+
+    const curPath = window.location.pathname.toLowerCase();
+    let activeSpecs = [];
+    if (curPath.includes('zoom')) activeSpecs = publicationsMetadata.zoom;
+    else if (curPath.includes('roxy')) activeSpecs = publicationsMetadata.roxy_brandbook;
+    else if (curPath.includes('nus')) activeSpecs = publicationsMetadata.nus_brandbook;
+    else if (curPath.includes('femvertising')) activeSpecs = publicationsMetadata.femvertising;
+    else if (curPath.includes('fomo')) activeSpecs = publicationsMetadata.fomo;
+    else if (curPath.includes('foto')) activeSpecs = publicationsMetadata.fotografia;
+    else if (curPath.includes('designer') || curPath.includes('history')) activeSpecs = publicationsMetadata.designer;
+    else {
+      activeSpecs = [
+        { label: 'date', value: '2024-2025' },
+        { label: 'category', value: 'publication & editorial' },
+        { label: 'format', value: layoutMode === 'single' ? 'single page' : 'spread flipbook' },
+        { label: 'deliverables', value: 'print book & digital archive' }
+      ];
+    }
+
     const specsTable = document.createElement('div');
     specsTable.className = 'editorial-specs-table';
-    specsTable.innerHTML = `
-      <div class="specs-row">
-        <span class="specs-label">PROJECT</span>
-        <span class="specs-value">${projectTitle}</span>
-      </div>
-      <div class="specs-row">
-        <span class="specs-label">DISCIPLINE</span>
-        <span class="specs-value">Publication &amp; Editorial</span>
-      </div>
-      <div class="specs-row">
-        <span class="specs-label">FORMAT</span>
-        <span class="specs-value">${layoutMode === 'single' ? 'Single Page' : 'Spread Flipbook'}</span>
-      </div>
-      <div class="specs-row">
-        <span class="specs-label">ARCHIVE</span>
-        <span class="specs-value">Print Book &amp; Digital Archive</span>
-      </div>
-    `;
+
+    const tableHeader = document.createElement('div');
+    tableHeader.className = 'specs-table-header';
+    tableHeader.innerHTML = `<span>infogrid</span>`;
+    specsTable.appendChild(tableHeader);
+
+    activeSpecs.forEach(spec => {
+      const row = document.createElement('div');
+      row.className = 'specs-row';
+      row.innerHTML = `
+        <span class="specs-label">${spec.label}</span>
+        <span class="specs-value">${spec.value}</span>
+      `;
+      specsTable.appendChild(row);
+    });
     stickyCol.appendChild(specsTable);
 
     // Gruppo Bottoni Azione

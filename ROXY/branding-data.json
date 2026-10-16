@@ -12,18 +12,23 @@
   },
   {
     "type": "text",
-    "label": "category",
-    "content": "strategic design"
+    "label": "team",
+    "content": "silvia andreoletti, gaia becchi, matteo brinzo, sofia raimondo, francesco zanchetta"
+  },
+  {
+    "type": "text",
+    "label": "date",
+    "content": "II semester, second year, 2025"
   },
   {
     "type": "text",
     "label": "context",
-    "content": "academic project — Politecnico di Milano, meta-project course"
+    "content": "academic project (Politecnico di Milano) meta-project course"
   },
   {
     "type": "text",
-    "label": "year",
-    "content": "2024"
+    "label": "category",
+    "content": "strategic design"
   },
   {
     "type": "text",
@@ -32,13 +37,13 @@
   },
   {
     "type": "text",
-    "label": "concept",
-    "content": "fierce, audacious and irreverent rebranding as an exclusive event platform"
+    "label": "tools",
+    "content": "adobe illustrator, adobe photoshop, adobe premiere pro, figma."
   },
   {
     "type": "text",
-    "label": "description",
-    "content": "strategic meta-project centered on the heritage of a historic tobacco brand. the rebranding explores the values of audacity and irreverence, positioning ROXY as a cultural icon for a bold, contemporary audience, right before this trend took place in the communication world. the strategy balances historical roots with a provocative visual language, documented through a comprehensive brandbook. the climax of the project is ROXYGEN, an activation-event aimed at the relaunch of the brand, 40 years after its vanishing, as an exclusive event-based community platform."
+    "label": "concept",
+    "content": "fierce, audacious and irreverent rebranding as an exclusive event platform"
   },
   {
     "type": "text",
@@ -58,7 +63,7 @@
   {
     "type": "text",
     "label": "target",
-    "content": "exclusive clientele who seeks unique experiences"
+    "content": "exclusive clientele who seeks unique experiences."
   },
   {
     "type": "text",
@@ -67,8 +72,8 @@
   },
   {
     "type": "text",
-    "label": "team",
-    "content": "silvia andreoletti, gaia becchi, matteo brinzo, sofia raimondo, francesco zanchetta"
+    "label": "description",
+    "content": "strategic meta-project centered on the heritage of a historic tobacco brand. the rebranding explores the values of audacity and irreverence, positioning ROXY as a cultural icon for a bold, contemporary audience, right before this trend took place in the communication world. the strategy balances historical roots with a provocative visual language, documented through a comprehensive brandbook. the climax of the project is ROXYGEN, an activation-event aimed at the relaunch of the brand, 40 years after its vanishing, as an exclusive event-based community platform."
   },
   {
     "type": "text",

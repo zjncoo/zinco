@@ -17,18 +17,18 @@
   },
   {
     "type": "text",
-    "label": "venue",
-    "content": "Triennale di Milano"
+    "label": "team",
+    "content": "camilla costato, roni gold, hila shaki, camilla vicario, francesco zanchetta"
   },
   {
     "type": "text",
-    "label": "year",
-    "content": "2026"
+    "label": "date",
+    "content": "II semester, third year, may-june 2026"
   },
   {
     "type": "text",
     "label": "context",
-    "content": "academic project — Politecnico di Milano, temporary exhibition design course"
+    "content": "academic project (Politecnico di Milano) course in temporary exhibition design"
   },
   {
     "type": "text",
@@ -38,7 +38,17 @@
   {
     "type": "text",
     "label": "role",
-    "content": "solo OOH communication designer, pitch slides graphics ideator"
+    "content": "solo ooh communication designer, pitch slides graphics ideator."
+  },
+  {
+    "type": "text",
+    "label": "tools",
+    "content": "adobe illustrator, adobe photoshop, figma, autocad, rhinoceros"
+  },
+  {
+    "type": "text",
+    "label": "concept",
+    "content": "while maintaining marten baas’ personality, the exhibition mocks the cliché visitor of MDW."
   },
   {
     "type": "text",
@@ -48,12 +58,12 @@
   {
     "type": "text",
     "label": "deliverables",
-    "content": "exhibition renders, OOH communication, exhibits catalogue, pitch slides"
+    "content": "exhibition renders, ooh communication, exhibits catalogue, pitch slides"
   },
   {
     "type": "text",
-    "label": "team",
-    "content": "camilla costato, roni gold, hila shaki, camilla vicario, francesco zanchetta"
+    "label": "venue",
+    "content": "Triennale di Milano"
   },
   {
     "type": "text",

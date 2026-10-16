@@ -292,15 +292,34 @@ function renderAppShowcase(data) {
       stickyCol.appendChild(photoBox);
     }
 
-    // 5B. Specs Table
+    // 5B. Specs Table (Replica esatta della tabella infogrid del Portfolio PDF)
     if (specsItem && Array.isArray(specsItem.items) && specsItem.items.length > 0) {
       const specsTable = document.createElement('div');
       specsTable.className = 'editorial-specs-table';
+
+      const tableHeader = document.createElement('div');
+      tableHeader.className = 'specs-table-header';
+      tableHeader.innerHTML = `<span>infogrid</span>`;
+      specsTable.appendChild(tableHeader);
+
+      if (metaItem.year) {
+        const dateRow = document.createElement('div');
+        dateRow.className = 'specs-row';
+        dateRow.innerHTML = `<span class="specs-label">date</span><span class="specs-value">${metaItem.year}</span>`;
+        specsTable.appendChild(dateRow);
+      }
+      if (metaItem.badge) {
+        const catRow = document.createElement('div');
+        catRow.className = 'specs-row';
+        catRow.innerHTML = `<span class="specs-label">category</span><span class="specs-value">${metaItem.badge.toLowerCase()}</span>`;
+        specsTable.appendChild(catRow);
+      }
+
       specsItem.items.forEach(spec => {
         const row = document.createElement('div');
         row.className = 'specs-row';
         row.innerHTML = `
-          <span class="specs-label">${spec.label}</span>
+          <span class="specs-label">${spec.label.toLowerCase()}</span>
           <span class="specs-value">${spec.value}</span>
         `;
         specsTable.appendChild(row);

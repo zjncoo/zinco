@@ -131,22 +131,41 @@ document.addEventListener('DOMContentLoaded', () => {
         stickyCol.appendChild(photoBox);
       }
 
-      // 2. Tabella Info / Specs (allineata a sinistra con linee sottili)
+      // 2. Tabella Info / Specs (allineata a sinistra con linee sottili — Replica esatta Infogrid PDF)
       const specsTable = document.createElement('div');
       specsTable.className = 'editorial-specs-table';
 
-      const specsKeys = [
-        { label: 'Category', keys: ['category', 'discipline', 'services'] },
-        { label: 'Year', keys: ['year', 'date'] },
-        { label: 'Context', keys: ['context', 'course', 'client'] },
-        { label: 'Role', keys: ['role', 'deliverables'] },
-        { label: 'Team', keys: ['team', 'collaborators'] },
-        { label: 'Payoff', keys: ['payoff', 'tagline'] },
-        { label: 'Essence', keys: ['brand essence', 'mission', 'positioning'] }
+      const tableHeader = document.createElement('div');
+      tableHeader.className = 'specs-table-header';
+      tableHeader.innerHTML = `<span>infogrid</span>`;
+      specsTable.appendChild(tableHeader);
+
+      const canonicalSpecs = [
+        { label: 'team', keys: ['team', 'collaborators'] },
+        { label: 'date', keys: ['date', 'year'] },
+        { label: 'context', keys: ['context', 'course', 'client', 'typology'] },
+        { label: 'category', keys: ['category', 'discipline', 'services'] },
+        { label: 'role', keys: ['role'] },
+        { label: 'tools', keys: ['tools', 'software', 'stack'] },
+        { label: 'languages', keys: ['languages'] },
+        { label: 'concept', keys: ['concept'] },
+        { label: 'mission', keys: ['mission'] },
+        { label: 'vision', keys: ['vision'] },
+        { label: 'values', keys: ['values'] },
+        { label: 'brand essence', keys: ['brand essence', 'essence'] },
+        { label: 'tone of voice', keys: ['tone of voice'] },
+        { label: 'target', keys: ['target'] },
+        { label: 'deliverables', keys: ['deliverables'] },
+        { label: 'dimensions', keys: ['dimensions'] },
+        { label: 'paper stock', keys: ['paper stock'] },
+        { label: 'binding', keys: ['binding'] },
+        { label: 'fonts', keys: ['fonts', 'typeface'] },
+        { label: 'venue', keys: ['venue'] },
+        { label: 'payoff', keys: ['payoff', 'tagline'] }
       ];
 
       let specsCount = 0;
-      specsKeys.forEach(spec => {
+      canonicalSpecs.forEach(spec => {
         const item = data.find(d => d.type === 'text' && spec.keys.includes((d.label || '').toLowerCase().trim()));
         if (item && item.content) {
           specsCount++;
