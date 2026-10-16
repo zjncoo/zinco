@@ -62,6 +62,11 @@
   },
   {
     "type": "text",
+    "label": "description",
+    "content": "“BAAS IS BACK IN TOWN” is a fictional Milan design week 2027 exhibition held at Triennale, Milan. evolving Maarten Baas’s 2014 critique against hyper-documentation, this installation transforms spectators into the actual exhibits. it exposes a semantic vacuum where the need to post on social media during fuorisalone replaces the willingness to understand the meaning behind. through an exhibition path featuring a carousel, a chandeliers’ hallway, hidden cameras, and mocking actors, visitors unknowingly become part of a live backstage show, which features screens that visually expose the ones who perform this behaviour."
+  },
+  {
+    "type": "text",
     "label": "concept",
     "content": "spectators become the actual exhibits — exposing the semantic vacuum of social media documentation during Fuorisalone"
   },

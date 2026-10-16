@@ -37,13 +37,18 @@
   },
   {
     "type": "text",
+    "label": "description",
+    "content": "strategic meta-project centered on the heritage of a historic tobacco brand. the rebranding explores the values of audacity and irreverence, positioning ROXY as a cultural icon for a bold, contemporary audience, right before this trend took place in the communication world. the strategy balances historical roots with a provocative visual language, documented through a comprehensive brandbook. the climax of the project is ROXYGEN, an activation-event aimed at the relaunch of the brand, 40 years after its vanishing, as an exclusive event-based community platform."
+  },
+  {
+    "type": "text",
     "label": "values",
     "content": "irreverence, audacity, exclusivity"
   },
   {
     "type": "text",
     "label": "brand essence",
-    "content": "F. Zanchetta"
+    "content": "irreverent by nature"
   },
   {
     "type": "text",

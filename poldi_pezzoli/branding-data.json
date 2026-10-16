@@ -41,6 +41,11 @@
   },
   {
     "type": "text",
+    "label": "description",
+    "content": "an immersive visual journey for the Poldi Pezzoli Museum, Milan. born from the design workshop 2026, this video exalts the vast, heterogeneous collection amassed by Gian Giacomo Poldi Pezzoli between 1857 and 1879. the adopted aesthetic is rooted in paper textures and sophisticated mockups, evolving far beyond bland collage into a rigorous, historic-archive dimension. every frame serves to activate the collection’s infinite complexity, orchestrating a bold dialogue between the weight of classical history and a sharp, contemporary visual language, understandable by all generations of audience."
+  },
+  {
+    "type": "text",
     "label": "concept",
     "content": "elaborated archive-like aesthetic giving off the uniqueness and vastity of the CPP collection"
   },
