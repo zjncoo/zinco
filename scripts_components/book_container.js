@@ -32,7 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Prima foto mockup per la colonna sinistra sticky
     const firstImg = mockupImgs.length > 0 ? mockupImgs[0] : null;
-    const repImgSrc = firstImg ? firstImg.src : '';
+    let repImgSrc = firstImg ? firstImg.src : '';
+    const curPath = window.location.pathname.toLowerCase();
+    if (!repImgSrc && (curPath.includes('designer') || curPath.includes('history'))) {
+      repImgSrc = 'img/potter_preview.png';
+    }
     const repImgAlt = firstImg ? (firstImg.alt || projectTitle) : projectTitle;
 
     // Contenitore Layout Editoriale a 2 Colonne
@@ -42,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Colonna Sinistra Sticky (Allineata a Sinistra)
     const stickyCol = document.createElement('div');
     stickyCol.className = 'project-sticky-col';
-    stickyCol.setAttribute('data-lenis-prevent', '');
 
     // Box Foto Rappresentativa
     if (repImgSrc) {
@@ -145,21 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
     }
 
-    const specGroupDefinitions = [
-      {
-        title: '01 / overview',
-        keys: ['date', 'context', 'category', 'team', 'role', 'format']
-      },
-      {
-        title: '02 / strategy & identity',
-        keys: ['concept', 'brand essence', 'mission', 'vision', 'values', 'tone of voice', 'target']
-      },
-      {
-        title: '03 / deliverables & technical',
-        keys: ['deliverables', 'tools', 'dimensions', 'paper stock', 'binding', 'fonts']
-      }
-    ];
-
     const specsTable = document.createElement('div');
     specsTable.className = 'editorial-specs-table';
 
@@ -168,53 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
     tableHeader.innerHTML = `<span>infogrid</span>`;
     specsTable.appendChild(tableHeader);
 
-    const handledSpecLabels = new Set();
-    specGroupDefinitions.forEach(groupDef => {
-      const groupRows = activeSpecs.filter(spec => groupDef.keys.includes((spec.label || '').toLowerCase().trim()));
-      if (groupRows.length > 0) {
-        groupRows.forEach(r => handledSpecLabels.add((r.label || '').toLowerCase().trim()));
-        const groupEl = document.createElement('div');
-        groupEl.className = 'specs-group';
-        const groupHdr = document.createElement('div');
-        groupHdr.className = 'specs-group-header';
-        groupHdr.textContent = groupDef.title;
-        groupEl.appendChild(groupHdr);
-
-        groupRows.forEach(spec => {
-          const row = document.createElement('div');
-          row.className = 'specs-row';
-          row.innerHTML = `
-            <span class="specs-label">${spec.label}</span>
-            <span class="specs-value">${spec.value}</span>
-          `;
-          groupEl.appendChild(row);
-        });
-        specsTable.appendChild(groupEl);
-      }
+    activeSpecs.forEach(spec => {
+      const row = document.createElement('div');
+      row.className = 'specs-row';
+      row.innerHTML = `
+        <span class="specs-label">${spec.label}</span>
+        <span class="specs-value">${spec.value}</span>
+      `;
+      specsTable.appendChild(row);
     });
-
-    const leftoverSpecs = activeSpecs.filter(spec => !handledSpecLabels.has((spec.label || '').toLowerCase().trim()));
-    if (leftoverSpecs.length > 0) {
-      let lastGroup = specsTable.querySelector('.specs-group:last-child');
-      if (!lastGroup) {
-        lastGroup = document.createElement('div');
-        lastGroup.className = 'specs-group';
-        const groupHdr = document.createElement('div');
-        groupHdr.className = 'specs-group-header';
-        groupHdr.textContent = '03 / deliverables & technical';
-        lastGroup.appendChild(groupHdr);
-        specsTable.appendChild(lastGroup);
-      }
-      leftoverSpecs.forEach(spec => {
-        const row = document.createElement('div');
-        row.className = 'specs-row';
-        row.innerHTML = `
-          <span class="specs-label">${spec.label}</span>
-          <span class="specs-value">${spec.value}</span>
-        `;
-        lastGroup.appendChild(row);
-      });
-    }
     stickyCol.appendChild(specsTable);
 
     // Gruppo Bottoni Azione

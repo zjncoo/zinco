@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // ── COLONNA SINISTRA: FISSA / STICKY ──────────────────────────
       const stickyCol = document.createElement('aside');
       stickyCol.className = 'project-sticky-col';
-      stickyCol.setAttribute('data-lenis-prevent', '');
 
       // 1. Foto Rappresentativa (formato editoriale variabile)
       let repImageSrc = '';
@@ -132,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stickyCol.appendChild(photoBox);
       }
 
-      // 2. Tabella Info / Specs (allineata a sinistra, divisa per sezioni tematiche con aria e respiro)
+      // 2. Tabella Info / Specs (allineata a sinistra con linee sottili — Replica esatta Infogrid PDF)
       const specsTable = document.createElement('div');
       specsTable.className = 'editorial-specs-table';
 
@@ -141,115 +140,46 @@ document.addEventListener('DOMContentLoaded', () => {
       tableHeader.innerHTML = `<span>infogrid</span>`;
       specsTable.appendChild(tableHeader);
 
-      const specGroups = [
-        {
-          groupTitle: '01 / overview',
-          specs: [
-            { label: 'date', keys: ['date', 'year'] },
-            { label: 'context', keys: ['context', 'course', 'client', 'typology'] },
-            { label: 'category', keys: ['category', 'discipline', 'services'] },
-            { label: 'team', keys: ['team', 'collaborators'] },
-            { label: 'role', keys: ['role'] },
-            { label: 'venue', keys: ['venue'] }
-          ]
-        },
-        {
-          groupTitle: '02 / strategy & identity',
-          specs: [
-            { label: 'concept', keys: ['concept'] },
-            { label: 'brand essence', keys: ['brand essence', 'essence'] },
-            { label: 'mission', keys: ['mission'] },
-            { label: 'vision', keys: ['vision'] },
-            { label: 'values', keys: ['values'] },
-            { label: 'tone of voice', keys: ['tone of voice'] },
-            { label: 'payoff', keys: ['payoff', 'tagline'] },
-            { label: 'positioning', keys: ['positioning'] },
-            { label: 'target', keys: ['target'] }
-          ]
-        },
-        {
-          groupTitle: '03 / deliverables & technical',
-          specs: [
-            { label: 'deliverables', keys: ['deliverables'] },
-            { label: 'tools', keys: ['tools', 'software', 'stack'] },
-            { label: 'languages', keys: ['languages'] },
-            { label: 'dimensions', keys: ['dimensions'] },
-            { label: 'paper stock', keys: ['paper stock'] },
-            { label: 'binding', keys: ['binding'] },
-            { label: 'fonts', keys: ['fonts', 'typeface', 'typography'] }
-          ]
-        }
+      const canonicalSpecs = [
+        { label: 'team', keys: ['team', 'collaborators'] },
+        { label: 'date', keys: ['date', 'year'] },
+        { label: 'context', keys: ['context', 'course', 'client', 'typology'] },
+        { label: 'category', keys: ['category', 'discipline', 'services'] },
+        { label: 'role', keys: ['role'] },
+        { label: 'tools', keys: ['tools', 'software', 'stack'] },
+        { label: 'languages', keys: ['languages'] },
+        { label: 'concept', keys: ['concept'] },
+        { label: 'mission', keys: ['mission'] },
+        { label: 'vision', keys: ['vision'] },
+        { label: 'values', keys: ['values'] },
+        { label: 'brand essence', keys: ['brand essence', 'essence'] },
+        { label: 'tone of voice', keys: ['tone of voice'] },
+        { label: 'target', keys: ['target'] },
+        { label: 'deliverables', keys: ['deliverables'] },
+        { label: 'dimensions', keys: ['dimensions'] },
+        { label: 'paper stock', keys: ['paper stock'] },
+        { label: 'binding', keys: ['binding'] },
+        { label: 'fonts', keys: ['fonts', 'typeface'] },
+        { label: 'venue', keys: ['venue'] },
+        { label: 'payoff', keys: ['payoff', 'tagline'] }
       ];
 
-      const handledKeys = new Set(['naming', 'description']);
-      let totalSpecsCount = 0;
-
-      specGroups.forEach(group => {
-        const matchingRows = [];
-        group.specs.forEach(spec => {
-          spec.keys.forEach(k => handledKeys.add(k));
-          const item = data.find(d => d.type === 'text' && spec.keys.includes((d.label || '').toLowerCase().trim()));
-          if (item && item.content) {
-            matchingRows.push({ label: spec.label, value: item.content });
-          }
-        });
-
-        if (matchingRows.length > 0) {
-          totalSpecsCount += matchingRows.length;
-          const groupEl = document.createElement('div');
-          groupEl.className = 'specs-group';
-
-          const groupHeader = document.createElement('div');
-          groupHeader.className = 'specs-group-header';
-          groupHeader.textContent = group.groupTitle;
-          groupEl.appendChild(groupHeader);
-
-          matchingRows.forEach(rowItem => {
-            const row = document.createElement('div');
-            row.className = 'specs-row';
-            row.innerHTML = `
-              <span class="specs-label">${rowItem.label}</span>
-              <span class="specs-value">${rowItem.value}</span>
-            `;
-            groupEl.appendChild(row);
-          });
-
-          specsTable.appendChild(groupEl);
-        }
-      });
-
-      // Raccogli eventuali altri campi testuali non previsti nei gruppi
-      const otherTextItems = data.filter(d =>
-        d.type === 'text' &&
-        d.label &&
-        d.content &&
-        !handledKeys.has(d.label.toLowerCase().trim())
-      );
-
-      if (otherTextItems.length > 0) {
-        totalSpecsCount += otherTextItems.length;
-        let lastGroup = specsTable.querySelector('.specs-group:last-child');
-        if (!lastGroup) {
-          lastGroup = document.createElement('div');
-          lastGroup.className = 'specs-group';
-          const header = document.createElement('div');
-          header.className = 'specs-group-header';
-          header.textContent = '03 / deliverables & technical';
-          lastGroup.appendChild(header);
-          specsTable.appendChild(lastGroup);
-        }
-        otherTextItems.forEach(item => {
+      let specsCount = 0;
+      canonicalSpecs.forEach(spec => {
+        const item = data.find(d => d.type === 'text' && spec.keys.includes((d.label || '').toLowerCase().trim()));
+        if (item && item.content) {
+          specsCount++;
           const row = document.createElement('div');
           row.className = 'specs-row';
           row.innerHTML = `
-            <span class="specs-label">${item.label}</span>
+            <span class="specs-label">${spec.label}</span>
             <span class="specs-value">${item.content}</span>
           `;
-          lastGroup.appendChild(row);
-        });
-      }
+          specsTable.appendChild(row);
+        }
+      });
 
-      if (totalSpecsCount > 0) {
+      if (specsCount > 0) {
         stickyCol.appendChild(specsTable);
       }
 

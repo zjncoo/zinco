@@ -306,7 +306,6 @@ function renderAppShowcase(data) {
     // --- Colonna Sinistra (Sticky / Fissa) ---
     const stickyCol = document.createElement('aside');
     stickyCol.className = 'project-sticky-col';
-    stickyCol.setAttribute('data-lenis-prevent', '');
 
     // 5A. Representative image / App icon
     const repImgSrc = metaItem.heroImage || (heroMediaItem && heroMediaItem.src) || (data.find(d => d.type === 'screenshot' && d.src) || {}).src;
@@ -317,7 +316,7 @@ function renderAppShowcase(data) {
       stickyCol.appendChild(photoBox);
     }
 
-    // 5B. Specs Table (Replica esatta della tabella infogrid del Portfolio PDF, divisa in sezioni)
+    // 5B. Specs Table (Replica esatta della tabella infogrid del Portfolio PDF)
     if (specsItem && Array.isArray(specsItem.items) && specsItem.items.length > 0) {
       const specsTable = document.createElement('div');
       specsTable.className = 'editorial-specs-table';
@@ -327,75 +326,28 @@ function renderAppShowcase(data) {
       tableHeader.innerHTML = `<span>infogrid</span>`;
       specsTable.appendChild(tableHeader);
 
-      const allAppSpecs = [];
-      if (metaItem.year) allAppSpecs.push({ label: 'date', value: metaItem.year });
-      if (metaItem.badge) allAppSpecs.push({ label: 'category', value: metaItem.badge.toLowerCase() });
-      specsItem.items.forEach(spec => {
-        allAppSpecs.push({ label: spec.label.toLowerCase(), value: spec.value });
-      });
-
-      const appSpecGroups = [
-        {
-          title: '01 / overview',
-          keys: ['date', 'category', 'role', 'team', 'status', 'platform', 'context']
-        },
-        {
-          title: '02 / architecture & stack',
-          keys: ['stack', 'technologies', 'tools', 'framework', 'frameworks', 'architecture', 'languages', 'backend', 'frontend', 'ai engine']
-        },
-        {
-          title: '03 / details & deliverables',
-          keys: ['target', 'deliverables', 'concept', 'mission', 'features', 'version', 'license', 'privacy', 'distribution']
-        }
-      ];
-
-      const handledAppLabels = new Set();
-      appSpecGroups.forEach(groupDef => {
-        const groupRows = allAppSpecs.filter(spec => groupDef.keys.includes((spec.label || '').toLowerCase().trim()));
-        if (groupRows.length > 0) {
-          groupRows.forEach(r => handledAppLabels.add((r.label || '').toLowerCase().trim()));
-          const groupEl = document.createElement('div');
-          groupEl.className = 'specs-group';
-          const groupHdr = document.createElement('div');
-          groupHdr.className = 'specs-group-header';
-          groupHdr.textContent = groupDef.title;
-          groupEl.appendChild(groupHdr);
-
-          groupRows.forEach(spec => {
-            const row = document.createElement('div');
-            row.className = 'specs-row';
-            row.innerHTML = `
-              <span class="specs-label">${spec.label}</span>
-              <span class="specs-value">${spec.value}</span>
-            `;
-            groupEl.appendChild(row);
-          });
-          specsTable.appendChild(groupEl);
-        }
-      });
-
-      const leftoverAppSpecs = allAppSpecs.filter(spec => !handledAppLabels.has((spec.label || '').toLowerCase().trim()));
-      if (leftoverAppSpecs.length > 0) {
-        let lastGroup = specsTable.querySelector('.specs-group:last-child');
-        if (!lastGroup) {
-          lastGroup = document.createElement('div');
-          lastGroup.className = 'specs-group';
-          const groupHdr = document.createElement('div');
-          groupHdr.className = 'specs-group-header';
-          groupHdr.textContent = '03 / details & deliverables';
-          lastGroup.appendChild(groupHdr);
-          specsTable.appendChild(lastGroup);
-        }
-        leftoverAppSpecs.forEach(spec => {
-          const row = document.createElement('div');
-          row.className = 'specs-row';
-          row.innerHTML = `
-            <span class="specs-label">${spec.label}</span>
-            <span class="specs-value">${spec.value}</span>
-          `;
-          lastGroup.appendChild(row);
-        });
+      if (metaItem.year) {
+        const dateRow = document.createElement('div');
+        dateRow.className = 'specs-row';
+        dateRow.innerHTML = `<span class="specs-label">date</span><span class="specs-value">${metaItem.year}</span>`;
+        specsTable.appendChild(dateRow);
       }
+      if (metaItem.badge) {
+        const catRow = document.createElement('div');
+        catRow.className = 'specs-row';
+        catRow.innerHTML = `<span class="specs-label">category</span><span class="specs-value">${metaItem.badge.toLowerCase()}</span>`;
+        specsTable.appendChild(catRow);
+      }
+
+      specsItem.items.forEach(spec => {
+        const row = document.createElement('div');
+        row.className = 'specs-row';
+        row.innerHTML = `
+          <span class="specs-label">${spec.label.toLowerCase()}</span>
+          <span class="specs-value">${spec.value}</span>
+        `;
+        specsTable.appendChild(row);
+      });
       stickyCol.appendChild(specsTable);
     }
 
