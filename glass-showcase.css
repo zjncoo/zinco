@@ -175,7 +175,8 @@ main#main {
   display: flex;
   align-items: flex-end;
   gap: 20px; /* EXACTLY 20px between the SVG silhouettes */
-  padding: 0 40px;
+  padding: 0 40px 48px;
+  box-sizing: border-box;
   height: 100%;
   will-change: transform;
   transform: translate3d(0, 0, 0);
@@ -768,7 +769,8 @@ main#main {
   }
 
   .glass-track {
-    padding: 0 calc(50vw - 100px);
+    padding: 0 calc(50vw - 100px) 48px;
+    box-sizing: border-box;
     gap: 24px;
     transform: none !important;
     touch-action: pan-x;
