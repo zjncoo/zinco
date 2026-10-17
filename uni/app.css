@@ -292,9 +292,16 @@ main#sezione-progetto {
   top: 72px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
   box-sizing: border-box;
   text-align: left;
+}
+
+@media (max-height: 760px) {
+  .project-sticky-col {
+    top: auto;
+    bottom: 20px;
+  }
 }
 
 .editorial-photo-box {
@@ -308,7 +315,7 @@ main#sezione-progetto {
 .editorial-photo-box img.editorial-rep-img {
   width: 100%;
   height: auto;
-  max-height: 280px;
+  max-height: 115px;
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
@@ -322,7 +329,7 @@ main#sezione-progetto {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid black;
+  border-top: none;
   text-align: left;
 }
 
@@ -330,11 +337,11 @@ main#sezione-progetto {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0 6px 0;
-  border-bottom: 1px solid black;
+  padding: 4px 0 6px 0;
+  border-bottom: none;
   font-family: 'neue-haas-unica', sans-serif;
-  font-weight: 700;
-  font-size: 0.76rem;
+  font-weight: 400;
+  font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: black;
@@ -344,20 +351,20 @@ main#sezione-progetto {
   display: grid;
   grid-template-columns: 105px 1fr;
   gap: 12px;
-  padding: 7px 0;
+  padding: 4px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   line-height: 1.35;
   text-align: left;
 }
 
 .specs-label {
-  font-weight: 700;
+  font-weight: 400;
   text-transform: lowercase;
   letter-spacing: 0.01em;
-  font-size: 0.78rem;
-  color: black;
+  font-size: 0.76rem;
+  color: #555555;
   text-align: left;
 }
 
@@ -409,8 +416,10 @@ main#sezione-progetto {
 .editorial-cta-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   width: 100%;
+  margin-top: 2px;
+  padding-bottom: 6px;
 }
 
 .editorial-action-btn {
@@ -418,13 +427,13 @@ main#sezione-progetto {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 12px 16px;
+  padding: 9px 14px;
   background-color: transparent;
   border: 1.5px solid black;
   color: black;
   font-family: 'neue-haas-unica', sans-serif;
   font-weight: 500;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
