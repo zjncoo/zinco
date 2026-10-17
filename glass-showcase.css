@@ -211,15 +211,16 @@ main#main {
   height: 100%;
   width: auto;
   display: block;
-  stroke: none;
-  outline: none;
-  border: none;
+  stroke: none !important;
+  outline: none !important;
+  border: none !important;
   pointer-events: none !important;
 }
 
 .glass-svg * {
-  outline: none;
-  border: none;
+  stroke: none !important;
+  outline: none !important;
+  border: none !important;
 }
 
 .glass-img {
@@ -238,14 +239,13 @@ main#main {
 
 /* Precise hit layer matching exact SVG geometry */
 .glass-hit-layer {
-  stroke: none;
-  stroke-width: 0;
-  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+  stroke: none !important;
+  stroke-width: 0 !important;
   pointer-events: all !important;
   cursor: none !important;
 }
 
-/* Hover triggered ONLY for desktop/mouse pointers: reveals the project photo framed by 2px outline */
+/* Hover triggered ONLY for desktop/mouse pointers: reveals the project photo */
 @media (hover: hover) and (pointer: fine) {
   .glass-item.is-hovered .glass-color-layer,
   .glass-item:focus .glass-color-layer,
@@ -259,16 +259,6 @@ main#main {
     opacity: 1;
   }
 
-  .glass-item.is-hovered .glass-hit-layer,
-  .glass-item:focus .glass-hit-layer,
-  .glass-item:focus-visible .glass-hit-layer {
-    stroke: #000000 !important;
-    stroke-width: 2px !important;
-    stroke-linejoin: round !important;
-    stroke-linecap: round !important;
-    fill-opacity: 0 !important;
-  }
-
   @supports selector(:has(*)) {
     .glass-item:has(.glass-hit-layer:hover) .glass-color-layer,
     .glass-item:has(.glass-color-layer:hover) .glass-color-layer {
@@ -277,14 +267,6 @@ main#main {
     .glass-item:has(.glass-hit-layer:hover) .glass-img,
     .glass-item:has(.glass-color-layer:hover) .glass-img {
       opacity: 1;
-    }
-    .glass-item:has(.glass-hit-layer:hover) .glass-hit-layer,
-    .glass-item:has(.glass-color-layer:hover) .glass-hit-layer {
-      stroke: #000000 !important;
-      stroke-width: 2px !important;
-      stroke-linejoin: round !important;
-      stroke-linecap: round !important;
-      fill-opacity: 0 !important;
     }
   }
 }
@@ -832,14 +814,6 @@ main#main {
   .glass-item.is-active-center .glass-img {
     opacity: 1 !important;
     transition: none !important;
-  }
-
-  .glass-item.is-active-center .glass-hit-layer {
-    stroke: #000000 !important;
-    stroke-width: 2px !important;
-    stroke-linejoin: round !important;
-    stroke-linecap: round !important;
-    fill-opacity: 0 !important;
   }
 
   .glass-cursor-label {
