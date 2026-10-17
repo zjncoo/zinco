@@ -289,19 +289,37 @@ main#sezione-progetto {
 .project-sticky-col {
   position: -webkit-sticky;
   position: sticky;
-  top: 72px;
+  top: 76px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
   box-sizing: border-box;
-  max-height: calc(100vh - 90px);
+  max-height: calc(100vh - 96px);
   overflow-y: auto;
-  scrollbar-width: none;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.22) transparent;
   text-align: left;
 }
 
 .project-sticky-col::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+  display: block;
+}
+
+.project-sticky-col::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-sticky-col::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.project-sticky-col::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .editorial-photo-box {
@@ -331,46 +349,71 @@ main#sezione-progetto {
   flex-direction: column;
   border-top: 1.5px solid black;
   text-align: left;
+  gap: 16px;
+  padding-bottom: 6px;
 }
 
 .specs-table-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0 6px 0;
+  padding: 10px 0 8px 0;
   border-bottom: 1.5px solid black;
   font-family: 'neue-haas-unica', sans-serif;
   font-weight: 700;
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: black;
+}
+
+.specs-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 2px;
+}
+
+.specs-group-header {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #767676;
+  padding-bottom: 6px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .specs-row {
   display: grid;
   grid-template-columns: 105px 1fr;
-  gap: 12px;
-  padding: 7px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.35;
+  font-size: 0.82rem;
+  line-height: 1.45;
   text-align: left;
 }
 
+.specs-row:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
 .specs-label {
-  font-weight: 700;
+  font-weight: 600;
   text-transform: lowercase;
   letter-spacing: 0.01em;
   font-size: 0.78rem;
-  color: black;
+  color: #555555;
   text-align: left;
 }
 
 .specs-value {
   font-weight: 400;
-  color: black;
+  color: #0a0a0a;
   word-break: break-word;
   text-align: left;
 }

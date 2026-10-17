@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // ── COLONNA SINISTRA: FISSA / STICKY ──────────────────────────
       const stickyCol = document.createElement('aside');
       stickyCol.className = 'project-sticky-col';
+      stickyCol.setAttribute('data-lenis-prevent', '');
 
       // 1. Foto Rappresentativa (formato editoriale variabile)
       let repImageSrc = '';
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stickyCol.appendChild(photoBox);
       }
 
-      // 2. Tabella Info / Specs (allineata a sinistra con linee sottili — Replica esatta Infogrid PDF)
+      // 2. Tabella Info / Specs (allineata a sinistra, divisa per sezioni tematiche con aria e respiro)
       const specsTable = document.createElement('div');
       specsTable.className = 'editorial-specs-table';
 
@@ -140,46 +141,115 @@ document.addEventListener('DOMContentLoaded', () => {
       tableHeader.innerHTML = `<span>infogrid</span>`;
       specsTable.appendChild(tableHeader);
 
-      const canonicalSpecs = [
-        { label: 'team', keys: ['team', 'collaborators'] },
-        { label: 'date', keys: ['date', 'year'] },
-        { label: 'context', keys: ['context', 'course', 'client', 'typology'] },
-        { label: 'category', keys: ['category', 'discipline', 'services'] },
-        { label: 'role', keys: ['role'] },
-        { label: 'tools', keys: ['tools', 'software', 'stack'] },
-        { label: 'languages', keys: ['languages'] },
-        { label: 'concept', keys: ['concept'] },
-        { label: 'mission', keys: ['mission'] },
-        { label: 'vision', keys: ['vision'] },
-        { label: 'values', keys: ['values'] },
-        { label: 'brand essence', keys: ['brand essence', 'essence'] },
-        { label: 'tone of voice', keys: ['tone of voice'] },
-        { label: 'target', keys: ['target'] },
-        { label: 'deliverables', keys: ['deliverables'] },
-        { label: 'dimensions', keys: ['dimensions'] },
-        { label: 'paper stock', keys: ['paper stock'] },
-        { label: 'binding', keys: ['binding'] },
-        { label: 'fonts', keys: ['fonts', 'typeface'] },
-        { label: 'venue', keys: ['venue'] },
-        { label: 'payoff', keys: ['payoff', 'tagline'] }
+      const specGroups = [
+        {
+          groupTitle: '01 / overview',
+          specs: [
+            { label: 'date', keys: ['date', 'year'] },
+            { label: 'context', keys: ['context', 'course', 'client', 'typology'] },
+            { label: 'category', keys: ['category', 'discipline', 'services'] },
+            { label: 'team', keys: ['team', 'collaborators'] },
+            { label: 'role', keys: ['role'] },
+            { label: 'venue', keys: ['venue'] }
+          ]
+        },
+        {
+          groupTitle: '02 / strategy & identity',
+          specs: [
+            { label: 'concept', keys: ['concept'] },
+            { label: 'brand essence', keys: ['brand essence', 'essence'] },
+            { label: 'mission', keys: ['mission'] },
+            { label: 'vision', keys: ['vision'] },
+            { label: 'values', keys: ['values'] },
+            { label: 'tone of voice', keys: ['tone of voice'] },
+            { label: 'payoff', keys: ['payoff', 'tagline'] },
+            { label: 'positioning', keys: ['positioning'] },
+            { label: 'target', keys: ['target'] }
+          ]
+        },
+        {
+          groupTitle: '03 / deliverables & technical',
+          specs: [
+            { label: 'deliverables', keys: ['deliverables'] },
+            { label: 'tools', keys: ['tools', 'software', 'stack'] },
+            { label: 'languages', keys: ['languages'] },
+            { label: 'dimensions', keys: ['dimensions'] },
+            { label: 'paper stock', keys: ['paper stock'] },
+            { label: 'binding', keys: ['binding'] },
+            { label: 'fonts', keys: ['fonts', 'typeface', 'typography'] }
+          ]
+        }
       ];
 
-      let specsCount = 0;
-      canonicalSpecs.forEach(spec => {
-        const item = data.find(d => d.type === 'text' && spec.keys.includes((d.label || '').toLowerCase().trim()));
-        if (item && item.content) {
-          specsCount++;
-          const row = document.createElement('div');
-          row.className = 'specs-row';
-          row.innerHTML = `
-            <span class="specs-label">${spec.label}</span>
-            <span class="specs-value">${item.content}</span>
-          `;
-          specsTable.appendChild(row);
+      const handledKeys = new Set(['naming', 'description']);
+      let totalSpecsCount = 0;
+
+      specGroups.forEach(group => {
+        const matchingRows = [];
+        group.specs.forEach(spec => {
+          spec.keys.forEach(k => handledKeys.add(k));
+          const item = data.find(d => d.type === 'text' && spec.keys.includes((d.label || '').toLowerCase().trim()));
+          if (item && item.content) {
+            matchingRows.push({ label: spec.label, value: item.content });
+          }
+        });
+
+        if (matchingRows.length > 0) {
+          totalSpecsCount += matchingRows.length;
+          const groupEl = document.createElement('div');
+          groupEl.className = 'specs-group';
+
+          const groupHeader = document.createElement('div');
+          groupHeader.className = 'specs-group-header';
+          groupHeader.textContent = group.groupTitle;
+          groupEl.appendChild(groupHeader);
+
+          matchingRows.forEach(rowItem => {
+            const row = document.createElement('div');
+            row.className = 'specs-row';
+            row.innerHTML = `
+              <span class="specs-label">${rowItem.label}</span>
+              <span class="specs-value">${rowItem.value}</span>
+            `;
+            groupEl.appendChild(row);
+          });
+
+          specsTable.appendChild(groupEl);
         }
       });
 
-      if (specsCount > 0) {
+      // Raccogli eventuali altri campi testuali non previsti nei gruppi
+      const otherTextItems = data.filter(d =>
+        d.type === 'text' &&
+        d.label &&
+        d.content &&
+        !handledKeys.has(d.label.toLowerCase().trim())
+      );
+
+      if (otherTextItems.length > 0) {
+        totalSpecsCount += otherTextItems.length;
+        let lastGroup = specsTable.querySelector('.specs-group:last-child');
+        if (!lastGroup) {
+          lastGroup = document.createElement('div');
+          lastGroup.className = 'specs-group';
+          const header = document.createElement('div');
+          header.className = 'specs-group-header';
+          header.textContent = '03 / deliverables & technical';
+          lastGroup.appendChild(header);
+          specsTable.appendChild(lastGroup);
+        }
+        otherTextItems.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'specs-row';
+          row.innerHTML = `
+            <span class="specs-label">${item.label}</span>
+            <span class="specs-value">${item.content}</span>
+          `;
+          lastGroup.appendChild(row);
+        });
+      }
+
+      if (totalSpecsCount > 0) {
         stickyCol.appendChild(specsTable);
       }
 
@@ -257,10 +327,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 1. Video (se presente nel progetto)
       if (videoContainer) {
-        mediaStream.appendChild(videoContainer);
+        const videoEl = videoContainer.querySelector('video');
+        if (!videoEl) {
+          videoContainer.remove();
+        } else {
+          const videoSrc = videoEl.getAttribute('src') || (videoEl.querySelector('source') && videoEl.querySelector('source').getAttribute('src'));
+          if (!videoSrc) {
+            videoContainer.remove();
+          } else {
+            const handleVidError = () => {
+              console.warn('[branding-project] Video source failed to load, removing video container:', videoSrc);
+              videoContainer.remove();
+            };
+            videoEl.addEventListener('error', handleVidError);
+            const sources = videoEl.querySelectorAll('source');
+            sources.forEach(s => s.addEventListener('error', handleVidError));
+
+            fetch(videoSrc, { method: 'HEAD' }).then(res => {
+              if (!res.ok) handleVidError();
+            }).catch(() => {
+              // Ignore network check errors for local/file scenarios
+            });
+
+            mediaStream.appendChild(videoContainer);
+          }
+        }
       }
 
       // 2. Presentazione PDF: Solo Prima Pagina / Cover Preview Non Scrollabile + Open in Browser
+      // Se il PDF non esiste o fallisce, scompare completamente senza mostrare blocchi o errori 404
       if (pdfSource) {
         const pdfSection = document.createElement('div');
         pdfSection.className = 'editorial-pdf-section';
@@ -282,17 +377,18 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </a>
         `;
-        mediaStream.appendChild(pdfSection);
 
         // Renderizza strictly la prima pagina su canvas
-        const canvas = pdfSection.querySelector('.editorial-presentation-canvas');
-        if (canvas && window.pdfjsLib) {
+        if (window.pdfjsLib) {
           if (!window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
           }
           window.pdfjsLib.getDocument(pdfSource).promise.then(pdf => {
             return pdf.getPage(1);
           }).then(page => {
+            const canvas = pdfSection.querySelector('.editorial-presentation-canvas');
+            if (!canvas) return;
+
             const pixelRatio = window.devicePixelRatio || 1;
             const viewport = page.getViewport({ scale: 1 });
             const containerWidth = mediaStream.clientWidth || 800;
@@ -308,12 +404,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const ctx = canvas.getContext('2d');
             page.render({ canvasContext: ctx, viewport: scaledViewport });
-          }).catch(err => {
-            console.warn('[branding-project] Could not render page 1 canvas, fallback to locked frame:', err);
-            const link = pdfSection.querySelector('.editorial-presentation-cover-link');
-            if (link) {
-              link.innerHTML = `<iframe src="${pdfSource}#page=1&toolbar=0&navpanes=0&scrollbar=0&view=Fit" style="width:100%; height:480px; border:none; pointer-events:none; overflow:hidden;" tabindex="-1" scrolling="no"></iframe>`;
+
+            // Aggiungi pdfSection a mediaStream solo quando la prima pagina si carica con successo
+            if (!pdfSection.parentNode) {
+              if (videoContainer && videoContainer.parentNode === mediaStream) {
+                videoContainer.after(pdfSection);
+              } else {
+                mediaStream.prepend(pdfSection);
+              }
             }
+          }).catch(err => {
+            console.warn('[branding-project] PDF not available or failed to load, removing section completely:', err);
+            pdfSection.remove();
           });
         }
       }

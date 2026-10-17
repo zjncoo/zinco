@@ -3,68 +3,162 @@
     "type": "image",
     "subtype": "logo",
     "label": "logo",
-    "src": "img/gizeta.png"
-  },
-  {
-    "type": "text",
-    "label": "description",
-    "content": "Gizeta SAS is a construction company specializing in residential building, renovations, and maintenance. We operate with precision and quality materials to ensure solid and lasting results over time."
+    "src": "img/gizeta_logo.svg"
   },
   {
     "type": "text",
     "label": "naming",
-    "content": "Gizeta SAS"
+    "content": "Gizeta sas"
+  },
+  {
+    "type": "text",
+    "label": "description",
+    "content": "Gizeta sas è un'impresa edile artigianale indipendente con sede a Mozzate (CO), fondata nel 2000 e attiva nelle province di Como, Varese e Milano. Con oltre venticinque anni di cantiere vissuti sul campo dal Geometra Paolo Zanchetta, l'identità visiva e il nuovo sito web ufficiale traducono il rigore costruttivo, la trasparenza e la cura sartoriale di ogni dettaglio esecutivo in un linguaggio visivo chiaro, solido e contemporaneo."
+  },
+  {
+    "type": "text",
+    "label": "context",
+    "content": "commercial client | impresa edile dal 2000"
+  },
+  {
+    "type": "text",
+    "label": "category",
+    "content": "brand identity | web design & development | art direction"
+  },
+  {
+    "type": "text",
+    "label": "date",
+    "content": "2000 — 2026 (26° anno di attività)"
+  },
+  {
+    "type": "text",
+    "label": "role",
+    "content": "brand identity, responsive web development, art direction, copywriting"
+  },
+  {
+    "type": "text",
+    "label": "tools",
+    "content": "figma, html5, css3, javascript, visual studio code, adobe illustrator"
   },
   {
     "type": "text",
     "label": "payoff",
-    "content": "We build value, brick by brick."
+    "content": "“Dal 2000, il nostro impegno è per chi abita gli spazi.”"
+  },
+  {
+    "type": "text",
+    "label": "concept",
+    "content": "continuità artigianale, rigore esecutivo e presidio tecnico costante senza intermediari"
   },
   {
     "type": "text",
     "label": "values",
-    "content": "solidity, quality, reliability, safety"
-  },
-  {
-    "type": "text",
-    "label": "mission",
-    "content": "To deliver construction works that exceed client expectations, ensuring safety, durability, and respect for agreed timelines and budgets."
-  },
-  {
-    "type": "text",
-    "label": "vision",
-    "content": "To become a point of reference in the local construction sector for execution excellence, transparency, and professional integrity."
+    "content": "rigore tecnico, dedizione, trasparenza, continuità sul territorio"
   },
   {
     "type": "text",
     "label": "brand essence",
-    "content": "Built to last."
+    "content": "Per chi abita gli spazi."
   },
   {
     "type": "text",
-    "label": "brand architecture",
-    "content": "monolithic brand"
+    "label": "mission",
+    "content": "Costruire, ristrutturare e proteggere edifici con precisione artigianale e supervisione tecnica diretta del Geometra Paolo Zanchetta su ogni cantiere."
+  },
+  {
+    "type": "text",
+    "label": "vision",
+    "content": "Rimanere il punto di riferimento territoriale per committenti privati e professionisti che esigono tempi certi, computi trasparenti e maestria esecutiva."
   },
   {
     "type": "text",
     "label": "target",
-    "content": "Private clients, architects, and small-to-medium enterprises seeking a reliable partner for building or renovating properties."
+    "content": "committenti privati, famiglie, architetti e studi tecnici (Como, Varese, Milano)"
+  },
+  {
+    "type": "text",
+    "label": "deliverables",
+    "content": "brandmark, logo celebrativo 25 anni, sito web responsive (gizeta-zanchetta.it), archivio fotografico di cantiere, disciplinare esecutivo"
+  },
+  {
+    "type": "link",
+    "label": "Official Website",
+    "href": "https://www.gizeta-zanchetta.it",
+    "description": "Live responsive website designed and developed for Gizeta sas"
   },
   {
     "type": "header",
-    "label": "brand mark applications"
+    "label": "official website & responsive experience"
   },
   {
     "type": "image",
-    "subtype": "mockup",
-    "label": "business card",
-    "src": "img/gizeta_biglietto.png"
+    "subtype": "app-screenshot",
+    "label": "gizeta-zanchetta.it — official website hero showcase",
+    "src": "img/website_hero_preview.webp"
   },
   {
     "type": "image",
-    "subtype": "mockup",
-    "label": "company vehicle",
-    "src": "img/gizeta_furgone.png"
+    "subtype": "app-screenshot",
+    "label": "gizeta-zanchetta.it — official website responsive experience",
+    "src": "img/website_scroll_preview.webp"
+  },
+  {
+    "type": "header",
+    "label": "brandmark & 25 years celebration"
+  },
+  {
+    "type": "image",
+    "label": "Gizeta sas — corporate logo",
+    "src": "img/gizeta_logo.svg"
+  },
+  {
+    "type": "image",
+    "label": "Gizeta sas — 25th anniversary commemorative emblem (2000 — 2025)",
+    "src": "img/logo_gizeta_25.svg"
+  },
+  {
+    "type": "image",
+    "label": "Targa celebrativa 25 anni conferita dal Sindaco e dalla Giunta del Comune di Mozzate",
+    "src": "img/targa_25_anni.webp"
+  },
+  {
+    "type": "header",
+    "label": "building site & architectural archive"
+  },
+  {
+    "type": "image",
+    "label": "Cantiere edile: strutture e getti in calcestruzzo armato",
+    "src": "img/cantiere_calcestruzzo.webp"
+  },
+  {
+    "type": "image",
+    "label": "Edificazione residenziale ex-novo in c.a. e muratura antisismica",
+    "src": "img/edificazione_exnovo.webp"
+  },
+  {
+    "type": "image",
+    "label": "Vespaio aerato con casseri iglù per isolamento radon e umidità",
+    "src": "img/vespaio_aerato.webp"
+  },
+  {
+    "type": "image",
+    "label": "Posa certificata finestre per tetti e lucernari Velux",
+    "src": "img/posa_velux.webp"
+  },
+  {
+    "type": "image",
+    "label": "Muri di sostegno in blocchi di sasso e pietra squadrati a mano",
+    "src": "img/muro_pietra.webp"
+  },
+  {
+    "type": "image",
+    "label": "Ristrutturazione d'interni e finiture artigianali di pregio",
+    "src": "img/ristrutturazione_villa.webp"
+  },
+  {
+    "type": "image",
+    "label": "Piscina interrata in calcestruzzo armato con solarium",
+    "src": "img/piscina_giardino.webp"
   },
   {
     "type": "header",
@@ -72,17 +166,22 @@
   },
   {
     "type": "color",
-    "label": "#343a40",
-    "hex": "#343a40"
+    "label": "#0a0a0a",
+    "hex": "#0a0a0a"
   },
   {
     "type": "color",
-    "label": "#fca311",
-    "hex": "#fca311"
+    "label": "#e5833c",
+    "hex": "#e5833c"
   },
   {
     "type": "color",
-    "label": "#e9ecef",
-    "hex": "#e9ecef"
+    "label": "#5c646c",
+    "hex": "#5c646c"
+  },
+  {
+    "type": "color",
+    "label": "#f4f3ef",
+    "hex": "#f4f3ef"
   }
 ]

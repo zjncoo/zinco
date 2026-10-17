@@ -166,7 +166,7 @@ const allProjectsData = [
   },
   {
     title: "Gizeta Website",
-    link: "https://www.gizeta-zanchetta.it/home",
+    link: "https://www.gizeta-zanchetta.it",
     category: "websites",
     image: "gizeta/img/gizeta.webp",
     indexNum: "022"

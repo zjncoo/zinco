@@ -67,7 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeTimeout = setTimeout(() => renderCover(pdfDoc), 150);
       }, { passive: true });
     }).catch(err => {
-      console.warn('[pdf_viewer] Could not render page 1:', err);
+      console.warn('[pdf_viewer] Could not render page 1, removing container:', err);
+      if (container) container.remove();
+      if (canvas) canvas.remove();
     });
   }
 });

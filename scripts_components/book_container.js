@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Colonna Sinistra Sticky (Allineata a Sinistra)
     const stickyCol = document.createElement('div');
     stickyCol.className = 'project-sticky-col';
+    stickyCol.setAttribute('data-lenis-prevent', '');
 
     // Box Foto Rappresentativa
     if (repImgSrc) {
@@ -144,6 +145,21 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
     }
 
+    const specGroupDefinitions = [
+      {
+        title: '01 / overview',
+        keys: ['date', 'context', 'category', 'team', 'role', 'format']
+      },
+      {
+        title: '02 / strategy & identity',
+        keys: ['concept', 'brand essence', 'mission', 'vision', 'values', 'tone of voice', 'target']
+      },
+      {
+        title: '03 / deliverables & technical',
+        keys: ['deliverables', 'tools', 'dimensions', 'paper stock', 'binding', 'fonts']
+      }
+    ];
+
     const specsTable = document.createElement('div');
     specsTable.className = 'editorial-specs-table';
 
@@ -152,15 +168,53 @@ document.addEventListener('DOMContentLoaded', () => {
     tableHeader.innerHTML = `<span>infogrid</span>`;
     specsTable.appendChild(tableHeader);
 
-    activeSpecs.forEach(spec => {
-      const row = document.createElement('div');
-      row.className = 'specs-row';
-      row.innerHTML = `
-        <span class="specs-label">${spec.label}</span>
-        <span class="specs-value">${spec.value}</span>
-      `;
-      specsTable.appendChild(row);
+    const handledSpecLabels = new Set();
+    specGroupDefinitions.forEach(groupDef => {
+      const groupRows = activeSpecs.filter(spec => groupDef.keys.includes((spec.label || '').toLowerCase().trim()));
+      if (groupRows.length > 0) {
+        groupRows.forEach(r => handledSpecLabels.add((r.label || '').toLowerCase().trim()));
+        const groupEl = document.createElement('div');
+        groupEl.className = 'specs-group';
+        const groupHdr = document.createElement('div');
+        groupHdr.className = 'specs-group-header';
+        groupHdr.textContent = groupDef.title;
+        groupEl.appendChild(groupHdr);
+
+        groupRows.forEach(spec => {
+          const row = document.createElement('div');
+          row.className = 'specs-row';
+          row.innerHTML = `
+            <span class="specs-label">${spec.label}</span>
+            <span class="specs-value">${spec.value}</span>
+          `;
+          groupEl.appendChild(row);
+        });
+        specsTable.appendChild(groupEl);
+      }
     });
+
+    const leftoverSpecs = activeSpecs.filter(spec => !handledSpecLabels.has((spec.label || '').toLowerCase().trim()));
+    if (leftoverSpecs.length > 0) {
+      let lastGroup = specsTable.querySelector('.specs-group:last-child');
+      if (!lastGroup) {
+        lastGroup = document.createElement('div');
+        lastGroup.className = 'specs-group';
+        const groupHdr = document.createElement('div');
+        groupHdr.className = 'specs-group-header';
+        groupHdr.textContent = '03 / deliverables & technical';
+        lastGroup.appendChild(groupHdr);
+        specsTable.appendChild(lastGroup);
+      }
+      leftoverSpecs.forEach(spec => {
+        const row = document.createElement('div');
+        row.className = 'specs-row';
+        row.innerHTML = `
+          <span class="specs-label">${spec.label}</span>
+          <span class="specs-value">${spec.value}</span>
+        `;
+        lastGroup.appendChild(row);
+      });
+    }
     stickyCol.appendChild(specsTable);
 
     // Gruppo Bottoni Azione
@@ -185,13 +239,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Aggiungi video se presente (es. zoom)
     videos.forEach(v => {
+      const vid = v.tagName === 'VIDEO' ? v : (v.querySelector('video') || v);
+      if (!vid) return;
+      const vSrc = vid.getAttribute('src') || (vid.querySelector('source') && vid.querySelector('source').getAttribute('src'));
+      if (!vSrc) return;
+
       const mediaItem = document.createElement('div');
       mediaItem.className = 'project-media-item';
       mediaItem.style.lineHeight = '0';
       mediaItem.style.width = '100%';
       mediaItem.style.borderBottom = '1px solid black';
 
-      const vid = v.tagName === 'VIDEO' ? v : (v.querySelector('video') || v);
+      const handleVidErr = () => {
+        console.warn('[book_container] Video failed to load, removing:', vSrc);
+        mediaItem.remove();
+      };
+      vid.addEventListener('error', handleVidErr);
+      const sources = vid.querySelectorAll('source');
+      sources.forEach(s => s.addEventListener('error', handleVidErr));
+
+      fetch(vSrc, { method: 'HEAD' }).then(res => {
+        if (!res.ok) handleVidErr();
+      }).catch(() => {});
+
       vid.style.width = '100%';
       vid.style.maxWidth = '100%';
       vid.style.height = 'auto';
@@ -652,9 +722,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (error) {
       console.error('Errore definitivo durante il caricamento del PDF dopo vari tentativi:', error);
-      pageLabel.textContent = 'Errore nel caricamento.';
-      pageNumbers.style.display = 'none';
-      pageTotal.style.display = 'none';
+      const readerSection = document.getElementById('project-publication-reader');
+      if (readerSection) readerSection.remove();
+      const readerBtn = document.getElementById('editorialScrollReaderBtn');
+      if (readerBtn) readerBtn.remove();
+      if (bookContainer) bookContainer.remove();
     }
   };
 
