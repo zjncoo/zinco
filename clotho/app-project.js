@@ -472,12 +472,15 @@ function setupLightbox() {
   lightbox.className = 'app-lightbox';
   lightbox.innerHTML = `
     <button class="lightbox-close-btn cursor-target" id="lightboxCloseBtn" aria-label="Close image">×</button>
-    <div class="lightbox-image-wrap">
+    <div class="lightbox-media-stage">
       <img id="lightboxImg" src="" alt="Expanded preview">
     </div>
-    <div class="lightbox-caption-bar">
-      <h3 id="lightboxTitle"></h3>
-      <p id="lightboxCaption"></p>
+    <div class="lightbox-caption-bottom">
+      <div class="lightbox-caption-header">
+        <span id="lightboxTitle" class="lightbox-caption-title"></span>
+        <span id="lightboxSubtitle" class="lightbox-caption-subtitle"></span>
+      </div>
+      <p id="lightboxCaption" class="lightbox-caption-text"></p>
     </div>
   `;
 
@@ -485,11 +488,12 @@ function setupLightbox() {
 
   const closeLightbox = () => {
     lightbox.classList.remove('is-open');
+    document.body.classList.remove('lightbox-open');
     if (window.lenis) window.lenis.start();
   };
 
   lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox || e.target.id === 'lightboxCloseBtn') {
+    if (e.target === lightbox || e.target.id === 'lightboxCloseBtn' || (e.target.closest && e.target.closest('#lightboxCloseBtn'))) {
       closeLightbox();
     }
   });
@@ -501,18 +505,29 @@ function setupLightbox() {
   });
 }
 
-function openLightbox(src, title, caption) {
+function openLightbox(src, title, caption, subtitle) {
   const lightbox = document.getElementById('appLightbox');
   if (!lightbox) return;
 
   const img = document.getElementById('lightboxImg');
   const titleEl = document.getElementById('lightboxTitle');
+  const subtitleEl = document.getElementById('lightboxSubtitle');
   const captionEl = document.getElementById('lightboxCaption');
 
   if (img) img.src = src;
   if (titleEl) titleEl.textContent = title || '';
+  if (subtitleEl) subtitleEl.textContent = subtitle ? `— ${subtitle}` : '';
   if (captionEl) captionEl.textContent = caption || '';
 
   lightbox.classList.add('is-open');
+  document.body.classList.add('lightbox-open');
+
+  // CRITICAL FIX: Relocate cursor to end of body so it is always on top
+  const cursorEl = document.getElementById('cursor');
+  if (cursorEl) {
+    document.body.appendChild(cursorEl);
+    cursorEl.style.zIndex = '2147483647';
+  }
+
   if (window.lenis) window.lenis.stop();
 }

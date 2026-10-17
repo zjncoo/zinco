@@ -611,76 +611,118 @@
   transform: rotate(180deg);
 }
 
-/* --- 7. Lightbox Zoom Modale --- */
+/* --- 7. Lightbox Zoom Modale (Sfondo Bianco & Descrizione in Basso a Sinistra) --- */
 .app-lightbox {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.92);
-  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 100000;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
+  justify-content: space-between;
   box-sizing: border-box;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .app-lightbox.is-open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
 .lightbox-close-btn {
   position: absolute;
   top: 24px;
-  right: 28px;
+  right: calc(27px + 0.88vw);
   background: transparent;
   border: none;
-  color: white;
+  color: #000000;
   font-family: 'neue-haas-unica', sans-serif;
-  font-size: 1.8rem;
+  font-weight: 300;
+  font-size: 2.8rem;
   cursor: pointer;
   line-height: 1;
-  padding: 8px;
+  padding: 4px 8px;
+  z-index: 20;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.lightbox-image-wrap {
-  max-width: 90vw;
-  max-height: 80vh;
+.lightbox-close-btn:hover {
+  transform: scale(1.15);
+  opacity: 0.7;
+}
+
+.lightbox-media-stage {
+  flex-grow: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 48px 40px 24px calc(27px + 0.88vw);
+  box-sizing: border-box;
+  min-height: 0;
+  overflow: hidden;
 }
 
-.lightbox-image-wrap img {
+.lightbox-media-stage img {
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 100%;
   object-fit: contain;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: block;
 }
 
-.lightbox-caption-bar {
-  margin-top: 16px;
-  color: white;
+.lightbox-caption-bottom {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 40px 24px calc(27px + 0.88vw);
+  border-top: 1px solid #000000;
+  background-color: #ffffff;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.lightbox-caption-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.lightbox-caption-title {
   font-family: 'neue-haas-unica', sans-serif;
-  text-align: center;
-  max-width: 700px;
-}
-
-.lightbox-caption-bar h3 {
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 500;
-  margin: 0 0 4px 0;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #000000;
+  text-align: left;
 }
 
-.lightbox-caption-bar p {
-  font-size: 0.85rem;
-  color: #ccc;
+.lightbox-caption-subtitle {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #555555;
+  text-transform: lowercase;
+  text-align: left;
+}
+
+.lightbox-caption-text {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #222222;
   margin: 0;
+  max-width: 800px;
+  text-align: left;
 }
 
 /* ==========================================================================

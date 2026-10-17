@@ -161,6 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- CURSORE PERSONALIZZATO (ottimizzato: RAF si ferma quando il mouse è fermo) ---
   const cursor = document.getElementById('cursor');
   if (cursor) {
+    if (cursor.parentElement !== document.body) {
+      document.body.appendChild(cursor);
+    }
+    cursor.style.zIndex = '2147483647';
     let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
     let cursorRAF = null;
     let cursorDirty = false;
