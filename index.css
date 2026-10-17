@@ -1420,7 +1420,8 @@ main>#figma-container {
   border-bottom: 2px solid white;
   outline: none;
   font-family: 'neue-haas-unica', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   transition: border-color 0.4s ease, font-size 0.4s ease;
 }
 
@@ -1433,6 +1434,7 @@ main>#figma-container {
 
 .search-input-line::placeholder {
   color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
 }
 
 .search-input-line:focus {
