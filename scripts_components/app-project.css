@@ -1,7 +1,7 @@
 /* ==========================================================================
  * APP SHOWCASE BASE STYLESHEET (STANDARDIZED FOR ZINCO.CC APPS)
  * Dedicated Base CSS for Application Projects (clotho, uni, etc.)
- * Editorial 2-Column Layout with Synchronized Dynamic Stacking Captions
+ * Editorial 2-Column Layout matching the brutalist Swiss site guidelines
  * ========================================================================== */
 
 /* --- 1. Global Page Overrides & Stacking Context --- */
@@ -148,7 +148,7 @@
 /* --- 3. Base Layout Editoriale a 2 Colonne (App Showcase) --- */
 .project-editorial-layout.app-editorial-layout {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 360px 1fr;
   gap: 60px;
   align-items: start;
   width: 100%;
@@ -165,10 +165,16 @@
   top: 72px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   box-sizing: border-box;
   text-align: left;
-  max-height: calc(100vh - 90px);
+}
+
+@media (max-height: 760px) {
+  .project-sticky-col.app-sticky-col {
+    top: auto;
+    bottom: 20px;
+  }
 }
 
 /* Foto Rappresentativa / Preview */
@@ -184,7 +190,7 @@
 .app-sticky-col .editorial-rep-img {
   width: 100%;
   height: auto;
-  max-height: 110px;
+  max-height: 115px;
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
@@ -192,75 +198,6 @@
 
 .app-sticky-col .editorial-photo-box:hover .editorial-rep-img {
   transform: scale(1.02);
-}
-
-/* Breve descrizione del progetto nella colonna sinistra */
-.app-editorial-intro {
-  width: 100%;
-  text-align: left;
-  margin: 2px 0 4px 0;
-  flex-shrink: 0;
-}
-
-.app-editorial-intro p {
-  font-family: 'neue-haas-unica', sans-serif;
-  font-weight: 400;
-  font-size: 0.86rem;
-  line-height: 1.45;
-  color: #111111;
-  text-align: left;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-/* Gruppo Bottoni Azione */
-.app-sticky-col .editorial-cta-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.editorial-action-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 9px 14px;
-  background-color: transparent;
-  border: 1.5px solid black;
-  color: black;
-  font-family: 'neue-haas-unica', sans-serif;
-  font-weight: 500;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  box-sizing: border-box;
-  text-align: left;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.editorial-action-btn:hover {
-  background-color: black;
-  color: white;
-}
-
-.editorial-action-btn .btn-arrow {
-  font-size: 0.95rem;
-  line-height: 1;
-  transition: transform 0.2s ease;
-}
-
-.editorial-action-btn:hover .btn-arrow {
-  transform: translateY(2px);
-}
-
-.editorial-action-btn.editorial-site-btn:hover .btn-arrow {
-  transform: translate(2px, -2px);
 }
 
 /* Tabella Specs / Infogrid */
@@ -315,174 +252,65 @@
   text-align: left;
 }
 
-/* ==========================================================================
- * 5. Dynamic Stacking Captions (Didascalie che si susseguono e si ammontano)
- * ========================================================================== */
-
-.app-captions-stream {
+/* Gruppo Bottoni Azione */
+.app-sticky-col .editorial-cta-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
-  margin-top: 4px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-  flex-grow: 1;
+  margin-top: 2px;
+  padding-bottom: 6px;
+  flex-shrink: 0;
 }
 
-.app-captions-stream::-webkit-scrollbar {
-  width: 4px;
-}
-
-.app-captions-stream::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-}
-
-.captions-stream-header {
+.editorial-action-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  width: 100%;
+  padding: 9px 14px;
+  background-color: transparent;
+  border: 1.5px solid black;
+  color: black;
   font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #666;
-  margin-bottom: 2px;
-}
-
-.captions-stream-header .captions-counter {
-  font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.72rem;
-  color: #000;
-  letter-spacing: 0.04em;
-}
-
-/* Singola didascalia nella colonna di sinistra */
-.app-caption-card {
-  box-sizing: border-box;
-  width: 100%;
-  border-left: 2px solid transparent;
-  background-color: transparent;
-  text-align: left;
+  text-decoration: none;
   cursor: pointer;
-  user-select: none;
-  /* Stato iniziale: non ancora raggiunto nello scroll */
-  opacity: 0;
-  max-height: 0;
-  padding: 0 12px;
-  margin-bottom: 0;
-  overflow: hidden;
-  transform: translateY(12px);
-  pointer-events: none;
-  transition: 
-    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    padding 0.3s ease,
-    margin 0.3s ease,
-    border-color 0.3s ease,
-    background-color 0.25s ease;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Stato Visibile: compare e si ammonta nella pila man mano che si scorre */
-.app-caption-card.is-visible {
-  opacity: 0.65;
-  max-height: 240px;
-  padding: 10px 12px;
-  margin-bottom: 6px;
-  border-left-color: rgba(0, 0, 0, 0.18);
-  transform: translateY(0);
-  pointer-events: auto;
+.editorial-action-btn:hover {
+  background-color: black;
+  color: white;
 }
 
-/* Stato Attivo: foto corrispondente correntemente visibile al centro */
-.app-caption-card.is-active {
-  opacity: 1;
-  border-left-color: #000000;
-  background-color: rgba(0, 0, 0, 0.035);
+.editorial-action-btn .btn-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
 }
 
-.app-caption-card:hover {
-  opacity: 1;
-  background-color: rgba(0, 0, 0, 0.02);
+.editorial-desc-btn:hover .btn-arrow {
+  transform: translateY(2px);
 }
 
-.caption-card-header {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 3px;
+.editorial-site-btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
 }
 
-.caption-index {
-  font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.70rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: #777;
-  transition: color 0.2s ease;
-}
-
-.app-caption-card.is-active .caption-index {
-  color: #000;
-}
-
-.caption-title {
-  font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #333;
-  margin: 0;
-  transition: color 0.2s ease;
-}
-
-.app-caption-card.is-active .caption-title {
-  color: #000;
-}
-
-.caption-subtitle {
-  display: block;
-  font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: #555;
-  margin-bottom: 4px;
-  line-height: 1.35;
-}
-
-.app-caption-card.is-active .caption-subtitle {
-  color: #222;
-}
-
-.caption-body {
-  font-family: 'neue-haas-unica', sans-serif;
-  font-size: 0.77rem;
-  font-weight: 400;
-  line-height: 1.4;
-  color: #444;
-  margin: 0;
-  transition: color 0.2s ease;
-}
-
-.app-caption-card.is-active .caption-body {
-  color: #111;
-}
-
-/* --- 6. Colonna Destra (Media Stream / Screenshot) --- */
+/* --- 5. Colonna Destra (Media Stream / Screenshot) --- */
 .project-media-stream {
   display: flex;
   flex-direction: column;
   gap: 0;
   width: 100%;
+  min-width: 0;
+  border-top: 1px solid black;
 }
 
 .project-media-item {
@@ -492,10 +320,6 @@
   position: relative;
   overflow: hidden;
   background-color: #fafafa;
-}
-
-.project-media-item:first-child {
-  border-top: 1px solid black;
 }
 
 .project-media-item img {
@@ -511,7 +335,7 @@
 
 .project-media-item .media-zoom-pill {
   position: absolute;
-  bottom: 16px;
+  top: 16px;
   right: 16px;
   display: inline-flex;
   align-items: center;
@@ -526,7 +350,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(-4px);
   transition: opacity 0.25s ease, transform 0.25s ease;
   pointer-events: none;
   z-index: 10;
@@ -535,6 +359,54 @@
 .project-media-item:hover .media-zoom-pill {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Didascalie sotto alle immagini nel Media Stream (come negli altri progetti) */
+.stream-item-caption {
+  line-height: 1.4;
+  padding: 12px 18px 15px 18px;
+  font-family: 'neue-haas-unica', sans-serif;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fafafa;
+  color: #222222;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.stream-caption-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.stream-caption-title {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #000000;
+}
+
+.stream-caption-subtitle {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: #555555;
+  text-transform: lowercase;
+}
+
+.stream-caption-desc {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #333333;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 /* Header di Sezione nel Media Stream (es. links & resources) */
@@ -636,43 +508,110 @@
   flex-shrink: 0;
 }
 
-/* --- 7. Sezione Descrizione Progetto in Basso --- */
+/* ==========================================================================
+ * 6. Sezione Info Progetto — Stile Editoriale (Identico agli altri progetti)
+ * ========================================================================== */
+
 .project-info-section {
   width: 100%;
-  box-sizing: border-box;
-  padding: 80px 40px 100px calc(27px + 0.88vw);
-  border-bottom: 2px solid black;
   background-color: white;
+  border-bottom: 2px solid black;
+  padding: 60px 40px 60px calc(27px + 0.88vw);
+  box-sizing: border-box;
 }
 
 .project-info-content {
-  max-width: 820px;
+  width: 100%;
+  margin: 0;
+  color: black;
+  text-align: left;
 }
 
+/* Label editoriale in alto: es. "DESCRIPTION / CLOTHO" */
 .project-info-content h2 {
   font-family: 'neue-haas-unica', sans-serif;
   font-weight: 500;
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  margin: 0 0 24px 0;
+  margin: 0 0 2.5rem 0;
   color: black;
+  opacity: 0.5;
+}
+
+/* Testo principale grande e giustificato (identico agli altri progetti) */
+.project-info-text {
+  column-count: 1;
+  column-gap: 0;
 }
 
 .project-info-text p {
   font-family: 'neue-haas-unica', sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  line-height: 1.5;
-  font-weight: 400;
-  margin: 0 0 20px 0;
-  color: #111111;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.5vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  margin: 0;
+  color: black;
 }
 
 .project-info-text p strong {
   font-weight: 500;
 }
 
-/* --- 8. Lightbox Zoom Modale --- */
+/* Paragrafi nascosti di default (collassati) */
+.project-info-text p.description-hidden {
+  display: none;
+  margin-top: 0.6em;
+}
+
+/* Quando espanso, tutti visibili con transizione */
+.project-info-text.expanded p.description-hidden {
+  display: block;
+}
+
+/* === BOTTONE "MORE / LESS" === */
+.description-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-top: 1.2em;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: black;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+}
+
+.description-more-btn:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.description-more-btn .btn-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.description-more-btn.open .btn-arrow {
+  transform: rotate(180deg);
+}
+
+/* --- 7. Lightbox Zoom Modale --- */
 .app-lightbox {
   position: fixed;
   inset: 0;
@@ -745,67 +684,103 @@
 }
 
 /* ==========================================================================
- * 9. Responsive Breakpoints
+ * 8. Responsive Breakpoints (Desktop First)
  * ========================================================================== */
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .project-editorial-layout.app-editorial-layout {
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 300px 1fr;
     gap: 40px;
+    padding: 40px 30px 60px calc(27px + 0.88vw);
+  }
+
+  .project-info-section {
+    padding: 60px 30px;
+    padding-left: 29px;
+  }
+
+  #project-hero {
+    padding: 40px 30px;
+    padding-left: 29px;
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 768px) {
   .project-editorial-layout.app-editorial-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 40px 20px 60px 20px;
+    gap: 36px;
+    padding: 30px 0 50px 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .project-sticky-col.app-sticky-col {
-    position: relative;
-    top: 0;
+    position: static;
     max-height: none;
+    padding: 0 20px 0 27px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .app-captions-stream {
-    display: none; /* Su schermi piccoli le didascalie sono inline sotto le foto */
+  .project-media-stream {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
-  .project-media-item .media-zoom-pill {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Inline mobile caption for small screens */
-  .mobile-screenshot-caption {
+  .project-media-item,
+  .project-media-item img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
     display: block !important;
-    padding: 12px 14px 18px 14px;
-    background: #ffffff;
-    border-bottom: 1px solid black;
-    line-height: 1.4;
   }
 
-  .mobile-screenshot-caption h4 {
-    font-family: 'neue-haas-unica', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    margin: 0 0 2px 0;
+  .stream-item-caption {
+    padding-left: 27px !important;
+    padding-right: 20px !important;
+    width: 100vw !important;
+    box-sizing: border-box;
   }
 
-  .mobile-screenshot-caption span {
-    font-family: 'neue-haas-unica', sans-serif;
-    font-size: 0.78rem;
-    color: #666;
-    display: block;
-    margin-bottom: 4px;
+  .project-info-section {
+    padding: 40px 20px 40px 27px;
   }
 
-  .mobile-screenshot-caption p {
-    font-family: 'neue-haas-unica', sans-serif;
-    font-size: 0.80rem;
-    color: #222;
-    margin: 0;
+  .project-info-text p {
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  #project-hero {
+    padding: 24px 20px 30px 24px;
+    min-height: 80vh;
+    justify-content: center;
+  }
+
+  .hero-title-container {
+    padding-top: 50px;
+  }
+
+  #project-hero h1 {
+    font-size: clamp(2.8rem, 14vw, 5rem);
+    max-width: 100%;
+  }
+
+  .hero-app-cta-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 24px;
+    width: 100%;
   }
 }

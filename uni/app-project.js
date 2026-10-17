@@ -3,10 +3,10 @@
  * Standardized Showcase Engine for Application Projects (zinco.cc)
  * Powered by JSONL data format.
  * Features:
- * - 2-Column Editorial Layout (NUS-inspired brutalist/minimalist Swiss design)
- * - Sticky Left Column with brief intro, specs, and dynamic stacking captions
- * - Captions that appear and stack sequentially with understated animation as user scrolls
- * - Interactive synchronization between left captions and right media stream
+ * - 2-Column Editorial Layout (Consistent with NUS / Swiss brutalist design system)
+ * - Sticky Left Column with representative preview, technical infogrid, and action buttons
+ * - Right Column Media Stream with image-level captions respecting the general site CSS
+ * - Standardized project description section with more/less collapsible toggle
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,9 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
         {"type":"screenshot","label":"Spotlight Palette (⌘F)","subtitle":"Instant keyboard search across all courses","src":"img/search.webp","caption":"Command palette invoked anywhere via ⌘F to instantly locate courses, lecture materials, exam dates, or launch context actions."},
         {"type":"screenshot","label":"macOS Distribution","subtitle":"Custom drag-and-drop installer","src":"img/dmg_showcase.webp","caption":"Custom-crafted DMG installer with branded background and seamless drag-and-drop installation into Applications."},
         {"type":"header","label":"links & resources"},
-        {"type":"link","label":"Official Web App","description":"Discover the dedicated landing page and interactive interface simulator at uni.zinco.cc.","href":"https://uni.zinco.cc","cta":"visit website","primary":true},
-        {"type":"link","label":"GitHub Repository","description":"Browse the open-source Swift 5.10+ codebase, architecture notes, and issue tracker.","href":"https://github.com/zjncoo/uni","cta":"view on GitHub","primary":false},
-        {"type":"link","label":"Download Latest DMG","description":"Download the pre-compiled universal binary for Apple Silicon and Intel Mac devices directly.","href":"https://github.com/zjncoo/uni/releases/latest/download/uni.dmg","cta":"download release","primary":false}
+        {"type":"link","label":"Official Web App","description":"Discover the dedicated landing page and interactive interface simulator at uni.zinco.cc.","href":"https://uni.zinco.cc","cta":"visit website","primary":true}
+        ,{"type":"link","label":"GitHub Repository","description":"Browse the open-source Swift 5.10+ codebase, architecture notes, and issue tracker.","href":"https://github.com/zjncoo/uni","cta":"view on GitHub","primary":false}
+        ,{"type":"link","label":"Download Latest DMG","description":"Download the pre-compiled universal binary for Apple Silicon and Intel Mac devices directly.","href":"https://github.com/zjncoo/uni/releases/latest/download/uni.dmg","cta":"download release","primary":false}
       ];
       renderAppShowcase(fallbackData);
     });
@@ -88,6 +88,12 @@ function renderAppShowcase(data) {
   const heroMediaItem = data.find(item => item.type === 'hero_media');
   const descItem = data.find(item => item.type === 'description');
   const specsItem = data.find(item => item.type === 'specs');
+
+  const isWebApp = Boolean(
+    (metaItem.badge && metaItem.badge.toLowerCase().includes('pwa')) ||
+    (metaItem.badge && metaItem.badge.toLowerCase().includes('web app')) ||
+    (metaItem.name && metaItem.name.toLowerCase() === 'clotho')
+  );
 
   // Hide old glance container if present
   const heroGlance = document.querySelector('#hero-wrapper #glance-container, main > #glance-container');
@@ -127,7 +133,10 @@ function renderAppShowcase(data) {
         websiteLink.rel = 'noopener noreferrer';
         websiteLink.className = 'hero-editorial-link cursor-target';
         websiteLink.id = 'heroWebAppLink';
-        websiteLink.setAttribute('aria-label', `Visit official web app for ${heroItem.title || 'the app'}`);
+        const linkAriaLabel = isWebApp 
+          ? `Visit official web app for ${heroItem.title || metaItem.name || 'the app'}`
+          : `Visit official website for ${heroItem.title || metaItem.name || 'the app'}`;
+        websiteLink.setAttribute('aria-label', linkAriaLabel);
 
         const domainText = heroItem.websiteDomain || websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
@@ -172,15 +181,6 @@ function renderAppShowcase(data) {
   const linkItems = data.filter(item => item.type === 'link');
   const headerItems = data.filter(item => item.type === 'header');
 
-  // Build clean brief description text for left column
-  let briefDesc = metaItem.tagline || '';
-  if (descItem && Array.isArray(descItem.paragraphs) && descItem.paragraphs.length > 0) {
-    const rawP = descItem.paragraphs[0].replace(/<[^>]*>/g, '');
-    if (rawP.length > 10) {
-      briefDesc = rawP;
-    }
-  }
-
   // Clean old elements from main
   const oldAppGrid = document.getElementById('appGrid');
   if (oldAppGrid) oldAppGrid.remove();
@@ -216,58 +216,7 @@ function renderAppShowcase(data) {
     stickyCol.appendChild(photoBox);
   }
 
-  // 4B. Breve descrizione del progetto (Allineata a sinistra)
-  if (briefDesc) {
-    const introBox = document.createElement('div');
-    introBox.className = 'app-editorial-intro';
-    introBox.innerHTML = `<p>${briefDesc}</p>`;
-    stickyCol.appendChild(introBox);
-  }
-
-  // 4C. Gruppo Bottoni Azione
-  const ctaGroup = document.createElement('div');
-  ctaGroup.className = 'editorial-cta-group';
-
-  const websiteUrl = heroItem.websiteUrl || metaItem.websiteUrl;
-  if (websiteUrl) {
-    const siteBtn = document.createElement('a');
-    siteBtn.href = websiteUrl;
-    siteBtn.target = '_blank';
-    siteBtn.rel = 'noopener noreferrer';
-    siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
-    siteBtn.innerHTML = `
-      <span>Open Web App</span>
-      <span class="btn-arrow">↗</span>
-    `;
-    ctaGroup.appendChild(siteBtn);
-  }
-
-  const downloadUrl = heroItem.downloadUrl || metaItem.downloadUrl;
-  if (downloadUrl && downloadUrl.endsWith('.dmg')) {
-    const dmgBtn = document.createElement('a');
-    dmgBtn.href = downloadUrl;
-    dmgBtn.target = '_blank';
-    dmgBtn.rel = 'noopener noreferrer';
-    dmgBtn.className = 'editorial-action-btn cursor-target';
-    dmgBtn.innerHTML = `
-      <span>Download DMG</span>
-      <span class="btn-arrow">↓</span>
-    `;
-    ctaGroup.appendChild(dmgBtn);
-  }
-
-  const descBtn = document.createElement('button');
-  descBtn.type = 'button';
-  descBtn.className = 'editorial-action-btn editorial-desc-btn cursor-target';
-  descBtn.id = 'editorialDescBtn';
-  descBtn.innerHTML = `
-    <span>Project Description</span>
-    <span class="btn-arrow">↓</span>
-  `;
-  ctaGroup.appendChild(descBtn);
-  stickyCol.appendChild(ctaGroup);
-
-  // 4D. Specs Table (Infogrid, max regular font weight 400)
+  // 4B. Specs Table (Infogrid, max regular font weight 400)
   if (specsItem && Array.isArray(specsItem.items) && specsItem.items.length > 0) {
     const specsTable = document.createElement('div');
     specsTable.className = 'editorial-specs-table';
@@ -302,56 +251,49 @@ function renderAppShowcase(data) {
     stickyCol.appendChild(specsTable);
   }
 
-  // 4E. Dynamic Stacking Captions Stream (Didascalie che si susseguono e si ammontano)
-  let captionsStreamEl = null;
-  const captionCards = [];
+  // 4C. Gruppo Bottoni Azione
+  const ctaGroup = document.createElement('div');
+  ctaGroup.className = 'editorial-cta-group';
 
-  if (screenshotItems.length > 0) {
-    captionsStreamEl = document.createElement('div');
-    captionsStreamEl.className = 'app-captions-stream';
-    captionsStreamEl.id = 'appCaptionsStream';
-
-    const streamHeader = document.createElement('div');
-    streamHeader.className = 'captions-stream-header';
-    streamHeader.innerHTML = `
-      <span>interfaces & features</span>
-      <span class="captions-counter" id="captionsCounter">0 / ${screenshotItems.length}</span>
+  const websiteUrl = heroItem.websiteUrl || metaItem.websiteUrl;
+  if (websiteUrl) {
+    const siteBtn = document.createElement('a');
+    siteBtn.href = websiteUrl;
+    siteBtn.target = '_blank';
+    siteBtn.rel = 'noopener noreferrer';
+    siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
+    const siteBtnText = isWebApp ? 'Open Web App' : 'Visit Website';
+    siteBtn.innerHTML = `
+      <span>${siteBtnText}</span>
+      <span class="btn-arrow">↗</span>
     `;
-    captionsStreamEl.appendChild(streamHeader);
-
-    screenshotItems.forEach((item, idx) => {
-      const card = document.createElement('div');
-      card.className = 'app-caption-card cursor-target';
-      card.id = `caption-card-${idx}`;
-      card.dataset.index = idx;
-
-      const numStr = String(idx + 1).padStart(2, '0');
-      card.innerHTML = `
-        <div class="caption-card-header">
-          <span class="caption-index">${numStr}</span>
-          <h4 class="caption-title">${item.label || `Feature ${numStr}`}</h4>
-        </div>
-        ${item.subtitle ? `<span class="caption-subtitle">${item.subtitle}</span>` : ''}
-        <p class="caption-body">${item.caption || item.description || ''}</p>
-      `;
-
-      // Cliccando sulla didascalia nella colonna di sinistra, scorre alla foto a destra
-      card.addEventListener('click', () => {
-        const targetMedia = document.getElementById(`screenshot-item-${idx}`);
-        if (!targetMedia) return;
-        if (window.lenis) {
-          window.lenis.scrollTo(targetMedia, { offset: -80 });
-        } else {
-          targetMedia.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
-
-      captionCards.push(card);
-      captionsStreamEl.appendChild(card);
-    });
-
-    stickyCol.appendChild(captionsStreamEl);
+    ctaGroup.appendChild(siteBtn);
   }
+
+  const downloadUrl = heroItem.downloadUrl || metaItem.downloadUrl;
+  if (downloadUrl && downloadUrl.endsWith('.dmg')) {
+    const dmgBtn = document.createElement('a');
+    dmgBtn.href = downloadUrl;
+    dmgBtn.target = '_blank';
+    dmgBtn.rel = 'noopener noreferrer';
+    dmgBtn.className = 'editorial-action-btn cursor-target';
+    dmgBtn.innerHTML = `
+      <span>Download DMG</span>
+      <span class="btn-arrow">↓</span>
+    `;
+    ctaGroup.appendChild(dmgBtn);
+  }
+
+  const descBtn = document.createElement('button');
+  descBtn.type = 'button';
+  descBtn.className = 'editorial-action-btn editorial-desc-btn cursor-target';
+  descBtn.id = 'editorialDescBtn';
+  descBtn.innerHTML = `
+    <span>Project Description</span>
+    <span class="btn-arrow">↓</span>
+  `;
+  ctaGroup.appendChild(descBtn);
+  stickyCol.appendChild(ctaGroup);
 
   editorialLayout.appendChild(stickyCol);
 
@@ -376,32 +318,40 @@ function renderAppShowcase(data) {
     mediaStream.appendChild(heroMediaWrap);
   }
 
-  // Lista screenshot
-  const screenshotEls = [];
+  // Lista screenshot con didascalie sotto ciascuna immagine
   screenshotItems.forEach((item, idx) => {
     const mediaItem = document.createElement('div');
-    mediaItem.className = 'project-media-item cursor-target';
+    mediaItem.className = 'project-media-item';
     mediaItem.id = `screenshot-item-${idx}`;
-    mediaItem.dataset.index = idx;
 
-    mediaItem.innerHTML = `
+    const imgWrap = document.createElement('div');
+    imgWrap.className = 'cursor-target';
+    imgWrap.style.position = 'relative';
+    imgWrap.style.lineHeight = '0';
+    imgWrap.innerHTML = `
       <img src="${item.src}" alt="${item.label || `Screenshot ${idx + 1}`}" loading="${idx === 0 ? 'eager' : 'lazy'}" decoding="async">
       <div class="media-zoom-pill">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <span>expand</span>
       </div>
-      <div class="mobile-screenshot-caption" style="display: none;">
-        <h4>${item.label || ''}</h4>
-        ${item.subtitle ? `<span>${item.subtitle}</span>` : ''}
-        <p>${item.caption || item.description || ''}</p>
-      </div>
     `;
-
-    mediaItem.addEventListener('click', () => {
+    imgWrap.addEventListener('click', () => {
       openLightbox(item.src, item.label || '', item.caption || item.description || item.subtitle || '');
     });
+    mediaItem.appendChild(imgWrap);
 
-    screenshotEls.push(mediaItem);
+    // Didascalia sotto l'immagine (formattazione conforme al CSS generale del sito)
+    const captionBox = document.createElement('div');
+    captionBox.className = 'stream-item-caption';
+    captionBox.innerHTML = `
+      <div class="stream-caption-header">
+        <span class="stream-caption-title">${item.label || ''}</span>
+        ${item.subtitle ? `<span class="stream-caption-subtitle">— ${item.subtitle}</span>` : ''}
+      </div>
+      ${(item.caption || item.description) ? `<p class="stream-caption-desc">${item.caption || item.description}</p>` : ''}
+    `;
+    mediaItem.appendChild(captionBox);
+
     mediaStream.appendChild(mediaItem);
   });
 
@@ -453,18 +403,45 @@ function renderAppShowcase(data) {
     mainSection.prepend(editorialLayout);
   }
 
-  // 5. Configurazione Sezione Descrizione Progetto in Fondo
+  // 5. Configurazione Sezione Descrizione Progetto in Fondo (Identica a NUS e agli altri progetti)
   if (projectInfoSection) {
     projectInfoSection.id = 'project-description-section';
-    if (mainSection) mainSection.appendChild(projectInfoSection);
 
-    // Colore brand su p
-    const brandColor = metaItem.brandColor;
-    if (brandColor && projectInfoContent) {
-      const colorTargets = projectInfoContent.querySelectorAll('.project-info-text p, .project-info-text p strong');
-      colorTargets.forEach(el => {
-        el.style.color = brandColor;
-      });
+    // Rimuove eventuale logo/icona duplicata sopra il titolo
+    const strayImg = projectInfoSection.querySelector('.project-info-content > img');
+    if (strayImg) strayImg.remove();
+
+    // Titolo formattato esattamente come DESCRIPTION / NOME
+    const descTitle = projectInfoSection.querySelector('h2');
+    if (descTitle) {
+      descTitle.textContent = `DESCRIPTION / ${(metaItem.name || 'PROJECT').toUpperCase()}`;
+    }
+
+    // Collasso paragrafi successivi al primo (more / less)
+    const descriptionText = projectInfoSection.querySelector('.project-info-text');
+    if (descriptionText) {
+      const paragraphs = Array.from(descriptionText.querySelectorAll('p'));
+      if (paragraphs.length > 1 && !projectInfoSection.querySelector('.description-more-btn')) {
+        paragraphs.slice(1).forEach(p => p.classList.add('description-hidden'));
+
+        const moreBtn = document.createElement('button');
+        moreBtn.className = 'description-more-btn cursor-target';
+        moreBtn.type = 'button';
+        moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
+        descriptionText.after(moreBtn);
+
+        moreBtn.addEventListener('click', () => {
+          const isExpanded = descriptionText.classList.toggle('expanded');
+          moreBtn.classList.toggle('open', isExpanded);
+          moreBtn.innerHTML = isExpanded 
+            ? 'less <span class="btn-arrow">↑</span>' 
+            : 'more <span class="btn-arrow">↓</span>';
+        });
+      }
+    }
+
+    if (mainSection) {
+      mainSection.appendChild(projectInfoSection);
     }
   }
 
@@ -481,91 +458,7 @@ function renderAppShowcase(data) {
     });
   }
 
-  // 6. SYNCHRONIZED SCROLL & DYNAMIC STACKING CAPTIONS
-  // Le didascalie a sinistra si susseguono e si ammontano con animazione carina ma sobria
-  if (screenshotEls.length > 0 && captionCards.length > 0) {
-    const counterEl = document.getElementById('captionsCounter');
-    let highestVisibleIndex = -1;
-    let currentActiveIndex = -1;
-
-    const updateCaptionsState = () => {
-      const windowHeight = window.innerHeight;
-      const triggerThreshold = windowHeight * 0.75; // Punto di attivazione per apparire nella pila
-      const focusThreshold = windowHeight * 0.45;   // Punto focale centrale per stato attivo
-
-      let newHighest = -1;
-      let closestToCenterIdx = -1;
-      let minDistance = Infinity;
-
-      screenshotEls.forEach((el, idx) => {
-        const rect = el.getBoundingClientRect();
-
-        // Se la parte superiore dello screenshot entra nel 75% inferiore del viewport
-        if (rect.top <= triggerThreshold && rect.bottom >= 60) {
-          if (idx > newHighest) newHighest = idx;
-        }
-
-        // Trova lo screenshot più vicino al centro focale
-        const elCenter = (rect.top + rect.bottom) / 2;
-        const dist = Math.abs(elCenter - focusThreshold);
-        if (rect.bottom > 80 && rect.top < windowHeight - 80) {
-          if (dist < minDistance) {
-            minDistance = dist;
-            closestToCenterIdx = idx;
-          }
-        }
-      });
-
-      highestVisibleIndex = newHighest;
-      currentActiveIndex = closestToCenterIdx >= 0 ? closestToCenterIdx : highestVisibleIndex;
-
-      // Aggiorna stato di ogni singola card
-      captionCards.forEach((card, idx) => {
-        const isVisible = idx <= highestVisibleIndex;
-        const isActive = idx === currentActiveIndex;
-
-        if (isVisible) {
-          card.classList.add('is-visible');
-        } else {
-          card.classList.remove('is-visible');
-        }
-
-        if (isActive) {
-          card.classList.add('is-active');
-          // Assicura che la card attiva sia visibile nel container di scroll
-          if (captionsStreamEl && isVisible) {
-            card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-          }
-        } else {
-          card.classList.remove('is-active');
-        }
-      });
-
-      // Aggiorna contatore
-      if (counterEl) {
-        const count = highestVisibleIndex >= 0 ? highestVisibleIndex + 1 : 0;
-        counterEl.textContent = `${count} / ${screenshotEls.length}`;
-      }
-    };
-
-    // Ascolto scroll con Lenis o nativo
-    let scrollRafId = null;
-    const onScroll = () => {
-      if (scrollRafId) return;
-      scrollRafId = requestAnimationFrame(() => {
-        updateCaptionsState();
-        scrollRafId = null;
-      });
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-
-    // Inizializza subito
-    setTimeout(updateCaptionsState, 150);
-  }
-
-  // 7. Modale Lightbox per ingrandire screenshot
+  // 6. Modale Lightbox per ingrandire screenshot
   setupLightbox();
 }
 
