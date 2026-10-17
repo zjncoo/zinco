@@ -845,7 +845,7 @@ main>#figma-container {
 .nav-brand-text {
   font-family: 'neue-haas-unica', sans-serif;
   font-weight: 400; /* Unica regular */
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   letter-spacing: -0.03em;
   color: black;
   text-decoration: none;
@@ -868,10 +868,10 @@ main>#figma-container {
 .nav-bar-link {
   font-family: 'neue-haas-unica', sans-serif;
   font-weight: 500;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   color: black;
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 0.95rem;
   padding: 2px 0;
   transition: opacity 0.3s ease;
 }
