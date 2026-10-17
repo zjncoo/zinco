@@ -1,8 +1,12 @@
 /**
  * app-project.js
  * Standardized Showcase Engine for Application Projects (zinco.cc)
- * Powered by JSONL (JSON Lines) data format.
- * Standardized 2-Column Editorial Layout
+ * Powered by JSONL data format.
+ * Features:
+ * - 2-Column Editorial Layout (NUS-inspired brutalist/minimalist Swiss design)
+ * - Sticky Left Column with brief intro, specs, and dynamic stacking captions
+ * - Captions that appear and stack sequentially with understated animation as user scrolls
+ * - Interactive synchronization between left captions and right media stream
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderAppShowcase(data);
     })
     .catch(error => {
-      console.warn('[app-project] Failed to fetch data, attempting to use window.EMBEDDED_APP_DATA or existing layout:', error);
+      console.warn('[app-project] Failed to fetch data, attempting embedded fallback data:', error);
       if (window.EMBEDDED_APP_DATA) {
         renderAppShowcase(window.EMBEDDED_APP_DATA);
       }
@@ -59,9 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderAppShowcase(data) {
   const heroTitle = document.getElementById('hero-title');
   const projectHero = document.getElementById('project-hero');
-  const glanceGrid = document.getElementById('glance-grid');
-  const appGrid = document.getElementById('appGrid');
-  const heroMediaContainer = document.getElementById('hero-media-container');
   const mainSection = document.getElementById('sezione-progetto') || document.querySelector('main');
   let projectInfoSection = document.querySelector('.project-info-section');
   const projectInfoContent = document.querySelector('.project-info-content');
@@ -72,7 +73,7 @@ function renderAppShowcase(data) {
   const descItem = data.find(item => item.type === 'description');
   const specsItem = data.find(item => item.type === 'specs');
 
-  // Hide the glance bar in hero-wrapper if present so hero stays pure white
+  // Hide old glance container if present
   const heroGlance = document.querySelector('#hero-wrapper #glance-container, main > #glance-container');
   if (heroGlance) {
     heroGlance.style.display = 'none';
@@ -84,9 +85,9 @@ function renderAppShowcase(data) {
   }
 
   // 2. Grand Hero App Link (prominent CTA in the Hero)
-  if (projectHero && heroItem) {
+  if (projectHero && (heroItem || metaItem)) {
     const websiteUrl = heroItem.websiteUrl || metaItem.websiteUrl;
-    const downloadUrl = heroItem.downloadUrl || metaItem.downloadUrl;
+    const downloadUrl = heroItem.downloadUrl || metaItem.downloadUrl || heroItem.githubUrl || metaItem.githubUrl;
 
     if (websiteUrl || downloadUrl) {
       let heroActionBox = document.querySelector('.hero-app-cta-container');
@@ -108,24 +109,19 @@ function renderAppShowcase(data) {
         websiteLink.href = websiteUrl;
         websiteLink.target = '_blank';
         websiteLink.rel = 'noopener noreferrer';
-        websiteLink.className = 'hero-app-big-link cursor-target';
+        websiteLink.className = 'hero-editorial-link cursor-target';
         websiteLink.id = 'heroWebAppLink';
         websiteLink.setAttribute('aria-label', `Visit official web app for ${heroItem.title || 'the app'}`);
 
         const domainText = heroItem.websiteDomain || websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
         websiteLink.innerHTML = `
-          <div class="hero-link-badge">
-            <span class="pulse-dot"></span>
-            <span>${heroItem.badge || 'OFFICIAL WEB APP'}</span>
-          </div>
-          <div class="hero-link-main">
-            <span class="hero-link-domain">${domainText}</span>
-            <svg class="hero-link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 7"></polyline>
-            </svg>
-          </div>
+          <span class="pulse-dot"></span>
+          <span class="hero-link-text">${domainText}</span>
+          <svg class="hero-link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 7"></polyline>
+          </svg>
         `;
         heroActionBox.appendChild(websiteLink);
       }
@@ -135,124 +131,281 @@ function renderAppShowcase(data) {
         downloadLink.href = downloadUrl;
         downloadLink.target = '_blank';
         downloadLink.rel = 'noopener noreferrer';
-        downloadLink.className = 'hero-app-download-btn cursor-target';
+        downloadLink.className = 'hero-editorial-link cursor-target';
         downloadLink.id = 'heroDownloadLink';
-        const rawDownloadLabel = heroItem.downloadLabel || (downloadUrl.endsWith('.dmg') ? 'download DMG' : 'view source');
-        const downloadLabel = rawDownloadLabel.replace(/[↓↗→←↑↔]/g, '').trim();
-        const isDmg = downloadUrl.toLowerCase().endsWith('.dmg') || downloadLabel.toLowerCase().includes('dmg');
+        const isDmg = downloadUrl.endsWith('.dmg');
+        const dlLabel = heroItem.downloadLabel || (isDmg ? 'download DMG' : 'view source');
+
         downloadLink.innerHTML = `
-          <svg class="download-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            ${isDmg ? `
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            ` : `
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-            `}
+          <svg class="download-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            ${isDmg 
+              ? '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>' 
+              : '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>'
+            }
           </svg>
-          <span>${downloadLabel}</span>
+          <span class="hero-link-text">${dlLabel}</span>
+          <span class="hero-link-arrow-text">${isDmg ? '↓' : '↗'}</span>
         `;
         heroActionBox.appendChild(downloadLink);
       }
     }
   }
 
-  // 3. Hero Media Preview
-  if (heroMediaContainer && heroMediaItem && heroMediaItem.src) {
-    heroMediaContainer.innerHTML = `
-      <div class="hero-media-wrapper cursor-target" id="heroMediaPreview" data-full-src="${heroMediaItem.src}" data-caption="${heroMediaItem.alt || ''}">
-        <img src="${heroMediaItem.src}" alt="${heroMediaItem.alt || 'App preview'}" loading="eager" decoding="async">
-        <div class="hero-media-overlay">
-          <span class="zoom-pill">
-            <svg class="zoom-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 6px; vertical-align: middle;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>Click to expand preview
-          </span>
-        </div>
-      </div>
-    `;
-    const heroPreviewEl = heroMediaContainer.querySelector('#heroMediaPreview');
-    if (heroPreviewEl) {
-      heroPreviewEl.addEventListener('click', () => {
-        openLightbox(heroMediaItem.src, heroItem.title || metaItem.name || 'Overview', heroMediaItem.alt || '');
-      });
+  // 3. Extract Screenshots and Links
+  const screenshotItems = data.filter(item => item.type === 'screenshot' || item.type === 'image');
+  const linkItems = data.filter(item => item.type === 'link');
+  const headerItems = data.filter(item => item.type === 'header');
+
+  // Build clean brief description text for left column
+  let briefDesc = metaItem.tagline || '';
+  if (descItem && Array.isArray(descItem.paragraphs) && descItem.paragraphs.length > 0) {
+    const rawP = descItem.paragraphs[0].replace(/<[^>]*>/g, '');
+    if (rawP.length > 10) {
+      briefDesc = rawP;
     }
   }
 
-  // 4. Populate App Grid (Screenshots, Headers, Links)
-  if (appGrid) appGrid.innerHTML = '';
-  let screenshotIndex = 0;
-  const screenshotsForGlance = [];
+  // Clean old elements from main
+  const oldAppGrid = document.getElementById('appGrid');
+  if (oldAppGrid) oldAppGrid.remove();
+  const oldHeroMedia = document.getElementById('hero-media-container');
+  if (oldHeroMedia) oldHeroMedia.remove();
+  const oldEditorialLayout = document.querySelector('.project-editorial-layout');
+  if (oldEditorialLayout) oldEditorialLayout.remove();
 
-  data.forEach((item, index) => {
-    const uniqueId = `app-item-${index}`;
+  // 4. Construct the 2-Column Editorial Layout
+  const editorialLayout = document.createElement('div');
+  editorialLayout.className = 'project-editorial-layout app-editorial-layout';
 
-    if (item.type === 'header') {
-      const headerItem = document.createElement('div');
-      headerItem.className = 'app-grid-header';
-      headerItem.id = uniqueId;
-      headerItem.innerHTML = `<h2>${item.label}</h2>`;
-      if (appGrid) appGrid.appendChild(headerItem);
-      return;
+  // --- COLONNA SINISTRA (Sticky) ---
+  const stickyCol = document.createElement('aside');
+  stickyCol.className = 'project-sticky-col app-sticky-col';
+
+  // 4A. App Icon / Preview Image
+  const repImgSrc = metaItem.icon || (heroMediaItem && heroMediaItem.src) || (screenshotItems[0] && screenshotItems[0].src);
+  if (repImgSrc) {
+    const photoBox = document.createElement('div');
+    photoBox.className = 'editorial-photo-box';
+    const repImg = document.createElement('img');
+    repImg.src = repImgSrc;
+    repImg.alt = metaItem.name || 'App icon';
+    repImg.className = 'editorial-rep-img';
+    repImg.loading = 'eager';
+    if (metaItem.icon && metaItem.icon.includes('.png')) {
+      repImg.style.objectFit = 'contain';
+      repImg.style.padding = '8px';
+      repImg.style.boxSizing = 'border-box';
+    }
+    photoBox.appendChild(repImg);
+    stickyCol.appendChild(photoBox);
+  }
+
+  // 4B. Breve descrizione del progetto (Allineata a sinistra)
+  if (briefDesc) {
+    const introBox = document.createElement('div');
+    introBox.className = 'app-editorial-intro';
+    introBox.innerHTML = `<p>${briefDesc}</p>`;
+    stickyCol.appendChild(introBox);
+  }
+
+  // 4C. Gruppo Bottoni Azione
+  const ctaGroup = document.createElement('div');
+  ctaGroup.className = 'editorial-cta-group';
+
+  const websiteUrl = heroItem.websiteUrl || metaItem.websiteUrl;
+  if (websiteUrl) {
+    const siteBtn = document.createElement('a');
+    siteBtn.href = websiteUrl;
+    siteBtn.target = '_blank';
+    siteBtn.rel = 'noopener noreferrer';
+    siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
+    siteBtn.innerHTML = `
+      <span>Open Web App</span>
+      <span class="btn-arrow">↗</span>
+    `;
+    ctaGroup.appendChild(siteBtn);
+  }
+
+  const downloadUrl = heroItem.downloadUrl || metaItem.downloadUrl;
+  if (downloadUrl && downloadUrl.endsWith('.dmg')) {
+    const dmgBtn = document.createElement('a');
+    dmgBtn.href = downloadUrl;
+    dmgBtn.target = '_blank';
+    dmgBtn.rel = 'noopener noreferrer';
+    dmgBtn.className = 'editorial-action-btn cursor-target';
+    dmgBtn.innerHTML = `
+      <span>Download DMG</span>
+      <span class="btn-arrow">↓</span>
+    `;
+    ctaGroup.appendChild(dmgBtn);
+  }
+
+  const descBtn = document.createElement('button');
+  descBtn.type = 'button';
+  descBtn.className = 'editorial-action-btn editorial-desc-btn cursor-target';
+  descBtn.id = 'editorialDescBtn';
+  descBtn.innerHTML = `
+    <span>Project Description</span>
+    <span class="btn-arrow">↓</span>
+  `;
+  ctaGroup.appendChild(descBtn);
+  stickyCol.appendChild(ctaGroup);
+
+  // 4D. Specs Table (Infogrid, max regular font weight 400)
+  if (specsItem && Array.isArray(specsItem.items) && specsItem.items.length > 0) {
+    const specsTable = document.createElement('div');
+    specsTable.className = 'editorial-specs-table';
+
+    const tableHeader = document.createElement('div');
+    tableHeader.className = 'specs-table-header';
+    tableHeader.innerHTML = `<span>infogrid</span>`;
+    specsTable.appendChild(tableHeader);
+
+    if (metaItem.year) {
+      const dateRow = document.createElement('div');
+      dateRow.className = 'specs-row';
+      dateRow.innerHTML = `<span class="specs-label">date</span><span class="specs-value">${metaItem.year}</span>`;
+      specsTable.appendChild(dateRow);
+    }
+    if (metaItem.badge) {
+      const catRow = document.createElement('div');
+      catRow.className = 'specs-row';
+      catRow.innerHTML = `<span class="specs-label">category</span><span class="specs-value">${metaItem.badge.toLowerCase()}</span>`;
+      specsTable.appendChild(catRow);
     }
 
-    if (item.type === 'screenshot' || item.type === 'image') {
-      screenshotIndex++;
-      screenshotsForGlance.push({ item, uniqueId });
-      const card = document.createElement('article');
-      card.className = 'app-screenshot-card cursor-target';
-      card.id = uniqueId;
+    specsItem.items.forEach(spec => {
+      const row = document.createElement('div');
+      row.className = 'specs-row';
+      row.innerHTML = `
+        <span class="specs-label">${spec.label.toLowerCase()}</span>
+        <span class="specs-value">${spec.value}</span>
+      `;
+      specsTable.appendChild(row);
+    });
+    stickyCol.appendChild(specsTable);
+  }
 
-      const imgWrapper = document.createElement('div');
-      imgWrapper.className = 'screenshot-frame';
+  // 4E. Dynamic Stacking Captions Stream (Didascalie che si susseguono e si ammontano)
+  let captionsStreamEl = null;
+  const captionCards = [];
 
-      const img = document.createElement('img');
-      img.src = item.src;
-      img.alt = item.label || `Screenshot ${screenshotIndex}`;
-      img.loading = 'lazy';
-      img.decoding = 'async';
+  if (screenshotItems.length > 0) {
+    captionsStreamEl = document.createElement('div');
+    captionsStreamEl.className = 'app-captions-stream';
+    captionsStreamEl.id = 'appCaptionsStream';
 
-      const zoomHint = document.createElement('div');
-      zoomHint.className = 'screenshot-zoom-hint';
-      zoomHint.innerHTML = `<span><svg class="zoom-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 5px; vertical-align: middle;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>Expand view</span>`;
+    const streamHeader = document.createElement('div');
+    streamHeader.className = 'captions-stream-header';
+    streamHeader.innerHTML = `
+      <span>interfaces & features</span>
+      <span class="captions-counter" id="captionsCounter">0 / ${screenshotItems.length}</span>
+    `;
+    captionsStreamEl.appendChild(streamHeader);
 
-      imgWrapper.append(img, zoomHint);
+    screenshotItems.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'app-caption-card cursor-target';
+      card.id = `caption-card-${idx}`;
+      card.dataset.index = idx;
 
-      const metaBox = document.createElement('div');
-      metaBox.className = 'screenshot-meta';
+      const numStr = String(idx + 1).padStart(2, '0');
+      card.innerHTML = `
+        <div class="caption-card-header">
+          <span class="caption-index">${numStr}</span>
+          <h4 class="caption-title">${item.label || `Feature ${numStr}`}</h4>
+        </div>
+        ${item.subtitle ? `<span class="caption-subtitle">${item.subtitle}</span>` : ''}
+        <p class="caption-body">${item.caption || item.description || ''}</p>
+      `;
 
-      const title = document.createElement('h3');
-      title.textContent = item.label || '';
-      metaBox.appendChild(title);
-
-      if (item.subtitle) {
-        const sub = document.createElement('span');
-        sub.className = 'screenshot-subtitle';
-        sub.textContent = item.subtitle;
-        metaBox.appendChild(sub);
-      }
-
-      if (item.caption || item.description) {
-        const cap = document.createElement('p');
-        cap.textContent = item.caption || item.description;
-        metaBox.appendChild(cap);
-      }
-
-      card.append(imgWrapper, metaBox);
-
+      // Cliccando sulla didascalia nella colonna di sinistra, scorre alla foto a destra
       card.addEventListener('click', () => {
-        openLightbox(item.src, item.label, item.caption || item.description || item.subtitle || '');
+        const targetMedia = document.getElementById(`screenshot-item-${idx}`);
+        if (!targetMedia) return;
+        if (window.lenis) {
+          window.lenis.scrollTo(targetMedia, { offset: -80 });
+        } else {
+          targetMedia.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       });
 
-      if (appGrid) appGrid.appendChild(card);
-      return;
-    }
+      captionCards.push(card);
+      captionsStreamEl.appendChild(card);
+    });
 
-    if (item.type === 'link') {
+    stickyCol.appendChild(captionsStreamEl);
+  }
+
+  editorialLayout.appendChild(stickyCol);
+
+  // --- COLONNA DESTRA (Media Stream) ---
+  const mediaStream = document.createElement('div');
+  mediaStream.className = 'project-media-stream';
+
+  // Se c'è una hero media preview in testata (es. dashboard.webp o clotho_preview.webp)
+  if (heroMediaItem && heroMediaItem.src) {
+    const heroMediaWrap = document.createElement('div');
+    heroMediaWrap.className = 'project-media-item hero-media-stream-item cursor-target';
+    heroMediaWrap.innerHTML = `
+      <img src="${heroMediaItem.src}" alt="${heroMediaItem.alt || metaItem.name || 'Hero Preview'}" loading="eager" decoding="async">
+      <div class="media-zoom-pill">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>expand</span>
+      </div>
+    `;
+    heroMediaWrap.addEventListener('click', () => {
+      openLightbox(heroMediaItem.src, metaItem.name || 'App Preview', metaItem.tagline || '');
+    });
+    mediaStream.appendChild(heroMediaWrap);
+  }
+
+  // Lista screenshot
+  const screenshotEls = [];
+  screenshotItems.forEach((item, idx) => {
+    const mediaItem = document.createElement('div');
+    mediaItem.className = 'project-media-item cursor-target';
+    mediaItem.id = `screenshot-item-${idx}`;
+    mediaItem.dataset.index = idx;
+
+    mediaItem.innerHTML = `
+      <img src="${item.src}" alt="${item.label || `Screenshot ${idx + 1}`}" loading="${idx === 0 ? 'eager' : 'lazy'}" decoding="async">
+      <div class="media-zoom-pill">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>expand</span>
+      </div>
+      <div class="mobile-screenshot-caption" style="display: none;">
+        <h4>${item.label || ''}</h4>
+        ${item.subtitle ? `<span>${item.subtitle}</span>` : ''}
+        <p>${item.caption || item.description || ''}</p>
+      </div>
+    `;
+
+    mediaItem.addEventListener('click', () => {
+      openLightbox(item.src, item.label || '', item.caption || item.description || item.subtitle || '');
+    });
+
+    screenshotEls.push(mediaItem);
+    mediaStream.appendChild(mediaItem);
+  });
+
+  // Sezione Links & Resources in coda al media stream
+  if (linkItems.length > 0) {
+    const linksHeader = document.createElement('div');
+    linksHeader.className = 'media-stream-section-header';
+    const headerTitle = (headerItems.find(h => h.label && h.label.includes('link')) || {}).label || 'links & resources';
+    linksHeader.innerHTML = `<h2>${headerTitle}</h2>`;
+    mediaStream.appendChild(linksHeader);
+
+    const linksGrid = document.createElement('div');
+    linksGrid.className = 'app-links-grid';
+
+    linkItems.forEach(item => {
       const linkCard = document.createElement('a');
       linkCard.href = item.href;
       linkCard.target = '_blank';
       linkCard.rel = 'noopener noreferrer';
       linkCard.className = `app-link-card cursor-target ${item.primary ? 'primary' : ''}`;
-      linkCard.id = uniqueId;
 
       const rawCta = item.cta || 'Open link';
       const cleanCta = rawCta.replace(/[→↗↓←↑↔]/g, '').trim();
@@ -271,138 +424,25 @@ function renderAppShowcase(data) {
           </svg>
         </div>
       `;
+      linksGrid.appendChild(linkCard);
+    });
 
-      if (appGrid) appGrid.appendChild(linkCard);
-      return;
-    }
-  });
+    mediaStream.appendChild(linksGrid);
+  }
 
-  // 5. Build Editorial 2-Column Structure
-  if (mainSection && !document.querySelector('.project-editorial-layout')) {
-    const editorialLayout = document.createElement('div');
-    editorialLayout.className = 'project-editorial-layout';
+  editorialLayout.appendChild(mediaStream);
 
-    // --- Colonna Sinistra (Sticky / Fissa) ---
-    const stickyCol = document.createElement('aside');
-    stickyCol.className = 'project-sticky-col';
-
-    // 5A. Representative image / App icon
-    const repImgSrc = metaItem.heroImage || (heroMediaItem && heroMediaItem.src) || (data.find(d => d.type === 'screenshot' && d.src) || {}).src;
-    if (repImgSrc) {
-      const photoBox = document.createElement('div');
-      photoBox.className = 'editorial-photo-box';
-      photoBox.innerHTML = `<img src="${repImgSrc}" alt="${metaItem.name || 'App preview'}" class="editorial-rep-img" loading="eager">`;
-      stickyCol.appendChild(photoBox);
-    }
-
-    // 5B. Specs Table (Replica esatta della tabella infogrid del Portfolio PDF)
-    if (specsItem && Array.isArray(specsItem.items) && specsItem.items.length > 0) {
-      const specsTable = document.createElement('div');
-      specsTable.className = 'editorial-specs-table';
-
-      const tableHeader = document.createElement('div');
-      tableHeader.className = 'specs-table-header';
-      tableHeader.innerHTML = `<span>infogrid</span>`;
-      specsTable.appendChild(tableHeader);
-
-      if (metaItem.year) {
-        const dateRow = document.createElement('div');
-        dateRow.className = 'specs-row';
-        dateRow.innerHTML = `<span class="specs-label">date</span><span class="specs-value">${metaItem.year}</span>`;
-        specsTable.appendChild(dateRow);
-      }
-      if (metaItem.badge) {
-        const catRow = document.createElement('div');
-        catRow.className = 'specs-row';
-        catRow.innerHTML = `<span class="specs-label">category</span><span class="specs-value">${metaItem.badge.toLowerCase()}</span>`;
-        specsTable.appendChild(catRow);
-      }
-
-      specsItem.items.forEach(spec => {
-        const row = document.createElement('div');
-        row.className = 'specs-row';
-        row.innerHTML = `
-          <span class="specs-label">${spec.label.toLowerCase()}</span>
-          <span class="specs-value">${spec.value}</span>
-        `;
-        specsTable.appendChild(row);
-      });
-      stickyCol.appendChild(specsTable);
-    }
-
-    // 5C. Glance Thumbnails
-    if (screenshotsForGlance.length > 0) {
-      const glanceWrap = document.createElement('div');
-      glanceWrap.className = 'editorial-glance-wrap';
-      const thumbsGrid = document.createElement('div');
-      thumbsGrid.className = 'editorial-glance-grid';
-      screenshotsForGlance.slice(0, 10).forEach(({ item, uniqueId }) => {
-        const thumbLink = document.createElement('a');
-        thumbLink.href = `#${uniqueId}`;
-        thumbLink.className = 'editorial-glance-thumb cursor-target';
-        thumbLink.title = item.label || 'View feature';
-        thumbLink.innerHTML = `<img src="${item.src}" alt="${item.label || 'Thumbnail'}" loading="lazy">`;
-        thumbsGrid.appendChild(thumbLink);
-      });
-      glanceWrap.appendChild(thumbsGrid);
-      stickyCol.appendChild(glanceWrap);
-    }
-
-    // 5D. Action CTA Group (Website button on left + Description button)
-    const ctaGroup = document.createElement('div');
-    ctaGroup.className = 'editorial-cta-group';
-
-    const websiteUrl = heroItem.websiteUrl || metaItem.websiteUrl;
-    if (websiteUrl) {
-      const siteBtn = document.createElement('a');
-      siteBtn.href = websiteUrl;
-      siteBtn.target = '_blank';
-      siteBtn.rel = 'noopener noreferrer';
-      siteBtn.className = 'editorial-action-btn editorial-site-btn cursor-target';
-      siteBtn.innerHTML = `
-        <span>Open Web App</span>
-        <span class="btn-arrow">${ARROW_SVG_DIAG}</span>
-      `;
-      ctaGroup.appendChild(siteBtn);
-    }
-
-    const descBtn = document.createElement('a');
-    descBtn.href = '#project-description-section';
-    descBtn.className = 'editorial-action-btn editorial-desc-btn cursor-target';
-    descBtn.id = 'editorialDescBtn';
-    descBtn.innerHTML = `
-      <span>Project Description</span>
-      <span class="btn-arrow">${ARROW_SVG_DOWN}</span>
-    `;
-    ctaGroup.appendChild(descBtn);
-
-    stickyCol.appendChild(ctaGroup);
-    editorialLayout.appendChild(stickyCol);
-
-    // --- Colonna Destra (Scroll Multimediale) ---
-    const mediaStream = document.createElement('div');
-    mediaStream.className = 'project-media-stream';
-
-    if (heroMediaContainer) {
-      mediaStream.appendChild(heroMediaContainer);
-    }
-    if (appGrid) {
-      mediaStream.appendChild(appGrid);
-    }
-
-    editorialLayout.appendChild(mediaStream);
-
-    // Inserisci il layout a 2 colonne in cima al main
+  // Inserimento ordinato in <main>
+  if (mainSection) {
     mainSection.prepend(editorialLayout);
   }
 
-  // 6. Project Info / Description at the bottom of the page
+  // 5. Configurazione Sezione Descrizione Progetto in Fondo
   if (projectInfoSection) {
     projectInfoSection.id = 'project-description-section';
-    // Move to bottom of mainSection
-    mainSection.appendChild(projectInfoSection);
+    if (mainSection) mainSection.appendChild(projectInfoSection);
 
-    // Apply brand color override dynamically if provided
+    // Colore brand su p
     const brandColor = metaItem.brandColor;
     if (brandColor && projectInfoContent) {
       const colorTargets = projectInfoContent.querySelectorAll('.project-info-text p, .project-info-text p strong');
@@ -410,125 +450,158 @@ function renderAppShowcase(data) {
         el.style.color = brandColor;
       });
     }
-
-    // Collapsible description (more / less)
-    const descriptionText = projectInfoSection.querySelector('.project-info-text');
-    if (descriptionText) {
-      const paragraphs = Array.from(descriptionText.querySelectorAll('p'));
-      const extraParagraphs = paragraphs.slice(1);
-      if (extraParagraphs.length > 0 && !projectInfoSection.querySelector('.description-more-btn')) {
-        extraParagraphs.forEach(p => p.classList.add('description-hidden'));
-
-        let moreBtn = document.createElement('button');
-        moreBtn.className = 'description-more-btn cursor-target';
-        moreBtn.innerHTML = 'more <span class="btn-arrow">↓</span>';
-        paragraphs[0].after(moreBtn);
-
-        moreBtn.addEventListener('click', () => {
-          const isExpanded = descriptionText.classList.toggle('expanded');
-          moreBtn.classList.toggle('open', isExpanded);
-          moreBtn.innerHTML = isExpanded
-            ? 'less <span class="btn-arrow">↓</span>'
-            : 'more <span class="btn-arrow">↓</span>';
-        });
-      }
-    }
   }
 
-  // 7. Click interactions
-  const descClickBtn = document.getElementById('editorialDescBtn');
-  if (descClickBtn && projectInfoSection) {
-    descClickBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (typeof window.lenis !== 'undefined' && window.lenis) {
-        window.lenis.scrollTo(projectInfoSection, { duration: 1.5, offset: -40 });
+  // Scroll fluido al bottone "Project Description"
+  if (descBtn) {
+    descBtn.addEventListener('click', () => {
+      const target = document.getElementById('project-description-section');
+      if (!target) return;
+      if (window.lenis) {
+        window.lenis.scrollTo(target, { offset: -60 });
       } else {
-        projectInfoSection.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: 'smooth' });
       }
     });
   }
 
-  setupSmoothScroll();
-  initLightbox();
-}
+  // 6. SYNCHRONIZED SCROLL & DYNAMIC STACKING CAPTIONS
+  // Le didascalie a sinistra si susseguono e si ammontano con animazione carina ma sobria
+  if (screenshotEls.length > 0 && captionCards.length > 0) {
+    const counterEl = document.getElementById('captionsCounter');
+    let highestVisibleIndex = -1;
+    let currentActiveIndex = -1;
 
-function setupSmoothScroll() {
-  const anchors = document.querySelectorAll('.editorial-glance-thumb, #glance-grid a, .scroll-down-arrow');
-  anchors.forEach(link => {
-    link.addEventListener('click', e => {
-      const targetId = link.getAttribute('href');
-      if (targetId && targetId.startsWith('#')) {
-        e.preventDefault();
-        const targetEl = document.querySelector(targetId);
-        if (targetEl) {
-          if (typeof window.lenis !== 'undefined') {
-            window.lenis.scrollTo(targetEl, { duration: 1.4, offset: -70 });
-          } else {
-            targetEl.scrollIntoView({ behavior: 'smooth' });
+    const updateCaptionsState = () => {
+      const windowHeight = window.innerHeight;
+      const triggerThreshold = windowHeight * 0.75; // Punto di attivazione per apparire nella pila
+      const focusThreshold = windowHeight * 0.45;   // Punto focale centrale per stato attivo
+
+      let newHighest = -1;
+      let closestToCenterIdx = -1;
+      let minDistance = Infinity;
+
+      screenshotEls.forEach((el, idx) => {
+        const rect = el.getBoundingClientRect();
+
+        // Se la parte superiore dello screenshot entra nel 75% inferiore del viewport
+        if (rect.top <= triggerThreshold && rect.bottom >= 60) {
+          if (idx > newHighest) newHighest = idx;
+        }
+
+        // Trova lo screenshot più vicino al centro focale
+        const elCenter = (rect.top + rect.bottom) / 2;
+        const dist = Math.abs(elCenter - focusThreshold);
+        if (rect.bottom > 80 && rect.top < windowHeight - 80) {
+          if (dist < minDistance) {
+            minDistance = dist;
+            closestToCenterIdx = idx;
           }
         }
+      });
+
+      highestVisibleIndex = newHighest;
+      currentActiveIndex = closestToCenterIdx >= 0 ? closestToCenterIdx : highestVisibleIndex;
+
+      // Aggiorna stato di ogni singola card
+      captionCards.forEach((card, idx) => {
+        const isVisible = idx <= highestVisibleIndex;
+        const isActive = idx === currentActiveIndex;
+
+        if (isVisible) {
+          card.classList.add('is-visible');
+        } else {
+          card.classList.remove('is-visible');
+        }
+
+        if (isActive) {
+          card.classList.add('is-active');
+          // Assicura che la card attiva sia visibile nel container di scroll
+          if (captionsStreamEl && isVisible) {
+            card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          }
+        } else {
+          card.classList.remove('is-active');
+        }
+      });
+
+      // Aggiorna contatore
+      if (counterEl) {
+        const count = highestVisibleIndex >= 0 ? highestVisibleIndex + 1 : 0;
+        counterEl.textContent = `${count} / ${screenshotEls.length}`;
       }
-    });
+    };
+
+    // Ascolto scroll con Lenis o nativo
+    let scrollRafId = null;
+    const onScroll = () => {
+      if (scrollRafId) return;
+      scrollRafId = requestAnimationFrame(() => {
+        updateCaptionsState();
+        scrollRafId = null;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    // Inizializza subito
+    setTimeout(updateCaptionsState, 150);
+  }
+
+  // 7. Modale Lightbox per ingrandire screenshot
+  setupLightbox();
+}
+
+function setupLightbox() {
+  if (document.getElementById('appLightbox')) return;
+
+  const lightbox = document.createElement('div');
+  lightbox.id = 'appLightbox';
+  lightbox.className = 'app-lightbox';
+  lightbox.innerHTML = `
+    <button class="lightbox-close-btn cursor-target" id="lightboxCloseBtn" aria-label="Close image">×</button>
+    <div class="lightbox-image-wrap">
+      <img id="lightboxImg" src="" alt="Expanded preview">
+    </div>
+    <div class="lightbox-caption-bar">
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxCaption"></p>
+    </div>
+  `;
+
+  document.body.appendChild(lightbox);
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    if (window.lenis) window.lenis.start();
+  };
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.id === 'lightboxCloseBtn') {
+      closeLightbox();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+      closeLightbox();
+    }
   });
 }
 
-function initLightbox() {
-  let modal = document.getElementById('screenshotLightbox');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'screenshotLightbox';
-    modal.className = 'screenshot-lightbox';
-    modal.innerHTML = `
-      <div class="lightbox-backdrop"></div>
-      <div class="lightbox-dialog" role="dialog" aria-modal="true">
-        <button class="lightbox-close cursor-target" aria-label="Close dialog">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-        <div class="lightbox-content">
-          <img src="" alt="" id="lightboxImg">
-          <div class="lightbox-caption-bar">
-            <h4 id="lightboxTitle"></h4>
-            <p id="lightboxCaption"></p>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-
-    const closeBtn = modal.querySelector('.lightbox-close');
-    const backdrop = modal.querySelector('.lightbox-backdrop');
-
-    const closeModal = () => {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    };
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (backdrop) backdrop.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
-      }
-    });
-  }
-}
-
 function openLightbox(src, title, caption) {
-  const modal = document.getElementById('screenshotLightbox');
-  if (!modal) return;
+  const lightbox = document.getElementById('appLightbox');
+  if (!lightbox) return;
 
-  const img = modal.querySelector('#lightboxImg');
-  const titleEl = modal.querySelector('#lightboxTitle');
-  const captionEl = modal.querySelector('#lightboxCaption');
+  const img = document.getElementById('lightboxImg');
+  const titleEl = document.getElementById('lightboxTitle');
+  const captionEl = document.getElementById('lightboxCaption');
 
   if (img) img.src = src;
   if (titleEl) titleEl.textContent = title || '';
   if (captionEl) captionEl.textContent = caption || '';
 
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  lightbox.classList.add('is-open');
+  if (window.lenis) window.lenis.stop();
 }

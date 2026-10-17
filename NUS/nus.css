@@ -236,6 +236,24 @@ main#sezione-progetto {
   transform: scale(1.02);
 }
 
+/* Testo di Introduzione Editoriale (Allineato a Sinistra) */
+.publication-editorial-intro {
+  width: 100%;
+  text-align: left;
+  margin: 6px 0 10px 0;
+}
+
+.publication-editorial-intro p {
+  font-family: 'neue-haas-unica', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #111111;
+  text-align: left;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
 /* Tabella Specs / Metadati (Allineata a Sinistra) */
 .editorial-specs-table {
   width: 100%;

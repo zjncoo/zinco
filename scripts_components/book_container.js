@@ -59,6 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
       stickyCol.appendChild(photoBox);
     }
 
+    // Testo di introduzione al progetto allineato a sinistra nella colonna di sinistra
+    if (descriptionText) {
+      const introBox = document.createElement('div');
+      introBox.className = 'publication-editorial-intro';
+      introBox.innerHTML = `<p>${descriptionText}</p>`;
+      stickyCol.appendChild(introBox);
+    }
+
     // Tabella Specifiche / Metadati (Replica esatta della tabella infogrid del Portfolio PDF)
     const publicationsMetadata = {
       zoom: [
@@ -130,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     };
 
-    const curPath = window.location.pathname.toLowerCase();
     let activeSpecs = [];
     if (curPath.includes('zoom')) activeSpecs = publicationsMetadata.zoom;
     else if (curPath.includes('roxy')) activeSpecs = publicationsMetadata.roxy_brandbook;
@@ -319,8 +326,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   buildPublicationEditorialLayout();
 
-  const { pdfjsLib } = window;
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+  const ensurePdfjsReady = async (maxWaitMs = 12000) => {
+    const start = Date.now();
+    while (typeof window.pdfjsLib === 'undefined') {
+      if (Date.now() - start > maxWaitMs) {
+        throw new Error('Timeout waiting for PDF.js library');
+      }
+      await new Promise(r => setTimeout(r, 60));
+    }
+    return window.pdfjsLib;
+  };
 
   const bookViewer = document.getElementById('book-viewer');
   const canvasLeft = document.getElementById('canvas-left');
@@ -638,19 +653,43 @@ document.addEventListener('DOMContentLoaded', () => {
     pageInput.addEventListener('blur', handlePageInput); // <-- Usa la nuova funzione
     // --- FINE MODIFICA ---
 
-    const loadPdfWithRetry = async (url, retries = 3, delay = 500) => {
+    const loadPdfWithRetry = async (rawUrl, retries = 3, delay = 500) => {
+      const safeUrl = encodeURI(decodeURI(rawUrl));
       for (let i = 0; i < retries; i++) {
         try {
-          return await pdfjsLib.getDocument(url).promise;
+          return await window.pdfjsLib.getDocument({
+            url: safeUrl,
+            cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+            cMapPacked: true,
+            enableXfa: false
+          }).promise;
         } catch (error) {
-          console.warn(`Tentativo ${i + 1} fallito per il caricamento del PDF:`, error);
-          if (i === retries - 1) throw error;
+          console.warn(`[book_container] Tentativo ${i + 1} fallito per ${safeUrl}:`, error);
+          if (i === retries - 1) {
+            try {
+              console.info('[book_container] Tentativo fallback con fetch ArrayBuffer per:', safeUrl);
+              const res = await fetch(safeUrl);
+              if (!res.ok) throw new Error(`HTTP ${res.status} recuperando PDF`);
+              const buffer = await res.arrayBuffer();
+              return await window.pdfjsLib.getDocument({
+                data: buffer,
+                cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+                cMapPacked: true
+              }).promise;
+            } catch (fallbackErr) {
+              console.error('[book_container] Anche il fallback ArrayBuffer è fallito:', fallbackErr);
+              throw error;
+            }
+          }
           await new Promise(res => setTimeout(res, delay));
         }
       }
     };
 
     try {
+      const pdfjs = await ensurePdfjsReady();
+      pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
       pdfDoc = await loadPdfWithRetry(pdfUrl);
       totalPages = pdfDoc.numPages;
       pageTotal.textContent = ` / ${totalPages}`;
@@ -671,12 +710,22 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
     } catch (error) {
-      console.error('Errore definitivo durante il caricamento del PDF dopo vari tentativi:', error);
-      const readerSection = document.getElementById('project-publication-reader');
-      if (readerSection) readerSection.remove();
-      const readerBtn = document.getElementById('editorialScrollReaderBtn');
-      if (readerBtn) readerBtn.remove();
-      if (bookContainer) bookContainer.remove();
+      console.error('[book_container] Errore definitivo durante il caricamento del PDF:', error);
+      if (bookViewer) {
+        bookViewer.innerHTML = `
+          <div class="publication-fallback-card" style="padding: 3rem 1.5rem; text-align: center; border: 1px solid black; background: #fafafa; margin: 2rem auto; max-width: 600px; box-sizing: border-box;">
+            <p style="font-family: 'neue-haas-unica', sans-serif; font-size: 0.95rem; line-height: 1.4; margin-bottom: 1.25rem; color: #111;">
+              Interactive flipbook preview could not be loaded directly. You can read the publication file here:
+            </p>
+            <a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" class="editorial-action-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: auto; padding: 10px 22px; margin: 0 auto; text-decoration: none; background: #000; color: #fff;">
+              <span>Open PDF in new tab</span>
+              <span class="btn-arrow">↗</span>
+            </a>
+          </div>
+        `;
+      }
+      const bookControls = document.getElementById('book-controls');
+      if (bookControls) bookControls.style.display = 'none';
     }
   };
 
