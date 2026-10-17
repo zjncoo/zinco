@@ -920,10 +920,10 @@ main>#figma-container {
 .btn--outline-light {
   background-color: transparent;
   color: white;
-  border: 1px solid white;
+  border: 1.5px solid white;
   text-transform: none;
-  font-size: 14px;
-  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  padding: 8px 18px;
   backdrop-filter: blur(5px);
   mix-blend-mode: difference;
 }
