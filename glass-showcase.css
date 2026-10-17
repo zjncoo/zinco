@@ -211,59 +211,80 @@ main#main {
   height: 100%;
   width: auto;
   display: block;
-  stroke: none !important;
-  outline: none !important;
-  border: none !important;
+  stroke: none;
+  outline: none;
+  border: none;
   pointer-events: none !important;
 }
 
 .glass-svg * {
-  stroke: none !important;
-  outline: none !important;
-  border: none !important;
+  outline: none;
+  border: none;
 }
 
 .glass-img {
-  transition: none !important;
+  opacity: 0;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none !important;
 }
 
-/* Project main color layer */
+/* Project main color layer - default rest state: full brand color silhouette */
 .glass-color-layer {
-  opacity: 0;
-  transition: none !important;
+  opacity: 1;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: all !important;
   cursor: none !important;
 }
 
 /* Precise hit layer matching exact SVG geometry */
 .glass-hit-layer {
+  stroke: none;
+  stroke-width: 0;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
   pointer-events: all !important;
   cursor: none !important;
 }
 
-/* Hover triggered ONLY for desktop/mouse pointers (never on mobile touch) */
+/* Hover triggered ONLY for desktop/mouse pointers: reveals the project photo framed by 2px outline */
 @media (hover: hover) and (pointer: fine) {
   .glass-item.is-hovered .glass-color-layer,
   .glass-item:focus .glass-color-layer,
   .glass-item:focus-visible .glass-color-layer {
-    opacity: 1;
+    opacity: 0;
   }
 
   .glass-item.is-hovered .glass-img,
   .glass-item:focus .glass-img,
   .glass-item:focus-visible .glass-img {
-    opacity: 0;
+    opacity: 1;
+  }
+
+  .glass-item.is-hovered .glass-hit-layer,
+  .glass-item:focus .glass-hit-layer,
+  .glass-item:focus-visible .glass-hit-layer {
+    stroke: #000000 !important;
+    stroke-width: 2px !important;
+    stroke-linejoin: round !important;
+    stroke-linecap: round !important;
+    fill-opacity: 0 !important;
   }
 
   @supports selector(:has(*)) {
     .glass-item:has(.glass-hit-layer:hover) .glass-color-layer,
     .glass-item:has(.glass-color-layer:hover) .glass-color-layer {
-      opacity: 1;
+      opacity: 0;
     }
     .glass-item:has(.glass-hit-layer:hover) .glass-img,
     .glass-item:has(.glass-color-layer:hover) .glass-img {
-      opacity: 0;
+      opacity: 1;
+    }
+    .glass-item:has(.glass-hit-layer:hover) .glass-hit-layer,
+    .glass-item:has(.glass-color-layer:hover) .glass-hit-layer {
+      stroke: #000000 !important;
+      stroke-width: 2px !important;
+      stroke-linejoin: round !important;
+      stroke-linecap: round !important;
+      fill-opacity: 0 !important;
     }
   }
 }
@@ -811,6 +832,14 @@ main#main {
   .glass-item.is-active-center .glass-img {
     opacity: 1 !important;
     transition: none !important;
+  }
+
+  .glass-item.is-active-center .glass-hit-layer {
+    stroke: #000000 !important;
+    stroke-width: 2px !important;
+    stroke-linejoin: round !important;
+    stroke-linecap: round !important;
+    fill-opacity: 0 !important;
   }
 
   .glass-cursor-label {
